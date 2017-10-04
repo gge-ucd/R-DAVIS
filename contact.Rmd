@@ -1,0 +1,41 @@
+---
+title: "Contact"
+---
+
+<br>
+
+## Instructors
+
+**Ryan Peek** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rapeek@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://ryanpeek.github.io/)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@riverpeek](https://twitter.com/riverpeek)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> ryanpeek](https://github.com/ryanpeek)  
+[<i class="ai ai-orcid-square"></i> orcid.org/0000-0002-9577-6885](https://orcid.org/0000-0002-9577-6885)   
+
+<br>
+
+**Michael Koontz** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mikoontz@gmail.com)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://michaeljkoontz.weebly.com/)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@_mikoontz](https://twitter.com/_mikoontz)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> mikoontz](https://github.com/mikoontz)  
+[<i class="ai ai-orcid-square"></i> orcid.org/0000-0002-8276-210X](https://orcid.org/0000-0002-8276-210X)  
+
+<br>
+
+## Teaching Assistants
+
+**TBD**
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
+
+<br>
+
+## Data Carpentry  
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [info@datacarpentry.org](mailto:info@datacarpentry.org)  
+[<i class="fa fa-globe" aria-hidden="true"></i> http://www.datacarpentry.org/](http://www.datacarpentry.org/)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@datacarpentry](https://twitter.com/datacarpentry)  

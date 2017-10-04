@@ -1,0 +1,36 @@
+navbar:
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Course Materials"
+      href: course_materials.html
+    - text: "Getting Started"
+      menu: 
+        - text: "Set Up!"
+          href: computer_setup.html
+        - text: "Orientation to Programming, R, & RStudio"
+          href: lesson_intro_r_rstudio.html
+        - text: "Project Management"
+          href: lesson_project_management.html
+        - text: "Data frames"
+          href: lesson_data_frames.html
+    - text: "Resources"
+      href: resources.html
+  right:
+    - text: "Contact"
+      href: contact.html
+    - icon: fa-github fa-lg
+      href: https://github.com/gge-ucd/R-DAVIS
+output_dir: "."
+output:
+  html_document:
+    theme: flatly
+    highlight: pygments
+    toc: true
+    toc_float:
+      collapsed: false
+    include:
+      in_header: header.html
+    css: style.css

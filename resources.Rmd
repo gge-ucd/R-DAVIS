@@ -1,0 +1,27 @@
+---
+title: "Resources"
+---
+
+## R Content/Lessons
+
+* [Software Carpentry: **R for Reproducible Scientific Analysis**](http://data-lessons.github.io/gapminder-R/)
+* [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/)
+* [Data Carpentry: **Data Organization in Spreadsheets**](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)
+* [Data Carpentry: **Genomics Lesson**](https://jasonjwilliamsny.github.io/tidiness-genomics/)
+* [ANGUS: **Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown**](http://angus.readthedocs.io/en/2017/index.html)
+* [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/)
+
+## Online R/Data Science Books/Courses
+
+* [Jenny Bryan's **Stat545.com**](http://stat545.com/)
+* [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/)
+* [Kieran Healy's **Data Visualization for Social Science**](http://socviz.co/)
+* [Ethan White and Zack Brym's **Data Carpentry for Biologists**](http://www.datacarpentry.org/semester-biology/)
+* [Chester Ismay and Albert Y. Kim's **Modern DiveR**](https://ismayc.github.io/moderndiver-book/)
+* [Colin Gillespie and Robin Lovelace **Efficient R Programming**](https://csgillespie.github.io/efficientR/)
+* [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/)
+* [Hadley Wickham's **Advanced R**](http://adv-r.had.co.nz/)
+
+## Git/Github 
+
+* [Jenny Bryan's **Happy Git and Github for the useR**](http://happygitwithr.com/)

@@ -1,0 +1,101 @@
+---
+title: "About"
+---
+
+<br>
+
+## About Data Carpentry
+
+<p></p>
+
+<div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+![](./img/DC-logo-vision.png)
+</div>
+
+<p></p>
+
+Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is a sibling organization of Software Carpentry. Where Software Carpentry teaches best practices in software development, our focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain specific, from life and physical sciences to social science and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.
+
+See the Data Carpentry [website](http://www.datacarpentry.org/) for more information.
+
+<br>
+
+## About the Instructors
+
+**Ryan Peek** 
+<a href="mailto:rapeek@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> 
+<a href="https://ryanpeek.github.io/"><i class="fa fa-user" aria-hidden="true"></i></a>
+<a href="https://twitter.com/riverpeek"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+<a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> 
+<a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a>
+
+I am a 3rd year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I've worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and [meadow conservation](x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/) and restoration in the Sierra Nevada. 
+
+I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the [Davis R Users Group (D-RUG)](http://d-rug.github.io/) and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.
+
+My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.  
+
+<br>
+
+**Michael Koontz** 
+<a href="mailto:mikoontz@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true" ></i></a> 
+<a href="https://michaeljkoontz.weebly.com/"><i class="fa fa-user" aria-hidden="true"></i></a> 
+<a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
+<a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> 
+<a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a>  
+
+I'm a 3rd year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
+
+I've been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.
+
+My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about *how* to learn more).  
+
+
+
+## About the TAs
+
+**Martha Wohlfeil**
+<a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>  
+
+Martha is a second year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
+
+<br> 
+
+
+## Code of Conduct
+
+We are dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity. However, we recognise that some groups in our community are subject to historical and ongoing discrimination, and may be vulnerable or disadvantaged. Membership in such a specific group can be on the basis of characteristics such as gender, sexual orientation, disability, physical appearance, body size, race, nationality, sex, colour, ethnic or social origin, pregnancy, citizenship, familial status, veteran status, genetic information, religion or belief, political or any other opinion, membership of a national minority, property, birth, age, or choice of text editor. We do not tolerate harassment of participants on the basis of these categories, or for any other reason.
+
+Harassment is any form of behaviour intended to exclude, intimidate, or cause discomfort. Because we are a diverse community, we may have different ways of communicating and of understanding the intent behind actions. Therefore we have chosen to prohibit certain forms of behaviour in our community, regardless of intent. Prohibited harassing behaviour includes but is not limited to:
+
+* written or verbal comments which have the effect of excluding people on the basis of membership of a specific group listed above
+* causing someone to fear for their safety, such as through stalking, following, or intimidation
+the display of sexual or violent images
+* unwelcome sexual attention
+* nonconsensual or unwelcome physical contact
+* sustained disruption of talks, events or communications
+* incitement to violence, suicide, or self-harm
+* continuing to initiate interaction (including photography or recording) with someone after being asked to stop
+* publication of private communication without consent
+
+Behaviour not explicitly mentioned above may still constitute harassment. The list above should not be taken as exhaustive but rather as a guide to make it easier to enrich all of us and the communities in which we participate. All Carpentry interactions should be professional regardless of location: harassment is prohibited whether it occurs on- or offline, and the same standards apply to both.
+
+Enforcement of the Code of Conduct will be respectful and not include any harassing behaviors.
+
+Thank you for helping make this a welcoming, friendly community for all.
+
+This code of conduct is an adaptation of the one used by the Software Carpentry Foundation and is a modified version of that used by PyCon, which in turn is forked from a template written by the Ada Initiative and hosted on the Geek Feminism Wiki. Contributors to this document: Adam Obeng, Aleksandra Pawlik, Bill Mills, Carol Willing, Erin Becker, Hilmar Lapp, Kara Woo, Karin Lagesen, Pauline Barmby, Sheila Miguez, Simon Waldman, Tracy Teal.
+
+For more information about the Code of Conduct related to Data Carpentry, please see their [website](http://www.datacarpentry.org/code-of-conduct/).
+
+If you are being harassed, notice that someone else is being harassed, or have any other concerns, please see the [UC Davis ombuds office](http://ombuds.ucdavis.edu/).
+
+<br>
+
+## Territory Acknowledgement
+
+Acknowledging territory shows recognition of and respect for Native Americans. It is recognition of their presence both in the past and the present. Recognition and respect are essential elements of establishing healthy, reciprocal relations. These relationships are key to reconciliation, a process to which we are committed.
+
+We would like to respectfully acknowledge that the land on which we gather is traditional unceded Patwin territory. We recognize and respect our role as guests here.
+
+This territory acknowledgement is an adaptation of one written by the Canadian Association of University Teachers. For more information, please see their [website](https://www.caut.ca/content/guide-acknowledging-first-peoples-traditional-territory).
