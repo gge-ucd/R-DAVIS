@@ -4,8 +4,13 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+      icon: fa-info-circle  fa-1x
     - text: "Course Materials"
+      icon: fa-book  fa-1x
       href: course_materials.html
+    - text: "Presentations"
+      icon: fa-slideshare fa-1x
+      href: https://speakerdeck.com/ryanpeek
     - text: "Getting Started"
       menu: 
         - text: "Set Up!"
@@ -17,9 +22,11 @@ navbar:
         - text: "Data frames"
           href: lesson_data_frames.html
     - text: "Resources"
+      icon: fa-list
       href: resources.html
   right:
     - text: "Contact"
+      icon: fa-hand-spock-o
       href: contact.html
     - icon: fa-github fa-lg
       href: https://github.com/gge-ucd/R-DAVIS
