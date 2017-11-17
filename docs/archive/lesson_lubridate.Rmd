@@ -1,0 +1,470 @@
+---
+title: "Dates & Times in R"
+subtitle: Working with datetimes and `lubridate`
+minutes: 30
+---
+
+---
+
+```{r, include=FALSE}
+# Silently load in the data so the rest of the lesson works
+library(tidyverse)
+library(lubridate)
+```
+
+## Learning objectives
+> * Learn the basic date/datetime data types in R
+> * Gain familiarity with converting between these data/timezones
+> * Learn how to use the `lubridate` package to more easily work with these data.
+> * A few tricks about management of datetime data
+
+## Background Reading
+
+These resources are very useful. Please read through them.
+
+ - This is a great overview of times and dates in R from [Bonnie Dixon's talk at the Davis R-Users Group](http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html)
+
+ - [A very comprehensive and detailed look at using dates in R](https://www.stat.berkeley.edu/~s133/dates.html)
+
+ - [The vignette on using lubridate](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html)
+
+# Date-Time Classes in R
+
+Importantly, there are **3** basic time classes in R:
+
+ - **`Dates`** (just dates, i.e., 2012-02-10)
+ - **`POSIXct`** ("**ct**" == calendar time, best class for dates with times)
+ - **`POSIXlt`** ("**lt**" == local time, enables easy extraction of specific components of a time, however, remember that POXIXlt objects are lists)
+
+So, for some brief examples/discussion about each of these classes, please read below. Unfortunately converting dates & times in R into formats that are computer readable can be frustrating, mainly because there is very little consistency. In particular, if you are importing things from Excel, keep in mind dates can get especially weird^1^, depending on the operating system you are working on, the format of your data, etc.
+
+^*1*^ <sub>*For example Excel stores dates as a number representing days since 1900-Jan-0, plus a fractional portion of a 24 hour day (**serial-time**), but in OSX (Mac), it is 1904-Jan-0.*</sub>
+
+## Dates
+
+The `Date` class in R can easily be converted or operated on numerically, depending on the interest. Let's make a string of dates to use for our example:
+
+ - `sample_dates_1 <- c("2016-02-01", "2016-03-21", "2016-10-05", "2017-01-01", "2017-02-18")` *notice we have dates across two years here*
+
+So to translate these into the `Date` class in R, we need to do a few things...first notice our sample dates are in a very nice order (YYYY-MM-DD). This works well with the function `as.Date`: 
+
+ - `as.Date(sample_dates_1)`
+
+What happens with different orders...say MM-DD-YYYY? 
+
+```{r sampledates, echo=T, eval=T}
+
+# Some sample dates: 
+sample_dates_2 <- c("02-01-2016", "03-21-2016", "10-05-2016", "01-01-2017", "02-18-2017")
+
+as.Date(sample_dates_2) # well that doesn't work
+
+```
+
+Well, the reason is the computer expects one thing, but is getting something else. Remember, **write code you can read and your computer can understand**. So we need to give some more information here so this will interpret correctly.
+
+```{r sampledates2, echo=T, eval=T}
+
+# Some sample dates: 
+sample_dates_2 <- c("02-01-2016", "03-21-2016", "10-05-2016", "01-01-2017", "02-18-2017")
+
+as.Date(sample_dates_2, format = "%m-%d-%Y" ) # date code preceded by "%"
+
+```
+
+
+To see a list of the date-time format codes in R, check out this [page and table](https://www.stat.berkeley.edu/~s133/dates.html), or you can use: `?(strptime)`
+
+The nice thing is this method works well with pretty much any format, you just need to provide the associated codes and structure:
+
+ - `as.Date("2016/01/01", format="%Y/%m/%d")`=`r as.Date("2016/01/01", format="%Y/%m/%d")`
+ 
+ - `as.Date("05A21A2011", format="%mA%dA%Y")`=`r as.Date("05A21A2011", format="%mA%dA%Y")`
+ 
+ > ### Challenge: 
+ Format this date with the `as.Date` function: `Jul 04, 2017`
+ 
+```{r challenge1, eval=T, echo=F}
+#as.Date("Jul 04, 2017", format="%b %d, %Y")
+
+```
+
+#### Date Calculations
+
+It's possible to use dates in calculations as well, as long as they are formatted in the same data type (i.e., both are `date` in this case).
+
+**Make some fake dates**
+```{r}
+# format a value as `date`
+dt1 <- as.Date("2017-07-11")
+dt1
+
+# non-standard formats must be specified using format=
+dt2 <- as.Date("04/22/2016", format = "%m/%d/%Y")
+dt2
+
+dt3 <- as.Date("October 6, 2014", format = "%B %d, %Y")
+dt3
+
+```
+**Now some calculations**
+```{r datecalc1}
+# subtract differences in dates
+print(dt1 - dt2)
+```
+```{r datecalc2}
+# or look at differences in alternate scales
+print(difftime(dt1, dt2, units = "weeks"))
+
+```
+
+You can also sequence along by a given interval to create a timeseries. 
+
+```{r}
+six.weeks <- seq(dt1, length = 6, by = "week")
+six.weeks
+```
+
+ > ### Challenge:
+ > Create a sequence of 10 dates with a 2 week interval starting on 2011-02-15
+ 
+```{r challenge2, echo=F, eval=F}
+startingDate <- as.Date("2011-02-15")
+tendates <- seq(startingDate, length=10, by=14)
+tendates
+```
+
+
+## The `lubridate` package with Dates
+
+The `lubridate` package will handle 90% of the date & datetime issues you need to deal with. It is fast, much easier to work with, and I recommend using it wherever possible. Do keep in mind sometimes you need to fall back on the base R functions (i.e., `as.Date()`). 
+
+`library(lubridate)`
+
+Same idea here, just simpler to type, read, write.
+
+ - `lubridate::ymd("2016/01/01")`=`r lubridate::ymd("2016/01/01")`
+ - `lubridate::ymd("2011-03-19")`=`r lubridate::ymd("2011-03-19")`
+ - `lubridate::mdy("Feb 19, 2011")`=`r lubridate::mdy("Feb 19, 2011")`
+ - `lubridate::dmy("22051997")`=`r lubridate::dmy("22051997")`
+
+## Using **`POSIXct`**
+
+When working with times, the best class to use (generally) is `POSIXct`.
+
+Making some POSXct objects:
+
+```{r}
+tm1 <- as.POSIXct("2016-07-24 23:55:26")
+tm1
+tm2 <- as.POSIXct("25072016 08:32:07", format = "%d%m%Y %H:%M:%S")
+tm2
+
+# specify the time zone:
+tm3 <- as.POSIXct("2010-12-01 11:42:03", tz = "GMT")
+tm3
+```
+
+## Working with Timezones & Datetimes
+
+Similar to `as.Date` there are two functions for each datetime class in R. `as.POSIXct` and `as.POSIXlt`. The arguments are the largely the same, but two important components to consider are a `strptime` function to help format the datetime (similar to `as.Date`), and a timezone argument `tz`, for adding the appropriate timezone.
+
+Keep in mind the default datetime format is `YMD HM` or `YMD HMS`, so if you use that format you won't need to use the `strptime` option.
+
+### **as.POSIXct**
+
+ - Example 1 (default doesn't need `strptime`): `as.POSIXct("2016-01-01 12:00", "America/Los_Angeles")` = `r as.POSIXct("2016-01-01 12:00", "America/Los_Angeles")`
+ - Example 2 (24 hr time): `as.POSIXct(strptime("2016/04/05 14:47",format = "%Y/%m/%d %H:%M"), "America/Los_Angeles")` = `r as.POSIXct(strptime("2016/04/05 14:47",format = "%Y/%m/%d %H:%M"), "America/Los_Angeles")`
+ - Example 3 (12 hr time): `as.POSIXct(strptime("2016/04/05 4:47 PM",format = "%Y/%m/%d %H:%M PM"), "America/Los_Angeles")` = `r as.POSIXct(strptime("2016/04/05 4:47 PM",format = "%Y/%m/%d %H:%M PM"), "America/Los_Angeles")`
+
+## The `lubridate` package & timezones
+
+Same as before, now just add `_hms` or `_hm` to `ymd` and a `tz` arguement. `lubridate` will default to the POSIXct format.
+
+ - Example 1: `lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")` = `r lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")`
+ - Example 2 (24 hr time): `lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")` = `r lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")`
+ - Example 3 (12 hr time but converts to 24): `lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")` = `r lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")`
+
+## Datetimes without Timezones (and `chron`)
+
+The `chron` package may be helpful for these tasks, however, this may also be a suitable use of the POSIXlt class.
+
+ - `chron::as.chron("2013-07-24 23:55:26")` = `r chron::as.chron("2013-07-24 23:55:26")`
+ - `chron::as.chron("07/25/13 08:32:07", "%m/%d/%y %H:%M:%S")` = `r chron::as.chron("07/25/13 08:32:07", "%m/%d/%y %H:%M:%S")`
+
+#### Lubridate Tips
+
+For lubridate to work, you need the column datatype to be **character** or **factor**. The `readr` package (from the `tidyverse`) is smart and will try to guess for you. Problem is, it might convert your data for you without the settings (in this case the proper timezone). So here are few ways to work around this. 
+
+```{r}
+
+# read in some data and skip header lines
+nfy1 <- read_csv("data/2015_NFY_solinst.csv", skip = 12)
+head(nfy1)
+
+# import raw dataset & specify column types
+nfy2 <- read_csv("data/2015_NFY_solinst.csv", col_types = "ccidd", skip=12)
+
+# or just import with read.csv (defaults to factors for the dates)
+nfy3 <- read.csv("data/2015_NFY_solinst.csv", skip = 12)
+
+glimpse(nfy1) # notice the data types in the Date.Time and datetime cols
+glimpse(nfy2)
+glimpse(nfy3)
+
+# make a datetime col:
+nfy2$datetime <- paste(nfy2$Date, " ", nfy2$Time, sep = "")
+
+# convert Date Time to POSIXct in local timezone using lubridate
+nfy2$datetime_test <- as_datetime(nfy2$datetime, 
+                                    tz="America/Los_Angeles")
+# convert using the ymd_functions
+nfy2$datetime_test2 <- ymd_hms(nfy2$datetime, tz="America/Los_Angeles")
+
+# or wrap in as.character()
+nfy1$datetime <- ymd_hms(as.character(paste0(nfy1$Date," ", nfy1$Time)), tz="America/Los_Angeles")
+tz(nfy1$datetime)
+
+```
+
+## Example 1: Mauna Loa Meterological Data
+
+So, now that we have a decent idea how to format these things, let's look at some real data, try to format and plot. Let's use the Mauna Loa meterological data, collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.*
+
+```{r mloa_data, eval=T, echo=T}
+
+# let's load our climate data from our previous lesson:
+
+# rds
+mloa <- readRDS("data/mauna_loa_met_2001_minute.rds")
+
+# rda
+load("data/mauna_loa_met_2001_minute.rda")
+
+library(lubridate, warn.conflicts = F)
+library(dplyr, warn.conflicts = F)
+
+summary(mloa_2001)
+names(mloa_2001)
+
+```
+
+One of the important components to consider is each of the datetime columns has been separated...so how do we get them into one column so we can format it as a datetime? The answer is the `paste` function.
+
+ - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify
+ - `paste0()` is the same thing, but defaults to using a **`,`** as the separator.
+
+```{r making datetime cols, echo=T, eval=T}
+
+# we need to make a datetime column...let's use paste
+mloa_2001$datetime <- paste0(mloa_2001$year,"-", mloa_2001$month, "-", mloa_2001$day," ", mloa_2001$hour24, ":", mloa_2001$min) # this makes a character column
+
+head(mloa_2001$datetime) # character vector but not POSIXct yet
+
+# we can nest this within a lubridate function to convert directly to POSIXct
+mloa_2001$datetime <- ymd_hm(mloa_2001$datetime, tz="Pacific/Honolulu")
+
+# all in one step
+mloa_2001$datetime <- ymd_hm(paste0(mloa_2001$year,"-", mloa_2001$month, "-", mloa_2001$day," ", mloa_2001$hour24, ":", mloa_2001$min), tz = "Pacific/Honolulu")
+
+summary(mloa_2001) # notice a new column called "datetime"
+head(mloa_2001$datetime) # in POSIXct
+
+```
+
+ > ### Challenge with `dplyr` & `ggplot`
+ - Remove the NA's (-99 and -999) in `rel_humid`, `temp_C_2m`, `windSpeed_m_s`
+ > - Use `dplyr` to calculate the mean monthly temperature (`temp_C_2m`) using the `datetime` column (*HINT: look at `lubridate` functions like `month()`*)
+ > - Make a ggplot of the avg monthly temperature 
+ > - Make a ggplot of the daily average temperature for July (*HINT: try `yday()` function with some `summarize()` in `dplyr`*)
+
+**Solutions**
+
+```{r solution, eval=T, echo=F}
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+# clean up the NA data (NA's are = -99 or -999 depending on data col)
+df <- mloa_2001 %>% 
+  filter(!rel_humid == -99, 
+         !temp_C_2m == -999.9,
+         !temp_C_10m == -999.9,
+         !temp_C_towertop == -999.9,
+         !windSpeed_m_s == -99.9) %>% 
+  mutate(mon=month(datetime, label = TRUE, abbr=TRUE),
+         jday=yday(datetime))
+
+df %>% 
+  group_by(mon) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %>% 
+  knitr::kable(digits = 2)
+```
+
+```{r, echo=F}
+
+df %>% 
+  group_by(mon) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %>% 
+  ggplot() + geom_point(aes(x=mon, y=avg_temp_2m), color="darkblue")+
+  geom_point(aes(x=mon, y=avg_temp_10m), color="maroon") + 
+  geom_point(aes(x=mon, y=avg_temp_tower), color="forestgreen") +
+  ylab("Avg Monthly Temperature (C)") + xlab("Month")
+```
+
+
+```{r, echo=F}
+
+# or with legend
+# use viridis color palette 
+library(viridis)
+#viridis(4) # "#440154FF" "#21908CFF" "#FDE725FF"
+cols1 <- c("Temp-2m"="#440154FF", "Temp-10m" = "#35B779FF", "Temp-Towertop" = "#31688EFF")
+
+df %>% 
+  group_by(mon) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %>% 
+  ggplot() + geom_point(aes(x=mon, y=avg_temp_2m, fill="Temp-2m"), size=5, pch=21)+
+  geom_point(aes(x=mon, y=avg_temp_10m, fill="Temp-10m"), size=5, pch=21) + 
+  geom_point(aes(x=mon, y=avg_temp_tower, fill="Temp-Towertop"), size=5, pch=21) +
+  ylab("2001 Avg Monthly Temperature (C)") + xlab("Month") + 
+  scale_fill_manual(name="Temperature (C)",values=cols1) +
+  theme(legend.position = "bottom")
+ 
+```
+
+ 
+
+```{r, echo=F}
+library(magrittr) # for the %T>% pipe...the "tee"
+
+# avg daily for july 
+df %>% filter(mon=="Jul") %>% # or month==7
+  group_by(day) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %T>%
+  # anything after the %T>% is a sidebar
+  glimpse() %>% # picks data back up from before %T>%
+  ggplot() + 
+  geom_line(aes(x=day, y=avg_temp_2m, color="Temp-2m"), lty=4)+
+  geom_line(aes(x=day, y=avg_temp_10m, color="Temp-10m"), lty=2) + 
+  geom_line(aes(x=day, y=avg_temp_tower, color="Temp-Towertop"), lty=1) + 
+  geom_point(aes(x=day, y=avg_temp_2m, fill="Temp-2m"), size=3, pch=21, alpha=0.5)+
+  geom_point(aes(x=day, y=avg_temp_10m, fill="Temp-10m"), size=3, pch=21, alpha=0.5) + 
+  geom_point(aes(x=day, y=avg_temp_tower, fill="Temp-Towertop"), size=3, pch=21, alpha=0.5) +
+  ylab("2001 Avg Daily Temperature (C)") + xlab("July day") + 
+  scale_fill_manual(name="Temperature (C)",values=cols1) + 
+  scale_color_manual(name="Temperature (C)",values=cols1) + 
+  theme(legend.position = "bottom")
+```
+
+
+
+```{r, echo=F}
+
+# avg hourly for july 
+df %>% filter(mon=="Jul") %>% # or month==7
+  group_by(hour(datetime)) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %T>%
+  glimpse() %>% 
+  ggplot() + 
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color="Temp-2m"), lty=4)+
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_10m, color="Temp-10m"), lty=2) + 
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_tower, color="Temp-Towertop"), lty=1) + 
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill="Temp-2m"), size=3, pch=21, alpha=0.5)+
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_10m, fill="Temp-10m"), size=3, pch=21, alpha=0.5) + 
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_tower, fill="Temp-Towertop"), size=3, pch=21, alpha=0.5) +
+  ylab("2001 Avg Daily Temperature (C)") + xlab("July Hour") + 
+  scale_fill_manual(name="Temperature (C)",values=cols1) + 
+  scale_color_manual(name="Temperature (C)",values=cols1) + 
+  theme(legend.position = "bottom")
+  
+  
+```
+
+## Example 2: Pressure Transducer (Solinst) Data Logger 
+
+Let's practice with another data file, a logger that records water temperature and river stage every 15 minutes from the NF American River. You can download the file by right clicking on the [webpage](https://raw.githubusercontent.com/gge-ucd/wRangling_Seminar/master/data/2015_NFA_solinst_08_05.csv), or simply use the web URL. We've practiced both now. 
+
+*This dataset has 35,038 observations for water temperature, and stage (pressure transducer info).*
+
+ > First part of the challenge: Read in and assign the data to your environment using either the direct webpage URL, or the downloaded file.
+
+```{r solinst_data, eval=T, echo=F}
+
+# pressure transducer data
+
+# read in file directly from a weblink
+dat <- read.csv("https://raw.githubusercontent.com/gge-ucd/wRangling_Seminar/master/data/2015_NFA_solinst_08_05.csv", skip=13)
+
+library(lubridate, warn.conflicts = F)
+library(dplyr, warn.conflicts = F)
+
+summary(dat)
+names(dat)
+
+```
+
+ > ### Challenge
+ - Make a `datetime` column and format as `POSIXct`
+ > - Calculate Weekly **Mean, Max, Min** Water Temperatures and plot as point or line plot *(HINT: `dplyr` function)*
+ > - Calculate Hourly mean **Level** for April through June and make a line plot (using `ggplot2`). 
+ > - Make a ggplot geom_pointrange plot of the avg. max, min monthly temperatures.
+
+**Solutions**
+
+```{r solution2, eval=T, echo=F}
+
+# make datetime column
+dat$datetime <- paste0(dat$Date, " ", dat$Time)
+# format as POSIXct using lubridate
+dat$datetime <- ymd_hms(dat$datetime)
+
+library(magrittr) # for use of " %<>% "
+library(ggplot2)
+
+dat %<>% # what did this do?
+  mutate(yr = year(datetime),
+         mon = month(datetime),
+         wk = week(datetime),
+         DOY = yday(datetime),
+         hr = hour(datetime))
+
+head(dat)
+
+# Weekly Plot
+dat %>%  select(Level, Temperature, wk) %>% # select only cols we want
+  group_by(wk) %>% 
+  summarise_each(funs(mean, max, min)) %>%  # apply functions to each column
+  ggplot() + geom_point(aes(x=wk, y=Temperature_max), color="gray40", fill="maroon", pch=21) +
+  geom_line(aes(x=wk, y=Temperature_mean), color="red3")+
+  geom_point(aes(x=wk, y=Temperature_min), color="gray40", fill="navyblue", pch=21) + xlab("July 2015: Week")
+
+
+# Hourly July Plot
+dat %>%  filter(mon>=4 & mon<=6) %>% 
+  select(Level, DOY, hr, yr) %>%
+  group_by(yr, DOY, hr) %>% 
+  summarise(mean_Level=mean(Level)) %>% 
+  mutate(datetimes = ymd_hms(strptime(paste0(yr,"-",DOY," ",hr, ":00"), format="%Y-%j %H:%M"))) %>% 
+  ggplot() + geom_line(aes(x=datetimes, y=mean_Level), color="forestgreen") + xlab("Date") + ylab("Hourly Stage (m)")
+
+# Monthly Plot
+dat %>%  
+  select(Temperature, mon) %>% # select only cols we want
+  group_by(mon) %>% 
+  summarise_each(funs(mean, max, min)) %>%  # apply functions to each column
+  ggplot() + geom_pointrange(aes(x=mon, y=mean, ymax=max, ymin=min), fill="maroon", size=1, pch=21) + xlab("Avg Monthly Water Temperature: Months")
+
+```
+
+

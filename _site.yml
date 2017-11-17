@@ -30,7 +30,7 @@ navbar:
       href: contact.html
     - icon: fa-github fa-lg
       href: https://github.com/gge-ucd/R-DAVIS
-output_dir: "."
+output_dir: "docs"
 output:
   html_document:
     theme: flatly
