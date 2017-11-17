@@ -7,20 +7,20 @@ navbar:
       icon: fa-info-circle  fa-1x
     - text: "Course Materials"
       icon: fa-book  fa-1x
-      href: course_materials.html
-    - text: "Presentations"
-      icon: fa-slideshare fa-1x
-      href: https://speakerdeck.com/ryanpeek
-    - text: "Getting Started"
-      menu: 
-        - text: "Set Up!"
-          href: computer_setup.html
+      menu:
         - text: "Orientation to Programming, R, & RStudio"
           href: lesson_intro_r_rstudio.html
         - text: "Project Management"
           href: lesson_project_management.html
         - text: "Data frames"
           href: lesson_data_frames.html
+    - text: "Presentations"
+      icon: fa-slideshare fa-1x
+      href: https://speakerdeck.com/ryanpeek
+    - text: "Set Up!"
+      menu: 
+        - text: "Set Up!"
+          href: computer_setup.html
     - text: "Resources"
       icon: fa-list
       href: resources.html
