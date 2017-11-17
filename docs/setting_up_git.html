@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Ryan Peek" />
 
 
-<title>Syllabus</title>
+<title>Setting Up Git</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -368,40 +367,61 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Syllabus</h1>
-<h4 class="author"><em>Ryan Peek</em></h4>
-<h4 class="date"><em>11/8/2017</em></h4>
+<h1 class="title toc-ignore">Setting Up Git</h1>
 
 </div>
 
 
-<div id="r-davis-r-data-analysis-visualization-in-science" class="section level1">
-<h1>R-DAVIS (<font color="#DAAA00">R</font>-<font color="#DAAA00">D</font>ata <font color="#DAAA00">A</font>nalysis &amp; <font color="#DAAA00">V</font>isualization <font color="#DAAA00">I</font>n <font color="#DAAA00">S</font>cience)</h1>
-<div id="course-description" class="section level2">
-<h2>Course Description</h2>
-<p>Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question &amp; answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will easily apply to all programming languages and database management systems. <strong>No background in databases or R/computational experience is required.</strong></p>
+<div id="git" class="section level3">
+<h3>Git</h3>
+<p>Hopefully this goes smoothly for everyone, it is the trickiest of the things we need to install. However, it may need a little testing/time, so please try to test/install this early so we can address any issues that pop up.</p>
+<p>You’ll need to register an account with Github first, it’s free!</p>
+<blockquote>
+<p><a href="https://github.com">Github</a></p>
+</blockquote>
+<p>Please also register for the student develop pack, which gives you some free perks…</p>
+<blockquote>
+<p><a href="https://education.github.com/pack">Education Pack</a></p>
+</blockquote>
+<p>Then for a really nice set of instructions on how to do this, please go here and try to work through all the steps:</p>
+<blockquote>
+<p><a href="http://happygitwithr.com/installation-pain.html">Git Installation using Happy Git</a></p>
+</blockquote>
+<p>For a quick summary of instructions specific to your OS, see below:</p>
+<div id="git-windows" class="section level4">
+<h4>Git &amp; Windows</h4>
+<ol style="list-style-type: decimal">
+<li>Download the Git for Windows <a href="https://git-for-windows.github.io/">installer</a>.</li>
+<li>Run the installer and follow the steps bellow:
+<ol style="list-style-type: decimal">
+<li>Click on “Next”.</li>
+<li>Click on “Next”.</li>
+<li>Click on “Next”.</li>
+<li>Click on “Next”.</li>
+<li>Click on “Next”.</li>
+<li><strong>Select “Use Git from the Windows Command Prompt” and click on “Next”.</strong> If you forgot to do this programs that you need for the workshop will not work properly. If this happens rerun the installer and select the appropriate option.</li>
+<li>Click on “Next”. <strong>Keep “Checkout Windows-style, commit Unix-style line endings” selected.</strong></li>
+<li><strong>Select “Use Windows’ default console window” and click on “Next”.</strong></li>
+<li>Click on “Next”.</li>
+<li>Click on “Finish”.</li>
+</ol></li>
+</ol>
 </div>
-<div id="prerequisite-knowledge-and-skills" class="section level2">
-<h2>Prerequisite Knowledge and Skills</h2>
-<p>A willingess to practice coding and embrace the R language.</p>
+<div id="git-mac-os-x" class="section level4">
+<h4>Git &amp; Mac OS X</h4>
+<ol style="list-style-type: decimal">
+<li>Open up the Terminal, type in “git” and press enter.</li>
+<li>This should cause a pop-up window to appear. It will have several options; click on “Install” (not “Get Xcode”, see “Installing Xcode” for that).</li>
+<li>Click “Agree”.</li>
+<li>When the install is finished, click “Done”.</li>
+<li>To make sure this worked, type in “git” in the Terminal and press enter. Some information will come up, including a list of common commands.</li>
+</ol>
+<p>If this doesn’t work you can try the following:</p>
+<p>For <strong>OS X 10.9 and higher</strong>, install Git for Mac by downloading and running the most recent “mavericks” installer from <a href="http://sourceforge.net/projects/git-osx-installer/files/">this list</a>. After installing Git, there will not be anything in your <code>/Applications</code> folder, as Git is a command line program. For older versions of <strong>OS X (10.5-10.8)</strong> use the most recent available installer labelled “snow-leopard” <a href="http://sourceforge.net/projects/git-osx-installer/files/.">available here</a></p>
 </div>
-<div id="purpose-of-course" class="section level2">
-<h2>Purpose of Course</h2>
-<p>In this course you will learn all of the fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations and maps, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, work with SQL databases, as well as collaborate on Github with version-controlled projects.</p>
-<p>The focus of this course is to provide graduate students with training that develops and teaches the tools applicable to the entire process of <strong>reproducible data-driven research</strong> and encourage the use of open-source tools. By learning how to get the computer to do your work for you, you will be able to do more science faster, and your future-self will thank you.</p>
-</div>
-<div id="course-objectives" class="section level2">
-<h2>Course Objectives</h2>
-<p>Students completing this course should be able to:</p>
-<ul>
-<li>Read, Import/Export data</li>
-<li>Tidy/summarize and analyze data</li>
-<li>Write simple functions/programs in R</li>
-<li>Automate data analysis</li>
-<li>Scrape websites for data</li>
-<li>Map/manipulate spatial (raster/vector) data</li>
-<li>Learn how to apply these tools to address scientific research questions</li>
-</ul>
+<div id="git-linux" class="section level4">
+<h4>Git &amp; Linux</h4>
+<p>Git is probably already installed. If it is not already available on your machine you can try to install it via your distro’s package manager. For Debian/Ubuntu run <code>sudo apt-get install git</code> and for Fedora run <code>sudo yum install git</code>.</p>
 </div>
 </div>
 

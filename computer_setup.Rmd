@@ -2,80 +2,124 @@
 title: "Computer Setup"
 ---
 
-> ECL-290 will require that students each have their own laptop with *R*, *RStudio*, *SQL*, and *Git* installed before the first class meeting. Read below for more detailed instructions.
+> ECL-290 will require that students each have their own laptop with *R*, *RStudio*, and *Git* installed before the first class meeting. Read below for more detailed instructions.
+
+## Software Setup Instructions
 
 ### R & RStudio
 
+**R** and **RStudio** are separate downloads and installations. R is the underlying statistical computing environment. RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. You need to install R before you install RStudio.
+
 Download and install both of these but in this order:
  1. The [**R base system**](http://cran.rstudio.com/): Get the most current version version appropriate for your machine. It's free.
+
  2. [**RStudio**](http://www.rstudio.com/products/rstudio/download/) is a great platform to work with R (note you need R before you can use RStudio). Please install the most recent version. It's free. It does lots of cool things.
 
-### Git
+#### Windows
 
-Hopefully this goes smoothly for everyone, it is the trickiest of the things we need to install. However, it may need a little testing/time, so please try to test/install this early so we can address any issues that pop up.
+##### If you already have R and RStudio installed
 
-You'll need to register an account with Github first, it's free!
+* Open RStudio, and click on "Help" > "Check for updates". If a new version is
+	available, quit RStudio, and download the latest version for RStudio.
+* To check which version of R you are using, start RStudio and the first thing
+  that appears in the console indicates the version of R you are
+  running. Alternatively, you can type `sessionInfo()`, which will also display
+  which version of R you are running. Go on
+  the [CRAN website](https://cran.r-project.org/bin/windows/base/) and check
+  whether a more recent version is available. If so, please download and install
+  it. You can [check here](https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f) for
+  more information on how to remove old versions from your system if you wish to do so.
 
- > [Github](https://github.com)
+##### If you don't have R and RStudio installed
 
-Please also register for the student develop pack, which gives you some free perks...
-
- > [Education Pack](https://education.github.com/pack)
-
-Then for a really nice set of instructions on how to do this, please go here and try to work through all the steps:
-
- > [Git Installation using Happy Git](http://happygitwithr.com/installation-pain.html)
-
-For a quick summary of instructions specific to your OS, see below:
-
-#### Git & Windows
-
-1.  Download the Git for Windows
-    [installer](https://git-for-windows.github.io/).
-2.  Run the installer and follow the steps bellow:
-    1.  Click on "Next".
-    2.  Click on "Next".
-    3.  Click on "Next".
-    4.  Click on "Next".
-    5.  Click on "Next".
-    6.  **Select "Use Git from the Windows Command Prompt" and click on
-        "Next".** If you forgot to do this programs that you need for
-        the workshop will not work properly. If this happens rerun the
-        installer and select the appropriate option.
-    7.  Click on "Next". **Keep "Checkout Windows-style, commit
-        Unix-style line endings" selected.**
-    8.  **Select "Use Windows' default console window" and click on
-        "Next".**
-    9.  Click on "Next".
-    10. Click on "Finish".
+* Download R from
+  the [CRAN website](http://cran.r-project.org/bin/windows/base/release.htm).
+* Run the `.exe` file that was just downloaded
+* Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+* Under *Installers* select **RStudio x.yy.zzz - Windows
+  XP/Vista/7/8** (where x, y, and z represent version numbers)
+* Double click the file to install it
+* Once it's installed, open RStudio to make sure it works and you don't get any
+  error messages.
 
 
-#### Git & Mac OS X
+#### macOS
 
-1. Open up the Terminal, type in "git" and press enter.
-2. This should cause a pop-up window to appear. It will have several options;
-   click on "Install" (not "Get Xcode", see "Installing Xcode" for that).
-3. Click "Agree".
-4. When the install is finished, click "Done".
-5. To make sure this worked, type in "git" in the Terminal and press enter. Some
-   information will come up, including a list of common commands.
+##### If you already have R and RStudio installed
 
-If this doesn't work you can try the following:
+* Open RStudio, and click on "Help" > "Check for updates". If a new version is
+	available, quit RStudio, and download the latest version for RStudio.
+* To check the version of R you are using, start RStudio and the first thing
+  that appears on the terminal indicates the version of R you are running. Alternatively, you can type `sessionInfo()`, which will also display which version of R you are running. Go on
+  the [CRAN website](https://cran.r-project.org/bin/macosx/) and check
+  whether a more recent version is available. If so, please download and install
+  it.
 
-For **OS X 10.9 and higher**, install Git for Mac by downloading and running the
-most recent "mavericks" installer from
-[this list](http://sourceforge.net/projects/git-osx-installer/files/).  After
-installing Git, there will not be anything in your `/Applications` folder, as
-Git is a command line program. For older versions of **OS X (10.5-10.8)**
-use the most recent available installer labelled "snow-leopard" [available
-here](http://sourceforge.net/projects/git-osx-installer/files/.)
+##### If you don't have R and RStudio installed
 
-#### Git & Linux
+* Download R from
+  the [CRAN website](http://cran.r-project.org/bin/macosx).
+* Select the `.pkg` file for the latest R version
+* Double click on the downloaded file to install R
+* It is also a good idea to install [XQuartz](https://www.xquartz.org/) (needed
+  by some packages)
+* Go to the [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+* Under *Installers* select **RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit)**
+  (where x, y, and z represent version numbers)
+* Double click the file to install RStudio
+* Once it's installed, open RStudio to make sure it works and you don't get any
+  error messages.
 
-Git is probably already installed. If it is not already available on your
-machine you can try to install it via your distro's package manager. For
-Debian/Ubuntu run `sudo apt-get install git` and for Fedora run `sudo yum
-install git`.
+
+#### Linux
+
+* Follow the instructions for your distribution
+  from [CRAN](https://cloud.r-project.org/bin/linux), they provide information
+  to get the most recent version of R for common distributions. For most
+  distributions, you could use your package manager (e.g., for Debian/Ubuntu run
+  `sudo apt-get install r-base`, and for Fedora `sudo yum install R`), but we
+  don't recommend this approach as the versions provided by this are
+  usually out of date. In any case, make sure you have at least R 3.3.1.
+* Go to the
+  [RStudio download page](https://www.rstudio.com/products/rstudio/download/#download)
+* Under *Installers* select the version that matches your distribution, and
+  install it with your preferred method (e.g., with Debian/Ubuntu `sudo dpkg -i
+  rstudio-x.yy.zzz-amd64.deb` at the terminal).
+* Once it's installed, open RStudio to make sure it works and you don't get any
+  error messages.
+  
+### Spreadsheet program
+
+To interact with spreadsheets, we can use LibreOffice, Microsoft Excel, Gnumeric, OpenOffice.org, or other programs. Commands may differ a bit between programs, but general ideas for thinking about spreadsheets are the same.
+
+For this lesson, if you don't have a spreadsheet program already, you can use LibreOffice. It's a free, open source spreadsheet program.
+
+#### Windows
+
+- Download the Installer 
+  - Install LibreOffice by going to [the installation page](https://www.libreoffice.org/download/libreoffice-fresh/). The version for Windows should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don't need to make one. Your download should begin automatically.
+- Install LibreOffice 
+- Once the installer is downloaded, double click on it and LibreOffice should install.
+
+#### Mac OS X
+
+- Download the Installer 
+  - Install LibreOffice by going to [the installation page](https://www.libreoffice.org/download/libreoffice-fresh/). The version for Mac should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don't need to make one. Your download should begin automatically.
+- Install LibreOffice 
+- Once the installer is downloaded, double click on it and LibreOffice should install.
+
+
+#### Linux
+
+- Download the Installer 
+  - Install LibreOffice by going to [the installation page](https://www.libreoffice.org/download/libreoffice-fresh/). The version for Linux should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don't need to make one. Your download should begin automatically.
+- Install LibreOffice 
+- Once the installer is downloaded, double click on it and LibreOffice should install.
+
+<br>
+
+These setup instructions are adapted from those written for [Data Carpentry: R for Data Analysis and Visualization of Ecological Data](http://www.datacarpentry.org/R-ecology-lesson/) and [Data Carpentry: Data Organization in Spreadsheets](http://www.datacarpentry.org/spreadsheet-ecology-lesson/).
+
 
 ### SQL
 

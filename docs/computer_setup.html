@@ -23,6 +23,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
@@ -148,6 +149,14 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 
@@ -277,12 +286,25 @@ div.tocify {
     About
   </a>
 </li>
-<li>
-  <a href="course_materials.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames.html">Data frames</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="https://speakerdeck.com/ryanpeek">
@@ -293,22 +315,16 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting Started
+    Set Up!
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="computer_setup.html">Set Up!</a>
+      <a href="computer_setup.html">Computer Setup</a>
     </li>
     <li>
-      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
-    </li>
-    <li>
-      <a href="lesson_project_management.html">Project Management</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames.html">Data frames</a>
+      <a href="setting_up_git.html">Setting up Git</a>
     </li>
   </ul>
 </li>
@@ -341,6 +357,14 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Computer Setup</h1>
@@ -349,67 +373,109 @@ div.tocify {
 
 
 <blockquote>
-<p>ECL-290 will require that students each have their own laptop with <em>R</em>, <em>RStudio</em>, <em>SQL</em>, and <em>Git</em> installed before the first class meeting. Read below for more detailed instructions.</p>
+<p>ECL-290 will require that students each have their own laptop with <em>R</em>, <em>RStudio</em>, and <em>Git</em> installed before the first class meeting. Read below for more detailed instructions.</p>
 </blockquote>
+<div id="software-setup-instructions" class="section level2">
+<h2>Software Setup Instructions</h2>
 <div id="r-rstudio" class="section level3">
 <h3>R &amp; RStudio</h3>
-<p>Download and install both of these but in this order: 1. The <a href="http://cran.rstudio.com/"><strong>R base system</strong></a>: Get the most current version version appropriate for your machine. It’s free. 2. <a href="http://www.rstudio.com/products/rstudio/download/"><strong>RStudio</strong></a> is a great platform to work with R (note you need R before you can use RStudio). Please install the most recent version. It’s free. It does lots of cool things.</p>
-</div>
-<div id="git" class="section level3">
-<h3>Git</h3>
-<p>Hopefully this goes smoothly for everyone, it is the trickiest of the things we need to install. However, it may need a little testing/time, so please try to test/install this early so we can address any issues that pop up.</p>
-<p>You’ll need to register an account with Github first, it’s free!</p>
-<blockquote>
-<p><a href="https://github.com">Github</a></p>
-</blockquote>
-<p>Please also register for the student develop pack, which gives you some free perks…</p>
-<blockquote>
-<p><a href="https://education.github.com/pack">Education Pack</a></p>
-</blockquote>
-<p>Then for a really nice set of instructions on how to do this, please go here and try to work through all the steps:</p>
-<blockquote>
-<p><a href="http://happygitwithr.com/installation-pain.html">Git Installation using Happy Git</a></p>
-</blockquote>
-<p>For a quick summary of instructions specific to your OS, see below:</p>
-<div id="git-windows" class="section level4">
-<h4>Git &amp; Windows</h4>
-<ol style="list-style-type: decimal">
-<li>Download the Git for Windows <a href="https://git-for-windows.github.io/">installer</a>.</li>
-<li>Run the installer and follow the steps bellow:
-<ol style="list-style-type: decimal">
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li><strong>Select “Use Git from the Windows Command Prompt” and click on “Next”.</strong> If you forgot to do this programs that you need for the workshop will not work properly. If this happens rerun the installer and select the appropriate option.</li>
-<li>Click on “Next”. <strong>Keep “Checkout Windows-style, commit Unix-style line endings” selected.</strong></li>
-<li><strong>Select “Use Windows’ default console window” and click on “Next”.</strong></li>
-<li>Click on “Next”.</li>
-<li>Click on “Finish”.</li>
-</ol></li>
+<p><strong>R</strong> and <strong>RStudio</strong> are separate downloads and installations. R is the underlying statistical computing environment. RStudio is a graphical integrated development environment (IDE) that makes using R much easier and more interactive. You need to install R before you install RStudio.</p>
+<p>Download and install both of these but in this order: 1. The <a href="http://cran.rstudio.com/"><strong>R base system</strong></a>: Get the most current version version appropriate for your machine. It’s free.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><a href="http://www.rstudio.com/products/rstudio/download/"><strong>RStudio</strong></a> is a great platform to work with R (note you need R before you can use RStudio). Please install the most recent version. It’s free. It does lots of cool things.</li>
 </ol>
+<div id="windows" class="section level4">
+<h4>Windows</h4>
+<div id="if-you-already-have-r-and-rstudio-installed" class="section level5">
+<h5>If you already have R and RStudio installed</h5>
+<ul>
+<li>Open RStudio, and click on “Help” &gt; “Check for updates”. If a new version is available, quit RStudio, and download the latest version for RStudio.</li>
+<li>To check which version of R you are using, start RStudio and the first thing that appears in the console indicates the version of R you are running. Alternatively, you can type <code>sessionInfo()</code>, which will also display which version of R you are running. Go on the <a href="https://cran.r-project.org/bin/windows/base/">CRAN website</a> and check whether a more recent version is available. If so, please download and install it. You can <a href="https://cran.r-project.org/bin/windows/base/rw-FAQ.html#How-do-I-UNinstall-R_003f">check here</a> for more information on how to remove old versions from your system if you wish to do so.</li>
+</ul>
 </div>
-<div id="git-mac-os-x" class="section level4">
-<h4>Git &amp; Mac OS X</h4>
-<ol style="list-style-type: decimal">
-<li>Open up the Terminal, type in “git” and press enter.</li>
-<li>This should cause a pop-up window to appear. It will have several options; click on “Install” (not “Get Xcode”, see “Installing Xcode” for that).</li>
-<li>Click “Agree”.</li>
-<li>When the install is finished, click “Done”.</li>
-<li>To make sure this worked, type in “git” in the Terminal and press enter. Some information will come up, including a list of common commands.</li>
-</ol>
-<p>If this doesn’t work you can try the following:</p>
-<p>For <strong>OS X 10.9 and higher</strong>, install Git for Mac by downloading and running the most recent “mavericks” installer from <a href="http://sourceforge.net/projects/git-osx-installer/files/">this list</a>. After installing Git, there will not be anything in your <code>/Applications</code> folder, as Git is a command line program. For older versions of <strong>OS X (10.5-10.8)</strong> use the most recent available installer labelled “snow-leopard” <a href="http://sourceforge.net/projects/git-osx-installer/files/.">available here</a></p>
+<div id="if-you-dont-have-r-and-rstudio-installed" class="section level5">
+<h5>If you don’t have R and RStudio installed</h5>
+<ul>
+<li>Download R from the <a href="http://cran.r-project.org/bin/windows/base/release.htm">CRAN website</a>.</li>
+<li>Run the <code>.exe</code> file that was just downloaded</li>
+<li>Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio download page</a></li>
+<li>Under <em>Installers</em> select <strong>RStudio x.yy.zzz - Windows XP/Vista/7/8</strong> (where x, y, and z represent version numbers)</li>
+<li>Double click the file to install it</li>
+<li>Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.</li>
+</ul>
 </div>
-<div id="git-linux" class="section level4">
-<h4>Git &amp; Linux</h4>
-<p>Git is probably already installed. If it is not already available on your machine you can try to install it via your distro’s package manager. For Debian/Ubuntu run <code>sudo apt-get install git</code> and for Fedora run <code>sudo yum install git</code>.</p>
+</div>
+<div id="macos" class="section level4">
+<h4>macOS</h4>
+<div id="if-you-already-have-r-and-rstudio-installed-1" class="section level5">
+<h5>If you already have R and RStudio installed</h5>
+<ul>
+<li>Open RStudio, and click on “Help” &gt; “Check for updates”. If a new version is available, quit RStudio, and download the latest version for RStudio.</li>
+<li>To check the version of R you are using, start RStudio and the first thing that appears on the terminal indicates the version of R you are running. Alternatively, you can type <code>sessionInfo()</code>, which will also display which version of R you are running. Go on the <a href="https://cran.r-project.org/bin/macosx/">CRAN website</a> and check whether a more recent version is available. If so, please download and install it.</li>
+</ul>
+</div>
+<div id="if-you-dont-have-r-and-rstudio-installed-1" class="section level5">
+<h5>If you don’t have R and RStudio installed</h5>
+<ul>
+<li>Download R from the <a href="http://cran.r-project.org/bin/macosx">CRAN website</a>.</li>
+<li>Select the <code>.pkg</code> file for the latest R version</li>
+<li>Double click on the downloaded file to install R</li>
+<li>It is also a good idea to install <a href="https://www.xquartz.org/">XQuartz</a> (needed by some packages)</li>
+<li>Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio download page</a></li>
+<li>Under <em>Installers</em> select <strong>RStudio x.yy.zzz - Mac OS X 10.6+ (64-bit)</strong> (where x, y, and z represent version numbers)</li>
+<li>Double click the file to install RStudio</li>
+<li>Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.</li>
+</ul>
+</div>
+</div>
+<div id="linux" class="section level4">
+<h4>Linux</h4>
+<ul>
+<li>Follow the instructions for your distribution from <a href="https://cloud.r-project.org/bin/linux">CRAN</a>, they provide information to get the most recent version of R for common distributions. For most distributions, you could use your package manager (e.g., for Debian/Ubuntu run <code>sudo apt-get install r-base</code>, and for Fedora <code>sudo yum install R</code>), but we don’t recommend this approach as the versions provided by this are usually out of date. In any case, make sure you have at least R 3.3.1.</li>
+<li>Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio download page</a></li>
+<li>Under <em>Installers</em> select the version that matches your distribution, and install it with your preferred method (e.g., with Debian/Ubuntu <code>sudo dpkg -i   rstudio-x.yy.zzz-amd64.deb</code> at the terminal).</li>
+<li>Once it’s installed, open RStudio to make sure it works and you don’t get any error messages.</li>
+</ul>
+</div>
+</div>
+<div id="spreadsheet-program" class="section level3">
+<h3>Spreadsheet program</h3>
+<p>To interact with spreadsheets, we can use LibreOffice, Microsoft Excel, Gnumeric, OpenOffice.org, or other programs. Commands may differ a bit between programs, but general ideas for thinking about spreadsheets are the same.</p>
+<p>For this lesson, if you don’t have a spreadsheet program already, you can use LibreOffice. It’s a free, open source spreadsheet program.</p>
+<div id="windows-1" class="section level4">
+<h4>Windows</h4>
+<ul>
+<li>Download the Installer</li>
+<li>Install LibreOffice by going to <a href="https://www.libreoffice.org/download/libreoffice-fresh/">the installation page</a>. The version for Windows should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don’t need to make one. Your download should begin automatically.</li>
+<li>Install LibreOffice</li>
+<li>Once the installer is downloaded, double click on it and LibreOffice should install.</li>
+</ul>
+</div>
+<div id="mac-os-x" class="section level4">
+<h4>Mac OS X</h4>
+<ul>
+<li>Download the Installer</li>
+<li>Install LibreOffice by going to <a href="https://www.libreoffice.org/download/libreoffice-fresh/">the installation page</a>. The version for Mac should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don’t need to make one. Your download should begin automatically.</li>
+<li>Install LibreOffice</li>
+<li>Once the installer is downloaded, double click on it and LibreOffice should install.</li>
+</ul>
+</div>
+<div id="linux-1" class="section level4">
+<h4>Linux</h4>
+<ul>
+<li>Download the Installer</li>
+<li>Install LibreOffice by going to <a href="https://www.libreoffice.org/download/libreoffice-fresh/">the installation page</a>. The version for Linux should automatically be selected. Click Download Version X.X.X (whichever is the most recent version). You will go to a page that asks about a donation, but you don’t need to make one. Your download should begin automatically.</li>
+<li>Install LibreOffice</li>
+<li>Once the installer is downloaded, double click on it and LibreOffice should install.</li>
+</ul>
+<p><br></p>
+<p>These setup instructions are adapted from those written for <a href="http://www.datacarpentry.org/R-ecology-lesson/">Data Carpentry: R for Data Analysis and Visualization of Ecological Data</a> and <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Data Carpentry: Data Organization in Spreadsheets</a>.</p>
 </div>
 </div>
 <div id="sql" class="section level3">
 <h3>SQL</h3>
 <p>Download and install <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>. Add the <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/">SQLite Manager</a>.</p>
+</div>
 </div>
 
 

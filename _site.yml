@@ -5,6 +5,12 @@ navbar:
     - text: "About"
       href: about.html
       icon: fa-info-circle  fa-1x
+    - text: "Set Up!"
+      menu: 
+        - text: "Computer Setup"
+          href: computer_setup.html
+        - text: "Setting up Git"
+          href: setting_up_git.html
     - text: "Course Materials"
       icon: fa-book  fa-1x
       menu:
@@ -17,10 +23,6 @@ navbar:
     - text: "Presentations"
       icon: fa-slideshare fa-1x
       href: https://speakerdeck.com/ryanpeek
-    - text: "Set Up!"
-      menu: 
-        - text: "Set Up!"
-          href: computer_setup.html
     - text: "Resources"
       icon: fa-list
       href: resources.html
@@ -35,6 +37,7 @@ output:
   html_document:
     theme: flatly
     highlight: pygments
+    code_folding: hide
     toc: true
     toc_float:
       collapsed: false

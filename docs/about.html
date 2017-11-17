@@ -23,6 +23,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
@@ -148,6 +149,14 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 
 
@@ -277,12 +286,25 @@ div.tocify {
     About
   </a>
 </li>
-<li>
-  <a href="course_materials.html">
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
+     
+    <span class="caret"></span>
   </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames.html">Data frames</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="https://speakerdeck.com/ryanpeek">
@@ -293,22 +315,16 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Getting Started
+    Set Up!
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="computer_setup.html">Set Up!</a>
+      <a href="computer_setup.html">Computer Setup</a>
     </li>
     <li>
-      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
-    </li>
-    <li>
-      <a href="lesson_project_management.html">Project Management</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames.html">Data frames</a>
+      <a href="setting_up_git.html">Setting up Git</a>
     </li>
   </ul>
 </li>
@@ -340,6 +356,14 @@ div.tocify {
 </div><!--/.navbar -->
 
 <div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
 
@@ -382,34 +406,6 @@ div.tocify {
 <p><strong>Martha Wohlfeil</strong> <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a></p>
 <p>Martha is a second year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software.</p>
 <p><br></p>
-</div>
-<div id="code-of-conduct" class="section level2">
-<h2>Code of Conduct</h2>
-<p>We are dedicated to providing a welcoming and supportive environment for all people, regardless of background or identity. However, we recognise that some groups in our community are subject to historical and ongoing discrimination, and may be vulnerable or disadvantaged. Membership in such a specific group can be on the basis of characteristics such as gender, sexual orientation, disability, physical appearance, body size, race, nationality, sex, colour, ethnic or social origin, pregnancy, citizenship, familial status, veteran status, genetic information, religion or belief, political or any other opinion, membership of a national minority, property, birth, age, or choice of text editor. We do not tolerate harassment of participants on the basis of these categories, or for any other reason.</p>
-<p>Harassment is any form of behaviour intended to exclude, intimidate, or cause discomfort. Because we are a diverse community, we may have different ways of communicating and of understanding the intent behind actions. Therefore we have chosen to prohibit certain forms of behaviour in our community, regardless of intent. Prohibited harassing behaviour includes but is not limited to:</p>
-<ul>
-<li>written or verbal comments which have the effect of excluding people on the basis of membership of a specific group listed above</li>
-<li>causing someone to fear for their safety, such as through stalking, following, or intimidation the display of sexual or violent images</li>
-<li>unwelcome sexual attention</li>
-<li>nonconsensual or unwelcome physical contact</li>
-<li>sustained disruption of talks, events or communications</li>
-<li>incitement to violence, suicide, or self-harm</li>
-<li>continuing to initiate interaction (including photography or recording) with someone after being asked to stop</li>
-<li>publication of private communication without consent</li>
-</ul>
-<p>Behaviour not explicitly mentioned above may still constitute harassment. The list above should not be taken as exhaustive but rather as a guide to make it easier to enrich all of us and the communities in which we participate. All Carpentry interactions should be professional regardless of location: harassment is prohibited whether it occurs on- or offline, and the same standards apply to both.</p>
-<p>Enforcement of the Code of Conduct will be respectful and not include any harassing behaviors.</p>
-<p>Thank you for helping make this a welcoming, friendly community for all.</p>
-<p>This code of conduct is an adaptation of the one used by the Software Carpentry Foundation and is a modified version of that used by PyCon, which in turn is forked from a template written by the Ada Initiative and hosted on the Geek Feminism Wiki. Contributors to this document: Adam Obeng, Aleksandra Pawlik, Bill Mills, Carol Willing, Erin Becker, Hilmar Lapp, Kara Woo, Karin Lagesen, Pauline Barmby, Sheila Miguez, Simon Waldman, Tracy Teal.</p>
-<p>For more information about the Code of Conduct related to Data Carpentry, please see their <a href="http://www.datacarpentry.org/code-of-conduct/">website</a>.</p>
-<p>If you are being harassed, notice that someone else is being harassed, or have any other concerns, please see the <a href="http://ombuds.ucdavis.edu/">UC Davis ombuds office</a>.</p>
-<p><br></p>
-</div>
-<div id="territory-acknowledgement" class="section level2">
-<h2>Territory Acknowledgement</h2>
-<p>Acknowledging territory shows recognition of and respect for Native Americans. It is recognition of their presence both in the past and the present. Recognition and respect are essential elements of establishing healthy, reciprocal relations. These relationships are key to reconciliation, a process to which we are committed.</p>
-<p>We would like to respectfully acknowledge that the land on which we gather is traditional unceded Patwin territory. We recognize and respect our role as guests here.</p>
-<p>This territory acknowledgement is an adaptation of one written by the Canadian Association of University Teachers. For more information, please see their <a href="https://www.caut.ca/content/guide-acknowledging-first-peoples-traditional-territory">website</a>.</p>
 </div>
 
 
