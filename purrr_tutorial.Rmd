@@ -1,0 +1,494 @@
+---
+title: "Using `map` Functions with `purrr`"
+---
+
+<br>
+
+## R4DS: [the map functions](http://r4ds.had.co.nz/iteration.html#the-map-functions)
+
+<br>
+
+**Brandon's PRESENTATION**:
+
+<iframe width="600" height="400" src="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1"></iframe>
+
+ - [*Fullscreen*](http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1)
+
+**Brandon's SCRIPT: BELOW**
+
+# Let's load tidyverse
+``` {r setup}
+library(tidyverse)
+```
+
+# R Data types
+```{r vector intiation}
+#initiate blank vectors of a specific type
+#this can be useful when capturing data from for loops
+a <- vector("logical", 5)
+a
+b <- vector("integer", 4)
+b
+c <- vector("double", 2) # can also use "numeric"
+c
+d <- vector("character", 10)
+d
+e <- vector("complex", 7)
+e
+f <- vector("raw", 3)
+f
+g <- list()
+g
+```
+# NAs
+```{r NA NA NA NA NA NA NA NA Batman}
+#what do the NAs look like?
+list(NA, NA_integer_, NA_real_, NA_character_, NA_complex_)
+#not very exciting
+```
+
+# The NULL element
+
+``` {r NULLs}
+# NULL is the absence of a vector
+a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) # logical vector 
+a
+a <- NULL
+a
+
+mtcars
+mtcars[1] <- NULL #this gets rid of the mpg coloumn completely
+mtcars
+
+data(mtcars) # restore mtcars
+
+```
+
+# Assembling vectors into a list, dataframes and tibbles
+```{r Vectors Victor, error = TRUE}
+# let's put actual values into these
+a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) #seems logical 
+b <- c(1:7, NA_integer_) #Integers
+c <- c(rnorm(8), NA_real_) #pull doubles from normal distribution
+d <- c(LETTERS[1:3], NA_character_) #first 5 capital letters
+
+e <- list(a, b, c, d) #make a list
+
+e # check it twix
+
+#Lists can contain anything of any length
+#data.frame is a special type of list
+# data.frame rows imply association so they need to line up
+
+data.frame(a, b) # uh oh
+
+a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA, NA, NA) # make it 8 like b
+df <- data.frame(a = a, b = b) # OH YEAH /Koolaidman.gif
+df 
+#tibbles are a more strict type of data.frame
+# with
+#     slightly more informative printing (not shown well here)
+#     strict behavior around subsetting `[` -> tibble `[[` vector
+#     does not partially match column names (this can get you into trouble)
+
+as_tibble(df)
+
+```
+# Back to presentation
+
+# Accessing elements inside vectors, lists, dataframes, and tibbles
+``` {r list_df_tibble_subsetting, error = TRUE} 
+
+#atomic vectors
+a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) #logic vector 
+a
+a[1] 
+a[[1]] # does the same thing
+a[[[1]]] #lolwut R you doing?
+
+#lists
+list_example <- list(a = a, b= b, c = c, d = d, e = list(1, "A")) #make a named list
+list_example
+# single brackets returns a list with that element in it
+# can reference by location or by name
+list_example[1]
+list_example["a"]
+
+# double brackets return a vector 
+list_example[[2]]
+list_example[["b"]]
+
+#stack [['s it to peel the onion back
+list_example[["e"]] # remove one layer
+list_example[["e"]][[2]] # remove the second layer
+
+#dolla dolla bills y'all (works like [[, with named vectors)
+list_example$c
+
+#same for dataframes
+mtcars[1]
+mtcars[[1]]
+
+# and for tibbles
+tbbl <- tibble(x = 1:3, y = LETTERS[1:3])
+tbbl[1]
+tbbl["x"]
+
+tbbl[[2]]
+tbbl[["y"]]
+```
+
+
+# Back to presentation
+
+
+# When to make a function in R
+``` {r Y_make_a_function}
+#Simple dataframe
+df <- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+# What are we doing here?
+df$a <- (df$a - min(df$a, na.rm = TRUE)) /  
+  (max(df$a, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$b <- (df$b - min(df$b, na.rm = TRUE)) /  
+  (max(df$b, na.rm = TRUE) - min(df$b, na.rm = TRUE))
+df$c <- (df$c - min(df$a, na.rm = TRUE)) /  
+  (max(df$c, na.rm = TRUE) - min(df$c, na.rm = TRUE))
+df$d <- (df$d - min(df$d, na.rm = TRUE)) /  
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+
+```
+
+
+``` {r function01, error = TRUE, eval = FALSE}
+df$d <- (df$d - min(df$d, na.rm = TRUE)) /  
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+```
+
+
+``` {r function02, error = TRUE, eval = FALSE}
+# pull out what's common
+x <- (x - min(x, na.rm = TRUE)) /  
+  (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
+```
+
+
+``` {r function03, error = TRUE, eval = FALSE}
+
+#simplify more and refactor if that makes sense
+x <- (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+```
+
+``` {r function04, error = TRUE, eval = FALSE}
+# rewrite as a function
+rescale_0_1 <- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+```
+
+``` {r test function}
+rescale_0_1 <- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+
+testvec <- 1:11
+testvec
+rescale_0_1(testvec)
+```
+
+``` {r use_function}
+df <- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+rescale_0_1 <- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+
+out <- df
+out$a <- rescale_0_1(df$a)
+out$b <- rescale_0_1(df$b)
+out$c <- rescale_0_1(df$c)
+out$d <- rescale_0_1(df$d)
+out
+```
+
+# Reduce iteration with a for loop
+``` {r forloops}
+out <- df #make a copy to store scaled data
+for (i in 1:ncol(df)) { # loop through each element
+  out[i] <- rescale_0_1(df[[i]]) #apply function and store it to out
+}
+out
+```
+
+# seq_along
+
+``` {r for_seq_along_loops}
+out <- df #make a copy to store scaled data
+for (i in seq_along(df)) {
+  out[i] <- rescale_0_1(df[[i]])
+}
+out
+```
+
+# map to iterate
+```{r WHAT_IS_THIS_MAPGIC}
+map(df, function(x) rescale_0_1(x)) #map over the columns in df
+```
+# let's look at another more simple example
+# This list contains two integer vectors and we want the mean of each one
+``` {r simplemap}
+l = list(a=1:10, b = 10:100)
+map(l, function(x) mean(x, na.rm = TRUE))
+```
+
+# We know we want one double back from each list
+# specify and you get a vector back instead of a list
+``` {r rightmap}
+l = list(a=1:10, b = 10:100)
+map_dbl(l, function(x) mean(x, na.rm = TRUE))
+```
+
+# You can coerce these to character so this works
+#   but I don't think this is very helpful
+``` {r okishmap}
+map_chr(l, function(x) mean(x, na.rm = TRUE))
+```
+
+
+# These are type-strict functions though
+# get it wrong and you'll know
+``` {r wrongmap, error = TRUE}
+l = list(a=1:10, b = 10:100)
+map_lgl(l, function(x) mean(x, na.rm = TRUE))
+```
+
+# Map Examples
+# Map use case #1: Read in files
+Based upon this tutorial
+http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/
+
+``` {r simple_read_csvs, message = FALSE}
+#this will work if you clone the github repository
+fileloc <- file.path(getwd(), "stocks")
+#create a list of files to read in that end in csv
+files <- list.files(fileloc, pattern = "csv$", full.names = TRUE) 
+
+#this reads in each csv independently into a list
+dat2 <- map(files, read_csv)
+dat2
+
+```
+
+# Let's make it a function
+``` {r make_it_functional, message = FALSE}
+fileloc <- file.path(getwd(), "stocks")
+
+read_folder <- function(folder) {
+  # get files that end with csv or CSV
+  files <- list.files(folder, pattern = "(csv|CSV)$", full.names = TRUE) 
+  #this reads in each csv independently into a list
+  map(files, read_csv) # last thing is returned
+}
+
+read_folder(fileloc)
+```
+
+
+# What if you want to change the type of file you're reading?
+``` {r fancify, message = FALSE}
+fileloc <- file.path(getwd(), "stocks")
+
+read_folder <- function(folder, pattern, read_fun) {
+  # get files that end with csv or CSV
+  files <- list.files(folder, pattern = pattern, full.names = TRUE) 
+  #this reads in each csv independently into a list
+  map(files, read_fun)
+}
+
+read_folder(folder = fileloc, pattern = "(csv|CSV)$", read_fun = read_csv)
+# OR more succinctly
+# read_folder(fileloc, "(csv|CSV)$", read_csv)
+```
+
+# We've got 3 independent datasets, this isn't always helpful
+# let's combine them into one, but we need to label them by their filenames
+
+``` {r combinify, message = FALSE}
+fileloc <- file.path(getwd(), "stocks")
+
+# This function reads a file and appends a column called "name" for ID
+read_fun <- function(file, FUN) {
+		dat <- FUN(file) # read in file
+		dat$name <- tools::file_path_sans_ext(basename(file)) #record the filename for later grouping
+		dat #bring data back
+  }
+
+# This function reads a folder for files of given pattern
+# then applies the given read function to read them in read_fun
+read_files_bind <- 	function(folder, pattern, FUN) {
+    # get files that end with csv or CSV
+    files <- list.files(folder, pattern = pattern, full.names = TRUE) 
+    map_dfr(files, read_fun, FUN)
+  }
+
+# Read everything in at once and bind it all together
+read_files_bind(folder = fileloc, pattern = "(csv|CSV)$", FUN = read_csv)
+```
+
+# List columns
+# tidyr::nest() embeds tibbles in a column
+``` {r nesting}
+cars_nested <-
+  mtcars %>%            # motortrend car dataset
+    group_by(cyl) %>%   # group by cylinder
+    nest(.key = "data") # nest data by cyl, default key is "data"
+
+cars_nested
+```  
+  
+# This is neat, but how to we interact with the nested data?
+# map!
+## let's make a linear model for each subset, pull out the coeffiecients with broom, and plot them
+``` {r model_extracts}
+library(broom)
+
+mtc_modeled <- 
+  mtcars %>%            # motortrend car dataset
+    group_by(cyl) %>%   # group by cylinder
+    nest(.key = "data") %>%         # nest data by cyl, default key is "data"
+    mutate(model = map(data, ~ lm(mpg ~ disp, data = .x))) %>%  # make models
+    mutate(coeff = map(model, tidy)) %>%                        #pull out coefficients
+    mutate(slope = map_dbl(coeff, ~ pull(.x, estimate)[2])) %>% # pull slope from coefficients
+    mutate(intercept = map_dbl(coeff, ~ pull(.x, estimate)[1])) # pull intercept from coefficients
+  
+ 
+ggplot() +
+  # plot the original data 
+  geom_point(data = mtcars, aes(x = disp, y = mpg, color = as.factor(cyl))) +
+  # plot the models
+  geom_abline(data = mtc_modeled, aes(slope = slope, intercept = intercept, color = as.factor(cyl)))
+  
+  
+```
+
+
+#Back to presentation
+
+# Iterating over more than one list with map2 and pmap
+``` {r map2_pmap_usage example}
+n =  list(5,10,20)
+mu = list(50,30,10)
+sd = list(10,5,1)
+
+# how does it look as we go from map to map2 to pmap?
+map(n, rnorm)
+map2(n, mu, rnorm)
+pmap(list(n, mu, sd), rnorm)
+
+#technically, pmap can do it all
+pmap(list(n), rnorm)
+pmap(list(n, mu), rnorm)
+
+# formula interface
+map(n, ~rnorm(.))
+map2(n, mu, ~ rnorm(.x, .y))
+pmap(list(n, mu, sd), ~rnorm(..1, ..2, ..3)) # ..4 and so on for as many as you need
+
+# CAUTION: position matters with map2 & pmap
+map2(n, mu, rnorm)
+map2(mu, n, rnorm)
+pmap(list(n, mu, sd), rnorm)
+pmap(list(mu, n, sd), rnorm)
+
+# if you need non-default ordering, specify with full function call
+map2(mu, n, function(x, y) rnorm(y, x))
+# or using the formula interface
+map2(mu, n, ~ rnorm(.y, .x))
+
+# pmap you can name your list to get around positional ordering
+pmap(list(mean=mu, n=n, sd=sd), rnorm)
+# OR you can specify with a full function call
+pmap(list(mu, n, sd), function(mu, n, sd) rnorm(n, mu, sd))
+# OR with the formula interface
+pmap(list(mu, n, sd), ~ rnorm(..2, ..1, ..3))
+```
+
+#Back to Presentation
+
+
+# Walk/walk2/pwalk are used to output side-effects
+``` {r simple walk}
+asdf <- list(a = LETTERS[1:10], b = 1:15, c = FALSE)
+# we just want to print each element of this list
+walk(asdf, print)
+```
+
+# Let's make some plots and plot them
+``` {r walking_to_plotting}
+# make a simple plotting function
+plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+mtcars %>%                 # motortrend car dataset
+  group_by(cyl) %>%       # group by cylinder
+  nest(.key = "data") %>% # nest by cylinder
+  mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
+  pull(plot) %>% #pull the plots out as a list
+  walk(., print) # print them
+```
+
+# Nice, but I wanted to save them; walk2/pwalk
+
+``` {r walk2_saving_plots}
+# make a simple plotting function
+plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+mtc_plot_n_save <-
+  mtcars %>%                 # motortrend car dataset
+    group_by(cyl) %>%       # group by cylinder
+    nest(.key = "data") %>% # nest by cylinder
+    mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
+    mutate(filepath = map_chr(cyl, ~ file.path(getwd(), paste0(.x, ".png")))) #make the save paths
+
+
+walk2(mtc_plot_n_save$plot, mtc_plot_n_save$filepath, ~ ggsave(.y, .x)) # save them out
+```
+
+
+
+``` {r pwalk_output_all_the_things}
+
+# make a simple plotting function
+plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+#function that prints cylinder info, ggplot, and table 
+print_func <-
+  function(info, plot, table) {
+    print(paste0("This is for ", info, " cylinders.\n"))
+    print(plot)
+    print(table)
+  }
+
+mtc_plot_n_save <-
+  mtcars %>%                 # motortrend car dataset
+    group_by(cyl) %>%       # group by cylinder
+    nest(.key = "data") %>% # nest by cylinder
+    mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
+    mutate(filepath = map_chr(cyl, ~ file.path(getwd(), paste0(.x, ".png")))) #make the save paths
+
+# print all the info
+pwalk(list(info = mtc_plot_n_save$cyl, plot = mtc_plot_n_save$plot, table = mtc_plot_n_save$data), print_func) 
+```
+
+# Back to Presentation
