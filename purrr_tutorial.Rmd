@@ -14,17 +14,23 @@ title: "Using `map` Functions with `purrr`"
 
  - [*Fullscreen*](http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1)
 
-**Brandon's SCRIPT: BELOW**
+# Brandon Hurr's Tutorial
 
-# Let's load tidyverse
-``` {r setup}
-library(tidyverse)
+The following code has been adapted from a great presentation Brandon gave at the D-RUG group in Oct 2017. See the original [post and content here](http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk)
+
+### Load `tidyverse`
+
+```{r setup}
+suppressPackageStartupMessages(library(tidyverse))
 ```
 
-# R Data types
+# *R* Data types
+
+For a nice demonstration of what vectors of different data types look like, try the code below.
+
 ```{r vector intiation}
-#initiate blank vectors of a specific type
-#this can be useful when capturing data from for loops
+# initiate blank vectors of a specific type
+# this can be useful when capturing data from for loops
 a <- vector("logical", 5)
 a
 b <- vector("integer", 4)
@@ -40,63 +46,85 @@ f
 g <- list()
 g
 ```
-# NAs
+
+## `NA`'s in R
+
+`NA`'s are a common issue in dealing with data from various places (remember spreadsheet lesson?). R deals well with NA's and even provides different NA's for different data types.
+
 ```{r NA NA NA NA NA NA NA NA Batman}
 #what do the NAs look like?
 list(NA, NA_integer_, NA_real_, NA_character_, NA_complex_)
-#not very exciting
+
 ```
 
-# The NULL element
+## The `NULL` element
 
-``` {r NULLs}
+```{r NULLs}
 # NULL is the absence of a vector
 a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) # logical vector 
 a
 a <- NULL
 a
 
-mtcars
-mtcars[1] <- NULL #this gets rid of the mpg coloumn completely
-mtcars
+# let's use mtcars as example of making a column NULL
+head(mtcars)
+dim(mtcars) # how many rows, cols
 
-data(mtcars) # restore mtcars
+# assign NULL to a given column to remove it
+mtcars[1] <- NULL #this gets rid of the mpg column completely
+head(mtcars)
+dim(mtcars) # how many rows, cols
+
+data(mtcars) # restore full mtcars dataset
+dim(mtcars) # how many rows, cols
 
 ```
 
-# Assembling vectors into a list, dataframes and tibbles
+# Lists in R
+
+Now that we have an idea what different *vectors* are, let's talk about how to make them into lists.
+
+![](https://thumbs.gfycat.com/PepperyMediocreAmericanbittern-small.gif)
+
+Lists can contain anything of any length, and `data.frames` are a special type of list. 
+
+## Vectors to Lists: dataframes & tibbles
+
 ```{r Vectors Victor, error = TRUE}
 # let's put actual values into these
-a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) #seems logical 
-b <- c(1:7, NA_integer_) #Integers
-c <- c(rnorm(8), NA_real_) #pull doubles from normal distribution
-d <- c(LETTERS[1:3], NA_character_) #first 5 capital letters
+a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) # a logical vector 6 items long
+b <- c(1:7, NA_integer_) # Integers
+c <- c(rnorm(8), NA_real_) # pull doubles from normal distribution
+d <- c(LETTERS[1:3], NA_character_) # first 3 capital letters
 
 e <- list(a, b, c, d) #make a list
 
-e # check it twix
+e # check it
 
-#Lists can contain anything of any length
-#data.frame is a special type of list
-# data.frame rows imply association so they need to line up
+# Lists can contain anything of any length
+## data.frame is a special type of list
+## data.frame rows imply association so they need to line up
 
 data.frame(a, b) # uh oh
 
 a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA, NA, NA) # make it 8 like b
-df <- data.frame(a = a, b = b) # OH YEAH /Koolaidman.gif
+df <- data.frame(a = a, b = b) 
 df 
-#tibbles are a more strict type of data.frame
-# with
-#     slightly more informative printing (not shown well here)
-#     strict behavior around subsetting `[` -> tibble `[[` vector
-#     does not partially match column names (this can get you into trouble)
-
-as_tibble(df)
-
 ```
-# Back to presentation
 
-# Accessing elements inside vectors, lists, dataframes, and tibbles
+`tibbles` are data.frames with some stricter rules: 
+  - slightly more informative printing (not shown well here)
+  - strict behavior around subsetting `[` -> tibble `[[` vector
+  - does not partially match column names (b/c this can get you into trouble)
+
+```{r}
+as_tibble(df)
+```
+
+_**See presentation, SLIDE: **_
+
+## Accessing elements inside vectors, lists, dataframes, and tibbles
+
 ``` {r list_df_tibble_subsetting, error = TRUE} 
 
 #atomic vectors
@@ -104,10 +132,10 @@ a <- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) #logic vector
 a
 a[1] 
 a[[1]] # does the same thing
-a[[[1]]] #lolwut R you doing?
+a[[[1]]] # nope just stop adding brackets!
 
-#lists
-list_example <- list(a = a, b= b, c = c, d = d, e = list(1, "A")) #make a named list
+# lists
+list_example <- list(a = a, b = b, c = c, d = d, e = list(1, "A")) #make a named list
 list_example
 # single brackets returns a list with that element in it
 # can reference by location or by name
@@ -118,9 +146,9 @@ list_example["a"]
 list_example[[2]]
 list_example[["b"]]
 
-#stack [['s it to peel the onion back
+#stack [['s to peel the onion back
 list_example[["e"]] # remove one layer
-list_example[["e"]][[2]] # remove the second layer
+list_example[["e"]][[2]] # remove the second layer (access e list, and 2 item in that list)
 
 #dolla dolla bills y'all (works like [[, with named vectors)
 list_example$c
@@ -138,12 +166,15 @@ tbbl[[2]]
 tbbl[["y"]]
 ```
 
+_**See presentation, SLIDE: **_
 
-# Back to presentation
+# Functions and `for` Loops
 
+## Functions
 
-# When to make a function in R
-``` {r Y_make_a_function}
+When should we make a function in R? 
+
+```{r Y_make_a_function}
 #Simple dataframe
 df <- data.frame(
   a = rnorm(10),
@@ -163,47 +194,58 @@ df$d <- (df$d - min(df$d, na.rm = TRUE)) /
 
 ```
 
+Anytime we need to do the same thing 3 or more times, it would probably be a good idea to think about creating a function. Stepping through these pieces, here's what we'd want to do:
 
-``` {r function01, error = TRUE, eval = FALSE}
+First what is the calculation/task you want to do?
+
+```{r function01, error = TRUE, eval = FALSE}
 df$d <- (df$d - min(df$d, na.rm = TRUE)) /  
   (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+# exactly as above
 ```
 
+Now pull out the common components:
 
-``` {r function02, error = TRUE, eval = FALSE}
+```{r function02, error = TRUE, eval = FALSE}
 # pull out what's common
 x <- (x - min(x, na.rm = TRUE)) /  
   (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))
 ```
 
+Problem is the above isn't a function yet, it's just the "anonymous" calculation we want our function to follow. We can simplify even more if we want:
 
-``` {r function03, error = TRUE, eval = FALSE}
+```{r function03, error = TRUE, eval = FALSE}
 
-#simplify more and refactor if that makes sense
+# simplify more and refactor if that makes sense
 x <- (x - min(x, na.rm = TRUE)) /  
   diff(range(x, na.rm = TRUE))
 ```
 
-``` {r function04, error = TRUE, eval = FALSE}
-# rewrite as a function
+And now add the actual `function()` call!
+
+```{r function04, error = TRUE, eval = FALSE}
 rescale_0_1 <- function(x) {
   (x - min(x, na.rm = TRUE)) /  
   diff(range(x, na.rm = TRUE))
 }
 ```
 
-``` {r test function}
+Let's test this function and see what happens. We can test a single vector, and then actually apply our function to each column in our dataset. Use a test dataset that's simple and we now what it should look like.
+
+```{r test function}
+
 rescale_0_1 <- function(x) {
   (x - min(x, na.rm = TRUE)) /  
   diff(range(x, na.rm = TRUE))
 }
 
-testvec <- 1:11
+testvec <- 10:20 # so this should get rescaled from 0 to 1
 testvec
-rescale_0_1(testvec)
+rescale_0_1(testvec) # looks like it worked, it rescaled all values from 0 to 1!
+
 ```
 
-``` {r use_function}
+```{r use_function}
 df <- data.frame(
   a = rnorm(10),
   b = rnorm(10),
@@ -215,26 +257,34 @@ rescale_0_1 <- function(x) {
   diff(range(x, na.rm = TRUE))
 }
 
-out <- df
+out <- df # rename df so we can always come back
 out$a <- rescale_0_1(df$a)
 out$b <- rescale_0_1(df$b)
 out$c <- rescale_0_1(df$c)
 out$d <- rescale_0_1(df$d)
 out
+
 ```
 
-# Reduce iteration with a for loop
-``` {r forloops}
+## `for` Loops to *apply* a function
+
+Reduce iteration with a `for` loop, which takes a vector or list, and interates or steps through each piece of that vector/list, does something and returns values/data.
+
+```{r forloops}
+
 out <- df #make a copy to store scaled data
 for (i in 1:ncol(df)) { # loop through each element
   out[i] <- rescale_0_1(df[[i]]) #apply function and store it to out
 }
 out
+
 ```
 
-# seq_along
+### Using `seq_along`
 
-``` {r for_seq_along_loops}
+Handy command that sequences along a list for you, so you don't have to specify columns or rows, or series of numbers.
+
+```{r for_seq_along_loops}
 out <- df #make a copy to store scaled data
 for (i in seq_along(df)) {
   out[i] <- rescale_0_1(df[[i]])
@@ -242,45 +292,89 @@ for (i in seq_along(df)) {
 out
 ```
 
-# map to iterate
-```{r WHAT_IS_THIS_MAPGIC}
-map(df, function(x) rescale_0_1(x)) #map over the columns in df
-```
-# let's look at another more simple example
-# This list contains two integer vectors and we want the mean of each one
-``` {r simplemap}
-l = list(a=1:10, b = 10:100)
-map(l, function(x) mean(x, na.rm = TRUE))
+# `map` and `apply` Functions
+
+There are a family of functions called `apply` (`mapply`, `sapply`, `lapply`, `vapply`) which essentially take a list of something and *apply* a function or operation on each item in that list. These are base functions in R, but a newer set of functions (which do the same thing & more) have been written in R, called the `map` functions. Let's see how they migth work.
+
+## `apply` 
+
+```{r apply_function}
+
+df_app1 <- apply(df, MARGIN = 2, function(x) rescale_0_1(x)) # iterate over the columns in df
+class(df_app1) # returns a matrix
+
+df_app2 <- sapply(df, function(x) rescale_0_1(x)) # same as above but defaults to cols
+
 ```
 
-# We know we want one double back from each list
-# specify and you get a vector back instead of a list
-``` {r rightmap}
-l = list(a=1:10, b = 10:100)
-map_dbl(l, function(x) mean(x, na.rm = TRUE))
+Okay so `apply` returns a matrix. What about `map`?
+
+## `map`
+
+```{r MAPGIC}
+
+df_map1<- map(df, function(x) rescale_0_1(x)) #map over the columns in df
+class(df_map1) # returns a list! Keeps same format that was input
+
+df_map2 <- map_df(df, rescale_0_1) # returns a dataframe!
+
 ```
 
-# You can coerce these to character so this works
-#   but I don't think this is very helpful
-``` {r okishmap}
+Let's look at another more simple example.
+
+### Specifying Outputs with `map`
+
+Another set of examples below will help us understand how `map` makes it easy to get different data classes (`matrix`,`list`, `dataframe`) back out. The default `map` function takes a list and returns a list, but there are various options that allow you to specify what you want.
+
+This example creates a list containing two integer vectors. Let's say we want the mean of each one:
+
+```{r simplemap}
+
+l = list(a=1:10, b = 10:100)
+map(l, function(x) mean(x, na.rm = TRUE)) # and this is returning a list (list in, list out)
+
+```
+
+#### Get numeric `double` type back
+
+Specify and you get a vector back instead of a list
+
+```{r rightmap}
+l = list(a=1:10, b = 10:100)
+map_dbl(l, function(x) mean(x, na.rm = TRUE)) # this is a numeric vector
+
+```
+
+#### Get `character` back
+
+Maybe not so useful, but demonstrates the point.
+
+```{r okishmap}
+
 map_chr(l, function(x) mean(x, na.rm = TRUE))
+
 ```
 
 
-# These are type-strict functions though
-# get it wrong and you'll know
-``` {r wrongmap, error = TRUE}
+### Use Error Messages: Type-strict functions
+
+So if you have or try to use the wrong type of data, the function won't run. 
+
+```{r wrongmap, error = TRUE}
 l = list(a=1:10, b = 10:100)
 map_lgl(l, function(x) mean(x, na.rm = TRUE))
 ```
 
-# Map Examples
-# Map use case #1: Read in files
+# More `map` Examples
+
+## `map` Use Case #1: Read in files
+
 Based upon this tutorial
 http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/
 
-``` {r simple_read_csvs, message = FALSE}
-#this will work if you clone the github repository
+```{r simple_read_csvs, message = FALSE}
+
+# this will work if you clone the github repository
 fileloc <- file.path(getwd(), "stocks")
 #create a list of files to read in that end in csv
 files <- list.files(fileloc, pattern = "csv$", full.names = TRUE) 
@@ -291,8 +385,10 @@ dat2
 
 ```
 
-# Let's make it a function
-``` {r make_it_functional, message = FALSE}
+### Let's make it a function
+
+```{r make_it_functional, message = FALSE}
+
 fileloc <- file.path(getwd(), "stocks")
 
 read_folder <- function(folder) {
@@ -306,8 +402,10 @@ read_folder(fileloc)
 ```
 
 
-# What if you want to change the type of file you're reading?
-``` {r fancify, message = FALSE}
+#### What if you want to change the type of file you're reading?
+
+```{r fancify, message = FALSE}
+
 fileloc <- file.path(getwd(), "stocks")
 
 read_folder <- function(folder, pattern, read_fun) {
@@ -320,12 +418,15 @@ read_folder <- function(folder, pattern, read_fun) {
 read_folder(folder = fileloc, pattern = "(csv|CSV)$", read_fun = read_csv)
 # OR more succinctly
 # read_folder(fileloc, "(csv|CSV)$", read_csv)
+
 ```
 
-# We've got 3 independent datasets, this isn't always helpful
-# let's combine them into one, but we need to label them by their filenames
+#### Combine Files and Label By Filenames
 
-``` {r combinify, message = FALSE}
+If there are multiple files but all have same structure (same number of columns/column types), we can read in separately and then combine. But add the filename of each dataset as a new column variable.
+
+```{r combinify, message = FALSE}
+
 fileloc <- file.path(getwd(), "stocks")
 
 # This function reads a file and appends a column called "name" for ID
@@ -345,23 +446,34 @@ read_files_bind <- 	function(folder, pattern, FUN) {
 
 # Read everything in at once and bind it all together
 read_files_bind(folder = fileloc, pattern = "(csv|CSV)$", FUN = read_csv)
+
 ```
 
-# List columns
-# tidyr::nest() embeds tibbles in a column
-``` {r nesting}
+# Lists & List columns
+
+Ok, so we can get data into our environment in a list, but what then? There are a number of ways to deal with these data, or to deal with lists within dataframes...called *list columns*.
+
+## `tidyr::nest()` embeds tibbles in a column
+
+See how to group by something and then create a list-columns that hold each dataframe for that group.
+
+```{r nesting}
+
 cars_nested <-
   mtcars %>%            # motortrend car dataset
     group_by(cyl) %>%   # group by cylinder
     nest(.key = "data") # nest data by cyl, default key is "data"
 
 cars_nested
+
 ```  
   
-# This is neat, but how to we interact with the nested data?
-# map!
-## let's make a linear model for each subset, pull out the coeffiecients with broom, and plot them
-``` {r model_extracts}
+## Interacting with list-data using `map`
+
+Use `map`!. Let's make a linear model for each subset, pull out the coefficients with `broom`, and plot them.
+
+```{r model_extracts}
+
 library(broom)
 
 mtc_modeled <- 
@@ -383,11 +495,12 @@ ggplot() +
   
 ```
 
+_**See presentation, SLIDE: **_
 
-#Back to presentation
+## Iterating over more than one list with `map2` and `pmap`
 
-# Iterating over more than one list with map2 and pmap
-``` {r map2_pmap_usage example}
+```{r map2_pmap_usage example}
+
 n =  list(5,10,20)
 mu = list(50,30,10)
 sd = list(10,5,1)
@@ -423,20 +536,22 @@ pmap(list(mean=mu, n=n, sd=sd), rnorm)
 pmap(list(mu, n, sd), function(mu, n, sd) rnorm(n, mu, sd))
 # OR with the formula interface
 pmap(list(mu, n, sd), ~ rnorm(..2, ..1, ..3))
+
 ```
 
-#Back to Presentation
+_**See presentation, SLIDE: **_
 
+## `walk/walk2/pwalk` are used to output side-effects
 
-# Walk/walk2/pwalk are used to output side-effects
-``` {r simple walk}
+```{r simple walk}
 asdf <- list(a = LETTERS[1:10], b = 1:15, c = FALSE)
 # we just want to print each element of this list
 walk(asdf, print)
 ```
 
-# Let's make some plots and plot them
-``` {r walking_to_plotting}
+### Outputting Plots with `map` Functions
+
+```{r walking_to_plotting}
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
 
@@ -446,11 +561,12 @@ mtcars %>%                 # motortrend car dataset
   mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
   pull(plot) %>% #pull the plots out as a list
   walk(., print) # print them
+
 ```
 
-# Nice, but I wanted to save them; walk2/pwalk
+#### Save Plots from `walk` with `walk2/pwalk`
 
-``` {r walk2_saving_plots}
+```{r walk2_saving_plots}
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
 
@@ -459,25 +575,28 @@ mtc_plot_n_save <-
     group_by(cyl) %>%       # group by cylinder
     nest(.key = "data") %>% # nest by cylinder
     mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
-    mutate(filepath = map_chr(cyl, ~ file.path(getwd(), paste0(.x, ".png")))) #make the save paths
+    mutate(filepath = map_chr(cyl, ~ file.path("figures", paste0(.x, ".png")))) #make the save paths
 
 
 walk2(mtc_plot_n_save$plot, mtc_plot_n_save$filepath, ~ ggsave(.y, .x)) # save them out
+
 ```
 
+That is great! Ok, let's make this a bit fancier. With `pwalk` we can have a bunch of different lists of things that get mapped...not just 1 or 2.
 
-
-``` {r pwalk_output_all_the_things}
+```{r pwalk_output_all_the_things}
 
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
 
 #function that prints cylinder info, ggplot, and table 
 print_func <-
-  function(info, plot, table) {
-    print(paste0("This is for ", info, " cylinders.\n"))
+  function(info, plot, table, filepath) {
+    print(paste0("This is for ", info, " cylinders./n"))
     print(plot)
+    ggsave(filepath)
     print(table)
+    
   }
 
 mtc_plot_n_save <-
@@ -485,10 +604,9 @@ mtc_plot_n_save <-
     group_by(cyl) %>%       # group by cylinder
     nest(.key = "data") %>% # nest by cylinder
     mutate(plot = map(data, plot_points)) %>% # we made a graph for each subset
-    mutate(filepath = map_chr(cyl, ~ file.path(getwd(), paste0(.x, ".png")))) #make the save paths
+    mutate(filepath = map_chr(cyl, ~ file.path("figures", paste0(.x, ".png")))) # make the save paths
 
 # print all the info
-pwalk(list(info = mtc_plot_n_save$cyl, plot = mtc_plot_n_save$plot, table = mtc_plot_n_save$data), print_func) 
+pwalk(list(info = mtc_plot_n_save$cyl, plot = mtc_plot_n_save$plot, table = mtc_plot_n_save$data, filepath = mtc_plot_n_save$filepath), print_func) 
 ```
 
-# Back to Presentation
