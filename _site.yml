@@ -20,8 +20,10 @@ navbar:
           href: lesson_project_management.html
         - text: "Data frames"
           href: lesson_data_frames.html
-        - text: "Using `purrr`"
-          href: purrr_tutorial.html
+        - text: "Using tidyr"
+          href: lesson_tidyr.html
+        - text: "Using purrr"
+          href: lesson_purrr_tutorial.html
     - text: "Presentations"
       icon: fa-slideshare fa-1x
       href: https://speakerdeck.com/ryanpeek
