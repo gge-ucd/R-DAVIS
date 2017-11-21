@@ -5,6 +5,9 @@ navbar:
     - text: "About"
       href: about.html
       icon: fa-info-circle  fa-1x
+    - text: "Syllabus"
+      href: syllabus.html
+      icon: fa-map fa-1.5x
     - text: "Set Up!"
       menu: 
         - text: "Computer Setup"
