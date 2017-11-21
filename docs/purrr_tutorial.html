@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Using map Functions with purrr</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames.html">Data frames</a>
+    </li>
+    <li>
+      <a href="purrr_tutorial.html">Using `purrr`</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://speakerdeck.com/ryanpeek">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Presentations
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Using <code>map</code> Functions with <code>purrr</code></h1>
+
+</div>
+
+
+<p><br></p>
+<div id="r4ds-the-map-functions" class="section level2">
+<h2>R4DS: <a href="http://r4ds.had.co.nz/iteration.html#the-map-functions">the map functions</a></h2>
+<p><br></p>
+<p><strong>Brandon’s PRESENTATION</strong>:</p>
+<iframe width="600" height="400" src="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1">
+</iframe>
+<ul>
+<li><a href="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1"><em>Fullscreen</em></a></li>
+</ul>
+</div>
+<div id="brandon-hurrs-tutorial" class="section level1">
+<h1>Brandon Hurr’s Tutorial</h1>
+<p>The following code has been adapted from a great presentation Brandon gave at the D-RUG group in Oct 2017. See the original <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">post and content here</a></p>
+<div id="load-tidyverse" class="section level3">
+<h3>Load <code>tidyverse</code></h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(tidyverse))</code></pre></div>
+</div>
+</div>
+<div id="r-data-types" class="section level1">
+<h1><em>R</em> Data types</h1>
+<p>For a nice demonstration of what vectors of different data types look like, try the code below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># initiate blank vectors of a specific type</span>
+<span class="co"># this can be useful when capturing data from for loops</span>
+a &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="dv">5</span>)
+a</code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="dv">4</span>)
+b</code></pre></div>
+<pre><code>## [1] 0 0 0 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">2</span>) <span class="co"># can also use &quot;numeric&quot;</span>
+c</code></pre></div>
+<pre><code>## [1] 0 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dv">10</span>)
+d</code></pre></div>
+<pre><code>##  [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;complex&quot;</span>, <span class="dv">7</span>)
+e</code></pre></div>
+<pre><code>## [1] 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;raw&quot;</span>, <span class="dv">3</span>)
+f</code></pre></div>
+<pre><code>## [1] 00 00 00</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">g &lt;-<span class="st"> </span><span class="kw">list</span>()
+g</code></pre></div>
+<pre><code>## list()</code></pre>
+<div id="nas-in-r" class="section level2">
+<h2><code>NA</code>’s in R</h2>
+<p><code>NA</code>’s are a common issue in dealing with data from various places (remember spreadsheet lesson?). R deals well with NA’s and even provides different NA’s for different data types.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#what do the NAs look like?</span>
+<span class="kw">list</span>(<span class="ot">NA</span>, <span class="ot">NA_integer_</span>, <span class="ot">NA_real_</span>, <span class="ot">NA_character_</span>, <span class="ot">NA_complex_</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] NA
+## 
+## [[2]]
+## [1] NA
+## 
+## [[3]]
+## [1] NA
+## 
+## [[4]]
+## [1] NA
+## 
+## [[5]]
+## [1] NA</code></pre>
+</div>
+<div id="the-null-element" class="section level2">
+<h2>The <code>NULL</code> element</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># NULL is the absence of a vector</span>
+a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># logical vector </span>
+a</code></pre></div>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE    NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="ot">NULL</span>
+a</code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># let&#39;s use mtcars as example of making a column NULL</span>
+<span class="kw">head</span>(mtcars)</code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></code></pre></div>
+<pre><code>## [1] 32 11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># assign NULL to a given column to remove it</span>
+mtcars[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co">#this gets rid of the mpg column completely</span>
+<span class="kw">head</span>(mtcars)</code></pre></div>
+<pre><code>##                   cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></code></pre></div>
+<pre><code>## [1] 32 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(mtcars) <span class="co"># restore full mtcars dataset</span>
+<span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></code></pre></div>
+<pre><code>## [1] 32 11</code></pre>
+</div>
+</div>
+<div id="lists-in-r" class="section level1">
+<h1>Lists in R</h1>
+<p>Now that we have an idea what different <em>vectors</em> are, let’s talk about how to make them into lists.</p>
+<div class="figure">
+<img src="https://thumbs.gfycat.com/PepperyMediocreAmericanbittern-small.gif" />
+
+</div>
+<p>Lists can contain anything of any length, and <code>data.frames</code> are a special type of list.</p>
+<div id="vectors-to-lists-dataframes-tibbles" class="section level2">
+<h2>Vectors to Lists: dataframes &amp; tibbles</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># let&#39;s put actual values into these</span>
+a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># a logical vector 6 items long</span>
+b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="ot">NA_integer_</span>) <span class="co"># Integers</span>
+c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">8</span>), <span class="ot">NA_real_</span>) <span class="co"># pull doubles from normal distribution</span>
+d &lt;-<span class="st"> </span><span class="kw">c</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="ot">NA_character_</span>) <span class="co"># first 3 capital letters</span>
+
+e &lt;-<span class="st"> </span><span class="kw">list</span>(a, b, c, d) <span class="co">#make a list</span>
+
+e <span class="co"># check it</span></code></pre></div>
+<pre><code>## [[1]]
+## [1]  TRUE FALSE  TRUE FALSE FALSE    NA
+## 
+## [[2]]
+## [1]  1  2  3  4  5  6  7 NA
+## 
+## [[3]]
+## [1] -0.8651108  0.1631561  0.7575487  0.1855140 -0.7981243  1.5257396
+## [7] -1.7689039 -0.5517413         NA
+## 
+## [[4]]
+## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lists can contain anything of any length</span>
+## data.frame is a special type of list
+## data.frame rows imply association so they need to line up
+
+<span class="kw">data.frame</span>(a, b) <span class="co"># uh oh</span></code></pre></div>
+<pre><code>## Error in data.frame(a, b): arguments imply differing number of rows: 6, 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># make it 8 like b</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b) 
+df </code></pre></div>
+<pre><code>##       a  b
+## 1  TRUE  1
+## 2 FALSE  2
+## 3  TRUE  3
+## 4 FALSE  4
+## 5 FALSE  5
+## 6    NA  6
+## 7    NA  7
+## 8    NA NA</code></pre>
+<p><code>tibbles</code> are data.frames with some stricter rules: - slightly more informative printing (not shown well here) - strict behavior around subsetting <code>[</code> -&gt; tibble <code>[[</code> vector - does not partially match column names (b/c this can get you into trouble)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(df)</code></pre></div>
+<pre><code>## # A tibble: 8 x 2
+##       a     b
+##   &lt;lgl&gt; &lt;int&gt;
+## 1  TRUE     1
+## 2 FALSE     2
+## 3  TRUE     3
+## 4 FALSE     4
+## 5 FALSE     5
+## 6    NA     6
+## 7    NA     7
+## 8    NA    NA</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="accessing-elements-inside-vectors-lists-dataframes-and-tibbles" class="section level2">
+<h2>Accessing elements inside vectors, lists, dataframes, and tibbles</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co">#atomic vectors</span>
+a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co">#logic vector </span>
+a
+a[<span class="dv">1</span>] 
+a[[<span class="dv">1</span>]] <span class="co"># does the same thing</span>
+a[[[<span class="dv">1</span>]]] <span class="co"># nope just stop adding brackets!</span>
+
+<span class="co"># lists</span>
+list_example &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b, <span class="dt">c =</span> c, <span class="dt">d =</span> d, <span class="dt">e =</span> <span class="kw">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)) <span class="co">#make a named list</span>
+list_example
+<span class="co"># single brackets returns a list with that element in it</span>
+<span class="co"># can reference by location or by name</span>
+list_example[<span class="dv">1</span>]
+list_example[<span class="st">&quot;a&quot;</span>]
+
+<span class="co"># double brackets return a vector </span>
+list_example[[<span class="dv">2</span>]]
+list_example[[<span class="st">&quot;b&quot;</span>]]
+
+<span class="co">#stack [[&#39;s to peel the onion back</span>
+list_example[[<span class="st">&quot;e&quot;</span>]] <span class="co"># remove one layer</span>
+list_example[[<span class="st">&quot;e&quot;</span>]][[<span class="dv">2</span>]] <span class="co"># remove the second layer (access e list, and 2 item in that list)</span>
+
+<span class="co">#dolla dolla bills y&#39;all (works like [[, with named vectors)</span>
+list_example<span class="op">$</span>c
+
+<span class="co">#same for dataframes</span>
+mtcars[<span class="dv">1</span>]
+mtcars[[<span class="dv">1</span>]]
+
+<span class="co"># and for tibbles</span>
+tbbl &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])
+tbbl[<span class="dv">1</span>]
+tbbl[<span class="st">&quot;x&quot;</span>]
+
+tbbl[[<span class="dv">2</span>]]
+tbbl[[<span class="st">&quot;y&quot;</span>]]</code></pre></div>
+<pre><code>## Error: &lt;text&gt;:7:4: unexpected &#39;[&#39;
+## 6: a[[1]] # does the same thing
+## 7: a[[[
+##       ^</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+</div>
+<div id="functions-and-for-loops" class="section level1">
+<h1>Functions and <code>for</code> Loops</h1>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>When should we make a function in R?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Simple dataframe</span>
+df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)
+)
+<span class="co"># What are we doing here?</span>
+df<span class="op">$</span>a &lt;-<span class="st"> </span>(df<span class="op">$</span>a <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+df<span class="op">$</span>b &lt;-<span class="st"> </span>(df<span class="op">$</span>b <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+df<span class="op">$</span>c &lt;-<span class="st"> </span>(df<span class="op">$</span>c <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>Anytime we need to do the same thing 3 or more times, it would probably be a good idea to think about creating a function. Stepping through these pieces, here’s what we’d want to do:</p>
+<p>First what is the calculation/task you want to do?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+<span class="co"># exactly as above</span></code></pre></div>
+<p>Now pull out the common components:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pull out what&#39;s common</span>
+x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span>(<span class="kw">max</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>Problem is the above isn’t a function yet, it’s just the “anonymous” calculation we want our function to follow. We can simplify even more if we want:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># simplify more and refactor if that makes sense</span>
+x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<p>And now add the actual <code>function()</code> call!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rescale_0_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+}</code></pre></div>
+<p>Let’s test this function and see what happens. We can test a single vector, and then actually apply our function to each column in our dataset. Use a test dataset that’s simple and we now what it should look like.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rescale_0_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+}
+
+testvec &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">20</span> <span class="co"># so this should get rescaled from 0 to 1</span>
+testvec</code></pre></div>
+<pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rescale_0_1</span>(testvec) <span class="co"># looks like it worked, it rescaled all values from 0 to 1!</span></code></pre></div>
+<pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),
+  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)
+)
+rescale_0_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+}
+
+out &lt;-<span class="st"> </span>df <span class="co"># rename df so we can always come back</span>
+out<span class="op">$</span>a &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>a)
+out<span class="op">$</span>b &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>b)
+out<span class="op">$</span>c &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>c)
+out<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>d)
+out</code></pre></div>
+<pre><code>##            a          b         c          d
+## 1  0.8207752 0.43290911 0.7371738 0.43895825
+## 2  0.6228656 0.68073212 1.0000000 1.00000000
+## 3  0.0000000 0.79957920 0.4428712 0.77617654
+## 4  0.9723748 0.38332367 0.5553486 0.59164455
+## 5  0.6782132 0.32195999 0.1182635 0.40936363
+## 6  0.4160803 0.00000000 0.7577814 0.37206187
+## 7  1.0000000 1.00000000 0.0000000 0.62780416
+## 8  0.8899215 0.67296415 0.4357569 0.10072500
+## 9  0.5756084 0.29736475 0.7724630 0.07516623
+## 10 0.8774973 0.01645077 0.1201067 0.00000000</code></pre>
+</div>
+<div id="for-loops-to-apply-a-function" class="section level2">
+<h2><code>for</code> Loops to <em>apply</em> a function</h2>
+<p>Reduce iteration with a <code>for</code> loop, which takes a vector or list, and interates or steps through each piece of that vector/list, does something and returns values/data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(df)) { <span class="co"># loop through each element</span>
+  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]]) <span class="co">#apply function and store it to out</span>
+}
+out</code></pre></div>
+<pre><code>##            a          b         c          d
+## 1  0.8207752 0.43290911 0.7371738 0.43895825
+## 2  0.6228656 0.68073212 1.0000000 1.00000000
+## 3  0.0000000 0.79957920 0.4428712 0.77617654
+## 4  0.9723748 0.38332367 0.5553486 0.59164455
+## 5  0.6782132 0.32195999 0.1182635 0.40936363
+## 6  0.4160803 0.00000000 0.7577814 0.37206187
+## 7  1.0000000 1.00000000 0.0000000 0.62780416
+## 8  0.8899215 0.67296415 0.4357569 0.10072500
+## 9  0.5756084 0.29736475 0.7724630 0.07516623
+## 10 0.8774973 0.01645077 0.1201067 0.00000000</code></pre>
+<div id="using-seq_along" class="section level3">
+<h3>Using <code>seq_along</code></h3>
+<p>Handy command that sequences along a list for you, so you don’t have to specify columns or rows, or series of numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {
+  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]])
+}
+out</code></pre></div>
+<pre><code>##            a          b         c          d
+## 1  0.8207752 0.43290911 0.7371738 0.43895825
+## 2  0.6228656 0.68073212 1.0000000 1.00000000
+## 3  0.0000000 0.79957920 0.4428712 0.77617654
+## 4  0.9723748 0.38332367 0.5553486 0.59164455
+## 5  0.6782132 0.32195999 0.1182635 0.40936363
+## 6  0.4160803 0.00000000 0.7577814 0.37206187
+## 7  1.0000000 1.00000000 0.0000000 0.62780416
+## 8  0.8899215 0.67296415 0.4357569 0.10072500
+## 9  0.5756084 0.29736475 0.7724630 0.07516623
+## 10 0.8774973 0.01645077 0.1201067 0.00000000</code></pre>
+</div>
+</div>
+</div>
+<div id="map-and-apply-functions" class="section level1">
+<h1><code>map</code> and <code>apply</code> Functions</h1>
+<p>There are a family of functions called <code>apply</code> (<code>mapply</code>, <code>sapply</code>, <code>lapply</code>, <code>vapply</code>) which essentially take a list of something and <em>apply</em> a function or operation on each item in that list. These are base functions in R, but a newer set of functions (which do the same thing &amp; more) have been written in R, called the <code>map</code> functions. Let’s see how they migth work.</p>
+<div id="apply" class="section level2">
+<h2><code>apply</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_app1 &lt;-<span class="st"> </span><span class="kw">apply</span>(df, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># iterate over the columns in df</span>
+<span class="kw">class</span>(df_app1) <span class="co"># returns a matrix</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_app2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># same as above but defaults to cols</span></code></pre></div>
+<p>Okay so <code>apply</code> returns a matrix. What about <code>map</code>?</p>
+</div>
+<div id="map" class="section level2">
+<h2><code>map</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_map1&lt;-<span class="st"> </span><span class="kw">map</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co">#map over the columns in df</span>
+<span class="kw">class</span>(df_map1) <span class="co"># returns a list! Keeps same format that was input</span></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df_map2 &lt;-<span class="st"> </span><span class="kw">map_df</span>(df, rescale_0_<span class="dv">1</span>) <span class="co"># returns a dataframe!</span></code></pre></div>
+<p>Let’s look at another more simple example.</p>
+<div id="specifying-outputs-with-map" class="section level3">
+<h3>Specifying Outputs with <code>map</code></h3>
+<p>Another set of examples below will help us understand how <code>map</code> makes it easy to get different data classes (<code>matrix</code>,<code>list</code>, <code>dataframe</code>) back out. The default <code>map</code> function takes a list and returns a list, but there are various options that allow you to specify what you want.</p>
+<p>This example creates a list containing two integer vectors. Let’s say we want the mean of each one:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)
+<span class="kw">map</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># and this is returning a list (list in, list out)</span></code></pre></div>
+<pre><code>## $a
+## [1] 5.5
+## 
+## $b
+## [1] 55</code></pre>
+<div id="get-numeric-double-type-back" class="section level4">
+<h4>Get numeric <code>double</code> type back</h4>
+<p>Specify and you get a vector back instead of a list</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)
+<span class="kw">map_dbl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># this is a numeric vector</span></code></pre></div>
+<pre><code>##    a    b 
+##  5.5 55.0</code></pre>
+</div>
+<div id="get-character-back" class="section level4">
+<h4>Get <code>character</code> back</h4>
+<p>Maybe not so useful, but demonstrates the point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_chr</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>##           a           b 
+##  &quot;5.500000&quot; &quot;55.000000&quot;</code></pre>
+</div>
+</div>
+<div id="use-error-messages-type-strict-functions" class="section level3">
+<h3>Use Error Messages: Type-strict functions</h3>
+<p>So if you have or try to use the wrong type of data, the function won’t run.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)
+<span class="kw">map_lgl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</code></pre></div>
+<pre><code>## Error: Can&#39;t coerce element 1 from a double to a logical</code></pre>
+</div>
+</div>
+</div>
+<div id="more-map-examples" class="section level1">
+<h1>More <code>map</code> Examples</h1>
+<div id="map-use-case-1-read-in-files" class="section level2">
+<h2><code>map</code> Use Case #1: Read in files</h2>
+<p>Based upon this tutorial <a href="http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/" class="uri">http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># this will work if you clone the github repository</span>
+fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)
+<span class="co">#create a list of files to read in that end in csv</span>
+files &lt;-<span class="st"> </span><span class="kw">list.files</span>(fileloc, <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) 
+
+<span class="co">#this reads in each csv independently into a list</span>
+dat2 &lt;-<span class="st"> </span><span class="kw">map</span>(files, read_csv)
+dat2</code></pre></div>
+<pre><code>## list()</code></pre>
+<div id="lets-make-it-a-function" class="section level3">
+<h3>Let’s make it a function</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)
+
+read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder) {
+  <span class="co"># get files that end with csv or CSV</span>
+  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) 
+  <span class="co">#this reads in each csv independently into a list</span>
+  <span class="kw">map</span>(files, read_csv) <span class="co"># last thing is returned</span>
+}
+
+<span class="kw">read_folder</span>(fileloc)</code></pre></div>
+<pre><code>## list()</code></pre>
+<div id="what-if-you-want-to-change-the-type-of-file-youre-reading" class="section level4">
+<h4>What if you want to change the type of file you’re reading?</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)
+
+read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder, pattern, read_fun) {
+  <span class="co"># get files that end with csv or CSV</span>
+  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) 
+  <span class="co">#this reads in each csv independently into a list</span>
+  <span class="kw">map</span>(files, read_fun)
+}
+
+<span class="kw">read_folder</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">read_fun =</span> read_csv)</code></pre></div>
+<pre><code>## list()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># OR more succinctly</span>
+<span class="co"># read_folder(fileloc, &quot;(csv|CSV)$&quot;, read_csv)</span></code></pre></div>
+</div>
+<div id="combine-files-and-label-by-filenames" class="section level4">
+<h4>Combine Files and Label By Filenames</h4>
+<p>If there are multiple files but all have same structure (same number of columns/column types), we can read in separately and then combine. But add the filename of each dataset as a new column variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)
+
+<span class="co"># This function reads a file and appends a column called &quot;name&quot; for ID</span>
+read_fun &lt;-<span class="st"> </span><span class="cf">function</span>(file, FUN) {
+        dat &lt;-<span class="st"> </span><span class="kw">FUN</span>(file) <span class="co"># read in file</span>
+        dat<span class="op">$</span>name &lt;-<span class="st"> </span>tools<span class="op">::</span><span class="kw">file_path_sans_ext</span>(<span class="kw">basename</span>(file)) <span class="co">#record the filename for later grouping</span>
+        dat <span class="co">#bring data back</span>
+  }
+
+<span class="co"># This function reads a folder for files of given pattern</span>
+<span class="co"># then applies the given read function to read them in read_fun</span>
+read_files_bind &lt;-<span class="st">  </span><span class="cf">function</span>(folder, pattern, FUN) {
+    <span class="co"># get files that end with csv or CSV</span>
+    files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) 
+    <span class="kw">map_dfr</span>(files, read_fun, FUN)
+  }
+
+<span class="co"># Read everything in at once and bind it all together</span>
+<span class="kw">read_files_bind</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">FUN =</span> read_csv)</code></pre></div>
+<pre><code>## # A tibble: 0 x 0</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="lists-list-columns" class="section level1">
+<h1>Lists &amp; List columns</h1>
+<p>Ok, so we can get data into our environment in a list, but what then? There are a number of ways to deal with these data, or to deal with lists within dataframes…called <em>list columns</em>.</p>
+<div id="tidyrnest-embeds-tibbles-in-a-column" class="section level2">
+<h2><code>tidyr::nest()</code> embeds tibbles in a column</h2>
+<p>See how to group by something and then create a list-columns that hold each dataframe for that group.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cars_nested &lt;-
+<span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span>
+<span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span>
+<span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="co"># nest data by cyl, default key is &quot;data&quot;</span>
+
+cars_nested</code></pre></div>
+<pre><code>## # A tibble: 3 x 2
+##     cyl               data
+##   &lt;dbl&gt;             &lt;list&gt;
+## 1     6  &lt;tibble [7 x 10]&gt;
+## 2     4 &lt;tibble [11 x 10]&gt;
+## 3     8 &lt;tibble [14 x 10]&gt;</code></pre>
+</div>
+<div id="interacting-with-list-data-using-map" class="section level2">
+<h2>Interacting with list-data using <code>map</code></h2>
+<p>Use <code>map</code>!. Let’s make a linear model for each subset, pull out the coefficients with <code>broom</code>, and plot them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+
+mtc_modeled &lt;-<span class="st"> </span>
+<span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span>
+<span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span>
+<span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st">         </span><span class="co"># nest data by cyl, default key is &quot;data&quot;</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp, <span class="dt">data =</span> .x))) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># make models</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">coeff =</span> <span class="kw">map</span>(model, tidy)) <span class="op">%&gt;%</span><span class="st">                        </span><span class="co">#pull out coefficients</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">slope =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">2</span>])) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pull slope from coefficients</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">intercept =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">1</span>])) <span class="co"># pull intercept from coefficients</span>
+  
+ 
+<span class="kw">ggplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="co"># plot the original data </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mtcars, <span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl))) <span class="op">+</span>
+<span class="st">  </span><span class="co"># plot the models</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> mtc_modeled, <span class="kw">aes</span>(<span class="dt">slope =</span> slope, <span class="dt">intercept =</span> intercept, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl)))</code></pre></div>
+<p><img src="purrr_tutorial_files/figure-html/model_extracts-1.png" width="672" /></p>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="iterating-over-more-than-one-list-with-map2-and-pmap" class="section level2">
+<h2>Iterating over more than one list with <code>map2</code> and <code>pmap</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n =<span class="st">  </span><span class="kw">list</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>)
+mu =<span class="st"> </span><span class="kw">list</span>(<span class="dv">50</span>,<span class="dv">30</span>,<span class="dv">10</span>)
+sd =<span class="st"> </span><span class="kw">list</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">1</span>)
+
+<span class="co"># how does it look as we go from map to map2 to pmap?</span>
+<span class="kw">map</span>(n, rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1]  1.4768703 -0.1533959  0.2396748  0.2402409 -0.2077689
+## 
+## [[2]]
+##  [1] -0.05247839  0.62911017 -0.88469193  1.59996856 -0.30069734
+##  [6] -1.18289173  2.27563636  2.19755601 -0.66035239 -0.63136664
+## 
+## [[3]]
+##  [1] -0.25985335  1.29166039 -0.16565655 -0.86726524 -1.33504355
+##  [6] -1.47486375 -0.21736759 -1.33822398  1.31132023 -0.60264571
+## [11]  1.64107207  0.05055839  0.77276881 -0.96325037  0.16046060
+## [16] -2.07450922 -1.91818065  1.14723890  1.00709912  0.17312155</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(n, mu, rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 48.54670 50.59173 50.00327 49.75617 50.45421
+## 
+## [[2]]
+##  [1] 30.78797 31.16257 29.40269 28.26594 30.37638 29.89839 30.24365
+##  [8] 29.99393 30.80376 30.87279
+## 
+## [[3]]
+##  [1] 11.044155 11.511773 11.025745 10.078490 12.782987  9.370071  9.744581
+##  [8]  9.582240 10.158940  8.396422 11.424147  8.579763 10.339949 10.763439
+## [15]  9.139641  9.441236  9.913024 10.981064  9.874723  9.053330</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 60.21579 46.40633 45.26419 48.69170 29.17810
+## 
+## [[2]]
+##  [1] 25.42173 20.89853 19.10881 37.61970 28.79060 27.34891 29.06953
+##  [8] 30.51019 28.86502 29.63786
+## 
+## [[3]]
+##  [1] 11.189231 11.247469 10.521035  9.856616  8.318161  9.583018 10.274564
+##  [8] 11.925249  9.908933 10.044569 10.537355 10.473546 10.670373 10.295606
+## [15] 10.497547 11.513199  7.699350 10.216416 10.577524 10.754320</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#technically, pmap can do it all</span>
+<span class="kw">pmap</span>(<span class="kw">list</span>(n), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1]  1.6743419  0.5906887 -0.2383763 -0.7228013  0.3115667
+## 
+## [[2]]
+##  [1]  0.6112044 -0.4594662 -0.1088584 -0.6394529 -1.0790912 -0.1658900
+##  [7] -0.5537572  0.1748168 -0.4740842  0.8942303
+## 
+## [[3]]
+##  [1]  0.08824759  1.69491559  0.63812594  0.51607932 -1.83405438
+##  [6]  0.82233400 -0.56177874 -0.26776757  2.24927224 -1.19641876
+## [11] -0.60144344 -0.49115629  1.66839832 -0.22908095  0.89472403
+## [16] -1.42507946 -1.71824775 -1.02668013  1.24374182 -0.70820907</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 51.59252 50.77109 49.32877 50.02599 49.88678
+## 
+## [[2]]
+##  [1] 29.97268 31.12543 30.43548 30.72164 29.28568 29.91871 31.21520
+##  [8] 28.37895 29.83291 27.77109
+## 
+## [[3]]
+##  [1]  9.841227 10.090712 11.006969  9.193296  9.013008 10.257081 11.401105
+##  [8] 10.586343 10.150945  8.981446 11.173479 10.784236  9.713015  9.728073
+## [15]  8.229543 12.219423 10.689129  8.888268  9.683102  8.437784</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># formula interface</span>
+<span class="kw">map</span>(n, <span class="op">~</span><span class="kw">rnorm</span>(.))</code></pre></div>
+<pre><code>## [[1]]
+## [1] -1.0253794  0.7547295 -0.1129269 -0.1010053 -0.2318647
+## 
+## [[2]]
+##  [1] -0.75319884 -0.47850360 -1.50549946  0.39523424 -0.41974828
+##  [6]  0.09680549 -0.36860617 -0.68998751  0.37844557 -0.92323009
+## 
+## [[3]]
+##  [1] -0.24591291  2.00960827 -0.75714007  1.32378064  0.44370772
+##  [6] -1.23360315  0.18500252  0.39762879  0.14289692  0.79869461
+## [11]  0.64890860  0.03435417 -0.08699145  1.35779602  0.12434992
+## [16] -0.43244888  1.54658493  0.13544102  1.90652781 -0.06429383</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(n, mu, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.x, .y))</code></pre></div>
+<pre><code>## [[1]]
+## [1] 50.27556 49.06252 49.99540 50.05685 51.16831
+## 
+## [[2]]
+##  [1] 29.41794 29.18751 31.07704 31.30368 28.63855 29.99805 28.27857
+##  [8] 30.51415 30.08255 30.97083
+## 
+## [[3]]
+##  [1]  9.091227  9.308521  8.736555  9.495450  7.842426 13.314138  9.481121
+##  [8] 10.437733 10.202052  9.989584 10.674737  8.003617  9.083636 10.859232
+## [15] 10.342497  8.630701 10.660202  9.228128 10.559359  9.194145</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), <span class="op">~</span><span class="kw">rnorm</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>, ..<span class="dv">3</span>)) <span class="co"># ..4 and so on for as many as you need</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] 38.45031 52.81602 50.99568 61.79909 56.34076
+## 
+## [[2]]
+##  [1] 36.66280 32.64799 34.51709 34.31619 28.13025 35.24909 33.78099
+##  [8] 30.04235 29.24031 36.93536
+## 
+## [[3]]
+##  [1] 10.431623  9.342936 11.457605 10.685423 10.333920 11.572697 12.195179
+##  [8] 10.837334  9.545745 10.802861  8.927582 10.085641 10.694308  9.743992
+## [15]  9.635709 10.067848  9.947924  8.209404 10.255774 10.453293</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># </span><span class="al">CAUTION</span><span class="co">: position matters with map2 &amp; pmap</span>
+<span class="kw">map2</span>(n, mu, rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 50.25973 48.63761 51.01387 51.43565 50.22203
+## 
+## [[2]]
+##  [1] 30.74727 29.24182 28.59790 30.23012 30.22110 29.25163 31.21307
+##  [8] 30.35769 29.41959 29.68153
+## 
+## [[3]]
+##  [1] 10.473262  9.989378  9.008948  9.281208  8.037053 11.205079  9.856961
+##  [8]  9.801129  9.150258  9.699877 10.093871  8.492011  9.519141 10.864316
+## [15]  8.573621  8.227408 10.252127  8.127659 11.273364  9.537162</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map2</span>(mu, n, rnorm)</code></pre></div>
+<pre><code>## [[1]]
+##  [1] 3.875211 5.474346 5.162325 5.184171 5.788494 3.835505 7.570435
+##  [8] 5.967825 3.248358 5.252940 4.881847 6.172477 3.772445 5.081889
+## [15] 4.783596 7.275792 7.594532 4.859897 4.769137 5.376831 5.605773
+## [22] 4.573446 6.394533 4.978607 2.517049 4.119955 4.899089 3.678623
+## [29] 5.066485 4.604867 6.049062 6.627879 4.029749 4.535380 5.752351
+## [36] 4.803157 4.285435 4.411271 5.311944 4.076320 3.204840 5.641990
+## [43] 5.328853 6.100534 3.920426 5.646253 5.918620 5.607403 5.883211
+## [50] 6.811019
+## 
+## [[2]]
+##  [1]  8.882975 11.110725  9.310308  9.822325 11.332727  9.384830  9.812571
+##  [8]  9.956442  9.269623 10.401821  9.456735  9.896822 10.262176  9.542839
+## [15] 10.870443  9.818270 10.548827  8.281902  9.428260  9.092218  8.517985
+## [22] 11.302470  9.023226 10.282410 10.284101 10.646787 10.621225 12.054209
+## [29]  9.502485  9.129787
+## 
+## [[3]]
+##  [1] 17.88910 20.68889 20.47802 20.85465 20.39209 21.46888 19.77250
+##  [8] 19.08281 20.15125 20.55789</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 56.45395 54.36934 37.06240 18.36399 62.06271
+## 
+## [[2]]
+##  [1] 25.38967 27.77635 26.79652 32.53486 26.05234 25.39013 28.43014
+##  [8] 24.29151 28.40957 23.14987
+## 
+## [[3]]
+##  [1]  9.003041 11.121387  8.743585 10.278424  9.726667  9.810071  8.935496
+##  [8]  9.797090  9.668132  8.953855  7.939918 11.830021 10.574065  9.159248
+## [15]  8.506585  9.244463 11.323323  9.564751  9.221630 10.423535</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+##  [1]  -6.0458712  11.3768528  -8.8455157   4.0748782   8.6269389
+##  [6]   2.3866227  -0.3765983  -3.4133414  12.0032059  10.4337296
+## [11]   0.7228497  -1.9822979  -5.9879225   7.4906875   9.0575604
+## [16]  -9.6945317   5.8676850   7.4765866  -7.2351108   7.8705944
+## [21]   5.0018483  -3.1792521 -14.3542237  17.9930969  13.5129234
+## [26]  -5.4209230  18.7649652  24.5093335  28.0131930   2.4939093
+## [31]  16.0574613   2.1720721  -3.6833043   0.0295888  -1.7839788
+## [36] -10.2955003  27.4708526  26.3268898 -13.4900544 -12.9562197
+## [41]  -0.9313159 -23.4264579   2.6907765  20.5398610  10.6773617
+## [46] -11.7232879  -7.0582025  28.4048372   5.7392067   4.0862554
+## 
+## [[2]]
+##  [1] 14.6115696 13.7462684  5.0078336  2.7360015 10.6302522  7.9540292
+##  [7] 12.3436987 10.9031262  8.7902742 15.4896978  8.0434691 -0.5580261
+## [13] 11.6237958  8.1969638  2.3154474  2.3227000 11.6625586  4.3237565
+## [19] 11.4009993  9.7368890  2.2172568 17.7780659  9.2804734  7.7427653
+## [25] 17.2846233  5.4502515  7.0844907  8.0682306  7.9101075  6.1424334
+## 
+## [[3]]
+##  [1] 19.45309 19.47684 21.47916 19.18732 21.82581 19.93036 19.60598
+##  [8] 18.85333 21.68092 20.44700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if you need non-default ordering, specify with full function call</span>
+<span class="kw">map2</span>(mu, n, <span class="cf">function</span>(x, y) <span class="kw">rnorm</span>(y, x))</code></pre></div>
+<pre><code>## [[1]]
+## [1] 50.03889 49.94476 48.98322 48.51922 49.27985
+## 
+## [[2]]
+##  [1] 29.30518 31.22317 28.62083 30.69993 28.93191 29.55604 29.73312
+##  [8] 29.94260 29.35171 30.94903
+## 
+## [[3]]
+##  [1] 10.474034  9.006908  9.154000  9.569446  9.344571  9.850153 12.677612
+##  [8] 10.213612 10.505118  9.750781  9.405815  8.581473 10.534423 10.284895
+## [15]  8.194021  8.777844  9.662300  8.931754  9.682779  8.739000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># or using the formula interface</span>
+<span class="kw">map2</span>(mu, n, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.y, .x))</code></pre></div>
+<pre><code>## [[1]]
+## [1] 49.25603 51.24131 50.18612 50.36180 49.38347
+## 
+## [[2]]
+##  [1] 29.85964 29.18054 30.17130 29.59394 29.41142 30.33886 30.73386
+##  [8] 28.74958 30.16552 29.07058
+## 
+## [[3]]
+##  [1]  9.694206 11.355693  7.905123 10.536021 10.720279  9.803345 10.523817
+##  [8]  9.331800  8.393273 11.477873 10.843439 11.645193  9.823439  8.422545
+## [15]  9.284359  9.776196 11.340587 10.073606 10.911216 10.649954</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># pmap you can name your list to get around positional ordering</span>
+<span class="kw">pmap</span>(<span class="kw">list</span>(<span class="dt">mean=</span>mu, <span class="dt">n=</span>n, <span class="dt">sd=</span>sd), rnorm)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 35.28244 38.27587 46.88812 39.65459 49.97719
+## 
+## [[2]]
+##  [1] 24.93864 35.53905 29.38443 38.09507 33.16624 29.47500 39.85592
+##  [8] 28.57115 30.30249 22.02181
+## 
+## [[3]]
+##  [1] 10.184844  9.628788 11.711726 10.767795 10.824763  8.336109 10.647370
+##  [8]  9.969834  9.891687  9.281672 12.961162 10.173852 10.236815  8.722754
+## [15] 11.183610  9.037304 10.134103  9.275650  9.850321 10.549545</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># OR you can specify with a full function call</span>
+<span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="cf">function</span>(mu, n, sd) <span class="kw">rnorm</span>(n, mu, sd))</code></pre></div>
+<pre><code>## [[1]]
+## [1] 50.23282 50.55791 40.26995 48.22113 54.55200
+## 
+## [[2]]
+##  [1] 36.24159 21.01382 28.41700 33.25130 43.52293 34.04032 34.71545
+##  [8] 27.23005 32.55908 30.70984
+## 
+## [[3]]
+##  [1] 10.419372 11.833522 10.253167 10.937142 10.017011  9.949321 10.004506
+##  [8]  9.089014 11.307628 11.998942  9.704686 10.467612 10.141273 10.257101
+## [15] 12.075882  8.788672  9.149085 10.773548 10.027637 11.510148</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># OR with the formula interface</span>
+<span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>, ..<span class="dv">3</span>))</code></pre></div>
+<pre><code>## [[1]]
+## [1] 65.21899 42.63330 43.34479 46.16218 51.92478
+## 
+## [[2]]
+##  [1] 28.51534 29.82076 27.49256 32.10316 31.05131 37.46672 35.15153
+##  [8] 27.71547 31.24982 31.11399
+## 
+## [[3]]
+##  [1] 10.296711 10.266669 10.389874 10.369666 10.440105 11.120763 11.477957
+##  [8] 11.619428 10.313643 10.471868  7.285020 10.786781 10.464827 11.222768
+## [15] 10.666679  9.659536  9.773543  9.721890 10.034660  9.777697</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="walkwalk2pwalk-are-used-to-output-side-effects" class="section level2">
+<h2><code>walk/walk2/pwalk</code> are used to output side-effects</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">asdf &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">b =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">c =</span> <span class="ot">FALSE</span>)
+<span class="co"># we just want to print each element of this list</span>
+<span class="kw">walk</span>(asdf, print)</code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot; &quot;H&quot; &quot;I&quot; &quot;J&quot;
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
+## [1] FALSE</code></pre>
+<div id="outputting-plots-with-map-functions" class="section level3">
+<h3>Outputting Plots with <code>map</code> Functions</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a simple plotting function</span>
+plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span>
+<span class="st">  </span><span class="kw">pull</span>(plot) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#pull the plots out as a list</span>
+<span class="st">  </span><span class="kw">walk</span>(., print) <span class="co"># print them</span></code></pre></div>
+<p><img src="purrr_tutorial_files/figure-html/walking_to_plotting-1.png" width="672" /><img src="purrr_tutorial_files/figure-html/walking_to_plotting-2.png" width="672" /><img src="purrr_tutorial_files/figure-html/walking_to_plotting-3.png" width="672" /></p>
+<div id="save-plots-from-walk-with-walk2pwalk" class="section level4">
+<h4>Save Plots from <code>walk</code> with <code>walk2/pwalk</code></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a simple plotting function</span>
+plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+mtc_plot_n_save &lt;-
+<span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span>
+<span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span>
+<span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co">#make the save paths</span>
+
+
+<span class="kw">walk2</span>(mtc_plot_n_save<span class="op">$</span>plot, mtc_plot_n_save<span class="op">$</span>filepath, <span class="op">~</span><span class="st"> </span><span class="kw">ggsave</span>(.y, .x)) <span class="co"># save them out</span></code></pre></div>
+<pre><code>## Saving 7 x 5 in image
+## Saving 7 x 5 in image
+## Saving 7 x 5 in image</code></pre>
+<p>That is great! Ok, let’s make this a bit fancier. With <code>pwalk</code> we can have a bunch of different lists of things that get mapped…not just 1 or 2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># make a simple plotting function</span>
+plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+
+<span class="co">#function that prints cylinder info, ggplot, and table </span>
+print_func &lt;-
+<span class="st">  </span><span class="cf">function</span>(info, plot, table, filepath) {
+    <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;This is for &quot;</span>, info, <span class="st">&quot; cylinders./n&quot;</span>))
+    <span class="kw">print</span>(plot)
+    <span class="kw">ggsave</span>(filepath)
+    <span class="kw">print</span>(table)
+    
+  }
+
+mtc_plot_n_save &lt;-
+<span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span>
+<span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span>
+<span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co"># make the save paths</span>
+
+<span class="co"># print all the info</span>
+<span class="kw">pwalk</span>(<span class="kw">list</span>(<span class="dt">info =</span> mtc_plot_n_save<span class="op">$</span>cyl, <span class="dt">plot =</span> mtc_plot_n_save<span class="op">$</span>plot, <span class="dt">table =</span> mtc_plot_n_save<span class="op">$</span>data, <span class="dt">filepath =</span> mtc_plot_n_save<span class="op">$</span>filepath), print_func) </code></pre></div>
+<pre><code>## [1] &quot;This is for 6 cylinders./n&quot;</code></pre>
+<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="purrr_tutorial_files/figure-html/pwalk_output_all_the_things-1.png" width="672" /></p>
+<pre><code>## # A tibble: 7 x 10
+##     mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  21.0 160.0   110  3.90 2.620 16.46     0     1     4     4
+## 2  21.0 160.0   110  3.90 2.875 17.02     0     1     4     4
+## 3  21.4 258.0   110  3.08 3.215 19.44     1     0     3     1
+## 4  18.1 225.0   105  2.76 3.460 20.22     1     0     3     1
+## 5  19.2 167.6   123  3.92 3.440 18.30     1     0     4     4
+## 6  17.8 167.6   123  3.92 3.440 18.90     1     0     4     4
+## 7  19.7 145.0   175  3.62 2.770 15.50     0     1     5     6
+## [1] &quot;This is for 4 cylinders./n&quot;</code></pre>
+<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="purrr_tutorial_files/figure-html/pwalk_output_all_the_things-2.png" width="672" /></p>
+<pre><code>## # A tibble: 11 x 10
+##      mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  22.8 108.0    93  3.85 2.320 18.61     1     1     4     1
+##  2  24.4 146.7    62  3.69 3.190 20.00     1     0     4     2
+##  3  22.8 140.8    95  3.92 3.150 22.90     1     0     4     2
+##  4  32.4  78.7    66  4.08 2.200 19.47     1     1     4     1
+##  5  30.4  75.7    52  4.93 1.615 18.52     1     1     4     2
+##  6  33.9  71.1    65  4.22 1.835 19.90     1     1     4     1
+##  7  21.5 120.1    97  3.70 2.465 20.01     1     0     3     1
+##  8  27.3  79.0    66  4.08 1.935 18.90     1     1     4     1
+##  9  26.0 120.3    91  4.43 2.140 16.70     0     1     5     2
+## 10  30.4  95.1   113  3.77 1.513 16.90     1     1     5     2
+## 11  21.4 121.0   109  4.11 2.780 18.60     1     1     4     2
+## [1] &quot;This is for 8 cylinders./n&quot;</code></pre>
+<pre><code>## Saving 7 x 5 in image</code></pre>
+<p><img src="purrr_tutorial_files/figure-html/pwalk_output_all_the_things-3.png" width="672" /></p>
+<pre><code>## # A tibble: 14 x 10
+##      mpg  disp    hp  drat    wt  qsec    vs    am  gear  carb
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1  18.7 360.0   175  3.15 3.440 17.02     0     0     3     2
+##  2  14.3 360.0   245  3.21 3.570 15.84     0     0     3     4
+##  3  16.4 275.8   180  3.07 4.070 17.40     0     0     3     3
+##  4  17.3 275.8   180  3.07 3.730 17.60     0     0     3     3
+##  5  15.2 275.8   180  3.07 3.780 18.00     0     0     3     3
+##  6  10.4 472.0   205  2.93 5.250 17.98     0     0     3     4
+##  7  10.4 460.0   215  3.00 5.424 17.82     0     0     3     4
+##  8  14.7 440.0   230  3.23 5.345 17.42     0     0     3     4
+##  9  15.5 318.0   150  2.76 3.520 16.87     0     0     3     2
+## 10  15.2 304.0   150  3.15 3.435 17.30     0     0     3     2
+## 11  13.3 350.0   245  3.73 3.840 15.41     0     0     3     4
+## 12  19.2 400.0   175  3.08 3.845 17.05     0     0     3     2
+## 13  15.8 351.0   264  4.22 3.170 14.50     0     1     5     4
+## 14  15.0 301.0   335  3.54 3.570 14.60     0     1     5     8</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
