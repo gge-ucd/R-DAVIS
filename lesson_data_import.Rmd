@@ -1,0 +1,164 @@
+---
+title: "Data import"
+---
+
+> ## Learning objectives
+>
+> * Get comfortable importing different kinds of data
+> * Understand the concept of "tidy data"
+
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+## Reading csv data
+
+Data come in many forms, and we need to be able to load them in R. For our own 
+use and with others who use R, there are R-specific data structures we can use, 
+like the .RDA file-type we just saw, but we need to be able to work with more 
+general data types too. Comma-separated value (csv) tables are perhaps the most 
+universal data structure. 
+
+The species dataset provides genus and species information for animals caught
+during a trapping survey. I downloaded it and put it in the data directory of my 
+project. You will do the same in a minute.
+
+We can read csv's with the `read.csv` function. The argument to `read.csv` is 
+the location of the file, relative to your working directory. Since I saved the 
+gapminder data to the `data` directory of my project, I can load it with this. 
+Note the use of tab-completion to find the file and get it exactly right without 
+typos. 
+
+```{r, eval = FALSE}
+read.csv('data/species.csv')
+```
+
+Whoa! What just happened? R executed the function and printed the result, just 
+like when you enter `log(1)`. How do you store an object to a variable?
+
+```{r}
+species <- read.csv('data/species.csv')
+```
+
+Now, a data.frame called `species` is in my Environment, and I can see that it 
+is a data.frame with `r nrow(species)` rows and `r ncol(species)` columns. 
+
+> #### Challenge -- read csv data
+>
+> The species data are available at [this link](data/species.csv).  
+> - Right click on the link to "save file as..."  
+> - Save the .csv file in the `/data` directory of your project.  
+> - Read the data with the `read.csv` function and assign it to the variable 
+> `species`.  
+> - Inspect the data.frame using whatever means you like
+> - Use a dplyr verb to reorder the data frame in alphabetical order by genus
+> 
+> **Advanced challenge**
+>
+> Suppose you get a .csv file from a colleague in Europe. Because they use "," 
+> (comma) as a decimal separator, they use ";" (semi-colons) to separate fields. 
+> How can you read it into R? 
+>
+> Feel free to use the web and/or R's helpfiles.    
+>
+
+### Using `stringsAsFactors=FALSE`
+
+By default, when building or importing a data frame, the columns that contain 
+characters (i.e., text) are coerced (=converted) into the factor data type. 
+Depending on what you want to do with the data, you may want to keep these 
+columns as character. To do so, `read.csv()` and `read.table()` have an argument 
+called `stringsAsFactors` which can be set to `FALSE`.
+
+ > **Tip**: In most cases, it’s preferable to set `stringsAsFactors = FALSE` 
+ > when importing your data, and converting as a factor only the columns that 
+ > require this data type.
+
+Compare the output of `str(surveys)` when setting `stringsAsFactors = TRUE` 
+(default) and `stringsAsFactors = FALSE`:
+
+```{r eval = FALSE, echo = TRUE}
+surveys <- read.csv('data/combined.csv')
+
+## Compare the difference between when the data are being read as
+## `factor`, and when they are being read as `character`.
+surveys <- read.csv("data/combined.csv", stringsAsFactors = TRUE)
+str(surveys)
+surveys <- read.csv("data/combined.csv", stringsAsFactors = FALSE)
+str(surveys)
+## Convert the column "plot_type" into a factor
+surveys$plot_type <- factor(surveys$plot_type)
+
+```
+
+## Reading messier data
+
+Sometimes data can be a bit trickier to read because it isn't in tidy format.
+If it is **close** to being tidy, we may be able add some more arguments to the
+`read.csv()` call to to help R interpret how the file should be read. If there
+are a few things that R will need help with, using the `read.table()` gives you
+the most flexibility but you'll also have to always specify more information
+about the file to help R interpret it.
+
+Use [this link](data/wide_eg.csv) to download this dataset and inspect it with
+a spreadsheet program. Why isn't it tidy?
+
+Try using the `read.csv()` function on the file.
+
+```{r, eval = FALSE}
+read.csv("data/wide_eg.csv")
+```
+
+We need to tell R to skip 2 rows!
+
+```{r, eval = FALSE}
+read.csv("data/wide_eg.csv", skip = 2)
+```
+
+Or using `read.table()`...
+
+```{r, eval = FALSE}
+read.table("data/wide_eg.csv", header = TRUE, sep = ",", skip = 2)
+```
+
+## Reading directly from websites
+
+We can use the `read.csv()` function to read files directly from a website if we
+first call the `url()` function on the web address.
+
+```{r wwwReadCsv, eval = FALSE}
+read.csv(url("https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv"), skip = 2)
+```
+
+We can also use the `read_csv()` (note that's an underscore in the function
+name, not a period) from the `readr` package which is part of the `tidyverse`.
+In this case, we don't have to use the `url()` function.
+
+```{r, eval = FALSE}
+read_csv("https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv", skip = 2)
+```
+
+## Exporting data
+
+Now that you have learned how to use **`dplyr`** to extract information from
+or summarize your raw data, you may want to export these new datasets to share
+them with your collaborators or for archival.
+
+Similar to the `read.csv()` function used for reading CSV files into R, there is
+a `write.csv()` function that generates CSV files from data frames.
+
+Before using `write.csv()`, we are going to create a new folder, `data_output`,
+in our working directory that will store this generated dataset. We don't want
+to write generated datasets in the same directory as our raw data. It's good
+practice to keep them separate. The `data` folder should only contain the raw,
+unaltered data, and should be left alone to make sure we don't delete or modify
+it. In contrast, our script will generate the contents of the `data_output`
+directory, so even if the files it contains are deleted, we can always
+re-generate them.
+
+<br>
+
+This lesson is adapted from the Software Carpentry: R for Reproducible 
+Scientific Analysis [Vectors and Data Frames materials](http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html)
+and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data 
+[Exporting Data materials](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html).
