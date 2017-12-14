@@ -17,7 +17,7 @@ A willingess to practice coding and embrace the R language.
 
 ## Purpose of Course
 
-In this course you will learn all of the fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations and maps, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, work with SQL databases, as well as collaborate on Github with version-controlled projects.
+In this course you will learn fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations and maps, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, as well as collaborate on Github with version-controlled projects.
 
 The focus of this course is to provide graduate students with training that develops and teaches the tools applicable to the entire process of **reproducible data-driven research** and encourage the use of open-source tools. By learning how to get the computer to do your work for you, you will be able to do more science faster, and your future-self will thank you.
 
@@ -63,16 +63,16 @@ library(emo, quietly = T)
 
 #### Week 3
 
- - dplyr (includes a pipeline of import, manipulation, visualization)
+ - `r emo::ji("white_check_mark")` `dplyr` (includes a pipeline of import, manipulation, visualization)
  - `r emo::ji("white_check_mark")` `tidyr`: with many datasets
 
 #### Week 4
 
- - visualization do's and don'ts (Jenny Bryan's site)
+ - `r emo::ji("ballot_box_with_check")` visualization do's and don'ts
 
 #### Week 5
 
- - Data import (link to Software Carpentry lessons; include a list-- how many different kinds of file extensions-- crowd-sourced list, R can do all of it)
+ - `r emo::ji("white_check_mark")` Data import; include a list-- how many different kinds of file extensions-- crowd-sourced list, R can do all of it)
  - `r emo::ji("white_check_mark")` `purrr` package
 
 #### Week 6
@@ -81,16 +81,16 @@ library(emo, quietly = T)
 
 #### Week 7
 
- - joins (lots of practice! Use Hadley's examples, use ModernDiveR examples)
+ - `r emo::ji("white_check_mark")` joins (lots of practice! Use Hadley's examples, use ModernDiveR examples)
 
 #### Week 8
 
- - spatial 
+ - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
 
 #### Week 9
 
- - custom functions
- - for loops
+ - `r emo::ji("ballot_box_with_check")` custom functions
+ - `r emo::ji("ballot_box_with_check")` for loops
 
 #### Week 10
 

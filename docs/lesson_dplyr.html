@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>R for reproducible scientific analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1.5x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames.html">Data frames</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data import</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr.html">Using dplyr</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_ggplot2.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_joins.html">Joining data</a>
+    </li>
+    <li>
+      <a href="lesson_purrr_tutorial.html">Using purrr</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://speakerdeck.com/ryanpeek">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Presentations
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">R for reproducible scientific analysis</h1>
+<h3 class="subtitle"><em>Manipulating data.frames</em></h3>
+
+</div>
+
+
+<blockquote>
+<h2 id="learning-objectives">Learning objectives</h2>
+<ul>
+<li>Understand the 6 main data types in R</li>
+<li>Be able to use the six major dplyr verbs (<code>filter</code>, <code>select</code>, <code>arrange</code>, <code>mutate</code>, <code>group_by</code>, <code>summarize</code>)</li>
+<li>Be able to use and understand the advantages of the <code>magrittr</code> pipe: <code>%&gt;%</code></li>
+</ul>
+</blockquote>
+<div id="installing-and-loading-packages" class="section level2">
+<h2>Installing and loading packages</h2>
+<p><code>dplyr</code> is not part of “base R”; rather it is a package – a library of functions that an R user wrote. This extensibility is part of the beauty of R. As of December 2016, there are 9,600 such packages in the official Comprehensive R Archive Network, better known as <a href="https://cran.r-project.org/">CRAN</a>.</p>
+<p><code>dplyr</code> is one of the most popular packages for R. It is part of a suite of R tools that make up “The Tidyverse”. Its author conveniently bundled these tools together in a super-package called <code>tidyverse</code>. To use the tidyverse tools, you first need to download them to your machine (once) and then load them (each R session you want to use them). You can download a package via the RStudio menu bar Tools -&gt; Install Packages…, or with a line of code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>)</code></pre></div>
+<p>You only have to download the code once. But whenever you want to <em>use</em> a package, you have to load it in your R session. For that, use the <code>library</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<blockquote>
+<h4 id="challenge-install-and-load-tidyverse" class="challenge">Challenge – Install and load tidyverse</h4>
+<ul>
+<li>Install the <code>tidyverse</code> &amp; <code>gapminder</code> packages, either with <code>install.packages('tidyverse', 'gapminder')</code> or via the menu bar: Tools -&gt; Install Packages…<br />
+</li>
+<li>Load <code>tidyverse</code> with <code>library(tidyverse)</code></li>
+<li>Load <code>gapminder</code> with <code>library(gapminder)</code></li>
+<li>You will see some warnings about conflicts. That’s okay.</li>
+</ul>
+</blockquote>
+</div>
+<div id="vectors-data-types" class="section level2">
+<h2>Vectors &amp; Data Types</h2>
+<blockquote>
+<p>There are six main types of data in R. We’ve already covered 2–3 of them. Can anyone help me list them?</p>
+</blockquote>
+<p>A vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the <strong><code>c()</code></strong> function. For example we can create a vector of animal weights and assign it to a new object <code>weight_g</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)
+weight_g</code></pre></div>
+<pre><code>## [1] 50 60 65 82</code></pre>
+<p>A vector can also contain characters:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)
+animals</code></pre></div>
+<pre><code>## [1] &quot;mouse&quot; &quot;rat&quot;   &quot;dog&quot;</code></pre>
+<p>The quotes around “mouse”, “rat”, etc. are essential here. Without the quotes R will assume there are objects called mouse, rat and dog. As these objects don’t exist in R’s memory, there will be an error message.</p>
+<p>There are many functions that allow you to inspect the content of a vector. <code>length()</code> tells you how many elements are in a particular vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(weight_g)</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(animals)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>An important feature of a vector, is that all of the elements are the same type of data. The function <code>class()</code> indicates the class (the type of element) of an object:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(weight_g)</code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(animals)</code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>The function <code>str()</code> provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(weight_g)</code></pre></div>
+<pre><code>##  num [1:4] 50 60 65 82</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(animals)</code></pre></div>
+<pre><code>##  chr [1:3] &quot;mouse&quot; &quot;rat&quot; &quot;dog&quot;</code></pre>
+<p>You can also use the <code>c()</code> function to add other elements to your vector:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># add to the end of the vector</span>
+weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># add to the beginning of the vector</span>
+weight_g</code></pre></div>
+<pre><code>## [1] 30 50 60 65 82 90</code></pre>
+<p>In the first line, we take the original vector <code>weight_g</code>, add the value 90 to the end of it, and save the result back into <code>weight_g</code>. Then we add the value 30 to the beginning, again saving the result back into <code>weight_g</code>.</p>
+<p>We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
+<p>We just saw 2 of the 6 main atomic vector types (or data types) that R uses: <strong>“character”</strong> and <strong>“numeric”</strong>. These are the basic building blocks that all R objects are built from. The other 4 are:</p>
+<ul>
+<li><strong>“logical”</strong> for TRUE and FALSE (the boolean data type)</li>
+<li><strong>“integer”</strong> for integer numbers (e.g., 2L, the L indicates to R that it’s an integer)</li>
+<li><strong>“complex”</strong> to represent complex numbers with real and imaginary parts (e.g., <code>1+4i</code>) and that’s all we’re going to say about them</li>
+<li><strong>“raw”</strong> that we won’t discuss further</li>
+</ul>
+<p>Vectors are one of the many data structures that R uses. Other important ones are lists (<code>list</code>), matrices (<code>matrix</code>), data frames (<code>data.frame</code>), factors (<code>factor</code>) and arrays (<code>array</code>).</p>
+<div id="challenge" class="section level4">
+<h4>Challenge</h4>
+<blockquote>
+<p>We’ve seen that atomic vectors can be of type character, numeric, integer, and logical. But what happens if we try to mix these types in a single vector? What will happen in each of these examples? (hint: use class() to check the data type of your objects):</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">num_char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)
+num_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)
+char_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)
+tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</code></pre></div>
+<blockquote>
+<ul>
+<li>Why do you think it happens?</li>
+<li>You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class coercion. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?</li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>Sometimes if we look at a data set with <code>str()</code> we can see columns consist of integers, character, etc. However, sometimes the columns are of a special class called a <code>factor</code>. Factors are very useful and are actually something that make R particularly well suited to working with data, so we’re going to spend a little time introducing them.</p>
+<p><strong>Factors are used to represent categorical data</strong>. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
+<p>Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as levels. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</code></pre></div>
+<p>R will assign 1 to the level “<code>female</code>” and 2 to the level “<code>male</code>” (because <strong>f</strong> comes before <strong>m</strong>, even though the first element in this vector is “<code>male</code>”). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">levels</span>(sex)</code></pre></div>
+<pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nlevels</span>(sex)</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. Here, one way to reorder our levels in the sex vector would be:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sex <span class="co"># current order</span></code></pre></div>
+<pre><code>## [1] male   female female male  
+## Levels: female male</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&gt; [1] male   female female male  </span>
+<span class="co">#&gt; Levels: female male</span>
+sex &lt;-<span class="st"> </span><span class="kw">factor</span>(sex, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))
+sex <span class="co"># after re-ordering</span></code></pre></div>
+<pre><code>## [1] male   female female male  
+## Levels: male female</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&gt; [1] male   female female male  </span>
+<span class="co">#&gt; Levels: male female</span></code></pre></div>
+<p>In R’s memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: “<code>female</code>”, “<code>male</code>” is more descriptive than 1, 2. Which one is “<code>male</code>”? You wouldn’t be able to tell just from the integer data. Factors, on the other hand, have this information built in. It is particularly helpful when there are many levels (like the species names in our ecology example dataset <a href="https://mikoontz.github.io/data-carpentry-week/data/species.csv">dataset</a>).</p>
+<div id="converting-factors" class="section level3">
+<h3>Converting factors</h3>
+<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.character</span>(sex)</code></pre></div>
+<pre><code>## [1] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;</code></pre>
+<p>Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. Another method is to use the <code>levels()</code> function. Compare:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1990</span>, <span class="dv">1983</span>, <span class="dv">1977</span>, <span class="dv">1998</span>, <span class="dv">1990</span>))
+<span class="kw">as.numeric</span>(f)               <span class="co"># wrong! and there is no warning...</span></code></pre></div>
+<pre><code>## [1] 3 2 1 4 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) <span class="co"># works...</span></code></pre></div>
+<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(<span class="kw">levels</span>(f))[f]    <span class="co"># The recommended way.</span></code></pre></div>
+<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
+<p>Notice that in the <code>levels()</code> approach, three important steps occur:</p>
+<ul>
+<li>We obtain all the factor levels using <code>levels(f)</code></li>
+<li>We convert these levels to numeric values using <code>as.numeric(levels(f))</code></li>
+<li>We then access these numeric values using the underlying integers of the vector <code>f</code> inside the square brackets</li>
+</ul>
+</div>
+<div id="using-stringsasfactorsfalse" class="section level3">
+<h3>Using <code>stringsAsFactors=FALSE</code></h3>
+<p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
+<blockquote>
+<p>In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
+</blockquote>
+<p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
+<p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read.csv()</code> to load into memory the content of the CSV file as an object of class data.frame.</p>
+<p>To download the data into the <code>data/</code> subdirectory, run the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">download.file</span>(<span class="st">&quot;https://ndownloader.figshare.com/files/2292169&quot;</span>,
+              <span class="st">&quot;data/combined.csv&quot;</span>)</code></pre></div>
+<p>You are now ready to load the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</code></pre></div>
+<p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the first 6 lines of this data using <code>head(surveys)</code></p>
+<p>Now we can look at how reading in the data in different ways affects the different data types (<code>factor</code> vs. <code>character</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Compare the difference between when the data are being read as
+## `factor`, and when they are being read as `character`.
+surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)
+<span class="kw">str</span>(surveys)
+surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+<span class="kw">str</span>(surveys)
+## Convert the column &quot;plot_type&quot; into a factor
+surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</code></pre></div>
+<div id="challenge-1" class="section level4">
+<h4>Challenge</h4>
+<p>We have seen how data frames are created when using the <code>read.csv()</code>, but they can also be created by hand with the <code>data.frame()</code> function. There are a few mistakes in this hand-crafted data.frame, can you spot and fix them? Don’t hesitate to experiment!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">animal_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),
+                          <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),
+                          <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>))</code></pre></div>
+<blockquote>
+<ul>
+<li>Can you predict the class for each of the columns in the following example? Check your guesses using str(country_climate):</li>
+<li>Are they what you expected? Why? Why not?</li>
+<li>What would have been different if we had added stringsAsFactors = FALSE to this call?</li>
+<li>What would you need to change to ensure that each column had the accurate data type?</li>
+</ul>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">country_climate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+       <span class="dt">country=</span><span class="kw">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),
+       <span class="dt">climate=</span><span class="kw">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),
+       <span class="dt">temperature=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),
+       <span class="dt">northern_hemisphere=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),
+       <span class="dt">has_kangaroo=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="dv">1</span>)
+       )</code></pre></div>
+<p>The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance.).</p>
+</div>
+</div>
+</div>
+<div id="data-wrangling-with-dplyr" class="section level2">
+<h2>Data Wrangling with <code>dplyr</code></h2>
+<p>It is an often bemoaned fact that a data scientist spends much, and often most, of her time wrangling data: getting it organized and clean. In this lesson we will learn an efficient set of tools that can handle the vast majority of most data management tasks.</p>
+<p>Enter <code>dplyr</code>, a package for making data manipulation easier. More on <code>dplyr</code> later. <code>dplyr</code> is part of <code>tidyverse</code>, so it is already installed on your machine. You can load it individually, or with the other tidyverse packages like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(gapminder)</code></pre></div>
+<p>Those messages and conflicts are normal. The conflicts are R telling you that there are two packages with functions named “filter” and “lag”. When R gives you red text, it’s not always a bad thing, but it does mean you should pay attention and try to understand what it’s trying to tell you.</p>
+<p>Remember that you only have to install each package once (per computer), but you have to load them for each R session in which you want to use them.</p>
+<p>You also have to load any data you want to use each time you start a new R session. So, if it’s not already loaded, read in the gapminder data. We’re going to use tidyverse’s <code>read_csv</code> instead of base R’s <code>read.csv</code> here. It has a few nice features; the most obvious is that it makes a special kind of data.frame that only prints the first ten rows instead of all 1704.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># gapminder &lt;- read_csv(&#39;data/gapminder-FiveYearData.csv&#39;)</span>
+<span class="kw">class</span>(gapminder)</code></pre></div>
+<pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(gapminder) <span class="co"># look at first few rows</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 6
+##       country continent  year lifeExp      pop gdpPercap
+##        &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan      Asia  1952  28.801  8425333  779.4453
+## 2 Afghanistan      Asia  1957  30.332  9240934  820.8530
+## 3 Afghanistan      Asia  1962  31.997 10267083  853.1007
+## 4 Afghanistan      Asia  1967  34.020 11537966  836.1971
+## 5 Afghanistan      Asia  1972  36.088 13079460  739.9811
+## 6 Afghanistan      Asia  1977  38.438 14880372  786.1134</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(gapminder) <span class="co"># look at data structure</span></code></pre></div>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    1704 obs. of  6 variables:
+##  $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ year     : int  1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 ...
+##  $ lifeExp  : num  28.8 30.3 32 34 36.1 ...
+##  $ pop      : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
+##  $ gdpPercap: num  779 821 853 836 740 ...</code></pre>
+<p>You can always convert a data.frame into this special kind of data.frame like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(gapminder)</code></pre></div>
+</div>
+<div id="what-is-dplyr" class="section level2">
+<h2>What is dplyr?</h2>
+<p>The package <code>dplyr</code> is a fairly new (2014) package that tries to provide easy tools for the most common data manipulation tasks. It is built to work directly with data frames. The thinking behind it was largely inspired by the package <code>plyr</code> which has been in use for some time but suffered from being slow in some cases.<code>dplyr</code> addresses this by porting much of the computation to C++. An additional feature is the ability to work with data stored directly in an external database. The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query returned.</p>
+<p>This addresses a common problem with R in that all operations are conducted in memory and thus the amount of data you can work with is limited by available memory. The database connections essentially remove that limitation in that you can have a database of many 100s GB, conduct queries on it directly and pull back just what you need for analysis in R.</p>
+<div id="the-five-tasks-of-dplyr" class="section level3">
+<h3>The five tasks of <code>dplyr</code></h3>
+<p>There are five actions we often want to apply to a tabular dataset:</p>
+<ul>
+<li>Filter rows</li>
+<li>Filter columns</li>
+<li>Arrange rows</li>
+<li>Make new columns</li>
+<li>Summarize groups</li>
+</ul>
+<p>We are about to see how to do each of those things using the <code>dplyr</code> package. Everything we’re going to learn to do can also be done using “base R”, but <code>dplyr</code> makes it easier, and the syntax is consistent, and it actually makes the computations faster.</p>
+<div id="filter" class="section level4">
+<h4><code>filter()</code></h4>
+<p>Suppose we want to see just the gapminder data for the USA. First, we need to know how “USA” is written in the dataset: Is it USA or United States or what? We can see all the unique values of a variable with the <code>unique</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</code></pre></div>
+<pre><code>##   [1] Afghanistan              Albania                 
+##   [3] Algeria                  Angola                  
+##   [5] Argentina                Australia               
+##   [7] Austria                  Bahrain                 
+##   [9] Bangladesh               Belgium                 
+##  [11] Benin                    Bolivia                 
+##  [13] Bosnia and Herzegovina   Botswana                
+##  [15] Brazil                   Bulgaria                
+##  [17] Burkina Faso             Burundi                 
+##  [19] Cambodia                 Cameroon                
+##  [21] Canada                   Central African Republic
+##  [23] Chad                     Chile                   
+##  [25] China                    Colombia                
+##  [27] Comoros                  Congo, Dem. Rep.        
+##  [29] Congo, Rep.              Costa Rica              
+##  [31] Cote d&#39;Ivoire            Croatia                 
+##  [33] Cuba                     Czech Republic          
+##  [35] Denmark                  Djibouti                
+##  [37] Dominican Republic       Ecuador                 
+##  [39] Egypt                    El Salvador             
+##  [41] Equatorial Guinea        Eritrea                 
+##  [43] Ethiopia                 Finland                 
+##  [45] France                   Gabon                   
+##  [47] Gambia                   Germany                 
+##  [49] Ghana                    Greece                  
+##  [51] Guatemala                Guinea                  
+##  [53] Guinea-Bissau            Haiti                   
+##  [55] Honduras                 Hong Kong, China        
+##  [57] Hungary                  Iceland                 
+##  [59] India                    Indonesia               
+##  [61] Iran                     Iraq                    
+##  [63] Ireland                  Israel                  
+##  [65] Italy                    Jamaica                 
+##  [67] Japan                    Jordan                  
+##  [69] Kenya                    Korea, Dem. Rep.        
+##  [71] Korea, Rep.              Kuwait                  
+##  [73] Lebanon                  Lesotho                 
+##  [75] Liberia                  Libya                   
+##  [77] Madagascar               Malawi                  
+##  [79] Malaysia                 Mali                    
+##  [81] Mauritania               Mauritius               
+##  [83] Mexico                   Mongolia                
+##  [85] Montenegro               Morocco                 
+##  [87] Mozambique               Myanmar                 
+##  [89] Namibia                  Nepal                   
+##  [91] Netherlands              New Zealand             
+##  [93] Nicaragua                Niger                   
+##  [95] Nigeria                  Norway                  
+##  [97] Oman                     Pakistan                
+##  [99] Panama                   Paraguay                
+## [101] Peru                     Philippines             
+## [103] Poland                   Portugal                
+## [105] Puerto Rico              Reunion                 
+## [107] Romania                  Rwanda                  
+## [109] Sao Tome and Principe    Saudi Arabia            
+## [111] Senegal                  Serbia                  
+## [113] Sierra Leone             Singapore               
+## [115] Slovak Republic          Slovenia                
+## [117] Somalia                  South Africa            
+## [119] Spain                    Sri Lanka               
+## [121] Sudan                    Swaziland               
+## [123] Sweden                   Switzerland             
+## [125] Syria                    Taiwan                  
+## [127] Tanzania                 Thailand                
+## [129] Togo                     Trinidad and Tobago     
+## [131] Tunisia                  Turkey                  
+## [133] Uganda                   United Kingdom          
+## [135] United States            Uruguay                 
+## [137] Venezuela                Vietnam                 
+## [139] West Bank and Gaza       Yemen, Rep.             
+## [141] Zambia                   Zimbabwe                
+## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe</code></pre>
+<p>Okay, now we want to see just the rows of the data.frame where country is “United States”. The syntax for all <code>dplyr</code> functions is the same: The first argument is the data.frame, the rest of the arguments are whatever you want to do in that data.frame.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 12 x 6
+##          country continent  year lifeExp       pop gdpPercap
+##           &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1 United States  Americas  1952  68.440 157553000  13990.48
+##  2 United States  Americas  1957  69.490 171984000  14847.13
+##  3 United States  Americas  1962  70.210 186538000  16173.15
+##  4 United States  Americas  1967  70.760 198712000  19530.37
+##  5 United States  Americas  1972  71.340 209896000  21806.04
+##  6 United States  Americas  1977  73.380 220239000  24072.63
+##  7 United States  Americas  1982  74.650 232187835  25009.56
+##  8 United States  Americas  1987  75.020 242803533  29884.35
+##  9 United States  Americas  1992  76.090 256894189  32003.93
+## 10 United States  Americas  1997  76.810 272911760  35767.43
+## 11 United States  Americas  2002  77.310 287675526  39097.10
+## 12 United States  Americas  2007  78.242 301139947  42951.65</code></pre>
+<p>We can also apply multiple conditions, e.g. the US after 2000:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>)</code></pre></div>
+<pre><code>## # A tibble: 2 x 6
+##         country continent  year lifeExp       pop gdpPercap
+##          &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+## 1 United States  Americas  2002  77.310 287675526  39097.10
+## 2 United States  Americas  2007  78.242 301139947  42951.65</code></pre>
+<p>We can also use “or” conditions with the vertical pipe: <code>|</code>. Notice that the variable (column) names don’t go in quotes, but values of character variables do.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">|</span><span class="st"> </span>country <span class="op">==</span><span class="st"> &quot;Mexico&quot;</span>)</code></pre></div>
+<pre><code>## # A tibble: 24 x 6
+##    country continent  year lifeExp      pop gdpPercap
+##     &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+##  1  Mexico  Americas  1952  50.789 30144317  3478.126
+##  2  Mexico  Americas  1957  55.190 35015548  4131.547
+##  3  Mexico  Americas  1962  58.299 41121485  4581.609
+##  4  Mexico  Americas  1967  60.110 47995559  5754.734
+##  5  Mexico  Americas  1972  62.361 55984294  6809.407
+##  6  Mexico  Americas  1977  65.032 63759976  7674.929
+##  7  Mexico  Americas  1982  67.405 71640904  9611.148
+##  8  Mexico  Americas  1987  69.498 80122492  8688.156
+##  9  Mexico  Americas  1992  71.455 88111030  9472.384
+## 10  Mexico  Americas  1997  73.670 95895146  9767.298
+## # ... with 14 more rows</code></pre>
+<p>A good, handy reference list for the operators (and, or, etc) can be found <a href="http://www.statmethods.net/management/operators.html">here</a>.</p>
+</div>
+<div id="select" class="section level4">
+<h4><code>select()</code></h4>
+<p><code>filter</code> returned a subset of the data.frame’s rows. <code>select</code> returns a subset of the data.frame’s columns.</p>
+<p>Suppose we only want to see country and life expectancy.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(gapminder, country, lifeExp)</code></pre></div>
+<p>We can choose which columns we don’t want</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(gapminder, <span class="op">-</span>continent, <span class="dt">income =</span> gdpPercap)</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 5
+##        country  year lifeExp      pop   income
+##         &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt;
+##  1 Afghanistan  1952  28.801  8425333 779.4453
+##  2 Afghanistan  1957  30.332  9240934 820.8530
+##  3 Afghanistan  1962  31.997 10267083 853.1007
+##  4 Afghanistan  1967  34.020 11537966 836.1971
+##  5 Afghanistan  1972  36.088 13079460 739.9811
+##  6 Afghanistan  1977  38.438 14880372 786.1134
+##  7 Afghanistan  1982  39.854 12881816 978.0114
+##  8 Afghanistan  1987  40.822 13867957 852.3959
+##  9 Afghanistan  1992  41.674 16317921 649.3414
+## 10 Afghanistan  1997  41.763 22227415 635.3414
+## # ... with 1,694 more rows</code></pre>
+<p>And we can rename columns</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">select</span>(gapminder, <span class="dt">ThePlace =</span> country, <span class="dt">HowLongTheyLive =</span> lifeExp)</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 2
+##       ThePlace HowLongTheyLive
+##         &lt;fctr&gt;           &lt;dbl&gt;
+##  1 Afghanistan          28.801
+##  2 Afghanistan          30.332
+##  3 Afghanistan          31.997
+##  4 Afghanistan          34.020
+##  5 Afghanistan          36.088
+##  6 Afghanistan          38.438
+##  7 Afghanistan          39.854
+##  8 Afghanistan          40.822
+##  9 Afghanistan          41.674
+## 10 Afghanistan          41.763
+## # ... with 1,694 more rows</code></pre>
+<p>As usual, R isn’t saving any of these outputs; just printing them to the screen. If we want to keep them around, we need to assign them to a variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">justUS =<span class="st"> </span><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)
+USdata =<span class="st"> </span><span class="kw">select</span>(justUS, <span class="op">-</span>country, <span class="op">-</span>continent)
+USdata</code></pre></div>
+<pre><code>## # A tibble: 12 x 4
+##     year lifeExp       pop gdpPercap
+##    &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1  1952  68.440 157553000  13990.48
+##  2  1957  69.490 171984000  14847.13
+##  3  1962  70.210 186538000  16173.15
+##  4  1967  70.760 198712000  19530.37
+##  5  1972  71.340 209896000  21806.04
+##  6  1977  73.380 220239000  24072.63
+##  7  1982  74.650 232187835  25009.56
+##  8  1987  75.020 242803533  29884.35
+##  9  1992  76.090 256894189  32003.93
+## 10  1997  76.810 272911760  35767.43
+## 11  2002  77.310 287675526  39097.10
+## 12  2007  78.242 301139947  42951.65</code></pre>
+<blockquote>
+<h4 id="subsetting" class="challenge">Subsetting</h4>
+<ul>
+<li>Subset the gapminder data to only Oceania countries post-1980.</li>
+<li>Remove the continent column</li>
+<li>Make a scatter plot of gdpPercap vs. population colored by country</li>
+</ul>
+<p><strong>Advanced</strong> How would you determine the median population for the North American countries between 1970 and 1980?</p>
+<p><strong>Bonus</strong> This can be done using base R’s subsetting, but this class doesn’t teach how. Do the original challenge without the <code>filter</code> and <code>select</code> functions. Feel free to consult Google, helpfiles, etc. to figure out how.</p>
+</blockquote>
+</div>
+<div id="arrange" class="section level4">
+<h4><code>arrange()</code></h4>
+<p>You can order the rows of a data.frame by a variable using <code>arrange</code>. Suppose we want to see the most populous countries:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(gapminder, pop)</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 6
+##                  country continent  year lifeExp   pop gdpPercap
+##                   &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
+##  1 Sao Tome and Principe    Africa  1952  46.471 60011  879.5836
+##  2 Sao Tome and Principe    Africa  1957  48.945 61325  860.7369
+##  3              Djibouti    Africa  1952  34.812 63149 2669.5295
+##  4 Sao Tome and Principe    Africa  1962  51.893 65345 1071.5511
+##  5 Sao Tome and Principe    Africa  1967  54.425 70787 1384.8406
+##  6              Djibouti    Africa  1957  37.328 71851 2864.9691
+##  7 Sao Tome and Principe    Africa  1972  56.480 76595 1532.9853
+##  8 Sao Tome and Principe    Africa  1977  58.550 86796 1737.5617
+##  9              Djibouti    Africa  1962  39.693 89898 3020.9893
+## 10 Sao Tome and Principe    Africa  1982  60.351 98593 1890.2181
+## # ... with 1,694 more rows</code></pre>
+<p>Hmm, we didn’t get the most populous countries. By default, <code>arrange</code> sorts the variable in <em>increasing</em> order. We could see the most populous countries by examining the <code>tail</code> of the last command, or we can sort the data.frame by descending population by wrapping the variable in <code>desc()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(pop))</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 6
+##    country continent  year  lifeExp        pop gdpPercap
+##     &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;    &lt;dbl&gt;      &lt;int&gt;     &lt;dbl&gt;
+##  1   China      Asia  2007 72.96100 1318683096 4959.1149
+##  2   China      Asia  2002 72.02800 1280400000 3119.2809
+##  3   China      Asia  1997 70.42600 1230075000 2289.2341
+##  4   China      Asia  1992 68.69000 1164970000 1655.7842
+##  5   India      Asia  2007 64.69800 1110396331 2452.2104
+##  6   China      Asia  1987 67.27400 1084035000 1378.9040
+##  7   India      Asia  2002 62.87900 1034172547 1746.7695
+##  8   China      Asia  1982 65.52500 1000281000  962.4214
+##  9   India      Asia  1997 61.76500  959000000 1458.8174
+## 10   China      Asia  1977 63.96736  943455000  741.2375
+## # ... with 1,694 more rows</code></pre>
+<p><code>arrange</code> can also sort by multiple variables. It will sort the data.frame by the first variable, and if there are any ties in that variable, they will be sorted by the next variable, and so on. Here we sort from newest to oldest, and within year from richest to poorest:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(year), <span class="kw">desc</span>(gdpPercap))</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 6
+##             country continent  year lifeExp       pop gdpPercap
+##              &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1           Norway    Europe  2007  80.196   4627926  49357.19
+##  2           Kuwait      Asia  2007  77.588   2505559  47306.99
+##  3        Singapore      Asia  2007  79.972   4553009  47143.18
+##  4    United States  Americas  2007  78.242 301139947  42951.65
+##  5          Ireland    Europe  2007  78.885   4109086  40676.00
+##  6 Hong Kong, China      Asia  2007  82.208   6980412  39724.98
+##  7      Switzerland    Europe  2007  81.701   7554661  37506.42
+##  8      Netherlands    Europe  2007  79.762  16570613  36797.93
+##  9           Canada  Americas  2007  80.653  33390141  36319.24
+## 10          Iceland    Europe  2007  81.757    301931  36180.79
+## # ... with 1,694 more rows</code></pre>
+<p><strong>Shoutout Q: Would we get the same output if we switched the order of <code>desc(year)</code> and <code>desc(gdpPercap)</code> in the last line?</strong></p>
+</div>
+<div id="mutate" class="section level4">
+<h4><code>mutate()</code></h4>
+<p>We have learned how to drop rows, drop columns, and rearrange rows. To make a new column we use the <code>mutate</code> function. As usual, the first argument is a data.frame. The second argument is the name of the new column you want to create, followed by an equal sign, followed by what to put in that column. You can reference other variables in the data.frame, and <code>mutate</code> will treat each row independently. E.g. we can calculate the total GDP of each country in each year by multiplying the per-capita GDP by the population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mutate</span>(gapminder, <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop)</code></pre></div>
+<pre><code>## # A tibble: 1,704 x 7
+##        country continent  year lifeExp      pop gdpPercap   total_gdp
+##         &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+##  1 Afghanistan      Asia  1952  28.801  8425333  779.4453  6567086330
+##  2 Afghanistan      Asia  1957  30.332  9240934  820.8530  7585448670
+##  3 Afghanistan      Asia  1962  31.997 10267083  853.1007  8758855797
+##  4 Afghanistan      Asia  1967  34.020 11537966  836.1971  9648014150
+##  5 Afghanistan      Asia  1972  36.088 13079460  739.9811  9678553274
+##  6 Afghanistan      Asia  1977  38.438 14880372  786.1134 11697659231
+##  7 Afghanistan      Asia  1982  39.854 12881816  978.0114 12598563401
+##  8 Afghanistan      Asia  1987  40.822 13867957  852.3959 11820990309
+##  9 Afghanistan      Asia  1992  41.674 16317921  649.3414 10595901589
+## 10 Afghanistan      Asia  1997  41.763 22227415  635.3414 14121995875
+## # ... with 1,694 more rows</code></pre>
+<p><strong>Shoutout Q: How would we view the highest-total-gdp countries?</strong></p>
+<p>Note that didn’t change gapminder: We didn’t assign the output to anything, so it was just printed, with the new column. If we want to modify our gapminder data.frame, we can assign the output of <code>mutate</code> back to the gapminder variable, but be careful doing this – if you make a mistake, you can’t just re-run that line of code, you’ll need to go back to loading the gapminder data.frame.</p>
+<p>Also, you can create multiple columns in one call to <code>mutate</code>, even using variables that you just created, separating them with commas:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder =<span class="st"> </span><span class="kw">mutate</span>(gapminder, 
+                   <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop,
+                   <span class="dt">log_gdp =</span> <span class="kw">log10</span>(total_gdp))</code></pre></div>
+<blockquote>
+<h4 id="mcq-data-reduction" class="challenge">MCQ: Data Reduction</h4>
+<p>Produce a data.frame with only the names, years, and per-capita GDP of countries where per capita gdp is less than a dollar a day sorted from most- to least-recent.</p>
+<ul>
+<li>Tip: The <code>gdpPercap</code> variable is annual gdp. You’ll need to adjust.</li>
+<li>Tip: For complex tasks, it often helps to use pencil and paper to write/draw/map the various steps needed and how they fit together before writing any code.</li>
+</ul>
+<p>What is the annual per-capita gdp, rounded to the nearest dollar, of the first row in the data.frame?</p>
+<ol style="list-style-type: lower-alpha">
+<li>$278</li>
+<li>$312</li>
+<li>$331</li>
+<li>$339</li>
+</ol>
+<p><strong>Advanced</strong>: Use dplyr functions and ggplot to plot per-capita GDP versus population for North American countries after 1970. - Once you’ve made the graph, transform both axes to a log10 scale. There are two ways to do this, one by creating new columns in the data frame, and another using functions provided by ggplot to transform the axes. Implement both, in that order. Which do you prefer and why?</p>
+</blockquote>
+</div>
+<div id="cest-ne-pas-une-pipe" class="section level4">
+<h4>C’est ne pas une pipe</h4>
+<p>Suppose we want to look at all the countries where life expectancy is greater than 80 years, sorted from poorest to richest. First, we <code>filter</code>, then we <code>arrange</code>. We could assign the intermediate data.frame to a variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lifeExpGreater80 =<span class="st"> </span><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)
+(<span class="dt">lifeExpGreater80sorted =</span> <span class="kw">arrange</span>(lifeExpGreater80, gdpPercap))</code></pre></div>
+<pre><code>## # A tibble: 21 x 8
+##             country continent  year lifeExp       pop gdpPercap
+##              &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1      New Zealand   Oceania  2007  80.204   4115771  25185.01
+##  2           Israel      Asia  2007  80.745   6426679  25523.28
+##  3            Italy    Europe  2002  80.240  57926999  27968.10
+##  4            Italy    Europe  2007  80.546  58147733  28569.72
+##  5            Japan      Asia  2002  82.000 127065841  28604.59
+##  6            Japan      Asia  1997  80.690 125956499  28816.58
+##  7            Spain    Europe  2007  80.941  40448191  28821.06
+##  8           Sweden    Europe  2002  80.040   8954175  29341.63
+##  9 Hong Kong, China      Asia  2002  81.495   6762476  30209.02
+## 10           France    Europe  2007  80.657  61083916  30470.02
+## # ... with 11 more rows, and 2 more variables: total_gdp &lt;dbl&gt;,
+## #   log_gdp &lt;dbl&gt;</code></pre>
+<p>In this case it doesn’t much matter, but we make a whole new data.frame (<code>lifeExpGreater80</code>) and only use it once; that’s a little wasteful of system resources, and it clutters our environment. If the data are large, that can be a big problem.</p>
+<p>Or, we could nest each function so that it appears on one line:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">arrange</span>(<span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), gdpPercap)</code></pre></div>
+<pre><code>## # A tibble: 21 x 8
+##             country continent  year lifeExp       pop gdpPercap
+##              &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1      New Zealand   Oceania  2007  80.204   4115771  25185.01
+##  2           Israel      Asia  2007  80.745   6426679  25523.28
+##  3            Italy    Europe  2002  80.240  57926999  27968.10
+##  4            Italy    Europe  2007  80.546  58147733  28569.72
+##  5            Japan      Asia  2002  82.000 127065841  28604.59
+##  6            Japan      Asia  1997  80.690 125956499  28816.58
+##  7            Spain    Europe  2007  80.941  40448191  28821.06
+##  8           Sweden    Europe  2002  80.040   8954175  29341.63
+##  9 Hong Kong, China      Asia  2002  81.495   6762476  30209.02
+## 10           France    Europe  2007  80.657  61083916  30470.02
+## # ... with 11 more rows, and 2 more variables: total_gdp &lt;dbl&gt;,
+## #   log_gdp &lt;dbl&gt;</code></pre>
+<p>This would become difficult to read if we are performing a number of operations that would require a repeated nesting. But…</p>
+<p>There is a better way, and it makes both writing and reading the code easier. The pipe from the <code>magrittr</code> package (which is automatically installed and loaded with <code>dplyr</code> and <code>tidyverse</code>) takes the output of first line, and plugs it in as the first argument of the next line. Since many <code>tidyverse</code> functions expect a data.frame as the first argument and output a data.frame, this works fluidly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</code></pre></div>
+<pre><code>## # A tibble: 21 x 8
+##             country continent  year lifeExp       pop gdpPercap
+##              &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1      New Zealand   Oceania  2007  80.204   4115771  25185.01
+##  2           Israel      Asia  2007  80.745   6426679  25523.28
+##  3            Italy    Europe  2002  80.240  57926999  27968.10
+##  4            Italy    Europe  2007  80.546  58147733  28569.72
+##  5            Japan      Asia  2002  82.000 127065841  28604.59
+##  6            Japan      Asia  1997  80.690 125956499  28816.58
+##  7            Spain    Europe  2007  80.941  40448191  28821.06
+##  8           Sweden    Europe  2002  80.040   8954175  29341.63
+##  9 Hong Kong, China      Asia  2002  81.495   6762476  30209.02
+## 10           France    Europe  2007  80.657  61083916  30470.02
+## # ... with 11 more rows, and 2 more variables: total_gdp &lt;dbl&gt;,
+## #   log_gdp &lt;dbl&gt;</code></pre>
+<p>To demonstrate how it works, here are some examples where it’s unnecessary.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<p>Whatever goes through the pipe becomes the first argument of the function after the pipe. This is convenient, because all <code>dplyr</code> functions produce a data.frame as their output and take a data.frame as the first argument. Since R ignores white-space, we can put each function on a new line, which RStudio will automatically indent, making everything easy to read. Now each line represents a step in a sequential operation. You can read this as “Take the gapminder data.frame, filter to the rows where lifeExp is greater than 80, and arrange by gdpPercap.”</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</code></pre></div>
+<pre><code>## # A tibble: 21 x 8
+##             country continent  year lifeExp       pop gdpPercap
+##              &lt;fctr&gt;    &lt;fctr&gt; &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
+##  1      New Zealand   Oceania  2007  80.204   4115771  25185.01
+##  2           Israel      Asia  2007  80.745   6426679  25523.28
+##  3            Italy    Europe  2002  80.240  57926999  27968.10
+##  4            Italy    Europe  2007  80.546  58147733  28569.72
+##  5            Japan      Asia  2002  82.000 127065841  28604.59
+##  6            Japan      Asia  1997  80.690 125956499  28816.58
+##  7            Spain    Europe  2007  80.941  40448191  28821.06
+##  8           Sweden    Europe  2002  80.040   8954175  29341.63
+##  9 Hong Kong, China      Asia  2002  81.495   6762476  30209.02
+## 10           France    Europe  2007  80.657  61083916  30470.02
+## # ... with 11 more rows, and 2 more variables: total_gdp &lt;dbl&gt;,
+## #   log_gdp &lt;dbl&gt;</code></pre>
+<p>Making your code easier for humans to read will save you lots of time. The human reading it is usually future-you, and operations that seem simple when you’re writing them will look like gibberish when you’re three weeks removed from them, let alone three months or three years or another person. Make your code as easy to read as possible by using the pipe where appropriate, leaving white space, using descriptive variable names, being consistent with spacing and naming, and liberally commenting code.</p>
+<blockquote>
+<h4 id="challenge-data-reduction-with-pipes" class="challenge">Challenge: Data Reduction with Pipes</h4>
+<p>Copy the code you (or the instructor) wrote to solve the previous MCQ Data Reduction challenge. Rewrite it using pipes (i.e. no assignment and no nested functions)</p>
+</blockquote>
+</div>
+<div id="summarize" class="section level4">
+<h4><code>summarize()</code></h4>
+<p>Often we want to calculate a new variable, but rather than keeping each row as an independent observation, we want to group observations together to calculate some summary statistic. To do this we need two functions, one to do the grouping and one to calculate the summary statistic: <code>group_by</code> and <code>summarize</code>. By itself <code>group_by</code> doesn’t change a data.frame; it just sets up the grouping. <code>summarize</code> then goes over each group in the data.frame and does whatever calculation you want. E.g. suppose we want the average global gdp for each year. While we’re at it, let’s calculate the mean and median and see how they differ.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdp =</span> <span class="kw">mean</span>(gdpPercap), <span class="dt">median_gdp =</span> <span class="kw">median</span>(gdpPercap))</code></pre></div>
+<pre><code>## # A tibble: 12 x 3
+##     year  mean_gdp median_gdp
+##    &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1  1952  3725.276   1968.528
+##  2  1957  4299.408   2173.220
+##  3  1962  4725.812   2335.440
+##  4  1967  5483.653   2678.335
+##  5  1972  6770.083   3339.129
+##  6  1977  7313.166   3798.609
+##  7  1982  7518.902   4216.228
+##  8  1987  7900.920   4280.300
+##  9  1992  8158.609   4386.086
+## 10  1997  9090.175   4781.825
+## 11  2002  9917.848   5319.805
+## 12  2007 11680.072   6124.371</code></pre>
+<p><strong>Shoutout Q: Note that <code>summarize</code> eliminates any other columns. Why? What else can it do? E.g. What country should it list for the year 1952!?</strong></p>
+<p>There are several different summary statistics that can be generated from our data. The R base package provides many built-in functions such as <code>mean</code>, <code>median</code>, <code>min</code>, <code>max</code>, and <code>range</code>. By default, all <strong>R functions operating on vectors that contains missing data will return NA</strong>. It’s a way to make sure that users know they have missing data, and make a conscious decision on how to deal with it. When dealing with simple statistics like the mean, the easiest way to ignore <code>NA</code> (the missing data) is to use <code>na.rm=TRUE</code> (<code>rm</code> stands for remove). An alternate option is to use the function <code>is.na()</code>, which evaluates to true if the value passed to it is not a number. This function is more useful as a part of a filter, where you can filter out everything that is not a number. For that purpose you would do something like</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(someColumn)) </code></pre></div>
+<p>The <code>!</code> symbol negates it, so we’re asking for everything that is not an <code>NA</code>.</p>
+<p>We often want to calculate the number of entries within a group. E.g. we might wonder if our dataset is balanced by country. We can do this with the <code>n()</code> function, or <code>dplyr</code> provides a <code>count</code> function as a convenience:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">number_entries =</span> <span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 142 x 2
+##        country number_entries
+##         &lt;fctr&gt;          &lt;int&gt;
+##  1 Afghanistan             12
+##  2     Albania             12
+##  3     Algeria             12
+##  4      Angola             12
+##  5   Argentina             12
+##  6   Australia             12
+##  7     Austria             12
+##  8     Bahrain             12
+##  9  Bangladesh             12
+## 10     Belgium             12
+## # ... with 132 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">count</span>(gapminder, country)</code></pre></div>
+<pre><code>## # A tibble: 142 x 2
+##        country     n
+##         &lt;fctr&gt; &lt;int&gt;
+##  1 Afghanistan    12
+##  2     Albania    12
+##  3     Algeria    12
+##  4      Angola    12
+##  5   Argentina    12
+##  6   Australia    12
+##  7     Austria    12
+##  8     Bahrain    12
+##  9  Bangladesh    12
+## 10     Belgium    12
+## # ... with 132 more rows</code></pre>
+<p>We can also do multiple groupings. Suppose we want the maximum life expectancy in each continent for each year. We group by continent and year and calculate the maximum with the <code>max</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp))</code></pre></div>
+<pre><code>## # A tibble: 60 x 3
+## # Groups:   continent [?]
+##    continent  year longest_life
+##       &lt;fctr&gt; &lt;int&gt;        &lt;dbl&gt;
+##  1    Africa  1952       52.724
+##  2    Africa  1957       58.089
+##  3    Africa  1962       60.246
+##  4    Africa  1967       61.557
+##  5    Africa  1972       64.274
+##  6    Africa  1977       67.064
+##  7    Africa  1982       69.885
+##  8    Africa  1987       71.913
+##  9    Africa  1992       73.615
+## 10    Africa  1997       74.772
+## # ... with 50 more rows</code></pre>
+<p>Hmm, we got the longest life expectancy for each continent-year, but we didn’t get the country. To get the country, we have to ask R “Where lifeExp is at a maximum, what is the entry in country?” For that we use the <code>which.max</code> function. <code>max</code> returns the maximum value; <code>which.max</code> returns the location of the maximum value.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1] 7</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which.max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Now, back to the question: Where lifeExp is at a maximum, what is the entry in country?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gapminder <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp), <span class="dt">country =</span> country[<span class="kw">which.max</span>(lifeExp)])</code></pre></div>
+<pre><code>## # A tibble: 60 x 4
+## # Groups:   continent [?]
+##    continent  year longest_life   country
+##       &lt;fctr&gt; &lt;int&gt;        &lt;dbl&gt;    &lt;fctr&gt;
+##  1    Africa  1952       52.724   Reunion
+##  2    Africa  1957       58.089 Mauritius
+##  3    Africa  1962       60.246 Mauritius
+##  4    Africa  1967       61.557 Mauritius
+##  5    Africa  1972       64.274   Reunion
+##  6    Africa  1977       67.064   Reunion
+##  7    Africa  1982       69.885   Reunion
+##  8    Africa  1987       71.913   Reunion
+##  9    Africa  1992       73.615   Reunion
+## 10    Africa  1997       74.772   Reunion
+## # ... with 50 more rows</code></pre>
+<blockquote>
+<h4 id="challenge-part-1" class="challenge">Challenge – Part 1</h4>
+<ul>
+<li>Calculate a new column: the total GDP of each country in each year.</li>
+<li>Calculate the variance – <code>var()</code> of countries’ gdps in each year.</li>
+<li>Is country-level GDP getting more or less equal over time?</li>
+</ul>
+</blockquote>
+<blockquote>
+<h4 id="challenge-part-2" class="challenge">Challenge – Part 2</h4>
+<ul>
+<li>Modify the code you just wrote to calculate the variance in both country-level GDP and per-capita GDP.</li>
+<li>Do both measures support the conclusion you arrived at above?</li>
+</ul>
+</blockquote>
+</div>
+<div id="resources" class="section level4">
+<h4>Resources</h4>
+<p>That is the core of <code>dplyr</code>’s functionality, but it does more. RStudio makes a great <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">cheatsheet</a> that covers all the <code>dplyr</code> functions we just learned, plus what we will learn in the next lesson: keeping data tidy.</p>
+</div>
+</div>
+</div>
+<div id="challenge-solutions" class="section level2">
+<h2>Challenge solutions</h2>
+<p><span style="color:white"><strong>Solution to challenge Subsetting</strong></span></p>
+<p><span style="color:white"> - Subset the gapminder data to only Oceania countries post-1980.<br />
+- Remove the continent column<br />
+- Make a scatter plot of gdpPercap vs. population colored by country</span></p>
+<p><span style="color:white"><code>library(gapminder)</code></span> <span style="color:white"> <code>oc1980 = filter(gapminder, continent == &quot;Oceania&quot; &amp; year &gt; 1980)</code> <code>oc1980less = select(oc1980, -continent)</code> <code>library('ggplot2')</code> <code>ggplot(oc1980less, aes(x = gdpPercap, y = lifeExp, color = country)) +</code> <code>geom_point()</code> </span></p>
+<p><span style="color:white"><strong>Advanced:</strong> How would you determine the median population for the North American countries between 1970 and 1980?</span></p>
+<p><span style="color:white"> <code>library(gapminder)</code> <code>library(tidyverse)</code> <code>noAm = filter(gapminder, country == &quot;United States&quot; | country == &quot;Canada&quot; |</code> <code>country == &quot;Mexico&quot; | country == &quot;Puerto Rico&quot; &amp; (year &gt; 1970 &amp; year &lt; 1980))</code> <code>noAmPop = select(noAm, pop)</code> <code>#median(noAmPop)</code> <code>#noAmPop</code> <code>#as.integer(noAmPop)</code> <code>median(unlist(noAmPop))</code> </span></p>
+<p><span style="color:white"><strong>Bonus</strong> This can be done using base R’s subsetting, but this class doesn’t teach how. Do the original challenge without the <code>filter</code> and <code>select</code> functions. Feel free to consult Google, helpfiles, etc. to figure out how. </span></p>
+<p><span style="color:white"> <code>noAm2 = gapminder[(gapminder$country == &quot;United States&quot;) |</code> <code>(gapminder$country == &quot;Mexico&quot;) |</code> <code>(gapminder$country == &quot;Canada&quot;) |</code> <code>(gapminder$country == &quot;Puerto Rico&quot;) &amp;</code> <code>((gapminder$year &gt; 1970) &amp;</code> <code>(gapminder$year &lt; 1980)),]</code> <code>median(noAm2$pop)</code> </span></p>
+<p><span style="color:white"><strong>Solution to challenge MCQ: Data Reduction</strong></span></p>
+<p><span style="color:white">Produce a data.frame with only the names, years, and per-capita GDP of countries where per capita gdp is less than a dollar a day sorted from most- to least-recent.</span></p>
+<p><span style="color:white"> - Tip: The <code>gdpPercap</code> variable is annual gdp. You’ll need to adjust. - Tip: For complex tasks, it often helps to use pencil and paper to write/draw/map the various steps needed and how they fit together before writing any code.</p>
+<p><span style="color:white">What is the annual per-capita gdp, rounded to the nearest dollar, of the first row in the data.frame?</span></p>
+<p><span style="color:white"> a. $278 b. $312 c. $331 d. $339 </span></p>
+<p><span style="color:white"> <code>dailyGDP = mutate(gapminder, onedayGDP = gdpPercap / 365)</code> <code>dailyGDP = filter(dailyGDP, onedayGDP &lt; 1)</code> <code>dailyGDP = select(dailyGDP, country, year, gdpPercap)</code> <code>dailyGDP[1,]</code> </span></p>
+<p><span style="color:white"> <strong>Advanced</strong>: Use dplyr functions and ggplot to plot per-capita GDP versus population for North American countries after 1970. - Once you’ve made the graph, transform both axes to a log10 scale. There are two ways to do this, one by creating new columns in the data frame, and another using functions provided by ggplot to transform the axes. Implement both, in that order. Which do you prefer and why? </span></p>
+<p><span style="color:white"> <code>noAm = filter(gapminder, country == &quot;United States&quot; |</code> <code>country == &quot;Canada&quot; | country == &quot;Mexico&quot; |</code> <code>country == &quot;Puerto Rico&quot; &amp; year &gt; 1970</code> <code>)</code> <code>ggplot(noAm, aes(x = gdpPercap, y = pop, color = country)) +</code> <code>geom_point() +</code> <code>scale_x_log10() +</code> <code>scale_y_log10()</code> </span></p>
+<p><span style="color:white"><strong>Challenge: Data Reduction with Pipes</strong></span></p>
+<p><span style="color:white">Copy the code you (or the instructor) wrote to solve the previous MCQ Data Reduction challenge. Rewrite it using pipes (i.e. no assignment and no nested functions)</span></p>
+<p><span style="color:white"> Previous challenge with pipes <code>dailyGDP = mutate(gapminder, onedayGDP = gdpPercap / 365)</code> <code>dailyGDP = filter(dailyGDP, onedayGDP &lt; 1)</code> <code>dailyGDP = select(dailyGDP, country, year, gdpPercap)</code> <code>smallGDP = gapminder %&gt;%</code> <code>mutate(onedayGDP = gdpPercap / 365) %&gt;%</code> <code>filter(onedayGDP &lt; 1) %&gt;%</code> <code>select(country, year, gdpPercap)</code> <code>smallGDP[1,]</code> </span></p>
+<p><span style="color:white"> <strong>OR, more fancy</strong> (without an intermediate temp variable) <code></code>(gapminder %&gt;% <code></code> mutate(onedayGDP = gdpPercap / 365) %&gt;% <code></code> filter(onedayGDP &lt; 1) %&gt;% <code></code> select(country, year, gdpPercap))[1,] ` </span></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
