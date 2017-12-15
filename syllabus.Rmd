@@ -68,7 +68,7 @@ library(emo, quietly = T)
 
 #### Week 4
 
- - `r emo::ji("ballot_box_with_check")` visualization do's and don'ts
+ - `r emo::ji("white_check_mark")` visualization do's and don'ts
 
 #### Week 5
 
@@ -85,12 +85,12 @@ library(emo, quietly = T)
 
 #### Week 8
 
- - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
+ - `r emo::ji("white_check_mark")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
 
 #### Week 9
 
- - `r emo::ji("ballot_box_with_check")` custom functions
- - `r emo::ji("ballot_box_with_check")` for loops
+ - `r emo::ji("white_check_mark")` custom functions
+ - `r emo::ji("white_check_mark")` for loops
 
 #### Week 10
 

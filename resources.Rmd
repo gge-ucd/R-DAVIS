@@ -1,8 +1,17 @@
 ---
 title: "Resources"
+output:
+  html_document:
+    toc: false
 ---
 
-## R Content/Lessons
+## {.tabset .tabset-fade}
+
+There are many resources online and in print. This is by no means a comprehensive list, but hopefully a launching pad for some very useful website and books. All of these examples provide code in same shape or form.
+
+### Resources
+
+#### *R Lessons & Tutorials*
 
 * [Software Carpentry: **R for Reproducible Scientific Analysis**](http://data-lessons.github.io/gapminder-R/)
 * [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/)
@@ -10,8 +19,9 @@ title: "Resources"
 * [Data Carpentry: **Genomics Lesson**](https://jasonjwilliamsny.github.io/tidiness-genomics/)
 * [ANGUS: **Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown**](http://angus.readthedocs.io/en/2017/index.html)
 * [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/)
+* [**Coding Club**, great resource with many tutorials](https://ourcodingclub.github.io/)
 
-## Online R/Data Science Books/Courses
+#### *R eBooks/Courses*
 
 * [Jenny Bryan's **Stat545.com**](http://stat545.com/)
 * [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/)
@@ -22,6 +32,31 @@ title: "Resources"
 * [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/)
 * [Hadley Wickham's **Advanced R**](http://adv-r.had.co.nz/)
 
-## Git/Github 
+#### *Git/Github* 
 
 * [Jenny Bryan's **Happy Git and Github for the useR**](http://happygitwithr.com/)
+* [Coding Club **Intro to Github**](https://ourcodingclub.github.io/2017/02/27/git.html)
+
+### Datasets
+
+This is a list of most of the data sources used in this course.
+
+* From [The Portal Project Teaching Database](https://doi.org/10.6084/m9.figshare.1314459.v6)
+    + [Portal_rodents_19772002_scinameUUIDs.csv](data/Portal_rodents_19772002_scinameUUIDs.csv) [raw trapping data]
+    + [species.csv](data/species.csv) [species id metadata]
+    + [surveys.csv](data/surveys.csv) [trapping data by record id]
+    + [combined.csv](data/combined.csv) [trapping data merged with record id metadata]
+    + [plots.csv](data/plots.csv) [plot type metadata]
+* From [Data Carpentry: Genomics Lesson](https://jasonjwilliamsny.github.io/tidiness-genomics/)
+    + [sequencing_results_metadata.txt](data/sequencing_results_metadata.txt) [metadata from DNA sequencing]
+* From [Data Carpentry: R for Data Analysis and Visualization of Ecological Data](http://www.datacarpentry.org/R-ecology-lesson/)
+    + [survey_data_spreadsheet_messy.xls](data/survey_data_spreadsheet_messy.xls) [example of untidy data]
+* From [Software Carpentry: R for Reproducible Scientific Analysis](http://data-lessons.github.io/gapminder-R/)
+    + [continents.RDA](data/continents.RDA) [gapminder continent-level data]
+    + [wide_eg.csv](data/wide_eg.csv) [blood albumin levels]
+    + [stocks.tsv](data/stocks.tsv) [restaurant stock data]
+    + [gapminder.csv](data/gapminder.csv) [country characteristics by year]
+* From [ANGUS: Analyzing High Throughput Sequencing Data](http://angus.readthedocs.io/en/2017/rmarkdown_rnaseq.html)
+    + [rnaseq.zip](data/rnaseq.zip) [zipped folder of RNA sequence data]
+* [2001_mauna_loa_met_data.zip](data/2001_mauna_loa_met_data.zip) [meteorological station data from Mauna Loa]
+

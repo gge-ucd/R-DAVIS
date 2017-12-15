@@ -11,7 +11,7 @@
 
 
 
-<title>Data import</title>
+<title>Automation with for loops</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -450,7 +450,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Data import</h1>
+<h1 class="title toc-ignore">Automation with for loops</h1>
 
 </div>
 
@@ -458,74 +458,109 @@ div.tocify {
 <blockquote>
 <h2 id="learning-objectives">Learning objectives</h2>
 <ul>
-<li>Get comfortable importing different kinds of data</li>
-<li>Understand the concept of “tidy data”</li>
+<li>Understand the anatomy of a for loop</li>
+<li>Understand the iterative looping variable</li>
+<li>Be able to build a for loop to automate a block of code</li>
 </ul>
 </blockquote>
-<div id="reading-csv-data" class="section level2">
-<h2>Reading csv data</h2>
-<p>Data come in many forms, and we need to be able to load them in R. For our own use and with others who use R, there are R-specific data structures we can use, like the .RDA file-type we just saw, but we need to be able to work with more general data types too. Comma-separated value (csv) tables are perhaps the most universal data structure.</p>
-<p>The species dataset provides genus and species information for animals caught during a trapping survey. I downloaded it and put it in the data directory of my project. You will do the same in a minute.</p>
-<p>We can read csv’s with the <code>read.csv</code> function. The argument to <code>read.csv</code> is the location of the file, relative to your working directory. Since I saved the gapminder data to the <code>data</code> directory of my project, I can load it with this. Note the use of tab-completion to find the file and get it exactly right without typos.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</code></pre></div>
-<p>Whoa! What just happened? R executed the function and printed the result, just like when you enter <code>log(1)</code>. How do you store an object to a variable?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">species &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</code></pre></div>
-<p>Now, a data.frame called <code>species</code> is in my Environment, and I can see that it is a data.frame with 54 rows and 4 columns.</p>
-<blockquote>
-<h4 id="challenge-read-csv-data">Challenge – read csv data</h4>
-<p>The species data are available at <a href="data/species.csv">this link</a>.<br />
-- Right click on the link to “save file as…”<br />
-- Save the .csv file in the <code>/data</code> directory of your project.<br />
-- Read the data with the <code>read.csv</code> function and assign it to the variable <code>species</code>.<br />
-- Inspect the data.frame using whatever means you like - Use a dplyr verb to reorder the data frame in alphabetical order by genus</p>
-<p><strong>Advanced challenge</strong></p>
-<p>Suppose you get a .csv file from a colleague in Europe. Because they use “,” (comma) as a decimal separator, they use “;” (semi-colons) to separate fields. How can you read it into R?</p>
-<p>Feel free to use the web and/or R’s helpfiles.</p>
-</blockquote>
-<div id="using-stringsasfactorsfalse" class="section level3">
-<h3>Using <code>stringsAsFactors=FALSE</code></h3>
-<p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
-<blockquote>
-<p><strong>Tip</strong>: In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
-</blockquote>
-<p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>We can automate chunks of code using a <code>for</code> loop. We’ve seen how many tasks are automatically automated using vectorization. Remember how we can often pass a vector of values as an argument to a function, and the function will happily operate on each element in turn.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">98</span>, <span class="dv">2</span>)
+<span class="kw">log</span>(x)</code></pre></div>
+<pre><code>## [1] 0.0000000 1.3862944 4.5849675 0.6931472</code></pre>
+<p>R understands that we want to call the <code>log()</code> function on the first element in the <code>x</code> vector, then call the <code>log()</code> function on the second element in the <code>x</code> vector, and so on.</p>
+<p>Sometimes vectorization can’t help us automate a set of commands. This can happen when commands are particularly complex, when the commands are using multiple objects at once, or when the next iteration of the block of code relies on the result of the previous iteration of the block of code. In these cases, we can tell R exactly what commands we want repeated inside of a loop.</p>
+<p>Here is what a basic for loop looks like.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {
+  <span class="kw">print</span>(i)
+}</code></pre></div>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>We use the <code>for()</code> function to indicate we are starting a loop. The <code>{</code> and <code>}</code> mark the start and end of the block of code that we will repeat over and over. <code>i in 1:10</code> means that <code>i</code> will take on the first value in the <code>1:10</code> vector, the block of code will execute, then <code>i</code> will take on the second value in the <code>1:10</code> vector, the block of code will execute a second time, and so on until <code>i</code> takes on the last value in the <code>1:10</code> vector, the block of code executes one final time, and then the loop is finished. R will now proceed to the next line of code after the <code>}</code>. We can call this <strong>iterative looping variable</strong> whatever we’d like. Often, it is called <code>i</code> (or <code>j</code> or <code>k</code> if <code>i</code> is already used), but it could be called <code>monkey</code> and R would be fine with that.</p>
+<p>It’s key to notice that the value of <code>i</code> changes each time the code block in the loop executes. We say that <code>i</code> is <em>iterating</em> through the values of the vector. We can use <code>i</code> (or whatever you’ve called it) inside the for loop code chunk. Above, we printed out the value of <code>i</code> (see how <code>i</code> changed?) Below, we print out the <code>i</code>th letter of the alphabet by using the <code>letters</code> vector</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">letters <span class="co"># all the letters in the alphabet</span></code></pre></div>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
+## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {
+  <span class="co"># use square bracket notation to access the ith element in the letters vector</span>
+  <span class="kw">print</span>(letters[i]) 
+}</code></pre></div>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;
+## [1] &quot;d&quot;
+## [1] &quot;e&quot;
+## [1] &quot;f&quot;
+## [1] &quot;g&quot;
+## [1] &quot;h&quot;
+## [1] &quot;i&quot;
+## [1] &quot;j&quot;</code></pre>
+</div>
+<div id="example-with-gapminder" class="section level1">
+<h1>Example with gapminder</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(gapminder)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countryToPlot, <span class="dt">theData =</span> gapminder) {
+  <span class="co"># this filters data to a specific country</span>
+  oneCountry &lt;-<span class="st"> </span>theData <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span>countryToPlot)
+  
+  <span class="co"># can add some error checking if you want</span>
+  <span class="cf">if</span>(<span class="op">!</span><span class="kw">nrow</span>(oneCountry)<span class="op">&gt;</span><span class="dv">0</span>) { <span class="co"># checks if there are values for country</span>
+    <span class="kw">stop</span>(<span class="st">&quot;No Data for this Country, please try again&quot;</span>)
+  }
 
-## Compare the difference between when the data are being read as
-## `factor`, and when they are being read as `character`.
-surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)
-<span class="kw">str</span>(surveys)
-surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
-<span class="kw">str</span>(surveys)
-## Convert the column &quot;plot_type&quot; into a factor
-surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</code></pre></div>
+  <span class="co"># this runs the plot</span>
+  <span class="kw">ggplot</span>(<span class="dt">data=</span>oneCountry) <span class="op">+</span><span class="st"> </span>
+<span class="st">           </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>pop, <span class="dt">color=</span>country))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plotPopGrowth(&quot;Afghanistans&quot;) # gives error</span>
+<span class="kw">plotPopGrowth</span>(<span class="st">&quot;Afghanistan&quot;</span>) </code></pre></div>
+<p><img src="lesson_for_loops_files/figure-html/demoTheFunction-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;United States&quot;</span>)</code></pre></div>
+<p><img src="lesson_for_loops_files/figure-html/demoTheFunction-2.png" width="672" /></p>
+<p>What if we want to make a plot and then save it for every country?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### LOOPING
+countries &lt;-<span class="st"> </span><span class="kw">unique</span>(gapminder<span class="op">$</span>country)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(countries)){
+  <span class="kw">plotPopGrowth</span>(countries[i])
+  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;Figures/plot_&quot;</span>,countries[i], <span class="st">&quot;.png&quot;</span>))
+}</code></pre></div>
 </div>
-</div>
-<div id="reading-messier-data" class="section level2">
-<h2>Reading messier data</h2>
-<p>Sometimes data can be a bit trickier to read because it isn’t in tidy format. If it is <strong>close</strong> to being tidy, we may be able add some more arguments to the <code>read.csv()</code> call to to help R interpret how the file should be read. If there are a few things that R will need help with, using the <code>read.table()</code> gives you the most flexibility but you’ll also have to always specify more information about the file to help R interpret it.</p>
-<p>Use <a href="data/wide_eg.csv">this link</a> to download this dataset and inspect it with a spreadsheet program. Why isn’t it tidy?</p>
-<p>Try using the <code>read.csv()</code> function on the file.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>)</code></pre></div>
-<p>We need to tell R to skip 2 rows!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</code></pre></div>
-<p>Or using <code>read.table()</code>…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.table</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</code></pre></div>
-</div>
-<div id="reading-directly-from-websites" class="section level2">
-<h2>Reading directly from websites</h2>
-<p>We can use the <code>read.csv()</code> function to read files directly from a website if we first call the <code>url()</code> function on the web address.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read.csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;</span>), <span class="dt">skip =</span> <span class="dv">2</span>)</code></pre></div>
-<p>We can also use the <code>read_csv()</code> (note that’s an underscore in the function name, not a period) from the <code>readr</code> package which is part of the <code>tidyverse</code>. In this case, we don’t have to use the <code>url()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_csv</span>(<span class="st">&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</code></pre></div>
-</div>
-<div id="exporting-data" class="section level2">
-<h2>Exporting data</h2>
-<p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>
-<p>Similar to the <code>read.csv()</code> function used for reading CSV files into R, there is a <code>write.csv()</code> function that generates CSV files from data frames.</p>
-<p>Before using <code>write.csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated dataset. We don’t want to write generated datasets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>
-<p><br></p>
-<p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a> and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting Data materials</a>.</p>
+<div id="example-with-file-imports" class="section level1">
+<h1>Example with file imports</h1>
+<p>The tidyverse has its own way to do loops</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/2001_mauna_loa_met_data/&quot;</span>, 
+                    <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>, 
+                    <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+xlist</code></pre></div>
+<pre><code>## character(0)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">column_headers &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, 
+    <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>,
+    <span class="st">&quot;windDir&quot;</span>, <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, 
+    <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, 
+    <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)
+
+ml &lt;-
+<span class="st">  </span>xlist <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">map_df</span>( <span class="op">~</span><span class="st"> </span><span class="kw">read.table</span>(., 
+                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>,
+                       <span class="dt">header =</span> <span class="ot">FALSE</span>, 
+                       <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, 
+                       <span class="dt">col.names =</span> column_headers))
+         
+<span class="kw">glimpse</span>(ml)</code></pre></div>
+<pre><code>## Observations: 0</code></pre>
 </div>
 
 

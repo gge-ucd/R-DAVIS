@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -161,107 +158,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -342,6 +238,18 @@ div.tocify {
       <a href="lesson_joins.html">Joining data</a>
     </li>
     <li>
+      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_for_loops.html">For loops</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
       <a href="lesson_purrr_tutorial.html">Using purrr</a>
     </li>
   </ul>
@@ -397,8 +305,13 @@ div.tocify {
 </div>
 
 
-<div id="r-contentlessons" class="section level2">
-<h2>R Content/Lessons</h2>
+<div id="section" class="section level2 tabset tabset-fade">
+<h2></h2>
+<p>There are many resources online and in print. This is by no means a comprehensive list, but hopefully a launching pad for some very useful website and books. All of these examples provide code in same shape or form.</p>
+<div id="resources" class="section level3">
+<h3>Resources</h3>
+<div id="r-lessons-tutorials" class="section level4">
+<h4><em>R Lessons &amp; Tutorials</em></h4>
 <ul>
 <li><a href="http://data-lessons.github.io/gapminder-R/">Software Carpentry: <strong>R for Reproducible Scientific Analysis</strong></a></li>
 <li><a href="http://www.datacarpentry.org/R-ecology-lesson/">Data Carpentry: <strong>R for Data Analysis and Visualization of Ecological Data</strong></a></li>
@@ -406,10 +319,11 @@ div.tocify {
 <li><a href="https://jasonjwilliamsny.github.io/tidiness-genomics/">Data Carpentry: <strong>Genomics Lesson</strong></a></li>
 <li><a href="http://angus.readthedocs.io/en/2017/index.html">ANGUS: <strong>Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown</strong></a></li>
 <li><a href="https://www.rstudio.com/resources/webinars/"><strong>RStudio Webinars</strong>, many topics</a></li>
+<li><a href="https://ourcodingclub.github.io/"><strong>Coding Club</strong>, great resource with many tutorials</a></li>
 </ul>
 </div>
-<div id="online-rdata-science-bookscourses" class="section level2">
-<h2>Online R/Data Science Books/Courses</h2>
+<div id="r-ebookscourses" class="section level4">
+<h4><em>R eBooks/Courses</em></h4>
 <ul>
 <li><a href="http://stat545.com/">Jenny Bryan’s <strong>Stat545.com</strong></a></li>
 <li><a href="http://r4ds.had.co.nz/">Garrett Grolemund and Hadley Wickham’s <strong>R For Data Science</strong></a></li>
@@ -421,17 +335,52 @@ div.tocify {
 <li><a href="http://adv-r.had.co.nz/">Hadley Wickham’s <strong>Advanced R</strong></a></li>
 </ul>
 </div>
-<div id="gitgithub" class="section level2">
-<h2>Git/Github</h2>
+<div id="gitgithub" class="section level4">
+<h4><em>Git/Github</em></h4>
 <ul>
 <li><a href="http://happygitwithr.com/">Jenny Bryan’s <strong>Happy Git and Github for the useR</strong></a></li>
+<li><a href="https://ourcodingclub.github.io/2017/02/27/git.html">Coding Club <strong>Intro to Github</strong></a></li>
 </ul>
 </div>
-
-
-
+</div>
+<div id="datasets" class="section level3">
+<h3>Datasets</h3>
+<p>This is a list of most of the data sources used in this course.</p>
+<ul>
+<li>From <a href="https://doi.org/10.6084/m9.figshare.1314459.v6">The Portal Project Teaching Database</a>
+<ul>
+<li><a href="data/Portal_rodents_19772002_scinameUUIDs.csv">Portal_rodents_19772002_scinameUUIDs.csv</a> [raw trapping data]</li>
+<li><a href="data/species.csv">species.csv</a> [species id metadata]</li>
+<li><a href="data/surveys.csv">surveys.csv</a> [trapping data by record id]</li>
+<li><a href="data/combined.csv">combined.csv</a> [trapping data merged with record id metadata]</li>
+<li><a href="data/plots.csv">plots.csv</a> [plot type metadata]</li>
+</ul></li>
+<li>From <a href="https://jasonjwilliamsny.github.io/tidiness-genomics/">Data Carpentry: Genomics Lesson</a>
+<ul>
+<li><a href="data/sequencing_results_metadata.txt">sequencing_results_metadata.txt</a> [metadata from DNA sequencing]</li>
+</ul></li>
+<li>From <a href="http://www.datacarpentry.org/R-ecology-lesson/">Data Carpentry: R for Data Analysis and Visualization of Ecological Data</a>
+<ul>
+<li><a href="data/survey_data_spreadsheet_messy.xls">survey_data_spreadsheet_messy.xls</a> [example of untidy data]</li>
+</ul></li>
+<li>From <a href="http://data-lessons.github.io/gapminder-R/">Software Carpentry: R for Reproducible Scientific Analysis</a>
+<ul>
+<li><a href="data/continents.RDA">continents.RDA</a> [gapminder continent-level data]</li>
+<li><a href="data/wide_eg.csv">wide_eg.csv</a> [blood albumin levels]</li>
+<li><a href="data/stocks.tsv">stocks.tsv</a> [restaurant stock data]</li>
+<li><a href="data/gapminder.csv">gapminder.csv</a> [country characteristics by year]</li>
+</ul></li>
+<li>From <a href="http://angus.readthedocs.io/en/2017/rmarkdown_rnaseq.html">ANGUS: Analyzing High Throughput Sequencing Data</a>
+<ul>
+<li><a href="data/rnaseq.zip">rnaseq.zip</a> [zipped folder of RNA sequence data]</li>
+</ul></li>
+<li><a href="data/2001_mauna_loa_met_data.zip">2001_mauna_loa_met_data.zip</a> [meteorological station data from Mauna Loa]</li>
+</ul>
 </div>
 </div>
+
+
+
 
 </div>
 

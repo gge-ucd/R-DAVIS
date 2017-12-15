@@ -33,6 +33,14 @@ navbar:
           href: lesson_visualization_ggplot2.html
         - text: "Joining data"
           href: lesson_joins.html
+        - text: "Pipelines: data import %>% dplyr %>% ggplot2"
+          href: lesson_import_dplyr_ggplot2.html
+        - text: "Writing functions"
+          href: lesson_functions.html
+        - text: "For loops"
+          href: lesson_for_loops.html
+        - text: "Visualization Do's & Don'ts"
+          href: lesson_visualization_dos.html
         - text: "Using purrr"
           href: lesson_purrr_tutorial.html
     - text: "Presentations"
