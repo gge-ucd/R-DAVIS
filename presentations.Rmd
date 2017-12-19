@@ -1,0 +1,76 @@
+---
+title: "Presentations"
+output:
+  html_document:
+    toc: false
+---
+
+Screencasts of each lecture will be available on Youtube below as the quarter progresses. We are using Google hangouts and screensharing, so bear with us on transitions during lecture and live-coding. In addition, there are a number of great presentations that have been recorded at [Davis R-Users Group](http://d-rug.github.io/) meetings. Links are provided. 
+
+## Lectures {.tabset .tabset-fade}
+
+### Week 1
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 2
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 3
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 4
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 5
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 6
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 7
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 8
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 9
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 10
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+<br>
+<br>
+
+## Other Presentations
+
+* [Ryan Peek on using the `sf` package](https://youtu.be/taY6GrZ6vzE)
+* [Rich Pauloo on using RMarkdown](https://youtu.be/CHBOVuo6RCo)
+* [Kate Tiedeman tutorial on using `raster`](https://youtu.be/mHz4wxo-Q4U)
+* [Clark Fitzgerald on integrating the shell with R](https://youtu.be/jgghG1K3740)
+* [Myfanwy Johnston on unit testing (or code testing) in R](https://youtu.be/8G6bBum3O9A)
+* [Michael Levy tutorial on using the `tidyverse`](https://youtu.be/9q7gssUP8UA)
+
+## Slide Decks
+
+* [Brandon Hurr "Intro to using `purrr`](http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1)
