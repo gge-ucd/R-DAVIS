@@ -1,69 +1,77 @@
 navbar:
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
-      icon: fa-info-circle  fa-1x
-    - text: "Syllabus"
-      href: syllabus.html
-      icon: fa-map fa-1.5x
-    - text: "Set Up!"
-      menu: 
-        - text: "Computer Setup"
-          href: computer_setup.html
-        - text: "Setting up Git"
-          href: setting_up_git.html
-    - text: "Course Materials"
-      icon: fa-book  fa-1x
-      menu:
-        - text: "Orientation to Programming, R, & RStudio"
-          href: lesson_intro_r_rstudio.html
-        - text: "Project Management"
-          href: lesson_project_management.html
-        - text: "Data frames"
-          href: lesson_data_frames.html
-        - text: "Data import"
-          href: lesson_data_import.html
-        - text: "Using tidyr"
-          href: lesson_tidyr.html
-        - text: "Using dplyr"
-          href: lesson_dplyr.html
-        - text: "Using ggplot2"
-          href: lesson_visualization_ggplot2.html
-        - text: "Joining data"
-          href: lesson_joins.html
-        - text: "Pipelines: data import %>% dplyr %>% ggplot2"
-          href: lesson_import_dplyr_ggplot2.html
-        - text: "Writing functions"
-          href: lesson_functions.html
-        - text: "For loops"
-          href: lesson_for_loops.html
-        - text: "Visualization Do's & Don'ts"
-          href: lesson_visualization_dos.html
-        - text: "Using purrr"
-          href: lesson_purrr_tutorial.html
-    - text: "Presentations"
-      icon: fa-slideshare fa-1x
-      href: https://speakerdeck.com/ryanpeek
-    - text: "Resources"
-      icon: fa-list
-      href: resources.html
+  - text: Home
+    href: index.html
+  - text: About
+    href: about.html
+    icon: fa-info-circle  fa-1x
+  - text: Syllabus
+    href: syllabus.html
+    icon: fa-map fa-1.5x
+  - text: Set Up!
+    menu:
+    - text: Computer Setup
+      href: computer_setup.html
+    - text: Setting up Git
+      href: setting_up_git.html
+  - text: Course Materials
+    icon: fa-book  fa-1x
+    menu:
+    - text: Orientation to Programming, R, & RStudio
+      href: lesson_intro_r_rstudio.html
+    - text: Project Management
+      href: lesson_project_management.html
+    - text: Data frames
+      href: lesson_data_frames.html
+    - text: Data import
+      href: lesson_data_import.html
+    - text: Using tidyr
+      href: lesson_tidyr.html
+    - text: Using dplyr
+      href: lesson_dplyr.html
+    - text: Using ggplot2
+      href: lesson_visualization_ggplot2.html
+    - text: Joining data
+      href: lesson_joins.html
+    - text: 'Pipelines: data import %>% dplyr %>% ggplot2'
+      href: lesson_import_dplyr_ggplot2.html
+    - text: Writing functions
+      href: lesson_functions.html
+    - text: For loops
+      href: lesson_for_loops.html
+    - text: Visualization Do's & Don'ts
+      href: lesson_visualization_dos.html
+    - text: Using purrr
+      href: lesson_purrr_tutorial.html
+    - text: Times & Dates
+      href: lesson_lubridate.html
+    - text: Github collaboration with branches
+      href: lesson_github_collaboration.html
+  - text: Presentations
+    icon: fa-slideshare fa-1x
+    href: presentations.html
+  - text: Resources
+    icon: fa-list
+    href: resources.html
   right:
-    - text: "Contact"
-      icon: fa-hand-spock-o
-      href: contact.html
-    - icon: fa-github fa-lg
-      href: https://github.com/gge-ucd/R-DAVIS
-output_dir: "docs"
+  - text: Contact
+    icon: fa-hand-spock-o
+    href: contact.html
+  - icon: fa-github fa-lg
+    href: https://github.com/gge-ucd/R-DAVIS
+output_dir: docs
 output:
   html_document:
     theme: flatly
     highlight: pygments
     code_folding: hide
-    toc: true
+    toc: yes
     toc_float:
-      collapsed: false
+      collapsed: no
     include:
       in_header: header.html
     css: style.css
+    lib_dir: site_libs
+    self_contained: no
+name: R-DAVIS
+

@@ -11,7 +11,7 @@
 
 
 
-<title>About Data Carpentry</title>
+<title>Github Collaboration: Branching &amp; Pull-Requests</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -410,41 +410,90 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">About Data Carpentry</h1>
+<h1 class="title toc-ignore">Github Collaboration: Branching &amp; Pull-Requests</h1>
 
 </div>
 
 
-<p>
-</p>
-<div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
+<p><br></p>
+<p>This is a quick tutorial in how to use <em>branches</em> in github, in addition to <em>Pull requests</em>, which is a way to create new content, review it, and then merge it back to your master content (the <code>master branch</code>). This is something that might take a bit of practice initially, but the process is and important “best practice” for collaboration and version control.</p>
+<p>Ideally you only want to do one thing per branch that you work on…whether that’s fixing some code in a specific script, or adding new content (but only a single piece), the simpler you can keep what you add to a new branch, the easier it will be to track, and merge back into the master branch.</p>
+<div id="create-a-new-branch" class="section level2">
+<h2>Create a New Branch</h2>
+<p>Make sure you’re on the <code>master</code> branch, and then either create a new branch via github, or in the command line use:</p>
+<ul>
+<li><code>git checkout -b YOUR-NEW-BRANCH</code></li>
+</ul>
+<div id="make-some-content" class="section level3">
+<h3>Make some content</h3>
+<p>Once that’s done, you can make your changes and update your content as needed. Once done, add one or more files (typically focus on adding one Rmd or lesson per branch). Perhaps most important is only adding the files you are working on or that you have revised (so <strong>don’t</strong> use <code>git add . -A</code>). Rather use:</p>
+<ul>
+<li><code>git add lesson_on_something_cool.Rmd</code></li>
+<li><code>git add data/data_for_something_cool.rda</code></li>
+<li><code>git add img/some_imgs_for_something_cool.png</code></li>
+</ul>
+</div>
+<div id="commit-changes" class="section level3">
+<h3>Commit Changes</h3>
+<p>Now comes time to commit your changes. Add a message that is detailed but not too long.</p>
+<ul>
+<li><code>git commit -m &quot;add something_cool lesson&quot;</code></li>
+</ul>
+</div>
+<div id="push-changes" class="section level3">
+<h3>Push Changes</h3>
+<p>When you want to push, make sure you are on the branch with your content, add the branch to the upstream <code>master</code>:</p>
+<ul>
+<li><code>git branch --set-upstream-to=origin/master viz_dos</code></li>
+</ul>
+<p>Then push your changes.</p>
+<ul>
+<li><code>git push origin YOUR-NEW-BRANCH</code></li>
+</ul>
+</div>
+</div>
+<div id="create-pull-request" class="section level2">
+<h2>Create Pull Request</h2>
+<p>At this point you’ve pushed changes up to the <code>master</code> (on github). If you got to the repo, there should be a green button with the option to “<strong>Compare &amp; Pull Request</strong>”</p>
+<p><br></p>
 <div class="figure">
-<img src="./img/DC-logo-vision.png" />
+<img src="img/compare_pullrequest.png" />
 
 </div>
+<p><br> <br></p>
+<p>The next screen gives you an opportunity to request a review, and tag your pull request (or <strong>PR</strong>) with some useful metadata.</p>
+<p><br></p>
+<div class="figure">
+<img src="img/open_pull_request.png" />
+
 </div>
-<p>
-</p>
-<p>Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is a sibling organization of Software Carpentry. Where Software Carpentry teaches best practices in software development, our focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain specific, from life and physical sciences to social science and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.</p>
-<p>See the Data Carpentry <a href="http://www.datacarpentry.org/">website</a> for more information.</p>
 <p><br></p>
-<div id="about-the-instructors" class="section level2">
-<h2>About the Instructors</h2>
-<p><strong>Ryan Peek</strong> <a href="mailto:rapeek@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://ryanpeek.github.io/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/riverpeek"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a></p>
-<p>I am a 3rd year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I’ve worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and <a href="x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/">meadow conservation</a> and restoration in the Sierra Nevada.</p>
-<p>I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the <a href="http://d-rug.github.io/">Davis R Users Group (D-RUG)</a> and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.</p>
-<p>My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.</p>
+<p>After entering relevant info, you can create your pull request. Github will automatically check and see if the content can be merged without any conflicts (i.e., if there is a file by the same name, or content that might be overwritten on the <code>master</code>, it will let you know). If everything looks like it will merge cleanly, github will show a green checkmark saying “<strong>This branch has no conflicts with the base branch</strong>”. That means once the content is reviewed, all one needs to do is click the <strong>Merge pull request</strong> button, and the changes will automagically get added into the <code>master</code> branch.</p>
 <p><br></p>
-<p><strong>Michael Koontz</strong> <a href="mailto:mikoontz@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true" ></i></a> <a href="https://michaeljkoontz.weebly.com/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a></p>
-<p>I’m a 3rd year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.</p>
-<p>I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.</p>
-<p>My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p>
+<div class="figure">
+<img src="img/add_PR_lesson.png" />
+
 </div>
-<div id="about-the-tas" class="section level2">
-<h2>About the TAs</h2>
-<p><strong>Martha Wohlfeil</strong> <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a></p>
-<p>Martha is a second year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software.</p>
 <p><br></p>
+</div>
+<div id="merge-with-master-branch" class="section level2">
+<h2>Merge with <code>master</code> Branch</h2>
+<p>Then you wait for whomever you tagged to review your content and <strong>Merge pull request</strong>. Once content has been successfully merged, you’ll be able to delete the branch (locally and on github).</p>
+<p><br></p>
+<div id="delete-the-local-branch" class="section level3">
+<h3>Delete the Local BRANCH</h3>
+<p>To delete the local branch (the one on your computer), you can use:</p>
+<ul>
+<li><code>git branch -d the_local_branch</code></li>
+</ul>
+</div>
+<div id="delete-the-repomaster-branch" class="section level3">
+<h3>Delete the Repo/Master Branch</h3>
+<p>You can do this on Github.com, or via command line with:</p>
+<ul>
+<li><code>git push origin --delete the_remote_branch</code></li>
+</ul>
+</div>
 </div>
 
 

@@ -11,7 +11,7 @@
 
 
 
-<title>About Data Carpentry</title>
+<title>Presentations</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -159,107 +156,6 @@ $(document).ready(function () {
 </script>
 
 
-
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -410,47 +306,106 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">About Data Carpentry</h1>
+<h1 class="title toc-ignore">Presentations</h1>
 
 </div>
 
 
-<p>
-</p>
-<div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
-<div class="figure">
-<img src="./img/DC-logo-vision.png" />
+<p>Screencasts of each lecture will be available on Youtube below as the quarter progresses. We are using Google hangouts and screensharing, so bear with us on transitions during lecture and live-coding. In addition, there are a number of great presentations that have been recorded at <a href="http://d-rug.github.io/">Davis R-Users Group</a> meetings. Links are provided.</p>
+<div id="lectures" class="section level2 tabset tabset-fade">
+<h2>Lectures</h2>
+<div id="week-1" class="section level3">
+<h3>Week 1</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-2" class="section level3">
+<h3>Week 2</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-3" class="section level3">
+<h3>Week 3</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-4" class="section level3">
+<h3>Week 4</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-5" class="section level3">
+<h3>Week 5</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-6" class="section level3">
+<h3>Week 6</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-7" class="section level3">
+<h3>Week 7</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-8" class="section level3">
+<h3>Week 8</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-9" class="section level3">
+<h3>Week 9</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+</div>
+<div id="week-10" class="section level3">
+<h3>Week 10</h3>
+<ul>
+<li>What we covered (link to livecode)</li>
+<li><a href="">Screencast</a></li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="other-presentations" class="section level2">
+<h2>Other Presentations</h2>
+<ul>
+<li><a href="https://youtu.be/taY6GrZ6vzE">Ryan Peek on using the <code>sf</code> package</a></li>
+<li><a href="https://youtu.be/CHBOVuo6RCo">Rich Pauloo on using RMarkdown</a></li>
+<li><a href="https://youtu.be/mHz4wxo-Q4U">Kate Tiedeman tutorial on using <code>raster</code></a></li>
+<li><a href="https://youtu.be/jgghG1K3740">Clark Fitzgerald on integrating the shell with R</a></li>
+<li><a href="https://youtu.be/8G6bBum3O9A">Myfanwy Johnston on unit testing (or code testing) in R</a></li>
+<li><a href="https://youtu.be/9q7gssUP8UA">Michael Levy tutorial on using the <code>tidyverse</code></a></li>
+</ul>
+</div>
+<div id="slide-decks" class="section level2">
+<h2>Slide Decks</h2>
+<ul>
+<li><a href="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1">Brandon Hurr “Intro to using <code>purrr</code></a></li>
+</ul>
+</div>
 
-</div>
-</div>
-<p>
-</p>
-<p>Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is a sibling organization of Software Carpentry. Where Software Carpentry teaches best practices in software development, our focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain specific, from life and physical sciences to social science and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.</p>
-<p>See the Data Carpentry <a href="http://www.datacarpentry.org/">website</a> for more information.</p>
-<p><br></p>
-<div id="about-the-instructors" class="section level2">
-<h2>About the Instructors</h2>
-<p><strong>Ryan Peek</strong> <a href="mailto:rapeek@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://ryanpeek.github.io/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/riverpeek"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a></p>
-<p>I am a 3rd year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I’ve worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and <a href="x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/">meadow conservation</a> and restoration in the Sierra Nevada.</p>
-<p>I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the <a href="http://d-rug.github.io/">Davis R Users Group (D-RUG)</a> and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.</p>
-<p>My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.</p>
-<p><br></p>
-<p><strong>Michael Koontz</strong> <a href="mailto:mikoontz@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true" ></i></a> <a href="https://michaeljkoontz.weebly.com/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a></p>
-<p>I’m a 3rd year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.</p>
-<p>I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.</p>
-<p>My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p>
-</div>
-<div id="about-the-tas" class="section level2">
-<h2>About the TAs</h2>
-<p><strong>Martha Wohlfeil</strong> <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a></p>
-<p>Martha is a second year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software.</p>
-<p><br></p>
-</div>
 
 
-
-</div>
-</div>
 
 </div>
 
