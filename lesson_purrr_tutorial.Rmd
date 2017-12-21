@@ -232,7 +232,7 @@ rescale_0_1 <- function(x) {
 
 Let's test this function and see what happens. We can test a single vector, and then actually apply our function to each column in our dataset. Use a test dataset that's simple and we now what it should look like.
 
-```{r test function}
+```{r test function, eval=T, echo=T}
 
 rescale_0_1 <- function(x) {
   (x - min(x, na.rm = TRUE)) /  
@@ -245,7 +245,7 @@ rescale_0_1(testvec) # looks like it worked, it rescaled all values from 0 to 1!
 
 ```
 
-```{r use_function}
+```{r use_function, eval=T, echo=T}
 df <- data.frame(
   a = rnorm(10),
   b = rnorm(10),
@@ -263,7 +263,6 @@ out$b <- rescale_0_1(df$b)
 out$c <- rescale_0_1(df$c)
 out$d <- rescale_0_1(df$d)
 out
-
 ```
 
 ## `for` Loops to *apply* a function
@@ -284,7 +283,7 @@ out
 
 Handy command that sequences along a list for you, so you don't have to specify columns or rows, or series of numbers.
 
-```{r for_seq_along_loops}
+```{r for_seq_along_loops, eval=T, echo=T}
 out <- df #make a copy to store scaled data
 for (i in seq_along(df)) {
   out[i] <- rescale_0_1(df[[i]])
@@ -298,7 +297,7 @@ There are a family of functions called `apply` (`mapply`, `sapply`, `lapply`, `v
 
 ## `apply` 
 
-```{r apply_function}
+```{r apply_function, eval=T, echo=T}
 
 df_app1 <- apply(df, MARGIN = 2, function(x) rescale_0_1(x)) # iterate over the columns in df
 class(df_app1) # returns a matrix
@@ -311,9 +310,12 @@ Okay so `apply` returns a matrix. What about `map`?
 
 ## `map`
 
-```{r MAPGIC}
+```{r MAPGIC, eval=F, echo=T}
+
+library(purrr)
 
 df_map1<- map(df, function(x) rescale_0_1(x)) #map over the columns in df
+
 class(df_map1) # returns a list! Keeps same format that was input
 
 df_map2 <- map_df(df, rescale_0_1) # returns a dataframe!
@@ -328,7 +330,7 @@ Another set of examples below will help us understand how `map` makes it easy to
 
 This example creates a list containing two integer vectors. Let's say we want the mean of each one:
 
-```{r simplemap}
+```{r simplemap, eval=F, echo=T}
 
 l = list(a=1:10, b = 10:100)
 map(l, function(x) mean(x, na.rm = TRUE)) # and this is returning a list (list in, list out)
@@ -339,7 +341,8 @@ map(l, function(x) mean(x, na.rm = TRUE)) # and this is returning a list (list i
 
 Specify and you get a vector back instead of a list
 
-```{r rightmap}
+```{r rightmap, eval=F, echo=T}
+
 l = list(a=1:10, b = 10:100)
 map_dbl(l, function(x) mean(x, na.rm = TRUE)) # this is a numeric vector
 
@@ -349,18 +352,17 @@ map_dbl(l, function(x) mean(x, na.rm = TRUE)) # this is a numeric vector
 
 Maybe not so useful, but demonstrates the point.
 
-```{r okishmap}
+```{r okishmap, eval=F, echo=T}
 
 map_chr(l, function(x) mean(x, na.rm = TRUE))
 
 ```
 
-
 ### Use Error Messages: Type-strict functions
 
 So if you have or try to use the wrong type of data, the function won't run. 
 
-```{r wrongmap, error = TRUE}
+```{r wrongmap, error = TRUE, eval=F, echo=T}
 l = list(a=1:10, b = 10:100)
 map_lgl(l, function(x) mean(x, na.rm = TRUE))
 ```
@@ -372,7 +374,7 @@ map_lgl(l, function(x) mean(x, na.rm = TRUE))
 Based upon this tutorial
 http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/
 
-```{r simple_read_csvs, message = FALSE}
+```{r simple_read_csvs, message = FALSE, eval=F, echo=T}
 
 # this will work if you clone the github repository
 fileloc <- file.path(getwd(), "stocks")
@@ -387,7 +389,7 @@ dat2
 
 ### Let's make it a function
 
-```{r make_it_functional, message = FALSE}
+```{r make_it_functional, message = FALSE, eval=F, echo=T}
 
 fileloc <- file.path(getwd(), "stocks")
 
@@ -404,7 +406,7 @@ read_folder(fileloc)
 
 #### What if you want to change the type of file you're reading?
 
-```{r fancify, message = FALSE}
+```{r fancify, message = FALSE, eval=F, echo=T}
 
 fileloc <- file.path(getwd(), "stocks")
 
@@ -425,7 +427,7 @@ read_folder(folder = fileloc, pattern = "(csv|CSV)$", read_fun = read_csv)
 
 If there are multiple files but all have same structure (same number of columns/column types), we can read in separately and then combine. But add the filename of each dataset as a new column variable.
 
-```{r combinify, message = FALSE}
+```{r combinify, message = FALSE, eval=F, echo=T}
 
 fileloc <- file.path(getwd(), "stocks")
 
@@ -457,7 +459,7 @@ Ok, so we can get data into our environment in a list, but what then? There are 
 
 See how to group by something and then create a list-columns that hold each dataframe for that group.
 
-```{r nesting}
+```{r nesting, eval=T, echo=T}
 
 cars_nested <-
   mtcars %>%            # motortrend car dataset
@@ -472,9 +474,12 @@ cars_nested
 
 Use `map`!. Let's make a linear model for each subset, pull out the coefficients with `broom`, and plot them.
 
-```{r model_extracts}
+```{r model_extracts, eval=F, echo=T}
 
 library(broom)
+library(purrr)
+library(dplyr)
+library(tidyr)
 
 mtc_modeled <- 
   mtcars %>%            # motortrend car dataset
@@ -492,14 +497,13 @@ ggplot() +
   # plot the models
   geom_abline(data = mtc_modeled, aes(slope = slope, intercept = intercept, color = as.factor(cyl)))
   
-  
 ```
 
 _**See presentation, SLIDE: **_
 
 ## Iterating over more than one list with `map2` and `pmap`
 
-```{r map2_pmap_usage example}
+```{r map2_pmap_usage example, eval=F, echo=T}
 
 n =  list(5,10,20)
 mu = list(50,30,10)
@@ -543,7 +547,7 @@ _**See presentation, SLIDE: **_
 
 ## `walk/walk2/pwalk` are used to output side-effects
 
-```{r simple walk}
+```{r simple walk, eval=F, echo=T}
 asdf <- list(a = LETTERS[1:10], b = 1:15, c = FALSE)
 # we just want to print each element of this list
 walk(asdf, print)
@@ -551,7 +555,7 @@ walk(asdf, print)
 
 ### Outputting Plots with `map` Functions
 
-```{r walking_to_plotting}
+```{r walking_to_plotting, eval=F, echo=T}
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
 
@@ -566,7 +570,7 @@ mtcars %>%                 # motortrend car dataset
 
 #### Save Plots from `walk` with `walk2/pwalk`
 
-```{r walk2_saving_plots}
+```{r walk2_saving_plots, eval=F, echo=T}
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
 
@@ -584,7 +588,7 @@ walk2(mtc_plot_n_save$plot, mtc_plot_n_save$filepath, ~ ggsave(.y, .x)) # save t
 
 That is great! Ok, let's make this a bit fancier. With `pwalk` we can have a bunch of different lists of things that get mapped...not just 1 or 2.
 
-```{r pwalk_output_all_the_things}
+```{r pwalk_output_all_the_things, eval=F, echo=T}
 
 # make a simple plotting function
 plot_points <- function(t) ggplot(t, aes(mpg, wt)) + geom_point()

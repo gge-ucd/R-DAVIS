@@ -31,20 +31,22 @@ navbar:
       href: lesson_dplyr.html
     - text: Using ggplot2
       href: lesson_visualization_ggplot2.html
+    - text: Visualization Do's & Don'ts
+      href: lesson_visualization_dos.html
     - text: Joining data
       href: lesson_joins.html
     - text: 'Pipelines: data import %>% dplyr %>% ggplot2'
       href: lesson_import_dplyr_ggplot2.html
+    - text: 'Pipelines: Download CO2 & Ice Core Data & Visualize'
+      href: lesson_ice_core_CO2_web_data.html
+    - text: Times & Dates with lubridate
+      href: lesson_lubridate.html
     - text: Writing functions
       href: lesson_functions.html
     - text: For loops
       href: lesson_for_loops.html
-    - text: Visualization Do's & Don'ts
-      href: lesson_visualization_dos.html
     - text: Using purrr
       href: lesson_purrr_tutorial.html
-    - text: Times & Dates
-      href: lesson_lubridate.html
     - text: Github collaboration with branches
       href: lesson_github_collaboration.html
   - text: Presentations
