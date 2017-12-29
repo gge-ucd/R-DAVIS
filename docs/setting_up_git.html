@@ -11,7 +11,7 @@
 
 
 
-<title>Setting Up Git</title>
+<title>RStudio and Git</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -413,61 +413,121 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Setting Up Git</h1>
+<h1 class="title toc-ignore">RStudio and Git</h1>
 
 </div>
 
 
-<div id="git" class="section level3">
-<h3>Git</h3>
-<p>Hopefully this goes smoothly for everyone, it is the trickiest of the things we need to install. However, it may need a little testing/time, so please try to test/install this early so we can address any issues that pop up.</p>
-<p>You’ll need to register an account with Github first, it’s free!</p>
+<p>Now that you’ve gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we’ll go through it when we meet.</p>
+<p>This lesson assumes you have:</p>
 <blockquote>
-<p><a href="https://github.com">Github</a></p>
+<ul>
+<li>registered for Github account</li>
+<li>installed R, RStudio, and git</li>
+<li>You accepted your invitation to your repository in the gge-ucd organization</li>
+<li>You’ve successfully created your <code>ssh</code> key or have been able to authenticate with <code>https</code></li>
+</ul>
 </blockquote>
-<p>Please also register for the student develop pack, which gives you some free perks…</p>
-<blockquote>
-<p><a href="https://education.github.com/pack">Education Pack</a></p>
-</blockquote>
-<p>Then for a really nice set of instructions on how to do this, please go here and try to work through all the steps:</p>
-<blockquote>
-<p><a href="http://happygitwithr.com/installation-pain.html">Git Installation using Happy Git</a></p>
-</blockquote>
-<p>For a quick summary of instructions specific to your OS, see below:</p>
-<div id="git-windows" class="section level4">
-<h4>Git &amp; Windows</h4>
-<ol style="list-style-type: decimal">
-<li>Download the Git for Windows <a href="https://git-for-windows.github.io/">installer</a>.</li>
-<li>Run the installer and follow the steps bellow:
-<ol style="list-style-type: decimal">
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li>Click on “Next”.</li>
-<li><strong>Select “Use Git from the Windows Command Prompt” and click on “Next”.</strong> If you forgot to do this programs that you need for the workshop will not work properly. If this happens rerun the installer and select the appropriate option.</li>
-<li>Click on “Next”. <strong>Keep “Checkout Windows-style, commit Unix-style line endings” selected.</strong></li>
-<li><strong>Select “Use Windows’ default console window” and click on “Next”.</strong></li>
-<li>Click on “Next”.</li>
-<li>Click on “Finish”.</li>
-</ol></li>
-</ol>
+<p>This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible.</p>
+<div id="introduction-to-version-control" class="section level2">
+<h2>Introduction to Version Control</h2>
+<p>At some point many of us have probably had files in a directory that may have looked like this (<em><a href="http://phdcomics.com/comics/archive.php?comicid=1323">from PHDcomics</a></em>):</p>
+<div class="figure">
+<img src="img/phd052810s.gif" alt="phdcomics" />
+<p class="caption">phdcomics</p>
 </div>
-<div id="git-mac-os-x" class="section level4">
-<h4>Git &amp; Mac OS X</h4>
-<ol style="list-style-type: decimal">
-<li>Open up the Terminal, type in “git” and press enter.</li>
-<li>This should cause a pop-up window to appear. It will have several options; click on “Install” (not “Get Xcode”, see “Installing Xcode” for that).</li>
-<li>Click “Agree”.</li>
-<li>When the install is finished, click “Done”.</li>
-<li>To make sure this worked, type in “git” in the Terminal and press enter. Some information will come up, including a list of common commands.</li>
-</ol>
-<p>If this doesn’t work you can try the following:</p>
-<p>For <strong>OS X 10.9 and higher</strong>, install Git for Mac by downloading and running the most recent “mavericks” installer from <a href="http://sourceforge.net/projects/git-osx-installer/files/">this list</a>. After installing Git, there will not be anything in your <code>/Applications</code> folder, as Git is a command line program. For older versions of <strong>OS X (10.5-10.8)</strong> use the most recent available installer labelled “snow-leopard” <a href="http://sourceforge.net/projects/git-osx-installer/files/.">available here</a></p>
+<p>Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren’t the same as in the submitted version of the manuscript.</p>
+<div id="benefits-of-version-control" class="section level3">
+<h3>Benefits of Version Control</h3>
+<ul>
+<li><em>Track changes on steroids</em>
+<ul>
+<li>Tracks every change ever made in groups called commits</li>
+<li>Every commit stores the full state of all of your files at that time</li>
+<li>Never lose anything</li>
+<li>Easily unbreak your code/data/manuscript</li>
+<li>No more file name changes</li>
+</ul></li>
+<li><em>Collaboration</em>
+<ul>
+<li>Work on things simultaneously</li>
+<li>See what changes others have made</li>
+<li>Everyone has the most recent version of everything</li>
+</ul></li>
+</ul>
 </div>
-<div id="git-linux" class="section level4">
-<h4>Git &amp; Linux</h4>
-<p>Git is probably already installed. If it is not already available on your machine you can try to install it via your distro’s package manager. For Debian/Ubuntu run <code>sudo apt-get install git</code> and for Fedora run <code>sudo yum install git</code>.</p>
+</div>
+<div id="connecting-rstudio-to-your-repository" class="section level2">
+<h2>Connecting RStudio to your Repository</h2>
+<p>You should have a repository in the gge-ucd organization…and it should look something like this: <a href="https://github.com/gge-ucd/first_lastname"><code>https://github.com/gge-ucd/first_lastname</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file.</p>
+<div id="create-a-version-controlled-rstudio-project" class="section level3">
+<h3>Create a Version Controlled RStudio Project</h3>
+<p>Now we’ll create an RStudio Project and link our Github repository (following <a href="http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio"><em>Section 13.3</em> of <code>happygitwithR</code></a>).</p>
+<ul>
+<li>First you’ll want to look for the big green “Clone or Download” button. Assuming you’ve set up your SSH key, make sure you have the <strong>Clone with SSH</strong> version and copy that link (should be <em><code>git@github.com:gge-ucd/first_lastname.git</code></em>, else use the <strong><code>https</code></strong> link).</li>
+</ul>
+<div class="figure">
+<img src="img/ssh_clone.png" />
+
+</div>
+<ul>
+<li>Then in RStudio, start a new Project: <code>File &gt; New Project &gt; Version Control &gt; Git</code>. In the “<strong>Repository URL</strong>” paste the URL of your new GitHub repository. If you hit <strong><code>Tab</code></strong>, the <em>Project directory name</em> will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the <em>Nuts &amp; Bolts</em> notes below for more info.</li>
+</ul>
+<div class="figure">
+<img src="img/newRStudio_git_proj_named.png" />
+
+</div>
+<p><br></p>
+<p>🔩 <em><strong>More about github/RStudio projects</strong>: One thing to keep in mind is each github repository should only have <strong>ONE</strong> corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository…there are hidden files which track your changes (the version control record), and there’s potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is <code>github</code> or <code>Rprojects</code>, and then each project or repository will have it’s own single folder within that general directory.</em></p>
+<ul>
+<li>This new subdirectory that you specified will be all these things:
+<ul>
+<li>a directory on your computer</li>
+<li>a local Git repository, linked to a remote GitHub repository</li>
+<li>an RStudio Project</li>
+<li>It should contain a <code>README.md</code> file with some content that I’ve created…we’ll edit that next.</li>
+</ul></li>
+</ul>
+<!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
+<div id="if-you-made-it-thus-far-congrats" class="section level4">
+<h4><em>IF YOU MADE IT THUS FAR CONGRATS!</em></h4>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="push-commit-changes-to-your-readme.md" class="section level2">
+<h2>Push &amp; Commit Changes to your <code>README.md</code></h2>
+<p>We’ll go over this part in class. If you have <code>ssh</code> set up and you created your RStudio project, you’ve done most of the hard work…what remains is:</p>
+<ul>
+<li>Test whether we can make changes or <strong>edit</strong> our README on our local copy of the repository (your computer)</li>
+<li><strong><code>commit</code></strong> these changes (make a version control record )</li>
+<li><strong><code>push</code></strong> these change to the <code>remote</code> which is the copy of the repository on Github.com.</li>
+</ul>
+<div id="open-your-rstudio-project" class="section level3">
+<h3>Open Your RStudio Project</h3>
+<p>In RStudio, open your new project (<strong><code>Firstname_Lastname</code></strong>). Navigate to the <em>Files</em> tab and open the <code>README.md</code> file. You can click on it in the window and it will automatically open up.</p>
+</div>
+<div id="edit-your-readme" class="section level3">
+<h3>Edit your README</h3>
+<ul>
+<li>Edit your README:
+<ul>
+<li>Add your name</li>
+<li>Remove the limerick and other bullets and add 1-2 sentences about what you study or what you hope to study.</li>
+<li>add an “X” inside the <strong>Edited by student</strong> box</li>
+</ul></li>
+</ul>
+</div>
+<div id="commit-to-git" class="section level3">
+<h3>Commit to Git</h3>
+<ul>
+<li><p>Click on the <strong>Git</strong> tab. When you click on the git tab, you should see the <code>README.md</code>, and a <code>.Rproj</code> file.</p></li>
+<li><p>Click on the small box to the left of the <code>README.md</code> to stage the file. Then click the <code>commit</code> button. You’ll see a new widow, on the upper right you need to type a <code>commit</code> message, something simple, short, and descriptive. Then click the <code>commit</code> button. You should see a little box with message committed.</p></li>
+<li><p>Finally before you close everything, hit the <strong>PUSH</strong> button. This <em>pushes</em> the changes to the github repository (you may need to enter your <code>ssh</code> password once).</p></li>
+<li><p>If you go back to the repository in your browser and refresh the page, you should see the changes you’ve made. Equally important, any collaborator or instructor can now <code>pull</code> those exact changes into a copy of the repo on our computer.</p></li>
+</ul>
+<p>Hopefully that all worked! You can now push and pull from your repository.</p>
+<p><br> Parts of these instructions were adapted from those written by Ethan White for his <a href="http://www.datacarpentry.org/semester-biology/">Data Carpentry for Biologists</a> course, and from Jenny Bryan’s <a href="http://happygitwithr.com/">happygitwithr.com</a> website.</p>
 </div>
 </div>
 

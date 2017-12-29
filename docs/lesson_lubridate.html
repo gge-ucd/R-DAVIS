@@ -641,14 +641,14 @@ nfy1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class=
 ## )</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(nfy1)</code></pre></div>
 <pre><code>## # A tibble: 6 x 5
-##         Date     Time    ms   Level Temperature
-##       &lt;date&gt;   &lt;time&gt; &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;
-## 1 2015-05-22 14:00:00     0 -8.6834           0
-## 2 2015-05-22 14:15:00     0 -8.2928           0
-## 3 2015-05-22 14:30:00     0 -8.2914           0
-## 4 2015-05-22 14:45:00     0 -8.2901           0
-## 5 2015-05-22 15:00:00     0 -8.2955           0
-## 6 2015-05-22 15:15:00     0 -8.2935           0</code></pre>
+##   Date       Time      ms Level Temperature
+##   &lt;date&gt;     &lt;time&gt; &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2015-05-22 14:00      0 -8.68           0
+## 2 2015-05-22 14:15      0 -8.29           0
+## 3 2015-05-22 14:30      0 -8.29           0
+## 4 2015-05-22 14:45      0 -8.29           0
+## 5 2015-05-22 15:00      0 -8.30           0
+## 6 2015-05-22 15:15      0 -8.29           0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># import raw dataset &amp; specify column types</span>
 nfy2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">col_types =</span> <span class="st">&quot;ccidd&quot;</span>, <span class="dt">skip=</span><span class="dv">12</span>)
 

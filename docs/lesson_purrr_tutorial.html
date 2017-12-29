@@ -618,16 +618,16 @@ df </code></pre></div>
 <p><code>tibbles</code> are data.frames with some stricter rules: - slightly more informative printing (not shown well here) - strict behavior around subsetting <code>[</code> -&gt; tibble <code>[[</code> vector - does not partially match column names (b/c this can get you into trouble)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(df)</code></pre></div>
 <pre><code>## # A tibble: 8 x 2
-##       a     b
+##   a         b
 ##   &lt;lgl&gt; &lt;int&gt;
-## 1  TRUE     1
-## 2 FALSE     2
-## 3  TRUE     3
-## 4 FALSE     4
-## 5 FALSE     5
-## 6    NA     6
-## 7    NA     7
-## 8    NA    NA</code></pre>
+## 1 T         1
+## 2 F         2
+## 3 T         3
+## 4 F         4
+## 5 F         5
+## 6 NA        6
+## 7 NA        7
+## 8 NA       NA</code></pre>
 <p><em><strong>See presentation, SLIDE: </strong></em></p>
 </div>
 <div id="accessing-elements-inside-vectors-lists-dataframes-and-tibbles" class="section level2">
@@ -923,11 +923,11 @@ read_files_bind &lt;-<span class="st">  </span><span class="cf">function</span>(
 
 cars_nested</code></pre></div>
 <pre><code>## # A tibble: 3 x 2
-##     cyl               data
-##   &lt;dbl&gt;             &lt;list&gt;
-## 1     6  &lt;tibble [7 x 10]&gt;
-## 2     4 &lt;tibble [11 x 10]&gt;
-## 3     8 &lt;tibble [14 x 10]&gt;</code></pre>
+##     cyl data              
+##   &lt;dbl&gt; &lt;list&gt;            
+## 1  6.00 &lt;tibble [7 × 10]&gt; 
+## 2  4.00 &lt;tibble [11 × 10]&gt;
+## 3  8.00 &lt;tibble [14 × 10]&gt;</code></pre>
 </div>
 <div id="interacting-with-list-data-using-map" class="section level2">
 <h2>Interacting with list-data using <code>map</code></h2>

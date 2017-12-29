@@ -77,7 +77,7 @@ library(emo, quietly = T)
 
 #### Week 6
 
- - `r emo::ji("ballot_box_with_check")` `lubridate` (import, manipulate, visualize pipeline time; time series example, CO2 web data, Maelle Salmon's tweet mining)
+ - `r emo::ji("white_check_mark")` `lubridate` (import, manipulate, visualize pipeline time; time series example, CO2 web data, Maelle Salmon's tweet mining)
 
 #### Week 7
 

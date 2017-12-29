@@ -1,70 +1,107 @@
 ---
-title: "Setting Up Git"
+title: "RStudio and Git"
 ---
 
-### Git
+Now that you've gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet.
 
-Hopefully this goes smoothly for everyone, it is the trickiest of the things we need to install. However, it may need a little testing/time, so please try to test/install this early so we can address any issues that pop up.
+This lesson assumes you have:
 
-You'll need to register an account with Github first, it's free!
+ >  - registered for Github account
+ >  - installed R, RStudio, and git
+ >  - You accepted your invitation to your repository in the gge-ucd organization
+ >  - You've successfully created your `ssh` key or have been able to authenticate with `https`
 
- > [Github](https://github.com)
+This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible. 
 
-Please also register for the student develop pack, which gives you some free perks...
+## Introduction to Version Control
 
- > [Education Pack](https://education.github.com/pack)
+At some point many of us have probably had files in a directory that may have looked like this (*[from PHDcomics](http://phdcomics.com/comics/archive.php?comicid=1323)*): 
 
-Then for a really nice set of instructions on how to do this, please go here and try to work through all the steps:
+![phdcomics](img/phd052810s.gif)
 
- > [Git Installation using Happy Git](http://happygitwithr.com/installation-pain.html)
+Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren't the same as in the submitted version of the manuscript.
 
-For a quick summary of instructions specific to your OS, see below:
+### Benefits of Version Control
 
-#### Git & Windows
+  - *Track changes on steroids*
+    - Tracks every change ever made in groups called commits
+    - Every commit stores the full state of all of your files at that time
+    - Never lose anything
+    - Easily unbreak your code/data/manuscript
+    - No more file name changes
+    
+  - *Collaboration*
+    - Work on things simultaneously
+    - See what changes others have made
+    - Everyone has the most recent version of everything
+    
 
-1.  Download the Git for Windows
-    [installer](https://git-for-windows.github.io/).
-2.  Run the installer and follow the steps bellow:
-    1.  Click on "Next".
-    2.  Click on "Next".
-    3.  Click on "Next".
-    4.  Click on "Next".
-    5.  Click on "Next".
-    6.  **Select "Use Git from the Windows Command Prompt" and click on
-        "Next".** If you forgot to do this programs that you need for
-        the workshop will not work properly. If this happens rerun the
-        installer and select the appropriate option.
-    7.  Click on "Next". **Keep "Checkout Windows-style, commit
-        Unix-style line endings" selected.**
-    8.  **Select "Use Windows' default console window" and click on
-        "Next".**
-    9.  Click on "Next".
-    10. Click on "Finish".
+## Connecting RStudio to your Repository
 
+You should have a repository in the gge-ucd organization...and it should look something like this:
+[`https://github.com/gge-ucd/first_lastname`](https://github.com/gge-ucd/first_lastname). Take a minute to navigate to your repo online and take a look at your `README.md` file.
 
-#### Git & Mac OS X
+### Create a Version Controlled RStudio Project
 
-1. Open up the Terminal, type in "git" and press enter.
-2. This should cause a pop-up window to appear. It will have several options;
-   click on "Install" (not "Get Xcode", see "Installing Xcode" for that).
-3. Click "Agree".
-4. When the install is finished, click "Done".
-5. To make sure this worked, type in "git" in the Terminal and press enter. Some
-   information will come up, including a list of common commands.
+Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).
+  
+  - First you'll want to look for the big green "Clone or Download" button. Assuming you've set up your SSH key, make sure you have the **Clone with SSH** version and copy that link (should be  *`git@github.com:gge-ucd/first_lastname.git`*, else use the **`https`** link).
+ 
+![](img/ssh_clone.png)
 
-If this doesn't work you can try the following:
+  - Then in RStudio, start a new Project: `File > New Project > Version Control > Git`. In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
+  
+![](img/newRStudio_git_proj_named.png)
 
-For **OS X 10.9 and higher**, install Git for Mac by downloading and running the
-most recent "mavericks" installer from
-[this list](http://sourceforge.net/projects/git-osx-installer/files/).  After
-installing Git, there will not be anything in your `/Applications` folder, as
-Git is a command line program. For older versions of **OS X (10.5-10.8)**
-use the most recent available installer labelled "snow-leopard" [available
-here](http://sourceforge.net/projects/git-osx-installer/files/.)
+<br>
 
-#### Git & Linux
+`r emo::ji("nut_and_bolt")` *__More about github/RStudio projects__: One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.*
 
-Git is probably already installed. If it is not already available on your
-machine you can try to install it via your distro's package manager. For
-Debian/Ubuntu run `sudo apt-get install git` and for Fedora run `sudo yum
-install git`.
+  - This new subdirectory that you specified will be all these things:
+    - a directory on your computer
+    - a local Git repository, linked to a remote GitHub repository
+    - an RStudio Project
+    - It should contain a `README.md` file with some content that I've created...we'll edit that next.
+    
+    
+<!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
+
+ 
+#### *IF YOU MADE IT THUS FAR CONGRATS!*
+
+<br>
+
+## Push & Commit Changes to your `README.md`
+
+We'll go over this part in class. If you have `ssh` set up and you created your RStudio project, you've done most of the hard work...what remains is:
+
+ - Test whether we can make changes or **edit** our README on our local copy of the repository (your computer)
+ - **`commit`** these changes (make a version control record )
+ - **`push`** these change to the `remote` which is the copy of the repository on Github.com.
+ 
+ 
+### Open Your RStudio Project
+
+In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
+
+### Edit your README
+
+  - Edit your README:
+    - Add your name
+    - Remove the limerick and other bullets and add 1-2 sentences about what you study or what you hope to study.
+    - add an "X" inside the **Edited by student** box
+
+### Commit to Git
+
+  - Click on the **Git** tab. When you click on the git tab, you should see the `README.md`, and a `.Rproj` file.
+  
+  - Click on the small box to the left of the `README.md` to stage the file. Then click the `commit` button. You'll see a new widow, on the upper right you need to type a `commit` message, something simple, short, and descriptive. Then click the `commit` button. You should see a little box with message committed.
+  
+  - Finally before you close everything, hit the **PUSH** button. This *pushes* the changes to the github repository (you may need to enter your `ssh` password once).
+  
+  - If you go back to the repository in your browser and refresh the page, you should see the changes you've made. Equally important, any collaborator or instructor can now `pull` those exact changes into a copy of the repo on our computer.
+
+Hopefully that all worked! You can now push and pull from your repository.
+
+<br>
+Parts of these instructions were adapted from those written by Ethan White for his [Data Carpentry for Biologists](http://www.datacarpentry.org/semester-biology/) course, and from Jenny Bryan's [happygitwithr.com](http://happygitwithr.com/) website.

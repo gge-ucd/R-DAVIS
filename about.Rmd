@@ -25,7 +25,7 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 <a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> 
 <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a>
 
-I am a 3rd year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I've worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and [meadow conservation](x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/) and restoration in the Sierra Nevada. 
+I am a 4th year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I've worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and [meadow conservation](x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/) and restoration in the Sierra Nevada. 
 
 I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the [Davis R Users Group (D-RUG)](http://d-rug.github.io/) and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.
 
@@ -40,7 +40,7 @@ My favorite part of teaching R is seeing folks make their first plot or read in 
 <a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> 
 <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a>  
 
-I'm a 3rd year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
+I'm a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
 
 I've been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.
 
@@ -53,7 +53,7 @@ My favorite part of teaching R is helping people make the leap between novice (n
 **Martha Wohlfeil**
 <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>  
 
-Martha is a second year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
+Martha is a 2nd year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
 
 <br> 
 
