@@ -12,28 +12,6 @@ output: html_document
  - add live googleDocs that everyone can access for live notes?
  - add more challenges/question components (how to hide "answer" code...on separate tab?
 
-## Setup email
-
-Hi Folks,
-Welcome to the class! (in case you haven't check Canvas yet...all these instructions are there as well). For those that have already done the pre-setup and gotten your github account sorted, thanks! Please ignore this email, we'll see you on Tuesday at 2pm.
-
-For everyone else, (which is most of you as I've gotten only responses for 10 of 25 students), please go through the setup instructions (attached here) and send me your github account name before class on Monday. You can email me directly or fill out the Google Form (here). The less setup sort of stuff we have to run through Monday, the more we can jump right into learning (hopefully).
-
-
-Thanks for your patience yesterday, and hopefully everyone is at least is set up for to continue into the deep dark woods of R. It's really not that bad, and I think in the long run the initial pain of learning version control/git is well worth it. I do know it was more difficult than I expected going through RStudio, but now it seems to all behave properly. A few notes on git and programs that you can try out if you are up for it are below.
-
-Important Notes: 
-I added you all to a team on our github page (Ewoks), and then added permissions for anyone on our team to be able to read all the repositories in the gge-ucd organization. These repositories are all still private, but now you all can at least view each others repositories, but you can only edit/write to your own. You can always check out your repository settings to see how these things all work, look under "Settings > Collaborators & teams". You can also feel free to make your own repositories for your own stuff, but for class we'll all be playing with the same data/scripts, and it's easiest to follow up if you use the one we setup for you.
-I've added/responded to some issues in our Discussion repository, please use it freely! It's the place to ask questions, post links, etc.
-We will plan on meeting next week but please don't feel obliged, it is a holiday. I can try and screencast to youtube for everyone, and we will also save all the scripts and info.
-Other Notes on git
-Remember the work flow, especially now that we have done stuff to our repository (or I've checked/edited your readme!), you need to PULL FIRST. Get in the habitat of always doing these steps:
-1) open your RStudio project, click on git tab and PULL.
-2) Then make changes, revise, add existing files to the directory your repository lives in on your computer, make new files, whatever you like, STAGE the files of interest, COMMIT the specific details along the way. COMMIT often.
-3) When done with all the hard work, PUSH!
-If you are feeling brave and interested in trying a different program to work with staging, committing, and pushing/pulling changes to github, you should check out a few other programs. I've played with both GitKraken and Sourcetree. Both are cross-platform, free, and do all the same stuff you can do in RStudio, but with a fancier and nicer user-interface. I prefer Sourcetree, but only because I like the layout better. Importantly the process is still the same, you would still work in RStudio in your project, then when done with your work in RStudio, you open up one of these programs and do the same stage/commit/push business we went through in class.
-Reading/Background for Next Week
-
 
 
 ## Specific Lessons

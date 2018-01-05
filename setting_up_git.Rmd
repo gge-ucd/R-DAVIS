@@ -36,20 +36,32 @@ Version control gives you a better way to track changes for things like data fil
     - Everyone has the most recent version of everything
     
 
-## Connecting RStudio to your Repository
+## Connecting RStudio & Github
 
-You should have a repository in the gge-ucd organization...and it should look something like this:
-[`https://github.com/gge-ucd/first_lastname`](https://github.com/gge-ucd/first_lastname). Take a minute to navigate to your repo online and take a look at your `README.md` file.
+For our purposes the "*best practice*" (i.e., **easier**) for setting up a new github repository in RStudio is through an RStudio *Project*. First, ideally what we want to do is create a new repository on [Github](https://github.com/), then create a new RStudio Project to **clone** (copy) our repository onto our computer (a local version). See the steps below.
 
-### Create a Version Controlled RStudio Project
+### 1. Create a New Repository on Github
 
-Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).
-  
-  - First you'll want to look for the big green "Clone or Download" button. Assuming you've set up your SSH key, make sure you have the **Clone with SSH** version and copy that link (should be  *`git@github.com:gge-ucd/first_lastname.git`*, else use the **`https`** link).
+ - Create a new repository on Github.
+    - For our class, we may be using a Github Classroom, which means we create the repository in advance and send you a link. You click the link, Github copies/creates a new repository for you, move to step 2.)
+
+### 2. Clone Repository Link
+
+You should now have a repository on github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
+  - [`https://github.com/gge-ucd/w01-fix-readme-ryanpeek`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
+
+ > **To _`clone`_ your repository**
+    
+ - **`SSH`:** Look for the big green "Clone or Download" button. It will appear on the main repository webpage. Click the button, and assuming you've set up your SSH key, make sure you have the **Clone with SSH** version and copy that link (should be something like *`git@github.com:gge-ucd/w01-fix-readme-firstnamelastname.git`*).
+ - **`HTTPS`:** Look for the big green "Clone or Download" button. Make sure you have the **Clone with HTTPS** version and copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
  
 ![](img/ssh_clone.png)
 
-  - Then in RStudio, start a new Project: `File > New Project > Version Control > Git`. In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
+### 3. Create a New Version Controlled (`git`) RStudio Project
+
+Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).
+
+  - In RStudio, start a new Project: `File > New Project > Version Control > Git`. In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
   
 ![](img/newRStudio_git_proj_named.png)
 
@@ -61,43 +73,39 @@ Now we'll create an RStudio Project and link our Github repository (following [*
     - a directory on your computer
     - a local Git repository, linked to a remote GitHub repository
     - an RStudio Project
-    - It should contain a `README.md` file with some content that I've created...we'll edit that next.
-    
+    - It should contain a `README.md` file with some content that we've created...we'll edit that next.
     
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
-
  
 #### *IF YOU MADE IT THUS FAR CONGRATS!*
 
 <br>
 
-## Push & Commit Changes to your `README.md`
+### 4. Push & Commit Changes to your `README.md`
 
 We'll go over this part in class. If you have `ssh` set up and you created your RStudio project, you've done most of the hard work...what remains is:
 
- - Test whether we can make changes or **edit** our README on our local copy of the repository (your computer)
- - **`commit`** these changes (make a version control record )
- - **`push`** these change to the `remote` which is the copy of the repository on Github.com.
- 
- 
-### Open Your RStudio Project
+ - Test whether we can make changes or **edit** our README on our local `master` branch (copy of the repository on your computer).
+ - **`commit`** these changes (make a version control record of your change/s)
+ - **`push`** these change back to the `remote` which is the copy of the repository on Github.com.
+
+#### Edit README
 
 In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
 
-### Edit your README
-
-  - Edit your README:
+  - **Edit your README:**
     - Add your name
-    - Remove the limerick and other bullets and add 1-2 sentences about what you study or what you hope to study.
-    - add an "X" inside the **Edited by student** box
+    - Delete the limerick and other bullets
+    - Add 1-2 sentences about what you study or what you hope to study
+    - Add an "X" inside the **Edited by student** box
 
-### Commit to Git
+#### Stage & Commit to Git
 
-  - Click on the **Git** tab. When you click on the git tab, you should see the `README.md`, and a `.Rproj` file.
+  - Click on the **Git** tab. When you click on the git tab, you should see the `README.md`, and a `.Rproj` file, and perhaps a few other files. That's ok!
   
   - Click on the small box to the left of the `README.md` to stage the file. Then click the `commit` button. You'll see a new widow, on the upper right you need to type a `commit` message, something simple, short, and descriptive. Then click the `commit` button. You should see a little box with message committed.
   
-  - Finally before you close everything, hit the **PUSH** button. This *pushes* the changes to the github repository (you may need to enter your `ssh` password once).
+  - Finally before you close everything, hit the **PUSH** button. This *pushes* the changes to the github repository (you may need to enter your username & password once depending on whether you used `ssh` or `https`).
   
   - If you go back to the repository in your browser and refresh the page, you should see the changes you've made. Equally important, any collaborator or instructor can now `pull` those exact changes into a copy of the repo on our computer.
 

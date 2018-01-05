@@ -12,7 +12,7 @@ navbar:
     menu:
     - text: Computer Setup
       href: computer_setup.html
-    - text: Setting up Git
+    - text: Setting up Git Repository
       href: setting_up_git.html
   - text: Course Materials
     icon: fa-book  fa-1x

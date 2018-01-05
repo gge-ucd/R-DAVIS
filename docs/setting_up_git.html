@@ -304,7 +304,7 @@ div.tocify {
       <a href="computer_setup.html">Computer Setup</a>
     </li>
     <li>
-      <a href="setting_up_git.html">Setting up Git</a>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
     </li>
   </ul>
 </li>
@@ -457,21 +457,38 @@ div.tocify {
 </ul>
 </div>
 </div>
-<div id="connecting-rstudio-to-your-repository" class="section level2">
-<h2>Connecting RStudio to your Repository</h2>
-<p>You should have a repository in the gge-ucd organization…and it should look something like this: <a href="https://github.com/gge-ucd/first_lastname"><code>https://github.com/gge-ucd/first_lastname</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file.</p>
-<div id="create-a-version-controlled-rstudio-project" class="section level3">
-<h3>Create a Version Controlled RStudio Project</h3>
-<p>Now we’ll create an RStudio Project and link our Github repository (following <a href="http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio"><em>Section 13.3</em> of <code>happygitwithR</code></a>).</p>
+<div id="connecting-rstudio-github" class="section level2">
+<h2>Connecting RStudio &amp; Github</h2>
+<p>For our purposes the “<em>best practice</em>” (i.e., <strong>easier</strong>) for setting up a new github repository in RStudio is through an RStudio <em>Project</em>. First, ideally what we want to do is create a new repository on <a href="https://github.com/">Github</a>, then create a new RStudio Project to <strong>clone</strong> (copy) our repository onto our computer (a local version). See the steps below.</p>
+<div id="create-a-new-repository-on-github" class="section level3">
+<h3>1. Create a New Repository on Github</h3>
 <ul>
-<li>First you’ll want to look for the big green “Clone or Download” button. Assuming you’ve set up your SSH key, make sure you have the <strong>Clone with SSH</strong> version and copy that link (should be <em><code>git@github.com:gge-ucd/first_lastname.git</code></em>, else use the <strong><code>https</code></strong> link).</li>
+<li>Create a new repository on Github.
+<ul>
+<li>For our class, we may be using a Github Classroom, which means we create the repository in advance and send you a link. You click the link, Github copies/creates a new repository for you, move to step 2.)</li>
+</ul></li>
+</ul>
+</div>
+<div id="clone-repository-link" class="section level3">
+<h3>2. Clone Repository Link</h3>
+<p>You should now have a repository on github. Our class is all housed in the <a href="https://github.com/gge-ucd">gge-ucd</a> Organization, so your repository should appear there, and it should look something like this: - <a href="https://github.com/gge-ucd/w01-fix-readme-ryanpeek"><code>https://github.com/gge-ucd/w01-fix-readme-ryanpeek</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file by clicking on it.</p>
+<blockquote>
+<p><strong>To <em><code>clone</code></em> your repository</strong></p>
+</blockquote>
+<ul>
+<li><strong><code>SSH</code>:</strong> Look for the big green “Clone or Download” button. It will appear on the main repository webpage. Click the button, and assuming you’ve set up your SSH key, make sure you have the <strong>Clone with SSH</strong> version and copy that link (should be something like <em><code>git@github.com:gge-ucd/w01-fix-readme-firstnamelastname.git</code></em>).</li>
+<li><strong><code>HTTPS</code>:</strong> Look for the big green “Clone or Download” button. Make sure you have the <strong>Clone with HTTPS</strong> version and copy that link (should be something like <em><code>https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git</code></em>).</li>
 </ul>
 <div class="figure">
 <img src="img/ssh_clone.png" />
 
 </div>
+</div>
+<div id="create-a-new-version-controlled-git-rstudio-project" class="section level3">
+<h3>3. Create a New Version Controlled (<code>git</code>) RStudio Project</h3>
+<p>Now we’ll create an RStudio Project and link our Github repository (following <a href="http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio"><em>Section 13.3</em> of <code>happygitwithR</code></a>).</p>
 <ul>
-<li>Then in RStudio, start a new Project: <code>File &gt; New Project &gt; Version Control &gt; Git</code>. In the “<strong>Repository URL</strong>” paste the URL of your new GitHub repository. If you hit <strong><code>Tab</code></strong>, the <em>Project directory name</em> will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the <em>Nuts &amp; Bolts</em> notes below for more info.</li>
+<li>In RStudio, start a new Project: <code>File &gt; New Project &gt; Version Control &gt; Git</code>. In the “<strong>Repository URL</strong>” paste the URL of your new GitHub repository. If you hit <strong><code>Tab</code></strong>, the <em>Project directory name</em> will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the <em>Nuts &amp; Bolts</em> notes below for more info.</li>
 </ul>
 <div class="figure">
 <img src="img/newRStudio_git_proj_named.png" />
@@ -485,7 +502,7 @@ div.tocify {
 <li>a directory on your computer</li>
 <li>a local Git repository, linked to a remote GitHub repository</li>
 <li>an RStudio Project</li>
-<li>It should contain a <code>README.md</code> file with some content that I’ve created…we’ll edit that next.</li>
+<li>It should contain a <code>README.md</code> file with some content that we’ve created…we’ll edit that next.</li>
 </ul></li>
 </ul>
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
@@ -494,40 +511,38 @@ div.tocify {
 <p><br></p>
 </div>
 </div>
-</div>
-<div id="push-commit-changes-to-your-readme.md" class="section level2">
-<h2>Push &amp; Commit Changes to your <code>README.md</code></h2>
+<div id="push-commit-changes-to-your-readme.md" class="section level3">
+<h3>4. Push &amp; Commit Changes to your <code>README.md</code></h3>
 <p>We’ll go over this part in class. If you have <code>ssh</code> set up and you created your RStudio project, you’ve done most of the hard work…what remains is:</p>
 <ul>
-<li>Test whether we can make changes or <strong>edit</strong> our README on our local copy of the repository (your computer)</li>
-<li><strong><code>commit</code></strong> these changes (make a version control record )</li>
-<li><strong><code>push</code></strong> these change to the <code>remote</code> which is the copy of the repository on Github.com.</li>
+<li>Test whether we can make changes or <strong>edit</strong> our README on our local <code>master</code> branch (copy of the repository on your computer).</li>
+<li><strong><code>commit</code></strong> these changes (make a version control record of your change/s)</li>
+<li><strong><code>push</code></strong> these change back to the <code>remote</code> which is the copy of the repository on Github.com.</li>
 </ul>
-<div id="open-your-rstudio-project" class="section level3">
-<h3>Open Your RStudio Project</h3>
+<div id="edit-readme" class="section level4">
+<h4>Edit README</h4>
 <p>In RStudio, open your new project (<strong><code>Firstname_Lastname</code></strong>). Navigate to the <em>Files</em> tab and open the <code>README.md</code> file. You can click on it in the window and it will automatically open up.</p>
-</div>
-<div id="edit-your-readme" class="section level3">
-<h3>Edit your README</h3>
 <ul>
-<li>Edit your README:
+<li><strong>Edit your README:</strong>
 <ul>
 <li>Add your name</li>
-<li>Remove the limerick and other bullets and add 1-2 sentences about what you study or what you hope to study.</li>
-<li>add an “X” inside the <strong>Edited by student</strong> box</li>
+<li>Delete the limerick and other bullets</li>
+<li>Add 1-2 sentences about what you study or what you hope to study</li>
+<li>Add an “X” inside the <strong>Edited by student</strong> box</li>
 </ul></li>
 </ul>
 </div>
-<div id="commit-to-git" class="section level3">
-<h3>Commit to Git</h3>
+<div id="stage-commit-to-git" class="section level4">
+<h4>Stage &amp; Commit to Git</h4>
 <ul>
-<li><p>Click on the <strong>Git</strong> tab. When you click on the git tab, you should see the <code>README.md</code>, and a <code>.Rproj</code> file.</p></li>
+<li><p>Click on the <strong>Git</strong> tab. When you click on the git tab, you should see the <code>README.md</code>, and a <code>.Rproj</code> file, and perhaps a few other files. That’s ok!</p></li>
 <li><p>Click on the small box to the left of the <code>README.md</code> to stage the file. Then click the <code>commit</code> button. You’ll see a new widow, on the upper right you need to type a <code>commit</code> message, something simple, short, and descriptive. Then click the <code>commit</code> button. You should see a little box with message committed.</p></li>
-<li><p>Finally before you close everything, hit the <strong>PUSH</strong> button. This <em>pushes</em> the changes to the github repository (you may need to enter your <code>ssh</code> password once).</p></li>
+<li><p>Finally before you close everything, hit the <strong>PUSH</strong> button. This <em>pushes</em> the changes to the github repository (you may need to enter your username &amp; password once depending on whether you used <code>ssh</code> or <code>https</code>).</p></li>
 <li><p>If you go back to the repository in your browser and refresh the page, you should see the changes you’ve made. Equally important, any collaborator or instructor can now <code>pull</code> those exact changes into a copy of the repo on our computer.</p></li>
 </ul>
 <p>Hopefully that all worked! You can now push and pull from your repository.</p>
 <p><br> Parts of these instructions were adapted from those written by Ethan White for his <a href="http://www.datacarpentry.org/semester-biology/">Data Carpentry for Biologists</a> course, and from Jenny Bryan’s <a href="http://happygitwithr.com/">happygitwithr.com</a> website.</p>
+</div>
 </div>
 </div>
 
