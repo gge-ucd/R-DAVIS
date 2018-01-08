@@ -51,7 +51,7 @@ My favorite part of teaching R is helping people make the leap between novice (n
 ## About the TAs
 
 **Martha Wohlfeil**
-<a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>  
+<a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
 <a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github" aria-hidden="true"></i></a>
 
 Martha is a 2nd year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
