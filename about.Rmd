@@ -52,8 +52,22 @@ My favorite part of teaching R is helping people make the leap between novice (n
 
 **Martha Wohlfeil**
 <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>  
+<a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github" aria-hidden="true"></i></a>
 
 Martha is a 2nd year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
 
 <br> 
 
+**Taylor Reiter**
+<a href="mailto:tereiter@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
+<a href="https://github.com/taylorreiter"><i class="fa fa-github" aria-hidden="true"></i></a>
+
+Taylor is a 2nd year graduate student in the Food Science graduate group at UC Davis. She studies how microbes survive in and change the metabolite profile of olive oil. She has experience wrangling genomic data, building websites, and using git in R. 
+
+<br>
+
+**Michael Culshaw-Maurer**
+<a href="mailto:mjculshawmaurer@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
+<a href="https://github.com/MCMaurer"><i class="fa fa-github" aria-hidden="true"></i></a>
+
+Michael is a 3rd year PhD candidate in the GGE. He studies the effects of disease and cannibalism on population dynamics in insects and has experience with statistical modeling, agent-based modeling, and data visualization in R.
