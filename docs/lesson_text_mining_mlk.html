@@ -11,7 +11,7 @@
 
 
 
-<title>Automation with for loops</title>
+<title>Analyzing Text in R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -462,117 +462,141 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Automation with for loops</h1>
+<h1 class="title toc-ignore">Analyzing Text in R</h1>
 
 </div>
 
 
-<blockquote>
-<h2 id="learning-objectives">Learning objectives</h2>
+<p>There are many kinds of data, including text! We can read text into R just like any other type of data, and using a number of handy packages, we can extract and parse out words, sentences, etc. Once the data has been “de-constructed”, it’s much easier to analyze and visualize our text.</p>
+<p>Let’s learn about doing text mining with R. This is going to be a very short demo using the “I have a dream” speech by Martin Luther King Jr. There is a much more comprehensive and excellent resource for working with text in R, <a href="http://tidytextmining.com/tidytext.html">“Text Mining with R” by Julia Silge and David Robinson</a>. We’ll reference a few chapters from this book in this lesson.</p>
+<div id="text-mining-packages-in-r" class="section level2">
+<h2>Text Mining Packages in R</h2>
+<p>There are always more packages that appear on CRAN, but the main libraries we’ll want for this pipeline are:</p>
 <ul>
-<li>Understand the anatomy of a for loop</li>
-<li>Understand the iterative looping variable</li>
-<li>Be able to build a for loop to automate a block of code</li>
+<li><code>dplyr</code></li>
+<li><code>tidytext</code></li>
 </ul>
+<p>An optional package that is fun to play with is <code>gutenbergr</code>, which provides access to public domain works from the <a href="https://www.gutenberg.org/">Project Gutenberg</a> collection.</p>
+</div>
+<div id="tidying-text" class="section level2">
+<h2>Tidying Text</h2>
+<p>Let’s read <a href="https://www.tidytextmining.com/tidytext.html#contrasting-tidy-text-with-other-data-structures"><strong>Ch. 1 of Text Mining in R</strong></a> for some more info on character vectors in R. This code is taken from Ch 1 (Silge &amp; Robinson 2017).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># basic text from Emily Dickinson</span>
+text &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Because I could not stop for Death -&quot;</span>,
+          <span class="st">&quot;He kindly stopped for me -&quot;</span>,
+          <span class="st">&quot;The Carriage held but just Ourselves -&quot;</span>,
+          <span class="st">&quot;and Immortality&quot;</span>)
+
+<span class="co"># make it into a dataframe</span>
+text_df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">line =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">text =</span> text)</code></pre></div>
+<blockquote>
+<p><strong>What is a token?</strong></p>
 </blockquote>
-<div id="background" class="section level1">
-<h1>Background</h1>
-<p>We can automate chunks of code using a <code>for</code> loop. We’ve seen how many tasks are automatically automated using vectorization. Remember how we can often pass a vector of values as an argument to a function, and the function will happily operate on each element in turn.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">98</span>, <span class="dv">2</span>)
-<span class="kw">log</span>(x)</code></pre></div>
-<pre><code>## [1] 0.0000000 1.3862944 4.5849675 0.6931472</code></pre>
-<p>R understands that we want to call the <code>log()</code> function on the first element in the <code>x</code> vector, then call the <code>log()</code> function on the second element in the <code>x</code> vector, and so on.</p>
-<p>Sometimes vectorization can’t help us automate a set of commands. This can happen when commands are particularly complex, when the commands are using multiple objects at once, or when the next iteration of the block of code relies on the result of the previous iteration of the block of code. In these cases, we can tell R exactly what commands we want repeated inside of a loop.</p>
-<p>Here is what a basic for loop looks like.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {
-  <span class="kw">print</span>(i)
-}</code></pre></div>
-<pre><code>## [1] 1
-## [1] 2
-## [1] 3
-## [1] 4
-## [1] 5
-## [1] 6
-## [1] 7
-## [1] 8
-## [1] 9
-## [1] 10</code></pre>
-<p>We use the <code>for()</code> function to indicate we are starting a loop. The <code>{</code> and <code>}</code> mark the start and end of the block of code that we will repeat over and over. <code>i in 1:10</code> means that <code>i</code> will take on the first value in the <code>1:10</code> vector, the block of code will execute, then <code>i</code> will take on the second value in the <code>1:10</code> vector, the block of code will execute a second time, and so on until <code>i</code> takes on the last value in the <code>1:10</code> vector, the block of code executes one final time, and then the loop is finished. R will now proceed to the next line of code after the <code>}</code>. We can call this <strong>iterative looping variable</strong> whatever we’d like. Often, it is called <code>i</code> (or <code>j</code> or <code>k</code> if <code>i</code> is already used), but it could be called <code>monkey</code> and R would be fine with that.</p>
-<p>It’s key to notice that the value of <code>i</code> changes each time the code block in the loop executes. We say that <code>i</code> is <em>iterating</em> through the values of the vector. We can use <code>i</code> (or whatever you’ve called it) inside the for loop code chunk. Above, we printed out the value of <code>i</code> (see how <code>i</code> changed?) Below, we print out the <code>i</code>th letter of the alphabet by using the <code>letters</code> vector</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">letters <span class="co"># all the letters in the alphabet</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
-## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {
-  <span class="co"># use square bracket notation to access the ith element in the letters vector</span>
-  <span class="kw">print</span>(letters[i]) 
-}</code></pre></div>
-<pre><code>## [1] &quot;a&quot;
-## [1] &quot;b&quot;
-## [1] &quot;c&quot;
-## [1] &quot;d&quot;
-## [1] &quot;e&quot;
-## [1] &quot;f&quot;
-## [1] &quot;g&quot;
-## [1] &quot;h&quot;
-## [1] &quot;i&quot;
-## [1] &quot;j&quot;</code></pre>
+<blockquote>
+<p><strong>What is tokenization?</strong></p>
+</blockquote>
+<div id="tokenization-of-text" class="section level3">
+<h3>Tokenization of Text</h3>
+<p>Let’s break these chunks of text into individual pieces, or <em>tokens</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># now extract the individual words</span>
+text_df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest_tokens</span>(word, text)</code></pre></div>
+<pre><code>## # A tibble: 20 x 2
+##     line word       
+##    &lt;int&gt; &lt;chr&gt;      
+##  1     1 because    
+##  2     1 i          
+##  3     1 could      
+##  4     1 not        
+##  5     1 stop       
+##  6     1 for        
+##  7     1 death      
+##  8     2 he         
+##  9     2 kindly     
+## 10     2 stopped    
+## 11     2 for        
+## 12     2 me         
+## 13     3 the        
+## 14     3 carriage   
+## 15     3 held       
+## 16     3 but        
+## 17     3 just       
+## 18     3 ourselves  
+## 19     4 and        
+## 20     4 immortality</code></pre>
+<p>Once we are able to parse the pieces of text out into individual components, it’s easier to use a standard analysis pipeline similar to Hadley Wickham’s “<code>Import &gt; Tidy &gt; Transform/Visualize/Model &gt; Communicate</code>”.</p>
+<p>This figure (from Silge and Robinson, 2017) gives a nice overview of the process of text mining/analysis.</p>
+<p><br></p>
+<div class="figure">
+<img src="https://www.tidytextmining.com/images/tidyflow-ch-1.png" alt="Silge &amp; Robinson, 2017" />
+<p class="caption">Silge &amp; Robinson, 2017</p>
 </div>
-<div id="example-with-gapminder" class="section level1">
-<h1>Example with gapminder</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">library</span>(gapminder)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countryToPlot, <span class="dt">theData =</span> gapminder) {
-  <span class="co"># this filters data to a specific country</span>
-  oneCountry &lt;-<span class="st"> </span>theData <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span>countryToPlot)
-  
-  <span class="co"># can add some error checking if you want</span>
-  <span class="cf">if</span>(<span class="op">!</span><span class="kw">nrow</span>(oneCountry)<span class="op">&gt;</span><span class="dv">0</span>) { <span class="co"># checks if there are values for country</span>
-    <span class="kw">stop</span>(<span class="st">&quot;No Data for this Country, please try again&quot;</span>)
-  }
-
-  <span class="co"># this runs the plot</span>
-  <span class="kw">ggplot</span>(<span class="dt">data=</span>oneCountry) <span class="op">+</span><span class="st"> </span>
-<span class="st">           </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>pop, <span class="dt">color=</span>country))
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plotPopGrowth(&quot;Afghanistans&quot;) # gives error</span>
-<span class="kw">plotPopGrowth</span>(<span class="st">&quot;Afghanistan&quot;</span>) </code></pre></div>
-<p><img src="lesson_for_loops_files/figure-html/demoTheFunction-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;United States&quot;</span>)</code></pre></div>
-<p><img src="lesson_for_loops_files/figure-html/demoTheFunction-2.png" width="672" /></p>
-<p>What if we want to make a plot and then save it for every country?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### LOOPING
-countries &lt;-<span class="st"> </span><span class="kw">unique</span>(gapminder<span class="op">$</span>country)
-<span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(countries)){
-  <span class="kw">plotPopGrowth</span>(countries[i])
-  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;Figures/plot_&quot;</span>,countries[i], <span class="st">&quot;.png&quot;</span>))
-}</code></pre></div>
+<p><br></p>
 </div>
-<div id="example-with-file-imports" class="section level1">
-<h1>Example with file imports</h1>
-<p>The tidyverse has its own way to do loops</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xlist &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/2001_mauna_loa_met_data/&quot;</span>, 
-                    <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>, 
-                    <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
-xlist</code></pre></div>
-<pre><code>## character(0)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">column_headers &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, 
-    <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>,
-    <span class="st">&quot;windDir&quot;</span>, <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, 
-    <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, 
-    <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)
+<div id="jane-austen-example" class="section level3">
+<h3>Jane Austen Example</h3>
+<p>For a nice example, let’s check out the Jane Austen text tidying code from <a href="https://www.tidytextmining.com/tidytext.html#tidyausten">Ch 1.3 of Text Mining with R</a>.</p>
+<p><br> <br></p>
+</div>
+<div id="analysis-of-i-have-a-dream-mlk-jr." class="section level3">
+<h3>Analysis of “I Have a Dream” (MLK Jr.)</h3>
+<p>Let’s assess Martin Luther King Jr.’s “<em>I Have A Dream</em>” and identify the most commonly used words. The data file for this is <a href="https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/I_have_a_dream_1963.md">here</a>, you’ll need to make sure you download to a “data” folder within your project. Also, make sure you have the <code>readr</code> and <code>ggplot2</code> packages installed.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressPackageStartupMessages</span>({
+  <span class="kw">library</span>(readr);
+  <span class="kw">library</span>(ggplot2)
+})
 
-ml &lt;-
-<span class="st">  </span>xlist <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">map_df</span>( <span class="op">~</span><span class="st"> </span><span class="kw">read.table</span>(., 
-                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>,
-                       <span class="dt">header =</span> <span class="ot">FALSE</span>, 
-                       <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, 
-                       <span class="dt">col.names =</span> column_headers))
-         
-<span class="kw">glimpse</span>(ml)</code></pre></div>
-<pre><code>## Observations: 0</code></pre>
+<span class="co"># read in the data (same as you would a csv)</span>
+mlk&lt;-<span class="kw">read_lines</span>(<span class="st">&quot;data/I_have_a_dream_1963.md&quot;</span>)
+
+<span class="co"># this splits the chunk of text into lines</span>
+mlk_text &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">line =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(mlk), <span class="dt">text =</span> mlk)
+
+<span class="co"># filter blank lines (even rows)</span>
+mlk_text &lt;-<span class="st"> </span>mlk_text <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(line <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">line =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.)) <span class="co"># renumber lines</span>
+
+<span class="co"># Make single word vector</span>
+mlk_text&lt;-<span class="st"> </span>mlk_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">unnest_tokens</span>(word, text)
+
+<span class="co"># Now remove all the stop words using an &quot;anti_join&quot;</span>
+tidy_mlk &lt;-<span class="st"> </span>mlk_text <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">anti_join</span>(stop_words)</code></pre></div>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count the use of each word</span>
+tidy_mlk <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </code></pre></div>
+<pre><code>## # A tibble: 214 x 2
+##    word         n
+##    &lt;chr&gt;    &lt;int&gt;
+##  1 freedom     13
+##  2 ring        12
+##  3 dream       11
+##  4 day          9
+##  5 negro        8
+##  6 free         5
+##  7 white        5
+##  8 faith        4
+##  9 hundred      4
+## 10 mountain     4
+## # ... with 204 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># count use and then plot by most to least for words used more than twice in the speech</span>
+tidy_mlk <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(word, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">word =</span> <span class="kw">reorder</span>(word, n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(word, n)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;forestgreen&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Words used more than 2x&quot;</span>, <span class="dt">title=</span><span class="st">&quot;I Have A Dream Speech, MLK Jr. (1963)&quot;</span>)</code></pre></div>
+<p><img src="lesson_text_mining_mlk_files/figure-html/mlk-1.png" width="672" /></p>
+</div>
+</div>
+<div id="word-co-occurences-and-correlations" class="section level2">
+<h2>Word Co-occurences and Correlations</h2>
+<p>See <a href="https://www.tidytextmining.com/nasa.html#word-co-ocurrences-and-correlations">Ch 8.2 from Text Mining with R</a>.</p>
 </div>
 
 

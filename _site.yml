@@ -47,6 +47,8 @@ navbar:
       href: lesson_for_loops.html
     - text: Using purrr
       href: lesson_purrr_tutorial.html
+    - text: Text mining
+      href: lesson_text_mining_mlk.html
     - text: Github collaboration with branches
       href: lesson_github_collaboration.html
   - text: Lectures
