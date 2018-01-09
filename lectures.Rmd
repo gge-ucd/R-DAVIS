@@ -1,0 +1,62 @@
+---
+title: "Lectures"
+output:
+  html_document:
+    toc: false
+---
+
+Screencasts of each lecture will be available on Youtube below as the quarter progresses. We are using Google hangouts and screensharing, so bear with us on transitions during lecture and live-coding. In addition, there are a number of great presentations that have been recorded at [Davis R-Users Group](http://d-rug.github.io/) meetings, see Resources tab.
+
+## Lectures {.tabset .tabset-fade}
+
+### Week 1
+
+* What we covered ([livecode](https://github.com/gge-ucd/R-DAVIS-live-code/blob/master/scripts/2018-R-DAVIS-w1.R))
+* [Screencast](https://www.youtube.com/watch?v=j0x6OZi_OGE)
+
+### Week 2
+
+* What we covered (livecode)
+* [Screencast](https://www.youtube.com/watch?v=O2X3d7sA1vU)
+
+### Week 3
+
+* What we covered (livecode)
+* [Screencast](https://www.youtube.com/watch?v=ypVTFzAxrRw)
+
+### Week 4
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 5
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 6
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 7
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 8
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 9
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+### Week 10
+
+* What we covered (link to livecode)
+* [Screencast]()
+
+

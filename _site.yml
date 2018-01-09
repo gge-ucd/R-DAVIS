@@ -49,9 +49,9 @@ navbar:
       href: lesson_purrr_tutorial.html
     - text: Github collaboration with branches
       href: lesson_github_collaboration.html
-  - text: Presentations
+  - text: Lectures
     icon: fa-slideshare fa-1x
-    href: presentations.html
+    href: lectures.html
   - text: Resources
     icon: fa-list
     href: resources.html
