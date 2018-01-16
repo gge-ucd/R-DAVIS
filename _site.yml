@@ -21,6 +21,10 @@ navbar:
       href: lesson_intro_r_rstudio.html
     - text: Project Management
       href: lesson_project_management.html
+    - text: Spreadsheets
+      href: http://www.datacarpentry.org/spreadsheet-ecology-lesson/
+    - text: Vectors & Data Types
+      href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
     - text: Data frames
       href: lesson_data_frames.html
     - text: Data import
