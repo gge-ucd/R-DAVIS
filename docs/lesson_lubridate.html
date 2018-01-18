@@ -376,7 +376,10 @@ div.tocify {
       <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames.html">Data frames</a>
+      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
     </li>
     <li>
       <a href="lesson_data_import.html">Data import</a>
@@ -385,7 +388,10 @@ div.tocify {
       <a href="lesson_tidyr.html">Using tidyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr.html">Using dplyr</a>
+      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
     </li>
     <li>
       <a href="lesson_visualization_ggplot2.html">Using ggplot2</a>
@@ -629,13 +635,8 @@ tm3</code></pre></div>
 <div id="lubridate-tips" class="section level4">
 <h4>Lubridate Tips</h4>
 <p>For lubridate to work, you need the column datatype to be <strong>character</strong> or <strong>factor</strong>. The <code>readr</code> package (from the <code>tidyverse</code>) is smart and will try to guess for you. Problem is, it might convert your data for you without the settings (in this case the proper timezone). So here are few ways to work around this.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     date</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lubridate)
+<span class="kw">library</span>(dplyr)
 <span class="kw">library</span>(readr)
 
 <span class="co"># read in some data and skip header lines</span>
