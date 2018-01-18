@@ -25,14 +25,18 @@ navbar:
       href: http://www.datacarpentry.org/spreadsheet-ecology-lesson/
     - text: Vectors & Data Types
       href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
-    - text: Data frames
-      href: lesson_data_frames.html
+    - text: Data frames (continents)
+      href: lesson_data_frames_continents.html
+    - text: Data frames (ecology)
+      href: lesson_data_frames_ecology.html
     - text: Data import
       href: lesson_data_import.html
     - text: Using tidyr
       href: lesson_tidyr.html
-    - text: Using dplyr
-      href: lesson_dplyr.html
+    - text: Using dplyr (gapminder)
+      href: lesson_dplyr_gapminder.html
+    - text: Using dplyr (ecology)
+      href: lesson_dplyr_ecology.html
     - text: Using ggplot2
       href: lesson_visualization_ggplot2.html
     - text: Visualization Do's & Don'ts
