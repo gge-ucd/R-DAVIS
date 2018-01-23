@@ -60,12 +60,12 @@ library(emo, quietly = T)
  
  - `r emo::ji("white_check_mark")` Spreadsheets & Project Management (p2)
  - `r emo::ji("white_check_mark")` Intro to R
- - `r emo::ji("ballot_box_with_check")` Data frames & subsetting
+ - `r emo::ji("white_check_mark")` Data frames & subsetting
  
 
 #### Week 3
 
- - `r emo::ji("ballot_box_with_check")` `dplyr` (import, manipulation, visualization)
+ - `r emo::ji("white_check_mark")` `dplyr` (import, manipulation, visualization)
  - `r emo::ji("ballot_box_with_check")` `tidyr` (import different datasets)
 
 #### Week 4
