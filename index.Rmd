@@ -6,7 +6,7 @@ date: "Updated: `r format(Sys.Date())`"
 <br> 
 
 # Welcome to R-DAVIS 
-##(<font color="#DAAA00">R</font>-<font color="#DAAA00">D</font>ata <font color="#DAAA00">A</font>nalysis & <font color="#DAAA00">V</font>isualization <font color="#DAAA00">I</font>n <font color="#DAAA00">S</font>cience)
+## (<font color="#DAAA00">**R**</font>-<font color="#DAAA00">**D**</font>ata <font color="#DAAA00">**A**</font>nalysis & <font color="#DAAA00">**V**</font>isualization <font color="#DAAA00">**I**</font>n <font color="#DAAA00">**S**</font>cience)
 
 *Site Updated: `r format(Sys.Date())`*
 

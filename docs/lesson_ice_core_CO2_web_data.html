@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Example: Download &amp; Plot Data from the Web</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.sourceCode {
+  overflow-x: visible;
+}
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1.5x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data import</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_ggplot2.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_joins.html">Joining data</a>
+    </li>
+    <li>
+      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_for_loops.html">For loops</a>
+    </li>
+    <li>
+      <a href="lesson_purrr_tutorial.html">Using purrr</a>
+    </li>
+    <li>
+      <a href="lesson_text_mining_mlk.html">Text mining</a>
+    </li>
+    <li>
+      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Example: Download &amp; Plot Data from the Web</h1>
+
+</div>
+
+
+<p>This lesson is meant to walk through a complete pipeline of how to download some data from the web, tidy it, look at a simple analysis, and visualize that data. We’ll be using data on historical and current CO<sub>2</sub>.</p>
+<p><br> <br></p>
+<div id="historical-c02-record-from-vostok-ice-cores" class="section level2">
+<h2>Historical C0<sub>2</sub> Record from Vostok Ice Cores</h2>
+<p>How do we know the C0<sub>2</sub> levels are higher now than compared with natural cycles observed through time? Thankfully we have ice cores that date back over 400,000 years ago. By analyzing the tiny bubbles trapped for eons deep<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> within the ice at known points in time (based on the depth of the ice layer), it’s possible to reconstruct a record of C0<sub>2</sub> on Earth over a very long period of time.</p>
+<p>These data are publically available as a simple text file <a href="http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2">here</a>, and a full description of the metadata is <a href="http://cdiac.ornl.gov/trends/co2/vostok.html">here</a>.</p>
+<div id="download-the-data" class="section level3">
+<h3>Download the Data</h3>
+<p>First, we’ve shown a few ways to download data from a URL, so let’s see if folks can take a look at this data, and download it using the following URL:</p>
+<blockquote>
+<p><code>http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2</code></p>
+</blockquote>
+<ul>
+<li>Why can’t we use <code>read_csv</code>?</li>
+<li>Can we use <code>read.table</code>?</li>
+<li>Why did we specify <code>skip=20</code>?</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">file =</span> <span class="st">&quot;http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2&quot;</span>, </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">skip =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;depth_m&quot;</span>,<span class="st">&quot;ice_age_yr_BP&quot;</span>, <span class="st">&quot;air_age_yr_BP&quot;</span>, <span class="st">&quot;C02_conc_ppmv&quot;</span>))</a></code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   depth_m = col_double(),
+##   ice_age_yr_BP = col_integer(),
+##   air_age_yr_BP = col_integer(),
+##   C02_conc_ppmv = col_double()
+## )</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+##   depth_m ice_age_yr_BP air_age_yr_BP C02_conc_ppmv
+##     &lt;dbl&gt;         &lt;int&gt;         &lt;int&gt;         &lt;dbl&gt;
+## 1     149          5679          2342           285
+## 2     173          6828          3634           273
+## 3     177          7043          3833           268
+## 4     229          9523          6220           262
+## 5     250         10579          7327           255
+## 6     266         11334          8113           260</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">dim</span>(df)</a></code></pre></div>
+<pre><code>## [1] 363   4</code></pre>
+<p>Ok now that we have our data read into R, is the data tidy? How can we check if there are NA’s in the data? Let’s move to some visualization now.</p>
+</div>
+<div id="plot-the-data-using-base" class="section level3">
+<h3>Plot The Data (using <code>base</code>)</h3>
+<p>If we want to make a plot using base R, we can use the following code. Let’s compare this to what we might do if we wanted to plot this in <code>ggplot</code>. Notice that the <code>with()</code> function is just a way to “attach” the data so we don’t have to use the <code>data$</code> convention when we want to specify a column in our dataframe.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># age vs. depth</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">plot</span>(df<span class="op">$</span>depth_m, df<span class="op">$</span>ice_age_yr_BP) <span class="co"># very simple plot</span></a></code></pre></div>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/baseplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># now baseplot of age vs. CO2 concentration</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">with</span>(df, <span class="kw">plot</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">              <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;darkblue&quot;</span>, </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">              <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>] ,<span class="st">&quot; Concentration (ppmv)&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">              <span class="dt">xlab=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, </a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">              <span class="dt">main=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)), </a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">              <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)))</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co"># add another &quot;layer&quot; (similar to using the geom_ in ggplot)</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="kw">with</span>(df, <span class="kw">points</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">                <span class="dt">xlab=</span><span class="ot">NULL</span>, <span class="dt">ylab=</span><span class="ot">NULL</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>,</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">     <span class="dt">bg=</span><span class="st">&quot;skyblue2&quot;</span>))</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co"># plot modern CO2 levels (notice we aren&#39;t using a data frame but giving a single data point location): (FOUND HERE: https://www.co2.earth/daily-co2)</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="kw">points</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.38</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">cex=</span><span class="fl">1.7</span>)</a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co"># add some text</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">405</span>, <span class="dt">labels =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>])), </a>
+<a class="sourceLine" id="cb8-19" data-line-number="19">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">pos=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">40</span>, <span class="dt">y=</span> <span class="dv">405</span>, <span class="dt">labels=</span> <span class="kw">paste0</span>(<span class="st">&quot;Level </span><span class="ch">\n</span><span class="st"> on: &quot;</span>, <span class="kw">Sys.Date</span>(), <span class="st">&quot;!&quot;</span>),</a>
+<a class="sourceLine" id="cb8-22" data-line-number="22">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/baseplot-2.png" width="672" /></p>
+<p>Remember, to use these base plot options, you have to always call a <code>plot()</code> first, and then <code>points()</code> or <code>lines()</code>. It won’t work if you try to do it the other way around. Also, the use of the <code>expression()</code> is a way to make formulas, scientific notation, etc. look correct in your plots.</p>
+</div>
+<div id="plot-the-data-using-ggplot2" class="section level3">
+<h3>Plot The Data (using <code>ggplot2</code>)</h3>
+<p>Ok, now let’s try something similar in a <strong>ggplot</strong> version, with the same pieces as above, but see if you can try to add the following components (don’t feel you need to do all of them…try a few before you look at the code below!)</p>
+<ul>
+<li>Color the points by the Ice Core Depth (<code>depth_m</code>) using the <code>viridis</code> package</li>
+<li>Scale the y-axis to a range of <code>c(180, 420)</code></li>
+<li>Add a dashed horizontal line for the max CO<sub>2</sub> value (<strong>406.38</strong>)</li>
+<li>add a label with a white background saying “Current CO2 Level”</li>
+<li>Change the legend title to say “Ice Core Depth (m)”</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">suppressPackageStartupMessages</span>({</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="kw">library</span>(ggplot2);</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="kw">library</span>(dplyr);</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="kw">library</span>(viridis) <span class="co"># for nice color scheme</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">})</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv),</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">                     <span class="dt">color=</span><span class="st">&quot;gray20&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv, <span class="dt">fill=</span>depth_m), <span class="dt">pch=</span><span class="dv">21</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="st">&quot;Ice Core </span><span class="ch">\n</span><span class="st"> Depth (m)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>,<span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">20</span>, <span class="dt">y=</span><span class="dv">400</span>, <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>), </a>
+<a class="sourceLine" id="cb9-18" data-line-number="18">             <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/ggplot%20version-1.png" width="672" /></p>
+<p>Ok! What parts did you remember? What parts did you google? (<em>FYI: I google this stuff all the time!</em>)</p>
+</div>
+</div>
+<div id="map-of-site" class="section level2">
+<h2>Map of Site</h2>
+<p>Let’s make a map of where our data have been collected. Vostok is located in Antarctica at the following coordinates:</p>
+<blockquote>
+<p><strong>Vostok, Antarctica</strong>, <strong>-78.4645° S, 106.8340° E</strong>, <strong>3488 m above MSL</strong></p>
+</blockquote>
+<p>The following code will demonstrate how to convert these data into something we can plot on a map. We’ll need a few new packages here, <code>maps</code>, <code>mapdata</code>, and <code>measurements</code>.</p>
+<div id="convert-lat-long" class="section level3">
+<h3>Convert Lat &amp; Long</h3>
+<p>If copy and paste the above data into R, we may run into a few problems. First, the <strong>°</strong> symbol. We need to strip that from the data. Here’s how to do that, and make a simple data frame of our coordinates.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">#library(measurements) # for converting data</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co"># change the degree symbol to a space with gsub</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">xlat &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&#39;°&#39;</span>, <span class="dt">replacement =</span> <span class="st">&#39;&#39;</span>,<span class="dt">x =</span> <span class="st">&#39;-78.4645°&#39;</span>)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">xlon &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;°&#39;</span>, <span class="st">&#39;&#39;</span>,<span class="st">&#39;106.8340°&#39;</span>)</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co"># make a data frame of our points</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">ice&lt;-<span class="kw">data.frame</span>(<span class="st">&quot;x&quot;</span>=<span class="kw">as.numeric</span>(xlon), <span class="st">&quot;y&quot;</span>=<span class="kw">as.numeric</span>(xlat))</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co"># side note, if you want to convert from decimal deg to deg_minute_second with &quot;measurements package&quot;</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#xlat &lt;- measurements::conv_unit(xlat, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#xlon &lt;- measurements::conv_unit(xlon, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a></code></pre></div>
+</div>
+<div id="locate-point-and-map" class="section level3">
+<h3>Locate Point and Map</h3>
+<p>Now that we have our lat/long point, we can find out where it is with <code>map.where</code>. This could be handy if you get some points and aren’t sure where they are. Then plot a basic world map with our location.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(maps) <span class="co"># a mapping package</span></a></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(mapdata) <span class="co"># map data </span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co"># here&#39;s a nice way to simply see where your point is verbally...</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">map.where</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">x=</span>ice<span class="op">$</span>x, <span class="dt">y=</span>ice<span class="op">$</span>y)</a></code></pre></div>
+<pre><code>## [1] &quot;Antarctica&quot;</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># flat map</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>) </a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw">map.axes</span>() <span class="co"># add axes</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">points</span>(<span class="dt">x =</span> ice<span class="op">$</span>x, <span class="dt">y =</span> ice<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/map_data-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># let&#39;s make a globe/spherical map</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co"># reproject points</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">ice_proj &lt;-<span class="st"> </span>mapproj<span class="op">::</span><span class="kw">mapproject</span>(ice<span class="op">$</span>x, ice<span class="op">$</span>y,<span class="dt">projection =</span> <span class="st">&quot;globular&quot;</span>)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co"># and an actual world map </span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">wrap =</span> <span class="ot">TRUE</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>,</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">    <span class="dt">projection=</span><span class="st">&quot;globular&quot;</span>) <span class="co"># just the map, no points</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#map.axes() # add axes</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="kw">points</span>(<span class="dt">x =</span> ice_proj<span class="op">$</span>x, <span class="dt">y =</span> ice_proj<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/map_data-2.png" width="672" /></p>
+</div>
+</div>
+<div id="what-about-c02-today" class="section level2">
+<h2>What About C0<sub>2</sub> Today?</h2>
+<p>A good site to check the current C0<sub>2</sub> emission level is <a href="https://www.co2.earth/">here</a>. NOAA’s <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/monthly.html">site</a> provides trends across different time stamps, dating back to <strong>1959</strong> using measurements from the Mauna Loa Observatory.</p>
+<p>Let’s pull the annual measurements using the same commands we used above, clean the data, and plot it with <code>ggplot</code>. Let’s also add a loess regression line using <code>geom_smooth</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">library</span>(viridis) <span class="co"># for colors</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co"># notice here we can use the base R read.table() function, it automatically ignores any lines that start with &quot;#&quot;</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">df2 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt&quot;</span>, <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;dec_date&quot;</span>, <span class="st">&quot;avg_C02&quot;</span>, <span class="st">&quot;interpolated_C02&quot;</span>, <span class="st">&quot;trend_seas_corr&quot;</span>, <span class="st">&quot;no_days&quot;</span>))</a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co"># use dplyr to filter and summarize daily data to annual, get rid of missing/NAs (values -99)</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">df_ann &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw">filter</span>(avg_C02 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ann_C02=</span><span class="kw">mean</span>(avg_C02, <span class="dt">na.rm=</span>T))</a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02), <span class="dt">color=</span><span class="st">&quot;darkblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-17" data-line-number="17"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-18" data-line-number="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02, <span class="dt">fill=</span>ann_C02), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">cex=</span><span class="fl">2.5</span>, <span class="dt">alpha=</span><span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-19" data-line-number="19"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>], <span class="st">&quot; ppmv&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1970</span>, <span class="dt">y=</span><span class="dv">406</span>, </a>
+<a class="sourceLine" id="cb18-22" data-line-number="22">                            <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>), <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-23" data-line-number="23"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>), <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-24" data-line-number="24"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; At Mauna Loa Since 1958&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-25" data-line-number="25"><span class="st">  </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="lesson_ice_core_CO2_web_data_files/figure-html/currentC02-1.png" width="672" /></p>
+</div>
+<div id="web-scraping-multiple-files" class="section level2">
+<h2>Web Scraping Multiple Files</h2>
+<p>So far we’ve just looked at pulling a single file from a website. What about many files? Often data are provided in separate pieces as multiple files (i.e., one file per day or month over a long period of time). Let’s take a look at how we might pull data and then aggregate, analyze, and visualize it.</p>
+<div id="fine-scale-meterological-data-mauna-loa" class="section level3">
+<h3>Fine Scale Meterological Data: Mauna Loa</h3>
+<p>There’s an abundance of meterological data available on many repositories and websites, but let’s continue along the C0<sub>2</sub> related data and pull some fine-scale meterological data from the Mauna Loa station. This is met. data collected every <strong>minute</strong> for a whole year.</p>
+<p>The metadata for this is available <a href="ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/README">here</a>. Data used in this example is all <a href="ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/mlo/2001/">here (minute scale met data)</a>.</p>
+</div>
+<div id="downloading-multiple-files-from-an-ftp-site" class="section level3">
+<h3>Downloading Multiple Files from an FTP site</h3>
+<p><strong>Advanced Material…be patient, this is a demo showing it can be done</strong>. This data is available (pre-downloaded and zipped up) on github <a href="https://gge-ucd.github.io/R-DAVIS/data/2001_mauna_loa_met_data.zip">here</a>.</p>
+<p>To download all these in one go, let’s try using some Terminal/BASH code! There should be a Terminal tab built right into RStudio, so we’ll try using that for now. Hopefully you’ll be able to install <code>wget</code> on most any platform.</p>
+<p>Let’s first go to <code>Tools &gt; Terminal &gt; New Terminal</code>. Once that window is open, let’s try the following code.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># change directory to the data directory, where we want to download data</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">system</span>(<span class="st">&quot;cd data&quot;</span>)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co"># Now the wget command: </span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co"># get all files in a single dir</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">system</span>(<span class="st">&quot;wget --no-verbose --no-parent --recursive --level=1 --no-directories ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/mlo/2001/&quot;</span>)</a></code></pre></div>
+</div>
+<div id="aggregating-multiple-files" class="section level3">
+<h3>Aggregating Multiple Files</h3>
+<p>So we have 12 files, each a month worth of measurements taken every minute, which is roughly <em>(<code>44,000</code> measurements <code>*</code> <code>12</code> months)</em>, or about a half million lines of data. Give or take.</p>
+<p>First step, how do we read in this many files at once and merge them into one file?</p>
+</div>
+<div id="read-in-multiple-files-and-bind-into-one-file" class="section level3">
+<h3>Read in <a href="http://serialmentor.com/blog/2016/6/13/reading-and-combining-many-tidy-data-files-in-R">Multiple Files</a> and bind into one file</h3>
+<p>We’ve talked briefly about using <code>purrr</code> which is a way to loop through and do the same task over and over. It’s <em>purrr</em>fect for this task.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">require</span>(readr)  <span class="co"># for read_csv()</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">require</span>(dplyr)  <span class="co"># for mutate()</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">require</span>(tidyr)  <span class="co"># for unnest()</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">require</span>(purrr)  <span class="co"># for map(), reduce()</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">folder &lt;-<span class="st"> &quot;data/2001_mauna_loa_met_data&quot;</span> <span class="co"># the folder where the data lives</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">files_list &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">path =</span> folder, <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>) <span class="co"># list all files in that folder ending with .txt</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co"># Option 1:  Simple version, read all files in as one dataframe</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">data &lt;-<span class="st"> </span>files_list <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># read in all the files individually</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="st">  </span><span class="kw">reduce</span>(rbind)       <span class="co"># reduce with rbind into one dataframe </span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="co"># add column names to the dataframe</span></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)  </a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">head</span>(data)</a>
+<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="kw">dim</span>(data)</a>
+<a class="sourceLine" id="cb21-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb21-20" data-line-number="20">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</a>
+<a class="sourceLine" id="cb21-21" data-line-number="21">data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># create dataframe with column of the filenames</span></a>
+<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">file_contents =</span> <span class="kw">map</span>(filename, <span class="co"># read files in</span></a>
+<a class="sourceLine" id="cb21-23" data-line-number="23">                             <span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-24" data-line-number="24"><span class="st">  </span>unnest <span class="co"># this unlists all the list of dataframe</span></a>
+<a class="sourceLine" id="cb21-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="co"># add column names</span></a>
+<a class="sourceLine" id="cb21-27" data-line-number="27"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;filename&quot;</span>, <span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)</a>
+<a class="sourceLine" id="cb21-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb21-29" data-line-number="29"><span class="kw">dim</span>(data)</a>
+<a class="sourceLine" id="cb21-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="co"># save this as an rds file and an rda file!</span></a>
+<a class="sourceLine" id="cb21-32" data-line-number="32">mloa_<span class="dv">2001</span> &lt;-<span class="st"> </span>data <span class="co"># remember with rda we can&#39;t rename the dataframe when we &quot;load()&quot;. </span></a>
+<a class="sourceLine" id="cb21-33" data-line-number="33"></a>
+<a class="sourceLine" id="cb21-34" data-line-number="34">dplyr<span class="op">::</span><span class="kw">write_rds</span>(mloa_<span class="dv">2001</span>, <span class="dt">path =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rds&quot;</span>, <span class="dt">compress =</span> <span class="st">&quot;gz&quot;</span>)</a>
+<a class="sourceLine" id="cb21-35" data-line-number="35"></a>
+<a class="sourceLine" id="cb21-36" data-line-number="36"><span class="kw">save</span>(mloa_<span class="dv">2001</span>, <span class="dt">file =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rda&quot;</span>, <span class="dt">compress =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Wow that’s cool!</p>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p>Hopefully this provides a few good examples of how to download various data from the interwebs, get that data into R, and then play &amp; plot it! We’ll work a bit more with the Mauna Loa data in other lessons.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><em>Ice cores have been drilled as deep as 3,623 m!</em>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

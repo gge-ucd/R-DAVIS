@@ -1,0 +1,88 @@
+---
+title: "Github protocols: `ssh` vs. `https`"
+---
+
+> *this is from this gist: https://gist.github.com/grawity/4392747* 
+
+Primary differences between SSH and HTTPS. This post is specifically about accessing Git repositories on GitHub.
+
+## Protocols to choose from when cloning:
+
+**plain Git**, aka `git://github.com/`
+
+  * **Does not add security** beyond what Git itself provides. The server is not verified.
+
+    If you clone a repository over git://, you should check if the latest commit's hash is correct.
+
+  * You **cannot push** over it. (But see "Mixing protocols" below.)
+
+**HTTPS**, aka `https://github.com/`
+
+  * HTTPS **will always verify the server** automatically, using certificate authorities.
+
+  * (On the other hand, in the past years several certificate authorities have been broken into, and many people consider them not secure enough. Also, some important HTTPS security enhancements are only available in web browsers, but not in Git.)
+
+  * Uses **password** authentication for pushing, and still allows anonymous pull.
+
+  * Downside: You have to enter your GitHub password every time you push. [Git can remember passwords][2] for a few minutes, but you need to be careful when storing the password permanently – since it can be used to change anything in your GitHub account.
+
+  * If you have two-factor authentication enabled, you will have to use a [personal access token][3] instead of your regular password.
+
+  * HTTPS **works practically everywhere**, even in places which block SSH and plain-Git protocols. In some cases, it can even be **a little faster** than SSH, especially over high-latency connections.
+
+**HTTP**, aka `http://github.com/`
+
+  * Doesn't work with GitHub anymore, but is offered by some other Git hosts.
+
+  * Works practically everywhere, like HTTPS.
+
+  * But does not provide any security – the connection is plain-text.
+
+**SSH**, aka `git@github.com:` or `ssh://git@github.com/`
+
+  * Uses **public-key** authentication. You have to [generate a **keypair**][1] (or "public key"), then add it to your GitHub account.
+
+  * Using keys is **more secure than passwords**, since you can add many to the same account (for example, a key for every computer you use GitHub from). The private keys on your computer can be protected with passphrases.
+
+  * On the other hand, since you do not use the password, GitHub does not require two-factor auth codes either – so whoever obtains your private key can push to your repositories without needing the code generator device.
+
+  * However, the keys only allow pushing/pulling, but _not_ editing account details. If you lose the private key (or if it gets stolen), you can just remove it from your GitHub account.
+
+  * A minor downside is that authentication is needed for all connections, so you always **need a GitHub account** – even to pull or clone.
+
+  * You also need to **carefully verify the server's fingerprint** when connecting for the first time. Many people skip that and just type "yes", which is insecure.
+
+  * (Note: This description is about GitHub. On personal servers, SSH can use passwords, anonymous access, or various other mechanisms.)
+
+## Mixing protocols
+
+### Globally
+
+You can clone everything over `git://`, but tell Git to push over HTTPS.
+
+    [url "https://github.com/"]
+        pushInsteadOf = git://github.com/
+
+Likewise, if you want to clone over `git://` or HTTPS, but push over SSH:
+
+    [url "git@github.com:"]
+        pushInsteadOf = git://github.com/
+        pushInsteadOf = https://github.com/
+
+These go to your *git* config file – sometimes `~/.config/git/config`, or `~/.gitconfig`, or just run `git config --edit --global`.
+
+### Per-repository
+
+You can also set different pull and push URLs for every remote separately, by changing <code>remote.<i>name</i>.pushUrl</code> in the repository's own `.git/config`:
+
+    [remote "origin"]
+        url = git://nullroute.eu.org/~grawity/rwho.git
+        pushUrl = ssh://sine/pub/git/rwho.git
+
+[1]: https://help.github.com/articles/generating-ssh-keys
+[2]: https://help.github.com/articles/set-up-git#password-caching
+[3]: https://help.github.com/articles/creating-an-access-token-for-command-line-use
+
+---
+
+Linked from [gitinfo](http://jk.gs/git/bot/trigger_detail.php?trigger=ghprotocols)

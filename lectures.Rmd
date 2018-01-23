@@ -24,7 +24,7 @@ Screencasts of each lecture will be available on Youtube below as the quarter pr
 ### Week 3
 
 * What we covered ([livecode](https://dl.dropboxusercontent.com/s/gnzcuy5p2bl3nlv/2018-R-DAVIS-w03.R?dl=0))
-* [Screencast](https://www.youtube.com/watch?v=ypVTFzAxrRw)
+* [**Screencast**](https://www.youtube.com/watch?v=ypVTFzAxrRw)
 * [**GoogleDoc**](https://tinyurl.com/r-davis-week-3)
 
 ### Week 4

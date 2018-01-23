@@ -1,0 +1,668 @@
+---
+layout: page
+title: R for reproducible scientific analysis
+subtitle: Manipulating data.frames
+minutes: 130
+---
+
+> ## Learning objectives
+> - Understand the 6 main data types in R
+> - Be able to use the six major dplyr verbs (`filter`, `select`, `arrange`, `mutate`, `group_by`, `summarize`)
+> - Be able to use and understand the advantages of the `magrittr` pipe: `%>%`
+
+## Installing and loading packages
+
+`dplyr` is not part of "base R"; rather it is a package -- a library of functions that an R user wrote. This extensibility is part of the beauty of R. As of December 2016, there are 9,600 such packages in the official Comprehensive R Archive Network, better known as [CRAN](https://cran.r-project.org/). 
+
+`dplyr` is one of the most popular packages for R. It is part of a suite of R tools that make up "The Tidyverse". Its author conveniently bundled these tools together in a super-package called `tidyverse`. To use the tidyverse tools, you first need to download them to your machine (once) and then load them (each R session you want to use them). You can download a package via the RStudio menu bar Tools -> Install Packages..., or with a line of code:
+
+```{r, eval = FALSE}
+install.packages('tidyverse')
+```
+
+You only have to download the code once. But whenever you want to *use* a package, you have to load it in your R session. For that, use the `library` function:
+
+```{r, echo=T, eval=F, warning = FALSE}
+library(tidyverse)
+```
+
+
+> #### Challenge -- Install and load tidyverse {.challenge}
+>
+> - Install the `tidyverse` & `gapminder` packages, either with `install.packages('tidyverse', 'gapminder')` or via the menu bar: Tools -> Install Packages...  
+> - Load `tidyverse` with `library(tidyverse)`
+> - Load `gapminder` with `library(gapminder)`
+>   - You will see some warnings about conflicts. That's okay.
+
+## Vectors & Data Types
+
+ > There are six main types of data in R. We've already covered 2--3 of them. Can anyone help me list them?
+
+A vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the **`c()`** function. For example we can create a vector of animal weights and assign it to a new object `weight_g`:
+
+```{r}
+weight_g <- c(50, 60, 65, 82)
+weight_g
+```
+
+A vector can also contain characters:
+
+```{r}
+animals <- c("mouse", "rat", "dog")
+animals
+```
+
+The quotes around “mouse”, “rat”, etc. are essential here. Without the quotes R will assume there are objects called mouse, rat and dog. As these objects don’t exist in R’s memory, there will be an error message.
+
+There are many functions that allow you to inspect the content of a vector. `length()` tells you how many elements are in a particular vector:
+
+```{r}
+length(weight_g)
+length(animals)
+```
+
+An important feature of a vector, is that all of the elements are the same type of data. The function `class()` indicates the class (the type of element) of an object:
+
+```{r}
+class(weight_g)
+class(animals)
+```
+
+The function `str()` provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:
+
+```{r}
+str(weight_g)
+str(animals)
+```
+
+You can also use the `c()` function to add other elements to your vector:
+
+```{r}
+weight_g <- c(weight_g, 90) # add to the end of the vector
+weight_g <- c(30, weight_g) # add to the beginning of the vector
+weight_g
+```
+
+In the first line, we take the original vector `weight_g`, add the value 90 to the end of it, and save the result back into `weight_g`. Then we add the value 30 to the beginning, again saving the result back into `weight_g`.
+
+We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.
+
+We just saw 2 of the 6 main atomic vector types (or data types) that R uses:  **"character"** and **"numeric"**. These are the basic building blocks that all R objects are built from. The other 4 are:
+
+ - **"logical"** for TRUE and FALSE (the boolean data type)
+ - **"integer"** for integer numbers (e.g., 2L, the L indicates to R that it’s an integer)
+ - **"complex"** to represent complex numbers with real and imaginary parts (e.g., `1+4i`) and that’s all we’re going to say about them
+ - **"raw"** that we won’t discuss further
+
+Vectors are one of the many data structures that R uses. Other important ones are lists (`list`), matrices (`matrix`), data frames (`data.frame`), factors (`factor`) and arrays (`array`).
+
+#### Challenge
+ > We’ve seen that atomic vectors can be of type character, numeric, integer, and logical. But what happens if we try to mix these types in a single vector?
+ > What will happen in each of these examples? (hint: use class() to check the data type of your objects):
+
+```{r}
+num_char <- c(1, 2, 3, 'a')
+num_logical <- c(1, 2, 3, TRUE)
+char_logical <- c('a', 'b', 'c', TRUE)
+tricky <- c(1, 2, 3, '4')
+```
+
+ > - Why do you think it happens?
+ > - You’ve probably noticed that objects of different types get converted into a single, shared type within a vector. In R, we call converting objects from one class into another class coercion. These conversions happen according to a hierarchy, whereby some types get preferentially coerced into other types. Can you draw a diagram that represents the hierarchy of how these data types are coerced?
+
+## Factors
+
+Sometimes if we look at a data set with `str()` we can see columns consist of integers, character, etc. However, sometimes the columns are of a special class called a `factor`. Factors are very useful and are actually something that make R particularly well suited to working with data, so we’re going to spend a little time introducing them.
+
+**Factors are used to represent categorical data**. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.
+
+Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.
+
+Once created, factors can only contain a pre-defined set of values, known as levels. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:
+
+```{r}
+sex <- factor(c("male", "female", "female", "male"))
+```
+
+R will assign 1 to the level "`female`" and 2 to the level "`male`" (because **f** comes before **m**, even though the first element in this vector is "`male`"). You can check this by using the function `levels()`, and check the number of levels using `nlevels()`:
+
+```{r}
+levels(sex)
+nlevels(sex)
+```
+
+Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. Here, one way to reorder our levels in the sex vector would be:
+
+```{r}
+sex # current order
+#> [1] male   female female male  
+#> Levels: female male
+sex <- factor(sex, levels = c("male", "female"))
+sex # after re-ordering
+#> [1] male   female female male  
+#> Levels: male female
+```
+
+
+In R’s memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: "`female`", "`male`" is more descriptive than 1, 2. Which one is “`male`”? You wouldn’t be able to tell just from the integer data. Factors, on the other hand, have this information built in. It is particularly helpful when there are many levels (like the species names in our ecology example dataset [dataset](https://mikoontz.github.io/data-carpentry-week/data/species.csv)).
+
+### Converting factors
+
+If you need to convert a factor to a character vector, you use `as.character(x)`.
+
+```{r}
+as.character(sex)
+```
+
+Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. Another method is to use the `levels()` function. Compare:
+
+```{r}
+f <- factor(c(1990, 1983, 1977, 1998, 1990))
+as.numeric(f)               # wrong! and there is no warning...
+as.numeric(as.character(f)) # works...
+as.numeric(levels(f))[f]    # The recommended way.
+```
+
+Notice that in the `levels()` approach, three important steps occur:
+
+ - We obtain all the factor levels using `levels(f)`
+ - We convert these levels to numeric values using `as.numeric(levels(f))`
+ - We then access these numeric values using the underlying integers of the vector `f` inside the square brackets
+
+### Using `stringsAsFactors=FALSE`
+
+By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, `read.csv()` and `read.table()` have an argument called `stringsAsFactors` which can be set to `FALSE`.
+
+ > In most cases, it’s preferable to set `stringsAsFactors = FALSE` when importing your data, and converting as a factor only the columns that require this data type.
+
+Compare the output of `str(surveys)` when setting `stringsAsFactors = TRUE` (default) and `stringsAsFactors = FALSE`:
+
+We are going to use the R function `download.file()` to download the CSV file that contains the survey data from figshare, and we will use `read.csv()` to load into memory the content of the CSV file as an object of class data.frame.
+
+To download the data into the `data/` subdirectory, run the following:
+
+```{r, eval=F, echo=T}
+
+download.file("https://ndownloader.figshare.com/files/2292169",
+              "data/combined.csv")
+```
+
+You are now ready to load the data:
+
+```{r eval=F, echo=T}
+surveys <- read.csv('data/combined.csv')
+```
+
+This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the first 6 lines of this data using `head(surveys)`
+
+Now we can look at how reading in the data in different ways affects the different data types (`factor` vs. `character`):
+
+```{r, eval=F, echo=T}
+
+## Compare the difference between when the data are being read as
+## `factor`, and when they are being read as `character`.
+surveys <- read.csv("data/combined.csv", stringsAsFactors = TRUE)
+str(surveys)
+surveys <- read.csv("data/combined.csv", stringsAsFactors = FALSE)
+str(surveys)
+## Convert the column "plot_type" into a factor
+surveys$plot_type <- factor(surveys$plot_type)
+```
+
+
+#### Challenge
+
+We have seen how data frames are created when using the `read.csv()`, but they can also be created by hand with the `data.frame()` function. There are a few mistakes in this hand-crafted data.frame, can you spot and fix them? Don’t hesitate to experiment!
+
+```{r, eval=FALSE, echo=T}
+animal_data <- data.frame(animal=c("dog", "cat", "sea cucumber", "sea urchin"),
+                          feel=c("furry", "squishy", "spiny"),
+                          weight=c(45, 8 1.1, 0.8))
+```
+
+> - Can you predict the class for each of the columns in the following example? Check your guesses using str(country_climate):
+>   - Are they what you expected? Why? Why not?
+>   - What would have been different if we had added  stringsAsFactors = FALSE to this call?
+>   - What would you need to change to ensure that each column had the accurate data type?
+
+```{r eval=F, echo=T}
+country_climate <- data.frame(
+       country=c("Canada", "Panama", "South Africa", "Australia"),
+       climate=c("cold", "hot", "temperate", "hot/temperate"),
+       temperature=c(10, 30, 18, "15"),
+       northern_hemisphere=c(TRUE, TRUE, FALSE, "FALSE"),
+       has_kangaroo=c(FALSE, FALSE, FALSE, 1)
+       )
+```
+
+The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance.).
+
+## Data Wrangling with `dplyr`
+
+It is an often bemoaned fact that a data scientist spends much, and often most, of her time wrangling data: getting it organized and clean. In this lesson we will learn an efficient set of tools that can handle the vast majority of most data management tasks. 
+
+Enter `dplyr`, a package for making data manipulation easier. More on `dplyr` later. `dplyr` is part of `tidyverse`, so it is already installed on your machine. You can load it individually, or with the other tidyverse packages like this:
+
+```{r, warning=FALSE}
+library(tidyverse)
+library(gapminder)
+```
+
+Those messages and conflicts are normal. The conflicts are R telling you that there are two packages with functions named "filter" and "lag". When R gives you red text, it's not always a bad thing, but it does mean you should pay attention and try to understand what it's trying to tell you.
+
+Remember that you only have to install each package once (per computer), but you have to load them for each R session in which you want to use them.
+
+You also have to load any data you want to use each time you start a new R session. So, if it's not already loaded, read in the gapminder data. We're going to use tidyverse's `read_csv` instead of base R's `read.csv` here. It has a few nice features; the most obvious is that it makes a special kind of data.frame that only prints the first ten rows instead of all 1704.
+
+```{r load, warning = FALSE, message = FALSE}
+# gapminder <- read_csv('data/gapminder-FiveYearData.csv')
+class(gapminder)
+head(gapminder) # look at first few rows
+str(gapminder) # look at data structure
+```
+
+You can always convert a data.frame into this special kind of data.frame like this:
+
+```{r}
+gapminder <- tbl_df(gapminder)
+```
+
+## What is dplyr?
+
+The package `dplyr` is a fairly new (2014) package that tries to provide easy
+tools for the most common data manipulation tasks. It is built to work directly
+with data frames. The thinking behind it was largely inspired by the package
+`plyr` which has been in use for some time but suffered from being slow in some
+cases.` dplyr` addresses this by porting much of the computation to C++. An
+additional feature is the ability to work with data stored directly in an
+external database. The benefits of doing this are that the data can be managed
+natively in a relational database, queries can be conducted on that database,
+and only the results of the query returned.
+
+This addresses a common problem with R in that all operations are conducted in
+memory and thus the amount of data you can work with is limited by available
+memory. The database connections essentially remove that limitation in that you
+can have a database of many 100s GB, conduct queries on it directly and pull
+back just what you need for analysis in R.
+
+
+### The five tasks of `dplyr`
+
+There are five actions we often want to apply to a tabular dataset:
+
+- Filter rows
+- Filter columns
+- Arrange rows
+- Make new columns
+- Summarize groups
+
+We are about to see how to do each of those things using the `dplyr` package. Everything we're going to learn to do can also be done using "base R", but `dplyr` makes it easier, and the syntax is consistent, and it actually makes the computations faster. 
+
+#### `filter()`
+
+Suppose we want to see just the gapminder data for the USA. First, we need to know how "USA" is written in the dataset: Is it USA or United States or what? We can see all the unique values of a variable with the `unique` function.
+
+```{r unique}
+unique(gapminder$country)
+```
+
+Okay, now we want to see just the rows of the data.frame where country is "United States". The syntax for all `dplyr` functions is the same: The first argument is the data.frame, the rest of the arguments are whatever you want to do in that data.frame. 
+
+```{r filter}
+filter(gapminder, country == "United States")
+```
+
+We can also apply multiple conditions, e.g. the US after 2000:
+
+```{r filter and}
+filter(gapminder, country == "United States" & year > 2000)
+```
+
+We can also use "or" conditions with the vertical pipe: `|`. Notice that the variable (column) names don't go in quotes, but values of character variables do. 
+
+```{r filter or}
+filter(gapminder, country == "United States" | country == "Mexico")
+```
+
+A good, handy reference list for the operators (and, or, etc) can be found [here](http://www.statmethods.net/management/operators.html).
+
+#### `select()`
+
+`filter` returned a subset of the data.frame's rows. `select` returns a subset of the data.frame's columns.
+
+Suppose we only want to see country and life expectancy. 
+
+```{r select, eval = FALSE}
+select(gapminder, country, lifeExp)
+```
+
+We can choose which columns we don't want
+
+```{r}
+select(gapminder, -continent, income = gdpPercap)
+```
+
+And we can rename columns
+
+```{r}
+select(gapminder, ThePlace = country, HowLongTheyLive = lifeExp)
+```
+
+As usual, R isn't saving any of these outputs; just printing them to the screen. If we want to keep them around, we need to assign them to a variable.
+
+```{r}
+justUS = filter(gapminder, country == "United States")
+USdata = select(justUS, -country, -continent)
+USdata
+```
+
+
+> #### Subsetting {.challenge}
+>
+> - Subset the gapminder data to only Oceania countries post-1980.
+> - Remove the continent column
+> - Make a scatter plot of gdpPercap vs. population colored by country
+>
+> **Advanced** How would you determine the median population for the North American countries between 1970 and 1980?
+>
+> **Bonus** This can be done using base R's subsetting, but this class doesn't teach how. Do the original challenge without the `filter` and `select` functions. Feel free to consult Google, helpfiles, etc. to figure out how.
+> 
+
+
+#### `arrange()`
+
+You can order the rows of a data.frame by a variable using `arrange`. Suppose we want to see the most populous countries: 
+
+```{r arrange}
+arrange(gapminder, pop)
+```
+
+Hmm, we didn't get the most populous countries. By default, `arrange` sorts the variable in *increasing* order. We could see the most populous countries by examining the `tail` of the last command, or we can sort the data.frame by descending population by wrapping the variable in `desc()`:
+
+```{r arrange desc}
+arrange(gapminder, desc(pop))
+```
+
+`arrange` can also sort by multiple variables. It will sort the data.frame by the first variable, and if there are any ties in that variable, they will be sorted by the next variable, and so on. Here we sort from newest to oldest, and within year from richest to poorest:
+
+```{r arrange multi}
+arrange(gapminder, desc(year), desc(gdpPercap))
+```
+
+**Shoutout Q: Would we get the same output if we switched the order of `desc(year)` and `desc(gdpPercap)` in the last line?**
+
+
+#### `mutate()`
+
+We have learned how to drop rows, drop columns, and rearrange rows. To make a new column we use the `mutate` function. As usual, the first argument is a data.frame. The second argument is the name of the new column you want to create, followed by an equal sign, followed by what to put in that column. You can reference other variables in the data.frame, and `mutate` will treat each row independently. E.g. we can calculate the total GDP of each country in each year by multiplying the per-capita GDP by the population. 
+
+```{r mutate}
+mutate(gapminder, total_gdp = gdpPercap * pop)
+```
+
+**Shoutout Q: How would we view the highest-total-gdp countries?**
+
+Note that didn't change gapminder: We didn't assign the output to anything, so it was just printed, with the new column. If we want to modify our gapminder data.frame, we can assign the output of `mutate` back to the gapminder variable, but be careful doing this -- if you make a mistake, you can't just re-run that line of code, you'll need to go back to loading the gapminder data.frame.
+
+Also, you can create multiple columns in one call to `mutate`, even using variables that you just created, separating them with commas:
+
+```{r}
+gapminder = mutate(gapminder, 
+                   total_gdp = gdpPercap * pop,
+                   log_gdp = log10(total_gdp))
+```
+
+
+> #### MCQ: Data Reduction {.challenge}
+>
+> Produce a data.frame with only the names, years, and per-capita GDP of countries where per capita gdp is less than a dollar a day sorted from most- to least-recent.
+>
+> - Tip: The `gdpPercap` variable is annual gdp. You'll need to adjust.
+> - Tip: For complex tasks, it often helps to use pencil and paper to write/draw/map the various steps needed and how they fit together before writing any code.
+> 
+> What is the annual per-capita gdp, rounded to the nearest dollar, of the first row in the data.frame?
+>
+> a. $278
+> b. $312
+> c. $331
+> d. $339
+>
+> **Advanced**: Use dplyr functions and ggplot to plot per-capita GDP versus population for North American countries after 1970.
+> - Once you've made the graph, transform both axes to a log10 scale. There are two ways to do this, one by creating new columns in the data frame, and another using functions provided by ggplot to transform the axes. Implement both, in that order. Which do you prefer and why?
+>
+
+
+
+#### C'est ne pas une pipe
+
+Suppose we want to look at all the countries where life expectancy is greater than 80 years, sorted from poorest to richest. First, we `filter`, then we `arrange`. We could assign the intermediate data.frame to a variable:
+
+```{r filter and arrange assign}
+lifeExpGreater80 = filter(gapminder, lifeExp > 80)
+(lifeExpGreater80sorted = arrange(lifeExpGreater80, gdpPercap))
+```
+
+In this case it doesn't much matter, but we make a whole new data.frame (`lifeExpGreater80`) and only use it once; that's a little wasteful of system resources, and it clutters our environment. If the data are large, that can be a big problem. 
+
+Or, we could nest each function so that it appears on one line:
+
+```{r filter and arrange assign oneline}
+arrange(filter(gapminder, lifeExp > 80), gdpPercap)
+```
+
+This would become difficult to read if we are performing a number of operations that would require a repeated nesting. But...
+
+There is a better way, and it makes both writing and reading the code easier. The pipe from the `magrittr` package (which is automatically installed and loaded with `dplyr` and `tidyverse`) takes the output of first line, and plugs it in as the first argument of the next line. Since many `tidyverse` functions expect a data.frame as the first argument and output a data.frame, this works fluidly.
+
+```{r filter and arrange pipe}
+filter(gapminder, lifeExp > 80) %>%
+    arrange(gdpPercap)
+```
+
+To demonstrate how it works, here are some examples where it's unnecessary. 
+
+```{r pipe simple}
+4 %>% sqrt()
+2 ^ 2 %>% sum(1)
+```
+
+Whatever goes through the pipe becomes the first argument of the function after the pipe. This is convenient, because all `dplyr` functions produce a data.frame as their output and take a data.frame as the first argument. Since R ignores white-space, we can put each function on a new line, which RStudio will automatically indent, making everything easy to read. Now each line represents a step in a sequential operation. You can read this as "Take the gapminder data.frame, filter to the rows where lifeExp is greater than 80, and arrange by gdpPercap." 
+
+```{r pipe}
+gapminder %>%
+    filter(lifeExp > 80) %>%
+    arrange(gdpPercap)
+```
+
+Making your code easier for humans to read will save you lots of time. The human reading it is usually future-you, and operations that seem simple when you're writing them will look like gibberish when you're three weeks removed from them, let alone three months or three years or another person. Make your code as easy to read as possible by using the pipe where appropriate, leaving white space, using descriptive variable names, being consistent with spacing and naming, and liberally commenting code.
+
+> #### Challenge: Data Reduction with Pipes {.challenge}
+>
+> Copy the code you (or the instructor) wrote to solve the previous MCQ Data Reduction challenge. Rewrite it using pipes (i.e. no assignment and no nested functions)
+>
+>
+
+
+#### `summarize()`
+
+Often we want to calculate a new variable, but rather than keeping each row as an independent observation, we want to group observations together to calculate some summary statistic. To do this we need two functions, one to do the grouping and one to calculate the summary statistic: `group_by` and `summarize`. By itself `group_by` doesn't change a data.frame; it just sets up the grouping. `summarize` then goes over each group in the data.frame and does whatever calculation you want. E.g. suppose we want the average global gdp for each year. While we're at it, let's calculate the mean and median and see how they differ. 
+
+```{r summarize}
+gapminder %>%
+    group_by(year) %>%
+    summarize(mean_gdp = mean(gdpPercap), median_gdp = median(gdpPercap))
+```
+
+**Shoutout Q: Note that `summarize` eliminates any other columns. Why? What else can it do? E.g. What country should it list for the year 1952!?**
+
+There are several different summary statistics that can be generated from our data. The R base package provides many built-in functions such as `mean`, `median`, `min`, `max`, and `range`.  By default, all **R functions operating on vectors that contains missing data will return NA**. It's a way to make sure that users know they have missing data, and make a conscious decision on how to deal with it. When dealing with simple statistics like the mean, the easiest way to ignore `NA` (the missing data) is to use `na.rm=TRUE` (`rm` stands for remove). An alternate option is to use the function `is.na()`, which evaluates to true if the value passed to it is not a number. This function is more useful as a part of a filter, where you can filter out everything that is not a number. For that purpose you would do something like
+
+```{r isna, purl = FALSE, eval=FALSE}
+gapminder %>%
+  filter(!is.na(someColumn)) 
+```
+
+The `!` symbol negates it, so we're asking for everything that is not an `NA`. 
+
+
+We often want to calculate the number of entries within a group. E.g. we might wonder if our dataset is balanced by country. We can do this with the `n()` function, or `dplyr` provides a `count` function as a convenience:
+
+```{r count}
+gapminder %>%
+    group_by(country) %>%
+    summarize(number_entries = n())
+count(gapminder, country)
+```
+
+
+We can also do multiple groupings. Suppose we want the maximum life expectancy in each continent for each year. We group by continent and year and calculate the maximum with the `max` function:
+
+```{r multiple groups}
+gapminder %>%
+    group_by(continent, year) %>%
+    summarize(longest_life = max(lifeExp))
+```
+
+Hmm, we got the longest life expectancy for each continent-year, but we didn't get the country. To get the country, we have to ask R "Where lifeExp is at a maximum, what is the entry in country?" For that we use the `which.max` function. `max` returns the maximum value; `which.max` returns the location of the maximum value.
+
+```{r which.max}
+max(c(1, 7, 4))
+which.max(c(1, 7, 4))
+```
+
+Now, back to the question: Where lifeExp is at a maximum, what is the entry in country? 
+
+```{r which.max lifeExp}
+gapminder %>%
+    group_by(continent, year) %>%
+    summarize(longest_life = max(lifeExp), country = country[which.max(lifeExp)])
+```
+
+
+
+
+> #### Challenge -- Part 1 {.challenge}
+>
+> - Calculate a new column: the total GDP of each country in each year. 
+> - Calculate the variance -- `var()` of countries' gdps in each year.
+> - Is country-level GDP getting more or less equal over time?
+> 
+
+> #### Challenge -- Part 2 {.challenge}
+> 
+> - Modify the code you just wrote to calculate the variance in both country-level GDP and per-capita GDP.
+> - Do both measures support the conclusion you arrived at above?
+
+
+#### Resources
+
+That is the core of `dplyr`'s functionality, but it does more. RStudio makes a great [cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) that covers all the `dplyr` functions we just learned, plus what we will learn in the next lesson: keeping data tidy.
+
+
+## Challenge solutions
+
+
+<span style="color:white">**Solution to challenge Subsetting**</span>
+
+<span style="color:white"> 
+    - Subset the gapminder data to only Oceania countries post-1980.  
+    - Remove the continent column  
+    - Make a scatter plot of gdpPercap vs. population colored by country</span>
+
+<span style="color:white">`library(gapminder)`</span>
+<span style="color:white">
+`oc1980 = filter(gapminder, continent == "Oceania" & year > 1980)`
+`oc1980less = select(oc1980, -continent)`
+`library('ggplot2')`
+`ggplot(oc1980less, aes(x = gdpPercap, y = lifeExp, color = country)) +`
+  `geom_point()`
+</span>
+
+<span style="color:white">**Advanced:** How would you determine the median population for the North American countries between 1970 and 1980?</span>
+
+<span style="color:white">
+`library(gapminder)`
+`library(tidyverse)`
+`noAm = filter(gapminder, country == "United States" | country == "Canada" |` `country == "Mexico" | country == "Puerto Rico" & (year > 1970 & year < 1980))`
+`noAmPop = select(noAm, pop) `
+`#median(noAmPop)` 
+`#noAmPop `
+`#as.integer(noAmPop) `
+`median(unlist(noAmPop))`
+</span>
+
+<span style="color:white">**Bonus** This can be done using base R's subsetting, but this class doesn't teach how. Do the original challenge without the `filter` and `select` functions. Feel free to consult Google, helpfiles, etc. to figure out how. </span>
+  
+<span style="color:white">
+`noAm2 = gapminder[(gapminder$country == "United States") | `
+`                    (gapminder$country == "Mexico") | `
+`                    (gapminder$country == "Canada") | `
+`                    (gapminder$country == "Puerto Rico") & `
+`                    ((gapminder$year > 1970) & `
+`                       (gapminder$year < 1980)),] `
+`median(noAm2$pop) `
+</span>
+ 
+
+<span style="color:white">**Solution to challenge MCQ: Data Reduction**</span>
+ 
+<span style="color:white">Produce a data.frame with only the names, years, and per-capita GDP of countries where per capita gdp is less than a dollar a day sorted from most- to least-recent.</span>
+
+<span style="color:white"> 
+ - Tip: The `gdpPercap` variable is annual gdp. You'll need to adjust. 
+ - Tip: For complex tasks, it often helps to use pencil and paper to write/draw/map the various steps needed and how they fit together before writing any code. 
+  
+<span style="color:white">What is the annual per-capita gdp, rounded to the nearest dollar, of the first row in the data.frame?</span> 
+
+<span style="color:white"> 
+ a. $278 
+ b. $312 
+ c. $331 
+ d. $339
+</span>
+  
+<span style="color:white">
+`dailyGDP = mutate(gapminder, onedayGDP = gdpPercap / 365) `
+`dailyGDP = filter(dailyGDP, onedayGDP < 1) `
+`dailyGDP = select(dailyGDP, country, year, gdpPercap) `
+`dailyGDP[1,]` 
+</span>
+
+<span style="color:white">
+**Advanced**: Use dplyr functions and ggplot to plot per-capita GDP versus population for North American countries after 1970. 
+ - Once you've made the graph, transform both axes to a log10 scale. There are two ways to do this, one by creating new columns in the data frame, and another using functions provided by ggplot to transform the axes. Implement both, in that order. Which do you prefer and why? </span>
+ 
+<span style="color:white">
+`noAm = filter(gapminder, country == "United States" |  `
+`                country == "Canada" | country == "Mexico" |  `
+`                country == "Puerto Rico" & year > 1970 `
+`)` 
+`ggplot(noAm, aes(x = gdpPercap, y = pop, color = country)) + `
+  `geom_point() +  `
+  `scale_x_log10() + `
+  `scale_y_log10() `
+</span>
+
+<span style="color:white">**Challenge: Data Reduction with Pipes**</span>
+ 
+<span style="color:white">Copy the code you (or the instructor) wrote to solve the previous MCQ Data Reduction challenge. Rewrite it using pipes (i.e. no assignment and no nested functions)</span> 
+ 
+<span style="color:white">
+Previous challenge with pipes 
+`dailyGDP = mutate(gapminder, onedayGDP = gdpPercap / 365)`
+`dailyGDP = filter(dailyGDP, onedayGDP < 1)` 
+`dailyGDP = select(dailyGDP, country, year, gdpPercap)` 
+`smallGDP = gapminder %>% `
+  `mutate(onedayGDP = gdpPercap / 365) %>% `
+  `filter(onedayGDP < 1) %>% `
+  `select(country, year, gdpPercap) `
+`smallGDP[1,] `
+</span>
+
+<span style="color:white">
+**OR, more fancy** (without an intermediate temp variable) `
+`(gapminder %>% `
+`    mutate(onedayGDP = gdpPercap / 365) %>% `
+`    filter(onedayGDP < 1) %>% `
+`    select(country, year, gdpPercap))[1,] `
+</span> 
