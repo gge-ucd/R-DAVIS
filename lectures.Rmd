@@ -12,7 +12,7 @@ Screencasts of each lecture will be available on Youtube below as the quarter pr
 ### Week 1
 
 * What we covered ([livecode](https://raw.githubusercontent.com/gge-ucd/R-DAVIS-live-code/master/scripts/2018-R-DAVIS-w01.R))
-* [**Screencast**](https://www.youtube.com/watch?v=j0x6OZi_OGE)
+* [**Screencast**](https://www.youtube.com/watch?v=j0x6OZi_OGE) (*video cuts out in second half, audio good*)
 * [**GoogleDoc**](https://tinyurl.com/r-davis-week-1)
 
 ### Week 2
@@ -24,23 +24,26 @@ Screencasts of each lecture will be available on Youtube below as the quarter pr
 ### Week 3
 
 * What we covered ([livecode](https://dl.dropboxusercontent.com/s/gnzcuy5p2bl3nlv/2018-R-DAVIS-w03.R?dl=0))
-* [**Screencast**](https://www.youtube.com/watch?v=ypVTFzAxrRw)
+* [**Screencast**](https://www.youtube.com/watch?v=ypVTFzAxrRw) (*video cuts out halfway, audio still good*)
 * [**GoogleDoc**](https://tinyurl.com/r-davis-week-3)
 
 ### Week 4
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/ht32bw2siddnwyz/2018-R-DAVIS-w04.R?dl=0))
+* [Screencast](https://www.youtube.com/watch?v=Sn1_K95uXx4)
+* [**GoogleDoc**](https://tinyurl.com/r-davis-week-4)
 
 ### Week 5
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/5gf17w7xo58a4vw/2018-R-DAVIS-w05.R?dl=0))
+* [Screencast](https://www.youtube.com/watch?v=zjQxdu0CUsE)
+* [**GoogleDoc**](https://tinyurl.com/r-davis-week-5)
 
 ### Week 6
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/60y47vubn84jvi8/2018-R-DAVIS-w06.R?dl=0))
+* [Screencast](https://www.youtube.com/watch?v=7PCQ5vfCsZU)
+* [**GoogleDoc**](https://tinyurl.com/r-davis-week-5)
 
 ### Week 7
 
