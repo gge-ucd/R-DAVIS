@@ -5,7 +5,7 @@ output:
     toc: false
 ---
 
-Screencasts of each lecture will be available on Youtube below as the quarter progresses. We are using Google hangouts and screensharing, so bear with us on transitions during lecture and live-coding. In addition, there are a number of great presentations that have been recorded at [Davis R-Users Group](http://d-rug.github.io/) meetings, see the Resources tab.
+Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` email/class registration is required to access the google doc] are available below. We are using Google hangouts and screensharing, so bear with us on transitions during lecture and live-coding. In addition, there are a number of great presentations that have been recorded at [Davis R-Users Group](http://d-rug.github.io/) meetings, see the Resources tab.
 
 ## Lectures {.tabset .tabset-fade}
 
