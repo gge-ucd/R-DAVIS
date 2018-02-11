@@ -54,46 +54,50 @@ library(emo, quietly = T)
  - `r emo::ji("white_check_mark")` Intro to Git and RStudio
  - `r emo::ji("white_check_mark")` Project management
 
-
 #### Week 2
-
  
- - `r emo::ji("white_check_mark")` Spreadsheets & Project Management (p2)
+ - `r emo::ji("white_check_mark")` Spreadsheets & Project Management
  - `r emo::ji("white_check_mark")` Intro to R
- - `r emo::ji("white_check_mark")` Data frames & subsetting
  
-
 #### Week 3
 
- - `r emo::ji("white_check_mark")` `dplyr` (import, manipulation, visualization)
- - `r emo::ji("ballot_box_with_check")` `tidyr` (import different datasets)
+ - `r emo::ji("white_check_mark")` Data frames & subsetting
 
 #### Week 4
 
- - `r emo::ji("ballot_box_with_check")` visualization do's and don'ts
+ - `r emo::ji("white_check_mark")` `dplyr` (import, manipulation, visualization)
+ - `r emo::ji("white_check_mark")` `ggplot2` (short intro and demo)
 
 #### Week 5
 
- - `r emo::ji("ballot_box_with_check")` Data import (how many different kinds of file extensions?)
- - `r emo::ji("ballot_box_with_check")` Using the `purrr` package
+ - `r emo::ji("white_check_mark")` `dplyr` (summarize and export)
+ - `r emo::ji("white_check_mark")` `ggplot2` (ecology lesson)
 
 #### Week 6
 
- - `r emo::ji("ballot_box_with_check")` `lubridate` (import, manipulate, visualize pipeline time; time series example, CO2 web data, Maelle Salmon's tweet mining)
+ - `r emo::ji("ballot_box_with_check")` `ggplot2` (finish up)
+ - `r emo::ji("ballot_box_with_check")` Data import/export (.rda, .rds, file types)
 
 #### Week 7
 
- - `r emo::ji("ballot_box_with_check")` joins (lots of practice! Use Hadley's examples, use ModernDiveR examples)
+ - `r emo::ji("ballot_box_with_check")` RMarkdown and literate programming
+ - `r emo::ji("ballot_box_with_check")` visualization do's and don'ts
 
 #### Week 8
 
- - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
+ - `r emo::ji("ballot_box_with_check")` joins using `dplyr`
+ - `r emo::ji("ballot_box_with_check")` `tidyr` (reshape data)
 
 #### Week 9
 
- - `r emo::ji("ballot_box_with_check")` custom functions
- - `r emo::ji("ballot_box_with_check")` for loops
+ - `r emo::ji("ballot_box_with_check")` datetime data in R with `lubridate` (import, manipulate, visualize pipeline for timeseries data)
 
 #### Week 10
 
- - **TBD**
+TBD, may include: 
+
+ - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
+ - `r emo::ji("ballot_box_with_check")` custom **functions**
+ - `r emo::ji("ballot_box_with_check")` Using the `purrr` package
+ - `r emo::ji("ballot_box_with_check")` **for loops**
+
