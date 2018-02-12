@@ -410,16 +410,10 @@ div.tocify {
       <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import</a>
-    </li>
-    <li>
-      <a href="lesson_tidyr.html">Using tidyr</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
     </li>
     <li>
       <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
     </li>
     <li>
       <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
@@ -429,6 +423,12 @@ div.tocify {
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data import &amp; export</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
     </li>
     <li>
       <a href="lesson_joins.html">Joining data</a>
@@ -519,24 +519,33 @@ div.tocify {
 </blockquote>
 <div id="reading-csv-data" class="section level2">
 <h2>Reading csv data</h2>
-<p>Data come in many forms, and we need to be able to load them in R. For our own use and with others who use R, there are R-specific data structures we can use, like the .RDA file-type we just saw, but we need to be able to work with more general data types too. Comma-separated value (csv) tables are perhaps the most universal data structure.</p>
-<p>The species dataset provides genus and species information for animals caught during a trapping survey. I downloaded it and put it in the data directory of my project. You will do the same in a minute.</p>
+<p>Data come in many forms, and we need to be able to load them in R. For our own use and with others who use R, there are R-specific data structures we can use, such as the <code>.rda</code> (<code>.RDATA</code>), or the <code>.rds</code> file-types. We’ll talk about those in more detail later. However, we need to be able to work with more general data types too. Comma-separated value (<code>.csv</code>) tables are perhaps the most universal data structure.</p>
+<p>This <a href="https://gge-ucd.github.io/R-DAVIS/data/species.csv">species dataset</a> provides genus and species information for animals caught during a trapping survey. I downloaded it and put it in the <code>data</code> directory of my project. Click on the link and download the file.</p>
 <p>We can read csv’s with the <code>read.csv</code> function. The argument to <code>read.csv</code> is the location of the file, relative to your working directory. Since I saved the gapminder data to the <code>data</code> directory of my project, I can load it with this. Note the use of tab-completion to find the file and get it exactly right without typos.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># download and read from your data folder</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</a></code></pre></div>
 <p>Whoa! What just happened? R executed the function and printed the result, just like when you enter <code>log(1)</code>. How do you store an object to a variable?</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">species &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</a></code></pre></div>
 <p>Now, a data.frame called <code>species</code> is in my Environment, and I can see that it is a data.frame with 54 rows and 4 columns.</p>
+<div id="challenge-read-csv-data" class="section level3">
+<h3>Challenge – read csv data</h3>
+<p>The species data are available at <a href="data/species.csv">this link</a>.</p>
 <blockquote>
-<h4 id="challenge-read-csv-data">Challenge – read csv data</h4>
-<p>The species data are available at <a href="data/species.csv">this link</a>.<br />
-- Right click on the link to “save file as…”<br />
-- Save the .csv file in the <code>/data</code> directory of your project.<br />
-- Read the data with the <code>read.csv</code> function and assign it to the variable <code>species</code>.<br />
-- Inspect the data.frame using whatever means you like - Use a dplyr verb to reorder the data frame in alphabetical order by genus</p>
-<p><strong>Advanced challenge</strong></p>
-<p>Suppose you get a .csv file from a colleague in Europe. Because they use “,” (comma) as a decimal separator, they use “;” (semi-colons) to separate fields. How can you read it into R?</p>
-<p>Feel free to use the web and/or R’s helpfiles.</p>
+<ul>
+<li>Right click on the link to “save file as…”</li>
+<li>Save the .csv file in the <code>/data</code> directory of your project.</li>
+<li>Read the data with the <code>read.csv</code> function and assign it to the variable <code>species</code>.<br />
+</li>
+<li>Inspect the <code>data.frame</code> using whatever means you like.</li>
+<li>Use a <code>dplyr</code> verb to reorder the data frame in alphabetical order by genus</li>
+</ul>
 </blockquote>
+<p><strong>Advanced challenge</strong></p>
+<blockquote>
+<p>Suppose you get a .csv file from a colleague in Europe. Because they use <code>,</code> (comma) as a decimal separator, they use <code>;</code> (semi-colons) to separate fields.<br />
+- How can you read it into R? Feel free to use the web and/or R’s helpfiles.</p>
+</blockquote>
+</div>
 <div id="using-stringsasfactorsfalse" class="section level3">
 <h3>Using <code>stringsAsFactors=FALSE</code></h3>
 <p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
@@ -559,7 +568,7 @@ div.tocify {
 <div id="reading-messier-data" class="section level2">
 <h2>Reading messier data</h2>
 <p>Sometimes data can be a bit trickier to read because it isn’t in tidy format. If it is <strong>close</strong> to being tidy, we may be able add some more arguments to the <code>read.csv()</code> call to to help R interpret how the file should be read. If there are a few things that R will need help with, using the <code>read.table()</code> gives you the most flexibility but you’ll also have to always specify more information about the file to help R interpret it.</p>
-<p>Use <a href="data/wide_eg.csv">this link</a> to download this dataset and inspect it with a spreadsheet program. Why isn’t it tidy?</p>
+<p>Use <a href="data/wide_eg.csv">this link</a> to download this “wide” dataset and inspect it with a spreadsheet program. Why isn’t it tidy?</p>
 <p>Try using the <code>read.csv()</code> function on the file.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">read.csv</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>)</a></code></pre></div>
 <p>We need to tell R to skip 2 rows!</p>
@@ -579,6 +588,75 @@ div.tocify {
 <p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>
 <p>Similar to the <code>read.csv()</code> function used for reading CSV files into R, there is a <code>write.csv()</code> function that generates CSV files from data frames.</p>
 <p>Before using <code>write.csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated dataset. We don’t want to write generated datasets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>
+<ul>
+<li>Type in <code>write.</code> and hit TAB. Scroll down and take a look at the many options that exist for writing out data in R.</li>
+</ul>
+<p>The <code>tidyverse</code> has a similar set of functions that are part of the <code>readr</code> package.</p>
+<ul>
+<li>Type in <code>write_</code> and hit TAB. Use the F1 key on any of these options to read more about how to use it.</li>
+</ul>
+</div>
+<div id="using-save-and-load" class="section level2">
+<h2>Using <code>save</code> and <code>load</code></h2>
+<p>We’ve seen how to save out specific data types in R. One additional option is you can save anything in your workspace or working “environment”. You can save a single object, or multiple objects together. This is best done using the <code>.rda</code> file type. The <strong>.Rda</strong>ta file type is a great way to save objects from R that you have already tidied or modeled, and you want to maintain the structure and format of the data. Because these are native “R” file types, they can be read back in and will appear exactly as when you saved them.</p>
+<p>Let’s assume we have the “surveys” object and the “counts” objects in our environment, and we want save them both in one file. We’ll use <code>save()</code> and the <code>.rda</code> filetype.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">save</span>(surveys, counts, <span class="dt">file =</span> <span class="st">&quot;data_output/surveys_counts.rda&quot;</span>)</a></code></pre></div>
+<p>To re-load these back into R, we use the <code>load</code> function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;data_output/surveys_counts.rda&quot;</span>)</a></code></pre></div>
+<div id="rds-vs.-.rda" class="section level3">
+<h3><code>.rds</code> vs. <code>.rda</code></h3>
+<p>Why use one vs. the other? What do these file types provide that a simple csv doesn’t provide?</p>
+<p>Short answer is they maintain not only the structure, but also the format and data types within your data sets. However it appears in your environment in R is exactly how it will be saved (with <code>save()</code>), and then read back in (with <code>load()</code> or <code>readRDS</code>. This can save time and code, once you have your data in a format/shape you are happy with. An added bonus is the format (<code>rda</code> and <code>rds</code>) are both highly compressed, and can save significant space on your hard drive.</p>
+<p>The main differences between the two:</p>
+<ul>
+<li><code>.rda</code> allows saving multiple objects together in one file, or one single object</li>
+<li><code>.rds</code> can only save file/object</li>
+</ul>
+<p>For example, let’s use the surveys dataset we loaded earlier and save a few <code>rda</code> and <code>rds</code> files.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co"># load data</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>) <span class="co"># the combined.csv is 3.1 MB in size</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co"># filter to years &gt; 2000 and only rodents</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">rodents2001 &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span> <span class="op">&amp;</span><span class="st"> </span>taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co"># filter to only birds</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">birds &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(taxa<span class="op">==</span><span class="st">&quot;Bird&quot;</span>)</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co"># RDA files: now we can save all these objects together:</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="kw">save</span>(surveys, rodents2001, birds, <span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>) <span class="co"># this file is 245 kb (0.2 MB)</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co"># RDS files: this can only be one file:</span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="kw">saveRDS</span>(rodents2001, <span class="dt">file =</span> <span class="st">&quot;data/rodents2001.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co"># to load an rds file back in:</span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19">any_name_i_choose &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;data/rodents2001.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co"># but won&#39;t work with rda</span></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22">nope &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>)</a>
+<a class="sourceLine" id="cb11-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co"># same with trying to assign a name to an rda file on load</span></a>
+<a class="sourceLine" id="cb11-25" data-line-number="25">doublenope &lt;-<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>) <span class="co"># wait ...check out &quot;doublenope&quot;</span></a>
+<a class="sourceLine" id="cb11-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb11-27" data-line-number="27">doublenope <span class="co"># created a character vector of the objects...but didn&#39;t assign any to the name nope</span></a>
+<a class="sourceLine" id="cb11-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co"># [1] &quot;surveys&quot;     &quot;rodents2001&quot; &quot;birds&quot;   </span></a></code></pre></div>
+</div>
+</div>
+<div id="excel-googlesheets" class="section level2">
+<h2>Excel &amp; GoogleSheets</h2>
+<ul>
+<li><a href="http://readxl.tidyverse.org/"><code>readxl</code></a> (Part of <code>tidyverse</code>)</li>
+<li>Jenny Bryan’s <code>googlesheets</code> or <a href="http://googledrive.tidyverse.org/"><code>googledrive</code></a> packages</li>
+</ul>
+</div>
+<div id="other-file-types" class="section level2">
+<h2>Other File Types</h2>
+<ul>
+<li>Using the <code>foreign</code> package</li>
+<li>reading in <code>.dbf</code>, <em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, <code>.shp</code>, <code>.netcdf</code>, <code>raster</code>, <code>.kml</code>, <code>gpx</code>, <code>xml</code>, <code>geojson</code>, <code>json</code>, etc….</li>
+</ul>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a> and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting Data materials</a>.</p>
 </div>

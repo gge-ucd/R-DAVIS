@@ -29,20 +29,20 @@ navbar:
       href: lesson_data_frames_continents.html
     - text: Data frames (ecology)
       href: lesson_data_frames_ecology.html
-    - text: Data import
-      href: lesson_data_import.html
-    - text: Using tidyr
-      href: lesson_tidyr.html
-    - text: Using dplyr (gapminder)
-      href: lesson_dplyr_gapminder.html
     - text: Using dplyr (ecology)
       href: lesson_dplyr_ecology.html
+    - text: Using dplyr (gapminder)
+      href: lesson_dplyr_gapminder.html
     - text: Using ggplot2 (gapminder)
       href: lesson_visualization_ggplot2.html
     - text: Using ggplot2 (ecology)
       href: http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
     - text: Visualization Do's & Don'ts
       href: lesson_visualization_dos.html
+    - text: Data import & export
+      href: lesson_data_import.html
+    - text: Using tidyr
+      href: lesson_tidyr.html
     - text: Joining data
       href: lesson_joins.html
     - text: 'Pipelines: data import %>% dplyr %>% ggplot2'

@@ -19,9 +19,9 @@ knitr::include_graphics("img/woodybewildered.gif")
 
  1. <i class="fa fa-github fa-2x" aria-hidden="true"></i> &nbsp; Install [**`git`**](https://git-scm.com/downloads) & register for a free [**github** account](https://github.com/) with your `.edu` email address
  
- 2. <img src="img/R_logo.png" alt="R", width = "6%"> &nbsp; Install *current* [**R**](https://cran.rstudio.com/) on your laptop
+ 2. <img src="img/R_logo.png" alt="R" width = "6%"> &nbsp; Install *current* [**R**](https://cran.rstudio.com/) on your laptop
  
- 3. <img src="img/Rstudio_icon.png" alt="RStudio", width = "6%"> &nbsp; Install *current* [**RStudio**](https://www.rstudio.com/products/rstudio/download/) on your laptop
+ 3. <img src="img/Rstudio_icon.png" alt="RStudio" width = "6%"> &nbsp; Install *current* [**RStudio**](https://www.rstudio.com/products/rstudio/download/) on your laptop
  
  4. <i class="fa fa-table fa-2x" aria-hidden="true"></i> &nbsp; Make sure you have a spreadsheet program installed on your computer (Microsoft Office, Libre Office, etc.)
 
