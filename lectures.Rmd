@@ -36,14 +36,15 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 ### Week 5
 
 * What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/5gf17w7xo58a4vw/2018-R-DAVIS-w05.R?dl=0))
-* [Screencast](https://www.youtube.com/watch?v=zjQxdu0CUsE)
+* [Screencast](https://www.youtube.com/watch?v=zjQxdu0CUsE) (*video cuts out halfway, audio still good*)
 * [**GoogleDoc**](https://tinyurl.com/r-davis-week-5)
 
 ### Week 6
 
 * What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/60y47vubn84jvi8/2018-R-DAVIS-w06.R?dl=0))
 * [Screencast](https://www.youtube.com/watch?v=7PCQ5vfCsZU)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-5)
+* [**GoogleDoc**](https://docs.google.com/document/d/1TLHA_MYEs38ZIfS0am4HHyNdwQK9WLfKMGTmOt5ZdDA/edit?usp=sharing)
+* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
 
 ### Week 7
 
