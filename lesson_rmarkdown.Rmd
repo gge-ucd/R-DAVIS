@@ -1,0 +1,83 @@
+---
+title: "Using RMarkdown"
+author: "Ryan Peek"
+---
+
+```{r toCover, echo=F, eval=F}
+
+## Objectives: 
+
+Chunks, arguments to chunks
+Markdown formatting (just look at the cheatsheet!!)
+How to write equations (google “how to write XYZ in latex”)
+Inserting photos
+Inserting weblinks
+Inserting tables (kable, htmltable?)
+Plot_ly as a finishing topic
+Add links to cowplot vignette (good for multi-panel plot) and color palettes (Mike)
+Add link to Claus Wilke’s visualization book
+
+```
+
+## Visualize & Communicate
+
+If we consider the data science workflow we showed earlier, we've covered most of the steps, save the last few. The excellent [R for Data Science](http://r4ds.had.co.nz/communicate-intro.html) online book by Garrett Grolemund & Hadley Wickham gives a nice run down of the various pieces that the last two steps may entail (**Visualization** and **Communication**). We'll use some examples from that book, along with some of additional code you may recognize from previous lessons.
+
+![](http://r4ds.had.co.nz/diagrams/data-science-communicate.png)
+
+
+## R Markdown
+
+RMarkdown is an excellent tool that is built into RStudio. It provides many options and is a very flexible and powerful platform for authoring HTML, PDF, and MS Word documents, using the Markdown language. RStudio has some excellent resources for this, be sure to visit their site: <http://rmarkdown.rstudio.com>.
+
+You can use RMarkdown as a digital notebook of all you've done or the code you've used, or you can write a more formal report that summarizes a project or experiment. This lesson won't cover everything (not even close!), but it should introduce you to some of the possibilities, and get you comfortable using RMarkdown inside RStudio.
+
+### *Knitting?*
+
+When you open a new `.Rmd` document, you'll get a basic template with some demo text and code. If you look for the **Knit** button at the top of the document, and click the small arrow just to the right of that button, you'll see a number of options for generating different document formats.
+
+Just to the right of the **Knit** button, there's a gear wheel with a small arrow to the right. Click on the small arrow and notice the various output options...these help determine where your content will end up when you **Knit**, or run chunks of code in your Rmd. We can play with these and determine what is most preferable.
+
+## Rmarkdown Components
+
+### Code Chunks
+
+Let's take a look at the [example Rmarkdown file](http://r4ds.had.co.nz/r-markdown.html#r-markdown-basics) from **R for Data Science**:
+
+### Weblinks
+
+ - full link to data
+ - hidden link
+
+### Photos/Images
+
+ - static from computer
+ - from internet
+ - gifs
+ - embedding youtube video or slide presentation
+
+### Equations & Formulas
+
+ - using LaTeX
+ - cheatsheet?
+
+### Tables
+
+ - kable
+ - stargazer
+ - DT or htmltable
+
+### Footnotes
+
+
+### Interactivity
+ - tabs, flexdashboards
+ - plotly
+ - leaflet
+ - websites
+
+### Citations
+
+
+
+
