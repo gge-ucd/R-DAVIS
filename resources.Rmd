@@ -45,6 +45,7 @@ This is a list of most of the data sources used in this course.
     + [Portal_rodents_19772002_scinameUUIDs.csv](data/Portal_rodents_19772002_scinameUUIDs.csv) [raw trapping data]
     + [species.csv](data/species.csv) [species id metadata]
     + [surveys.csv](data/surveys.csv) [trapping data by record id]
+    + [surveys_complete.csv](data_output/surveys_complete.csv) [cleaned trapping data by record id]
     + [combined.csv](data/combined.csv) [trapping data merged with record id metadata]
     + [plots.csv](data/plots.csv) [plot type metadata]
 * From [Data Carpentry: Genomics Lesson](https://jasonjwilliamsny.github.io/tidiness-genomics/)

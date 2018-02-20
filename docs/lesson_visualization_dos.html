@@ -425,6 +425,9 @@ div.tocify {
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
     </li>
     <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+    <li>
       <a href="lesson_data_import.html">Data import &amp; export</a>
     </li>
     <li>
@@ -531,6 +534,10 @@ div.tocify {
 <p>Because there are so many options and methods to plot our data in R, we need to think about how we are going to represent the data, how can that data be interpreted visually, and what story it may tell.</p>
 <p>A very nice example of this is provided by this animation (created by Darkhorse Analytics, and used in Jenny Bryan’s excellent <a href="http://stat545.com/block015_graph-dos-donts.html">stat545</a> course). It shows how <em>simplification</em> can make a big difference in communication.</p>
 <p><img src="img/less-is-more-darkhorse-analytics.gif" /></p>
+<div id="exploration-vs.communication" class="section level3">
+<h3>Exploration vs. Communication</h3>
+<p>One thing to consider is what the objective is when creating a visualization or plot. When we build plots for exploratory purposes, we already know what the variables are we are using, and the objective is more about what sort of patterns the data might show. When communicating, the objective is more about providing a stand-alone snapshot which helps others <em>understand</em> what you are trying to convey. We’ll cover more on this when we talk about <code>Rmarkdown</code>.</p>
+</div>
 <div id="ggplot2" class="section level3">
 <h3><code>ggplot2</code></h3>
 <p>While there are many visualization options in R, I believe the most comprehensive and powerful is the <code>ggplot2</code> package. Much of the class has used/follows <code>ggplot</code>, so here’s a little background that might be useful.</p>
@@ -545,6 +552,27 @@ div.tocify {
 <li>Stats = Ways to wire or plumb your house…how to tie your data together, or transform it (<code>stat_</code>)</li>
 </ul></li>
 </ul>
+</div>
+</div>
+<div id="color" class="section level2">
+<h2>Color!!</h2>
+<p>There are so many options in R. It is fun to play around with color, but keep in mind not everyone sees color in the same way, and some folks cannot see certain spectrums of color (i.e., <a href="https://www.colormatters.com/color-and-vision/what-is-color-blindness">absence of blue or green receptors is common</a>). See below for a example of what colorblindness may do…if you see numbers inside these circles, great, you have some blue/green retinal receptors.</p>
+<p><img src="https://www.colormatters.com/images/cbtests/plate1.jpg" /> <img src="https://www.colormatters.com/images/cbtests/plate3.jpg" /></p>
+<p>Having said that, <a href="http://research.stowers.org/mcm/efg/R/Color/Chart/ColorChart.pdf">here’s a great cheat sheet of colors in R</a>, it can be handy when trying to find the correct color or name of a color.</p>
+<div id="discretecategorical" class="section level3">
+<h3>Discrete/Categorical:</h3>
+<p>For a very nice discussion about color palettes, I recommend <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">this page</a> from the R cookbook folks.</p>
+<p>Additionally, check out the great <a href="https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html">ggthemes</a> package, which has many options. One I find very helpful is using <code>scale_color_colorblind()</code>, which if you have 8-9 categories, may be a nice way to display your data.</p>
+</div>
+<div id="continuous-viridis" class="section level3">
+<h3>Continuous: <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a></h3>
+<p>The <code>viridis</code> package is an excellent set of colors that better represent your data, are easier to read for those with colorblindness, and they also tend to print fairly well in grayscale.</p>
+<p>Take a look at the <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">vignette online</a>!</p>
+<p>An example:</p>
+<div class="figure">
+<img src="img/viridis_demo.png" alt="viridis" />
+<p class="caption">viridis</p>
+</div>
 </div>
 </div>
 <div id="visualization-tips" class="section level2 tabset tabset-fade">
@@ -633,15 +661,76 @@ div.tocify {
 </div>
 </div>
 </div>
+<div id="publishing-plots-cowplot" class="section level2">
+<h2>Publishing Plots: <code>cowplot</code></h2>
+<p>A few excellent options exist for creating multi-paneled plots for publications. The first and foremost is a package by Claus Wilke called <a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html"><code>cowplot</code></a>. With <code>cowplot</code>, it’s possible to quickly combine existing <code>ggplots</code>, creating publication quality plots. See the vignette for more options, but here’s a quick example from the vignette below:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">library</span>(cowplot)</a></code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;cowplot&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     ggsave</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># make a few plots:</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">plot.diamonds &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(clarity, <span class="dt">fill =</span> cut)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">70</span>, <span class="dt">vjust=</span><span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#plot.diamonds</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">plot.cars &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="st">   </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="fl">2.5</span>)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#plot.cars</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">plot.iris &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length, <span class="dt">fill=</span>Species)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>, <span class="dt">alpha=</span><span class="fl">0.7</span>, <span class="dt">shape=</span><span class="dv">21</span>)</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#plot.iris</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co"># use plot_grid</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">(panel_plot &lt;-<span class="st"> </span><span class="kw">plot_grid</span>(plot.cars, plot.iris, plot.diamonds, <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">ncol=</span><span class="dv">2</span>, <span class="dt">nrow =</span> <span class="dv">2</span>))</a></code></pre></div>
+<p><img src="lesson_visualization_dos_files/figure-html/cowplot-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># fix the sizes draw_plot</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">(fixed_gridplot &lt;-<span class="st"> </span><span class="kw">ggdraw</span>() <span class="op">+</span><span class="st"> </span><span class="kw">draw_plot</span>(plot.iris, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">0</span>, <span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">height =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="st">           </span><span class="kw">draw_plot</span>(plot.cars, <span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y=</span>.<span class="dv">5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">height =</span> <span class="fl">0.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">           </span><span class="kw">draw_plot</span>(plot.diamonds, <span class="dt">x=</span><span class="fl">0.5</span>, <span class="dt">y=</span><span class="fl">0.5</span>, <span class="dt">width=</span><span class="fl">0.5</span>, <span class="dt">height =</span> <span class="fl">0.5</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="st">  </span><span class="kw">draw_plot_label</span>(<span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>), <span class="dt">x =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="dv">0</span>), <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="fl">0.5</span>)))</a></code></pre></div>
+<p><img src="lesson_visualization_dos_files/figure-html/cowplot-2.png" width="672" /></p>
+<p>Saving out plots with <code>save_plot</code> can be a good way to preserve or change the aspect ratio. See how changing the aspect ratio changes the output:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># save_plot can be a nice way to set the aspect_ratio...play with these options</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">save_plot</span>(<span class="st">&quot;figures/plot2by1_11.png&quot;</span>, fixed_gridplot, <span class="dt">dpi=</span><span class="dv">300</span>,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">          <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="co"># we&#39;re saving a grid plot of 2 columns</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">          <span class="dt">nrow =</span> <span class="dv">2</span>, <span class="co"># and 2 rows</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">          <span class="co"># each individual subplot should have an aspect ratio of 1.3</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">          <span class="dt">base_aspect_ratio =</span> <span class="fl">1.1</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">          )</a></code></pre></div>
+<p><strong>Ratio of 1.1</strong>:</p>
+<div class="figure">
+<img src="figures/plot2by1_11.png" alt="ratio1.1" />
+<p class="caption">ratio1.1</p>
+</div>
+<p><strong>Ratio of 1.5</strong> <img src="figures/plot2by1_15.png" alt="ratio1.5" /></p>
+</div>
+<div id="publishing-plots-patchwork" class="section level2">
+<h2>Publishing Plots: <code>patchwork</code></h2>
+<p>A newer package (only available only via Github) by Thomas Pedersen is called <code>patchwork</code>. To install, you’ll need a package called “<code>devtools</code>”. See the <a href="https://github.com/thomasp85/patchwork"><code>patchwork</code> github page</a> section on installation for more info. The terminology used for plots is based on ggplot2, so it uses the <code>+</code> between things. Now, you can simply add your plots together using this terminology. Note, this doesn’t have the same lettering functionality shown above, but does make it easier to arrange your plots however you choose. Using the plots from our example above:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co">#devtools::install_github(&quot;thomasp85/patchwork&quot;)</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">library</span>(patchwork)</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co"># the default</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">plot.cars <span class="op">+</span><span class="st"> </span>plot.iris <span class="op">+</span><span class="st"> </span>plot.diamonds <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">ncol=</span><span class="dv">1</span>)</a></code></pre></div>
+<p><img src="lesson_visualization_dos_files/figure-html/patchwork-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># you can use a few different things to nest your plots by changin &quot;+&quot; to &quot;-&quot;</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">plot.cars <span class="op">+</span><span class="st"> </span>plot.iris <span class="op">-</span><span class="st"> </span>plot.diamonds <span class="op">+</span><span class="st"> </span><span class="kw">plot_layout</span>(<span class="dt">ncol=</span><span class="dv">1</span>)</a></code></pre></div>
+<p><img src="lesson_visualization_dos_files/figure-html/patchwork-2.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># there are many more options should you choose them, see the github page.</span></a></code></pre></div>
+</div>
 <div id="additional-resources" class="section level2">
 <h2>Additional Resources</h2>
 <p>Here’s a list of resources you may want to check out. Many of these have lots of examples and code you can try out.</p>
 <ul>
 <li>Hadley’s R for Data Science <a href="http://r4ds.had.co.nz/data-visualisation.html">Chap. on Data Visualisation</a></li>
 <li><a href="http://vita.had.co.nz/papers/layered-grammar.pdf">The Layered Grammar of Graphics</a></li>
-<li><a href="http://moderndive.com/3-viz.html">Modern Diver Lesson on Data Vis</a></li>
+<li>Claus O. Wilke’s new (in progress) book <a href="http://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a></li>
 <li><a href="http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html">Top 50 ggplot2 Visualizations</a>: A great set of examples and code for many different types of ggplots you can make</li>
-<li>Great tips on <a href="https://cdn2.hubspot.net/hub/53/file-863940581-pdf/Data_Visualization_101_How_to_Design_Charts_and_Graphs.pdf">data design</a></li>
+<li>Just to get a sense of less than ideal, see Karl Broman’s <a href="https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/">Top 10 Worst Graphs</a></li>
 <li>Some nice <a href="https://infogram.com/blog/dataviz-chart-guide-101-dos-and-donts/">Tips by chart type</a></li>
 <li>More examples for <a href="https://www.analyticsvidhya.com/blog/2015/07/guide-data-visualization-r/">Data Viz</a></li>
 </ul>
