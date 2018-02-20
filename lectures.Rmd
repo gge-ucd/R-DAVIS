@@ -48,22 +48,29 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 7
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/fu43gc7th8iouiz/2018-R-DAVIS-w07.R?dl=0)
+* [Screencast](https://www.youtube.com/watch?v=TeU4UyDzsCc
+* [**GoogleDoc**](https://docs.google.com/document/d/1LmR-DqYNfGfn7DoecjfpjX8Ex0i8pdwaMqhFGLfmh0E/edit)
+* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
 
 ### Week 8
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/zzyj2hsc7lhmpd9/2018-R-DAVIS-w08.R?dl=0)
+* [Screencast](https://www.youtube.com/watch?v=ERlzn8Cw9Ls)
+* [**GoogleDoc**](https://docs.google.com/document/d/10iZ7B4ikQzOF59ABXhm67-zSiUV-T0qxBWwbXoT6DHE/edit)
+* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
 
 ### Week 9
 
-* What we covered (link to livecode)
-* [Screencast]()
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/o25qnita4l5g0qb/2018-R-DAVIS-w09.R?dl=0)
+* [Screencast](https://www.youtube.com/watch?v=orgb6CIzjVo)
+* [**GoogleDoc**](https://docs.google.com/document/d/1IdM25wj8WfVZv1D1XGMDjiJx4YCFoN3zb6tGyAbNJjM/edit)
+* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
 
 ### Week 10
 
 * What we covered (link to livecode)
 * [Screencast]()
+* [**GoogleDoc**](https://docs.google.com/document/d/12grTEZu4AwiP_JURlaAQ4VgCV_7dgrLLlxxRv1Lv-Ik/edit)
 
 
