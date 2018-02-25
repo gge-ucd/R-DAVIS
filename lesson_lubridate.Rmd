@@ -235,7 +235,7 @@ tz(nfy1$datetime)
 
 ## Example 1: Mauna Loa Meterological Data
 
-So, now that we have a decent idea how to format these things, let's look at some real data, try to format and plot. Let's use the Mauna Loa meterological data, collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.*
+So, now that we have a decent idea how to format these things, let's look at some real data, try to format and plot. Let's use the Mauna Loa meterological data, collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can find it on the R-DAVIS website in the [Resources->Datasets](https://gge-ucd.github.io/R-DAVIS/resources.html) tab.
 
 ```{r mloa_data, eval=T, echo=T}
 
@@ -402,7 +402,7 @@ df %>% filter(mon=="Jul") %>% # or month==7
 
 ## Example 2: Pressure Transducer (Solinst) Data Logger 
 
-Let's practice with another data file, a logger that records water temperature and river stage every 15 minutes from the NF American River. You can download the file by right clicking on the [webpage](https://raw.githubusercontent.com/gge-ucd/wRangling_Seminar/master/data/2015_NFA_solinst_08_05.csv), or simply use the web URL. We've practiced both now. 
+Let's practice with another data file, a logger that records water temperature and river stage every 15 minutes from the NF American River. You can download the file by right clicking on the [webpage](data/2015_NFA_solinst_08_05.csv), or simply use the web URL. We've practiced both now. (The file is also available on the R-DAVIS website in the [Resources->Datasets](https://gge-ucd.github.io/R-DAVIS/resources.html) tab.)
 
 *This dataset has 35,038 observations for water temperature, and stage (pressure transducer info).*
 
@@ -413,7 +413,7 @@ Let's practice with another data file, a logger that records water temperature a
 # pressure transducer data
 
 # read in file directly from a weblink
-dat <- read.csv("https://raw.githubusercontent.com/gge-ucd/wRangling_Seminar/master/data/2015_NFA_solinst_08_05.csv", skip=13)
+dat <- read.csv("https://gge-ucd.github.io/R-DAVIS/data/2015_NFA_solinst_08_05.csv", skip=13)
 
 library(lubridate, warn.conflicts = F)
 library(dplyr, warn.conflicts = F)
