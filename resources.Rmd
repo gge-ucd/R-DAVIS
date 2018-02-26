@@ -59,7 +59,11 @@ This is a list of most of the data sources used in this course.
     + [gapminder.csv](data/gapminder.csv) [country characteristics by year]
 * From [ANGUS: Analyzing High Throughput Sequencing Data](http://angus.readthedocs.io/en/2017/rmarkdown_rnaseq.html)
     + [rnaseq.zip](data/rnaseq.zip) [zipped folder of RNA sequence data]
-* [2001_mauna_loa_met_data.zip](data/2001_mauna_loa_met_data.zip) [meteorological station data from Mauna Loa]
+* From [Data wRangling for Ecologists](https://gge-ucd.github.io/wRangling-Ecology/)
+    + [2001_mauna_loa_met_data.zip](data/2001_mauna_loa_met_data.zip) [raw meteorological station data from Mauna Loa]
+    + [2001 Mauna Loa meteorological station data](data/mauna_loa_met_2001_minute.rda) [tidy format of minute-scale meteorological data from Mauna Loa Observatory]
+    + [solinst data logger data](data/2015_NFA_solinst_08_05.csv) [pressure transducer data logger data from NF American River]
+
 
 ### Presentations
 
@@ -70,3 +74,4 @@ This is a list of most of the data sources used in this course.
 * [Myfanwy Johnston on unit testing (or code testing) in R](https://youtu.be/8G6bBum3O9A)
 * [Michael Levy tutorial on using the `tidyverse`](https://youtu.be/9q7gssUP8UA)
 * [Brandon Hurr "Intro to using `purrr`](http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1)
+* [Brandon Hurr "dplyr II: Joins and Set Operations"](http://d-rug.github.io/blog/2016/hurr-dplyr2)
