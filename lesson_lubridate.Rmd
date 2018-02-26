@@ -413,7 +413,7 @@ Let's practice with another data file, a logger that records water temperature a
 # pressure transducer data
 
 # read in file directly from a weblink
-dat <- read.csv("https://gge-ucd.github.io/R-DAVIS/data/2015_NFA_solinst_08_05.csv", skip=13)
+dat <- read.csv("https://github.com/gge-ucd/R-DAVIS/raw/master/data/2015_NFA_solinst_08_05.csv", skip=13)
 
 library(lubridate, warn.conflicts = F)
 library(dplyr, warn.conflicts = F)
