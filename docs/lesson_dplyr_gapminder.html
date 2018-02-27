@@ -714,12 +714,12 @@ div.tocify {
 <pre><code>## # A tibble: 6 x 6
 ##   country     continent  year lifeExp      pop gdpPercap
 ##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
-## 1 Afghanistan Asia       1952    28.8  8425333       779
-## 2 Afghanistan Asia       1957    30.3  9240934       821
-## 3 Afghanistan Asia       1962    32.0 10267083       853
-## 4 Afghanistan Asia       1967    34.0 11537966       836
-## 5 Afghanistan Asia       1972    36.1 13079460       740
-## 6 Afghanistan Asia       1977    38.4 14880372       786</code></pre>
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">str</span>(gapminder) <span class="co"># look at data structure</span></a></code></pre></div>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    1704 obs. of  6 variables:
 ##  $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
@@ -827,40 +827,40 @@ div.tocify {
 <pre><code>## # A tibble: 12 x 6
 ##    country       continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
-##  1 United States Americas   1952    68.4 157553000     13990
-##  2 United States Americas   1957    69.5 171984000     14847
-##  3 United States Americas   1962    70.2 186538000     16173
-##  4 United States Americas   1967    70.8 198712000     19530
-##  5 United States Americas   1972    71.3 209896000     21806
-##  6 United States Americas   1977    73.4 220239000     24073
-##  7 United States Americas   1982    74.6 232187835     25010
-##  8 United States Americas   1987    75.0 242803533     29884
-##  9 United States Americas   1992    76.1 256894189     32004
-## 10 United States Americas   1997    76.8 272911760     35767
-## 11 United States Americas   2002    77.3 287675526     39097
-## 12 United States Americas   2007    78.2 301139947     42952</code></pre>
+##  1 United States Americas   1952    68.4 157553000    13990.
+##  2 United States Americas   1957    69.5 171984000    14847.
+##  3 United States Americas   1962    70.2 186538000    16173.
+##  4 United States Americas   1967    70.8 198712000    19530.
+##  5 United States Americas   1972    71.3 209896000    21806.
+##  6 United States Americas   1977    73.4 220239000    24073.
+##  7 United States Americas   1982    74.6 232187835    25010.
+##  8 United States Americas   1987    75.0 242803533    29884.
+##  9 United States Americas   1992    76.1 256894189    32004.
+## 10 United States Americas   1997    76.8 272911760    35767.
+## 11 United States Americas   2002    77.3 287675526    39097.
+## 12 United States Americas   2007    78.2 301139947    42952.</code></pre>
 <p>We can also apply multiple conditions, e.g. the US after 2000:</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 6
 ##   country       continent  year lifeExp       pop gdpPercap
 ##   &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
-## 1 United States Americas   2002    77.3 287675526     39097
-## 2 United States Americas   2007    78.2 301139947     42952</code></pre>
+## 1 United States Americas   2002    77.3 287675526    39097.
+## 2 United States Americas   2007    78.2 301139947    42952.</code></pre>
 <p>We can also use “or” conditions with the vertical pipe: <code>|</code>. Notice that the variable (column) names don’t go in quotes, but values of character variables do.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">|</span><span class="st"> </span>country <span class="op">==</span><span class="st"> &quot;Mexico&quot;</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 24 x 6
 ##    country continent  year lifeExp      pop gdpPercap
 ##    &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
-##  1 Mexico  Americas   1952    50.8 30144317      3478
-##  2 Mexico  Americas   1957    55.2 35015548      4132
-##  3 Mexico  Americas   1962    58.3 41121485      4582
-##  4 Mexico  Americas   1967    60.1 47995559      5755
-##  5 Mexico  Americas   1972    62.4 55984294      6809
-##  6 Mexico  Americas   1977    65.0 63759976      7675
-##  7 Mexico  Americas   1982    67.4 71640904      9611
-##  8 Mexico  Americas   1987    69.5 80122492      8688
-##  9 Mexico  Americas   1992    71.5 88111030      9472
-## 10 Mexico  Americas   1997    73.7 95895146      9767
+##  1 Mexico  Americas   1952    50.8 30144317     3478.
+##  2 Mexico  Americas   1957    55.2 35015548     4132.
+##  3 Mexico  Americas   1962    58.3 41121485     4582.
+##  4 Mexico  Americas   1967    60.1 47995559     5755.
+##  5 Mexico  Americas   1972    62.4 55984294     6809.
+##  6 Mexico  Americas   1977    65.0 63759976     7675.
+##  7 Mexico  Americas   1982    67.4 71640904     9611.
+##  8 Mexico  Americas   1987    69.5 80122492     8688.
+##  9 Mexico  Americas   1992    71.5 88111030     9472.
+## 10 Mexico  Americas   1997    73.7 95895146     9767.
 ## # ... with 14 more rows</code></pre>
 <p>A good, handy reference list for the operators (and, or, etc) can be found <a href="http://www.statmethods.net/management/operators.html">here</a>.</p>
 </div>
@@ -874,16 +874,16 @@ div.tocify {
 <pre><code>## # A tibble: 1,704 x 5
 ##    country      year lifeExp      pop income
 ##    &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;
-##  1 Afghanistan  1952    28.8  8425333    779
-##  2 Afghanistan  1957    30.3  9240934    821
-##  3 Afghanistan  1962    32.0 10267083    853
-##  4 Afghanistan  1967    34.0 11537966    836
-##  5 Afghanistan  1972    36.1 13079460    740
-##  6 Afghanistan  1977    38.4 14880372    786
-##  7 Afghanistan  1982    39.9 12881816    978
-##  8 Afghanistan  1987    40.8 13867957    852
-##  9 Afghanistan  1992    41.7 16317921    649
-## 10 Afghanistan  1997    41.8 22227415    635
+##  1 Afghanistan  1952    28.8  8425333   779.
+##  2 Afghanistan  1957    30.3  9240934   821.
+##  3 Afghanistan  1962    32.0 10267083   853.
+##  4 Afghanistan  1967    34.0 11537966   836.
+##  5 Afghanistan  1972    36.1 13079460   740.
+##  6 Afghanistan  1977    38.4 14880372   786.
+##  7 Afghanistan  1982    39.9 12881816   978.
+##  8 Afghanistan  1987    40.8 13867957   852.
+##  9 Afghanistan  1992    41.7 16317921   649.
+## 10 Afghanistan  1997    41.8 22227415   635.
 ## # ... with 1,694 more rows</code></pre>
 <p>And we can rename columns</p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">select</span>(gapminder, <span class="dt">ThePlace =</span> country, <span class="dt">HowLongTheyLive =</span> lifeExp)</a></code></pre></div>
@@ -908,18 +908,18 @@ div.tocify {
 <pre><code>## # A tibble: 12 x 4
 ##     year lifeExp       pop gdpPercap
 ##    &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
-##  1  1952    68.4 157553000     13990
-##  2  1957    69.5 171984000     14847
-##  3  1962    70.2 186538000     16173
-##  4  1967    70.8 198712000     19530
-##  5  1972    71.3 209896000     21806
-##  6  1977    73.4 220239000     24073
-##  7  1982    74.6 232187835     25010
-##  8  1987    75.0 242803533     29884
-##  9  1992    76.1 256894189     32004
-## 10  1997    76.8 272911760     35767
-## 11  2002    77.3 287675526     39097
-## 12  2007    78.2 301139947     42952</code></pre>
+##  1  1952    68.4 157553000    13990.
+##  2  1957    69.5 171984000    14847.
+##  3  1962    70.2 186538000    16173.
+##  4  1967    70.8 198712000    19530.
+##  5  1972    71.3 209896000    21806.
+##  6  1977    73.4 220239000    24073.
+##  7  1982    74.6 232187835    25010.
+##  8  1987    75.0 242803533    29884.
+##  9  1992    76.1 256894189    32004.
+## 10  1997    76.8 272911760    35767.
+## 11  2002    77.3 287675526    39097.
+## 12  2007    78.2 301139947    42952.</code></pre>
 <blockquote>
 <h4 id="subsetting" class="challenge">Subsetting</h4>
 <ul>
@@ -938,48 +938,48 @@ div.tocify {
 <pre><code>## # A tibble: 1,704 x 6
 ##    country               continent  year lifeExp   pop gdpPercap
 ##    &lt;fct&gt;                 &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
-##  1 Sao Tome and Principe Africa     1952    46.5 60011       880
-##  2 Sao Tome and Principe Africa     1957    48.9 61325       861
-##  3 Djibouti              Africa     1952    34.8 63149      2670
-##  4 Sao Tome and Principe Africa     1962    51.9 65345      1072
-##  5 Sao Tome and Principe Africa     1967    54.4 70787      1385
-##  6 Djibouti              Africa     1957    37.3 71851      2865
-##  7 Sao Tome and Principe Africa     1972    56.5 76595      1533
-##  8 Sao Tome and Principe Africa     1977    58.6 86796      1738
-##  9 Djibouti              Africa     1962    39.7 89898      3021
-## 10 Sao Tome and Principe Africa     1982    60.4 98593      1890
+##  1 Sao Tome and Principe Africa     1952    46.5 60011      880.
+##  2 Sao Tome and Principe Africa     1957    48.9 61325      861.
+##  3 Djibouti              Africa     1952    34.8 63149     2670.
+##  4 Sao Tome and Principe Africa     1962    51.9 65345     1072.
+##  5 Sao Tome and Principe Africa     1967    54.4 70787     1385.
+##  6 Djibouti              Africa     1957    37.3 71851     2865.
+##  7 Sao Tome and Principe Africa     1972    56.5 76595     1533.
+##  8 Sao Tome and Principe Africa     1977    58.6 86796     1738.
+##  9 Djibouti              Africa     1962    39.7 89898     3021.
+## 10 Sao Tome and Principe Africa     1982    60.4 98593     1890.
 ## # ... with 1,694 more rows</code></pre>
 <p>Hmm, we didn’t get the most populous countries. By default, <code>arrange</code> sorts the variable in <em>increasing</em> order. We could see the most populous countries by examining the <code>tail</code> of the last command, or we can sort the data.frame by descending population by wrapping the variable in <code>desc()</code>:</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(pop))</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country continent  year lifeExp        pop gdpPercap
 ##    &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;int&gt;     &lt;dbl&gt;
-##  1 China   Asia       2007    73.0 1318683096      4959
-##  2 China   Asia       2002    72.0 1280400000      3119
-##  3 China   Asia       1997    70.4 1230075000      2289
-##  4 China   Asia       1992    68.7 1164970000      1656
-##  5 India   Asia       2007    64.7 1110396331      2452
-##  6 China   Asia       1987    67.3 1084035000      1379
-##  7 India   Asia       2002    62.9 1034172547      1747
-##  8 China   Asia       1982    65.5 1000281000       962
-##  9 India   Asia       1997    61.8  959000000      1459
-## 10 China   Asia       1977    64.0  943455000       741
+##  1 China   Asia       2007    73.0 1318683096     4959.
+##  2 China   Asia       2002    72.0 1280400000     3119.
+##  3 China   Asia       1997    70.4 1230075000     2289.
+##  4 China   Asia       1992    68.7 1164970000     1656.
+##  5 India   Asia       2007    64.7 1110396331     2452.
+##  6 China   Asia       1987    67.3 1084035000     1379.
+##  7 India   Asia       2002    62.9 1034172547     1747.
+##  8 China   Asia       1982    65.5 1000281000      962.
+##  9 India   Asia       1997    61.8  959000000     1459.
+## 10 China   Asia       1977    64.0  943455000      741.
 ## # ... with 1,694 more rows</code></pre>
 <p><code>arrange</code> can also sort by multiple variables. It will sort the data.frame by the first variable, and if there are any ties in that variable, they will be sorted by the next variable, and so on. Here we sort from newest to oldest, and within year from richest to poorest:</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(year), <span class="kw">desc</span>(gdpPercap))</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country          continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;            &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
-##  1 Norway           Europe     2007    80.2   4627926     49357
-##  2 Kuwait           Asia       2007    77.6   2505559     47307
-##  3 Singapore        Asia       2007    80.0   4553009     47143
-##  4 United States    Americas   2007    78.2 301139947     42952
-##  5 Ireland          Europe     2007    78.9   4109086     40676
-##  6 Hong Kong, China Asia       2007    82.2   6980412     39725
-##  7 Switzerland      Europe     2007    81.7   7554661     37506
-##  8 Netherlands      Europe     2007    79.8  16570613     36798
-##  9 Canada           Americas   2007    80.7  33390141     36319
-## 10 Iceland          Europe     2007    81.8    301931     36181
+##  1 Norway           Europe     2007    80.2   4627926    49357.
+##  2 Kuwait           Asia       2007    77.6   2505559    47307.
+##  3 Singapore        Asia       2007    80.0   4553009    47143.
+##  4 United States    Americas   2007    78.2 301139947    42952.
+##  5 Ireland          Europe     2007    78.9   4109086    40676.
+##  6 Hong Kong, China Asia       2007    82.2   6980412    39725.
+##  7 Switzerland      Europe     2007    81.7   7554661    37506.
+##  8 Netherlands      Europe     2007    79.8  16570613    36798.
+##  9 Canada           Americas   2007    80.7  33390141    36319.
+## 10 Iceland          Europe     2007    81.8    301931    36181.
 ## # ... with 1,694 more rows</code></pre>
 <p><strong>Shoutout Q: Would we get the same output if we switched the order of <code>desc(year)</code> and <code>desc(gdpPercap)</code> in the last line?</strong></p>
 </div>
@@ -988,18 +988,18 @@ div.tocify {
 <p>We have learned how to drop rows, drop columns, and rearrange rows. To make a new column we use the <code>mutate</code> function. As usual, the first argument is a data.frame. The second argument is the name of the new column you want to create, followed by an equal sign, followed by what to put in that column. You can reference other variables in the data.frame, and <code>mutate</code> will treat each row independently. E.g. we can calculate the total GDP of each country in each year by multiplying the per-capita GDP by the population.</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">mutate</span>(gapminder, <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop)</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 7
-##    country     continent  year lifeExp      pop gdpPercap   total_gdp
-##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-##  1 Afghanistan Asia       1952    28.8  8425333       779  6567086330
-##  2 Afghanistan Asia       1957    30.3  9240934       821  7585448670
-##  3 Afghanistan Asia       1962    32.0 10267083       853  8758855797
-##  4 Afghanistan Asia       1967    34.0 11537966       836  9648014150
-##  5 Afghanistan Asia       1972    36.1 13079460       740  9678553274
-##  6 Afghanistan Asia       1977    38.4 14880372       786 11697659231
-##  7 Afghanistan Asia       1982    39.9 12881816       978 12598563401
-##  8 Afghanistan Asia       1987    40.8 13867957       852 11820990309
-##  9 Afghanistan Asia       1992    41.7 16317921       649 10595901589
-## 10 Afghanistan Asia       1997    41.8 22227415       635 14121995875
+##    country     continent  year lifeExp      pop gdpPercap    total_gdp
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+##  1 Afghanistan Asia       1952    28.8  8425333      779.  6567086330.
+##  2 Afghanistan Asia       1957    30.3  9240934      821.  7585448670.
+##  3 Afghanistan Asia       1962    32.0 10267083      853.  8758855797.
+##  4 Afghanistan Asia       1967    34.0 11537966      836.  9648014150.
+##  5 Afghanistan Asia       1972    36.1 13079460      740.  9678553274.
+##  6 Afghanistan Asia       1977    38.4 14880372      786. 11697659231.
+##  7 Afghanistan Asia       1982    39.9 12881816      978. 12598563401.
+##  8 Afghanistan Asia       1987    40.8 13867957      852. 11820990309.
+##  9 Afghanistan Asia       1992    41.7 16317921      649. 10595901589.
+## 10 Afghanistan Asia       1997    41.8 22227415      635. 14121995875.
 ## # ... with 1,694 more rows</code></pre>
 <p><strong>Shoutout Q: How would we view the highest-total-gdp countries?</strong></p>
 <p>Note that didn’t change gapminder: We didn’t assign the output to anything, so it was just printed, with the new column. If we want to modify our gapminder data.frame, we can assign the output of <code>mutate</code> back to the gapminder variable, but be careful doing this – if you make a mistake, you can’t just re-run that line of code, you’ll need to go back to loading the gapminder data.frame.</p>
@@ -1030,53 +1030,53 @@ div.tocify {
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">lifeExpGreater80 =<span class="st"> </span><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)</a>
 <a class="sourceLine" id="cb77-2" data-line-number="2">(<span class="dt">lifeExpGreater80sorted =</span> <span class="kw">arrange</span>(lifeExpGreater80, gdpPercap))</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
-##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
-##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 New Zeala… Oceania    2007    80.2  4.12e⁶     25185    1.04e¹¹    11.0
-##  2 Israel     Asia       2007    80.7  6.43e⁶     25523    1.64e¹¹    11.2
-##  3 Italy      Europe     2002    80.2  5.79e⁷     27968    1.62e¹²    12.2
-##  4 Italy      Europe     2007    80.5  5.81e⁷     28570    1.66e¹²    12.2
-##  5 Japan      Asia       2002    82.0  1.27e⁸     28605    3.63e¹²    12.6
-##  6 Japan      Asia       1997    80.7  1.26e⁸     28817    3.63e¹²    12.6
-##  7 Spain      Europe     2007    80.9  4.04e⁷     28821    1.17e¹²    12.1
-##  8 Sweden     Europe     2002    80.0  8.95e⁶     29342    2.63e¹¹    11.4
-##  9 Hong Kong… Asia       2002    81.5  6.76e⁶     30209    2.04e¹¹    11.3
-## 10 France     Europe     2007    80.7  6.11e⁷     30470    1.86e¹²    12.3
+##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 New Zealand Oceania    2007    80.2  4.12e6    25185.   1.04e11    11.0
+##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
+##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
+##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
+##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
+##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
+##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
+##  9 Hong Kong,… Asia       2002    81.5  6.76e6    30209.   2.04e11    11.3
+## 10 France      Europe     2007    80.7  6.11e7    30470.   1.86e12    12.3
 ## # ... with 11 more rows</code></pre>
 <p>In this case it doesn’t much matter, but we make a whole new data.frame (<code>lifeExpGreater80</code>) and only use it once; that’s a little wasteful of system resources, and it clutters our environment. If the data are large, that can be a big problem.</p>
 <p>Or, we could nest each function so that it appears on one line:</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">arrange</span>(<span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
-##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
-##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 New Zeala… Oceania    2007    80.2  4.12e⁶     25185    1.04e¹¹    11.0
-##  2 Israel     Asia       2007    80.7  6.43e⁶     25523    1.64e¹¹    11.2
-##  3 Italy      Europe     2002    80.2  5.79e⁷     27968    1.62e¹²    12.2
-##  4 Italy      Europe     2007    80.5  5.81e⁷     28570    1.66e¹²    12.2
-##  5 Japan      Asia       2002    82.0  1.27e⁸     28605    3.63e¹²    12.6
-##  6 Japan      Asia       1997    80.7  1.26e⁸     28817    3.63e¹²    12.6
-##  7 Spain      Europe     2007    80.9  4.04e⁷     28821    1.17e¹²    12.1
-##  8 Sweden     Europe     2002    80.0  8.95e⁶     29342    2.63e¹¹    11.4
-##  9 Hong Kong… Asia       2002    81.5  6.76e⁶     30209    2.04e¹¹    11.3
-## 10 France     Europe     2007    80.7  6.11e⁷     30470    1.86e¹²    12.3
+##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 New Zealand Oceania    2007    80.2  4.12e6    25185.   1.04e11    11.0
+##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
+##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
+##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
+##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
+##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
+##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
+##  9 Hong Kong,… Asia       2002    81.5  6.76e6    30209.   2.04e11    11.3
+## 10 France      Europe     2007    80.7  6.11e7    30470.   1.86e12    12.3
 ## # ... with 11 more rows</code></pre>
 <p>This would become difficult to read if we are performing a number of operations that would require a repeated nesting. But…</p>
 <p>There is a better way, and it makes both writing and reading the code easier. The pipe from the <code>magrittr</code> package (which is automatically installed and loaded with <code>dplyr</code> and <code>tidyverse</code>) takes the output of first line, and plugs it in as the first argument of the next line. Since many <code>tidyverse</code> functions expect a data.frame as the first argument and output a data.frame, this works fluidly.</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
-##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
-##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 New Zeala… Oceania    2007    80.2  4.12e⁶     25185    1.04e¹¹    11.0
-##  2 Israel     Asia       2007    80.7  6.43e⁶     25523    1.64e¹¹    11.2
-##  3 Italy      Europe     2002    80.2  5.79e⁷     27968    1.62e¹²    12.2
-##  4 Italy      Europe     2007    80.5  5.81e⁷     28570    1.66e¹²    12.2
-##  5 Japan      Asia       2002    82.0  1.27e⁸     28605    3.63e¹²    12.6
-##  6 Japan      Asia       1997    80.7  1.26e⁸     28817    3.63e¹²    12.6
-##  7 Spain      Europe     2007    80.9  4.04e⁷     28821    1.17e¹²    12.1
-##  8 Sweden     Europe     2002    80.0  8.95e⁶     29342    2.63e¹¹    11.4
-##  9 Hong Kong… Asia       2002    81.5  6.76e⁶     30209    2.04e¹¹    11.3
-## 10 France     Europe     2007    80.7  6.11e⁷     30470    1.86e¹²    12.3
+##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 New Zealand Oceania    2007    80.2  4.12e6    25185.   1.04e11    11.0
+##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
+##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
+##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
+##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
+##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
+##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
+##  9 Hong Kong,… Asia       2002    81.5  6.76e6    30209.   2.04e11    11.3
+## 10 France      Europe     2007    80.7  6.11e7    30470.   1.86e12    12.3
 ## # ... with 11 more rows</code></pre>
 <p>To demonstrate how it works, here are some examples where it’s unnecessary.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</a></code></pre></div>
@@ -1088,18 +1088,18 @@ div.tocify {
 <a class="sourceLine" id="cb87-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb87-3" data-line-number="3"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
-##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
-##    &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 New Zeala… Oceania    2007    80.2  4.12e⁶     25185    1.04e¹¹    11.0
-##  2 Israel     Asia       2007    80.7  6.43e⁶     25523    1.64e¹¹    11.2
-##  3 Italy      Europe     2002    80.2  5.79e⁷     27968    1.62e¹²    12.2
-##  4 Italy      Europe     2007    80.5  5.81e⁷     28570    1.66e¹²    12.2
-##  5 Japan      Asia       2002    82.0  1.27e⁸     28605    3.63e¹²    12.6
-##  6 Japan      Asia       1997    80.7  1.26e⁸     28817    3.63e¹²    12.6
-##  7 Spain      Europe     2007    80.9  4.04e⁷     28821    1.17e¹²    12.1
-##  8 Sweden     Europe     2002    80.0  8.95e⁶     29342    2.63e¹¹    11.4
-##  9 Hong Kong… Asia       2002    81.5  6.76e⁶     30209    2.04e¹¹    11.3
-## 10 France     Europe     2007    80.7  6.11e⁷     30470    1.86e¹²    12.3
+##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 New Zealand Oceania    2007    80.2  4.12e6    25185.   1.04e11    11.0
+##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
+##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
+##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
+##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
+##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
+##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
+##  9 Hong Kong,… Asia       2002    81.5  6.76e6    30209.   2.04e11    11.3
+## 10 France      Europe     2007    80.7  6.11e7    30470.   1.86e12    12.3
 ## # ... with 11 more rows</code></pre>
 <p>Making your code easier for humans to read will save you lots of time. The human reading it is usually future-you, and operations that seem simple when you’re writing them will look like gibberish when you’re three weeks removed from them, let alone three months or three years or another person. Make your code as easy to read as possible by using the pipe where appropriate, leaving white space, using descriptive variable names, being consistent with spacing and naming, and liberally commenting code.</p>
 <blockquote>
@@ -1116,18 +1116,18 @@ div.tocify {
 <pre><code>## # A tibble: 12 x 3
 ##     year mean_gdp median_gdp
 ##    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
-##  1  1952     3725       1969
-##  2  1957     4299       2173
-##  3  1962     4726       2335
-##  4  1967     5484       2678
-##  5  1972     6770       3339
-##  6  1977     7313       3799
-##  7  1982     7519       4216
-##  8  1987     7901       4280
-##  9  1992     8159       4386
-## 10  1997     9090       4782
-## 11  2002     9918       5320
-## 12  2007    11680       6124</code></pre>
+##  1  1952    3725.      1969.
+##  2  1957    4299.      2173.
+##  3  1962    4726.      2335.
+##  4  1967    5484.      2678.
+##  5  1972    6770.      3339.
+##  6  1977    7313.      3799.
+##  7  1982    7519.      4216.
+##  8  1987    7901.      4280.
+##  9  1992    8159.      4386.
+## 10  1997    9090.      4782.
+## 11  2002    9918.      5320.
+## 12  2007   11680.      6124.</code></pre>
 <p><strong>Shoutout Q: Note that <code>summarize</code> eliminates any other columns. Why? What else can it do? E.g. What country should it list for the year 1952!?</strong></p>
 <p>There are several different summary statistics that can be generated from our data. The R base package provides many built-in functions such as <code>mean</code>, <code>median</code>, <code>min</code>, <code>max</code>, and <code>range</code>. By default, all <strong>R functions operating on vectors that contains missing data will return NA</strong>. It’s a way to make sure that users know they have missing data, and make a conscious decision on how to deal with it. When dealing with simple statistics like the mean, the easiest way to ignore <code>NA</code> (the missing data) is to use <code>na.rm=TRUE</code> (<code>rm</code> stands for remove). An alternate option is to use the function <code>is.na()</code>, which evaluates to true if the value passed to it is not a number. This function is more useful as a part of a filter, where you can filter out everything that is not a number. For that purpose you would do something like</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>

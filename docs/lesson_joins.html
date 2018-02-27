@@ -712,16 +712,16 @@ div.tocify {
 <pre><code>## # A tibble: 1,704 x 11
 ##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
 ##    &lt;fct&gt;      &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Afghanist… Asia       1952    28.8  8.43e⁶       779    6.57e ⁹    9.82
-##  2 Afghanist… Asia       1957    30.3  9.24e⁶       821    7.59e ⁹    9.88
-##  3 Afghanist… Asia       1962    32.0  1.03e⁷       853    8.76e ⁹    9.94
-##  4 Afghanist… Asia       1967    34.0  1.15e⁷       836    9.65e ⁹    9.98
-##  5 Afghanist… Asia       1972    36.1  1.31e⁷       740    9.68e ⁹    9.99
-##  6 Afghanist… Asia       1977    38.4  1.49e⁷       786    1.17e¹⁰   10.1 
-##  7 Afghanist… Asia       1982    39.9  1.29e⁷       978    1.26e¹⁰   10.1 
-##  8 Afghanist… Asia       1987    40.8  1.39e⁷       852    1.18e¹⁰   10.1 
-##  9 Afghanist… Asia       1992    41.7  1.63e⁷       649    1.06e¹⁰   10.0 
-## 10 Afghanist… Asia       1997    41.8  2.22e⁷       635    1.41e¹⁰   10.1 
+##  1 Afghanist… Asia       1952    28.8  8.43e6      779.    6.57e 9    9.82
+##  2 Afghanist… Asia       1957    30.3  9.24e6      821.    7.59e 9    9.88
+##  3 Afghanist… Asia       1962    32.0  1.03e7      853.    8.76e 9    9.94
+##  4 Afghanist… Asia       1967    34.0  1.15e7      836.    9.65e 9    9.98
+##  5 Afghanist… Asia       1972    36.1  1.31e7      740.    9.68e 9    9.99
+##  6 Afghanist… Asia       1977    38.4  1.49e7      786.    1.17e10   10.1 
+##  7 Afghanist… Asia       1982    39.9  1.29e7      978.    1.26e10   10.1 
+##  8 Afghanist… Asia       1987    40.8  1.39e7      852.    1.18e10   10.1 
+##  9 Afghanist… Asia       1992    41.7  1.63e7      649.    1.06e10   10.0 
+## 10 Afghanist… Asia       1997    41.8  2.22e7      635.    1.41e10   10.1 
 ## # ... with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents)</a></code></pre></div>
@@ -731,16 +731,16 @@ div.tocify {
 <pre><code>## # A tibble: 1,705 x 11
 ##    country continent  year lifeExp      pop gdpPercap    total_gdp log_gdp
 ##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1  9279525      2449  22725632678    10.4
-##  2 Algeria Africa     1957    45.7 10270856      3014  30956113720    10.5
-##  3 Algeria Africa     1962    48.3 11000948      2551  28061403854    10.4
-##  4 Algeria Africa     1967    51.4 12760499      3247  41433235247    10.6
-##  5 Algeria Africa     1972    54.5 14760787      4183  61739408943    10.8
-##  6 Algeria Africa     1977    58.0 17152804      4910  84227416174    10.9
-##  7 Algeria Africa     1982    61.4 20033753      5745 115097120653    11.1
-##  8 Algeria Africa     1987    65.8 23254956      5681 132119742845    11.1
-##  9 Algeria Africa     1992    67.7 26298373      5023 132102425043    11.1
-## 10 Algeria Africa     1997    69.2 29072015      4797 139467033682    11.1
+##  1 Algeria Africa     1952    43.1  9279525     2449.      2.27e10    10.4
+##  2 Algeria Africa     1957    45.7 10270856     3014.      3.10e10    10.5
+##  3 Algeria Africa     1962    48.3 11000948     2551.      2.81e10    10.4
+##  4 Algeria Africa     1967    51.4 12760499     3247.      4.14e10    10.6
+##  5 Algeria Africa     1972    54.5 14760787     4183.      6.17e10    10.8
+##  6 Algeria Africa     1977    58.0 17152804     4910.      8.42e10    10.9
+##  7 Algeria Africa     1982    61.4 20033753     5745.      1.15e11    11.1
+##  8 Algeria Africa     1987    65.8 23254956     5681.      1.32e11    11.1
+##  9 Algeria Africa     1992    67.7 26298373     5023.      1.32e11    11.1
+## 10 Algeria Africa     1997    69.2 29072015     4797.      1.39e11    11.1
 ## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
@@ -764,16 +764,16 @@ div.tocify {
 <pre><code>## # A tibble: 1,705 x 11
 ##    country continent  year lifeExp country_pop gdpPercap total_gdp log_gdp
 ##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;       &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1     9279525      2449   2.27e¹⁰    10.4
-##  2 Algeria Africa     1957    45.7    10270856      3014   3.10e¹⁰    10.5
-##  3 Algeria Africa     1962    48.3    11000948      2551   2.81e¹⁰    10.4
-##  4 Algeria Africa     1967    51.4    12760499      3247   4.14e¹⁰    10.6
-##  5 Algeria Africa     1972    54.5    14760787      4183   6.17e¹⁰    10.8
-##  6 Algeria Africa     1977    58.0    17152804      4910   8.42e¹⁰    10.9
-##  7 Algeria Africa     1982    61.4    20033753      5745   1.15e¹¹    11.1
-##  8 Algeria Africa     1987    65.8    23254956      5681   1.32e¹¹    11.1
-##  9 Algeria Africa     1992    67.7    26298373      5023   1.32e¹¹    11.1
-## 10 Algeria Africa     1997    69.2    29072015      4797   1.39e¹¹    11.1
+##  1 Algeria Africa     1952    43.1     9279525     2449.   2.27e10    10.4
+##  2 Algeria Africa     1957    45.7    10270856     3014.   3.10e10    10.5
+##  3 Algeria Africa     1962    48.3    11000948     2551.   2.81e10    10.4
+##  4 Algeria Africa     1967    51.4    12760499     3247.   4.14e10    10.6
+##  5 Algeria Africa     1972    54.5    14760787     4183.   6.17e10    10.8
+##  6 Algeria Africa     1977    58.0    17152804     4910.   8.42e10    10.9
+##  7 Algeria Africa     1982    61.4    20033753     5745.   1.15e11    11.1
+##  8 Algeria Africa     1987    65.8    23254956     5681.   1.32e11    11.1
+##  9 Algeria Africa     1992    67.7    26298373     5023.   1.32e11    11.1
+## 10 Algeria Africa     1997    69.2    29072015     4797.   1.39e11    11.1
 ## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   continent_pop &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <blockquote>

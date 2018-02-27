@@ -793,8 +793,8 @@ surveys_hindfoot_half <- surveys %>%
 ##  1 F     BA                9.16
 ##  2 F     DM               41.6 
 ##  3 F     DO               48.5 
-##  4 F     DS              118   
-##  5 F     NL              154   
+##  4 F     DS              118.  
+##  5 F     NL              154.  
 ##  6 F     OL               31.1 
 ##  7 F     OT               24.8 
 ##  8 F     OX               21.0 
@@ -813,8 +813,8 @@ surveys_hindfoot_half <- surveys %>%
 ##  1 F     BA                9.16
 ##  2 F     DM               41.6 
 ##  3 F     DO               48.5 
-##  4 F     DS              118   
-##  5 F     NL              154   
+##  4 F     DS              118.  
+##  5 F     NL              154.  
 ##  6 F     OL               31.1 
 ##  7 F     OT               24.8 
 ##  8 F     OX               21.0 
@@ -834,8 +834,8 @@ surveys_hindfoot_half <- surveys %>%
 ##  1 F     BA                9.16
 ##  2 F     DM               41.6 
 ##  3 F     DO               48.5 
-##  4 F     DS              118   
-##  5 F     NL              154   
+##  4 F     DS              118.  
+##  5 F     NL              154.  
 ##  6 F     OL               31.1 
 ##  7 F     OT               24.8 
 ##  8 F     OX               21.0 
@@ -857,16 +857,16 @@ surveys_hindfoot_half <- surveys %>%
 ## # Groups:   sex [?]
 ##    sex   species_id mean_weight min_weight
 ##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
-##  1 F     BA                9.16       6.00
-##  2 F     DM               41.6       10.0 
-##  3 F     DO               48.5       12.0 
-##  4 F     DS              118         45.0 
-##  5 F     NL              154         32.0 
-##  6 F     OL               31.1       10.0 
-##  7 F     OT               24.8        5.00
-##  8 F     OX               21.0       20.0 
-##  9 F     PB               30.2       12.0 
-## 10 F     PE               22.8       11.0 
+##  1 F     BA                9.16         6.
+##  2 F     DM               41.6         10.
+##  3 F     DO               48.5         12.
+##  4 F     DS              118.          45.
+##  5 F     NL              154.          32.
+##  6 F     OL               31.1         10.
+##  7 F     OT               24.8          5.
+##  8 F     OX               21.0         20.
+##  9 F     PB               30.2         12.
+## 10 F     PE               22.8         11.
 ## # ... with 54 more rows</code></pre>
 </div>
 <div id="tallying" class="section level4">
@@ -908,16 +908,16 @@ surveys_hindfoot_half <- surveys %>%
 ## # A tibble: 25 x 4
 ##    species_id mean_hindfoot_length min_hindfoot_length max_hindfoot_length
 ##    <chr>                     <dbl>               <dbl>               <dbl>
-##  1 AH                         33.0               31.0                 35.0
-##  2 BA                         13.0                6.00                16.0
-##  3 DM                         36.0               16.0                 50.0
-##  4 DO                         35.6               26.0                 64.0
-##  5 DS                         49.9               39.0                 58.0
-##  6 NL                         32.3               21.0                 70.0
-##  7 OL                         20.5               12.0                 39.0
-##  8 OT                         20.3               13.0                 50.0
-##  9 OX                         19.1               13.0                 21.0
-## 10 PB                         26.1                2.00                47.0
+##  1 AH                         33.0                 31.                 35.
+##  2 BA                         13.0                  6.                 16.
+##  3 DM                         36.0                 16.                 50.
+##  4 DO                         35.6                 26.                 64.
+##  5 DS                         49.9                 39.                 58.
+##  6 NL                         32.3                 21.                 70.
+##  7 OL                         20.5                 12.                 39.
+##  8 OT                         20.3                 13.                 50.
+##  9 OX                         19.1                 13.                 21.
+## 10 PB                         26.1                  2.                 47.
 ## # ... with 15 more rows
 ```
 
@@ -1044,12 +1044,12 @@ surveys_hindfoot_half <- surveys %>%
 <pre><code>## # A tibble: 6 x 11
 ##   plot_id Baiomys Chaetodipus Dipodomys Neotoma Onychomys Perognathus
 ##     &lt;int&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-## 1       1    7.00        22.2      60.2     156      27.7        9.62
-## 2       2    6.00        25.1      55.7     169      26.9        6.95
-## 3       3    8.61        24.6      52.0     158      26.0        7.51
-## 4       4    0           23.0      57.5     164      28.1        7.82
-## 5       5    7.75        18.0      51.1     190      27.0        8.66
-## 6       6    0           24.9      58.6     180      25.9        7.81
+## 1       1    7.00        22.2      60.2    156.      27.7        9.62
+## 2       2    6.00        25.1      55.7    169.      26.9        6.95
+## 3       3    8.61        24.6      52.0    158.      26.0        7.51
+## 4       4    0.          23.0      57.5    164.      28.1        7.82
+## 5       5    7.75        18.0      51.1    190.      27.0        8.66
+## 6       6    0.          24.9      58.6    180.      25.9        7.81
 ## # ... with 4 more variables: Peromyscus &lt;dbl&gt;, Reithrodontomys &lt;dbl&gt;,
 ## #   Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
 </div>

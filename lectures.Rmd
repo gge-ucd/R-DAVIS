@@ -48,14 +48,14 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 7
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/fu43gc7th8iouiz/2018-R-DAVIS-w07.R?dl=0), [Rmd](https://dl.dropboxusercontent.com/s/pbb9fz0g5lv0r6c/demo_rmarkdown.Rmd))
+* What we covered (link to [livecode R](https://dl.dropboxusercontent.com/s/fu43gc7th8iouiz/2018-R-DAVIS-w07.R?dl=0), [Rmd](https://dl.dropboxusercontent.com/s/pbb9fz0g5lv0r6c/demo_rmarkdown.Rmd))
 * [Screencast](https://www.youtube.com/watch?v=TeU4UyDzsCc)
 * [**GoogleDoc**](https://docs.google.com/document/d/1LmR-DqYNfGfn7DoecjfpjX8Ex0i8pdwaMqhFGLfmh0E/edit)
 * [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
 
 ### Week 8
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/zzyj2hsc7lhmpd9/2018-R-DAVIS-w08.R?dl=0))
+* What we covered (link to [Rmd livecode](https://dl.dropboxusercontent.com/s/wtoiwdcdd6nvm8w/2018-R-DAVIS-w08.Rmd))
 * [Screencast](https://www.youtube.com/watch?v=ERlzn8Cw9Ls)
 * [**GoogleDoc**](https://docs.google.com/document/d/10iZ7B4ikQzOF59ABXhm67-zSiUV-T0qxBWwbXoT6DHE/edit)
 * [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
