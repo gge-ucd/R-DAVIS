@@ -183,7 +183,6 @@ right_join(gapminder, continents) %>%
 > - Plotting per-capita gdp versus population density. 
 >
 
-
 ## Challenge solutions
 
 > #### Solution to Challenge -- Putting the pieces together
@@ -209,9 +208,111 @@ right_join(gapminder, continents) %>%
 > ```
 >
 
+# Practice with joins using surveys
+
+To illustrate how to use **`dplyr`** with these complex queries, we are going to join
+the `plots` and `surveys` tables. The `plots` table in the database contains
+information about the different plots surveyed by the researchers.
+
+The datasets can be found here: [plots.csv](data/plots.csv), [surveys.csv](data/surveys.csv), and [species.csv]("data/species.csv").
+
+Download them and save them to your downloads folder. Alternatively, copy the link and use the `read_csv()` function directly on that.
+
+```{r plots, results='markup', purl=FALSE}
+plots <- read_csv("data/plots.csv")
+plots
+```
+
+The `plot_id` column also features in the `surveys` table:
+
+```{r surveys, results='markup', purl=FALSE}
+surveys <- read_csv("data/surveys.csv")
+surveys
+```
+
+Because `plot_id` is listed in both tables, we can use it to look up matching
+records, and join the two tables.
+
+
+![diagram illustrating inner and left joins](img/joins.svg)
+
+
+For example, to extract all surveys for the first plot, which has `plot_id` 1,
+we can do:
+
+```{r join, results='markup', purl=FALSE}
+plots %>%
+  filter(plot_id == 1) %>%
+  inner_join(surveys)
+```
+
+> ### Challenge
+>
+> 
+>
+> Write some code that returns the number of rodents observed in each plot in
+> each year. Start by reading in the species dataframe.
+>
+> ```{r get_species}
+> species <- read_csv("data/species.csv")
+> ```
+>
+> Hint: All the information you need isn't contained in one single dataframe
+> just yet. The "taxa" information is contained in the species dataframe, and the
+> observation data is contained in the surveys dataframe. Write some code that 
+> joins the species and survey tables together on a common column. What are the 
+> common columns?
+>
+> Hint: How would you use a split-apply-combine strategy to count the number of
+> observations *per taxa, per year*? Which part of this hint refers to the
+> "splitting", and which part refers to the "applying"?
+>
+> Hint: How would you subset the resulting dataframe to just include the rodents?
+>
+>
+> ```{r left_join_answer, answer=TRUE, eval=TRUE}
+> 
+> glimpse(surveys)
+> glimpse(species)
+> ## with dplyr syntax
+> 
+> surveys %>% 
+>   left_join(species) %>%
+>   group_by(taxa, year) %>%
+>   summarize(n = n()) %>% 
+>   filter(taxa == "Rodent")
+> 
+> ``` 
+
+> ### Challenge
+>
+> Write some code that returns the total number of rodents in each genus caught
+> in the different plot types.
+>
+> Hint: Not all the data you need are contained in 1 dataframe. The plot_type data
+> are in the plots dataframe, the taxa data are in the species dataframe, and the
+> observation data are in the surveys dataframe. Start by joining these three dataframes
+> together.
+>
+> Hint: Think "split-apply-combine". We want to *count* the number of observations in
+> each group defined by `plot_type` and `genus` combinations. That is, what is the 
+> count of observations *per plot_type, per genus* for *just the Rodent taxa*.
+> 
+> ```{r genus_by_type_answer, answer=TRUE, results='markup', eval=TRUE}
+> genus_counts <- 
+>   surveys %>% 
+>   left_join(plots) %>%
+>   left_join(species) %>% 
+>   filter(taxa == "Rodent") %>% 
+>   group_by(plot_type, genus, taxa) %>%
+>   summarize(n = n())
+>
+> genus_counts
+> ```
+
+
 <br>
 
 This lesson is adapted from the Software Carpentry: R for Reproducible 
-Scientific Analysis [Multi-Table Joins materials](http://data-lessons.github.io/gapminder-R/12-joins.html) 
-and Brandon Hurr's dplyr II: Joins and Set Ops [presentation](https://github.com/bhive01/2016-02-D-RUG-dplyr-II-talk)
-to the Davis R UsersGroup on Februrary 2, 2016.
+Scientific Analysis [Multi-Table Joins materials](http://data-lessons.github.io/gapminder-R/12-joins.html), Brandon Hurr's dplyr II: Joins and Set Ops [presentation](https://github.com/bhive01/2016-02-D-RUG-dplyr-II-talk)
+to the Davis R UsersGroup on Februrary 2, 2016, and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data [R and Databases materials](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).

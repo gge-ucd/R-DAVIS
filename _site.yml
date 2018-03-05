@@ -63,6 +63,8 @@ navbar:
       href: lesson_text_mining_mlk.html
     - text: Github collaboration with branches
       href: lesson_github_collaboration.html
+    - text: R and SQL
+      href: http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html
   - text: Lectures
     icon: fa-slideshare fa-1x
     href: lectures.html
