@@ -59,6 +59,9 @@ navbar:
       href: lesson_for_loops.html
     - text: Using purrr
       href: lesson_purrr_tutorial.html
+    - text: Mapping in R
+      icon: fa-map fa-1.5x
+      href: https://ryanpeek.github.io/mapping_in_R/index.html
     - text: Text mining
       href: lesson_text_mining_mlk.html
     - text: Github collaboration with branches
