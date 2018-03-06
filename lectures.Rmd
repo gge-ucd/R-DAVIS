@@ -62,7 +62,7 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 9
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/o25qnita4l5g0qb/2018-R-DAVIS-w09.R?dl=0))
+* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/kans88x940g3m12/2018-R-DAVIS-w09.Rmd))
 * [Screencast](https://www.youtube.com/watch?v=orgb6CIzjVo)
 * [**GoogleDoc**](https://docs.google.com/document/d/1IdM25wj8WfVZv1D1XGMDjiJx4YCFoN3zb6tGyAbNJjM/edit)
 * [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
