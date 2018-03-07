@@ -1,9 +1,7 @@
 ---
-title: "Syllabus"
+pagetitle: "Syllabus"
 date: '*Updated:* `r format(Sys.time(), "%Y-%b-%d")`'
 ---
-
-# 
 
 <br>
 
