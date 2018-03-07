@@ -74,28 +74,24 @@ library(emo, quietly = T)
 #### Week 6
 
  - `r emo::ji("white_check_mark")` `ggplot2` (finish up)
- - `r emo::ji("white_check_mark")` Data import/export (.rda, .rds, file types)
+ - `r emo::ji("white_check_mark")` Data import/export (as assignment)
 
 #### Week 7
 
- - `r emo::ji("ballot_box_with_check")` RMarkdown and literate programming
- - `r emo::ji("ballot_box_with_check")` Visualization do's and don'ts
+ - `r emo::ji("white_check_mark")` RMarkdown and literate programming
+ - `r emo::ji("white_check_mark")` Visualization do's and don'ts
 
 #### Week 8
 
- - `r emo::ji("ballot_box_with_check")` joins using `dplyr`
- - `r emo::ji("ballot_box_with_check")` `tidyr` (reshape data)
+ - `r emo::ji("white_check_mark")` `tidyr` (reshape data)
+ - `r emo::ji("white_check_mark")` datetime data in R with `lubridate`
 
 #### Week 9
 
- - `r emo::ji("ballot_box_with_check")` datetime data in R with `lubridate` (import, manipulate, visualize pipeline for timeseries data)
+ - `r emo::ji("white_check_mark")` finish datetime data
+ - `r emo::ji("white_check_mark")` joins using `dplyr`
 
 #### Week 10
 
-TBD, may include: 
-
  - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
- - `r emo::ji("ballot_box_with_check")` custom **functions**
- - `r emo::ji("ballot_box_with_check")` Using the `purrr` package
- - `r emo::ji("ballot_box_with_check")` **for loops**
-
+ 
