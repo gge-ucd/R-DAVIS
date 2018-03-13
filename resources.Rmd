@@ -64,7 +64,7 @@ This is a list of most of the data sources used in this course.
     + [2001 Mauna Loa meteorological station data](data/mauna_loa_met_2001_minute.rda) [tidy format of minute-scale meteorological data from Mauna Loa Observatory]
     + [solinst temp/stage logger data (full)](data/2015_NFA_solinst_08_05.csv) [pressure transducer data logger data from NF American River]
     + [solinst A](data/2015_NFA_solinst_08_05_A.csv) [partial pressure transducer data logger data from NF American River]
-    + [solinst B](data/2015_NFA_solinst_08_05_A.csv) [partial pressure transducer data logger data from NF American River]
+    + [solinst B](data/2015_NFA_solinst_08_05_B.csv) [partial pressure transducer data logger data from NF American River]
 
 
 ### Presentations

@@ -214,7 +214,7 @@ To illustrate how to use **`dplyr`** with these complex queries, we are going to
 the `plots` and `surveys` tables. The `plots` table in the database contains
 information about the different plots surveyed by the researchers.
 
-The datasets can be found here: [plots.csv](data/plots.csv), [surveys.csv](data/surveys.csv), and [species.csv]("data/species.csv").
+The datasets can be found here: [plots.csv](data/plots.csv), [surveys.csv](data/surveys.csv), and [species.csv](data/species.csv).
 
 Download them and save them to your downloads folder. Alternatively, copy the link and use the `read_csv()` function directly on that.
 
@@ -264,7 +264,7 @@ plots %>%
 > common columns?
 >
 > Hint: How would you use a split-apply-combine strategy to count the number of
-> observations *per taxa, per year*? Which part of this hint refers to the
+> observations *per plot, per year*? Which part of this hint refers to the
 > "splitting", and which part refers to the "applying"?
 >
 > Hint: How would you subset the resulting dataframe to just include the rodents?
@@ -278,11 +278,18 @@ plots %>%
 > 
 > surveys %>% 
 >   left_join(species) %>%
->   group_by(taxa, year) %>%
+>   group_by(plot_id, taxa, year) %>%
 >   summarize(n = n()) %>% 
 >   filter(taxa == "Rodent")
 > 
-> ``` 
+> # Alternatively, filter to rodents *before* summarizing by plot and year
+> surveys %>% 
+>   left_join(species) %>%
+>   filter(taxa == "Rodent") %>% 
+>   group_by(plot_id, year) %>%
+>   summarize(n = n())
+> 
+``` 
 
 > ### Challenge
 >
