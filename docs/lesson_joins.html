@@ -826,7 +826,7 @@ div.tocify {
 <div id="practice-with-joins-using-surveys" class="section level1">
 <h1>Practice with joins using surveys</h1>
 <p>To illustrate how to use <strong><code>dplyr</code></strong> with these complex queries, we are going to join the <code>plots</code> and <code>surveys</code> tables. The <code>plots</code> table in the database contains information about the different plots surveyed by the researchers.</p>
-<p>The datasets can be found here: <a href="data/plots.csv">plots.csv</a>, <a href="data/surveys.csv">surveys.csv</a>, and <a href="%22data/species.csv%22">species.csv</a>.</p>
+<p>The datasets can be found here: <a href="data/plots.csv">plots.csv</a>, <a href="data/surveys.csv">surveys.csv</a>, and <a href="data/species.csv">species.csv</a>.</p>
 <p>Download them and save them to your downloads folder. Alternatively, copy the link and use the <code>read_csv()</code> function directly on that.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">plots &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/plots.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
@@ -915,7 +915,7 @@ div.tocify {
 ##   taxa = col_character()
 ## )</code></pre>
 <p>Hint: All the information you need isn’t contained in one single dataframe just yet. The “taxa” information is contained in the species dataframe, and the observation data is contained in the surveys dataframe. Write some code that joins the species and survey tables together on a common column. What are the common columns?</p>
-<p>Hint: How would you use a split-apply-combine strategy to count the number of observations <em>per taxa, per year</em>? Which part of this hint refers to the “splitting”, and which part refers to the “applying”?</p>
+<p>Hint: How would you use a split-apply-combine strategy to count the number of observations <em>per plot, per year</em>? Which part of this hint refers to the “splitting”, and which part refers to the “applying”?</p>
 <p>Hint: How would you subset the resulting dataframe to just include the rodents?</p>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">glimpse</span>(surveys)</a></code></pre></div>
 <pre><code>## Observations: 35,549
@@ -940,41 +940,63 @@ div.tocify {
 <a class="sourceLine" id="cb77-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb77-3" data-line-number="3">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb77-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(taxa, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, taxa, year) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb77-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb77-7" data-line-number="7"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
-<pre><code>## # A tibble: 26 x 3
-## # Groups:   taxa [1]
-##    taxa    year     n
-##    &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
-##  1 Rodent  1977   487
-##  2 Rodent  1978   990
-##  3 Rodent  1979   658
-##  4 Rodent  1980  1355
-##  5 Rodent  1981  1394
-##  6 Rodent  1982  1903
-##  7 Rodent  1983  1594
-##  8 Rodent  1984   914
-##  9 Rodent  1985  1398
-## 10 Rodent  1986   912
-## # ... with 16 more rows</code></pre>
+<pre><code>## # A tibble: 619 x 4
+## # Groups:   plot_id, taxa [24]
+##    plot_id taxa    year     n
+##      &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+##  1       1 Rodent  1977    22
+##  2       1 Rodent  1978    57
+##  3       1 Rodent  1979    26
+##  4       1 Rodent  1980    75
+##  5       1 Rodent  1981    79
+##  6       1 Rodent  1982   109
+##  7       1 Rodent  1983   129
+##  8       1 Rodent  1984    49
+##  9       1 Rodent  1985   102
+## 10       1 Rodent  1986    57
+## # ... with 609 more rows</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co"># Alternatively, filter to rodents *before* summarizing by plot and year</span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
+<pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
+<pre><code>## # A tibble: 619 x 3
+## # Groups:   plot_id [?]
+##    plot_id  year     n
+##      &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##  1       1  1977    22
+##  2       1  1978    57
+##  3       1  1979    26
+##  4       1  1980    75
+##  5       1  1981    79
+##  6       1  1982   109
+##  7       1  1983   129
+##  8       1  1984    49
+##  9       1  1985   102
+## 10       1  1986    57
+## # ... with 609 more rows</code></pre>
 </blockquote>
 <blockquote>
 <h3 id="challenge-1">Challenge</h3>
 <p>Write some code that returns the total number of rodents in each genus caught in the different plot types.</p>
 <p>Hint: Not all the data you need are contained in 1 dataframe. The plot_type data are in the plots dataframe, the taxa data are in the species dataframe, and the observation data are in the surveys dataframe. Start by joining these three dataframes together.</p>
 <p>Hint: Think “split-apply-combine”. We want to <em>count</em> the number of observations in each group defined by <code>plot_type</code> and <code>genus</code> combinations. That is, what is the count of observations <em>per plot_type, per genus</em> for <em>just the Rodent taxa</em>.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">genus_counts &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb80-2" data-line-number="2"><span class="st">  </span>surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="st">  </span><span class="kw">left_join</span>(plots) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-6" data-line-number="6"><span class="st">  </span><span class="kw">group_by</span>(plot_type, genus, taxa) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb80-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">genus_counts &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="st">  </span>surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="st">  </span><span class="kw">left_join</span>(plots) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-6" data-line-number="6"><span class="st">  </span><span class="kw">group_by</span>(plot_type, genus, taxa) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">genus_counts</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">genus_counts</a></code></pre></div>
 <pre><code>## # A tibble: 59 x 4
 ## # Groups:   plot_type, genus [?]
 ##    plot_type genus            taxa       n
