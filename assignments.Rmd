@@ -1,0 +1,384 @@
+---
+title: "Coding Practice"
+output:
+  html_document:
+    toc: false
+---
+
+The following material was posted on Github via the Discussion board for the class *Team* (2018 was the **Ents**). Assignments were designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments were completed via private repositories each student set up (via [Github Classrooms](https://classroom.github.com/classrooms)), and each week students were randomly assigned another student for a code review. Apologies if there are links that don't work, they may be specifically setup for students enrolled in course.
+
+<br>
+
+## Assignments {.tabset .tabset-fade .tabset-pills}
+
+### <small>W2</small>
+
+From here on out, each week, we'd like to post a quick summary of what we've covered, and then a quick preview of what next week might hold, as well as potential reading/coding that might be helpful to do before the next session. These may be more formal assignments, or just things that may help you follow along more quickly when Mike and I are live-coding.
+
+**Week 1/2 Recap**
+
+The last few weeks have largely been about getting familiar with git/Github, figuring out how to use RStudio, and some basics in what R is. We've also discussed some basics about data management and organization, which is really simple but quite important and foundational to everything you will do from here on out.
+
+We've talked about functions, data types, variables and assignment, and we've shown how you can use git from either a bash (the language) command line or from the tab in RStudio. We learned (the hard way), the importance of always using `git pull` before doing anything in a repository that you may be collaborating with folks on, to sync up your local copy with the cloud copy. Thanks for your patience on all that.
+
+**Week 3 Preview**
+
+Next week we are going to really start playing with data in R. We'll be going over vectors/dataframe, and learning two really amazing packages (which are groups of functions we download and use in R) called `dplyr` and `tidyr`, which are part of a group of packages called the `tidyverse` (also a package!). I think next week will be fun, and a chance for folks to really start playing with code. We'll also show a few tips/tricks about starting and ending your RStudio sessions cleanly. And maybe most importantly, we'll spend some time talking about how to get help in R when you want to figure out how to do something (quick hint, "Google" is a strong answer!).
+
+**Optional Code/Reading**
+
+If you have time there are two tasks I'd like everyone to try before class on Tuesday. 
+
+- First, I'd like everyone to attempt to install the **`tidyverse`** package, when you are in RStudio. If you run into trouble, file an issue in the Discussion repository ([here](https://github.com/gge-ucd/Discussion/issues)). **`tidyverse`** is a fairly large package, so don't be alarmed if you see lots of code scrolling past, and it may take 3-4 minutes to complete. To install, there are two options:
+    - you can either find the menu at the top of the screen and click on *Tools* > **Install Packages** > and then type **`tidyverse`** in the blank space; OR,
+    -  in the console window you can type: **`install.packages("tidyverse")`**
+
+ - Second, if you have some time to read through and try the code in the [Data frames (continents)](https://gge-ucd.github.io/R-DAVIS/lesson_data_frames_continents.html) lesson, that would be great. We'll be working through the Data frames (ecology) lesson in class.
+
+### <small>W3</small>
+
+Hi @gge-ucd/ents folks,
+Thanks again for a good class today! Your feedback helps us make this course better and hopefully more useful for you, so keep it coming (constructively 😃 ).
+
+#### **Assignment Instructions**
+
+Since we just touched on `dplyr`, this will only cover what we talked about in class. The objective of the assignment is for you to write a new, clean script, commit and push it to github, and then someone else will download and run that script on their computer, and file an issue in your repository with some comments about the script.
+
+#### **Part I: Filter/Select**
+
+**Create a new script**
+ - Create a new script named: `w3_assignment_ABC.R` (but with your initials instead of ABC). Save it in the **`scripts`** folder.
+ - Use clear commenting about what your script does throughout. Include at least one section break (hint: `Ctrl/Cmd + Shift + R`)
+
+**Read Data in and Filter and Select**
+ - Read `portal_data_joined.csv` into R as `surveys`. Use the `read_csv` from the `readr` package (part of the `tidyverse`)
+ - Using `dplyr`, **filter** data to `hindfoot_length  > 10`, and months between May and October.
+ - Then use a `%>%` and **select** the following columns: `weight`, `hindfoot_length`, `month`, `species_id`
+ - Check and see how many `NA`'s are in the `weight` column (*hint, it's a function we've already covered, nothing new*)
+ - Finally, using the `table()` function, identify which `species_id` has the greatest number of observations, and which has the least.
+
+**Make a Histogram Plot!**
+ - Using the `hist()` function and the `$` way of subsetting to a specific column in a dataframe, make a histogram of the `weight` column. It should look something like this (minus a few of the labels that I modified):
+![histo_weight](https://user-images.githubusercontent.com/5864880/35349101-eb35877e-00ee-11e8-9e8f-ffcc3f47c42d.png)
+
+**Commit & Push the R script to Github**
+  - Check your repository on Github and make sure your script is there.
+
+#### **Part II: Code Review**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w3_assignment_ABC.R`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `scripts` folder in your repository. Make sure to change the file extension to `.R` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to run the script line by line. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the [Discussion repository](https://github.com/gge-ucd/Discussion/issues) @ryanpeek, @mikoontz , @taylorreiter, etc. 
+
+Thanks!
+
+### <small>W4</small>
+
+This week's assignment builds on the `dplyr` verbs that we learned during Week 04. Just like last week, there are two parts: the exercsise and a code review.
+
+#### **Part I:**
+
+**Create a new script**
+ - Create a new script named: `w4_assignment_ABC.R` (but with your initials instead of ABC). Save it in the **`scripts`** folder in your new repository (learning-tidyverse-githubName).
+ - Use clear commenting about what your script does throughout. Include at least one section break (hint: `Ctrl/Cmd + Shift + R`)
+
+**Using the `dplyr` verbs**
+
+This exercise asks you to **rearrange pre-written lines of code to accomplish a task.**
+
+For this assignment, we will use a new (to us) dataset called "gapminder". It describes the life expectancy, population size, and per capita annual gross domestic product (GDP) of every country every 5 years between 1952 and 2007.
+
+Here is the task: first, import the `gapminder` dataset. Then, use the `dplyr` verbs you've learned on the `gapminder` data to produce a new data.frame called `dollar_per_day_GDP` with only the names, years, and per-capita annual GDP of countries where per capita *daily* GDP is less than a dollar a day sorted from most- to least-recent. Finally, print your result. 
+
+- *Tip:* Remember there is no harm in trying stuff and seeing what happens! This is, in fact, an excellent way to learn what code is doing. Tinker away!
+- *Tip:* The gdpPercap variable is annual gdp. You’ll need to adjust.
+- *Tip:* There may be more than one order that works.
+
+```
+arrange(desc(year))
+glimpse(gapminder)
+select(country, year, gdpPercap) %>% 
+dollar_per_day_GDP
+dollar_per_day_GDP <- gapminder %>% 
+gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv")
+library(tidyverse)
+filter(dailyGDP < 1) %>% 
+mutate(dailyGDP = gdpPercap / 365) %>% 
+```
+
+**Optional: Using the `dplyr` verbs**
+
+If you're feeling ambitious, try out this exercise.
+
+Using the original `gapminder` data.frame, calculate a new column: the total GDP of each country in each year. 
+Calculate the variance – var() across all countries’ total GDPs in each year. 
+Using the `ggplot2` package, make a scatterplot to visualize how variance of country-level GDP is changing through time.
+Is country-level GDP getting more or less equal over time?
+
+**Commit & Push the R script to Github**
+  - Check your repository on Github and make sure your script is there.
+
+#### **Part II: Code Review**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w4_assignment_ABC.R`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `scripts` folder in your repository. Make sure to change the file extension to `.R` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to run the script line by line. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the [Discussion repository](https://github.com/gge-ucd/Discussion/issues) @ryanpeek, @mikoontz , @taylorreiter, etc. 
+
+### <small>W4 Solution</small>
+
+I've posted my approach to the Week 4 assignment in my [learning-tidyverse-mikoontz repository](https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w4_assignment_mikoontz.R)
+
+If you are itching to file an issue to get a GitHub sticker and your code partner hasn't finished the assignment yet, you are welcome to file an issue on my script.
+
+We will go over this on Tuesday, so need to check out the script unless you want to or are spinning your wheels and need a hint.
+
+Mike
+
+### <small>W5</small>
+
+This week's assignment builds on the `ggplot` skills that we learned during Week 05. Just like last week, there are two parts: the exercsise and a code review.
+
+#### **Part 1**
+
+This exercise asks you to **modify existing code to complete a new task.**
+
+We will work in the same repository that you've been working in for the last couple of weeks: learning-tidyverse-GitHub_username.
+
+We will again use the `gapminder` data. Last week, you should have downloaded it into your "data" folder. If you haven't done that, first create a new folder called "data", then you can run this code:
+
+```
+library(tidyverse)
+gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv")
+glimpse(gapminder)
+```
+
+#### *1A*.
+
+Modify the following code to make a figure that shows how life expectancy has changed over time:
+
+```
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+geom_point()
+```
+
+#### *1B*.
+
+Look at the following code. What do you think the `scale_x_log10()` line is doing? What do you think the `geom_smooth()` line is doing? 
+**Hint:** There's no cost to tinkering! Try some code out and see what happens with or without particular elements.
+
+```
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent), size = .25) + 
+    scale_x_log10() +
+    geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') +
+    theme_bw()
+```
+
+#### *1C*. (optional)
+
+Modify the above code to size the points in proportion to the population of the county. 
+**Hint:** Are you translating data to a visual feature of the plot?
+
+#### **Part II: Code Review**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w4_assignment_ABC.R`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `scripts` folder in your repository. Make sure to change the file extension to `.R` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to run the script line by line. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+### <small>W5 Solution</small>
+
+Hi folks, I posted my approach to the Week 5 assignment in my repository: [https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w5_assignment_mikoontz.R](https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w5_assignment_mikoontz.R)
+
+When you come to class on Tuesday, be thinking about one thing that you liked or understood about the homework, and one thing that felt like it was a sticking point. We will add these to the [Google Doc](https://docs.google.com/document/d/1DzXlYTFaHzhqCZWYdNoe2AqRo_ISSoo7e8TGrqVg6ks/edit?usp=sharing) at the start of class.
+
+
+### <small>W6</small>
+
+This week's assignment builds on the `ggplot` skills that we learned during **Week 06** and some new data import/export material that you will go over on your own. Just like last week, there are two parts: the exercise and a code review.
+
+The data import/export lesson material is here: [https://gge-ucd.github.io/R-DAVIS/lesson_data_import.html](https://gge-ucd.github.io/R-DAVIS/lesson_data_import.html)
+
+#### **Part 1a**
+
+Your European colleague needs to use a semicolon-separated (compare to a **comma** separated) file with a comma used as the decimal indicator. E.g., we would write `pi` as 3.14159 but your colleague needs it written as 3,14159.
+
+Use what you've learned about data export and expand on the code below to read the gapminder data in from the URL and write it to a file with a `;` as the cell separator and a `,` to indicate a decimal. Write the file to your `data/` folder. Be sure to create a `data/` folder if you don't have one yet.
+
+Use the `read_csv2()` function on the file you just created to read it into `R` from the `data/` folder and make sure it still looks okay.
+
+**Hint:** If `read_csv2()` imports a file with `;` as the delimiter character and `,` used to indicate a decimal, what function do you think we'll use to write a file with those characteristics?
+
+```
+library(tidyverse)
+gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv")
+glimpse(gapminder)
+
+?read_csv2()
+```
+
+#### **Part 1b**
+
+Create a line plot of `life_expectancy` versus `year` for each `country` in the `gapminder` dataset. Facet the plot by `continent` in order to better visualize the data. Add a trend line with a "linear model" method for each continent.
+
+**Hint:** Build from the code that you wrote for the homework last week! It's nice to not have to start from a blank screen if you can avoid it and borrow some code from someone else or a previous project you've worked on.
+**Hint:** You can map data to a visual feature on a plot within a `geom_smooth()` similarly to how you'd do it in other `geom_` functions.
+  
+#### **Part 1c (optional)**
+
+Build the same plot above without facetting by `continent`. Instead, color each trend line by `continent`. Also color the individual country lines by `continent`. What other changes might you make to make this plot more visually appealing?
+
+Which plot do you prefer between 1b and 1c? What are the strengths and weaknesses of facetting?
+
+#### **Part II: Code Review**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w4_assignment_ABC.R`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `scripts` folder in your repository. Make sure to change the file extension to `.R` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to run the script line by line. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+
+### <small>W6 Solution</small>
+
+A quick mention that if you would like to comment/review code, please feel free to file an issue on @mikoontz or @ryanpeek!  I posted my take on this week's assignment [here](https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/scripts/w6_assignment_RAP.R). 
+
+Also, if you haven't gotten a code review yet, or would like some additional review, please feel free to tag Mike or I (as above) in an issue on the code you'd like us to review. So, essentially you will file an issue on your own repository, make sure to "@mikoontz or @ryanpeek" and let us know what script you want us to take a look at.
+
+### <small>W7</small>
+
+This week's assignment asks you to apply everything you've learned about the data pipeline (importing, manipulating, summarizing, and visualizing, reporting) to an authentic ecology task. You will write a report using RMarkdown, and embed all code within the document. We have already worked through the first part of the code together throughout previous classes, so hopefully it feels familiar. Your challenge will be to get that code to work inside the RMarkdown. The new thing we ask you to do is the last step-- create a customized visualization of some kind to embed in the RMarkdown document.
+
+The final step is code review!
+
+**Please push your `.Rmd` file by the end of the day on Saturday so your code partner has access to it starting Sunday morning. If your partner hasn't pushed their file by Saturday night, feel free to file an issue on my or Ryan's repository. Similarly, if your code partner hasn't filed an issue on your repository and you'd like some feedback, create an issue in your own repository and tag @mikoontz or @ryanpeek to request a review.**
+
+#### **Part 1**
+
+The content you will work to embed in your RMarkdown file can be found here: https://gge-ucd.github.io/R-DAVIS/lesson_import_dplyr_ggplot2.html
+
+First, create a new RMarkdown document in your learning-tidyverse repository. (File -> New File -> RMarkdown...). Add a title if you wish, but leave the output format to "html". In the file that comes up, delete everything after the YAML header (the title, author, date, and output lines that are surrounded above and below by `---`). Save your document as `w7_assignment_ABC.Rmd` where `ABC` are your initials.
+
+Start writing up your data pipeline process in the document below the last `---`. Use the lesson materials on [Literate Programming using RMarkdown](https://gge-ucd.github.io/R-DAVIS/lesson_rmarkdown.html), Google, or any other resource to help you.
+
+When it comes time to embed `R` code, add a "chunk" to signify that you want RStudio to interpret that part of the document as code to run, and not just plain text. The shortcut on a Mac is `Command+Option+i`. The shortcut on a PC is `Control+Alt+i`. (Here's a handy cheatsheet for other [useful shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+"Knit" your document to html (by clicking the "Knit" button above your RMarkdown script or `Command+Shift+k` on a Mac, `Control+Shift+k` on a PC). Get in the habit of **knitting your document regularly to make sure everything is working as you think it should**. Note that if your `R` code has an error, the line number in the error message refers to the line in your code at **the beginning of the chunk where the error occurs**. So you'll have to look through the whole chunk to find out what is broken.
+
+Push only your finished `.Rmd` to GitHub. That is, don't push the `.html` file. Your code partner should be able to knit your `.Rmd` file and get the same `.html` that you did!
+
+#### **Part 2**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w7_assignment_ABC.Rmd`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `docs` folder in your repository. Make sure to change the file extension to `.Rmd` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to knit the document. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+### <small>W7 Solution</small>
+
+Hello @gge-ucd/ents,
+
+I've pushed the remainder of my approach to the week 7 assignment to [my repository](https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/docs/w7_assignment_mikoontz.Rmd).
+
+Ryan posted a solution as well, it's **[here](https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/docs/w7-assignment-RAP.Rmd)**, please take a look and see if you find anything useful. It builds on @mikoontz's solution a bit, to provide a few different ways of doing things, as well as some different plotting options. 
+
+If your code partner hasn't pushed their attempt for you to review, feel free to review my attempt and then open a new issue in your own repository requesting a review on *your* code by tagging me (@mikoontz), Ryan (@ryanpeek), Martha (@MarthaWohlfeil), or Michael (@MCMaurer).
+
+We will start on Tuesday using the Google Doc to crowdsource the good and muddy points of this homework assignment, so be thinking about that.
+
+Finally, on Tuesday, we will be introducing 2 new tools for your data manipulation toolkit-- reshaping data (going from tidy format to wide format) and joining data (merging 2 dataframes together by a common column). We think it might be helpful, if you have 10 minutes, to peruse [this D-RUG presentation](http://d-rug.github.io/2016-02-D-RUG-dplyr-II-talk/#1) by Brandon Hurr on using joins. Flip through the slides by using the up and down arrow keys on your keyboard. 
+
+Don't focus on the code mechanics-- we'll do some live coding to go over that. Instead, get a sense of what "joins" are doing and think about how they'd be valuable in working with your own data. The screencast from the slides is [here](http://d-rug.github.io/blog/2016/hurr-dplyr2) if you want to hear how a particular slide was presented.
+
+### <small>W8</small>
+
+This week's assignment asks you to apply everything you've learned about the data pipeline (importing, manipulating, summarizing, and visualizing, reporting) to an authentic ecology task. You will write a report using RMarkdown, and embed all code within the document. This time, all the code you write will be new, though you will use the Mauna Loa Observatory dataset, which you've seen before.
+
+**Please push your `.Rmd` file by the end of the day on Saturday so your code partner has access to it starting Sunday morning. If your partner hasn't pushed their file by Saturday night, feel free to file an issue on my or Ryan's repository. Similarly, if your code partner hasn't filed an issue on your repository and you'd like some feedback, create an issue in your own repository and tag @mikoontz or @ryanpeek to request a review.**
+
+#### **Part 1**
+
+Here is the challenge:
+
+> Using the Mauna Loa minute-scale meteorological data from 2001...
+>
+> * Remove the NA’s (-99 and -999) in `rel_humid`, `temp_C_2m`, `windSpeed_m_s`
+> * Convert the `temp_C_2m` temperature from degrees Celsius to degrees Fahrenheit
+> * Using `dplyr` and the degrees Fahrenheit column you just created to calculate the `max`imum and `min`imum temperature for each day through the year (*Hint:* look at the `lubridate` functions like `month()`, `day()`, or `yday()` to help determine what month and day each per-minute observation came from)
+> * Make a `ggplot` of both the maximum and minimum temperatures per day throughout the year using separate line geometries for each.
+> * Make some tweaks to your plot to make it more visually appealing.
+> * Write up your process in an RMarkdown document and knit it to .html
+
+**Some background and details:**
+
+**Save the data to `data/`**  
+First, make sure you have the data saved in your `data/` folder. You can download the data from [here](https://github.com/gge-ucd/R-DAVIS/raw/master/data/mauna_loa_met_2001_minute.rda). What format are the data in? What function do you use to import that file type? Note: after you've imported these data, the dataframe is automatically named `mloa_2001`. That is, if you've imported the file properly, you should be able to run `head(mloa_2001)` to see the first 6 rows of it.
+
+**Make a new Rmarkdown doc**  
+Next, create a new RMarkdown document in your learning-tidyverse repository. (File -> New File -> RMarkdown...). Add a title if you wish, but leave the output format to "html". In the file that comes up, delete everything after the YAML header (the title, author, date, and output lines that are surrounded above and below by `---`). Save your document as `w8_assignment_ABC.Rmd` where `ABC` are your initials.
+
+**Write & Code, Write & Code**  
+Start writing up your data pipeline process in the document below the last `---`. Use the lesson materials on [Literate Programming using RMarkdown](https://gge-ucd.github.io/R-DAVIS/lesson_rmarkdown.html), Google, or any other resource to help you. Think of it as a written down version of your mental process in working with the data. Consider starting with the purpose of your report, the source of your data, and a brief description of the data. Then you might start writing down the running commentary of what you want to try, the code to try it, and then your interpretation of the results of running the code. Then commentary on the next thing to try, the code to try it, and your interpetation, etc.
+
+When it comes time to embed `R` code, add a "chunk" to signify that you want RStudio to interpret that part of the document as code to run, and not just plain text. The shortcut on a Mac is Command+Option+i. The shortcut on a PC is Control+Alt+i. (Here's a handy cheatsheet for other [useful shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts))
+
+**Knit**  
+"Knit" your document to html (by clicking the "Knit" button above your RMarkdown script or Command+Shift+k on a Mac, Control+Shift+k on a PC). Get in the habit of **knitting your document regularly to make sure everything is working as you think it should**. Note that if your `R` code has an error, the line number in the error message refers to the line in your code at **the beginning of the chunk where the error occurs**. So you'll have to look through the whole chunk to find out what is broken.
+
+Push only your finished `.Rmd` to GitHub. That is, don't push the `.html` file. Your code partner should be able to knit your `.Rmd` file and get the same `.html` that you did!
+
+#### **Part 2**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w8_assignment_ABC.Rmd`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `docs` folder in your repository. Make sure to change the file extension to `.Rmd` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to knit the document. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). Remember to be constructive and positive...we're all learning!
+
+### <small>W8 Solution</small>
+
+Meant to get this posted yesterday, but life happens. I've pushed my version of the w8 assignment, so take a look if you like. It's here: https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/docs/w8-assignment-RAP.Rmd.
+
+Tomorrow we'll spend a little bit more time using date times, and then move to Joins, which are really powerful and a tool I use frequently. We will also set up a brand new repository (together) in class for our final week 10 class...crazy! 😮 💻 🔥  We want everyone to feel comfortable enough with the process so you will be able to create your own repository, so we'll work through that (again) together!
+
+### <small>W9</small>
+
+This week's assignment is a bit shorter and hopefully simpler. We want you to make sure you have done two main tasks:
+
+ - Successfully created a new github repository and RStudio project called `spatial_mapping_demo`,
+ - and installed the following packages for our spatial mapping lesson:
+    - `sf`
+    - `maps`
+    - `rgdal`
+    - `maptools`
+    - `mapview`
+    - `leaflet`
+    - `tmap`
+
+*Please install these using either the dropdown `Tools` >> `Install Packages`, or `install.packages()` before our next class.* 
+
+Additionally, if you have location data or shapefiles you are interested in making a map with, send them my way! We'll see if we can incorporate them into our lesson next week. Please email Ryan with that info.
+
+If you have any questions please go to our class [Discussion repository](https://github.com/gge-ucd/Discussion/issues) and file an issue, it's likely other folks might have a similar problem/question!
+
+Remember you can always ping us using individual names when you file an issue,  @ryanpeek, @mikoontz , @taylorreiter, etc. 
+
+Hang in there!
+
+

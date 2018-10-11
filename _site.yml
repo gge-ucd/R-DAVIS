@@ -7,7 +7,7 @@ navbar:
     icon: fa-info-circle  fa-1x
   - text: Syllabus
     href: syllabus.html
-    icon: fa-map fa-1.5x
+    icon: fa-map fa-1x
   - text: Set Up!
     menu:
     - text: Computer Setup
@@ -71,6 +71,9 @@ navbar:
   - text: Lectures
     icon: fa-slideshare fa-1x
     href: lectures.html
+  - text: Assignments
+    icon: fa-paperclip fa-1x
+    href: assignments.html
   - text: Resources
     icon: fa-list
     href: resources.html
