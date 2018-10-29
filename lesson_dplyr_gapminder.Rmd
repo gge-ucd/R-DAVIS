@@ -666,3 +666,9 @@ Previous challenge with pipes
 `    filter(onedayGDP < 1) %>% `
 `    select(country, year, gdpPercap))[1,] `
 </span> 
+
+This lesson is adapted from the Software Carpentry: R for Reproducible 
+Scientific Analysis [Vectors and Data Frames materials](http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html), the Software Carpentry: R for Reproducible 
+Scientific Analysis [Manipulating Data.Frames materials](http://data-lessons.github.io/gapminder-R/05-dplyr-single-table.html), and the Software Carpentry: R for Reproducbile Scientific Analysis [Plotting materials](http://data-lessons.github.io/gapminder-R/04-ggplot.html).
+
+Find the latest version of Software Carpentry: R for Reproducible Scientific Analysis [here](http://swcarpentry.github.io/r-novice-gapminder/).
