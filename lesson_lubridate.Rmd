@@ -476,4 +476,4 @@ dat %>%
 
 ```
 
-
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/).
