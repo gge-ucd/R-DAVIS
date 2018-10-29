@@ -211,4 +211,4 @@ m
 
 There are also options for citations...you can add a `.bib` file in your YAML header. See [RStudio's demo](https://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html) for a short overview.
 
-
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/).
