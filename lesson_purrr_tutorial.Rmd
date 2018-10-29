@@ -614,3 +614,4 @@ mtc_plot_n_save <-
 pwalk(list(info = mtc_plot_n_save$cyl, plot = mtc_plot_n_save$plot, table = mtc_plot_n_save$data, filepath = mtc_plot_n_save$filepath), print_func) 
 ```
 
+This lesson is adapted from [Brandon Hurr's D-RUG presentation materials](http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk).
