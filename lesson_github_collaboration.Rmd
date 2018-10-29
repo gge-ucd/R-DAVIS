@@ -82,3 +82,5 @@ To delete the local branch (the one on your computer), you can use:
 You can do this on Github.com, or via command line with:
 
  - `git push origin --delete the_remote_branch`
+
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/).
