@@ -28,7 +28,7 @@ This data was formerly stored here: `http://cdiac.ornl.gov/ftp/trends/co2/vostok
  - Can we use `read.table`?
  - Why did we specify `skip=20`?
  
-```{r getC02 data, echo=T, eval=F}
+```{r getC02 data, echo=T, eval=T}
 
 library(readr)
 df <- read_tsv(
