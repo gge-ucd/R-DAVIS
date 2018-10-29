@@ -24,7 +24,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -32,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -45,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -153,6 +153,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -362,7 +365,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -477,6 +480,13 @@ div.tocify {
     <span class="fa fa-slideshare fa-1x"></span>
      
     Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
   </a>
 </li>
 <li>
@@ -673,13 +683,13 @@ div.tocify {
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</a></code></pre></div>
 <p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the first 6 lines of this data using <code>head(surveys)</code></p>
 <p>Now we can look at how reading in the data in different ways affects the different data types (<code>factor</code> vs. <code>character</code>):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">## Compare the difference between when the data are being read as</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">## `factor`, and when they are being read as `character`.</a>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">## Compare the difference between when the data are being read as</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
 <a class="sourceLine" id="cb42-3" data-line-number="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb42-4" data-line-number="4"><span class="kw">str</span>(surveys)</a>
 <a class="sourceLine" id="cb42-5" data-line-number="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">## Convert the column &quot;plot_type&quot; into a factor</a>
+<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
 <a class="sourceLine" id="cb42-8" data-line-number="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
 <div id="challenge-1" class="section level4">
 <h4>Challenge</h4>
@@ -1046,7 +1056,7 @@ div.tocify {
 ##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
 ##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
 ##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
-##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  5 Japan       Asia       2002    82    1.27e8    28605.   3.63e12    12.6
 ##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
 ##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
 ##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
@@ -1063,7 +1073,7 @@ div.tocify {
 ##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
 ##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
 ##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
-##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  5 Japan       Asia       2002    82    1.27e8    28605.   3.63e12    12.6
 ##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
 ##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
 ##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
@@ -1081,7 +1091,7 @@ div.tocify {
 ##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
 ##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
 ##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
-##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  5 Japan       Asia       2002    82    1.27e8    28605.   3.63e12    12.6
 ##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
 ##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
 ##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
@@ -1104,7 +1114,7 @@ div.tocify {
 ##  2 Israel      Asia       2007    80.7  6.43e6    25523.   1.64e11    11.2
 ##  3 Italy       Europe     2002    80.2  5.79e7    27968.   1.62e12    12.2
 ##  4 Italy       Europe     2007    80.5  5.81e7    28570.   1.66e12    12.2
-##  5 Japan       Asia       2002    82.0  1.27e8    28605.   3.63e12    12.6
+##  5 Japan       Asia       2002    82    1.27e8    28605.   3.63e12    12.6
 ##  6 Japan       Asia       1997    80.7  1.26e8    28817.   3.63e12    12.6
 ##  7 Spain       Europe     2007    80.9  4.04e7    28821.   1.17e12    12.1
 ##  8 Sweden      Europe     2002    80.0  8.95e6    29342.   2.63e11    11.4
@@ -1264,6 +1274,8 @@ div.tocify {
 <p><span style="color:white">Copy the code you (or the instructor) wrote to solve the previous MCQ Data Reduction challenge. Rewrite it using pipes (i.e. no assignment and no nested functions)</span></p>
 <p><span style="color:white"> Previous challenge with pipes <code>dailyGDP = mutate(gapminder, onedayGDP = gdpPercap / 365)</code> <code>dailyGDP = filter(dailyGDP, onedayGDP &lt; 1)</code> <code>dailyGDP = select(dailyGDP, country, year, gdpPercap)</code> <code>smallGDP = gapminder %&gt;%</code> <code>mutate(onedayGDP = gdpPercap / 365) %&gt;%</code> <code>filter(onedayGDP &lt; 1) %&gt;%</code> <code>select(country, year, gdpPercap)</code> <code>smallGDP[1,]</code> </span></p>
 <p><span style="color:white"> <strong>OR, more fancy</strong> (without an intermediate temp variable) <code></code>(gapminder %&gt;% <code></code> mutate(onedayGDP = gdpPercap / 365) %&gt;% <code></code> filter(onedayGDP &lt; 1) %&gt;% <code></code> select(country, year, gdpPercap))[1,] ` </span></p>
+<p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a>, the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/05-dplyr-single-table.html">Manipulating Data.Frames materials</a>, and the Software Carpentry: R for Reproducbile Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/04-ggplot.html">Plotting materials</a>.</p>
+<p>Find the latest version of Software Carpentry: R for Reproducible Scientific Analysis <a href="http://swcarpentry.github.io/r-novice-gapminder/">here</a>.</p>
 </div>
 
 

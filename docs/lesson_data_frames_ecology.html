@@ -25,7 +25,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -33,7 +35,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -46,13 +48,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -154,6 +154,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -363,7 +366,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -478,6 +481,13 @@ div.tocify {
     <span class="fa fa-slideshare fa-1x"></span>
      
     Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
   </a>
 </li>
 <li>
@@ -830,7 +840,7 @@ Another method is to use the <code>levels()</code> function. Compare:</p>
 <div id="renaming-factors" class="section level3">
 <h3>Renaming factors</h3>
 <p>When your data is stored as a factor, you can use the <code>plot()</code> function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">## bar plot of the number of females and males captured during the experiment:</a>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">## bar plot of the number of females and males captured during the experiment:</span></a>
 <a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">plot</span>(surveys<span class="op">$</span>sex)</a></code></pre></div>
 <p><img src="lesson_data_frames_ecology_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
@@ -870,13 +880,13 @@ plot(sex)
 <p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the <code>factor</code> data type. Depending on what you want to do with the data, you may want to keep these columns as <code>character</code>. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
 <p>In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
 <p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">## Compare the difference between when the data are being read as</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">## `factor`, and when they are being read as `character`.</a>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co">## Compare the difference between when the data are being read as</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
 <a class="sourceLine" id="cb51-3" data-line-number="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb51-4" data-line-number="4"><span class="kw">str</span>(surveys)</a>
 <a class="sourceLine" id="cb51-5" data-line-number="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb51-6" data-line-number="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb51-7" data-line-number="7">## Convert the column &quot;plot_type&quot; into a factor</a>
+<a class="sourceLine" id="cb51-7" data-line-number="7"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
 <a class="sourceLine" id="cb51-8" data-line-number="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
 <blockquote>
 <h3 id="challenge-3">Challenge</h3>
@@ -931,8 +941,9 @@ plot(sex)
 <p>This character vector can be used as the argument for <code>ymd()</code>:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">ymd</span>(<span class="kw">paste</span>(surveys<span class="op">$</span>year, surveys<span class="op">$</span>month, surveys<span class="op">$</span>day, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>))</a></code></pre></div>
 <p>The resulting POSIXct vector can be added to <code>surveys</code> as a new column called <code>date</code>:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">surveys<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="kw">paste</span>(surveys<span class="op">$</span>year, surveys<span class="op">$</span>month, surveys<span class="op">$</span>day, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>))</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">str</span>(surveys) <span class="co"># notice the new column, with &#39;date&#39; as the class</span></a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">surveys<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="kw">paste</span>(surveys<span class="op">$</span>year, surveys<span class="op">$</span>month, surveys<span class="op">$</span>day, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: 129 failed to parse.</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">str</span>(surveys) <span class="co"># notice the new column, with &#39;date&#39; as the class</span></a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    34786 obs. of  14 variables:
 ##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
 ##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
@@ -949,18 +960,18 @@ plot(sex)
 ##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ date           : Date, format: &quot;1977-07-16&quot; &quot;1977-08-19&quot; ...</code></pre>
 <p>Remember, when <strong><code>lubridate</code></strong> fails to parse a date, it will return <code>NA</code> quietly. We can check whether there are missing values using <code>summary()</code>:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">summary</span>(surveys<span class="op">$</span>date) <span class="co"># yes, some dates failed to parse</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="kw">summary</span>(surveys<span class="op">$</span>date) <span class="co"># yes, some dates failed to parse</span></a></code></pre></div>
 <pre><code>##         Min.      1st Qu.       Median         Mean      3rd Qu. 
 ## &quot;1977-07-16&quot; &quot;1984-03-12&quot; &quot;1990-07-22&quot; &quot;1990-12-15&quot; &quot;1997-07-29&quot; 
 ##         Max.         NA&#39;s 
 ## &quot;2002-12-31&quot;        &quot;129&quot;</code></pre>
 <p>We can use the functions we saw previously to deal with missing data to identify the rows in our data frame that are failing. First, let’s create a vector that contains our dates as a character vector:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1">surveys_dates &lt;-<span class="st"> </span><span class="kw">paste</span>(surveys<span class="op">$</span>year, surveys<span class="op">$</span>month, surveys<span class="op">$</span>day, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="kw">head</span>(surveys_dates)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">surveys_dates &lt;-<span class="st"> </span><span class="kw">paste</span>(surveys<span class="op">$</span>year, surveys<span class="op">$</span>month, surveys<span class="op">$</span>day, <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">head</span>(surveys_dates)</a></code></pre></div>
 <pre><code>## [1] &quot;1977-7-16&quot;  &quot;1977-8-19&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot; &quot;1977-11-12&quot;
 ## [6] &quot;1977-11-12&quot;</code></pre>
 <p>The vector <code>surveys_dates</code> contains all the dates from our dataset, in the same order as they are in the data frame. We can therefore use the <code>is.na()</code> function on the <code>surveys</code> data frame to locate the elements in the vectors <code>surveys_dates</code> that failed to parse:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">surveys_dates[<span class="kw">is.na</span>(surveys<span class="op">$</span>date)]</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">surveys_dates[<span class="kw">is.na</span>(surveys<span class="op">$</span>date)]</a></code></pre></div>
 <pre><code>##   [1] &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
 ##   [6] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
 ##  [11] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
@@ -988,6 +999,7 @@ plot(sex)
 ## [121] &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
 ## [126] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;</code></pre>
 <p>Why did these dates fail to parse? If you had to use these data for your analyses, how would you deal with this situation?</p>
+<p>This lesson is adapted from the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="https://datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">Starting With Data materials</a>.</p>
 </div>
 
 

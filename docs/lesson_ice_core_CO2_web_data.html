@@ -24,7 +24,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -32,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -45,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -153,6 +153,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -362,7 +365,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -480,6 +483,13 @@ div.tocify {
   </a>
 </li>
 <li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
   <a href="resources.html">
     <span class="fa fa-list"></span>
      
@@ -531,10 +541,11 @@ div.tocify {
 <p>These data are publically available as a simple text file <a href="http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2">here</a>, and a full description of the metadata is <a href="http://cdiac.ornl.gov/trends/co2/vostok.html">here</a>.</p>
 <div id="download-the-data" class="section level3">
 <h3>Download the Data</h3>
-<p>First, we’ve shown a few ways to download data from a URL, so let’s see if folks can take a look at this data, and download it using the following URL:</p>
+<p>First, we’ve shown a few ways to download data from a URL, so let’s see if folks can take a look at this data, and download it using the following URL from our Github Repository:</p>
 <blockquote>
-<p><code>http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2</code></p>
+<p><a href="https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2">R-DAVIS github</a></p>
 </blockquote>
+<p>This data was formerly stored here: <code>http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2</code>, but it is no longer provided at that website. See the <a href="https://data.ess-dive.lbl.gov/">ESS-DIVE</a> website.</p>
 <ul>
 <li>Why can’t we use <code>read_csv</code>?</li>
 <li>Can we use <code>read.table</code>?</li>
@@ -542,7 +553,7 @@ div.tocify {
 </ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">file =</span> <span class="st">&quot;http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2&quot;</span>, </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2&quot;</span>, </a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">skip =</span> <span class="dv">20</span>, </a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;depth_m&quot;</span>,<span class="st">&quot;ice_age_yr_BP&quot;</span>, <span class="st">&quot;air_age_yr_BP&quot;</span>, <span class="st">&quot;C02_conc_ppmv&quot;</span>))</a></code></pre></div>
 <pre><code>## Parsed with column specification:
@@ -561,7 +572,7 @@ div.tocify {
 ## 3    177.          7043          3833          268.
 ## 4    229.          9523          6220          262.
 ## 5    250.         10579          7327          255.
-## 6    266.         11334          8113          260.</code></pre>
+## 6    266          11334          8113          260.</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">dim</span>(df)</a></code></pre></div>
 <pre><code>## [1] 363   4</code></pre>
 <p>Ok now that we have our data read into R, is the data tidy? How can we check if there are NA’s in the data? Let’s move to some visualization now.</p>
@@ -764,7 +775,7 @@ div.tocify {
 <a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">head</span>(data)</a>
 <a class="sourceLine" id="cb21-18" data-line-number="18"><span class="kw">dim</span>(data)</a>
 <a class="sourceLine" id="cb21-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb21-20" data-line-number="20">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</a>
+<a class="sourceLine" id="cb21-20" data-line-number="20"><span class="co">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</span></a>
 <a class="sourceLine" id="cb21-21" data-line-number="21">data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># create dataframe with column of the filenames</span></a>
 <a class="sourceLine" id="cb21-22" data-line-number="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">file_contents =</span> <span class="kw">map</span>(filename, <span class="co"># read files in</span></a>
 <a class="sourceLine" id="cb21-23" data-line-number="23">                             <span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -787,6 +798,7 @@ div.tocify {
 <div id="summary" class="section level2">
 <h2>Summary</h2>
 <p>Hopefully this provides a few good examples of how to download various data from the interwebs, get that data into R, and then play &amp; plot it! We’ll work a bit more with the Mauna Loa data in other lessons.</p>
+<p>This lesson was contributed by <a href="https://ryanpeek.github.io/">Ryan Peek</a></p>
 </div>
 <div class="footnotes">
 <hr />

@@ -24,7 +24,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -32,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -45,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -153,6 +153,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -362,7 +365,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -480,6 +483,13 @@ div.tocify {
   </a>
 </li>
 <li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
   <a href="resources.html">
     <span class="fa fa-list"></span>
      
@@ -590,17 +600,17 @@ div.tocify {
 ##    subject sex   control treatment1 treatment2
 ##      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ##  1       1 M        4.49       1.61       3.03
-##  2       2 F        5.98       3.40       3.79
+##  2       2 F        5.98       3.4        3.79
 ##  3       3 F        3.77       1.92       4.66
-##  4       4 M        2.60       4.72       7.48
-##  5       5 m        5.20       1.76       9.77
+##  4       4 M        2.6        4.72       7.48
+##  5       5 m        5.2        1.76       9.77
 ##  6       6 F        4.22       4.41       7.23
 ##  7       7 F        2.25       6.55       2.51
-##  8       8 F        3.76       1.92       9.60
+##  8       8 F        3.76       1.92       9.6 
 ##  9       9 M        4.93       2.73       7.26
-## 10      10 M        5.66       6.10       9.88
-## 11      11 F        3.30       3.92       4.47
-## 12      12 M        5.90       1.52       2.66</code></pre>
+## 10      10 M        5.66       6.1        9.88
+## 11      11 F        3.3        3.92       4.47
+## 12      12 M        5.9        1.52       2.66</code></pre>
 <p>There’s one other little problem in this dataset – do you see it? One of the subject’s sexes was entered as “m” instead of “M”. If we later try to <code>group_by</code> sex or plot by sex, we will get three groups: “F”, “M”, and “m”. To fix this, we could identify the errant entry and replace it specifically with something like <code>blood$sex[blood$sex == &quot;m&quot;] = &quot;M&quot;</code>, or we can simply tell R to make all the entries in that variable upper-case with the <code>toupper</code> function:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">blood<span class="op">$</span>sex</a></code></pre></div>
 <pre><code>##  [1] &quot;M&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; &quot;m&quot; &quot;F&quot; &quot;F&quot; &quot;F&quot; &quot;M&quot; &quot;M&quot; &quot;F&quot; &quot;M&quot;</code></pre>
@@ -615,17 +625,17 @@ div.tocify {
 ##    subject sex   control treatment1 treatment2
 ##      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ##  1       1 M        4.49       1.61       3.03
-##  2       2 F        5.98       3.40       3.79
+##  2       2 F        5.98       3.4        3.79
 ##  3       3 F        3.77       1.92       4.66
-##  4       4 M        2.60       4.72       7.48
-##  5       5 M        5.20       1.76       9.77
+##  4       4 M        2.6        4.72       7.48
+##  5       5 M        5.2        1.76       9.77
 ##  6       6 F        4.22       4.41       7.23
 ##  7       7 F        2.25       6.55       2.51
-##  8       8 F        3.76       1.92       9.60
+##  8       8 F        3.76       1.92       9.6 
 ##  9       9 M        4.93       2.73       7.26
-## 10      10 M        5.66       6.10       9.88
-## 11      11 F        3.30       3.92       4.47
-## 12      12 M        5.90       1.52       2.66</code></pre>
+## 10      10 M        5.66       6.1        9.88
+## 11      11 F        3.3        3.92       4.47
+## 12      12 M        5.9        1.52       2.66</code></pre>
 <p>It looks like we’ve got 12 individuals, each subjected to three conditions – a control and two treatments. Each observation here is a person in a treatment (we don’t know what the measured value is), so each row should be defined by a person-treatment; that is, we should have 12 rows with four columns: subject, sex, condition, and the measured value.</p>
 <div id="gather" class="section level4">
 <h4><code>gather()</code></h4>
@@ -640,8 +650,8 @@ div.tocify {
 ##  1       1 M     control      4.49
 ##  2       2 F     control      5.98
 ##  3       3 F     control      3.77
-##  4       4 M     control      2.60
-##  5       5 M     control      5.20
+##  4       4 M     control      2.6 
+##  5       5 M     control      5.2 
 ##  6       6 F     control      4.22
 ##  7       7 F     control      2.25
 ##  8       8 F     control      3.76

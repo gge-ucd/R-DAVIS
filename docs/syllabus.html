@@ -11,7 +11,7 @@
 
 
 
-<title>Syllabus</title>
+<title>syllabus.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,7 +24,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -79,6 +81,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -288,7 +293,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -406,6 +411,13 @@ div.tocify {
   </a>
 </li>
 <li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
   <a href="resources.html">
     <span class="fa fa-list"></span>
      
@@ -477,7 +489,9 @@ div.tocify {
 </div>
 <div id="schedule" class="section level2">
 <h2>Schedule</h2>
-<!-- devtools::install_github("hadley/emo") 
+<!-- 
+previously used the emo package now using emojifont as it's CRAN ready
+devtools::install_github("hadley/emo") 
 http://emoji.muan.co/ to look up emoji
 
 /-->

@@ -24,7 +24,9 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 
@@ -32,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -45,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -153,6 +153,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -362,7 +365,7 @@ div.tocify {
 </li>
 <li>
   <a href="syllabus.html">
-    <span class="fa fa-map fa-1.5x"></span>
+    <span class="fa fa-map fa-1x"></span>
      
     Syllabus
   </a>
@@ -477,6 +480,13 @@ div.tocify {
     <span class="fa fa-slideshare fa-1x"></span>
      
     Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
   </a>
 </li>
 <li>
@@ -654,8 +664,8 @@ div.tocify {
 ## [[4]]
 ## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># Lists can contain anything of any length</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">## data.frame is a special type of list</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">## data.frame rows imply association so they need to line up</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">## data.frame is a special type of list</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">## data.frame rows imply association so they need to line up</span></a>
 <a class="sourceLine" id="cb34-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb34-5" data-line-number="5"><span class="kw">data.frame</span>(a, b) <span class="co"># uh oh</span></a></code></pre></div>
 <pre><code>## Error in data.frame(a, b): arguments imply differing number of rows: 6, 8</code></pre>
@@ -981,9 +991,9 @@ div.tocify {
 <pre><code>## # A tibble: 3 x 2
 ##     cyl data              
 ##   &lt;dbl&gt; &lt;list&gt;            
-## 1    6. &lt;tibble [7 × 10]&gt; 
-## 2    4. &lt;tibble [11 × 10]&gt;
-## 3    8. &lt;tibble [14 × 10]&gt;</code></pre>
+## 1     6 &lt;tibble [7 × 10]&gt; 
+## 2     4 &lt;tibble [11 × 10]&gt;
+## 3     8 &lt;tibble [14 × 10]&gt;</code></pre>
 </div>
 <div id="interacting-with-list-data-using-map" class="section level2">
 <h2>Interacting with list-data using <code>map</code></h2>
@@ -1102,6 +1112,7 @@ div.tocify {
 <a class="sourceLine" id="cb76-20" data-line-number="20"></a>
 <a class="sourceLine" id="cb76-21" data-line-number="21"><span class="co"># print all the info</span></a>
 <a class="sourceLine" id="cb76-22" data-line-number="22"><span class="kw">pwalk</span>(<span class="kw">list</span>(<span class="dt">info =</span> mtc_plot_n_save<span class="op">$</span>cyl, <span class="dt">plot =</span> mtc_plot_n_save<span class="op">$</span>plot, <span class="dt">table =</span> mtc_plot_n_save<span class="op">$</span>data, <span class="dt">filepath =</span> mtc_plot_n_save<span class="op">$</span>filepath), print_func) </a></code></pre></div>
+<p>This lesson is adapted from <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">Brandon Hurr’s D-RUG presentation materials</a>.</p>
 </div>
 </div>
 </div>
