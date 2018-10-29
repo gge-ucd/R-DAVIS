@@ -33,14 +33,16 @@ Students completing this course should be able to:
 
 ## Schedule
 
-<!-- devtools::install_github("hadley/emo") 
+<!-- 
+previously used the emo package now using emojifont as it's CRAN ready
+devtools::install_github("hadley/emo") 
 http://emoji.muan.co/ to look up emoji
 
 /-->
 
 ```{r echo=F, eval=T}
-#devtools::install_github("hadley/emo")
-library(emo, quietly = T)
+
+library(emojifont, quietly = T)
 
 # green check emoji are things we've completed or already are in/updated, 
 # gray check boxes are content we have but haven't added to website yet
@@ -48,50 +50,50 @@ library(emo, quietly = T)
 
 #### Week 1
 
- - `r emo::ji("white_check_mark")` Course Intro
- - `r emo::ji("white_check_mark")` Intro to Git and RStudio
- - `r emo::ji("white_check_mark")` Project management
+ - `r emojifont::emoji("white_check_mark")` Course Intro
+ - `r emojifont::emoji("white_check_mark")` Intro to Git and RStudio
+ - `r emojifont::emoji("white_check_mark")` Project management
 
 #### Week 2
  
- - `r emo::ji("white_check_mark")` Spreadsheets & Project Management
- - `r emo::ji("white_check_mark")` Intro to R
+ - `r emojifont::emoji("white_check_mark")` Spreadsheets & Project Management
+ - `r emojifont::emoji("white_check_mark")` Intro to R
  
 #### Week 3
 
- - `r emo::ji("white_check_mark")` Data frames & subsetting
+ - `r emojifont::emoji("white_check_mark")` Data frames & subsetting
 
 #### Week 4
 
- - `r emo::ji("white_check_mark")` `dplyr` (import, manipulation, visualization)
- - `r emo::ji("white_check_mark")` `ggplot2` (short intro and demo)
+ - `r emojifont::emoji("white_check_mark")` `dplyr` (import, manipulation, visualization)
+ - `r emojifont::emoji("white_check_mark")` `ggplot2` (short intro and demo)
 
 #### Week 5
 
- - `r emo::ji("white_check_mark")` `dplyr` (summarize and export)
- - `r emo::ji("white_check_mark")` `ggplot2` (ecology lesson)
+ - `r emojifont::emoji("white_check_mark")` `dplyr` (summarize and export)
+ - `r emojifont::emoji("white_check_mark")` `ggplot2` (ecology lesson)
 
 #### Week 6
 
- - `r emo::ji("white_check_mark")` `ggplot2` (finish up)
- - `r emo::ji("white_check_mark")` Data import/export (as assignment)
+ - `r emojifont::emoji("white_check_mark")` `ggplot2` (finish up)
+ - `r emojifont::emoji("white_check_mark")` Data import/export (as assignment)
 
 #### Week 7
 
- - `r emo::ji("white_check_mark")` RMarkdown and literate programming
- - `r emo::ji("white_check_mark")` Visualization do's and don'ts
+ - `r emojifont::emoji("white_check_mark")` RMarkdown and literate programming
+ - `r emojifont::emoji("white_check_mark")` Visualization do's and don'ts
 
 #### Week 8
 
- - `r emo::ji("white_check_mark")` `tidyr` (reshape data)
- - `r emo::ji("white_check_mark")` datetime data in R with `lubridate`
+ - `r emojifont::emoji("white_check_mark")` `tidyr` (reshape data)
+ - `r emojifont::emoji("white_check_mark")` datetime data in R with `lubridate`
 
 #### Week 9
 
- - `r emo::ji("white_check_mark")` finish datetime data
- - `r emo::ji("white_check_mark")` joins using `dplyr`
+ - `r emojifont::emoji("white_check_mark")` finish datetime data
+ - `r emojifont::emoji("white_check_mark")` joins using `dplyr`
 
 #### Week 10
 
- - `r emo::ji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
+ - `r emojifont::emoji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
  
