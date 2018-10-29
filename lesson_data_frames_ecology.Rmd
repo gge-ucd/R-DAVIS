@@ -621,3 +621,5 @@ surveys_dates[is.na(surveys$date)]
 Why did these dates fail to parse? If you had to use these data for your
 analyses, how would you deal with this situation?
 
+This lesson is adapted from the Data Carpentry: R for Data Analysis and Visualization of Ecological Data 
+[Starting With Data materials](https://datacarpentry.org/R-ecology-lesson/02-starting-with-data.html).
