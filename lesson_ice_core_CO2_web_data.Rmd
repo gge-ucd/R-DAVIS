@@ -290,3 +290,5 @@ Wow that's cool!
 ## Summary
 
 Hopefully this provides a few good examples of how to download various data from the interwebs, get that data into R, and then play & plot it! We'll work a bit more with the Mauna Loa data in other lessons.
+
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/)
