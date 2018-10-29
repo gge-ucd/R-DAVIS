@@ -67,7 +67,7 @@ Now we'll create an RStudio Project and link our Github repository (following [*
 
 <br>
 
-`r emo::ji("nut_and_bolt")` *__More about github/RStudio projects__: One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.*
+`r emojifont::emoji("nut_and_bolt")` *__More about github/RStudio projects__: One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.*
 
   - This new subdirectory that you specified will be all these things:
     - a directory on your computer
