@@ -1,0 +1,84 @@
+---
+title: "Dynamic Documents with RStudio & RMarkdown"
+minutes: 30
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+> ## Learning objectives {.objectives}
+>
+> - Understanding dynamic document types
+> - Learning basics of Markdown and RMarkdown
+> - A brief introduction to the many options 
+>     - Dynamic web based content (i.e., flexdashboards)
+>     - Static rendering to pdf, word, or html
+>     - The many templates that exist already
+
+# Basic RMarkdown Documents (`.Rmd`)
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+There are loads of options within these `.Rmd` files, all largely based around how you format the **`yaml`** header within these documents. Much of this has been designed to make it easy to setup/customize as much or as little as you are interested in.
+
+**`yaml`**
+
+## Basic Markdown Lingo
+
+
+
+### Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+### Including Photos from Web
+
+![](https://imgs.xkcd.com/comics/tech_support_cheat_sheet.png)
+
+### Including Video from Web
+
+<iframe src="https://player.vimeo.com/video/164154774" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/164154774">North Fork American Streamlapse: March-April 2016</a> from <a href="https://vimeo.com/user12653303">Center for Watershed Sciences</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+### Including Image from Your Computer
+
+![](data/Feb_airtemp_Davis_1981-2016.svg)
+
+# Using [**flexdashboards**](http://rmarkdown.rstudio.com/flexdashboard/)
+
+These are very cool documents that are sort of like interactive and dynamic webpages. You can provide a number of different panels (customized as you like), which can display data in an interactive and exploratory way. 
+
+# Creating your own CV
+
+With just one added file (a template), and installing a program called LaTeX, it is possible to maintain/update your CV using RStudio and RMarkdown. Some folks have even developed templates for manuscripts and [dissertations](https://github.com/davharris/Davis-dissertation-template) using this method! What follows is an adaptation from Steven Miller's excellent [post](http://svmiller.com/blog/2016/03/svm-r-markdown-cv/) and associated [code](https://github.com/svmiller/svm-r-markdown-templates) with a few formatting changes. 
+
+**The following lesson/showcase will require 3 pieces:**  
+
+ - Folks need to have a version of LaTeX installed, and it can take awhile, so if you don't already have it downloaded, please do so ahead of time if possible (here: http://www.latex-project.org/get/)  
+ - You'll need the **`rap-latex-cv.tex`** file (the template that dictates how the PDF will look), you can download from [here](https://raw.githubusercontent.com/ryanpeek/markdown_cv/master/Rmarkdown/rap-latex-cv.tex)
+ 
+ - And you'll need the actual **`template-2pg-cv.Rmd`** file, [here](https://raw.githubusercontent.com/ryanpeek/markdown_cv/master/Rmarkdown/template-2pg-cv.Rmd).
+
+### Important tips:
+
+ - Use a new RStudio project for this (and everything, it makes things easier)
+ - Make sure you have a **`LaTex`** distribution installed (see [here](http://www.latex-project.org/get/), note: it is a big file and will take a little time to install the first time)
+ - Make sure in your RStudio global settings you have **`pdfLaTex`** selected in the Sweave options (see [here](https://support.rstudio.com/hc/en-us/articles/200532257-Customizing-LaTeX-Options) for more info on checking this).
+ 
+ 
+**CV Example**
+
+[Here's an example PDF](https://github.com/ryanpeek/markdown_cv/blob/master/Rmarkdown/template-2pg-cv.pdf)

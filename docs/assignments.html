@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Coding Practice</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data import &amp; export</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_joins.html">Joining data</a>
+    </li>
+    <li>
+      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_for_loops.html">For loops</a>
+    </li>
+    <li>
+      <a href="lesson_purrr_tutorial.html">Using purrr</a>
+    </li>
+    <li>
+      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
+        <span class="fa fa-map fa-1.5x"></span>
+         
+        Mapping in R
+      </a>
+    </li>
+    <li>
+      <a href="lesson_text_mining_mlk.html">Text mining</a>
+    </li>
+    <li>
+      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
+    </li>
+    <li>
+      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Coding Practice</h1>
+
+</div>
+
+
+<p>The following material was posted on Github via the Discussion board for the class <em>Team</em> (2018 was the <strong>Ents</strong>). Assignments were designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments were completed via private repositories each student set up (via <a href="https://classroom.github.com/classrooms">Github Classrooms</a>), and each week students were randomly assigned another student for a code review. Apologies if there are links that don’t work, they may be specifically setup for students enrolled in course.</p>
+<p><br></p>
+<div id="assignments" class="section level2 tabset tabset-fade tabset-pills">
+<h2>Assignments</h2>
+<div id="w2" class="section level3">
+<h3><small>W2</small></h3>
+<p>From here on out, each week, we’d like to post a quick summary of what we’ve covered, and then a quick preview of what next week might hold, as well as potential reading/coding that might be helpful to do before the next session. These may be more formal assignments, or just things that may help you follow along more quickly when Mike and I are live-coding.</p>
+<p><strong>Week 1/2 Recap</strong></p>
+<p>The last few weeks have largely been about getting familiar with git/Github, figuring out how to use RStudio, and some basics in what R is. We’ve also discussed some basics about data management and organization, which is really simple but quite important and foundational to everything you will do from here on out.</p>
+<p>We’ve talked about functions, data types, variables and assignment, and we’ve shown how you can use git from either a bash (the language) command line or from the tab in RStudio. We learned (the hard way), the importance of always using <code>git pull</code> before doing anything in a repository that you may be collaborating with folks on, to sync up your local copy with the cloud copy. Thanks for your patience on all that.</p>
+<p><strong>Week 3 Preview</strong></p>
+<p>Next week we are going to really start playing with data in R. We’ll be going over vectors/dataframe, and learning two really amazing packages (which are groups of functions we download and use in R) called <code>dplyr</code> and <code>tidyr</code>, which are part of a group of packages called the <code>tidyverse</code> (also a package!). I think next week will be fun, and a chance for folks to really start playing with code. We’ll also show a few tips/tricks about starting and ending your RStudio sessions cleanly. And maybe most importantly, we’ll spend some time talking about how to get help in R when you want to figure out how to do something (quick hint, “Google” is a strong answer!).</p>
+<p><strong>Optional Code/Reading</strong></p>
+<p>If you have time there are two tasks I’d like everyone to try before class on Tuesday.</p>
+<ul>
+<li>First, I’d like everyone to attempt to install the <strong><code>tidyverse</code></strong> package, when you are in RStudio. If you run into trouble, file an issue in the Discussion repository (<a href="https://github.com/gge-ucd/Discussion/issues">here</a>). <strong><code>tidyverse</code></strong> is a fairly large package, so don’t be alarmed if you see lots of code scrolling past, and it may take 3-4 minutes to complete. To install, there are two options:
+<ul>
+<li>you can either find the menu at the top of the screen and click on <em>Tools</em> &gt; <strong>Install Packages</strong> &gt; and then type <strong><code>tidyverse</code></strong> in the blank space; OR,</li>
+<li>in the console window you can type: <strong><code>install.packages(&quot;tidyverse&quot;)</code></strong></li>
+</ul></li>
+<li>Second, if you have some time to read through and try the code in the <a href="https://gge-ucd.github.io/R-DAVIS/lesson_data_frames_continents.html">Data frames (continents)</a> lesson, that would be great. We’ll be working through the Data frames (ecology) lesson in class.</li>
+</ul>
+</div>
+<div id="w3" class="section level3">
+<h3><small>W3</small></h3>
+<p>Hi <span class="citation">@gge-ucd/ents</span> folks, Thanks again for a good class today! Your feedback helps us make this course better and hopefully more useful for you, so keep it coming (constructively 😃 ).</p>
+<div id="assignment-instructions" class="section level4">
+<h4><strong>Assignment Instructions</strong></h4>
+<p>Since we just touched on <code>dplyr</code>, this will only cover what we talked about in class. The objective of the assignment is for you to write a new, clean script, commit and push it to github, and then someone else will download and run that script on their computer, and file an issue in your repository with some comments about the script.</p>
+</div>
+<div id="part-i-filterselect" class="section level4">
+<h4><strong>Part I: Filter/Select</strong></h4>
+<p><strong>Create a new script</strong> - Create a new script named: <code>w3_assignment_ABC.R</code> (but with your initials instead of ABC). Save it in the <strong><code>scripts</code></strong> folder. - Use clear commenting about what your script does throughout. Include at least one section break (hint: <code>Ctrl/Cmd + Shift + R</code>)</p>
+<p><strong>Read Data in and Filter and Select</strong> - Read <code>portal_data_joined.csv</code> into R as <code>surveys</code>. Use the <code>read_csv</code> from the <code>readr</code> package (part of the <code>tidyverse</code>) - Using <code>dplyr</code>, <strong>filter</strong> data to <code>hindfoot_length  &gt; 10</code>, and months between May and October. - Then use a <code>%&gt;%</code> and <strong>select</strong> the following columns: <code>weight</code>, <code>hindfoot_length</code>, <code>month</code>, <code>species_id</code> - Check and see how many <code>NA</code>’s are in the <code>weight</code> column (<em>hint, it’s a function we’ve already covered, nothing new</em>) - Finally, using the <code>table()</code> function, identify which <code>species_id</code> has the greatest number of observations, and which has the least.</p>
+<p><strong>Make a Histogram Plot!</strong> - Using the <code>hist()</code> function and the <code>$</code> way of subsetting to a specific column in a dataframe, make a histogram of the <code>weight</code> column. It should look something like this (minus a few of the labels that I modified): <img src="https://user-images.githubusercontent.com/5864880/35349101-eb35877e-00ee-11e8-9e8f-ffcc3f47c42d.png" alt="histo_weight" /></p>
+<p><strong>Commit &amp; Push the R script to Github</strong> - Check your repository on Github and make sure your script is there.</p>
+</div>
+<div id="part-ii-code-review" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w3_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+<p>Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a> <span class="citation">@ryanpeek</span>, <span class="citation">@mikoontz</span> , <span class="citation">@taylorreiter</span>, etc.</p>
+<p>Thanks!</p>
+</div>
+</div>
+<div id="w4" class="section level3">
+<h3><small>W4</small></h3>
+<p>This week’s assignment builds on the <code>dplyr</code> verbs that we learned during Week 04. Just like last week, there are two parts: the exercsise and a code review.</p>
+<div id="part-i" class="section level4">
+<h4><strong>Part I:</strong></h4>
+<p><strong>Create a new script</strong> - Create a new script named: <code>w4_assignment_ABC.R</code> (but with your initials instead of ABC). Save it in the <strong><code>scripts</code></strong> folder in your new repository (learning-tidyverse-githubName). - Use clear commenting about what your script does throughout. Include at least one section break (hint: <code>Ctrl/Cmd + Shift + R</code>)</p>
+<p><strong>Using the <code>dplyr</code> verbs</strong></p>
+<p>This exercise asks you to <strong>rearrange pre-written lines of code to accomplish a task.</strong></p>
+<p>For this assignment, we will use a new (to us) dataset called “gapminder”. It describes the life expectancy, population size, and per capita annual gross domestic product (GDP) of every country every 5 years between 1952 and 2007.</p>
+<p>Here is the task: first, import the <code>gapminder</code> dataset. Then, use the <code>dplyr</code> verbs you’ve learned on the <code>gapminder</code> data to produce a new data.frame called <code>dollar_per_day_GDP</code> with only the names, years, and per-capita annual GDP of countries where per capita <em>daily</em> GDP is less than a dollar a day sorted from most- to least-recent. Finally, print your result.</p>
+<ul>
+<li><em>Tip:</em> Remember there is no harm in trying stuff and seeing what happens! This is, in fact, an excellent way to learn what code is doing. Tinker away!</li>
+<li><em>Tip:</em> The gdpPercap variable is annual gdp. You’ll need to adjust.</li>
+<li><em>Tip:</em> There may be more than one order that works.</li>
+</ul>
+<pre><code>arrange(desc(year))
+glimpse(gapminder)
+select(country, year, gdpPercap) %&gt;% 
+dollar_per_day_GDP
+dollar_per_day_GDP &lt;- gapminder %&gt;% 
+gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;)
+library(tidyverse)
+filter(dailyGDP &lt; 1) %&gt;% 
+mutate(dailyGDP = gdpPercap / 365) %&gt;% </code></pre>
+<p><strong>Optional: Using the <code>dplyr</code> verbs</strong></p>
+<p>If you’re feeling ambitious, try out this exercise.</p>
+<p>Using the original <code>gapminder</code> data.frame, calculate a new column: the total GDP of each country in each year. Calculate the variance – var() across all countries’ total GDPs in each year. Using the <code>ggplot2</code> package, make a scatterplot to visualize how variance of country-level GDP is changing through time. Is country-level GDP getting more or less equal over time?</p>
+<p><strong>Commit &amp; Push the R script to Github</strong> - Check your repository on Github and make sure your script is there.</p>
+</div>
+<div id="part-ii-code-review-1" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w4_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+<p>Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a> <span class="citation">@ryanpeek</span>, <span class="citation">@mikoontz</span> , <span class="citation">@taylorreiter</span>, etc.</p>
+</div>
+</div>
+<div id="w4-solution" class="section level3">
+<h3><small>W4 Solution</small></h3>
+<p>I’ve posted my approach to the Week 4 assignment in my <a href="https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w4_assignment_mikoontz.R">learning-tidyverse-mikoontz repository</a></p>
+<p>If you are itching to file an issue to get a GitHub sticker and your code partner hasn’t finished the assignment yet, you are welcome to file an issue on my script.</p>
+<p>We will go over this on Tuesday, so need to check out the script unless you want to or are spinning your wheels and need a hint.</p>
+<p>Mike</p>
+</div>
+<div id="w5" class="section level3">
+<h3><small>W5</small></h3>
+<p>This week’s assignment builds on the <code>ggplot</code> skills that we learned during Week 05. Just like last week, there are two parts: the exercsise and a code review.</p>
+<div id="part-1" class="section level4">
+<h4><strong>Part 1</strong></h4>
+<p>This exercise asks you to <strong>modify existing code to complete a new task.</strong></p>
+<p>We will work in the same repository that you’ve been working in for the last couple of weeks: learning-tidyverse-GitHub_username.</p>
+<p>We will again use the <code>gapminder</code> data. Last week, you should have downloaded it into your “data” folder. If you haven’t done that, first create a new folder called “data”, then you can run this code:</p>
+<pre><code>library(tidyverse)
+gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;)
+glimpse(gapminder)</code></pre>
+</div>
+<div id="a." class="section level4">
+<h4><em>1A</em>.</h4>
+<p>Modify the following code to make a figure that shows how life expectancy has changed over time:</p>
+<pre><code>ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+geom_point()</code></pre>
+</div>
+<div id="b." class="section level4">
+<h4><em>1B</em>.</h4>
+<p>Look at the following code. What do you think the <code>scale_x_log10()</code> line is doing? What do you think the <code>geom_smooth()</code> line is doing? <strong>Hint:</strong> There’s no cost to tinkering! Try some code out and see what happens with or without particular elements.</p>
+<pre><code>ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent), size = .25) + 
+    scale_x_log10() +
+    geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
+    theme_bw()</code></pre>
+</div>
+<div id="c.-optional" class="section level4">
+<h4><em>1C</em>. (optional)</h4>
+<p>Modify the above code to size the points in proportion to the population of the county. <strong>Hint:</strong> Are you translating data to a visual feature of the plot?</p>
+</div>
+<div id="part-ii-code-review-2" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w4_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+</div>
+</div>
+<div id="w5-solution" class="section level3">
+<h3><small>W5 Solution</small></h3>
+<p>Hi folks, I posted my approach to the Week 5 assignment in my repository: <a href="https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w5_assignment_mikoontz.R" class="uri">https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/scripts/w5_assignment_mikoontz.R</a></p>
+<p>When you come to class on Tuesday, be thinking about one thing that you liked or understood about the homework, and one thing that felt like it was a sticking point. We will add these to the <a href="https://docs.google.com/document/d/1DzXlYTFaHzhqCZWYdNoe2AqRo_ISSoo7e8TGrqVg6ks/edit?usp=sharing">Google Doc</a> at the start of class.</p>
+</div>
+<div id="w6" class="section level3">
+<h3><small>W6</small></h3>
+<p>This week’s assignment builds on the <code>ggplot</code> skills that we learned during <strong>Week 06</strong> and some new data import/export material that you will go over on your own. Just like last week, there are two parts: the exercise and a code review.</p>
+<p>The data import/export lesson material is here: <a href="https://gge-ucd.github.io/R-DAVIS/lesson_data_import.html" class="uri">https://gge-ucd.github.io/R-DAVIS/lesson_data_import.html</a></p>
+<div id="part-1a" class="section level4">
+<h4><strong>Part 1a</strong></h4>
+<p>Your European colleague needs to use a semicolon-separated (compare to a <strong>comma</strong> separated) file with a comma used as the decimal indicator. E.g., we would write <code>pi</code> as 3.14159 but your colleague needs it written as 3,14159.</p>
+<p>Use what you’ve learned about data export and expand on the code below to read the gapminder data in from the URL and write it to a file with a <code>;</code> as the cell separator and a <code>,</code> to indicate a decimal. Write the file to your <code>data/</code> folder. Be sure to create a <code>data/</code> folder if you don’t have one yet.</p>
+<p>Use the <code>read_csv2()</code> function on the file you just created to read it into <code>R</code> from the <code>data/</code> folder and make sure it still looks okay.</p>
+<p><strong>Hint:</strong> If <code>read_csv2()</code> imports a file with <code>;</code> as the delimiter character and <code>,</code> used to indicate a decimal, what function do you think we’ll use to write a file with those characteristics?</p>
+<pre><code>library(tidyverse)
+gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;)
+glimpse(gapminder)
+
+?read_csv2()</code></pre>
+</div>
+<div id="part-1b" class="section level4">
+<h4><strong>Part 1b</strong></h4>
+<p>Create a line plot of <code>life_expectancy</code> versus <code>year</code> for each <code>country</code> in the <code>gapminder</code> dataset. Facet the plot by <code>continent</code> in order to better visualize the data. Add a trend line with a “linear model” method for each continent.</p>
+<p><strong>Hint:</strong> Build from the code that you wrote for the homework last week! It’s nice to not have to start from a blank screen if you can avoid it and borrow some code from someone else or a previous project you’ve worked on. <strong>Hint:</strong> You can map data to a visual feature on a plot within a <code>geom_smooth()</code> similarly to how you’d do it in other <code>geom_</code> functions.</p>
+</div>
+<div id="part-1c-optional" class="section level4">
+<h4><strong>Part 1c (optional)</strong></h4>
+<p>Build the same plot above without facetting by <code>continent</code>. Instead, color each trend line by <code>continent</code>. Also color the individual country lines by <code>continent</code>. What other changes might you make to make this plot more visually appealing?</p>
+<p>Which plot do you prefer between 1b and 1c? What are the strengths and weaknesses of facetting?</p>
+</div>
+<div id="part-ii-code-review-3" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w4_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+</div>
+</div>
+<div id="w6-solution" class="section level3">
+<h3><small>W6 Solution</small></h3>
+<p>A quick mention that if you would like to comment/review code, please feel free to file an issue on <span class="citation">@mikoontz</span> or <span class="citation">@ryanpeek</span>! I posted my take on this week’s assignment <a href="https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/scripts/w6_assignment_RAP.R">here</a>.</p>
+<p>Also, if you haven’t gotten a code review yet, or would like some additional review, please feel free to tag Mike or I (as above) in an issue on the code you’d like us to review. So, essentially you will file an issue on your own repository, make sure to “<span class="citation">@mikoontz</span> or <span class="citation">@ryanpeek</span>” and let us know what script you want us to take a look at.</p>
+</div>
+<div id="w7" class="section level3">
+<h3><small>W7</small></h3>
+<p>This week’s assignment asks you to apply everything you’ve learned about the data pipeline (importing, manipulating, summarizing, and visualizing, reporting) to an authentic ecology task. You will write a report using RMarkdown, and embed all code within the document. We have already worked through the first part of the code together throughout previous classes, so hopefully it feels familiar. Your challenge will be to get that code to work inside the RMarkdown. The new thing we ask you to do is the last step– create a customized visualization of some kind to embed in the RMarkdown document.</p>
+<p>The final step is code review!</p>
+<p><strong>Please push your <code>.Rmd</code> file by the end of the day on Saturday so your code partner has access to it starting Sunday morning. If your partner hasn’t pushed their file by Saturday night, feel free to file an issue on my or Ryan’s repository. Similarly, if your code partner hasn’t filed an issue on your repository and you’d like some feedback, create an issue in your own repository and tag <span class="citation">@mikoontz</span> or <span class="citation">@ryanpeek</span> to request a review.</strong></p>
+<div id="part-1-1" class="section level4">
+<h4><strong>Part 1</strong></h4>
+<p>The content you will work to embed in your RMarkdown file can be found here: <a href="https://gge-ucd.github.io/R-DAVIS/lesson_import_dplyr_ggplot2.html" class="uri">https://gge-ucd.github.io/R-DAVIS/lesson_import_dplyr_ggplot2.html</a></p>
+<p>First, create a new RMarkdown document in your learning-tidyverse repository. (File -&gt; New File -&gt; RMarkdown…). Add a title if you wish, but leave the output format to “html”. In the file that comes up, delete everything after the YAML header (the title, author, date, and output lines that are surrounded above and below by <code>---</code>). Save your document as <code>w7_assignment_ABC.Rmd</code> where <code>ABC</code> are your initials.</p>
+<p>Start writing up your data pipeline process in the document below the last <code>---</code>. Use the lesson materials on <a href="https://gge-ucd.github.io/R-DAVIS/lesson_rmarkdown.html">Literate Programming using RMarkdown</a>, Google, or any other resource to help you.</p>
+<p>When it comes time to embed <code>R</code> code, add a “chunk” to signify that you want RStudio to interpret that part of the document as code to run, and not just plain text. The shortcut on a Mac is <code>Command+Option+i</code>. The shortcut on a PC is <code>Control+Alt+i</code>. (Here’s a handy cheatsheet for other <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">useful shortcuts</a>)</p>
+<p>“Knit” your document to html (by clicking the “Knit” button above your RMarkdown script or <code>Command+Shift+k</code> on a Mac, <code>Control+Shift+k</code> on a PC). Get in the habit of <strong>knitting your document regularly to make sure everything is working as you think it should</strong>. Note that if your <code>R</code> code has an error, the line number in the error message refers to the line in your code at <strong>the beginning of the chunk where the error occurs</strong>. So you’ll have to look through the whole chunk to find out what is broken.</p>
+<p>Push only your finished <code>.Rmd</code> to GitHub. That is, don’t push the <code>.html</code> file. Your code partner should be able to knit your <code>.Rmd</code> file and get the same <code>.html</code> that you did!</p>
+</div>
+<div id="part-2" class="section level4">
+<h4><strong>Part 2</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w7_assignment_ABC.Rmd</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>docs</code> folder in your repository. Make sure to change the file extension to <code>.Rmd</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to knit the document. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+</div>
+</div>
+<div id="w7-solution" class="section level3">
+<h3><small>W7 Solution</small></h3>
+<p>Hello <span class="citation">@gge-ucd/ents</span>,</p>
+<p>I’ve pushed the remainder of my approach to the week 7 assignment to <a href="https://github.com/gge-ucd/learning-tidyverse-mikoontz/blob/master/docs/w7_assignment_mikoontz.Rmd">my repository</a>.</p>
+<p>Ryan posted a solution as well, it’s <strong><a href="https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/docs/w7-assignment-RAP.Rmd">here</a></strong>, please take a look and see if you find anything useful. It builds on <span class="citation">@mikoontz</span>’s solution a bit, to provide a few different ways of doing things, as well as some different plotting options.</p>
+<p>If your code partner hasn’t pushed their attempt for you to review, feel free to review my attempt and then open a new issue in your own repository requesting a review on <em>your</em> code by tagging me (<span class="citation">@mikoontz</span>), Ryan (<span class="citation">@ryanpeek</span>), Martha (<span class="citation">@MarthaWohlfeil</span>), or Michael (<span class="citation">@MCMaurer</span>).</p>
+<p>We will start on Tuesday using the Google Doc to crowdsource the good and muddy points of this homework assignment, so be thinking about that.</p>
+<p>Finally, on Tuesday, we will be introducing 2 new tools for your data manipulation toolkit– reshaping data (going from tidy format to wide format) and joining data (merging 2 dataframes together by a common column). We think it might be helpful, if you have 10 minutes, to peruse <a href="http://d-rug.github.io/2016-02-D-RUG-dplyr-II-talk/#1">this D-RUG presentation</a> by Brandon Hurr on using joins. Flip through the slides by using the up and down arrow keys on your keyboard.</p>
+<p>Don’t focus on the code mechanics– we’ll do some live coding to go over that. Instead, get a sense of what “joins” are doing and think about how they’d be valuable in working with your own data. The screencast from the slides is <a href="http://d-rug.github.io/blog/2016/hurr-dplyr2">here</a> if you want to hear how a particular slide was presented.</p>
+</div>
+<div id="w8" class="section level3">
+<h3><small>W8</small></h3>
+<p>This week’s assignment asks you to apply everything you’ve learned about the data pipeline (importing, manipulating, summarizing, and visualizing, reporting) to an authentic ecology task. You will write a report using RMarkdown, and embed all code within the document. This time, all the code you write will be new, though you will use the Mauna Loa Observatory dataset, which you’ve seen before.</p>
+<p><strong>Please push your <code>.Rmd</code> file by the end of the day on Saturday so your code partner has access to it starting Sunday morning. If your partner hasn’t pushed their file by Saturday night, feel free to file an issue on my or Ryan’s repository. Similarly, if your code partner hasn’t filed an issue on your repository and you’d like some feedback, create an issue in your own repository and tag <span class="citation">@mikoontz</span> or <span class="citation">@ryanpeek</span> to request a review.</strong></p>
+<div id="part-1-2" class="section level4">
+<h4><strong>Part 1</strong></h4>
+<p>Here is the challenge:</p>
+<blockquote>
+<p>Using the Mauna Loa minute-scale meteorological data from 2001…</p>
+<ul>
+<li>Remove the NA’s (-99 and -999) in <code>rel_humid</code>, <code>temp_C_2m</code>, <code>windSpeed_m_s</code></li>
+<li>Convert the <code>temp_C_2m</code> temperature from degrees Celsius to degrees Fahrenheit</li>
+<li>Using <code>dplyr</code> and the degrees Fahrenheit column you just created to calculate the <code>max</code>imum and <code>min</code>imum temperature for each day through the year (<em>Hint:</em> look at the <code>lubridate</code> functions like <code>month()</code>, <code>day()</code>, or <code>yday()</code> to help determine what month and day each per-minute observation came from)</li>
+<li>Make a <code>ggplot</code> of both the maximum and minimum temperatures per day throughout the year using separate line geometries for each.</li>
+<li>Make some tweaks to your plot to make it more visually appealing.</li>
+<li>Write up your process in an RMarkdown document and knit it to .html</li>
+</ul>
+</blockquote>
+<p><strong>Some background and details:</strong></p>
+<p><strong>Save the data to <code>data/</code></strong><br />
+First, make sure you have the data saved in your <code>data/</code> folder. You can download the data from <a href="https://github.com/gge-ucd/R-DAVIS/raw/master/data/mauna_loa_met_2001_minute.rda">here</a>. What format are the data in? What function do you use to import that file type? Note: after you’ve imported these data, the dataframe is automatically named <code>mloa_2001</code>. That is, if you’ve imported the file properly, you should be able to run <code>head(mloa_2001)</code> to see the first 6 rows of it.</p>
+<p><strong>Make a new Rmarkdown doc</strong><br />
+Next, create a new RMarkdown document in your learning-tidyverse repository. (File -&gt; New File -&gt; RMarkdown…). Add a title if you wish, but leave the output format to “html”. In the file that comes up, delete everything after the YAML header (the title, author, date, and output lines that are surrounded above and below by <code>---</code>). Save your document as <code>w8_assignment_ABC.Rmd</code> where <code>ABC</code> are your initials.</p>
+<p><strong>Write &amp; Code, Write &amp; Code</strong><br />
+Start writing up your data pipeline process in the document below the last <code>---</code>. Use the lesson materials on <a href="https://gge-ucd.github.io/R-DAVIS/lesson_rmarkdown.html">Literate Programming using RMarkdown</a>, Google, or any other resource to help you. Think of it as a written down version of your mental process in working with the data. Consider starting with the purpose of your report, the source of your data, and a brief description of the data. Then you might start writing down the running commentary of what you want to try, the code to try it, and then your interpretation of the results of running the code. Then commentary on the next thing to try, the code to try it, and your interpetation, etc.</p>
+<p>When it comes time to embed <code>R</code> code, add a “chunk” to signify that you want RStudio to interpret that part of the document as code to run, and not just plain text. The shortcut on a Mac is Command+Option+i. The shortcut on a PC is Control+Alt+i. (Here’s a handy cheatsheet for other <a href="https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts">useful shortcuts</a>)</p>
+<p><strong>Knit</strong><br />
+“Knit” your document to html (by clicking the “Knit” button above your RMarkdown script or Command+Shift+k on a Mac, Control+Shift+k on a PC). Get in the habit of <strong>knitting your document regularly to make sure everything is working as you think it should</strong>. Note that if your <code>R</code> code has an error, the line number in the error message refers to the line in your code at <strong>the beginning of the chunk where the error occurs</strong>. So you’ll have to look through the whole chunk to find out what is broken.</p>
+<p>Push only your finished <code>.Rmd</code> to GitHub. That is, don’t push the <code>.html</code> file. Your code partner should be able to knit your <code>.Rmd</code> file and get the same <code>.html</code> that you did!</p>
+</div>
+<div id="part-2-1" class="section level4">
+<h4><strong>Part 2</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w8_assignment_ABC.Rmd</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>docs</code> folder in your repository. Make sure to change the file extension to <code>.Rmd</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to knit the document. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+</div>
+</div>
+<div id="w8-solution" class="section level3">
+<h3><small>W8 Solution</small></h3>
+<p>Meant to get this posted yesterday, but life happens. I’ve pushed my version of the w8 assignment, so take a look if you like. It’s here: <a href="https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/docs/w8-assignment-RAP.Rmd" class="uri">https://github.com/gge-ucd/learning-tidyverse-ryanpeek/blob/master/docs/w8-assignment-RAP.Rmd</a>.</p>
+<p>Tomorrow we’ll spend a little bit more time using date times, and then move to Joins, which are really powerful and a tool I use frequently. We will also set up a brand new repository (together) in class for our final week 10 class…crazy! 😮 💻 🔥 We want everyone to feel comfortable enough with the process so you will be able to create your own repository, so we’ll work through that (again) together!</p>
+</div>
+<div id="w9" class="section level3">
+<h3><small>W9</small></h3>
+<p>This week’s assignment is a bit shorter and hopefully simpler. We want you to make sure you have done two main tasks:</p>
+<ul>
+<li>Successfully created a new github repository and RStudio project called <code>spatial_mapping_demo</code>,</li>
+<li>and installed the following packages for our spatial mapping lesson:
+<ul>
+<li><code>sf</code></li>
+<li><code>maps</code></li>
+<li><code>rgdal</code></li>
+<li><code>maptools</code></li>
+<li><code>mapview</code></li>
+<li><code>leaflet</code></li>
+<li><code>tmap</code></li>
+</ul></li>
+</ul>
+<p><em>Please install these using either the dropdown <code>Tools</code> &gt;&gt; <code>Install Packages</code>, or <code>install.packages()</code> before our next class.</em></p>
+<p>Additionally, if you have location data or shapefiles you are interested in making a map with, send them my way! We’ll see if we can incorporate them into our lesson next week. Please email Ryan with that info.</p>
+<p>If you have any questions please go to our class <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a> and file an issue, it’s likely other folks might have a similar problem/question!</p>
+<p>Remember you can always ping us using individual names when you file an issue, <span class="citation">@ryanpeek</span>, <span class="citation">@mikoontz</span> , <span class="citation">@taylorreiter</span>, etc.</p>
+<p>Hang in there!</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
