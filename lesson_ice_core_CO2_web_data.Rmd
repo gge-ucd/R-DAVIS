@@ -18,19 +18,21 @@ These data are publically available as a simple text file [here](http://cdiac.or
 
 ### Download the Data
 
-First, we've shown a few ways to download data from a URL, so let's see if folks can take a look at this data, and download it using the following URL:
+First, we've shown a few ways to download data from a URL, so let's see if folks can take a look at this data, and download it using the following URL from our Github Repository:
 
- > `http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2`
+ > [R-DAVIS github](https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2)
+
+This data was formerly stored here: `http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2`, but it is no longer provided at that website. See the [ESS-DIVE](https://data.ess-dive.lbl.gov/) website.
 
  - Why can't we use `read_csv`? 
  - Can we use `read.table`?
  - Why did we specify `skip=20`?
  
-```{r getC02 data, echo=T, eval=T}
+```{r getC02 data, echo=T, eval=F}
 
 library(readr)
 df <- read_tsv(
-  file = "http://cdiac.ornl.gov/ftp/trends/co2/vostok.icecore.co2", 
+  file = "https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2", 
   skip = 20, 
   col_names = c("depth_m","ice_age_yr_BP", "air_age_yr_BP", "C02_conc_ppmv"))
 
