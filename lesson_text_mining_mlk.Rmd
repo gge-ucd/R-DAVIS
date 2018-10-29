@@ -125,3 +125,5 @@ tidy_mlk %>%
 ## Word Co-occurences and Correlations
 
 See [Ch 8.2 from Text Mining with R](https://www.tidytextmining.com/nasa.html#word-co-ocurrences-and-correlations).
+
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/).
