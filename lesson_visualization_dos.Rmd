@@ -256,3 +256,5 @@ Here's a list of resources you may want to check out. Many of these have lots of
  - Just to get a sense of less than ideal, see Karl Broman's [Top 10 Worst Graphs](https://www.biostat.wisc.edu/~kbroman/topten_worstgraphs/)
  - Some nice [Tips by chart type](https://infogram.com/blog/dataviz-chart-guide-101-dos-and-donts/)
  - More examples for [Data Viz](https://www.analyticsvidhya.com/blog/2015/07/guide-data-visualization-r/)
+ 
+ This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/).
