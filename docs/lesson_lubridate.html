@@ -49,7 +49,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -576,16 +576,16 @@ div.tocify {
 <li><code>as.Date(sample_dates_1)</code></li>
 </ul>
 <p>What happens with different orders…say MM-DD-YYYY?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Some sample dates: </span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">sample_dates_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;02-01-2016&quot;</span>, <span class="st">&quot;03-21-2016&quot;</span>, <span class="st">&quot;10-05-2016&quot;</span>, <span class="st">&quot;01-01-2017&quot;</span>, <span class="st">&quot;02-18-2017&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">as.Date</span>(sample_dates_<span class="dv">2</span>) <span class="co"># well that doesn&#39;t work</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Some sample dates: </span></a>
+<a class="sourceLine" id="cb1-2" title="2">sample_dates_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;02-01-2016&quot;</span>, <span class="st">&quot;03-21-2016&quot;</span>, <span class="st">&quot;10-05-2016&quot;</span>, <span class="st">&quot;01-01-2017&quot;</span>, <span class="st">&quot;02-18-2017&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">as.Date</span>(sample_dates_<span class="dv">2</span>) <span class="co"># well that doesn&#39;t work</span></a></code></pre></div>
 <pre><code>## [1] &quot;0002-01-20&quot; NA           &quot;0010-05-20&quot; &quot;0001-01-20&quot; NA</code></pre>
 <p>Well, the reason is the computer expects one thing, but is getting something else. Remember, <strong>write code you can read and your computer can understand</strong>. So we need to give some more information here so R will interpret our data correctly.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Some sample dates: </span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">sample_dates_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;02-01-2016&quot;</span>, <span class="st">&quot;03-21-2016&quot;</span>, <span class="st">&quot;10-05-2016&quot;</span>, <span class="st">&quot;01-01-2017&quot;</span>, <span class="st">&quot;02-18-2017&quot;</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">as.Date</span>(sample_dates_<span class="dv">2</span>, <span class="dt">format =</span> <span class="st">&quot;%m-%d-%Y&quot;</span> ) <span class="co"># date code preceded by &quot;%&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Some sample dates: </span></a>
+<a class="sourceLine" id="cb3-2" title="2">sample_dates_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;02-01-2016&quot;</span>, <span class="st">&quot;03-21-2016&quot;</span>, <span class="st">&quot;10-05-2016&quot;</span>, <span class="st">&quot;01-01-2017&quot;</span>, <span class="st">&quot;02-18-2017&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">as.Date</span>(sample_dates_<span class="dv">2</span>, <span class="dt">format =</span> <span class="st">&quot;%m-%d-%Y&quot;</span> ) <span class="co"># date code preceded by &quot;%&quot;</span></a></code></pre></div>
 <pre><code>## [1] &quot;2016-02-01&quot; &quot;2016-03-21&quot; &quot;2016-10-05&quot; &quot;2017-01-01&quot; &quot;2017-02-18&quot;</code></pre>
 <p>To see a list of the date-time format codes in R, check out this <a href="https://www.stat.berkeley.edu/~s133/dates.html">page and table</a>, or you can use: <code>?(strptime)</code></p>
 <p>The nice thing is this method works well with pretty much any format, you just need to provide the associated codes and structure:</p>
@@ -601,27 +601,27 @@ div.tocify {
 <h3>Date Calculations</h3>
 <p>It’s possible to use dates in calculations as well, as long as they are formatted in the same data type (i.e., both are <code>date</code> in this case).</p>
 <p><strong>Make some fake dates</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># format a value as `date`</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">dt1 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-07-11&quot;</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">dt1</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># format a value as `date`</span></a>
+<a class="sourceLine" id="cb5-2" title="2">dt1 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;2017-07-11&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3">dt1</a></code></pre></div>
 <pre><code>## [1] &quot;2017-07-11&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># non-standard formats must be specified using format=</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">dt2 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;04/22/2016&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">dt2</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># non-standard formats must be specified using format=</span></a>
+<a class="sourceLine" id="cb7-2" title="2">dt2 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;04/22/2016&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3">dt2</a></code></pre></div>
 <pre><code>## [1] &quot;2016-04-22&quot;</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">dt3 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;October 6, 2014&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%B %d, %Y&quot;</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">dt3</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">dt3 &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="st">&quot;October 6, 2014&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%B %d, %Y&quot;</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2">dt3</a></code></pre></div>
 <pre><code>## [1] &quot;2014-10-06&quot;</code></pre>
 <p><strong>Now some calculations</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># subtract differences in dates</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">print</span>(dt1 <span class="op">-</span><span class="st"> </span>dt2)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># subtract differences in dates</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">print</span>(dt1 <span class="op">-</span><span class="st"> </span>dt2)</a></code></pre></div>
 <pre><code>## Time difference of 445 days</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># or look at differences in alternate scales</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">print</span>(<span class="kw">difftime</span>(dt1, dt2, <span class="dt">units =</span> <span class="st">&quot;weeks&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># or look at differences in alternate scales</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">print</span>(<span class="kw">difftime</span>(dt1, dt2, <span class="dt">units =</span> <span class="st">&quot;weeks&quot;</span>))</a></code></pre></div>
 <pre><code>## Time difference of 63.57143 weeks</code></pre>
 <p>You can also sequence along by a given interval to create a timeseries.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">six.weeks &lt;-<span class="st"> </span><span class="kw">seq</span>(dt1, <span class="dt">length =</span> <span class="dv">6</span>, <span class="dt">by =</span> <span class="st">&quot;week&quot;</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">six.weeks</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">six.weeks &lt;-<span class="st"> </span><span class="kw">seq</span>(dt1, <span class="dt">length =</span> <span class="dv">6</span>, <span class="dt">by =</span> <span class="st">&quot;week&quot;</span>)</a>
+<a class="sourceLine" id="cb15-2" title="2">six.weeks</a></code></pre></div>
 <pre><code>## [1] &quot;2017-07-11&quot; &quot;2017-07-18&quot; &quot;2017-07-25&quot; &quot;2017-08-01&quot; &quot;2017-08-08&quot;
 ## [6] &quot;2017-08-15&quot;</code></pre>
 <blockquote>
@@ -646,15 +646,15 @@ div.tocify {
 <h2>Using <strong><code>POSIXct</code></strong></h2>
 <p>When working with times, the best class to use (generally) is <code>POSIXct</code>.</p>
 <p>Making some POSXct objects:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">tm1 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2016-07-24 23:55:26&quot;</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">tm1</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">tm1 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2016-07-24 23:55:26&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" title="2">tm1</a></code></pre></div>
 <pre><code>## [1] &quot;2016-07-24 23:55:26 PDT&quot;</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">tm2 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;25072016 08:32:07&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%d%m%Y %H:%M:%S&quot;</span>)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">tm2</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">tm2 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;25072016 08:32:07&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%d%m%Y %H:%M:%S&quot;</span>)</a>
+<a class="sourceLine" id="cb19-2" title="2">tm2</a></code></pre></div>
 <pre><code>## [1] &quot;2016-07-25 08:32:07 PDT&quot;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># specify the time zone:</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">tm3 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2010-12-01 11:42:03&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;GMT&quot;</span>)</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">tm3</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># specify the time zone:</span></a>
+<a class="sourceLine" id="cb21-2" title="2">tm3 &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(<span class="st">&quot;2010-12-01 11:42:03&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;GMT&quot;</span>)</a>
+<a class="sourceLine" id="cb21-3" title="3">tm3</a></code></pre></div>
 <pre><code>## [1] &quot;2010-12-01 11:42:03 GMT&quot;</code></pre>
 </div>
 <div id="working-with-timezones-datetimes" class="section level2">
@@ -689,12 +689,12 @@ div.tocify {
 <div id="lubridate-tips" class="section level4">
 <h4>Lubridate Tips</h4>
 <p>For lubridate to work, you need the column datatype to be <strong>character</strong> or <strong>factor</strong>. The <code>readr</code> package (from the <code>tidyverse</code>) is smart and will try to guess for you. Problem is, it might convert your data for you without the settings (in this case the proper timezone). So here are few ways to work around this.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="co"># read in some data and skip header lines</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">nfy1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">12</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb23-4" title="4"></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co"># read in some data and skip header lines</span></a>
+<a class="sourceLine" id="cb23-6" title="6">nfy1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">12</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   Date = col_date(format = &quot;&quot;),
@@ -703,7 +703,7 @@ div.tocify {
 ##   Level = col_double(),
 ##   Temperature = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">head</span>(nfy1)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">head</span>(nfy1)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 5
 ##   Date       Time      ms Level Temperature
 ##   &lt;date&gt;     &lt;time&gt; &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;
@@ -713,13 +713,13 @@ div.tocify {
 ## 4 2015-05-22 14:45      0 -8.29           0
 ## 5 2015-05-22 15:00      0 -8.30           0
 ## 6 2015-05-22 15:15      0 -8.29           0</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co"># import raw dataset &amp; specify column types</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">nfy2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">col_types =</span> <span class="st">&quot;ccidd&quot;</span>, <span class="dt">skip=</span><span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="co"># or just import with read.csv (defaults to factors for the dates)</span></a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">nfy3 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="kw">glimpse</span>(nfy1) <span class="co"># notice the data types in the Date.Time and datetime cols</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># import raw dataset &amp; specify column types</span></a>
+<a class="sourceLine" id="cb27-2" title="2">nfy2 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">col_types =</span> <span class="st">&quot;ccidd&quot;</span>, <span class="dt">skip=</span><span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb27-3" title="3"></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co"># or just import with read.csv (defaults to factors for the dates)</span></a>
+<a class="sourceLine" id="cb27-5" title="5">nfy3 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/2015_NFY_solinst.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7"><span class="kw">glimpse</span>(nfy1) <span class="co"># notice the data types in the Date.Time and datetime cols</span></a></code></pre></div>
 <pre><code>## Observations: 7,764
 ## Variables: 5
 ## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2...
@@ -727,7 +727,7 @@ div.tocify {
 ## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
 ## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
 ## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">glimpse</span>(nfy2)</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">glimpse</span>(nfy2)</a></code></pre></div>
 <pre><code>## Observations: 7,764
 ## Variables: 5
 ## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05...
@@ -735,7 +735,7 @@ div.tocify {
 ## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
 ## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
 ## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">glimpse</span>(nfy3)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">glimpse</span>(nfy3)</a></code></pre></div>
 <pre><code>## Observations: 7,764
 ## Variables: 5
 ## $ Date        &lt;fct&gt; 2015/05/22, 2015/05/22, 2015/05/22, 2015/05/22, 20...
@@ -743,37 +743,37 @@ div.tocify {
 ## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
 ## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
 ## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co"># make a datetime col:</span></a>
-<a class="sourceLine" id="cb33-2" data-line-number="2">nfy2<span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">paste</span>(nfy2<span class="op">$</span>Date, <span class="st">&quot; &quot;</span>, nfy2<span class="op">$</span>Time, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb33-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="co"># convert Date Time to POSIXct in local timezone using lubridate</span></a>
-<a class="sourceLine" id="cb33-5" data-line-number="5">nfy2<span class="op">$</span>datetime_test &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(nfy2<span class="op">$</span>datetime, </a>
-<a class="sourceLine" id="cb33-6" data-line-number="6">                                    <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
-<a class="sourceLine" id="cb33-7" data-line-number="7"><span class="co"># convert using the ymd_functions</span></a>
-<a class="sourceLine" id="cb33-8" data-line-number="8">nfy2<span class="op">$</span>datetime_test2 &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(nfy2<span class="op">$</span>datetime, <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
-<a class="sourceLine" id="cb33-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb33-10" data-line-number="10"><span class="co"># or wrap in as.character()</span></a>
-<a class="sourceLine" id="cb33-11" data-line-number="11">nfy1<span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="kw">as.character</span>(<span class="kw">paste0</span>(nfy1<span class="op">$</span>Date,<span class="st">&quot; &quot;</span>, nfy1<span class="op">$</span>Time)), <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
-<a class="sourceLine" id="cb33-12" data-line-number="12"><span class="kw">tz</span>(nfy1<span class="op">$</span>datetime)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="co"># make a datetime col:</span></a>
+<a class="sourceLine" id="cb33-2" title="2">nfy2<span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">paste</span>(nfy2<span class="op">$</span>Date, <span class="st">&quot; &quot;</span>, nfy2<span class="op">$</span>Time, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb33-3" title="3"></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="co"># convert Date Time to POSIXct in local timezone using lubridate</span></a>
+<a class="sourceLine" id="cb33-5" title="5">nfy2<span class="op">$</span>datetime_test &lt;-<span class="st"> </span><span class="kw">as_datetime</span>(nfy2<span class="op">$</span>datetime, </a>
+<a class="sourceLine" id="cb33-6" title="6">                                    <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
+<a class="sourceLine" id="cb33-7" title="7"><span class="co"># convert using the ymd_functions</span></a>
+<a class="sourceLine" id="cb33-8" title="8">nfy2<span class="op">$</span>datetime_test2 &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(nfy2<span class="op">$</span>datetime, <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
+<a class="sourceLine" id="cb33-9" title="9"></a>
+<a class="sourceLine" id="cb33-10" title="10"><span class="co"># or wrap in as.character()</span></a>
+<a class="sourceLine" id="cb33-11" title="11">nfy1<span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hms</span>(<span class="kw">as.character</span>(<span class="kw">paste0</span>(nfy1<span class="op">$</span>Date,<span class="st">&quot; &quot;</span>, nfy1<span class="op">$</span>Time)), <span class="dt">tz=</span><span class="st">&quot;America/Los_Angeles&quot;</span>)</a>
+<a class="sourceLine" id="cb33-12" title="12"><span class="kw">tz</span>(nfy1<span class="op">$</span>datetime)</a></code></pre></div>
 <pre><code>## [1] &quot;America/Los_Angeles&quot;</code></pre>
 </div>
 </div>
 <div id="example-1-mauna-loa-meterological-data" class="section level2">
 <h2>Example 1: Mauna Loa Meterological Data</h2>
 <p>So, now that we have a decent idea how to format these things, let’s look at some real data, try to format and plot. Let’s use the Mauna Loa meterological data, collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can find it on the R-DAVIS website in the <a href="https://gge-ucd.github.io/R-DAVIS/resources.html">Resources-&gt;Datasets</a> tab.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co"># let&#39;s load our climate data from our previous lesson:</span></a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co"># what&#39;s different between RDS files and RDA (or Rdata) files?</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co"># rds</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">mloa &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/mauna_loa_met_2001_minute.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="co"># rda</span></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="kw">load</span>(<span class="st">&quot;data/mauna_loa_met_2001_minute.rda&quot;</span>)</a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="kw">library</span>(lubridate, <span class="dt">warn.conflicts =</span> F)</a>
-<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="kw">library</span>(dplyr, <span class="dt">warn.conflicts =</span> F)</a>
-<a class="sourceLine" id="cb35-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb35-13" data-line-number="13"><span class="kw">summary</span>(mloa_<span class="dv">2001</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># let&#39;s load our climate data from our previous lesson:</span></a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="co"># what&#39;s different between RDS files and RDA (or Rdata) files?</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co"># rds</span></a>
+<a class="sourceLine" id="cb35-5" title="5">mloa &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/mauna_loa_met_2001_minute.rds&quot;</span>)</a>
+<a class="sourceLine" id="cb35-6" title="6"></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="co"># rda</span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="kw">load</span>(<span class="st">&quot;data/mauna_loa_met_2001_minute.rda&quot;</span>)</a>
+<a class="sourceLine" id="cb35-9" title="9"></a>
+<a class="sourceLine" id="cb35-10" title="10"><span class="kw">library</span>(lubridate, <span class="dt">warn.conflicts =</span> F)</a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="kw">library</span>(dplyr, <span class="dt">warn.conflicts =</span> F)</a>
+<a class="sourceLine" id="cb35-12" title="12"></a>
+<a class="sourceLine" id="cb35-13" title="13"><span class="kw">summary</span>(mloa_<span class="dv">2001</span>)</a></code></pre></div>
 <pre><code>##    filename         siteID            year          month       
 ##  Length:459769      MLO:459769   Min.   :2001   Min.   : 1.000  
 ##  Class :character                1st Qu.:2001   1st Qu.: 3.000  
@@ -802,7 +802,7 @@ div.tocify {
 ##  Mean   : -46.69   Mean   :   1.539   Mean   : 31.82   Mean   : -0.8066   
 ##  3rd Qu.:   8.60   3rd Qu.:   8.800   3rd Qu.: 57.00   3rd Qu.:  0.0000   
 ##  Max.   :  16.90   Max.   :  16.200   Max.   :138.00   Max.   : 60.0000</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw">names</span>(mloa_<span class="dv">2001</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">names</span>(mloa_<span class="dv">2001</span>)</a></code></pre></div>
 <pre><code>##  [1] &quot;filename&quot;            &quot;siteID&quot;              &quot;year&quot;               
 ##  [4] &quot;month&quot;               &quot;day&quot;                 &quot;hour24&quot;             
 ##  [7] &quot;min&quot;                 &quot;windDir&quot;             &quot;windSpeed_m_s&quot;      
@@ -814,19 +814,19 @@ div.tocify {
 <li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify</li>
 <li><code>paste0()</code> is the same thing, but defaults to using a <strong><code>,</code></strong> as the separator.</li>
 </ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="co"># we need to make a datetime column...let&#39;s use paste</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">paste0</span>(mloa_<span class="dv">2001</span><span class="op">$</span>year,<span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>month, <span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>day,<span class="st">&quot; &quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>hour24, <span class="st">&quot;:&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>min) <span class="co"># this makes a character column</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4"><span class="kw">head</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime) <span class="co"># character vector but not POSIXct yet</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># we need to make a datetime column...let&#39;s use paste</span></a>
+<a class="sourceLine" id="cb39-2" title="2">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">paste0</span>(mloa_<span class="dv">2001</span><span class="op">$</span>year,<span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>month, <span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>day,<span class="st">&quot; &quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>hour24, <span class="st">&quot;:&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>min) <span class="co"># this makes a character column</span></a>
+<a class="sourceLine" id="cb39-3" title="3"></a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="kw">head</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime) <span class="co"># character vector but not POSIXct yet</span></a></code></pre></div>
 <pre><code>## [1] &quot;2001-1-1 0:0&quot; &quot;2001-1-1 0:1&quot; &quot;2001-1-1 0:2&quot; &quot;2001-1-1 0:3&quot;
 ## [5] &quot;2001-1-1 0:4&quot; &quot;2001-1-1 0:5&quot;</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="co"># we can nest this within a lubridate function to convert directly to POSIXct</span></a>
-<a class="sourceLine" id="cb41-2" data-line-number="2">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hm</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime, <span class="dt">tz=</span><span class="st">&quot;Pacific/Honolulu&quot;</span>)</a>
-<a class="sourceLine" id="cb41-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb41-4" data-line-number="4"><span class="co"># all in one step</span></a>
-<a class="sourceLine" id="cb41-5" data-line-number="5">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hm</span>(<span class="kw">paste0</span>(mloa_<span class="dv">2001</span><span class="op">$</span>year,<span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>month, <span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>day,<span class="st">&quot; &quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>hour24, <span class="st">&quot;:&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>min), <span class="dt">tz =</span> <span class="st">&quot;Pacific/Honolulu&quot;</span>)</a>
-<a class="sourceLine" id="cb41-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb41-7" data-line-number="7"><span class="kw">summary</span>(mloa_<span class="dv">2001</span>) <span class="co"># notice a new column called &quot;datetime&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># we can nest this within a lubridate function to convert directly to POSIXct</span></a>
+<a class="sourceLine" id="cb41-2" title="2">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hm</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime, <span class="dt">tz=</span><span class="st">&quot;Pacific/Honolulu&quot;</span>)</a>
+<a class="sourceLine" id="cb41-3" title="3"></a>
+<a class="sourceLine" id="cb41-4" title="4"><span class="co"># all in one step</span></a>
+<a class="sourceLine" id="cb41-5" title="5">mloa_<span class="dv">2001</span><span class="op">$</span>datetime &lt;-<span class="st"> </span><span class="kw">ymd_hm</span>(<span class="kw">paste0</span>(mloa_<span class="dv">2001</span><span class="op">$</span>year,<span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>month, <span class="st">&quot;-&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>day,<span class="st">&quot; &quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>hour24, <span class="st">&quot;:&quot;</span>, mloa_<span class="dv">2001</span><span class="op">$</span>min), <span class="dt">tz =</span> <span class="st">&quot;Pacific/Honolulu&quot;</span>)</a>
+<a class="sourceLine" id="cb41-6" title="6"></a>
+<a class="sourceLine" id="cb41-7" title="7"><span class="kw">summary</span>(mloa_<span class="dv">2001</span>) <span class="co"># notice a new column called &quot;datetime&quot;</span></a></code></pre></div>
 <pre><code>##    filename         siteID            year          month       
 ##  Length:459769      MLO:459769   Min.   :2001   Min.   : 1.000  
 ##  Class :character                1st Qu.:2001   1st Qu.: 3.000  
@@ -862,7 +862,7 @@ div.tocify {
 ##  Mean   :2001-06-30 15:28:42  
 ##  3rd Qu.:2001-10-07 00:34:00  
 ##  Max.   :2001-12-31 23:59:00</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">head</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime) <span class="co"># in POSIXct</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">head</span>(mloa_<span class="dv">2001</span><span class="op">$</span>datetime) <span class="co"># in POSIXct</span></a></code></pre></div>
 <pre><code>## [1] &quot;2001-01-01 00:00:00 HST&quot; &quot;2001-01-01 00:01:00 HST&quot;
 ## [3] &quot;2001-01-01 00:02:00 HST&quot; &quot;2001-01-01 00:03:00 HST&quot;
 ## [5] &quot;2001-01-01 00:04:00 HST&quot; &quot;2001-01-01 00:05:00 HST&quot;</code></pre>

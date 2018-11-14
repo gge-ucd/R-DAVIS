@@ -49,7 +49,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -549,23 +549,23 @@ div.tocify {
 <h3>Defining a function</h3>
 <p>Recall the components of a function. E.g. the <code>log</code> function (see <code>?log</code>) takes “arguments” <code>x</code> and <code>base</code> and “returns” the base-<code>base</code> logarithm of <code>x</code>. Functions take arguments as input and yield return-values as output. You can define functions to do any number of operations on any number of arguments, but always output a single return value (however there are complex objects into which you can put multiple objects, should you need to).</p>
 <p>Let’s start by defining a simple function to add two numbers. This is the basic structure, which you can read as “assign to the variable <code>my_sum</code> a function that takes arguments <code>a</code> and <code>b</code> and returns <code>the_sum</code>.” The body of the function is delimited by the curly-braces. The statements in the body are indented. This makes the code easier to read but does not affect how the code operates.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">my_sum &lt;-<span class="st"> </span><span class="cf">function</span>(a, b) {</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  the_sum &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">return</span>(the_sum)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">my_sum &lt;-<span class="st"> </span><span class="cf">function</span>(a, b) {</a>
+<a class="sourceLine" id="cb1-2" title="2">  the_sum &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="kw">return</span>(the_sum)</a>
+<a class="sourceLine" id="cb1-4" title="4">}</a></code></pre></div>
 <p>Notice that no numbers were summed when we ran that code, but now the Environment has an object called <code>my_sum</code> that has type function. You can call <code>my_sum</code> just like you would any other function. When you do, the code between the curly-braces of the <code>my_sum</code> definition is run with whatever values you pass to <code>a</code> and <code>b</code> substituted in their place.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">my_sum</span>(<span class="dt">a =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">my_sum</span>(<span class="dt">a =</span> <span class="dv">2</span>, <span class="dt">b =</span> <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">my_sum</span>(<span class="dv">3</span>, <span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">my_sum</span>(<span class="dv">3</span>, <span class="dv">4</span>)</a></code></pre></div>
 <pre><code>## [1] 7</code></pre>
 <p>Just like <code>log</code> provides a default value of <code>base</code> (<code>exp(1)</code>) so that you don’t have to type it every time, you can provide default values to any arguments of your function. Then if the user doesn’t specify them, the defaults will be used.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">my_sum2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) {</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  the_sum &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">return</span>(the_sum)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">my_sum2</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">my_sum2 &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>) {</a>
+<a class="sourceLine" id="cb6-2" title="2">  the_sum &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b</a>
+<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">return</span>(the_sum)</a>
+<a class="sourceLine" id="cb6-4" title="4">}</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="kw">my_sum2</span>()</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">my_sum2</span>(<span class="dt">b =</span> <span class="dv">7</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">my_sum2</span>(<span class="dt">b =</span> <span class="dv">7</span>)</a></code></pre></div>
 <pre><code>## [1] 8</code></pre>
 <blockquote>
 <h2 id="tip" class="callout">Tip</h2>
@@ -574,16 +574,16 @@ div.tocify {
 <div id="temperature-conversion" class="section level4">
 <h4>Temperature conversion</h4>
 <p>Let’s define a function F_to_K that converts temperatures from Fahrenheit to Kelvin:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">F_to_K &lt;-<span class="st"> </span><span class="cf">function</span>(temp) {</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">  K &lt;-<span class="st"> </span>((temp <span class="op">-</span><span class="st"> </span><span class="dv">32</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">9</span>)) <span class="op">+</span><span class="st"> </span><span class="fl">273.15</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="kw">return</span>(K)</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">F_to_K &lt;-<span class="st"> </span><span class="cf">function</span>(temp) {</a>
+<a class="sourceLine" id="cb10-2" title="2">  K &lt;-<span class="st"> </span>((temp <span class="op">-</span><span class="st"> </span><span class="dv">32</span>) <span class="op">*</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">/</span><span class="st"> </span><span class="dv">9</span>)) <span class="op">+</span><span class="st"> </span><span class="fl">273.15</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="kw">return</span>(K)</a>
+<a class="sourceLine" id="cb10-4" title="4">}</a></code></pre></div>
 <p>Calling our own function is no different from calling any other function:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># freezing point of water</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">F_to_K</span>(<span class="dv">32</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># freezing point of water</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">F_to_K</span>(<span class="dv">32</span>)</a></code></pre></div>
 <pre><code>## [1] 273.15</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># boiling point of water</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">F_to_K</span>(<span class="dv">212</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># boiling point of water</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">F_to_K</span>(<span class="dv">212</span>)</a></code></pre></div>
 <pre><code>## [1] 373.15</code></pre>
 <blockquote>
 <h4 id="challenge-1" class="challenge">Challenge 1</h4>
@@ -599,7 +599,7 @@ div.tocify {
 <div id="sourceing-functions" class="section level4">
 <h4><code>source()</code>ing functions</h4>
 <p>You can load all the functions in your <code>code/functions.R</code> script without even opening the file, via the <code>source</code> function. This allows you to keep your functions separate from the analyses which use them.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&#39;code/functions.R&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">source</span>(<span class="st">&#39;code/functions.R&#39;</span>)</a></code></pre></div>
 </div>
 <div id="combining-functions" class="section level4">
 <h4>Combining functions</h4>
@@ -650,13 +650,13 @@ div.tocify {
 <h3>Challenge solutions</h3>
 <blockquote>
 <h4 id="solution-a-new-function" class="challenge">Solution – A new function</h4>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countrytoplot, <span class="dt">dat =</span> gapminder) {</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">    df &lt;-<span class="st"> </span><span class="kw">filter</span>(dat, country <span class="op">==</span><span class="st"> </span>countrytoplot) </a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">    plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(year, pop)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="st">        </span><span class="kw">geom_line</span>()</a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">    <span class="kw">return</span>(plot)</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">}</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="kw">plotPopGrowth</span>(<span class="st">&#39;Canada&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countrytoplot, <span class="dt">dat =</span> gapminder) {</a>
+<a class="sourceLine" id="cb16-2" title="2">    df &lt;-<span class="st"> </span><span class="kw">filter</span>(dat, country <span class="op">==</span><span class="st"> </span>countrytoplot) </a>
+<a class="sourceLine" id="cb16-3" title="3">    plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(year, pop)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">        </span><span class="kw">geom_line</span>()</a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="kw">return</span>(plot)</a>
+<a class="sourceLine" id="cb16-6" title="6">}</a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="kw">plotPopGrowth</span>(<span class="st">&#39;Canada&#39;</span>)</a></code></pre></div>
 <p><img src="lesson_functions_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </blockquote>
 <p><br></p>

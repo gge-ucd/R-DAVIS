@@ -49,7 +49,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -629,11 +629,11 @@ div.tocify {
 <div id="introduction-to-r" class="section level2">
 <h2>Introduction to R</h2>
 <p>The simplest thing you can do with R is do arithmetic:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">100</span></a></code></pre></div>
 <pre><code>## [1] 101</code></pre>
 <p>And R will print out the answer, with a preceding “[1]”, which indicates the first item of output.</p>
 <p>If you type in an incomplete command, R will wait for you to complete it:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">-</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span> <span class="op">-</span></a></code></pre></div>
 <pre class="output"><code>+</code></pre>
 <p>Any time you execute code and the R session shows a “+” instead of a “&gt;”, it means it’s waiting for you to complete the command. If you want to cancel a command you can simply hit “Esc” and RStudio will give you back the “&gt;” prompt. You can also cancel commands with “Esc” if R is taking too long to finish a calculation.</p>
 <p>Order of operations works in R just like it did in algebra class. From highest to lowest precedence:</p>
@@ -645,18 +645,18 @@ div.tocify {
 <li>Add: <code>+</code></li>
 <li>Subtract: <code>-</code></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 13</code></pre>
 <p>Use parentheses to group to force the order of evaluation, and/or to make code easier to read.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <pre><code>## [1] 16</code></pre>
 <div id="whitespace" class="section level3">
 <h3>Whitespace</h3>
 <p>Speaking of being easy to read, whitespace is ignored by R. Use it consistently to make code readable. For example, putting a single space on either side of an operator makes code easy to read.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))) <span class="co"># hard to read</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>       <span class="co"># easier to read, once you know rules</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="dv">3</span><span class="op">+</span><span class="dv">5</span><span class="op">*</span><span class="dv">2</span><span class="op">^</span><span class="dv">2</span>             <span class="co"># very hard to read</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)     <span class="co"># to make order of operations clear, use parentheses</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">(<span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>))) <span class="co"># hard to read</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>       <span class="co"># easier to read, once you know rules</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="dv">3</span><span class="op">+</span><span class="dv">5</span><span class="op">*</span><span class="dv">2</span><span class="op">^</span><span class="dv">2</span>             <span class="co"># very hard to read</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)     <span class="co"># to make order of operations clear, use parentheses</span></a></code></pre></div>
 </div>
 <div id="comments" class="section level3">
 <h3>Comments</h3>
@@ -666,61 +666,61 @@ div.tocify {
 <div id="scientific-notation" class="section level3">
 <h3>Scientific Notation</h3>
 <p>Really small or large numbers get a scientific notation:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="dv">2</span><span class="op">/</span><span class="dv">10000</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="dv">2</span><span class="op">/</span><span class="dv">10000</span></a></code></pre></div>
 <pre><code>## [1] 2e-04</code></pre>
 <p>Which is shorthand for “multiplied by <code>10^XX</code>”. So <code>2e-4</code> is shorthand for <code>2 * 10^(-4)</code>.</p>
 <p>You can write numbers in scientific notation too:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="fl">1e9</span>  <span class="co"># One billion</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="fl">1e9</span>  <span class="co"># One billion</span></a></code></pre></div>
 <pre><code>## [1] 1e+09</code></pre>
 </div>
 <div id="mathematical-functions" class="section level3">
 <h3>Mathematical functions</h3>
 <p>R has many built in mathematical functions. To call a function, type its name, follow by open and closing parentheses. Anything we type inside those parentheses is an “argument” to that function.</p>
 <p>Here we call the <code>sin</code> function and provide it the argument 3.14, or approximately <span class="math inline">\(\pi\)</span>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">sin</span>(<span class="fl">3.14</span>)  <span class="co"># trigonometry functions</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">sin</span>(<span class="fl">3.14</span>)  <span class="co"># trigonometry functions</span></a></code></pre></div>
 <pre><code>## [1] 0.001592653</code></pre>
 <p>We can take a logarithm:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">3</span>)  <span class="co"># natural logarithm</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">log</span>(<span class="dv">3</span>)  <span class="co"># natural logarithm</span></a></code></pre></div>
 <pre><code>## [1] 1.098612</code></pre>
 <p>Or exponentiate:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">exp</span>(<span class="fl">0.5</span>) <span class="co"># e^(1/2)</span></a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">exp</span>(<span class="fl">0.5</span>) <span class="co"># e^(1/2)</span></a></code></pre></div>
 <pre><code>## [1] 1.648721</code></pre>
 </div>
 <div id="nested-functions" class="section level3">
 <h3>Nested Functions</h3>
 <p>You can even put functions inside each other. <code>exp(0.5)</code> raised <code>e</code> to the <code>1/2</code> power. Equivalently we could take the square-root of <code>e</code>. Expressions are interpretted from the inside-out: In the following line, R first takes <code>e^1</code> (which is <code>e</code>), and then takes the square-root (that’s what the <code>sqrt</code> function does) of the result.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">sqrt</span>(<span class="kw">exp</span>(<span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">sqrt</span>(<span class="kw">exp</span>(<span class="dv">1</span>))</a></code></pre></div>
 <pre><code>## [1] 1.648721</code></pre>
 <p>You don’t need to remember function names. There are many ways to discover or rediscover them when you need them. Google is your friend, but we will discuss other ways soon.</p>
 </div>
 <div id="comparison" class="section level3">
 <h3>Comparison</h3>
 <p>We can do logical comparison in R. This will be important later, for example, when we want to filter a dataset based on a logical condition.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># equality (note two equals signs, read as &quot;is equal to&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>  <span class="co"># equality (note two equals signs, read as &quot;is equal to&quot;)</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="dv">1</span> <span class="op">!=</span><span class="st"> </span><span class="dv">2</span>  <span class="co"># not-equal (read, &quot;is not equal to&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="dv">1</span> <span class="op">!=</span><span class="st"> </span><span class="dv">2</span>  <span class="co"># not-equal (read, &quot;is not equal to&quot;)</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="dv">1</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>  <span class="co"># less than</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="dv">1</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>  <span class="co"># less than</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">-9</span> <span class="co"># greater than or equal to</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">-9</span> <span class="co"># greater than or equal to</span></a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="variables-and-assignment" class="section level3">
 <h3>Variables and assignment</h3>
 <p>We can store values in variables using the assignment operator <code>&lt;-</code>. You can also use a single equals sign, <code>=</code>, for assignment.</p>
 <p>Note that unlike every other expression we have run so far, R doesn’t print anything when we run this next line. Instead, it is stored for later in a <strong>variable</strong>, <code>x</code>. <code>x</code> now contains the <strong>value</strong> <code>0.25</code>. Read this as “Assign 1/4 to x.”</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">/</span><span class="dv">4</span></a></code></pre></div>
 <p>Look for the <code>Environment</code> tab in one of the panes of RStudio, and you will see that <code>x</code> and its value have appeared. Our variable <code>x</code> can be used in place of a number in any calculation that expects a number:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">x</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">x</a></code></pre></div>
 <pre><code>## [1] 0.25</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">log</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">log</span>(x)</a></code></pre></div>
 <pre><code>## [1] -1.386294</code></pre>
 <p>This doesn’t change the value of <code>x</code> or store the result anywhere, it simply prints the answer to the console.</p>
 <p>Variables can be reassigned:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">99</span></a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">x &lt;-<span class="st"> </span><span class="dv">99</span></a></code></pre></div>
 <p><code>x</code> used to contain the value 0.25 and and now it has the value 99.</p>
 <p>Assignment values can contain the variable being assigned to:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">x &lt;-<span class="st"> </span>x <span class="op">+</span><span class="st"> </span><span class="dv">1</span> </a></code></pre></div>
 <blockquote>
 <h4 id="mcq-variable-assignment">MCQ – Variable Assignment</h4>
 <p>What does the following code print?</p>
@@ -749,7 +749,7 @@ Option 4) ::nothing::  </code></pre>
 <div id="tab-completion" class="section level3">
 <h3>Tab completion</h3>
 <p>Use descriptive variable names, as they make your code easier to understand. It will save time because you’ll remember what each variable is: It’s easier to remember what <code>domesticPopulation</code> is than <code>dp</code> or <code>x</code>. A silly example:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">theNumberNine &lt;-<span class="st"> </span><span class="dv">9</span></a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">theNumberNine &lt;-<span class="st"> </span><span class="dv">9</span></a></code></pre></div>
 <p>Tab-completion is a really nice feature of RStudio that saves typing and avoid typos. After you assign 9 to <code>theNumberNine</code>, if you start typing <code>t...</code>, <code>th...</code>, etc., and then pressing <code>tab</code>, RStudio will pull up a box of all the valid ways to finish that word. You can scroll through them using the up- and down-arrows and press enter to choose the one you want. If you press tab when there is only one valid way to complete something, RStudio will automatically complete it.</p>
 </div>
 </div>
@@ -759,7 +759,7 @@ Option 4) ::nothing::  </code></pre>
 <h3>R help files</h3>
 <p>Once you figure out what function you want, you need to figure out how to use it. Every function has an associated help-file. They can be hard to read, especially at first, but it is important to learn how to make sense of them.</p>
 <p><code>?function</code> brings up help-file. E.g.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">?log</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">?log</a></code></pre></div>
 <p>Each help-file contains the following components.</p>
 <ul>
 <li>Description: An extended description of what the function does.</li>
@@ -774,7 +774,7 @@ Option 4) ::nothing::  </code></pre>
 <div id="other-ways-to-get-help" class="section level3">
 <h3>Other ways to get help</h3>
 <ul>
-<li><code>??</code> searches the text of all R help files, e.g. <code>??base</code> will find <code>log</code>.</li>
+<li><code>??</code> searches the text of all R help files, e.g. <code>??base</code> will find <code>log</code>.</li>
 <li><a href="https://www.google.com/">Google</a></li>
 <li><a href="https://stackoverflow.com/">Stack Overflow</a></li>
 <li><a href="http://www.rstudio.com/resources/cheatsheets/">RStudio cheat sheets</a></li>
@@ -787,26 +787,26 @@ Option 4) ::nothing::  </code></pre>
 <li>Can be specified by order or by name</li>
 <li>Before, when we entered <code>log(3)</code>, <code>log</code> knew <code>3</code> was <code>x</code> because it was in the first position, but we could have also told <code>log</code> explicitly that <code>3</code> is the value <code>x</code> should take. These are the same:</li>
 </ul>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">3</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">log</span>(<span class="dv">3</span>)  </a></code></pre></div>
 <pre><code>## [1] 1.098612</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] 1.098612</code></pre>
 <ul>
-<li>Some arguments have default values, e.g. <code>log</code>’s <code>base</code> defaults to <code>exp(1)</code>, <em>e</em>, unless you tell it otherwise. So these are identical:</li>
+<li>Some arguments have default values, e.g. <code>log</code>’s <code>base</code> defaults to <code>exp(1)</code>, <em>e</em>, unless you tell it otherwise. So these are identical:</li>
 </ul>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] 1.098612</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="kw">exp</span>(<span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="kw">exp</span>(<span class="dv">1</span>))</a></code></pre></div>
 <pre><code>## [1] 1.098612</code></pre>
 <p>To get the base 10 logarithm of 3, you could do</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 0.4771213</code></pre>
 <p>If you provide a function with arguments by name, they can go in any order. Otherwise, they have to appear in the order specified by the function. These are all the same:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">log</span>(<span class="dv">3</span>, <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">log</span>(<span class="dv">3</span>, <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 0.4771213</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 0.4771213</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">10</span>, <span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">log</span>(<span class="dt">base =</span> <span class="dv">10</span>, <span class="dt">x =</span> <span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] 0.4771213</code></pre>
 <blockquote>
 <h4 id="mcq-which-of-these-things-is-not-like-the-other-ones">MCQ – Which of these things is not like the other ones?</h4>
@@ -823,32 +823,32 @@ Option 4) log(10, 1000)</code></pre>
 <div id="errors" class="section level4">
 <h4>Errors</h4>
 <p>R returns an error when it cannot proceed. It stops you in your tracks. The error message will provide some information on what the problem was, but it is often cryptic. Learning to understand these messages is important but takes practice. Here’s an example of an error:</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">log_of_a_word &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="st">&quot;a_word&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">log_of_a_word &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="st">&quot;a_word&quot;</span>)</a></code></pre></div>
 <pre><code>## Error in log(&quot;a_word&quot;): non-numeric argument to mathematical function</code></pre>
 <p>R tell us that something has gone wrong: It got a non-number for a function that needs a number. Note that errors prevent execution of the line, so nothing got assigned to <code>log_of_a_word</code> there. If we ask R what it thinks <code>log_of_a_word</code> is, it will return another error. Practice understanding R’s communication style: Do you understand how R is telling you what the problem is?</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">log_of_a_word</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">log_of_a_word</a></code></pre></div>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;log_of_a_word&#39; not found</code></pre>
 </div>
 <div id="warnings" class="section level4">
 <h4>Warnings</h4>
 <p>Warnings appear in the same red font in the console, but they start with “Warning” instead of “Error”. Warnings are R’s way of telling you that it did something, but it suspects it may not have been what you wanted. <em>Warnings can be more insidious than errors</em> because you can keep going, but keep going with a mistake in your pipeline. Here’s an example:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">log_of_a_negative &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="op">-</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">log_of_a_negative &lt;-<span class="st"> </span><span class="kw">log</span>(<span class="op">-</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## Warning in log(-2): NaNs produced</code></pre>
 <p><code>NaN</code> means “not a number”, and R has kindly told us, “Hey, I think you probably wanted a number here – taking a log of a negative is kind of a weird thing to do. I can do it if you really want, I just want to be make sure it’s what you want.”</p>
 <p>Note that it did work, so if we ask R what <code>log_of_a_negative</code> is, we won’t get an error. Note that we don’t get a warning either, so you need to pay attention when warnings first appear.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">log_of_a_negative</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">log_of_a_negative</a></code></pre></div>
 <pre><code>## [1] NaN</code></pre>
 </div>
 <div id="messages" class="section level4">
 <h4>Messages</h4>
 <p>There’s a third source of red text in R: messages. These are R’s way of telling you that something happened, but it’s probably nothing to worry about. These don’t start with “Message”; they just print the red text. We can make R print one like this:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">message</span>(<span class="st">&quot;Hey buddy!&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">message</span>(<span class="st">&quot;Hey buddy!&quot;</span>)</a></code></pre></div>
 <pre><code>## Hey buddy!</code></pre>
 <blockquote>
 <h4 id="challenge-extra-practice-assignment-comparison">Challenge – Extra practice: Assignment &amp; Comparison</h4>
 <p>Which elephant weighs more? Convert one’s weight to the units of the other, and store the result in an appropriately-named new variable. Write a command to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">elephant1_kg &lt;-<span class="st"> </span><span class="dv">3492</span></a>
-<a class="sourceLine" id="cb68-2" data-line-number="2">elephant2_lb &lt;-<span class="st"> </span><span class="dv">7757</span></a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">elephant1_kg &lt;-<span class="st"> </span><span class="dv">3492</span></a>
+<a class="sourceLine" id="cb68-2" title="2">elephant2_lb &lt;-<span class="st"> </span><span class="dv">7757</span></a></code></pre></div>
 </blockquote>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/01-intro-r-rstudio.html">Introduction to R and RStudio materials</a> and the Data Carpentry: R for data analysis and visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html">Before We Start materials</a>.</p>
