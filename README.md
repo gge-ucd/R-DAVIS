@@ -13,6 +13,8 @@ Because much of the varied content found in the lessons, there are a number of p
 "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap",
 "ggthemes", "magrittr", "leaflet", "plotly", "knitr")`
 
+To get an updated list of packages for the website, navigate to the repo on the command line, then run this command: `grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/\'//g; s/"//g' | grep -Eo '^\w+' | sort | uniq`
+
 ## Build Site Locally
 
 The [course website](https://gge-ucd.github.io/R-DAVIS/) can be rebuilt locally by using the "`Build`" tab in RStudio. Assuming the above packages are installed on your machine:
