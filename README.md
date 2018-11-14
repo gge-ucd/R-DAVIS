@@ -22,6 +22,8 @@ The [course website](https://gge-ucd.github.io/R-DAVIS/) can be rebuilt locally 
  - Open the R-DAVIS project in RStudio. Click on the `Build` tab, and "*More*", select "*Clean All*".
  - Then select `Build Website`. This process make take a few minutes.
 
+You can also clean and build the website from the command line by navigating to the repo and running `R -e 'rmarkdown::clean_site()'` or `R -e 'rmarkdown::render_site()'`.
+
 ## Releases
  
 See the [`Releases`](https://github.com/gge-ucd/R-DAVIS/releases) tab in this repo to find the completed version for a given year. We expect further development of the website for future iterations as the course improves in the future.
