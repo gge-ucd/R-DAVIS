@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -607,7 +609,7 @@ div.tocify {
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;United States&quot;</span>)</a></code></pre></div>
 <p><img src="lesson_for_loops_files/figure-html/demoTheFunction-2.png" width="672" /></p>
 <p>What if we want to make a plot and then save it for every country?</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co">### LOOPING</span></a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">### LOOPING</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">countries &lt;-<span class="st"> </span><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(countries)){</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="kw">plotPopGrowth</span>(countries[i])</a>

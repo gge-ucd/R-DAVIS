@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -683,13 +685,13 @@ div.tocify {
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</a></code></pre></div>
 <p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the first 6 lines of this data using <code>head(surveys)</code></p>
 <p>Now we can look at how reading in the data in different ways affects the different data types (<code>factor</code> vs. <code>character</code>):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">## Compare the difference between when the data are being read as</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">## Compare the difference between when the data are being read as</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">## `factor`, and when they are being read as `character`.</a>
 <a class="sourceLine" id="cb42-3" data-line-number="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb42-4" data-line-number="4"><span class="kw">str</span>(surveys)</a>
 <a class="sourceLine" id="cb42-5" data-line-number="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">## Convert the column &quot;plot_type&quot; into a factor</a>
 <a class="sourceLine" id="cb42-8" data-line-number="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
 <div id="challenge-1" class="section level4">
 <h4>Challenge</h4>

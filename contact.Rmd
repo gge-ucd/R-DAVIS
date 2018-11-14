@@ -6,6 +6,26 @@ title: "Contact"
 
 ## Instructors
 
+**Michael Culshaw-Maurer** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mjculshawmaurer@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://mcmaurer.github.io/)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@MCulshawMaurer](https://twitter.com/MCulshawMaurer)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer](https://github.com/mcmaurer)  
+
+<br>
+
+**Martha Wohlfeil** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://marthawohlfeil.github.io/)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil](https://github.com/MarthaWohlfeil)  
+
+<br>
+
+
+## Course Creators/Former Instructors/OGs
+
 **Ryan Peek** 
 
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rapeek@ucdavis.edu)  
@@ -29,8 +49,6 @@ title: "Contact"
 ## Teaching Assistants
 
 **TBD**
-
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
 
 <br>
 

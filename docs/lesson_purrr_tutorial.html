@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -664,8 +666,8 @@ div.tocify {
 ## [[4]]
 ## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># Lists can contain anything of any length</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co">## data.frame is a special type of list</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">## data.frame rows imply association so they need to line up</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">## data.frame is a special type of list</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">## data.frame rows imply association so they need to line up</a>
 <a class="sourceLine" id="cb34-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb34-5" data-line-number="5"><span class="kw">data.frame</span>(a, b) <span class="co"># uh oh</span></a></code></pre></div>
 <pre><code>## Error in data.frame(a, b): arguments imply differing number of rows: 6, 8</code></pre>

@@ -35,7 +35,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -48,11 +48,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -564,7 +566,7 @@ div.tocify {
 <p>We have seen in our previous lesson that when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. We had to set <strong><code>stringsAsFactors</code></strong> to <strong><code>FALSE</code></strong> to avoid this hidden argument to convert our data type.</p>
 <p>This time will use the <strong><code>tidyverse</code></strong> package to read the data and avoid having to set <strong><code>stringsAsFactors</code></strong> to <strong><code>FALSE</code></strong></p>
 <p>To load the package type:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)    <span class="co">## load the tidyverse packages, incl. dplyr</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)    ## load the tidyverse packages, incl. dplyr</a></code></pre></div>
 <div id="what-are-dplyr-and-tidyr" class="section level2">
 <h2>What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</h2>
 <p>The package <strong><code>dplyr</code></strong> provides easy tools for the most common data manipulation tasks. It is built to work directly with data frames, with many common tasks optimized by being written in a compiled language (C++). An additional feature is the ability to work directly with data stored in an external database. The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query are returned.</p>
@@ -589,7 +591,7 @@ div.tocify {
 ##   taxa = col_character(),
 ##   plot_type = col_character()
 ## )</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">## inspect the data</span></a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">## inspect the data</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">str</span>(surveys)</a></code></pre></div>
 <p>Notice that the class of the data is now <code>tbl_df</code> This is referred to as a “tibble”. Tibbles are almost identical to R’s standard data frames, but they tweak some of the old behaviors of data frames. For our purposes the only differences between data frames and tibbles are that:</p>
 <ol style="list-style-type: decimal">
@@ -1188,13 +1190,13 @@ surveys_hindfoot_half <- surveys %>%
 <a class="sourceLine" id="cb44-3" data-line-number="3">         <span class="op">!</span><span class="kw">is.na</span>(hindfoot_length),  <span class="co"># remove missing hindfoot_length</span></a>
 <a class="sourceLine" id="cb44-4" data-line-number="4">         <span class="op">!</span><span class="kw">is.na</span>(sex))                <span class="co"># remove missing sex</span></a></code></pre></div>
 <p>Because we are interested in plotting how species abundances have changed through time, we are also going to remove observations for rare species (i.e., that have been observed less than 50 times). We will do this in two steps: first we are going to create a data set that counts how often each species has been observed, and filter out the rare species; then, we will extract only the observations for these more common species:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co">## Extract the most common species_id</span></a>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">## Extract the most common species_id</a>
 <a class="sourceLine" id="cb45-2" data-line-number="2">species_counts &lt;-<span class="st"> </span>surveys_complete <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb45-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(species_id) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb45-4" data-line-number="4"><span class="st">  </span><span class="kw">tally</span>() <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb45-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;=</span><span class="st"> </span><span class="dv">50</span>)</a>
 <a class="sourceLine" id="cb45-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb45-7" data-line-number="7"><span class="co">## Only keep the most common species</span></a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">## Only keep the most common species</a>
 <a class="sourceLine" id="cb45-8" data-line-number="8">surveys_complete &lt;-<span class="st"> </span>surveys_complete <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb45-9" data-line-number="9"><span class="st">  </span><span class="kw">filter</span>(species_id <span class="op">%in%</span><span class="st"> </span>species_counts<span class="op">$</span>species_id)</a></code></pre></div>
 <p>To make sure that everyone has the same data set, check that <code>surveys_complete</code> has 30463 rows and 13 columns by typing <code>dim(surveys_complete)</code>.</p>

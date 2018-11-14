@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -775,7 +777,7 @@ div.tocify {
 <a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">head</span>(data)</a>
 <a class="sourceLine" id="cb21-18" data-line-number="18"><span class="kw">dim</span>(data)</a>
 <a class="sourceLine" id="cb21-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb21-20" data-line-number="20"><span class="co">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</span></a>
+<a class="sourceLine" id="cb21-20" data-line-number="20">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</a>
 <a class="sourceLine" id="cb21-21" data-line-number="21">data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># create dataframe with column of the filenames</span></a>
 <a class="sourceLine" id="cb21-22" data-line-number="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">file_contents =</span> <span class="kw">map</span>(filename, <span class="co"># read files in</span></a>
 <a class="sourceLine" id="cb21-23" data-line-number="23">                             <span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>

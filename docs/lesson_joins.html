@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -730,18 +732,18 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,704 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Afghan… Asia       1952    28.8 8.43e6      779.   6.57e 9    9.82
-##  2 Afghan… Asia       1957    30.3 9.24e6      821.   7.59e 9    9.88
-##  3 Afghan… Asia       1962    32.0 1.03e7      853.   8.76e 9    9.94
-##  4 Afghan… Asia       1967    34.0 1.15e7      836.   9.65e 9    9.98
-##  5 Afghan… Asia       1972    36.1 1.31e7      740.   9.68e 9    9.99
-##  6 Afghan… Asia       1977    38.4 1.49e7      786.   1.17e10   10.1 
-##  7 Afghan… Asia       1982    39.9 1.29e7      978.   1.26e10   10.1 
-##  8 Afghan… Asia       1987    40.8 1.39e7      852.   1.18e10   10.1 
-##  9 Afghan… Asia       1992    41.7 1.63e7      649.   1.06e10   10.0 
-## 10 Afghan… Asia       1997    41.8 2.22e7      635.   1.41e10   10.1 
+##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
+##    &lt;fct&gt;      &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghanist… Asia       1952    28.8  8.43e6      779.    6.57e 9    9.82
+##  2 Afghanist… Asia       1957    30.3  9.24e6      821.    7.59e 9    9.88
+##  3 Afghanist… Asia       1962    32.0  1.03e7      853.    8.76e 9    9.94
+##  4 Afghanist… Asia       1967    34.0  1.15e7      836.    9.65e 9    9.98
+##  5 Afghanist… Asia       1972    36.1  1.31e7      740.    9.68e 9    9.99
+##  6 Afghanist… Asia       1977    38.4  1.49e7      786.    1.17e10   10.1 
+##  7 Afghanist… Asia       1982    39.9  1.29e7      978.    1.26e10   10.1 
+##  8 Afghanist… Asia       1987    40.8  1.39e7      852.    1.18e10   10.1 
+##  9 Afghanist… Asia       1992    41.7  1.63e7      649.    1.06e10   10.0 
+## 10 Afghanist… Asia       1997    41.8  2.22e7      635.    1.41e10   10.1 
 ## # ... with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents)</a></code></pre></div>
@@ -749,18 +751,18 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,705 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1 9.28e6     2449.   2.27e10    10.4
-##  2 Algeria Africa     1957    45.7 1.03e7     3014.   3.10e10    10.5
-##  3 Algeria Africa     1962    48.3 1.10e7     2551.   2.81e10    10.4
-##  4 Algeria Africa     1967    51.4 1.28e7     3247.   4.14e10    10.6
-##  5 Algeria Africa     1972    54.5 1.48e7     4183.   6.17e10    10.8
-##  6 Algeria Africa     1977    58.0 1.72e7     4910.   8.42e10    10.9
-##  7 Algeria Africa     1982    61.4 2.00e7     5745.   1.15e11    11.1
-##  8 Algeria Africa     1987    65.8 2.33e7     5681.   1.32e11    11.1
-##  9 Algeria Africa     1992    67.7 2.63e7     5023.   1.32e11    11.1
-## 10 Algeria Africa     1997    69.2 2.91e7     4797.   1.39e11    11.1
+##    country continent  year lifeExp      pop gdpPercap    total_gdp log_gdp
+##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Algeria Africa     1952    43.1  9279525     2449.      2.27e10    10.4
+##  2 Algeria Africa     1957    45.7 10270856     3014.      3.10e10    10.5
+##  3 Algeria Africa     1962    48.3 11000948     2551.      2.81e10    10.4
+##  4 Algeria Africa     1967    51.4 12760499     3247.      4.14e10    10.6
+##  5 Algeria Africa     1972    54.5 14760787     4183.      6.17e10    10.8
+##  6 Algeria Africa     1977    58.0 17152804     4910.      8.42e10    10.9
+##  7 Algeria Africa     1982    61.4 20033753     5745.      1.15e11    11.1
+##  8 Algeria Africa     1987    65.8 23254956     5681.      1.32e11    11.1
+##  9 Algeria Africa     1992    67.7 26298373     5023.      1.32e11    11.1
+## 10 Algeria Africa     1997    69.2 29072015     4797.      1.39e11    11.1
 ## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
@@ -770,9 +772,9 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1 x 11
-##   country continent  year lifeExp   pop gdpPercap total_gdp log_gdp
-##   &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 &lt;NA&gt;    Antarcti…    NA      NA    NA        NA        NA      NA
+##   country continent   year lifeExp   pop gdpPercap total_gdp log_gdp
+##   &lt;fct&gt;   &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 &lt;NA&gt;    Antarctica    NA      NA    NA        NA        NA      NA
 ## # ... with 3 more variables: area_km2 &lt;dbl&gt;, population &lt;dbl&gt;,
 ## #   percent_total_pop &lt;dbl&gt;</code></pre>
 <p>There’s another problem in this data.frame – it has two population measures, one by continent and one by country and it’s not clear which is which! Let’s rename a couple of columns.</p>
@@ -899,18 +901,18 @@ div.tocify {
 <a class="sourceLine" id="cb68-3" data-line-number="3"><span class="st">  </span><span class="kw">inner_join</span>(surveys)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
 <pre><code>## # A tibble: 1,995 x 10
-##    plot_id plot_type record_id month   day  year species_id sex  
-##      &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
-##  1       1 Spectab …         6     7    16  1977 PF         M    
-##  2       1 Spectab …         8     7    16  1977 DM         M    
-##  3       1 Spectab …         9     7    16  1977 DM         F    
-##  4       1 Spectab …        78     8    19  1977 PF         M    
-##  5       1 Spectab …        80     8    19  1977 DS         M    
-##  6       1 Spectab …       218     9    13  1977 PF         M    
-##  7       1 Spectab …       222     9    13  1977 DS         M    
-##  8       1 Spectab …       239     9    13  1977 DS         M    
-##  9       1 Spectab …       263    10    16  1977 DM         M    
-## 10       1 Spectab …       270    10    16  1977 DM         F    
+##    plot_id plot_type         record_id month   day  year species_id sex  
+##      &lt;int&gt; &lt;chr&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
+##  1       1 Spectab exclosure         6     7    16  1977 PF         M    
+##  2       1 Spectab exclosure         8     7    16  1977 DM         M    
+##  3       1 Spectab exclosure         9     7    16  1977 DM         F    
+##  4       1 Spectab exclosure        78     8    19  1977 PF         M    
+##  5       1 Spectab exclosure        80     8    19  1977 DS         M    
+##  6       1 Spectab exclosure       218     9    13  1977 PF         M    
+##  7       1 Spectab exclosure       222     9    13  1977 DS         M    
+##  8       1 Spectab exclosure       239     9    13  1977 DS         M    
+##  9       1 Spectab exclosure       263    10    16  1977 DM         M    
+## 10       1 Spectab exclosure       270    10    16  1977 DM         F    
 ## # ... with 1,985 more rows, and 2 more variables: hindfoot_length &lt;int&gt;,
 ## #   weight &lt;int&gt;</code></pre>
 <blockquote>
@@ -946,7 +948,7 @@ div.tocify {
 ## $ genus      &lt;chr&gt; &quot;Amphispiza&quot;, &quot;Ammospermophilus&quot;, &quot;Ammodramus&quot;, &quot;Ba...
 ## $ species    &lt;chr&gt; &quot;bilineata&quot;, &quot;harrisi&quot;, &quot;savannarum&quot;, &quot;taylori&quot;, &quot;b...
 ## $ taxa       &lt;chr&gt; &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Bird&quot;,...</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1"><span class="co">## with dplyr syntax</span></a>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">## with dplyr syntax</a>
 <a class="sourceLine" id="cb77-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb77-3" data-line-number="3">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb77-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>

@@ -35,7 +35,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -48,11 +48,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -840,7 +842,7 @@ Another method is to use the <code>levels()</code> function. Compare:</p>
 <div id="renaming-factors" class="section level3">
 <h3>Renaming factors</h3>
 <p>When your data is stored as a factor, you can use the <code>plot()</code> function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">## bar plot of the number of females and males captured during the experiment:</span></a>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">## bar plot of the number of females and males captured during the experiment:</a>
 <a class="sourceLine" id="cb42-2" data-line-number="2"><span class="kw">plot</span>(surveys<span class="op">$</span>sex)</a></code></pre></div>
 <p><img src="lesson_data_frames_ecology_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
@@ -880,13 +882,13 @@ plot(sex)
 <p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the <code>factor</code> data type. Depending on what you want to do with the data, you may want to keep these columns as <code>character</code>. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
 <p>In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
 <p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="co">## Compare the difference between when the data are being read as</span></a>
-<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">## Compare the difference between when the data are being read as</a>
+<a class="sourceLine" id="cb51-2" data-line-number="2">## `factor`, and when they are being read as `character`.</a>
 <a class="sourceLine" id="cb51-3" data-line-number="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb51-4" data-line-number="4"><span class="kw">str</span>(surveys)</a>
 <a class="sourceLine" id="cb51-5" data-line-number="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/portal_data_joined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb51-6" data-line-number="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb51-7" data-line-number="7"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
+<a class="sourceLine" id="cb51-7" data-line-number="7">## Convert the column &quot;plot_type&quot; into a factor</a>
 <a class="sourceLine" id="cb51-8" data-line-number="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
 <blockquote>
 <h3 id="challenge-3">Challenge</h3>
