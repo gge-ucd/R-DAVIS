@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -544,15 +546,15 @@ div.tocify {
 <div id="background" class="section level1">
 <h1>Background</h1>
 <p>We can automate chunks of code using a <code>for</code> loop. We’ve seen how many tasks are automatically automated using vectorization. Remember how we can often pass a vector of values as an argument to a function, and the function will happily operate on each element in turn.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">98</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">log</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">98</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">log</span>(x)</a></code></pre></div>
 <pre><code>## [1] 0.0000000 1.3862944 4.5849675 0.6931472</code></pre>
 <p>R understands that we want to call the <code>log()</code> function on the first element in the <code>x</code> vector, then call the <code>log()</code> function on the second element in the <code>x</code> vector, and so on.</p>
 <p>Sometimes vectorization can’t help us automate a set of commands. This can happen when commands are particularly complex, when the commands are using multiple objects at once, or when the next iteration of the block of code relies on the result of the previous iteration of the block of code. In these cases, we can tell R exactly what commands we want repeated inside of a loop.</p>
 <p>Here is what a basic for loop looks like.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">print</span>(i)</a>
-<a class="sourceLine" id="cb3-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">print</span>(i)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">}</a></code></pre></div>
 <pre><code>## [1] 1
 ## [1] 2
 ## [1] 3
@@ -565,13 +567,13 @@ div.tocify {
 ## [1] 10</code></pre>
 <p>We use the <code>for()</code> function to indicate we are starting a loop. The <code>{</code> and <code>}</code> mark the start and end of the block of code that we will repeat over and over. <code>i in 1:10</code> means that <code>i</code> will take on the first value in the <code>1:10</code> vector, the block of code will execute, then <code>i</code> will take on the second value in the <code>1:10</code> vector, the block of code will execute a second time, and so on until <code>i</code> takes on the last value in the <code>1:10</code> vector, the block of code executes one final time, and then the loop is finished. R will now proceed to the next line of code after the <code>}</code>. We can call this <strong>iterative looping variable</strong> whatever we’d like. Often, it is called <code>i</code> (or <code>j</code> or <code>k</code> if <code>i</code> is already used), but it could be called <code>monkey</code> and R would be fine with that.</p>
 <p>It’s key to notice that the value of <code>i</code> changes each time the code block in the loop executes. We say that <code>i</code> is <em>iterating</em> through the values of the vector. We can use <code>i</code> (or whatever you’ve called it) inside the for loop code chunk. Above, we printed out the value of <code>i</code> (see how <code>i</code> changed?) Below, we print out the <code>i</code>th letter of the alphabet by using the <code>letters</code> vector</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">letters <span class="co"># all the letters in the alphabet</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">letters <span class="co"># all the letters in the alphabet</span></a></code></pre></div>
 <pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot;
 ## [18] &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb7-2" title="2">  <span class="co"># use square bracket notation to access the ith element in the letters vector</span></a>
-<a class="sourceLine" id="cb7-3" title="3">  <span class="kw">print</span>(letters[i]) </a>
-<a class="sourceLine" id="cb7-4" title="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="co"># use square bracket notation to access the ith element in the letters vector</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="kw">print</span>(letters[i]) </a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">}</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot;
 ## [1] &quot;b&quot;
 ## [1] &quot;c&quot;
@@ -585,59 +587,59 @@ div.tocify {
 </div>
 <div id="example-with-gapminder" class="section level1">
 <h1>Example with gapminder</h1>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countryToPlot, <span class="dt">theData =</span> gapminder) {</a>
-<a class="sourceLine" id="cb10-2" title="2">  <span class="co"># this filters data to a specific country</span></a>
-<a class="sourceLine" id="cb10-3" title="3">  oneCountry &lt;-<span class="st"> </span>theData <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="st">    </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span>countryToPlot)</a>
-<a class="sourceLine" id="cb10-5" title="5">  </a>
-<a class="sourceLine" id="cb10-6" title="6">  <span class="co"># can add some error checking if you want</span></a>
-<a class="sourceLine" id="cb10-7" title="7">  <span class="cf">if</span>(<span class="op">!</span><span class="kw">nrow</span>(oneCountry)<span class="op">&gt;</span><span class="dv">0</span>) { <span class="co"># checks if there are values for country</span></a>
-<a class="sourceLine" id="cb10-8" title="8">    <span class="kw">stop</span>(<span class="st">&quot;No Data for this Country, please try again&quot;</span>)</a>
-<a class="sourceLine" id="cb10-9" title="9">  }</a>
-<a class="sourceLine" id="cb10-10" title="10"></a>
-<a class="sourceLine" id="cb10-11" title="11">  <span class="co"># this runs the plot</span></a>
-<a class="sourceLine" id="cb10-12" title="12">  <span class="kw">ggplot</span>(<span class="dt">data=</span>oneCountry) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-13" title="13"><span class="st">           </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>pop, <span class="dt">color=</span>country))</a>
-<a class="sourceLine" id="cb10-14" title="14">}</a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># plotPopGrowth(&quot;Afghanistans&quot;) # gives error</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;Afghanistan&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">plotPopGrowth &lt;-<span class="st"> </span><span class="cf">function</span>(countryToPlot, <span class="dt">theData =</span> gapminder) {</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="co"># this filters data to a specific country</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  oneCountry &lt;-<span class="st"> </span>theData <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">    </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> </span>countryToPlot)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  </a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">  <span class="co"># can add some error checking if you want</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="cf">if</span>(<span class="op">!</span><span class="kw">nrow</span>(oneCountry)<span class="op">&gt;</span><span class="dv">0</span>) { <span class="co"># checks if there are values for country</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">    <span class="kw">stop</span>(<span class="st">&quot;No Data for this Country, please try again&quot;</span>)</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">  }</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">  <span class="co"># this runs the plot</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="kw">ggplot</span>(<span class="dt">data=</span>oneCountry) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="st">           </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>pop, <span class="dt">color=</span>country))</a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">}</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># plotPopGrowth(&quot;Afghanistans&quot;) # gives error</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;Afghanistan&quot;</span>) </a></code></pre></div>
 <p><img src="lesson_for_loops_files/figure-html/demoTheFunction-1.png" width="672" /></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;United States&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">plotPopGrowth</span>(<span class="st">&quot;United States&quot;</span>)</a></code></pre></div>
 <p><img src="lesson_for_loops_files/figure-html/demoTheFunction-2.png" width="672" /></p>
 <p>What if we want to make a plot and then save it for every country?</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co">### LOOPING</span></a>
-<a class="sourceLine" id="cb13-2" title="2">countries &lt;-<span class="st"> </span><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(countries)){</a>
-<a class="sourceLine" id="cb13-4" title="4">  <span class="kw">plotPopGrowth</span>(countries[i])</a>
-<a class="sourceLine" id="cb13-5" title="5">  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;Figures/plot_&quot;</span>,countries[i], <span class="st">&quot;.png&quot;</span>))</a>
-<a class="sourceLine" id="cb13-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">### LOOPING</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">countries &lt;-<span class="st"> </span><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="cf">for</span>(i <span class="cf">in</span> <span class="kw">seq_along</span>(countries)){</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="kw">plotPopGrowth</span>(countries[i])</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="kw">ggsave</span>(<span class="dt">filename =</span> <span class="kw">paste0</span>(<span class="st">&quot;Figures/plot_&quot;</span>,countries[i], <span class="st">&quot;.png&quot;</span>))</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">}</a></code></pre></div>
 </div>
 <div id="example-with-file-imports" class="section level1">
 <h1>Example with file imports</h1>
 <p>The tidyverse has its own way to do loops</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">xlist &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/2001_mauna_loa_met_data/&quot;</span>, </a>
-<a class="sourceLine" id="cb14-2" title="2">                    <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>, </a>
-<a class="sourceLine" id="cb14-3" title="3">                    <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb14-4" title="4">xlist</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">xlist &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="dt">path =</span> <span class="st">&quot;data/2001_mauna_loa_met_data/&quot;</span>, </a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">                    <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>, </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">                    <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">xlist</a></code></pre></div>
 <pre><code>## character(0)</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">column_headers &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, </a>
-<a class="sourceLine" id="cb16-3" title="3">    <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>,</a>
-<a class="sourceLine" id="cb16-4" title="4">    <span class="st">&quot;windDir&quot;</span>, <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, </a>
-<a class="sourceLine" id="cb16-5" title="5">    <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, </a>
-<a class="sourceLine" id="cb16-6" title="6">    <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)</a>
-<a class="sourceLine" id="cb16-7" title="7"></a>
-<a class="sourceLine" id="cb16-8" title="8">ml &lt;-</a>
-<a class="sourceLine" id="cb16-9" title="9"><span class="st">  </span>xlist <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-10" title="10"><span class="st">  </span><span class="kw">map_df</span>( <span class="op">~</span><span class="st"> </span><span class="kw">read.table</span>(., </a>
-<a class="sourceLine" id="cb16-11" title="11">                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>,</a>
-<a class="sourceLine" id="cb16-12" title="12">                       <span class="dt">header =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb16-13" title="13">                       <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, </a>
-<a class="sourceLine" id="cb16-14" title="14">                       <span class="dt">col.names =</span> column_headers))</a>
-<a class="sourceLine" id="cb16-15" title="15">         </a>
-<a class="sourceLine" id="cb16-16" title="16"><span class="kw">glimpse</span>(ml)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">column_headers &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="st">  </span><span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, </a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>,</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    <span class="st">&quot;windDir&quot;</span>, <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, </a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">    <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, </a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">ml &lt;-</a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="st">  </span>xlist <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="st">  </span><span class="kw">map_df</span>( <span class="op">~</span><span class="st"> </span><span class="kw">read.table</span>(., </a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">                       <span class="dt">header =</span> <span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">                       <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, </a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">                       <span class="dt">col.names =</span> column_headers))</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">         </a>
+<a class="sourceLine" id="cb16-16" data-line-number="16"><span class="kw">glimpse</span>(ml)</a></code></pre></div>
 <pre><code>## Observations: 0
 ## Variables: 0</code></pre>
 <p>This lesson was contributed by <a href="https://orcid.org/0000-0002-8276-210X">Michael Koontz</a>.</p>

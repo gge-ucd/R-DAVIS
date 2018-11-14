@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,11 +47,13 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -566,21 +568,21 @@ div.tocify {
 <h1>Practice with joins</h1>
 <div id="fabricate-some-example-data" class="section level2">
 <h2>Fabricate some example data</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12345</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">key=</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)], </a>
-<a class="sourceLine" id="cb1-3" title="3">                <span class="dt">value1 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
-<a class="sourceLine" id="cb1-4" title="4">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-5" title="5">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">key=</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], </a>
-<a class="sourceLine" id="cb1-6" title="6">                <span class="dt">value2 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
-<a class="sourceLine" id="cb1-7" title="7">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1-8" title="8"></a>
-<a class="sourceLine" id="cb1-9" title="9">x</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">12345</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">key=</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)], </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">                <span class="dt">value1 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">key=</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">                <span class="dt">value2 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">x</a></code></pre></div>
 <pre><code>##   key value1
 ## 1   A      8
 ## 2   B     10
 ## 3   C      7
 ## 4   E      9</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">y</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">y</a></code></pre></div>
 <pre><code>##   key value2
 ## 1   A      5
 ## 2   B      2
@@ -589,28 +591,28 @@ div.tocify {
 </div>
 <div id="joining-joins" class="section level2">
 <h2>“Joining” joins</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># What&#39;s in both x and y?</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw">inner_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># What&#39;s in both x and y?</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">inner_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1 value2
 ## 1   A      8      5
 ## 2   B     10      2
 ## 3   C      7      3</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># What&#39;s in X and bring with it the stuff that matches in Y</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">left_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># What&#39;s in X and bring with it the stuff that matches in Y</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">left_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1 value2
 ## 1   A      8      5
 ## 2   B     10      2
 ## 3   C      7      3
 ## 4   E      9     NA</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># What&#39;s in Y and bring with it the stuff that matches in Y</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw">right_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># What&#39;s in Y and bring with it the stuff that matches in Y</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">right_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1 value2
 ## 1   A      8      5
 ## 2   B     10      2
 ## 3   C      7      3
 ## 4   D     NA      4</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Give me everything!</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="kw">full_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># Give me everything!</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw">full_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1 value2
 ## 1   A      8      5
 ## 2   B     10      2
@@ -620,44 +622,44 @@ div.tocify {
 </div>
 <div id="filtering-joins" class="section level2">
 <h2>Filtering “joins”</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Give me the stuff in X that is also in Y</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw">semi_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Give me the stuff in X that is also in Y</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">semi_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1
 ## 1   A      8
 ## 2   B     10
 ## 3   C      7</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Give me the stuff in X that is not in Y</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">anti_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># Give me the stuff in X that is not in Y</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">anti_join</span>(x, y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1
 ## 1   E      9</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Want everything that doesn&#39;t match?</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw">full_join</span>(<span class="kw">anti_join</span>(x,y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>), <span class="kw">anti_join</span>(y,x, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>), <span class="dt">by=</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># Want everything that doesn&#39;t match?</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">full_join</span>(<span class="kw">anti_join</span>(x,y, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>), <span class="kw">anti_join</span>(y,x, <span class="dt">by =</span> <span class="st">&quot;key&quot;</span>), <span class="dt">by=</span> <span class="st">&quot;key&quot;</span>)</a></code></pre></div>
 <pre><code>##   key value1 value2
 ## 1   E      9     NA
 ## 2   D     NA      4</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># keys with different names?</span></a>
-<a class="sourceLine" id="cb19-2" title="2">x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">keyX =</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)], </a>
-<a class="sourceLine" id="cb19-3" title="3">                <span class="dt">value1 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
-<a class="sourceLine" id="cb19-4" title="4">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb19-5" title="5">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">keyY =</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], </a>
-<a class="sourceLine" id="cb19-6" title="6">                <span class="dt">value2 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
-<a class="sourceLine" id="cb19-7" title="7">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb19-8" title="8"></a>
-<a class="sourceLine" id="cb19-9" title="9">x</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co"># keys with different names?</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">keyX =</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">5</span>)], </a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">                <span class="dt">value1 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">y &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">keyY =</span> LETTERS[<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)], </a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">                <span class="dt">value2 =</span> <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">4</span>), </a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">                <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">x</a></code></pre></div>
 <pre><code>##   keyX value1
 ## 1    A      8
 ## 2    B      9
 ## 3    C      1
 ## 4    E      2</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">y</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">y</a></code></pre></div>
 <pre><code>##   keyY value2
 ## 1    A      8
 ## 2    B      1
 ## 3    C      4
 ## 4    D     10</code></pre>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">full_join</span>(x, y) <span class="co">#should error out</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">full_join</span>(x, y) <span class="co">#should error out</span></a></code></pre></div>
 <pre><code>## Error: `by` required, because the data sources have no common variables</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">full_join</span>(x, y, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;keyX&quot;</span> =<span class="st"> &quot;keyY&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">full_join</span>(x, y, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;keyX&quot;</span> =<span class="st"> &quot;keyY&quot;</span>))</a></code></pre></div>
 <pre><code>##   keyX value1 value2
 ## 1    A      8      8
 ## 2    B      9      1
@@ -668,45 +670,45 @@ div.tocify {
 </div>
 <div id="set-operations" class="section level1">
 <h1>Set Operations</h1>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">df1 &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </a>
-<a class="sourceLine" id="cb27-2" title="2">                  <span class="dt">y =</span> <span class="kw">c</span>(1L, 1L))</a>
-<a class="sourceLine" id="cb27-3" title="3">df2 &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </a>
-<a class="sourceLine" id="cb27-4" title="4">                  <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb27-5" title="5"></a>
-<a class="sourceLine" id="cb27-6" title="6">df1</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">df1 &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">                  <span class="dt">y =</span> <span class="kw">c</span>(1L, 1L))</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">df2 &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">x =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], </a>
+<a class="sourceLine" id="cb27-4" data-line-number="4">                  <span class="dt">y =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb27-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb27-6" data-line-number="6">df1</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 A         1
 ## 2 B         1</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">df2</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">df2</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 A         1
 ## 2 B         2</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># Which rows are common in both datasets?</span></a>
-<a class="sourceLine" id="cb31-2" title="2">dplyr<span class="op">::</span><span class="kw">intersect</span>(df1, df2)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co"># Which rows are common in both datasets?</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">dplyr<span class="op">::</span><span class="kw">intersect</span>(df1, df2)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 A         1</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="co">#Want all unique rows between both datasets?</span></a>
-<a class="sourceLine" id="cb33-2" title="2">dplyr<span class="op">::</span><span class="kw">union</span>(df1, df2)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co">#Want all unique rows between both datasets?</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">dplyr<span class="op">::</span><span class="kw">union</span>(df1, df2)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 B         2
 ## 2 B         1
 ## 3 A         1</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co">#What&#39;s unique to df1?</span></a>
-<a class="sourceLine" id="cb35-2" title="2">dplyr<span class="op">::</span><span class="kw">setdiff</span>(df1, df2)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co">#What&#39;s unique to df1?</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">dplyr<span class="op">::</span><span class="kw">setdiff</span>(df1, df2)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
 ## 1 B         1</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co">#What&#39;s unique to df2?</span></a>
-<a class="sourceLine" id="cb37-2" title="2">dplyr<span class="op">::</span><span class="kw">setdiff</span>(df2, df1)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="co">#What&#39;s unique to df2?</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">dplyr<span class="op">::</span><span class="kw">setdiff</span>(df2, df1)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
@@ -715,8 +717,8 @@ div.tocify {
 <div id="practice-with-joins-using-gapminder" class="section level1">
 <h1>Practice with joins using gapminder</h1>
 <p>We will practice on our continents data.frame from module 2 and the gapminder data.frame. Note how these are tidy data: We have observations at the level of continent and at the level of country, so they go in different tables. The continent column in the gapminder data.frame allows us to link them now. If continents data.frame isn’t in your Environment, load it and recall what it consists of:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">load</span>(<span class="st">&#39;data/continents.RDA&#39;</span>)</a>
-<a class="sourceLine" id="cb39-2" title="2">continents</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&#39;data/continents.RDA&#39;</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">continents</a></code></pre></div>
 <pre><code>##    continent area_km2 population percent_total_pop
 ## 1     Africa 30370000 1022234000              15.0
 ## 2   Americas 42330000  934611000              14.0
@@ -725,59 +727,59 @@ div.tocify {
 ## 5     Europe 10180000  738199000              11.0
 ## 6    Oceania  9008500   29127000               0.4</code></pre>
 <p>We can join the two data.frames using any of the <code>dplyr</code> functions. We will pass the results to <code>str</code> to avoid printing more than we can read, and to get more high-level information on the resulting data.frames.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">left_join</span>(gapminder, continents) </a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">left_join</span>(gapminder, continents) </a></code></pre></div>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,704 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Afghan… Asia       1952    28.8 8.43e6      779.   6.57e 9    9.82
-##  2 Afghan… Asia       1957    30.3 9.24e6      821.   7.59e 9    9.88
-##  3 Afghan… Asia       1962    32.0 1.03e7      853.   8.76e 9    9.94
-##  4 Afghan… Asia       1967    34.0 1.15e7      836.   9.65e 9    9.98
-##  5 Afghan… Asia       1972    36.1 1.31e7      740.   9.68e 9    9.99
-##  6 Afghan… Asia       1977    38.4 1.49e7      786.   1.17e10   10.1 
-##  7 Afghan… Asia       1982    39.9 1.29e7      978.   1.26e10   10.1 
-##  8 Afghan… Asia       1987    40.8 1.39e7      852.   1.18e10   10.1 
-##  9 Afghan… Asia       1992    41.7 1.63e7      649.   1.06e10   10.0 
-## 10 Afghan… Asia       1997    41.8 2.22e7      635.   1.41e10   10.1 
+##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
+##    &lt;fct&gt;      &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghanist… Asia       1952    28.8  8.43e6      779.    6.57e 9    9.82
+##  2 Afghanist… Asia       1957    30.3  9.24e6      821.    7.59e 9    9.88
+##  3 Afghanist… Asia       1962    32.0  1.03e7      853.    8.76e 9    9.94
+##  4 Afghanist… Asia       1967    34.0  1.15e7      836.    9.65e 9    9.98
+##  5 Afghanist… Asia       1972    36.1  1.31e7      740.    9.68e 9    9.99
+##  6 Afghanist… Asia       1977    38.4  1.49e7      786.    1.17e10   10.1 
+##  7 Afghanist… Asia       1982    39.9  1.29e7      978.    1.26e10   10.1 
+##  8 Afghanist… Asia       1987    40.8  1.39e7      852.    1.18e10   10.1 
+##  9 Afghanist… Asia       1992    41.7  1.63e7      649.    1.06e10   10.0 
+## 10 Afghanist… Asia       1997    41.8  2.22e7      635.    1.41e10   10.1 
 ## # ... with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">right_join</span>(gapminder, continents)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,705 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1 9.28e6     2449.   2.27e10    10.4
-##  2 Algeria Africa     1957    45.7 1.03e7     3014.   3.10e10    10.5
-##  3 Algeria Africa     1962    48.3 1.10e7     2551.   2.81e10    10.4
-##  4 Algeria Africa     1967    51.4 1.28e7     3247.   4.14e10    10.6
-##  5 Algeria Africa     1972    54.5 1.48e7     4183.   6.17e10    10.8
-##  6 Algeria Africa     1977    58.0 1.72e7     4910.   8.42e10    10.9
-##  7 Algeria Africa     1982    61.4 2.00e7     5745.   1.15e11    11.1
-##  8 Algeria Africa     1987    65.8 2.33e7     5681.   1.32e11    11.1
-##  9 Algeria Africa     1992    67.7 2.63e7     5023.   1.32e11    11.1
-## 10 Algeria Africa     1997    69.2 2.91e7     4797.   1.39e11    11.1
+##    country continent  year lifeExp      pop gdpPercap    total_gdp log_gdp
+##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Algeria Africa     1952    43.1  9279525     2449.      2.27e10    10.4
+##  2 Algeria Africa     1957    45.7 10270856     3014.      3.10e10    10.5
+##  3 Algeria Africa     1962    48.3 11000948     2551.      2.81e10    10.4
+##  4 Algeria Africa     1967    51.4 12760499     3247.      4.14e10    10.6
+##  5 Algeria Africa     1972    54.5 14760787     4183.      6.17e10    10.8
+##  6 Algeria Africa     1977    58.0 17152804     4910.      8.42e10    10.9
+##  7 Algeria Africa     1982    61.4 20033753     5745.      1.15e11    11.1
+##  8 Algeria Africa     1987    65.8 23254956     5681.      1.32e11    11.1
+##  9 Algeria Africa     1992    67.7 26298373     5023.      1.32e11    11.1
+## 10 Algeria Africa     1997    69.2 29072015     4797.      1.39e11    11.1
 ## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">right_join</span>(gapminder, continents) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Antarctica&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(continent <span class="op">==</span><span class="st"> &quot;Antarctica&quot;</span>)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1 x 11
-##   country continent  year lifeExp   pop gdpPercap total_gdp log_gdp
-##   &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 &lt;NA&gt;    Antarcti…    NA      NA    NA        NA        NA      NA
+##   country continent   year lifeExp   pop gdpPercap total_gdp log_gdp
+##   &lt;fct&gt;   &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 &lt;NA&gt;    Antarctica    NA      NA    NA        NA        NA      NA
 ## # ... with 3 more variables: area_km2 &lt;dbl&gt;, population &lt;dbl&gt;,
 ## #   percent_total_pop &lt;dbl&gt;</code></pre>
 <p>There’s another problem in this data.frame – it has two population measures, one by continent and one by country and it’s not clear which is which! Let’s rename a couple of columns.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">right_join</span>(gapminder, continents) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">country_pop =</span> pop, <span class="dt">continent_pop =</span> population)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">country_pop =</span> pop, <span class="dt">continent_pop =</span> population)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
@@ -810,22 +812,22 @@ div.tocify {
 <h2>Challenge solutions</h2>
 <blockquote>
 <h4 id="solution-to-challenge-putting-the-pieces-together">Solution to Challenge – Putting the pieces together</h4>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb57-2" title="2"></a>
-<a class="sourceLine" id="cb57-3" title="3">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb57-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GDP =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Calculate country-level GDP</span></a>
-<a class="sourceLine" id="cb57-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Group by continent</span></a>
-<a class="sourceLine" id="cb57-6" title="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">cont_gdp =</span> <span class="kw">sum</span>(GDP)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Calculate continent-level GDP</span></a>
-<a class="sourceLine" id="cb57-7" title="7"><span class="co"># Join the continent-GDP data.frame to the continents data.frame</span></a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="st">    </span><span class="kw">left_join</span>(continents) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb57-9" title="9"><span class="co"># Calculate continent-level per-capita GDP</span></a>
-<a class="sourceLine" id="cb57-10" title="10"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">per_cap =</span> cont_gdp <span class="op">/</span><span class="st"> </span>population) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="co"># Plot gdp versus land area</span></a>
-<a class="sourceLine" id="cb57-12" title="12"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> area_km2, <span class="dt">y =</span> per_cap)) <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb57-13" title="13"><span class="co"># Draw points</span></a>
-<a class="sourceLine" id="cb57-14" title="14"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb57-15" title="15"><span class="co"># And label them</span></a>
-<a class="sourceLine" id="cb57-16" title="16"><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> continent), <span class="dt">nudge_y =</span> <span class="fl">5e3</span>)  </a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb57-3" data-line-number="3">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb57-4" data-line-number="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">GDP =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Calculate country-level GDP</span></a>
+<a class="sourceLine" id="cb57-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(continent) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Group by continent</span></a>
+<a class="sourceLine" id="cb57-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">cont_gdp =</span> <span class="kw">sum</span>(GDP)) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># Calculate continent-level GDP</span></a>
+<a class="sourceLine" id="cb57-7" data-line-number="7"><span class="co"># Join the continent-GDP data.frame to the continents data.frame</span></a>
+<a class="sourceLine" id="cb57-8" data-line-number="8"><span class="st">    </span><span class="kw">left_join</span>(continents) <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb57-9" data-line-number="9"><span class="co"># Calculate continent-level per-capita GDP</span></a>
+<a class="sourceLine" id="cb57-10" data-line-number="10"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">per_cap =</span> cont_gdp <span class="op">/</span><span class="st"> </span>population) <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb57-11" data-line-number="11"><span class="co"># Plot gdp versus land area</span></a>
+<a class="sourceLine" id="cb57-12" data-line-number="12"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> area_km2, <span class="dt">y =</span> per_cap)) <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb57-13" data-line-number="13"><span class="co"># Draw points</span></a>
+<a class="sourceLine" id="cb57-14" data-line-number="14"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb57-15" data-line-number="15"><span class="co"># And label them</span></a>
+<a class="sourceLine" id="cb57-16" data-line-number="16"><span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label =</span> continent), <span class="dt">nudge_y =</span> <span class="fl">5e3</span>)  </a></code></pre></div>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
@@ -838,13 +840,13 @@ div.tocify {
 <p>To illustrate how to use <strong><code>dplyr</code></strong> with these complex queries, we are going to join the <code>plots</code> and <code>surveys</code> tables. The <code>plots</code> table in the database contains information about the different plots surveyed by the researchers.</p>
 <p>The datasets can be found here: <a href="data/plots.csv">plots.csv</a>, <a href="data/surveys.csv">surveys.csv</a>, and <a href="data/species.csv">species.csv</a>.</p>
 <p>Download them and save them to your downloads folder. Alternatively, copy the link and use the <code>read_csv()</code> function directly on that.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">plots &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/plots.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">plots &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/plots.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   plot_id = col_integer(),
 ##   plot_type = col_character()
 ## )</code></pre>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">plots</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">plots</a></code></pre></div>
 <pre><code>## # A tibble: 24 x 2
 ##    plot_id plot_type                
 ##      &lt;int&gt; &lt;chr&gt;                    
@@ -860,7 +862,7 @@ div.tocify {
 ## 10      10 Rodent Exclosure         
 ## # ... with 14 more rows</code></pre>
 <p>The <code>plot_id</code> column also features in the <code>surveys</code> table:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/surveys.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/surveys.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   record_id = col_integer(),
@@ -873,7 +875,7 @@ div.tocify {
 ##   hindfoot_length = col_integer(),
 ##   weight = col_integer()
 ## )</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">surveys</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">surveys</a></code></pre></div>
 <pre><code>## # A tibble: 35,549 x 9
 ##    record_id month   day  year plot_id species_id sex   hindfoot_length
 ##        &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;
@@ -894,29 +896,29 @@ div.tocify {
 <p class="caption">diagram illustrating inner and left joins</p>
 </div>
 <p>For example, to extract all surveys for the first plot, which has <code>plot_id</code> 1, we can do:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">plots <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span><span class="kw">filter</span>(plot_id <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb68-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(surveys)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">plots <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(plot_id <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="st">  </span><span class="kw">inner_join</span>(surveys)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
 <pre><code>## # A tibble: 1,995 x 10
-##    plot_id plot_type record_id month   day  year species_id sex  
-##      &lt;int&gt; &lt;chr&gt;         &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
-##  1       1 Spectab …         6     7    16  1977 PF         M    
-##  2       1 Spectab …         8     7    16  1977 DM         M    
-##  3       1 Spectab …         9     7    16  1977 DM         F    
-##  4       1 Spectab …        78     8    19  1977 PF         M    
-##  5       1 Spectab …        80     8    19  1977 DS         M    
-##  6       1 Spectab …       218     9    13  1977 PF         M    
-##  7       1 Spectab …       222     9    13  1977 DS         M    
-##  8       1 Spectab …       239     9    13  1977 DS         M    
-##  9       1 Spectab …       263    10    16  1977 DM         M    
-## 10       1 Spectab …       270    10    16  1977 DM         F    
+##    plot_id plot_type         record_id month   day  year species_id sex  
+##      &lt;int&gt; &lt;chr&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
+##  1       1 Spectab exclosure         6     7    16  1977 PF         M    
+##  2       1 Spectab exclosure         8     7    16  1977 DM         M    
+##  3       1 Spectab exclosure         9     7    16  1977 DM         F    
+##  4       1 Spectab exclosure        78     8    19  1977 PF         M    
+##  5       1 Spectab exclosure        80     8    19  1977 DS         M    
+##  6       1 Spectab exclosure       218     9    13  1977 PF         M    
+##  7       1 Spectab exclosure       222     9    13  1977 DS         M    
+##  8       1 Spectab exclosure       239     9    13  1977 DS         M    
+##  9       1 Spectab exclosure       263    10    16  1977 DM         M    
+## 10       1 Spectab exclosure       270    10    16  1977 DM         F    
 ## # ... with 1,985 more rows, and 2 more variables: hindfoot_length &lt;int&gt;,
 ## #   weight &lt;int&gt;</code></pre>
 <blockquote>
 <h3 id="challenge">Challenge</h3>
 <p>Write some code that returns the number of rodents observed in each plot in each year. Start by reading in the species dataframe.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">species &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/species.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1">species &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/species.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   species_id = col_character(),
@@ -927,7 +929,7 @@ div.tocify {
 <p>Hint: All the information you need isn’t contained in one single dataframe just yet. The “taxa” information is contained in the species dataframe, and the observation data is contained in the surveys dataframe. Write some code that joins the species and survey tables together on a common column. What are the common columns?</p>
 <p>Hint: How would you use a split-apply-combine strategy to count the number of observations <em>per plot, per year</em>? Which part of this hint refers to the “splitting”, and which part refers to the “applying”?</p>
 <p>Hint: How would you subset the resulting dataframe to just include the rodents?</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">glimpse</span>(surveys)</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">glimpse</span>(surveys)</a></code></pre></div>
 <pre><code>## Observations: 35,549
 ## Variables: 9
 ## $ record_id       &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,...
@@ -939,20 +941,20 @@ div.tocify {
 ## $ sex             &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;...
 ## $ hindfoot_length &lt;int&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38...
 ## $ weight          &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="kw">glimpse</span>(species)</a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">glimpse</span>(species)</a></code></pre></div>
 <pre><code>## Observations: 54
 ## Variables: 4
 ## $ species_id &lt;chr&gt; &quot;AB&quot;, &quot;AH&quot;, &quot;AS&quot;, &quot;BA&quot;, &quot;CB&quot;, &quot;CM&quot;, &quot;CQ&quot;, &quot;CS&quot;, &quot;CT...
 ## $ genus      &lt;chr&gt; &quot;Amphispiza&quot;, &quot;Ammospermophilus&quot;, &quot;Ammodramus&quot;, &quot;Ba...
 ## $ species    &lt;chr&gt; &quot;bilineata&quot;, &quot;harrisi&quot;, &quot;savannarum&quot;, &quot;taylori&quot;, &quot;b...
 ## $ taxa       &lt;chr&gt; &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Bird&quot;,...</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="co">## with dplyr syntax</span></a>
-<a class="sourceLine" id="cb77-2" title="2"></a>
-<a class="sourceLine" id="cb77-3" title="3">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, taxa, year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb77-6" title="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb77-7" title="7"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">## with dplyr syntax</a>
+<a class="sourceLine" id="cb77-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb77-3" data-line-number="3">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb77-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb77-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, taxa, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb77-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb77-7" data-line-number="7"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
 <pre><code>## # A tibble: 619 x 4
 ## # Groups:   plot_id, taxa [24]
@@ -969,12 +971,12 @@ div.tocify {
 ##  9       1 Rodent  1985   102
 ## 10       1 Rodent  1986    57
 ## # ... with 609 more rows</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1"><span class="co"># Alternatively, filter to rodents *before* summarizing by plot and year</span></a>
-<a class="sourceLine" id="cb80-2" title="2">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb80-4" title="4"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb80-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb80-6" title="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1"><span class="co"># Alternatively, filter to rodents *before* summarizing by plot and year</span></a>
+<a class="sourceLine" id="cb80-2" data-line-number="2">surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-3" data-line-number="3"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-4" data-line-number="4"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb80-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(plot_id, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb80-6" data-line-number="6"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
 <pre><code>## # A tibble: 619 x 3
 ## # Groups:   plot_id [?]
@@ -997,16 +999,16 @@ div.tocify {
 <p>Write some code that returns the total number of rodents in each genus caught in the different plot types.</p>
 <p>Hint: Not all the data you need are contained in 1 dataframe. The plot_type data are in the plots dataframe, the taxa data are in the species dataframe, and the observation data are in the surveys dataframe. Start by joining these three dataframes together.</p>
 <p>Hint: Think “split-apply-combine”. We want to <em>count</em> the number of observations in each group defined by <code>plot_type</code> and <code>genus</code> combinations. That is, what is the count of observations <em>per plot_type, per genus</em> for <em>just the Rodent taxa</em>.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">genus_counts &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb83-2" title="2"><span class="st">  </span>surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb83-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(plots) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb83-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb83-5" title="5"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb83-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(plot_type, genus, taxa) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb83-7" title="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">genus_counts &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb83-2" data-line-number="2"><span class="st">  </span>surveys <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-3" data-line-number="3"><span class="st">  </span><span class="kw">left_join</span>(plots) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-4" data-line-number="4"><span class="st">  </span><span class="kw">left_join</span>(species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-5" data-line-number="5"><span class="st">  </span><span class="kw">filter</span>(taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb83-6" data-line-number="6"><span class="st">  </span><span class="kw">group_by</span>(plot_type, genus, taxa) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb83-7" data-line-number="7"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">n =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1">genus_counts</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1">genus_counts</a></code></pre></div>
 <pre><code>## # A tibble: 59 x 4
 ## # Groups:   plot_type, genus [?]
 ##    plot_type genus            taxa       n
