@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -548,9 +546,9 @@ div.tocify {
 <h2>Installing and loading packages</h2>
 <p><code>dplyr</code> is not part of “base R”; rather it is a package – a library of functions that an R user wrote. This extensibility is part of the beauty of R. As of December 2016, there are 9,600 such packages in the official Comprehensive R Archive Network, better known as <a href="https://cran.r-project.org/">CRAN</a>.</p>
 <p><code>dplyr</code> is one of the most popular packages for R. It is part of a suite of R tools that make up “The Tidyverse”. Its author conveniently bundled these tools together in a super-package called <code>tidyverse</code>. To use the tidyverse tools, you first need to download them to your machine (once) and then load them (each R session you want to use them). You can download a package via the RStudio menu bar Tools -&gt; Install Packages…, or with a line of code:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&#39;tidyverse&#39;</span>)</a></code></pre></div>
 <p>You only have to download the code once. But whenever you want to <em>use</em> a package, you have to load it in your R session. For that, use the <code>library</code> function:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
 <blockquote>
 <h4 id="challenge-install-and-load-tidyverse" class="challenge">Challenge – Install and load tidyverse</h4>
 <ul>
@@ -570,33 +568,33 @@ div.tocify {
 <p>There are six main types of data in R. We’ve already covered 2–3 of them. Can anyone help me list them?</p>
 </blockquote>
 <p>A vector is the most common and basic data type in R, and is pretty much the workhorse of R. A vector is composed by a series of values, which can be either numbers or characters. We can assign a series of values to a vector using the <strong><code>c()</code></strong> function. For example we can create a vector of animal weights and assign it to a new object <code>weight_g</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">weight_g</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">82</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2">weight_g</a></code></pre></div>
 <pre><code>## [1] 50 60 65 82</code></pre>
 <p>A vector can also contain characters:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">animals</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">animals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;mouse&quot;</span>, <span class="st">&quot;rat&quot;</span>, <span class="st">&quot;dog&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">animals</a></code></pre></div>
 <pre><code>## [1] &quot;mouse&quot; &quot;rat&quot;   &quot;dog&quot;</code></pre>
 <p>The quotes around “mouse”, “rat”, etc. are essential here. Without the quotes R will assume there are objects called mouse, rat and dog. As these objects don’t exist in R’s memory, there will be an error message.</p>
 <p>There are many functions that allow you to inspect the content of a vector. <code>length()</code> tells you how many elements are in a particular vector:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">length</span>(weight_g)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">length</span>(weight_g)</a></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">length</span>(animals)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">length</span>(animals)</a></code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>An important feature of a vector, is that all of the elements are the same type of data. The function <code>class()</code> indicates the class (the type of element) of an object:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">class</span>(weight_g)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">class</span>(weight_g)</a></code></pre></div>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">class</span>(animals)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">class</span>(animals)</a></code></pre></div>
 <pre><code>## [1] &quot;character&quot;</code></pre>
 <p>The function <code>str()</code> provides an overview of the structure of an object and its elements. It is a useful function when working with large and complex objects:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">str</span>(weight_g)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">str</span>(weight_g)</a></code></pre></div>
 <pre><code>##  num [1:4] 50 60 65 82</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">str</span>(animals)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">str</span>(animals)</a></code></pre></div>
 <pre><code>##  chr [1:3] &quot;mouse&quot; &quot;rat&quot; &quot;dog&quot;</code></pre>
 <p>You can also use the <code>c()</code> function to add other elements to your vector:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># add to the end of the vector</span></a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># add to the beginning of the vector</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">weight_g</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(weight_g, <span class="dv">90</span>) <span class="co"># add to the end of the vector</span></a>
+<a class="sourceLine" id="cb19-2" title="2">weight_g &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, weight_g) <span class="co"># add to the beginning of the vector</span></a>
+<a class="sourceLine" id="cb19-3" title="3">weight_g</a></code></pre></div>
 <pre><code>## [1] 30 50 60 65 82 90</code></pre>
 <p>In the first line, we take the original vector <code>weight_g</code>, add the value 90 to the end of it, and save the result back into <code>weight_g</code>. Then we add the value 30 to the beginning, again saving the result back into <code>weight_g</code>.</p>
 <p>We can do this over and over again to grow a vector, or assemble a dataset. As we program, this may be useful to add results that we are collecting or calculating.</p>
@@ -613,10 +611,10 @@ div.tocify {
 <blockquote>
 <p>We’ve seen that atomic vectors can be of type character, numeric, integer, and logical. But what happens if we try to mix these types in a single vector? What will happen in each of these examples? (hint: use class() to check the data type of your objects):</p>
 </blockquote>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">num_char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">num_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">char_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb21-4" data-line-number="4">tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">num_char &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;a&#39;</span>)</a>
+<a class="sourceLine" id="cb21-2" title="2">num_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb21-3" title="3">char_logical &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb21-4" title="4">tricky &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&#39;4&#39;</span>)</a></code></pre></div>
 <blockquote>
 <ul>
 <li>Why do you think it happens?</li>
@@ -631,37 +629,37 @@ div.tocify {
 <p><strong>Factors are used to represent categorical data</strong>. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
 <p>Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
 <p>Once created, factors can only contain a pre-defined set of values, known as levels. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>))</a></code></pre></div>
 <p>R will assign 1 to the level “<code>female</code>” and 2 to the level “<code>male</code>” (because <strong>f</strong> comes before <strong>m</strong>, even though the first element in this vector is “<code>male</code>”). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">levels</span>(sex)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">levels</span>(sex)</a></code></pre></div>
 <pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">nlevels</span>(sex)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">nlevels</span>(sex)</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. Here, one way to reorder our levels in the sex vector would be:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">sex <span class="co"># current order</span></a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">sex <span class="co"># current order</span></a></code></pre></div>
 <pre><code>## [1] male   female female male  
 ## Levels: female male</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="co">#&gt; [1] male   female female male  </span></a>
-<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co">#&gt; Levels: female male</span></a>
-<a class="sourceLine" id="cb29-3" data-line-number="3">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(sex, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</a>
-<a class="sourceLine" id="cb29-4" data-line-number="4">sex <span class="co"># after re-ordering</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co">#&gt; [1] male   female female male  </span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="co">#&gt; Levels: female male</span></a>
+<a class="sourceLine" id="cb29-3" title="3">sex &lt;-<span class="st"> </span><span class="kw">factor</span>(sex, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>))</a>
+<a class="sourceLine" id="cb29-4" title="4">sex <span class="co"># after re-ordering</span></a></code></pre></div>
 <pre><code>## [1] male   female female male  
 ## Levels: male female</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co">#&gt; [1] male   female female male  </span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="co">#&gt; Levels: male female</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co">#&gt; [1] male   female female male  </span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="co">#&gt; Levels: male female</span></a></code></pre></div>
 <p>In R’s memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: “<code>female</code>”, “<code>male</code>” is more descriptive than 1, 2. Which one is “<code>male</code>”? You wouldn’t be able to tell just from the integer data. Factors, on the other hand, have this information built in. It is particularly helpful when there are many levels (like the species names in our ecology example dataset <a href="https://mikoontz.github.io/data-carpentry-week/data/species.csv">dataset</a>).</p>
 <div id="converting-factors" class="section level3">
 <h3>Converting factors</h3>
 <p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">as.character</span>(sex)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">as.character</span>(sex)</a></code></pre></div>
 <pre><code>## [1] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;</code></pre>
 <p>Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. One method is to convert factors to characters and then numbers. Another method is to use the <code>levels()</code> function. Compare:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1990</span>, <span class="dv">1983</span>, <span class="dv">1977</span>, <span class="dv">1998</span>, <span class="dv">1990</span>))</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw">as.numeric</span>(f)               <span class="co"># wrong! and there is no warning...</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">f &lt;-<span class="st"> </span><span class="kw">factor</span>(<span class="kw">c</span>(<span class="dv">1990</span>, <span class="dv">1983</span>, <span class="dv">1977</span>, <span class="dv">1998</span>, <span class="dv">1990</span>))</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">as.numeric</span>(f)               <span class="co"># wrong! and there is no warning...</span></a></code></pre></div>
 <pre><code>## [1] 3 2 1 4 3</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) <span class="co"># works...</span></a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(f)) <span class="co"># works...</span></a></code></pre></div>
 <pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">as.numeric</span>(<span class="kw">levels</span>(f))[f]    <span class="co"># The recommended way.</span></a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">as.numeric</span>(<span class="kw">levels</span>(f))[f]    <span class="co"># The recommended way.</span></a></code></pre></div>
 <pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
 <p>Notice that in the <code>levels()</code> approach, three important steps occur:</p>
 <ul>
@@ -679,26 +677,26 @@ div.tocify {
 <p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
 <p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read.csv()</code> to load into memory the content of the CSV file as an object of class data.frame.</p>
 <p>To download the data into the <code>data/</code> subdirectory, run the following:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">download.file</span>(<span class="st">&quot;https://ndownloader.figshare.com/files/2292169&quot;</span>,</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2">              <span class="st">&quot;data/combined.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">download.file</span>(<span class="st">&quot;https://ndownloader.figshare.com/files/2292169&quot;</span>,</a>
+<a class="sourceLine" id="cb40-2" title="2">              <span class="st">&quot;data/combined.csv&quot;</span>)</a></code></pre></div>
 <p>You are now ready to load the data:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</a></code></pre></div>
 <p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the first 6 lines of this data using <code>head(surveys)</code></p>
-<p>Now we can look at how reading in the data in different ways affects the different data types (<code>factor</code> vs. <code>character</code>):</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">## Compare the difference between when the data are being read as</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">## `factor`, and when they are being read as `character`.</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">## Convert the column &quot;plot_type&quot; into a factor</a>
-<a class="sourceLine" id="cb42-8" data-line-number="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
+<p>Now we can look at how reading in the data in different ways affects the different data types (<code>factor</code> vs. <code>character</code>):</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co">## Compare the difference between when the data are being read as</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
+<a class="sourceLine" id="cb42-3" title="3">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="kw">str</span>(surveys)</a>
+<a class="sourceLine" id="cb42-5" title="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="kw">str</span>(surveys)</a>
+<a class="sourceLine" id="cb42-7" title="7"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
+<a class="sourceLine" id="cb42-8" title="8">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
 <div id="challenge-1" class="section level4">
 <h4>Challenge</h4>
 <p>We have seen how data frames are created when using the <code>read.csv()</code>, but they can also be created by hand with the <code>data.frame()</code> function. There are a few mistakes in this hand-crafted data.frame, can you spot and fix them? Don’t hesitate to experiment!</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">animal_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),</a>
-<a class="sourceLine" id="cb43-2" data-line-number="2">                          <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3">                          <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">animal_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">animal=</span><span class="kw">c</span>(<span class="st">&quot;dog&quot;</span>, <span class="st">&quot;cat&quot;</span>, <span class="st">&quot;sea cucumber&quot;</span>, <span class="st">&quot;sea urchin&quot;</span>),</a>
+<a class="sourceLine" id="cb43-2" title="2">                          <span class="dt">feel=</span><span class="kw">c</span>(<span class="st">&quot;furry&quot;</span>, <span class="st">&quot;squishy&quot;</span>, <span class="st">&quot;spiny&quot;</span>),</a>
+<a class="sourceLine" id="cb43-3" title="3">                          <span class="dt">weight=</span><span class="kw">c</span>(<span class="dv">45</span>, <span class="dv">8</span> <span class="fl">1.1</span>, <span class="fl">0.8</span>))</a></code></pre></div>
 <blockquote>
 <ul>
 <li>Can you predict the class for each of the columns in the following example? Check your guesses using str(country_climate):
@@ -709,13 +707,13 @@ div.tocify {
 </ul></li>
 </ul>
 </blockquote>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">country_climate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">       <span class="dt">country=</span><span class="kw">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),</a>
-<a class="sourceLine" id="cb44-3" data-line-number="3">       <span class="dt">climate=</span><span class="kw">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),</a>
-<a class="sourceLine" id="cb44-4" data-line-number="4">       <span class="dt">temperature=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),</a>
-<a class="sourceLine" id="cb44-5" data-line-number="5">       <span class="dt">northern_hemisphere=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),</a>
-<a class="sourceLine" id="cb44-6" data-line-number="6">       <span class="dt">has_kangaroo=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb44-7" data-line-number="7">       )</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">country_climate &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb44-2" title="2">       <span class="dt">country=</span><span class="kw">c</span>(<span class="st">&quot;Canada&quot;</span>, <span class="st">&quot;Panama&quot;</span>, <span class="st">&quot;South Africa&quot;</span>, <span class="st">&quot;Australia&quot;</span>),</a>
+<a class="sourceLine" id="cb44-3" title="3">       <span class="dt">climate=</span><span class="kw">c</span>(<span class="st">&quot;cold&quot;</span>, <span class="st">&quot;hot&quot;</span>, <span class="st">&quot;temperate&quot;</span>, <span class="st">&quot;hot/temperate&quot;</span>),</a>
+<a class="sourceLine" id="cb44-4" title="4">       <span class="dt">temperature=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">18</span>, <span class="st">&quot;15&quot;</span>),</a>
+<a class="sourceLine" id="cb44-5" title="5">       <span class="dt">northern_hemisphere=</span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="st">&quot;FALSE&quot;</span>),</a>
+<a class="sourceLine" id="cb44-6" title="6">       <span class="dt">has_kangaroo=</span><span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb44-7" title="7">       )</a></code></pre></div>
 <p>The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance.).</p>
 </div>
 </div>
@@ -724,15 +722,15 @@ div.tocify {
 <h2>Data Wrangling with <code>dplyr</code></h2>
 <p>It is an often bemoaned fact that a data scientist spends much, and often most, of her time wrangling data: getting it organized and clean. In this lesson we will learn an efficient set of tools that can handle the vast majority of most data management tasks.</p>
 <p>Enter <code>dplyr</code>, a package for making data manipulation easier. More on <code>dplyr</code> later. <code>dplyr</code> is part of <code>tidyverse</code>, so it is already installed on your machine. You can load it individually, or with the other tidyverse packages like this:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb45-2" data-line-number="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="kw">library</span>(gapminder)</a></code></pre></div>
 <p>Those messages and conflicts are normal. The conflicts are R telling you that there are two packages with functions named “filter” and “lag”. When R gives you red text, it’s not always a bad thing, but it does mean you should pay attention and try to understand what it’s trying to tell you.</p>
 <p>Remember that you only have to install each package once (per computer), but you have to load them for each R session in which you want to use them.</p>
 <p>You also have to load any data you want to use each time you start a new R session. So, if it’s not already loaded, read in the gapminder data. We’re going to use tidyverse’s <code>read_csv</code> instead of base R’s <code>read.csv</code> here. It has a few nice features; the most obvious is that it makes a special kind of data.frame that only prints the first ten rows instead of all 1704.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1"><span class="co"># gapminder &lt;- read_csv(&#39;data/gapminder-FiveYearData.csv&#39;)</span></a>
-<a class="sourceLine" id="cb46-2" data-line-number="2"><span class="kw">class</span>(gapminder)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="co"># gapminder &lt;- read_csv(&#39;data/gapminder-FiveYearData.csv&#39;)</span></a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="kw">class</span>(gapminder)</a></code></pre></div>
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">head</span>(gapminder) <span class="co"># look at first few rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">head</span>(gapminder) <span class="co"># look at first few rows</span></a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##   country     continent  year lifeExp      pop gdpPercap
 ##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
@@ -742,7 +740,7 @@ div.tocify {
 ## 4 Afghanistan Asia       1967    34.0 11537966      836.
 ## 5 Afghanistan Asia       1972    36.1 13079460      740.
 ## 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">str</span>(gapminder) <span class="co"># look at data structure</span></a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">str</span>(gapminder) <span class="co"># look at data structure</span></a></code></pre></div>
 <pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    1704 obs. of  6 variables:
 ##  $ country  : Factor w/ 142 levels &quot;Afghanistan&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ continent: Factor w/ 5 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
@@ -751,7 +749,7 @@ div.tocify {
 ##  $ pop      : int  8425333 9240934 10267083 11537966 13079460 14880372 12881816 13867957 16317921 22227415 ...
 ##  $ gdpPercap: num  779 821 853 836 740 ...</code></pre>
 <p>You can always convert a data.frame into this special kind of data.frame like this:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">gapminder &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(gapminder)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1">gapminder &lt;-<span class="st"> </span><span class="kw">tbl_df</span>(gapminder)</a></code></pre></div>
 </div>
 <div id="what-is-dplyr" class="section level2">
 <h2>What is dplyr?</h2>
@@ -771,7 +769,7 @@ div.tocify {
 <div id="filter" class="section level4">
 <h4><code>filter()</code></h4>
 <p>Suppose we want to see just the gapminder data for the USA. First, we need to know how “USA” is written in the dataset: Is it USA or United States or what? We can see all the unique values of a variable with the <code>unique</code> function.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">unique</span>(gapminder<span class="op">$</span>country)</a></code></pre></div>
 <pre><code>##   [1] Afghanistan              Albania                 
 ##   [3] Algeria                  Angola                  
 ##   [5] Argentina                Australia               
@@ -845,7 +843,7 @@ div.tocify {
 ## [141] Zambia                   Zimbabwe                
 ## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe</code></pre>
 <p>Okay, now we want to see just the rows of the data.frame where country is “United States”. The syntax for all <code>dplyr</code> functions is the same: The first argument is the data.frame, the rest of the arguments are whatever you want to do in that data.frame.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 6
 ##    country       continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
@@ -862,14 +860,14 @@ div.tocify {
 ## 11 United States Americas   2002    77.3 287675526    39097.
 ## 12 United States Americas   2007    78.2 301139947    42952.</code></pre>
 <p>We can also apply multiple conditions, e.g. the US after 2000:</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">&amp;</span><span class="st"> </span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 2 x 6
 ##   country       continent  year lifeExp       pop gdpPercap
 ##   &lt;fct&gt;         &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
 ## 1 United States Americas   2002    77.3 287675526    39097.
 ## 2 United States Americas   2007    78.2 301139947    42952.</code></pre>
 <p>We can also use “or” conditions with the vertical pipe: <code>|</code>. Notice that the variable (column) names don’t go in quotes, but values of character variables do.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">|</span><span class="st"> </span>country <span class="op">==</span><span class="st"> &quot;Mexico&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span> <span class="op">|</span><span class="st"> </span>country <span class="op">==</span><span class="st"> &quot;Mexico&quot;</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 24 x 6
 ##    country continent  year lifeExp      pop gdpPercap
 ##    &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
@@ -890,9 +888,9 @@ div.tocify {
 <h4><code>select()</code></h4>
 <p><code>filter</code> returned a subset of the data.frame’s rows. <code>select</code> returns a subset of the data.frame’s columns.</p>
 <p>Suppose we only want to see country and life expectancy.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">select</span>(gapminder, country, lifeExp)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">select</span>(gapminder, country, lifeExp)</a></code></pre></div>
 <p>We can choose which columns we don’t want</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="kw">select</span>(gapminder, <span class="op">-</span>continent, <span class="dt">income =</span> gdpPercap)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="kw">select</span>(gapminder, <span class="op">-</span>continent, <span class="dt">income =</span> gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 5
 ##    country      year lifeExp      pop income
 ##    &lt;fct&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;  &lt;dbl&gt;
@@ -908,7 +906,7 @@ div.tocify {
 ## 10 Afghanistan  1997    41.8 22227415   635.
 ## # ... with 1,694 more rows</code></pre>
 <p>And we can rename columns</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">select</span>(gapminder, <span class="dt">ThePlace =</span> country, <span class="dt">HowLongTheyLive =</span> lifeExp)</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">select</span>(gapminder, <span class="dt">ThePlace =</span> country, <span class="dt">HowLongTheyLive =</span> lifeExp)</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 2
 ##    ThePlace    HowLongTheyLive
 ##    &lt;fct&gt;                 &lt;dbl&gt;
@@ -924,9 +922,9 @@ div.tocify {
 ## 10 Afghanistan            41.8
 ## # ... with 1,694 more rows</code></pre>
 <p>As usual, R isn’t saving any of these outputs; just printing them to the screen. If we want to keep them around, we need to assign them to a variable.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">justUS =<span class="st"> </span><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2">USdata =<span class="st"> </span><span class="kw">select</span>(justUS, <span class="op">-</span>country, <span class="op">-</span>continent)</a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">USdata</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">justUS =<span class="st"> </span><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>)</a>
+<a class="sourceLine" id="cb66-2" title="2">USdata =<span class="st"> </span><span class="kw">select</span>(justUS, <span class="op">-</span>country, <span class="op">-</span>continent)</a>
+<a class="sourceLine" id="cb66-3" title="3">USdata</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 4
 ##     year lifeExp       pop gdpPercap
 ##    &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
@@ -956,7 +954,7 @@ div.tocify {
 <div id="arrange" class="section level4">
 <h4><code>arrange()</code></h4>
 <p>You can order the rows of a data.frame by a variable using <code>arrange</code>. Suppose we want to see the most populous countries:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">arrange</span>(gapminder, pop)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">arrange</span>(gapminder, pop)</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country               continent  year lifeExp   pop gdpPercap
 ##    &lt;fct&gt;                 &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;
@@ -972,7 +970,7 @@ div.tocify {
 ## 10 Sao Tome and Principe Africa     1982    60.4 98593     1890.
 ## # ... with 1,694 more rows</code></pre>
 <p>Hmm, we didn’t get the most populous countries. By default, <code>arrange</code> sorts the variable in <em>increasing</em> order. We could see the most populous countries by examining the <code>tail</code> of the last command, or we can sort the data.frame by descending population by wrapping the variable in <code>desc()</code>:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(pop))</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(pop))</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country continent  year lifeExp        pop gdpPercap
 ##    &lt;fct&gt;   &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;int&gt;     &lt;dbl&gt;
@@ -988,7 +986,7 @@ div.tocify {
 ## 10 China   Asia       1977    64.0  943455000      741.
 ## # ... with 1,694 more rows</code></pre>
 <p><code>arrange</code> can also sort by multiple variables. It will sort the data.frame by the first variable, and if there are any ties in that variable, they will be sorted by the next variable, and so on. Here we sort from newest to oldest, and within year from richest to poorest:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(year), <span class="kw">desc</span>(gdpPercap))</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">arrange</span>(gapminder, <span class="kw">desc</span>(year), <span class="kw">desc</span>(gdpPercap))</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 6
 ##    country          continent  year lifeExp       pop gdpPercap
 ##    &lt;fct&gt;            &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;     &lt;int&gt;     &lt;dbl&gt;
@@ -1008,7 +1006,7 @@ div.tocify {
 <div id="mutate" class="section level4">
 <h4><code>mutate()</code></h4>
 <p>We have learned how to drop rows, drop columns, and rearrange rows. To make a new column we use the <code>mutate</code> function. As usual, the first argument is a data.frame. The second argument is the name of the new column you want to create, followed by an equal sign, followed by what to put in that column. You can reference other variables in the data.frame, and <code>mutate</code> will treat each row independently. E.g. we can calculate the total GDP of each country in each year by multiplying the per-capita GDP by the population.</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="kw">mutate</span>(gapminder, <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop)</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">mutate</span>(gapminder, <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop)</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 7
 ##    country     continent  year lifeExp      pop gdpPercap    total_gdp
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;
@@ -1026,9 +1024,9 @@ div.tocify {
 <p><strong>Shoutout Q: How would we view the highest-total-gdp countries?</strong></p>
 <p>Note that didn’t change gapminder: We didn’t assign the output to anything, so it was just printed, with the new column. If we want to modify our gapminder data.frame, we can assign the output of <code>mutate</code> back to the gapminder variable, but be careful doing this – if you make a mistake, you can’t just re-run that line of code, you’ll need to go back to loading the gapminder data.frame.</p>
 <p>Also, you can create multiple columns in one call to <code>mutate</code>, even using variables that you just created, separating them with commas:</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">gapminder =<span class="st"> </span><span class="kw">mutate</span>(gapminder, </a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">                   <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop,</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3">                   <span class="dt">log_gdp =</span> <span class="kw">log10</span>(total_gdp))</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">gapminder =<span class="st"> </span><span class="kw">mutate</span>(gapminder, </a>
+<a class="sourceLine" id="cb76-2" title="2">                   <span class="dt">total_gdp =</span> gdpPercap <span class="op">*</span><span class="st"> </span>pop,</a>
+<a class="sourceLine" id="cb76-3" title="3">                   <span class="dt">log_gdp =</span> <span class="kw">log10</span>(total_gdp))</a></code></pre></div>
 <blockquote>
 <h4 id="mcq-data-reduction" class="challenge">MCQ: Data Reduction</h4>
 <p>Produce a data.frame with only the names, years, and per-capita GDP of countries where per capita gdp is less than a dollar a day sorted from most- to least-recent.</p>
@@ -1049,8 +1047,8 @@ div.tocify {
 <div id="cest-ne-pas-une-pipe" class="section level4">
 <h4>C’est ne pas une pipe</h4>
 <p>Suppose we want to look at all the countries where life expectancy is greater than 80 years, sorted from poorest to richest. First, we <code>filter</code>, then we <code>arrange</code>. We could assign the intermediate data.frame to a variable:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">lifeExpGreater80 =<span class="st"> </span><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)</a>
-<a class="sourceLine" id="cb77-2" data-line-number="2">(<span class="dt">lifeExpGreater80sorted =</span> <span class="kw">arrange</span>(lifeExpGreater80, gdpPercap))</a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">lifeExpGreater80 =<span class="st"> </span><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>)</a>
+<a class="sourceLine" id="cb77-2" title="2">(<span class="dt">lifeExpGreater80sorted =</span> <span class="kw">arrange</span>(lifeExpGreater80, gdpPercap))</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
 ##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -1067,7 +1065,7 @@ div.tocify {
 ## # ... with 11 more rows</code></pre>
 <p>In this case it doesn’t much matter, but we make a whole new data.frame (<code>lifeExpGreater80</code>) and only use it once; that’s a little wasteful of system resources, and it clutters our environment. If the data are large, that can be a big problem.</p>
 <p>Or, we could nest each function so that it appears on one line:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1"><span class="kw">arrange</span>(<span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), gdpPercap)</a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">arrange</span>(<span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>), gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
 ##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -1084,8 +1082,8 @@ div.tocify {
 ## # ... with 11 more rows</code></pre>
 <p>This would become difficult to read if we are performing a number of operations that would require a repeated nesting. But…</p>
 <p>There is a better way, and it makes both writing and reading the code easier. The pipe from the <code>magrittr</code> package (which is automatically installed and loaded with <code>dplyr</code> and <code>tidyverse</code>) takes the output of first line, and plugs it in as the first argument of the next line. Since many <code>tidyverse</code> functions expect a data.frame as the first argument and output a data.frame, this works fluidly.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1"><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-2" data-line-number="2"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="kw">filter</span>(gapminder, lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb81-2" title="2"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
 ##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -1101,14 +1099,14 @@ div.tocify {
 ## 10 France      Europe     2007    80.7  6.11e7    30470.   1.86e12    12.3
 ## # ... with 11 more rows</code></pre>
 <p>To demonstrate how it works, here are some examples where it’s unnecessary.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1"><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1"><span class="dv">4</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="dv">2</span> <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>Whatever goes through the pipe becomes the first argument of the function after the pipe. This is convenient, because all <code>dplyr</code> functions produce a data.frame as their output and take a data.frame as the first argument. Since R ignores white-space, we can put each function on a new line, which RStudio will automatically indent, making everything easy to read. Now each line represents a step in a sequential operation. You can read this as “Take the gapminder data.frame, filter to the rows where lifeExp is greater than 80, and arrange by gdpPercap.”</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb87-2" data-line-number="2"><span class="st">    </span><span class="kw">filter</span>(lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb87-3" data-line-number="3"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="st">    </span><span class="kw">filter</span>(lifeExp <span class="op">&gt;</span><span class="st"> </span><span class="dv">80</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb87-3" title="3"><span class="st">    </span><span class="kw">arrange</span>(gdpPercap)</a></code></pre></div>
 <pre><code>## # A tibble: 21 x 8
 ##    country     continent  year lifeExp     pop gdpPercap total_gdp log_gdp
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -1132,9 +1130,9 @@ div.tocify {
 <div id="summarize" class="section level4">
 <h4><code>summarize()</code></h4>
 <p>Often we want to calculate a new variable, but rather than keeping each row as an independent observation, we want to group observations together to calculate some summary statistic. To do this we need two functions, one to do the grouping and one to calculate the summary statistic: <code>group_by</code> and <code>summarize</code>. By itself <code>group_by</code> doesn’t change a data.frame; it just sets up the grouping. <code>summarize</code> then goes over each group in the data.frame and does whatever calculation you want. E.g. suppose we want the average global gdp for each year. While we’re at it, let’s calculate the mean and median and see how they differ.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb89-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb89-3" data-line-number="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdp =</span> <span class="kw">mean</span>(gdpPercap), <span class="dt">median_gdp =</span> <span class="kw">median</span>(gdpPercap))</a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb89-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">mean_gdp =</span> <span class="kw">mean</span>(gdpPercap), <span class="dt">median_gdp =</span> <span class="kw">median</span>(gdpPercap))</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 3
 ##     year mean_gdp median_gdp
 ##    &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;
@@ -1152,13 +1150,13 @@ div.tocify {
 ## 12  2007   11680.      6124.</code></pre>
 <p><strong>Shoutout Q: Note that <code>summarize</code> eliminates any other columns. Why? What else can it do? E.g. What country should it list for the year 1952!?</strong></p>
 <p>There are several different summary statistics that can be generated from our data. The R base package provides many built-in functions such as <code>mean</code>, <code>median</code>, <code>min</code>, <code>max</code>, and <code>range</code>. By default, all <strong>R functions operating on vectors that contains missing data will return NA</strong>. It’s a way to make sure that users know they have missing data, and make a conscious decision on how to deal with it. When dealing with simple statistics like the mean, the easiest way to ignore <code>NA</code> (the missing data) is to use <code>na.rm=TRUE</code> (<code>rm</code> stands for remove). An alternate option is to use the function <code>is.na()</code>, which evaluates to true if the value passed to it is not a number. This function is more useful as a part of a filter, where you can filter out everything that is not a number. For that purpose you would do something like</p>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb91-2" data-line-number="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(someColumn)) </a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb91-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(someColumn)) </a></code></pre></div>
 <p>The <code>!</code> symbol negates it, so we’re asking for everything that is not an <code>NA</code>.</p>
 <p>We often want to calculate the number of entries within a group. E.g. we might wonder if our dataset is balanced by country. We can do this with the <code>n()</code> function, or <code>dplyr</code> provides a <code>count</code> function as a convenience:</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb92-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">number_entries =</span> <span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb92-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">number_entries =</span> <span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 142 x 2
 ##    country     number_entries
 ##    &lt;fct&gt;                &lt;int&gt;
@@ -1173,7 +1171,7 @@ div.tocify {
 ##  9 Bangladesh              12
 ## 10 Belgium                 12
 ## # ... with 132 more rows</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1"><span class="kw">count</span>(gapminder, country)</a></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" title="1"><span class="kw">count</span>(gapminder, country)</a></code></pre></div>
 <pre><code>## # A tibble: 142 x 2
 ##    country         n
 ##    &lt;fct&gt;       &lt;int&gt;
@@ -1189,9 +1187,9 @@ div.tocify {
 ## 10 Belgium        12
 ## # ... with 132 more rows</code></pre>
 <p>We can also do multiple groupings. Suppose we want the maximum life expectancy in each continent for each year. We group by continent and year and calculate the maximum with the <code>max</code> function:</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp))</a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb96-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb96-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp))</a></code></pre></div>
 <pre><code>## # A tibble: 60 x 3
 ## # Groups:   continent [?]
 ##    continent  year longest_life
@@ -1208,14 +1206,14 @@ div.tocify {
 ## 10 Africa     1997         74.8
 ## # ... with 50 more rows</code></pre>
 <p>Hmm, we got the longest life expectancy for each continent-year, but we didn’t get the country. To get the country, we have to ask R “Where lifeExp is at a maximum, what is the entry in country?” For that we use the <code>which.max</code> function. <code>max</code> returns the maximum value; <code>which.max</code> returns the location of the maximum value.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1"><span class="kw">max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" title="1"><span class="kw">max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</a></code></pre></div>
 <pre><code>## [1] 7</code></pre>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="kw">which.max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1"><span class="kw">which.max</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">4</span>))</a></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>Now, back to the question: Where lifeExp is at a maximum, what is the entry in country?</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" data-line-number="1">gapminder <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb102-2" data-line-number="2"><span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb102-3" data-line-number="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp), <span class="dt">country =</span> country[<span class="kw">which.max</span>(lifeExp)])</a></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb102-1" title="1">gapminder <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb102-2" title="2"><span class="st">    </span><span class="kw">group_by</span>(continent, year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb102-3" title="3"><span class="st">    </span><span class="kw">summarize</span>(<span class="dt">longest_life =</span> <span class="kw">max</span>(lifeExp), <span class="dt">country =</span> country[<span class="kw">which.max</span>(lifeExp)])</a></code></pre></div>
 <pre><code>## # A tibble: 60 x 4
 ## # Groups:   continent [?]
 ##    continent  year longest_life country  

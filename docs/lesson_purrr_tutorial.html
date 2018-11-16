@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -551,40 +549,40 @@ div.tocify {
 <p>The following code has been adapted from a great presentation Brandon gave at the D-RUG group in Oct 2017. See the original <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">post and content here</a></p>
 <div id="load-tidyverse" class="section level3">
 <h3>Load <code>tidyverse</code></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(tidyverse))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">suppressPackageStartupMessages</span>(<span class="kw">library</span>(tidyverse))</a></code></pre></div>
 </div>
 </div>
 <div id="r-data-types" class="section level1">
 <h1><em>R</em> Data types</h1>
 <p>For a nice demonstration of what vectors of different data types look like, try the code below.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># initiate blank vectors of a specific type</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># this can be useful when capturing data from for loops</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">a &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">a</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># initiate blank vectors of a specific type</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># this can be useful when capturing data from for loops</span></a>
+<a class="sourceLine" id="cb2-3" title="3">a &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4">a</a></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">b &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">b</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">b &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2">b</a></code></pre></div>
 <pre><code>## [1] 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">c &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">2</span>) <span class="co"># can also use &quot;numeric&quot;</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">c</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">c &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">2</span>) <span class="co"># can also use &quot;numeric&quot;</span></a>
+<a class="sourceLine" id="cb6-2" title="2">c</a></code></pre></div>
 <pre><code>## [1] 0 0</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">d &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">d</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">d &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2">d</a></code></pre></div>
 <pre><code>##  [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">e &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;complex&quot;</span>, <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">e</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">e &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;complex&quot;</span>, <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb10-2" title="2">e</a></code></pre></div>
 <pre><code>## [1] 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">f &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;raw&quot;</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">f</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">f &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;raw&quot;</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb12-2" title="2">f</a></code></pre></div>
 <pre><code>## [1] 00 00 00</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">g &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">g</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">g &lt;-<span class="st"> </span><span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb14-2" title="2">g</a></code></pre></div>
 <pre><code>## list()</code></pre>
 <div id="nas-in-r" class="section level2">
 <h2><code>NA</code>’s in R</h2>
 <p><code>NA</code>’s are a common issue in dealing with data from various places (remember spreadsheet lesson?). R deals well with NA’s and even provides different NA’s for different data types.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">#what do the NAs look like?</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">list</span>(<span class="ot">NA</span>, <span class="ot">NA_integer_</span>, <span class="ot">NA_real_</span>, <span class="ot">NA_character_</span>, <span class="ot">NA_complex_</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co">#what do the NAs look like?</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">list</span>(<span class="ot">NA</span>, <span class="ot">NA_integer_</span>, <span class="ot">NA_real_</span>, <span class="ot">NA_character_</span>, <span class="ot">NA_complex_</span>)</a></code></pre></div>
 <pre><code>## [[1]]
 ## [1] NA
 ## 
@@ -602,15 +600,15 @@ div.tocify {
 </div>
 <div id="the-null-element" class="section level2">
 <h2>The <code>NULL</code> element</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co"># NULL is the absence of a vector</span></a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># logical vector </span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">a</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># NULL is the absence of a vector</span></a>
+<a class="sourceLine" id="cb18-2" title="2">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># logical vector </span></a>
+<a class="sourceLine" id="cb18-3" title="3">a</a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE    NA</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">a</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">a &lt;-<span class="st"> </span><span class="ot">NULL</span></a>
+<a class="sourceLine" id="cb20-2" title="2">a</a></code></pre></div>
 <pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># let&#39;s use mtcars as example of making a column NULL</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">head</span>(mtcars)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># let&#39;s use mtcars as example of making a column NULL</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">head</span>(mtcars)</a></code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
@@ -618,11 +616,11 @@ div.tocify {
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
 <pre><code>## [1] 32 11</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="co"># assign NULL to a given column to remove it</span></a>
-<a class="sourceLine" id="cb26-2" data-line-number="2">mtcars[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co">#this gets rid of the mpg column completely</span></a>
-<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="kw">head</span>(mtcars)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># assign NULL to a given column to remove it</span></a>
+<a class="sourceLine" id="cb26-2" title="2">mtcars[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="ot">NULL</span> <span class="co">#this gets rid of the mpg column completely</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="kw">head</span>(mtcars)</a></code></pre></div>
 <pre><code>##                   cyl disp  hp drat    wt  qsec vs am gear carb
 ## Mazda RX4           6  160 110 3.90 2.620 16.46  0  1    4    4
 ## Mazda RX4 Wag       6  160 110 3.90 2.875 17.02  0  1    4    4
@@ -630,10 +628,10 @@ div.tocify {
 ## Hornet 4 Drive      6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## Valiant             6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
 <pre><code>## [1] 32 10</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">data</span>(mtcars) <span class="co"># restore full mtcars dataset</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">data</span>(mtcars) <span class="co"># restore full mtcars dataset</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">dim</span>(mtcars) <span class="co"># how many rows, cols</span></a></code></pre></div>
 <pre><code>## [1] 32 11</code></pre>
 </div>
 </div>
@@ -644,15 +642,15 @@ div.tocify {
 <p>Lists can contain anything of any length, and <code>data.frames</code> are a special type of list.</p>
 <div id="vectors-to-lists-dataframes-tibbles" class="section level2">
 <h2>Vectors to Lists: dataframes &amp; tibbles</h2>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># let&#39;s put actual values into these</span></a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># a logical vector 6 items long</span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="ot">NA_integer_</span>) <span class="co"># Integers</span></a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">8</span>), <span class="ot">NA_real_</span>) <span class="co"># pull doubles from normal distribution</span></a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">d &lt;-<span class="st"> </span><span class="kw">c</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="ot">NA_character_</span>) <span class="co"># first 3 capital letters</span></a>
-<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">e &lt;-<span class="st"> </span><span class="kw">list</span>(a, b, c, d) <span class="co">#make a list</span></a>
-<a class="sourceLine" id="cb32-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb32-9" data-line-number="9">e <span class="co"># check it</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># let&#39;s put actual values into these</span></a>
+<a class="sourceLine" id="cb32-2" title="2">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co"># a logical vector 6 items long</span></a>
+<a class="sourceLine" id="cb32-3" title="3">b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="ot">NA_integer_</span>) <span class="co"># Integers</span></a>
+<a class="sourceLine" id="cb32-4" title="4">c &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rnorm</span>(<span class="dv">8</span>), <span class="ot">NA_real_</span>) <span class="co"># pull doubles from normal distribution</span></a>
+<a class="sourceLine" id="cb32-5" title="5">d &lt;-<span class="st"> </span><span class="kw">c</span>(LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>], <span class="ot">NA_character_</span>) <span class="co"># first 3 capital letters</span></a>
+<a class="sourceLine" id="cb32-6" title="6"></a>
+<a class="sourceLine" id="cb32-7" title="7">e &lt;-<span class="st"> </span><span class="kw">list</span>(a, b, c, d) <span class="co">#make a list</span></a>
+<a class="sourceLine" id="cb32-8" title="8"></a>
+<a class="sourceLine" id="cb32-9" title="9">e <span class="co"># check it</span></a></code></pre></div>
 <pre><code>## [[1]]
 ## [1]  TRUE FALSE  TRUE FALSE FALSE    NA
 ## 
@@ -665,15 +663,15 @@ div.tocify {
 ## 
 ## [[4]]
 ## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co"># Lists can contain anything of any length</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2">## data.frame is a special type of list</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3">## data.frame rows imply association so they need to line up</a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="kw">data.frame</span>(a, b) <span class="co"># uh oh</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># Lists can contain anything of any length</span></a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="co">## data.frame is a special type of list</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="co">## data.frame rows imply association so they need to line up</span></a>
+<a class="sourceLine" id="cb34-4" title="4"></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="kw">data.frame</span>(a, b) <span class="co"># uh oh</span></a></code></pre></div>
 <pre><code>## Error in data.frame(a, b): arguments imply differing number of rows: 6, 8</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># make it 8 like b</span></a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b) </a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">df </a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>, <span class="ot">NA</span>, <span class="ot">NA</span>) <span class="co"># make it 8 like b</span></a>
+<a class="sourceLine" id="cb36-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b) </a>
+<a class="sourceLine" id="cb36-3" title="3">df </a></code></pre></div>
 <pre><code>##       a  b
 ## 1  TRUE  1
 ## 2 FALSE  2
@@ -684,7 +682,7 @@ div.tocify {
 ## 7    NA  7
 ## 8    NA NA</code></pre>
 <p><code>tibbles</code> are data.frames with some stricter rules: - slightly more informative printing (not shown well here) - strict behavior around subsetting <code>[</code> -&gt; tibble <code>[[</code> vector - does not partially match column names (b/c this can get you into trouble)</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">as_tibble</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">as_tibble</span>(df)</a></code></pre></div>
 <pre><code>## # A tibble: 8 x 2
 ##   a         b
 ##   &lt;lgl&gt; &lt;int&gt;
@@ -700,44 +698,44 @@ div.tocify {
 </div>
 <div id="accessing-elements-inside-vectors-lists-dataframes-and-tibbles" class="section level2">
 <h2>Accessing elements inside vectors, lists, dataframes, and tibbles</h2>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#atomic vectors</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co">#logic vector </span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">a</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">a[<span class="dv">1</span>] </a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">a[[<span class="dv">1</span>]] <span class="co"># does the same thing</span></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">a[[[<span class="dv">1</span>]]] <span class="co"># nope just stop adding brackets!</span></a>
-<a class="sourceLine" id="cb40-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="co"># lists</span></a>
-<a class="sourceLine" id="cb40-10" data-line-number="10">list_example &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b, <span class="dt">c =</span> c, <span class="dt">d =</span> d, <span class="dt">e =</span> <span class="kw">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)) <span class="co">#make a named list</span></a>
-<a class="sourceLine" id="cb40-11" data-line-number="11">list_example</a>
-<a class="sourceLine" id="cb40-12" data-line-number="12"><span class="co"># single brackets returns a list with that element in it</span></a>
-<a class="sourceLine" id="cb40-13" data-line-number="13"><span class="co"># can reference by location or by name</span></a>
-<a class="sourceLine" id="cb40-14" data-line-number="14">list_example[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb40-15" data-line-number="15">list_example[<span class="st">&quot;a&quot;</span>]</a>
-<a class="sourceLine" id="cb40-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb40-17" data-line-number="17"><span class="co"># double brackets return a vector </span></a>
-<a class="sourceLine" id="cb40-18" data-line-number="18">list_example[[<span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb40-19" data-line-number="19">list_example[[<span class="st">&quot;b&quot;</span>]]</a>
-<a class="sourceLine" id="cb40-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb40-21" data-line-number="21"><span class="co">#stack [[&#39;s to peel the onion back</span></a>
-<a class="sourceLine" id="cb40-22" data-line-number="22">list_example[[<span class="st">&quot;e&quot;</span>]] <span class="co"># remove one layer</span></a>
-<a class="sourceLine" id="cb40-23" data-line-number="23">list_example[[<span class="st">&quot;e&quot;</span>]][[<span class="dv">2</span>]] <span class="co"># remove the second layer (access e list, and 2 item in that list)</span></a>
-<a class="sourceLine" id="cb40-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb40-25" data-line-number="25"><span class="co">#dolla dolla bills y&#39;all (works like [[, with named vectors)</span></a>
-<a class="sourceLine" id="cb40-26" data-line-number="26">list_example<span class="op">$</span>c</a>
-<a class="sourceLine" id="cb40-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb40-28" data-line-number="28"><span class="co">#same for dataframes</span></a>
-<a class="sourceLine" id="cb40-29" data-line-number="29">mtcars[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb40-30" data-line-number="30">mtcars[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb40-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb40-32" data-line-number="32"><span class="co"># and for tibbles</span></a>
-<a class="sourceLine" id="cb40-33" data-line-number="33">tbbl &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb40-34" data-line-number="34">tbbl[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb40-35" data-line-number="35">tbbl[<span class="st">&quot;x&quot;</span>]</a>
-<a class="sourceLine" id="cb40-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb40-37" data-line-number="37">tbbl[[<span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb40-38" data-line-number="38">tbbl[[<span class="st">&quot;y&quot;</span>]]</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"></a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="co">#atomic vectors</span></a>
+<a class="sourceLine" id="cb40-3" title="3">a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>, <span class="ot">NA</span>) <span class="co">#logic vector </span></a>
+<a class="sourceLine" id="cb40-4" title="4">a</a>
+<a class="sourceLine" id="cb40-5" title="5">a[<span class="dv">1</span>] </a>
+<a class="sourceLine" id="cb40-6" title="6">a[[<span class="dv">1</span>]] <span class="co"># does the same thing</span></a>
+<a class="sourceLine" id="cb40-7" title="7">a[[[<span class="dv">1</span>]]] <span class="co"># nope just stop adding brackets!</span></a>
+<a class="sourceLine" id="cb40-8" title="8"></a>
+<a class="sourceLine" id="cb40-9" title="9"><span class="co"># lists</span></a>
+<a class="sourceLine" id="cb40-10" title="10">list_example &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> a, <span class="dt">b =</span> b, <span class="dt">c =</span> c, <span class="dt">d =</span> d, <span class="dt">e =</span> <span class="kw">list</span>(<span class="dv">1</span>, <span class="st">&quot;A&quot;</span>)) <span class="co">#make a named list</span></a>
+<a class="sourceLine" id="cb40-11" title="11">list_example</a>
+<a class="sourceLine" id="cb40-12" title="12"><span class="co"># single brackets returns a list with that element in it</span></a>
+<a class="sourceLine" id="cb40-13" title="13"><span class="co"># can reference by location or by name</span></a>
+<a class="sourceLine" id="cb40-14" title="14">list_example[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb40-15" title="15">list_example[<span class="st">&quot;a&quot;</span>]</a>
+<a class="sourceLine" id="cb40-16" title="16"></a>
+<a class="sourceLine" id="cb40-17" title="17"><span class="co"># double brackets return a vector </span></a>
+<a class="sourceLine" id="cb40-18" title="18">list_example[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb40-19" title="19">list_example[[<span class="st">&quot;b&quot;</span>]]</a>
+<a class="sourceLine" id="cb40-20" title="20"></a>
+<a class="sourceLine" id="cb40-21" title="21"><span class="co">#stack [[&#39;s to peel the onion back</span></a>
+<a class="sourceLine" id="cb40-22" title="22">list_example[[<span class="st">&quot;e&quot;</span>]] <span class="co"># remove one layer</span></a>
+<a class="sourceLine" id="cb40-23" title="23">list_example[[<span class="st">&quot;e&quot;</span>]][[<span class="dv">2</span>]] <span class="co"># remove the second layer (access e list, and 2 item in that list)</span></a>
+<a class="sourceLine" id="cb40-24" title="24"></a>
+<a class="sourceLine" id="cb40-25" title="25"><span class="co">#dolla dolla bills y&#39;all (works like [[, with named vectors)</span></a>
+<a class="sourceLine" id="cb40-26" title="26">list_example<span class="op">$</span>c</a>
+<a class="sourceLine" id="cb40-27" title="27"></a>
+<a class="sourceLine" id="cb40-28" title="28"><span class="co">#same for dataframes</span></a>
+<a class="sourceLine" id="cb40-29" title="29">mtcars[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb40-30" title="30">mtcars[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb40-31" title="31"></a>
+<a class="sourceLine" id="cb40-32" title="32"><span class="co"># and for tibbles</span></a>
+<a class="sourceLine" id="cb40-33" title="33">tbbl &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb40-34" title="34">tbbl[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb40-35" title="35">tbbl[<span class="st">&quot;x&quot;</span>]</a>
+<a class="sourceLine" id="cb40-36" title="36"></a>
+<a class="sourceLine" id="cb40-37" title="37">tbbl[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb40-38" title="38">tbbl[[<span class="st">&quot;y&quot;</span>]]</a></code></pre></div>
 <pre><code>## Error: &lt;text&gt;:7:4: unexpected &#39;[&#39;
 ## 6: a[[1]] # does the same thing
 ## 7: a[[[
@@ -750,68 +748,68 @@ div.tocify {
 <div id="functions" class="section level2">
 <h2>Functions</h2>
 <p>When should we make a function in R?</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co">#Simple dataframe</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb42-6" data-line-number="6">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb42-8" data-line-number="8"><span class="co"># What are we doing here?</span></a>
-<a class="sourceLine" id="cb42-9" data-line-number="9">df<span class="op">$</span>a &lt;-<span class="st"> </span>(df<span class="op">$</span>a <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb42-10" data-line-number="10"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb42-11" data-line-number="11">df<span class="op">$</span>b &lt;-<span class="st"> </span>(df<span class="op">$</span>b <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb42-12" data-line-number="12"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb42-13" data-line-number="13">df<span class="op">$</span>c &lt;-<span class="st"> </span>(df<span class="op">$</span>c <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb42-14" data-line-number="14"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb42-15" data-line-number="15">df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb42-16" data-line-number="16"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co">#Simple dataframe</span></a>
+<a class="sourceLine" id="cb42-2" title="2">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb42-3" title="3">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb42-4" title="4">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb42-5" title="5">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb42-6" title="6">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb42-7" title="7">)</a>
+<a class="sourceLine" id="cb42-8" title="8"><span class="co"># What are we doing here?</span></a>
+<a class="sourceLine" id="cb42-9" title="9">df<span class="op">$</span>a &lt;-<span class="st"> </span>(df<span class="op">$</span>a <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb42-10" title="10"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb42-11" title="11">df<span class="op">$</span>b &lt;-<span class="st"> </span>(df<span class="op">$</span>b <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb42-12" title="12"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>b, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb42-13" title="13">df<span class="op">$</span>c &lt;-<span class="st"> </span>(df<span class="op">$</span>c <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>a, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb42-14" title="14"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>c, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb42-15" title="15">df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb42-16" title="16"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p>Anytime we need to do the same thing 3 or more times, it would probably be a good idea to think about creating a function. Stepping through these pieces, here’s what we’d want to do:</p>
 <p>First what is the calculation/task you want to do?</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb43-3" data-line-number="3"><span class="co"># exactly as above</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">df<span class="op">$</span>d &lt;-<span class="st"> </span>(df<span class="op">$</span>d <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="st">  </span>(<span class="kw">max</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(df<span class="op">$</span>d, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="co"># exactly as above</span></a></code></pre></div>
 <p>Now pull out the common components:</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="co"># pull out what&#39;s common</span></a>
-<a class="sourceLine" id="cb44-2" data-line-number="2">x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb44-3" data-line-number="3"><span class="st">  </span>(<span class="kw">max</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># pull out what&#39;s common</span></a>
+<a class="sourceLine" id="cb44-2" title="2">x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="st">  </span>(<span class="kw">max</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p>Problem is the above isn’t a function yet, it’s just the “anonymous” calculation we want our function to follow. We can simplify even more if we want:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="co"># simplify more and refactor if that makes sense</span></a>
-<a class="sourceLine" id="cb45-2" data-line-number="2">x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb45-3" data-line-number="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># simplify more and refactor if that makes sense</span></a>
+<a class="sourceLine" id="cb45-2" title="2">x &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <p>And now add the actual <code>function()</code> call!</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb46-2" data-line-number="2">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb46-3" data-line-number="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb46-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb46-2" title="2">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb46-4" title="4">}</a></code></pre></div>
 <p>Let’s test this function and see what happens. We can test a single vector, and then actually apply our function to each column in our dataset. Use a test dataset that’s simple and we now what it should look like.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb47-2" data-line-number="2">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb47-3" data-line-number="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb47-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb47-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb47-6" data-line-number="6">testvec &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">20</span> <span class="co"># so this should get rescaled from 0 to 1</span></a>
-<a class="sourceLine" id="cb47-7" data-line-number="7">testvec</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb47-2" title="2">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb47-4" title="4">}</a>
+<a class="sourceLine" id="cb47-5" title="5"></a>
+<a class="sourceLine" id="cb47-6" title="6">testvec &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">20</span> <span class="co"># so this should get rescaled from 0 to 1</span></a>
+<a class="sourceLine" id="cb47-7" title="7">testvec</a></code></pre></div>
 <pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">rescale_0_1</span>(testvec) <span class="co"># looks like it worked, it rescaled all values from 0 to 1!</span></a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">rescale_0_1</span>(testvec) <span class="co"># looks like it worked, it rescaled all values from 0 to 1!</span></a></code></pre></div>
 <pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb51-2" data-line-number="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb51-3" data-line-number="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb51-4" data-line-number="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb51-5" data-line-number="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb51-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb51-7" data-line-number="7">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb51-8" data-line-number="8">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb51-9" data-line-number="9"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb51-10" data-line-number="10">}</a>
-<a class="sourceLine" id="cb51-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb51-12" data-line-number="12">out &lt;-<span class="st"> </span>df <span class="co"># rename df so we can always come back</span></a>
-<a class="sourceLine" id="cb51-13" data-line-number="13">out<span class="op">$</span>a &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>a)</a>
-<a class="sourceLine" id="cb51-14" data-line-number="14">out<span class="op">$</span>b &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>b)</a>
-<a class="sourceLine" id="cb51-15" data-line-number="15">out<span class="op">$</span>c &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>c)</a>
-<a class="sourceLine" id="cb51-16" data-line-number="16">out<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>d)</a>
-<a class="sourceLine" id="cb51-17" data-line-number="17">out</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb51-2" title="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb51-3" title="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb51-4" title="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb51-5" title="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb51-6" title="6">)</a>
+<a class="sourceLine" id="cb51-7" title="7">rescale_<span class="dv">0</span>_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb51-8" title="8">  (x <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">/</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="st">  </span><span class="kw">diff</span>(<span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb51-10" title="10">}</a>
+<a class="sourceLine" id="cb51-11" title="11"></a>
+<a class="sourceLine" id="cb51-12" title="12">out &lt;-<span class="st"> </span>df <span class="co"># rename df so we can always come back</span></a>
+<a class="sourceLine" id="cb51-13" title="13">out<span class="op">$</span>a &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>a)</a>
+<a class="sourceLine" id="cb51-14" title="14">out<span class="op">$</span>b &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>b)</a>
+<a class="sourceLine" id="cb51-15" title="15">out<span class="op">$</span>c &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>c)</a>
+<a class="sourceLine" id="cb51-16" title="16">out<span class="op">$</span>d &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df<span class="op">$</span>d)</a>
+<a class="sourceLine" id="cb51-17" title="17">out</a></code></pre></div>
 <pre><code>##            a          b         c           d
 ## 1  0.6763377 0.60223401 0.4980153 0.576331081
 ## 2  0.7058622 0.79674954 0.0000000 0.234580934
@@ -827,11 +825,11 @@ div.tocify {
 <div id="for-loops-to-apply-a-function" class="section level2">
 <h2><code>for</code> Loops to <em>apply</em> a function</h2>
 <p>Reduce iteration with a <code>for</code> loop, which takes a vector or list, and interates or steps through each piece of that vector/list, does something and returns values/data.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span></a>
-<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(df)) { <span class="co"># loop through each element</span></a>
-<a class="sourceLine" id="cb53-3" data-line-number="3">  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]]) <span class="co">#apply function and store it to out</span></a>
-<a class="sourceLine" id="cb53-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb53-5" data-line-number="5">out</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(df)) { <span class="co"># loop through each element</span></a>
+<a class="sourceLine" id="cb53-3" title="3">  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]]) <span class="co">#apply function and store it to out</span></a>
+<a class="sourceLine" id="cb53-4" title="4">}</a>
+<a class="sourceLine" id="cb53-5" title="5">out</a></code></pre></div>
 <pre><code>##            a          b         c           d
 ## 1  0.6763377 0.60223401 0.4980153 0.576331081
 ## 2  0.7058622 0.79674954 0.0000000 0.234580934
@@ -846,11 +844,11 @@ div.tocify {
 <div id="using-seq_along" class="section level3">
 <h3>Using <code>seq_along</code></h3>
 <p>Handy command that sequences along a list for you, so you don’t have to specify columns or rows, or series of numbers.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span></a>
-<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {</a>
-<a class="sourceLine" id="cb55-3" data-line-number="3">  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]])</a>
-<a class="sourceLine" id="cb55-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb55-5" data-line-number="5">out</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">out &lt;-<span class="st"> </span>df <span class="co">#make a copy to store scaled data</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {</a>
+<a class="sourceLine" id="cb55-3" title="3">  out[i] &lt;-<span class="st"> </span><span class="kw">rescale_0_1</span>(df[[i]])</a>
+<a class="sourceLine" id="cb55-4" title="4">}</a>
+<a class="sourceLine" id="cb55-5" title="5">out</a></code></pre></div>
 <pre><code>##            a          b         c           d
 ## 1  0.6763377 0.60223401 0.4980153 0.576331081
 ## 2  0.7058622 0.79674954 0.0000000 0.234580934
@@ -870,45 +868,45 @@ div.tocify {
 <p>There are a family of functions called <code>apply</code> (<code>mapply</code>, <code>sapply</code>, <code>lapply</code>, <code>vapply</code>) which essentially take a list of something and <em>apply</em> a function or operation on each item in that list. These are base functions in R, but a newer set of functions (which do the same thing &amp; more) have been written in R, called the <code>map</code> functions. Let’s see how they migth work.</p>
 <div id="apply" class="section level2">
 <h2><code>apply</code></h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">df_app1 &lt;-<span class="st"> </span><span class="kw">apply</span>(df, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># iterate over the columns in df</span></a>
-<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="kw">class</span>(df_app1) <span class="co"># returns a matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">df_app1 &lt;-<span class="st"> </span><span class="kw">apply</span>(df, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># iterate over the columns in df</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">class</span>(df_app1) <span class="co"># returns a matrix</span></a></code></pre></div>
 <pre><code>## [1] &quot;matrix&quot;</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1">df_app2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># same as above but defaults to cols</span></a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">df_app2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co"># same as above but defaults to cols</span></a></code></pre></div>
 <p>Okay so <code>apply</code> returns a matrix. What about <code>map</code>?</p>
 </div>
 <div id="map" class="section level2">
 <h2><code>map</code></h2>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">library</span>(purrr)</a>
-<a class="sourceLine" id="cb60-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">df_map1&lt;-<span class="st"> </span><span class="kw">map</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co">#map over the columns in df</span></a>
-<a class="sourceLine" id="cb60-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb60-5" data-line-number="5"><span class="kw">class</span>(df_map1) <span class="co"># returns a list! Keeps same format that was input</span></a>
-<a class="sourceLine" id="cb60-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb60-7" data-line-number="7">df_map2 &lt;-<span class="st"> </span><span class="kw">map_df</span>(df, rescale_<span class="dv">0</span>_<span class="dv">1</span>) <span class="co"># returns a dataframe!</span></a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb60-2" title="2"></a>
+<a class="sourceLine" id="cb60-3" title="3">df_map1&lt;-<span class="st"> </span><span class="kw">map</span>(df, <span class="cf">function</span>(x) <span class="kw">rescale_0_1</span>(x)) <span class="co">#map over the columns in df</span></a>
+<a class="sourceLine" id="cb60-4" title="4"></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="kw">class</span>(df_map1) <span class="co"># returns a list! Keeps same format that was input</span></a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7">df_map2 &lt;-<span class="st"> </span><span class="kw">map_df</span>(df, rescale_<span class="dv">0</span>_<span class="dv">1</span>) <span class="co"># returns a dataframe!</span></a></code></pre></div>
 <p>Let’s look at another more simple example.</p>
 <div id="specifying-outputs-with-map" class="section level3">
 <h3>Specifying Outputs with <code>map</code></h3>
 <p>Another set of examples below will help us understand how <code>map</code> makes it easy to get different data classes (<code>matrix</code>,<code>list</code>, <code>dataframe</code>) back out. The default <code>map</code> function takes a list and returns a list, but there are various options that allow you to specify what you want.</p>
 <p>This example creates a list containing two integer vectors. Let’s say we want the mean of each one:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">map</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># and this is returning a list (list in, list out)</span></a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="kw">map</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># and this is returning a list (list in, list out)</span></a></code></pre></div>
 <div id="get-numeric-double-type-back" class="section level4">
 <h4>Get numeric <code>double</code> type back</h4>
 <p>Specify and you get a vector back instead of a list</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">map_dbl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># this is a numeric vector</span></a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="kw">map_dbl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="co"># this is a numeric vector</span></a></code></pre></div>
 </div>
 <div id="get-character-back" class="section level4">
 <h4>Get <code>character</code> back</h4>
 <p>Maybe not so useful, but demonstrates the point.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">map_chr</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">map_chr</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 </div>
 </div>
 <div id="use-error-messages-type-strict-functions" class="section level3">
 <h3>Use Error Messages: Type-strict functions</h3>
 <p>So if you have or try to use the wrong type of data, the function won’t run.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">map_lgl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">l =<span class="st"> </span><span class="kw">list</span>(<span class="dt">a=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">10</span><span class="op">:</span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="kw">map_lgl</span>(l, <span class="cf">function</span>(x) <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 </div>
 </div>
 </div>
@@ -917,63 +915,63 @@ div.tocify {
 <div id="map-use-case-1-read-in-files" class="section level2">
 <h2><code>map</code> Use Case #1: Read in files</h2>
 <p>Based upon this tutorial <a href="http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/" class="uri">http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/</a></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co"># this will work if you clone the github repository</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
-<a class="sourceLine" id="cb65-3" data-line-number="3"><span class="co">#create a list of files to read in that end in csv</span></a>
-<a class="sourceLine" id="cb65-4" data-line-number="4">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(fileloc, <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb65-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb65-6" data-line-number="6"><span class="co">#this reads in each csv independently into a list</span></a>
-<a class="sourceLine" id="cb65-7" data-line-number="7">dat2 &lt;-<span class="st"> </span><span class="kw">map</span>(files, read_csv)</a>
-<a class="sourceLine" id="cb65-8" data-line-number="8">dat2</a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="co"># this will work if you clone the github repository</span></a>
+<a class="sourceLine" id="cb65-2" title="2">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
+<a class="sourceLine" id="cb65-3" title="3"><span class="co">#create a list of files to read in that end in csv</span></a>
+<a class="sourceLine" id="cb65-4" title="4">files &lt;-<span class="st"> </span><span class="kw">list.files</span>(fileloc, <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb65-5" title="5"></a>
+<a class="sourceLine" id="cb65-6" title="6"><span class="co">#this reads in each csv independently into a list</span></a>
+<a class="sourceLine" id="cb65-7" title="7">dat2 &lt;-<span class="st"> </span><span class="kw">map</span>(files, read_csv)</a>
+<a class="sourceLine" id="cb65-8" title="8">dat2</a></code></pre></div>
 <div id="lets-make-it-a-function" class="section level3">
 <h3>Let’s make it a function</h3>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder) {</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4">  <span class="co"># get files that end with csv or CSV</span></a>
-<a class="sourceLine" id="cb66-5" data-line-number="5">  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb66-6" data-line-number="6">  <span class="co">#this reads in each csv independently into a list</span></a>
-<a class="sourceLine" id="cb66-7" data-line-number="7">  <span class="kw">map</span>(files, read_csv) <span class="co"># last thing is returned</span></a>
-<a class="sourceLine" id="cb66-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb66-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb66-10" data-line-number="10"><span class="kw">read_folder</span>(fileloc)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
+<a class="sourceLine" id="cb66-2" title="2"></a>
+<a class="sourceLine" id="cb66-3" title="3">read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder) {</a>
+<a class="sourceLine" id="cb66-4" title="4">  <span class="co"># get files that end with csv or CSV</span></a>
+<a class="sourceLine" id="cb66-5" title="5">  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb66-6" title="6">  <span class="co">#this reads in each csv independently into a list</span></a>
+<a class="sourceLine" id="cb66-7" title="7">  <span class="kw">map</span>(files, read_csv) <span class="co"># last thing is returned</span></a>
+<a class="sourceLine" id="cb66-8" title="8">}</a>
+<a class="sourceLine" id="cb66-9" title="9"></a>
+<a class="sourceLine" id="cb66-10" title="10"><span class="kw">read_folder</span>(fileloc)</a></code></pre></div>
 <div id="what-if-you-want-to-change-the-type-of-file-youre-reading" class="section level4">
 <h4>What if you want to change the type of file you’re reading?</h4>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb67-3" data-line-number="3">read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder, pattern, read_fun) {</a>
-<a class="sourceLine" id="cb67-4" data-line-number="4">  <span class="co"># get files that end with csv or CSV</span></a>
-<a class="sourceLine" id="cb67-5" data-line-number="5">  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb67-6" data-line-number="6">  <span class="co">#this reads in each csv independently into a list</span></a>
-<a class="sourceLine" id="cb67-7" data-line-number="7">  <span class="kw">map</span>(files, read_fun)</a>
-<a class="sourceLine" id="cb67-8" data-line-number="8">}</a>
-<a class="sourceLine" id="cb67-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb67-10" data-line-number="10"><span class="kw">read_folder</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">read_fun =</span> read_csv)</a>
-<a class="sourceLine" id="cb67-11" data-line-number="11"><span class="co"># OR more succinctly</span></a>
-<a class="sourceLine" id="cb67-12" data-line-number="12"><span class="co"># read_folder(fileloc, &quot;(csv|CSV)$&quot;, read_csv)</span></a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
+<a class="sourceLine" id="cb67-2" title="2"></a>
+<a class="sourceLine" id="cb67-3" title="3">read_folder &lt;-<span class="st"> </span><span class="cf">function</span>(folder, pattern, read_fun) {</a>
+<a class="sourceLine" id="cb67-4" title="4">  <span class="co"># get files that end with csv or CSV</span></a>
+<a class="sourceLine" id="cb67-5" title="5">  files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb67-6" title="6">  <span class="co">#this reads in each csv independently into a list</span></a>
+<a class="sourceLine" id="cb67-7" title="7">  <span class="kw">map</span>(files, read_fun)</a>
+<a class="sourceLine" id="cb67-8" title="8">}</a>
+<a class="sourceLine" id="cb67-9" title="9"></a>
+<a class="sourceLine" id="cb67-10" title="10"><span class="kw">read_folder</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">read_fun =</span> read_csv)</a>
+<a class="sourceLine" id="cb67-11" title="11"><span class="co"># OR more succinctly</span></a>
+<a class="sourceLine" id="cb67-12" title="12"><span class="co"># read_folder(fileloc, &quot;(csv|CSV)$&quot;, read_csv)</span></a></code></pre></div>
 </div>
 <div id="combine-files-and-label-by-filenames" class="section level4">
 <h4>Combine Files and Label By Filenames</h4>
 <p>If there are multiple files but all have same structure (same number of columns/column types), we can read in separately and then combine. But add the filename of each dataset as a new column variable.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
-<a class="sourceLine" id="cb68-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb68-3" data-line-number="3"><span class="co"># This function reads a file and appends a column called &quot;name&quot; for ID</span></a>
-<a class="sourceLine" id="cb68-4" data-line-number="4">read_fun &lt;-<span class="st"> </span><span class="cf">function</span>(file, FUN) {</a>
-<a class="sourceLine" id="cb68-5" data-line-number="5">        dat &lt;-<span class="st"> </span><span class="kw">FUN</span>(file) <span class="co"># read in file</span></a>
-<a class="sourceLine" id="cb68-6" data-line-number="6">        dat<span class="op">$</span>name &lt;-<span class="st"> </span>tools<span class="op">::</span><span class="kw">file_path_sans_ext</span>(<span class="kw">basename</span>(file)) <span class="co">#record the filename for later grouping</span></a>
-<a class="sourceLine" id="cb68-7" data-line-number="7">        dat <span class="co">#bring data back</span></a>
-<a class="sourceLine" id="cb68-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb68-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb68-10" data-line-number="10"><span class="co"># This function reads a folder for files of given pattern</span></a>
-<a class="sourceLine" id="cb68-11" data-line-number="11"><span class="co"># then applies the given read function to read them in read_fun</span></a>
-<a class="sourceLine" id="cb68-12" data-line-number="12">read_files_bind &lt;-<span class="st">  </span><span class="cf">function</span>(folder, pattern, FUN) {</a>
-<a class="sourceLine" id="cb68-13" data-line-number="13">    <span class="co"># get files that end with csv or CSV</span></a>
-<a class="sourceLine" id="cb68-14" data-line-number="14">    files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb68-15" data-line-number="15">    <span class="kw">map_dfr</span>(files, read_fun, FUN)</a>
-<a class="sourceLine" id="cb68-16" data-line-number="16">  }</a>
-<a class="sourceLine" id="cb68-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb68-18" data-line-number="18"><span class="co"># Read everything in at once and bind it all together</span></a>
-<a class="sourceLine" id="cb68-19" data-line-number="19"><span class="kw">read_files_bind</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">FUN =</span> read_csv)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">fileloc &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">getwd</span>(), <span class="st">&quot;stocks&quot;</span>)</a>
+<a class="sourceLine" id="cb68-2" title="2"></a>
+<a class="sourceLine" id="cb68-3" title="3"><span class="co"># This function reads a file and appends a column called &quot;name&quot; for ID</span></a>
+<a class="sourceLine" id="cb68-4" title="4">read_fun &lt;-<span class="st"> </span><span class="cf">function</span>(file, FUN) {</a>
+<a class="sourceLine" id="cb68-5" title="5">        dat &lt;-<span class="st"> </span><span class="kw">FUN</span>(file) <span class="co"># read in file</span></a>
+<a class="sourceLine" id="cb68-6" title="6">        dat<span class="op">$</span>name &lt;-<span class="st"> </span>tools<span class="op">::</span><span class="kw">file_path_sans_ext</span>(<span class="kw">basename</span>(file)) <span class="co">#record the filename for later grouping</span></a>
+<a class="sourceLine" id="cb68-7" title="7">        dat <span class="co">#bring data back</span></a>
+<a class="sourceLine" id="cb68-8" title="8">  }</a>
+<a class="sourceLine" id="cb68-9" title="9"></a>
+<a class="sourceLine" id="cb68-10" title="10"><span class="co"># This function reads a folder for files of given pattern</span></a>
+<a class="sourceLine" id="cb68-11" title="11"><span class="co"># then applies the given read function to read them in read_fun</span></a>
+<a class="sourceLine" id="cb68-12" title="12">read_files_bind &lt;-<span class="st">  </span><span class="cf">function</span>(folder, pattern, FUN) {</a>
+<a class="sourceLine" id="cb68-13" title="13">    <span class="co"># get files that end with csv or CSV</span></a>
+<a class="sourceLine" id="cb68-14" title="14">    files &lt;-<span class="st"> </span><span class="kw">list.files</span>(folder, <span class="dt">pattern =</span> pattern, <span class="dt">full.names =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb68-15" title="15">    <span class="kw">map_dfr</span>(files, read_fun, FUN)</a>
+<a class="sourceLine" id="cb68-16" title="16">  }</a>
+<a class="sourceLine" id="cb68-17" title="17"></a>
+<a class="sourceLine" id="cb68-18" title="18"><span class="co"># Read everything in at once and bind it all together</span></a>
+<a class="sourceLine" id="cb68-19" title="19"><span class="kw">read_files_bind</span>(<span class="dt">folder =</span> fileloc, <span class="dt">pattern =</span> <span class="st">&quot;(csv|CSV)$&quot;</span>, <span class="dt">FUN =</span> read_csv)</a></code></pre></div>
 </div>
 </div>
 </div>
@@ -984,12 +982,12 @@ div.tocify {
 <div id="tidyrnest-embeds-tibbles-in-a-column" class="section level2">
 <h2><code>tidyr::nest()</code> embeds tibbles in a column</h2>
 <p>See how to group by something and then create a list-columns that hold each dataframe for that group.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">cars_nested &lt;-</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span></a>
-<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span></a>
-<a class="sourceLine" id="cb69-4" data-line-number="4"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="co"># nest data by cyl, default key is &quot;data&quot;</span></a>
-<a class="sourceLine" id="cb69-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb69-6" data-line-number="6">cars_nested</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">cars_nested &lt;-</a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span></a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="co"># nest data by cyl, default key is &quot;data&quot;</span></a>
+<a class="sourceLine" id="cb69-5" title="5"></a>
+<a class="sourceLine" id="cb69-6" title="6">cars_nested</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##     cyl data              
 ##   &lt;dbl&gt; &lt;list&gt;            
@@ -1000,120 +998,120 @@ div.tocify {
 <div id="interacting-with-list-data-using-map" class="section level2">
 <h2>Interacting with list-data using <code>map</code></h2>
 <p>Use <code>map</code>!. Let’s make a linear model for each subset, pull out the coefficients with <code>broom</code>, and plot them.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">library</span>(broom)</a>
-<a class="sourceLine" id="cb71-2" data-line-number="2"><span class="kw">library</span>(purrr)</a>
-<a class="sourceLine" id="cb71-3" data-line-number="3"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb71-4" data-line-number="4"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb71-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb71-6" data-line-number="6">mtc_modeled &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb71-7" data-line-number="7"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span></a>
-<a class="sourceLine" id="cb71-8" data-line-number="8"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span></a>
-<a class="sourceLine" id="cb71-9" data-line-number="9"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st">         </span><span class="co"># nest data by cyl, default key is &quot;data&quot;</span></a>
-<a class="sourceLine" id="cb71-10" data-line-number="10"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp, <span class="dt">data =</span> .x))) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># make models</span></a>
-<a class="sourceLine" id="cb71-11" data-line-number="11"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">coeff =</span> <span class="kw">map</span>(model, tidy)) <span class="op">%&gt;%</span><span class="st">                        </span><span class="co">#pull out coefficients</span></a>
-<a class="sourceLine" id="cb71-12" data-line-number="12"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">slope =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">2</span>])) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pull slope from coefficients</span></a>
-<a class="sourceLine" id="cb71-13" data-line-number="13"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">intercept =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">1</span>])) <span class="co"># pull intercept from coefficients</span></a>
-<a class="sourceLine" id="cb71-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb71-15" data-line-number="15"> </a>
-<a class="sourceLine" id="cb71-16" data-line-number="16"><span class="kw">ggplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb71-17" data-line-number="17"><span class="st">  </span><span class="co"># plot the original data </span></a>
-<a class="sourceLine" id="cb71-18" data-line-number="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mtcars, <span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb71-19" data-line-number="19"><span class="st">  </span><span class="co"># plot the models</span></a>
-<a class="sourceLine" id="cb71-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> mtc_modeled, <span class="kw">aes</span>(<span class="dt">slope =</span> slope, <span class="dt">intercept =</span> intercept, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl)))</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">library</span>(broom)</a>
+<a class="sourceLine" id="cb71-2" title="2"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb71-3" title="3"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb71-4" title="4"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb71-5" title="5"></a>
+<a class="sourceLine" id="cb71-6" title="6">mtc_modeled &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb71-7" title="7"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">            </span><span class="co"># motortrend car dataset</span></a>
+<a class="sourceLine" id="cb71-8" title="8"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">   </span><span class="co"># group by cylinder</span></a>
+<a class="sourceLine" id="cb71-9" title="9"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st">         </span><span class="co"># nest data by cyl, default key is &quot;data&quot;</span></a>
+<a class="sourceLine" id="cb71-10" title="10"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>disp, <span class="dt">data =</span> .x))) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># make models</span></a>
+<a class="sourceLine" id="cb71-11" title="11"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">coeff =</span> <span class="kw">map</span>(model, tidy)) <span class="op">%&gt;%</span><span class="st">                        </span><span class="co">#pull out coefficients</span></a>
+<a class="sourceLine" id="cb71-12" title="12"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">slope =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">2</span>])) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># pull slope from coefficients</span></a>
+<a class="sourceLine" id="cb71-13" title="13"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">intercept =</span> <span class="kw">map_dbl</span>(coeff, <span class="op">~</span><span class="st"> </span><span class="kw">pull</span>(.x, estimate)[<span class="dv">1</span>])) <span class="co"># pull intercept from coefficients</span></a>
+<a class="sourceLine" id="cb71-14" title="14">  </a>
+<a class="sourceLine" id="cb71-15" title="15"> </a>
+<a class="sourceLine" id="cb71-16" title="16"><span class="kw">ggplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb71-17" title="17"><span class="st">  </span><span class="co"># plot the original data </span></a>
+<a class="sourceLine" id="cb71-18" title="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mtcars, <span class="kw">aes</span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb71-19" title="19"><span class="st">  </span><span class="co"># plot the models</span></a>
+<a class="sourceLine" id="cb71-20" title="20"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> mtc_modeled, <span class="kw">aes</span>(<span class="dt">slope =</span> slope, <span class="dt">intercept =</span> intercept, <span class="dt">color =</span> <span class="kw">as.factor</span>(cyl)))</a></code></pre></div>
 <p><em><strong>See presentation, SLIDE: </strong></em></p>
 </div>
 <div id="iterating-over-more-than-one-list-with-map2-and-pmap" class="section level2">
 <h2>Iterating over more than one list with <code>map2</code> and <code>pmap</code></h2>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1">n =<span class="st">  </span><span class="kw">list</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb72-2" data-line-number="2">mu =<span class="st"> </span><span class="kw">list</span>(<span class="dv">50</span>,<span class="dv">30</span>,<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb72-3" data-line-number="3">sd =<span class="st"> </span><span class="kw">list</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb72-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb72-5" data-line-number="5"><span class="co"># how does it look as we go from map to map2 to pmap?</span></a>
-<a class="sourceLine" id="cb72-6" data-line-number="6"><span class="kw">map</span>(n, rnorm)</a>
-<a class="sourceLine" id="cb72-7" data-line-number="7"><span class="kw">map2</span>(n, mu, rnorm)</a>
-<a class="sourceLine" id="cb72-8" data-line-number="8"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</a>
-<a class="sourceLine" id="cb72-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb72-10" data-line-number="10"><span class="co">#technically, pmap can do it all</span></a>
-<a class="sourceLine" id="cb72-11" data-line-number="11"><span class="kw">pmap</span>(<span class="kw">list</span>(n), rnorm)</a>
-<a class="sourceLine" id="cb72-12" data-line-number="12"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu), rnorm)</a>
-<a class="sourceLine" id="cb72-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb72-14" data-line-number="14"><span class="co"># formula interface</span></a>
-<a class="sourceLine" id="cb72-15" data-line-number="15"><span class="kw">map</span>(n, <span class="op">~</span><span class="kw">rnorm</span>(.))</a>
-<a class="sourceLine" id="cb72-16" data-line-number="16"><span class="kw">map2</span>(n, mu, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.x, .y))</a>
-<a class="sourceLine" id="cb72-17" data-line-number="17"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), <span class="op">~</span><span class="kw">rnorm</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>, ..<span class="dv">3</span>)) <span class="co"># ..4 and so on for as many as you need</span></a>
-<a class="sourceLine" id="cb72-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb72-19" data-line-number="19"><span class="co"># </span><span class="al">CAUTION</span><span class="co">: position matters with map2 &amp; pmap</span></a>
-<a class="sourceLine" id="cb72-20" data-line-number="20"><span class="kw">map2</span>(n, mu, rnorm)</a>
-<a class="sourceLine" id="cb72-21" data-line-number="21"><span class="kw">map2</span>(mu, n, rnorm)</a>
-<a class="sourceLine" id="cb72-22" data-line-number="22"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</a>
-<a class="sourceLine" id="cb72-23" data-line-number="23"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), rnorm)</a>
-<a class="sourceLine" id="cb72-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb72-25" data-line-number="25"><span class="co"># if you need non-default ordering, specify with full function call</span></a>
-<a class="sourceLine" id="cb72-26" data-line-number="26"><span class="kw">map2</span>(mu, n, <span class="cf">function</span>(x, y) <span class="kw">rnorm</span>(y, x))</a>
-<a class="sourceLine" id="cb72-27" data-line-number="27"><span class="co"># or using the formula interface</span></a>
-<a class="sourceLine" id="cb72-28" data-line-number="28"><span class="kw">map2</span>(mu, n, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.y, .x))</a>
-<a class="sourceLine" id="cb72-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb72-30" data-line-number="30"><span class="co"># pmap you can name your list to get around positional ordering</span></a>
-<a class="sourceLine" id="cb72-31" data-line-number="31"><span class="kw">pmap</span>(<span class="kw">list</span>(<span class="dt">mean=</span>mu, <span class="dt">n=</span>n, <span class="dt">sd=</span>sd), rnorm)</a>
-<a class="sourceLine" id="cb72-32" data-line-number="32"><span class="co"># OR you can specify with a full function call</span></a>
-<a class="sourceLine" id="cb72-33" data-line-number="33"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="cf">function</span>(mu, n, sd) <span class="kw">rnorm</span>(n, mu, sd))</a>
-<a class="sourceLine" id="cb72-34" data-line-number="34"><span class="co"># OR with the formula interface</span></a>
-<a class="sourceLine" id="cb72-35" data-line-number="35"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>, ..<span class="dv">3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1">n =<span class="st">  </span><span class="kw">list</span>(<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb72-2" title="2">mu =<span class="st"> </span><span class="kw">list</span>(<span class="dv">50</span>,<span class="dv">30</span>,<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb72-3" title="3">sd =<span class="st"> </span><span class="kw">list</span>(<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb72-4" title="4"></a>
+<a class="sourceLine" id="cb72-5" title="5"><span class="co"># how does it look as we go from map to map2 to pmap?</span></a>
+<a class="sourceLine" id="cb72-6" title="6"><span class="kw">map</span>(n, rnorm)</a>
+<a class="sourceLine" id="cb72-7" title="7"><span class="kw">map2</span>(n, mu, rnorm)</a>
+<a class="sourceLine" id="cb72-8" title="8"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</a>
+<a class="sourceLine" id="cb72-9" title="9"></a>
+<a class="sourceLine" id="cb72-10" title="10"><span class="co">#technically, pmap can do it all</span></a>
+<a class="sourceLine" id="cb72-11" title="11"><span class="kw">pmap</span>(<span class="kw">list</span>(n), rnorm)</a>
+<a class="sourceLine" id="cb72-12" title="12"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu), rnorm)</a>
+<a class="sourceLine" id="cb72-13" title="13"></a>
+<a class="sourceLine" id="cb72-14" title="14"><span class="co"># formula interface</span></a>
+<a class="sourceLine" id="cb72-15" title="15"><span class="kw">map</span>(n, <span class="op">~</span><span class="kw">rnorm</span>(.))</a>
+<a class="sourceLine" id="cb72-16" title="16"><span class="kw">map2</span>(n, mu, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.x, .y))</a>
+<a class="sourceLine" id="cb72-17" title="17"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), <span class="op">~</span><span class="kw">rnorm</span>(..<span class="dv">1</span>, ..<span class="dv">2</span>, ..<span class="dv">3</span>)) <span class="co"># ..4 and so on for as many as you need</span></a>
+<a class="sourceLine" id="cb72-18" title="18"></a>
+<a class="sourceLine" id="cb72-19" title="19"><span class="co"># </span><span class="al">CAUTION</span><span class="co">: position matters with map2 &amp; pmap</span></a>
+<a class="sourceLine" id="cb72-20" title="20"><span class="kw">map2</span>(n, mu, rnorm)</a>
+<a class="sourceLine" id="cb72-21" title="21"><span class="kw">map2</span>(mu, n, rnorm)</a>
+<a class="sourceLine" id="cb72-22" title="22"><span class="kw">pmap</span>(<span class="kw">list</span>(n, mu, sd), rnorm)</a>
+<a class="sourceLine" id="cb72-23" title="23"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), rnorm)</a>
+<a class="sourceLine" id="cb72-24" title="24"></a>
+<a class="sourceLine" id="cb72-25" title="25"><span class="co"># if you need non-default ordering, specify with full function call</span></a>
+<a class="sourceLine" id="cb72-26" title="26"><span class="kw">map2</span>(mu, n, <span class="cf">function</span>(x, y) <span class="kw">rnorm</span>(y, x))</a>
+<a class="sourceLine" id="cb72-27" title="27"><span class="co"># or using the formula interface</span></a>
+<a class="sourceLine" id="cb72-28" title="28"><span class="kw">map2</span>(mu, n, <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(.y, .x))</a>
+<a class="sourceLine" id="cb72-29" title="29"></a>
+<a class="sourceLine" id="cb72-30" title="30"><span class="co"># pmap you can name your list to get around positional ordering</span></a>
+<a class="sourceLine" id="cb72-31" title="31"><span class="kw">pmap</span>(<span class="kw">list</span>(<span class="dt">mean=</span>mu, <span class="dt">n=</span>n, <span class="dt">sd=</span>sd), rnorm)</a>
+<a class="sourceLine" id="cb72-32" title="32"><span class="co"># OR you can specify with a full function call</span></a>
+<a class="sourceLine" id="cb72-33" title="33"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="cf">function</span>(mu, n, sd) <span class="kw">rnorm</span>(n, mu, sd))</a>
+<a class="sourceLine" id="cb72-34" title="34"><span class="co"># OR with the formula interface</span></a>
+<a class="sourceLine" id="cb72-35" title="35"><span class="kw">pmap</span>(<span class="kw">list</span>(mu, n, sd), <span class="op">~</span><span class="st"> </span><span class="kw">rnorm</span>(..<span class="dv">2</span>, ..<span class="dv">1</span>, ..<span class="dv">3</span>))</a></code></pre></div>
 <p><em><strong>See presentation, SLIDE: </strong></em></p>
 </div>
 <div id="walkwalk2pwalk-are-used-to-output-side-effects" class="section level2">
 <h2><code>walk/walk2/pwalk</code> are used to output side-effects</h2>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1">asdf &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">b =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">c =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb73-2" data-line-number="2"><span class="co"># we just want to print each element of this list</span></a>
-<a class="sourceLine" id="cb73-3" data-line-number="3"><span class="kw">walk</span>(asdf, print)</a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">asdf &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> LETTERS[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">b =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">c =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="co"># we just want to print each element of this list</span></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="kw">walk</span>(asdf, print)</a></code></pre></div>
 <div id="outputting-plots-with-map-functions" class="section level3">
 <h3>Outputting Plots with <code>map</code> Functions</h3>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># make a simple plotting function</span></a>
-<a class="sourceLine" id="cb74-2" data-line-number="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
-<a class="sourceLine" id="cb74-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb74-4" data-line-number="4">mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
-<a class="sourceLine" id="cb74-5" data-line-number="5"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
-<a class="sourceLine" id="cb74-6" data-line-number="6"><span class="st">  </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
-<a class="sourceLine" id="cb74-7" data-line-number="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
-<a class="sourceLine" id="cb74-8" data-line-number="8"><span class="st">  </span><span class="kw">pull</span>(plot) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#pull the plots out as a list</span></a>
-<a class="sourceLine" id="cb74-9" data-line-number="9"><span class="st">  </span><span class="kw">walk</span>(., print) <span class="co"># print them</span></a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="co"># make a simple plotting function</span></a>
+<a class="sourceLine" id="cb74-2" title="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb74-3" title="3"></a>
+<a class="sourceLine" id="cb74-4" title="4">mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
+<a class="sourceLine" id="cb74-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
+<a class="sourceLine" id="cb74-6" title="6"><span class="st">  </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
+<a class="sourceLine" id="cb74-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
+<a class="sourceLine" id="cb74-8" title="8"><span class="st">  </span><span class="kw">pull</span>(plot) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#pull the plots out as a list</span></a>
+<a class="sourceLine" id="cb74-9" title="9"><span class="st">  </span><span class="kw">walk</span>(., print) <span class="co"># print them</span></a></code></pre></div>
 <div id="save-plots-from-walk-with-walk2pwalk" class="section level4">
 <h4>Save Plots from <code>walk</code> with <code>walk2/pwalk</code></h4>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># make a simple plotting function</span></a>
-<a class="sourceLine" id="cb75-2" data-line-number="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
-<a class="sourceLine" id="cb75-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb75-4" data-line-number="4">mtc_plot_n_save &lt;-</a>
-<a class="sourceLine" id="cb75-5" data-line-number="5"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
-<a class="sourceLine" id="cb75-6" data-line-number="6"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
-<a class="sourceLine" id="cb75-7" data-line-number="7"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
-<a class="sourceLine" id="cb75-8" data-line-number="8"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
-<a class="sourceLine" id="cb75-9" data-line-number="9"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co">#make the save paths</span></a>
-<a class="sourceLine" id="cb75-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb75-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb75-12" data-line-number="12"><span class="kw">walk2</span>(mtc_plot_n_save<span class="op">$</span>plot, mtc_plot_n_save<span class="op">$</span>filepath, <span class="op">~</span><span class="st"> </span><span class="kw">ggsave</span>(.y, .x)) <span class="co"># save them out</span></a></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1"><span class="co"># make a simple plotting function</span></a>
+<a class="sourceLine" id="cb75-2" title="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb75-3" title="3"></a>
+<a class="sourceLine" id="cb75-4" title="4">mtc_plot_n_save &lt;-</a>
+<a class="sourceLine" id="cb75-5" title="5"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
+<a class="sourceLine" id="cb75-6" title="6"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
+<a class="sourceLine" id="cb75-7" title="7"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
+<a class="sourceLine" id="cb75-8" title="8"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
+<a class="sourceLine" id="cb75-9" title="9"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co">#make the save paths</span></a>
+<a class="sourceLine" id="cb75-10" title="10"></a>
+<a class="sourceLine" id="cb75-11" title="11"></a>
+<a class="sourceLine" id="cb75-12" title="12"><span class="kw">walk2</span>(mtc_plot_n_save<span class="op">$</span>plot, mtc_plot_n_save<span class="op">$</span>filepath, <span class="op">~</span><span class="st"> </span><span class="kw">ggsave</span>(.y, .x)) <span class="co"># save them out</span></a></code></pre></div>
 <p>That is great! Ok, let’s make this a bit fancier. With <code>pwalk</code> we can have a bunch of different lists of things that get mapped…not just 1 or 2.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="co"># make a simple plotting function</span></a>
-<a class="sourceLine" id="cb76-2" data-line-number="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
-<a class="sourceLine" id="cb76-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb76-4" data-line-number="4"><span class="co">#function that prints cylinder info, ggplot, and table </span></a>
-<a class="sourceLine" id="cb76-5" data-line-number="5">print_func &lt;-</a>
-<a class="sourceLine" id="cb76-6" data-line-number="6"><span class="st">  </span><span class="cf">function</span>(info, plot, table, filepath) {</a>
-<a class="sourceLine" id="cb76-7" data-line-number="7">    <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;This is for &quot;</span>, info, <span class="st">&quot; cylinders./n&quot;</span>))</a>
-<a class="sourceLine" id="cb76-8" data-line-number="8">    <span class="kw">print</span>(plot)</a>
-<a class="sourceLine" id="cb76-9" data-line-number="9">    <span class="kw">ggsave</span>(filepath)</a>
-<a class="sourceLine" id="cb76-10" data-line-number="10">    <span class="kw">print</span>(table)</a>
-<a class="sourceLine" id="cb76-11" data-line-number="11">    </a>
-<a class="sourceLine" id="cb76-12" data-line-number="12">  }</a>
-<a class="sourceLine" id="cb76-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb76-14" data-line-number="14">mtc_plot_n_save &lt;-</a>
-<a class="sourceLine" id="cb76-15" data-line-number="15"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
-<a class="sourceLine" id="cb76-16" data-line-number="16"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
-<a class="sourceLine" id="cb76-17" data-line-number="17"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
-<a class="sourceLine" id="cb76-18" data-line-number="18"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
-<a class="sourceLine" id="cb76-19" data-line-number="19"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co"># make the save paths</span></a>
-<a class="sourceLine" id="cb76-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb76-21" data-line-number="21"><span class="co"># print all the info</span></a>
-<a class="sourceLine" id="cb76-22" data-line-number="22"><span class="kw">pwalk</span>(<span class="kw">list</span>(<span class="dt">info =</span> mtc_plot_n_save<span class="op">$</span>cyl, <span class="dt">plot =</span> mtc_plot_n_save<span class="op">$</span>plot, <span class="dt">table =</span> mtc_plot_n_save<span class="op">$</span>data, <span class="dt">filepath =</span> mtc_plot_n_save<span class="op">$</span>filepath), print_func) </a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1"><span class="co"># make a simple plotting function</span></a>
+<a class="sourceLine" id="cb76-2" title="2">plot_points &lt;-<span class="st"> </span><span class="cf">function</span>(t) <span class="kw">ggplot</span>(t, <span class="kw">aes</span>(mpg, wt)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()</a>
+<a class="sourceLine" id="cb76-3" title="3"></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="co">#function that prints cylinder info, ggplot, and table </span></a>
+<a class="sourceLine" id="cb76-5" title="5">print_func &lt;-</a>
+<a class="sourceLine" id="cb76-6" title="6"><span class="st">  </span><span class="cf">function</span>(info, plot, table, filepath) {</a>
+<a class="sourceLine" id="cb76-7" title="7">    <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;This is for &quot;</span>, info, <span class="st">&quot; cylinders./n&quot;</span>))</a>
+<a class="sourceLine" id="cb76-8" title="8">    <span class="kw">print</span>(plot)</a>
+<a class="sourceLine" id="cb76-9" title="9">    <span class="kw">ggsave</span>(filepath)</a>
+<a class="sourceLine" id="cb76-10" title="10">    <span class="kw">print</span>(table)</a>
+<a class="sourceLine" id="cb76-11" title="11">    </a>
+<a class="sourceLine" id="cb76-12" title="12">  }</a>
+<a class="sourceLine" id="cb76-13" title="13"></a>
+<a class="sourceLine" id="cb76-14" title="14">mtc_plot_n_save &lt;-</a>
+<a class="sourceLine" id="cb76-15" title="15"><span class="st">  </span>mtcars <span class="op">%&gt;%</span><span class="st">                 </span><span class="co"># motortrend car dataset</span></a>
+<a class="sourceLine" id="cb76-16" title="16"><span class="st">    </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st">       </span><span class="co"># group by cylinder</span></a>
+<a class="sourceLine" id="cb76-17" title="17"><span class="st">    </span><span class="kw">nest</span>(<span class="dt">.key =</span> <span class="st">&quot;data&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># nest by cylinder</span></a>
+<a class="sourceLine" id="cb76-18" title="18"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">plot =</span> <span class="kw">map</span>(data, plot_points)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># we made a graph for each subset</span></a>
+<a class="sourceLine" id="cb76-19" title="19"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">filepath =</span> <span class="kw">map_chr</span>(cyl, <span class="op">~</span><span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;figures&quot;</span>, <span class="kw">paste0</span>(.x, <span class="st">&quot;.png&quot;</span>)))) <span class="co"># make the save paths</span></a>
+<a class="sourceLine" id="cb76-20" title="20"></a>
+<a class="sourceLine" id="cb76-21" title="21"><span class="co"># print all the info</span></a>
+<a class="sourceLine" id="cb76-22" title="22"><span class="kw">pwalk</span>(<span class="kw">list</span>(<span class="dt">info =</span> mtc_plot_n_save<span class="op">$</span>cyl, <span class="dt">plot =</span> mtc_plot_n_save<span class="op">$</span>plot, <span class="dt">table =</span> mtc_plot_n_save<span class="op">$</span>data, <span class="dt">filepath =</span> mtc_plot_n_save<span class="op">$</span>filepath), print_func) </a></code></pre></div>
 <p>This lesson is adapted from <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">Brandon Hurr’s D-RUG presentation materials</a>.</p>
 </div>
 </div>

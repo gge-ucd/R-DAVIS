@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -553,11 +551,11 @@ div.tocify {
 <li>Can we use <code>read.table</code>?</li>
 <li>Why did we specify <code>skip=20</code>?</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">df &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2&quot;</span>, </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">skip =</span> <span class="dv">20</span>, </a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;depth_m&quot;</span>,<span class="st">&quot;ice_age_yr_BP&quot;</span>, <span class="st">&quot;air_age_yr_BP&quot;</span>, <span class="st">&quot;C02_conc_ppmv&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read_tsv</span>(</a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="dt">file =</span> <span class="st">&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/e03a4d41a457049c476828cde0e0524a5da0d366/data/vostok.icecore.co2&quot;</span>, </a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="dt">skip =</span> <span class="dv">20</span>, </a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;depth_m&quot;</span>,<span class="st">&quot;ice_age_yr_BP&quot;</span>, <span class="st">&quot;air_age_yr_BP&quot;</span>, <span class="st">&quot;C02_conc_ppmv&quot;</span>))</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   depth_m = col_double(),
@@ -565,7 +563,7 @@ div.tocify {
 ##   air_age_yr_BP = col_integer(),
 ##   C02_conc_ppmv = col_double()
 ## )</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 4
 ##   depth_m ice_age_yr_BP air_age_yr_BP C02_conc_ppmv
 ##     &lt;dbl&gt;         &lt;int&gt;         &lt;int&gt;         &lt;dbl&gt;
@@ -575,38 +573,38 @@ div.tocify {
 ## 4    229.          9523          6220          262.
 ## 5    250.         10579          7327          255.
 ## 6    266          11334          8113          260.</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">dim</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">dim</span>(df)</a></code></pre></div>
 <pre><code>## [1] 363   4</code></pre>
 <p>Ok now that we have our data read into R, is the data tidy? How can we check if there are NA’s in the data? Let’s move to some visualization now.</p>
 </div>
 <div id="plot-the-data-using-base" class="section level3">
 <h3>Plot The Data (using <code>base</code>)</h3>
 <p>If we want to make a plot using base R, we can use the following code. Let’s compare this to what we might do if we wanted to plot this in <code>ggplot</code>. Notice that the <code>with()</code> function is just a way to “attach” the data so we don’t have to use the <code>data$</code> convention when we want to specify a column in our dataframe.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># age vs. depth</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">plot</span>(df<span class="op">$</span>depth_m, df<span class="op">$</span>ice_age_yr_BP) <span class="co"># very simple plot</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># age vs. depth</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">plot</span>(df<span class="op">$</span>depth_m, df<span class="op">$</span>ice_age_yr_BP) <span class="co"># very simple plot</span></a></code></pre></div>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/baseplot-1.png" width="672" /></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># now baseplot of age vs. CO2 concentration</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">with</span>(df, <span class="kw">plot</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">              <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;darkblue&quot;</span>, </a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">              <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>] ,<span class="st">&quot; Concentration (ppmv)&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>),</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">              <span class="dt">xlab=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, </a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">              <span class="dt">main=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)), </a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">              <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)))</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co"># add another &quot;layer&quot; (similar to using the geom_ in ggplot)</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="kw">with</span>(df, <span class="kw">points</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">                <span class="dt">xlab=</span><span class="ot">NULL</span>, <span class="dt">ylab=</span><span class="ot">NULL</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>,</a>
-<a class="sourceLine" id="cb8-12" data-line-number="12">     <span class="dt">bg=</span><span class="st">&quot;skyblue2&quot;</span>))</a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co"># plot modern CO2 levels (notice we aren&#39;t using a data frame but giving a single data point location): (FOUND HERE: https://www.co2.earth/daily-co2)</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="kw">points</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.38</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">cex=</span><span class="fl">1.7</span>)</a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co"># add some text</span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">405</span>, <span class="dt">labels =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>])), </a>
-<a class="sourceLine" id="cb8-19" data-line-number="19">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">pos=</span><span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">40</span>, <span class="dt">y=</span> <span class="dv">405</span>, <span class="dt">labels=</span> <span class="kw">paste0</span>(<span class="st">&quot;Level </span><span class="ch">\n</span><span class="st"> on: &quot;</span>, <span class="kw">Sys.Date</span>(), <span class="st">&quot;!&quot;</span>),</a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># now baseplot of age vs. CO2 concentration</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">with</span>(df, <span class="kw">plot</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
+<a class="sourceLine" id="cb8-3" title="3">              <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">col=</span><span class="st">&quot;darkblue&quot;</span>, </a>
+<a class="sourceLine" id="cb8-4" title="4">              <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>] ,<span class="st">&quot; Concentration (ppmv)&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb8-5" title="5">              <span class="dt">xlab=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, </a>
+<a class="sourceLine" id="cb8-6" title="6">              <span class="dt">main=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>)), </a>
+<a class="sourceLine" id="cb8-7" title="7">              <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)))</a>
+<a class="sourceLine" id="cb8-8" title="8"></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co"># add another &quot;layer&quot; (similar to using the geom_ in ggplot)</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="kw">with</span>(df, <span class="kw">points</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv,</a>
+<a class="sourceLine" id="cb8-11" title="11">                <span class="dt">xlab=</span><span class="ot">NULL</span>, <span class="dt">ylab=</span><span class="ot">NULL</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">col=</span><span class="st">&quot;gray50&quot;</span>,</a>
+<a class="sourceLine" id="cb8-12" title="12">     <span class="dt">bg=</span><span class="st">&quot;skyblue2&quot;</span>))</a>
+<a class="sourceLine" id="cb8-13" title="13"></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co"># plot modern CO2 levels (notice we aren&#39;t using a data frame but giving a single data point location): (FOUND HERE: https://www.co2.earth/daily-co2)</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="kw">points</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.38</span>, <span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">cex=</span><span class="fl">1.7</span>)</a>
+<a class="sourceLine" id="cb8-16" title="16"></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="co"># add some text</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">0</span>, <span class="dt">y =</span> <span class="dv">405</span>, <span class="dt">labels =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>])), </a>
+<a class="sourceLine" id="cb8-19" title="19">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">pos=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">40</span>, <span class="dt">y=</span> <span class="dv">405</span>, <span class="dt">labels=</span> <span class="kw">paste0</span>(<span class="st">&quot;Level </span><span class="ch">\n</span><span class="st"> on: &quot;</span>, <span class="kw">Sys.Date</span>(), <span class="st">&quot;!&quot;</span>),</a>
+<a class="sourceLine" id="cb8-22" title="22">     <span class="dt">font =</span> <span class="dv">4</span>, <span class="dt">col =</span> <span class="st">&quot;maroon&quot;</span>, <span class="dt">pos =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/baseplot-2.png" width="672" /></p>
 <p>Remember, to use these base plot options, you have to always call a <code>plot()</code> first, and then <code>points()</code> or <code>lines()</code>. It won’t work if you try to do it the other way around. Also, the use of the <code>expression()</code> is a way to make formulas, scientific notation, etc. look correct in your plots.</p>
 </div>
@@ -620,24 +618,24 @@ div.tocify {
 <li>add a label with a white background saying “Current CO2 Level”</li>
 <li>Change the legend title to say “Ice Core Depth (m)”</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">suppressPackageStartupMessages</span>({</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="kw">library</span>(ggplot2);</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="kw">library</span>(dplyr);</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  <span class="kw">library</span>(viridis) <span class="co"># for nice color scheme</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">})</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv),</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">                     <span class="dt">color=</span><span class="st">&quot;gray20&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv, <span class="dt">fill=</span>depth_m), <span class="dt">pch=</span><span class="dv">21</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="st">&quot;Ice Core </span><span class="ch">\n</span><span class="st"> Depth (m)&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>,<span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">20</span>, <span class="dt">y=</span><span class="dv">400</span>, <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>), </a>
-<a class="sourceLine" id="cb9-18" data-line-number="18">             <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">suppressPackageStartupMessages</span>({</a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">library</span>(ggplot2);</a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="kw">library</span>(dplyr);</a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="kw">library</span>(viridis) <span class="co"># for nice color scheme</span></a>
+<a class="sourceLine" id="cb9-5" title="5">})</a>
+<a class="sourceLine" id="cb9-6" title="6">  </a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv),</a>
+<a class="sourceLine" id="cb9-9" title="9">                     <span class="dt">color=</span><span class="st">&quot;gray20&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df, <span class="kw">aes</span>(<span class="dt">x=</span>air_age_yr_BP<span class="op">/</span><span class="dv">1000</span>, <span class="dt">y=</span>C02_conc_ppmv, <span class="dt">fill=</span>depth_m), <span class="dt">pch=</span><span class="dv">21</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="st">&quot;Ice Core </span><span class="ch">\n</span><span class="st"> Depth (m)&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">180</span>, <span class="dv">420</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Age of Entrapped Air (kyr BP)&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="dt">x =</span> <span class="dv">0</span>, <span class="dt">y=</span><span class="fl">406.4</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>,<span class="dt">pch=</span><span class="dv">16</span>, <span class="dt">size=</span><span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;C0&quot;</span>[<span class="dv">2</span>],<span class="st">&quot; through Time: Vostok Ice Core Data&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">20</span>, <span class="dt">y=</span><span class="dv">400</span>, <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>), </a>
+<a class="sourceLine" id="cb9-18" title="18">             <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/ggplot%20version-1.png" width="672" /></p>
 <p>Ok! What parts did you remember? What parts did you google? (<em>FYI: I google this stuff all the time!</em>)</p>
 </div>
@@ -652,49 +650,49 @@ div.tocify {
 <div id="convert-lat-long" class="section level3">
 <h3>Convert Lat &amp; Long</h3>
 <p>If copy and paste the above data into R, we may run into a few problems. First, the <strong>°</strong> symbol. We need to strip that from the data. Here’s how to do that, and make a simple data frame of our coordinates.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">#library(measurements) # for converting data</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co"># change the degree symbol to a space with gsub</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">xlat &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&#39;°&#39;</span>, <span class="dt">replacement =</span> <span class="st">&#39;&#39;</span>,<span class="dt">x =</span> <span class="st">&#39;-78.4645°&#39;</span>)</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">xlon &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;°&#39;</span>, <span class="st">&#39;&#39;</span>,<span class="st">&#39;106.8340°&#39;</span>)</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co"># make a data frame of our points</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">ice&lt;-<span class="kw">data.frame</span>(<span class="st">&quot;x&quot;</span>=<span class="kw">as.numeric</span>(xlon), <span class="st">&quot;y&quot;</span>=<span class="kw">as.numeric</span>(xlat))</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co"># side note, if you want to convert from decimal deg to deg_minute_second with &quot;measurements package&quot;</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#xlat &lt;- measurements::conv_unit(xlat, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#xlon &lt;- measurements::conv_unit(xlon, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co">#library(measurements) # for converting data</span></a>
+<a class="sourceLine" id="cb10-2" title="2"></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co"># change the degree symbol to a space with gsub</span></a>
+<a class="sourceLine" id="cb10-4" title="4">xlat &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&#39;°&#39;</span>, <span class="dt">replacement =</span> <span class="st">&#39;&#39;</span>,<span class="dt">x =</span> <span class="st">&#39;-78.4645°&#39;</span>)</a>
+<a class="sourceLine" id="cb10-5" title="5">xlon &lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="st">&#39;°&#39;</span>, <span class="st">&#39;&#39;</span>,<span class="st">&#39;106.8340°&#39;</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6"></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co"># make a data frame of our points</span></a>
+<a class="sourceLine" id="cb10-8" title="8">ice&lt;-<span class="kw">data.frame</span>(<span class="st">&quot;x&quot;</span>=<span class="kw">as.numeric</span>(xlon), <span class="st">&quot;y&quot;</span>=<span class="kw">as.numeric</span>(xlat))</a>
+<a class="sourceLine" id="cb10-9" title="9"></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co"># side note, if you want to convert from decimal deg to deg_minute_second with &quot;measurements package&quot;</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#xlat &lt;- measurements::conv_unit(xlat, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co">#xlon &lt;- measurements::conv_unit(xlon, from = &#39;dec_deg&#39;, to = &#39;deg_min_sec&#39;)</span></a></code></pre></div>
 </div>
 <div id="locate-point-and-map" class="section level3">
 <h3>Locate Point and Map</h3>
 <p>Now that we have our lat/long point, we can find out where it is with <code>map.where</code>. This could be handy if you get some points and aren’t sure where they are. Then plot a basic world map with our location.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">library</span>(maps) <span class="co"># a mapping package</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">library</span>(maps) <span class="co"># a mapping package</span></a></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;maps&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:purrr&#39;:
 ## 
 ##     map</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(mapdata) <span class="co"># map data </span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co"># here&#39;s a nice way to simply see where your point is verbally...</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">map.where</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">x=</span>ice<span class="op">$</span>x, <span class="dt">y=</span>ice<span class="op">$</span>y)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">library</span>(mapdata) <span class="co"># map data </span></a>
+<a class="sourceLine" id="cb14-2" title="2"></a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co"># here&#39;s a nice way to simply see where your point is verbally...</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="kw">map.where</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">x=</span>ice<span class="op">$</span>x, <span class="dt">y=</span>ice<span class="op">$</span>y)</a></code></pre></div>
 <pre><code>## [1] &quot;Antarctica&quot;</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># flat map</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>) </a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw">map.axes</span>() <span class="co"># add axes</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">points</span>(<span class="dt">x =</span> ice<span class="op">$</span>x, <span class="dt">y =</span> ice<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># flat map</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>) </a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">map.axes</span>() <span class="co"># add axes</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="kw">points</span>(<span class="dt">x =</span> ice<span class="op">$</span>x, <span class="dt">y =</span> ice<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/map_data-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># let&#39;s make a globe/spherical map</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co"># reproject points</span></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">ice_proj &lt;-<span class="st"> </span>mapproj<span class="op">::</span><span class="kw">mapproject</span>(ice<span class="op">$</span>x, ice<span class="op">$</span>y,<span class="dt">projection =</span> <span class="st">&quot;globular&quot;</span>)</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co"># and an actual world map </span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">wrap =</span> <span class="ot">TRUE</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>,</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">    <span class="dt">projection=</span><span class="st">&quot;globular&quot;</span>) <span class="co"># just the map, no points</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="co">#map.axes() # add axes</span></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="kw">points</span>(<span class="dt">x =</span> ice_proj<span class="op">$</span>x, <span class="dt">y =</span> ice_proj<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># let&#39;s make a globe/spherical map</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="co"># reproject points</span></a>
+<a class="sourceLine" id="cb17-3" title="3">ice_proj &lt;-<span class="st"> </span>mapproj<span class="op">::</span><span class="kw">mapproject</span>(ice<span class="op">$</span>x, ice<span class="op">$</span>y,<span class="dt">projection =</span> <span class="st">&quot;globular&quot;</span>)</a>
+<a class="sourceLine" id="cb17-4" title="4"></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co"># and an actual world map </span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="kw">map</span>(<span class="dt">database =</span> <span class="st">&quot;world&quot;</span>, <span class="dt">wrap =</span> <span class="ot">TRUE</span>, <span class="dt">plot=</span><span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&quot;gray80&quot;</span>,</a>
+<a class="sourceLine" id="cb17-7" title="7">    <span class="dt">projection=</span><span class="st">&quot;globular&quot;</span>) <span class="co"># just the map, no points</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co">#map.axes() # add axes</span></a>
+<a class="sourceLine" id="cb17-9" title="9"><span class="kw">points</span>(<span class="dt">x =</span> ice_proj<span class="op">$</span>x, <span class="dt">y =</span> ice_proj<span class="op">$</span>y, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;red&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span>) <span class="co"># add the points</span></a>
+<a class="sourceLine" id="cb17-10" title="10"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Vostok, Antartica&quot;</span>, <span class="dt">sub =</span> <span class="st">&quot;Location of ice core data&quot;</span>) <span class="co"># add a title</span></a></code></pre></div>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/map_data-2.png" width="672" /></p>
 </div>
 </div>
@@ -702,31 +700,31 @@ div.tocify {
 <h2>What About C0<sub>2</sub> Today?</h2>
 <p>A good site to check the current C0<sub>2</sub> emission level is <a href="https://www.co2.earth/">here</a>. NOAA’s <a href="https://www.esrl.noaa.gov/gmd/ccgg/trends/monthly.html">site</a> provides trends across different time stamps, dating back to <strong>1959</strong> using measurements from the Mauna Loa Observatory.</p>
 <p>Let’s pull the annual measurements using the same commands we used above, clean the data, and plot it with <code>ggplot</code>. Let’s also add a loess regression line using <code>geom_smooth</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="kw">library</span>(viridis) <span class="co"># for colors</span></a>
-<a class="sourceLine" id="cb18-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co"># notice here we can use the base R read.table() function, it automatically ignores any lines that start with &quot;#&quot;</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5">df2 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt&quot;</span>, <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;dec_date&quot;</span>, <span class="st">&quot;avg_C02&quot;</span>, <span class="st">&quot;interpolated_C02&quot;</span>, <span class="st">&quot;trend_seas_corr&quot;</span>, <span class="st">&quot;no_days&quot;</span>))</a>
-<a class="sourceLine" id="cb18-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co"># use dplyr to filter and summarize daily data to annual, get rid of missing/NAs (values -99)</span></a>
-<a class="sourceLine" id="cb18-8" data-line-number="8">df_ann &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">  </span><span class="kw">filter</span>(avg_C02 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ann_C02=</span><span class="kw">mean</span>(avg_C02, <span class="dt">na.rm=</span>T))</a>
-<a class="sourceLine" id="cb18-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co"># plot</span></a>
-<a class="sourceLine" id="cb18-14" data-line-number="14"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-15" data-line-number="15"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02), <span class="dt">color=</span><span class="st">&quot;darkblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-16" data-line-number="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-17" data-line-number="17"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-18" data-line-number="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02, <span class="dt">fill=</span>ann_C02), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">cex=</span><span class="fl">2.5</span>, <span class="dt">alpha=</span><span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-19" data-line-number="19"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>], <span class="st">&quot; ppmv&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-20" data-line-number="20"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1970</span>, <span class="dt">y=</span><span class="dv">406</span>, </a>
-<a class="sourceLine" id="cb18-22" data-line-number="22">                            <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>), <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>)  <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-23" data-line-number="23"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>), <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb18-24" data-line-number="24"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; At Mauna Loa Since 1958&quot;</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-25" data-line-number="25"><span class="st">  </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw">library</span>(viridis) <span class="co"># for colors</span></a>
+<a class="sourceLine" id="cb18-3" title="3"></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co"># notice here we can use the base R read.table() function, it automatically ignores any lines that start with &quot;#&quot;</span></a>
+<a class="sourceLine" id="cb18-5" title="5">df2 &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="dt">file =</span> <span class="st">&quot;ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt&quot;</span>, <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;mon&quot;</span>, <span class="st">&quot;dec_date&quot;</span>, <span class="st">&quot;avg_C02&quot;</span>, <span class="st">&quot;interpolated_C02&quot;</span>, <span class="st">&quot;trend_seas_corr&quot;</span>, <span class="st">&quot;no_days&quot;</span>))</a>
+<a class="sourceLine" id="cb18-6" title="6"></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="co"># use dplyr to filter and summarize daily data to annual, get rid of missing/NAs (values -99)</span></a>
+<a class="sourceLine" id="cb18-8" title="8">df_ann &lt;-<span class="st"> </span>df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-9" title="9"><span class="st">  </span><span class="kw">filter</span>(avg_C02 <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-11" title="11"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">ann_C02=</span><span class="kw">mean</span>(avg_C02, <span class="dt">na.rm=</span>T))</a>
+<a class="sourceLine" id="cb18-12" title="12"></a>
+<a class="sourceLine" id="cb18-13" title="13"><span class="co"># plot</span></a>
+<a class="sourceLine" id="cb18-14" title="14"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-15" title="15"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02), <span class="dt">color=</span><span class="st">&quot;darkblue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-16" title="16"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Year&quot;</span>, <span class="dt">y=</span><span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; Concentration (ppmv)&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-17" title="17"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-18" title="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data=</span>df_ann, <span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ann_C02, <span class="dt">fill=</span>ann_C02), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">cex=</span><span class="fl">2.5</span>, <span class="dt">alpha=</span><span class="fl">0.8</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-19" title="19"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>], <span class="st">&quot; ppmv&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-20" title="20"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="dv">406</span>, <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">lty=</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-21" title="21"><span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data=</span><span class="ot">NULL</span>, <span class="kw">aes</span>(<span class="dt">x=</span><span class="dv">1970</span>, <span class="dt">y=</span><span class="dv">406</span>, </a>
+<a class="sourceLine" id="cb18-22" title="22">                            <span class="dt">label=</span><span class="st">&quot;Current C02 Level&quot;</span>), <span class="dt">col=</span><span class="st">&quot;maroon&quot;</span>, <span class="dt">nudge_x =</span> <span class="dv">30</span>, <span class="dt">family=</span><span class="st">&quot;Roboto Condensed&quot;</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-23" title="23"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>), <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">1955</span>,<span class="dv">2017</span>,<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-24" title="24"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(C0[<span class="dv">2</span>],<span class="st">&quot; At Mauna Loa Since 1958&quot;</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-25" title="25"><span class="st">  </span><span class="kw">theme_bw</span>(<span class="dt">base_family =</span> <span class="st">&quot;Roboto Condensed&quot;</span>)</a></code></pre></div>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="lesson_ice_core_CO2_web_data_files/figure-html/currentC02-1.png" width="672" /></p>
 </div>
@@ -743,12 +741,12 @@ div.tocify {
 <p><strong>Advanced Material…be patient, this is a demo showing it can be done</strong>. This data is available (pre-downloaded and zipped up) on github <a href="https://gge-ucd.github.io/R-DAVIS/data/2001_mauna_loa_met_data.zip">here</a>.</p>
 <p>To download all these in one go, let’s try using some Terminal/BASH code! There should be a Terminal tab built right into RStudio, so we’ll try using that for now. Hopefully you’ll be able to install <code>wget</code> on most any platform.</p>
 <p>Let’s first go to <code>Tools &gt; Terminal &gt; New Terminal</code>. Once that window is open, let’s try the following code.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># change directory to the data directory, where we want to download data</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">system</span>(<span class="st">&quot;cd data&quot;</span>)</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co"># Now the wget command: </span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co"># get all files in a single dir</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">system</span>(<span class="st">&quot;wget --no-verbose --no-parent --recursive --level=1 --no-directories ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/mlo/2001/&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># change directory to the data directory, where we want to download data</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">system</span>(<span class="st">&quot;cd data&quot;</span>)</a>
+<a class="sourceLine" id="cb20-3" title="3"></a>
+<a class="sourceLine" id="cb20-4" title="4"><span class="co"># Now the wget command: </span></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co"># get all files in a single dir</span></a>
+<a class="sourceLine" id="cb20-6" title="6"><span class="kw">system</span>(<span class="st">&quot;wget --no-verbose --no-parent --recursive --level=1 --no-directories ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/mlo/2001/&quot;</span>)</a></code></pre></div>
 </div>
 <div id="aggregating-multiple-files" class="section level3">
 <h3>Aggregating Multiple Files</h3>
@@ -758,42 +756,42 @@ div.tocify {
 <div id="read-in-multiple-files-and-bind-into-one-file" class="section level3">
 <h3>Read in <a href="http://serialmentor.com/blog/2016/6/13/reading-and-combining-many-tidy-data-files-in-R">Multiple Files</a> and bind into one file</h3>
 <p>We’ve talked briefly about using <code>purrr</code> which is a way to loop through and do the same task over and over. It’s <em>purrr</em>fect for this task.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">require</span>(readr)  <span class="co"># for read_csv()</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">require</span>(dplyr)  <span class="co"># for mutate()</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="kw">require</span>(tidyr)  <span class="co"># for unnest()</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="kw">require</span>(purrr)  <span class="co"># for map(), reduce()</span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6">folder &lt;-<span class="st"> &quot;data/2001_mauna_loa_met_data&quot;</span> <span class="co"># the folder where the data lives</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7">files_list &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">path =</span> folder, <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>) <span class="co"># list all files in that folder ending with .txt</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co"># Option 1:  Simple version, read all files in as one dataframe</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10">data &lt;-<span class="st"> </span>files_list <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># read in all the files individually</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="st">  </span><span class="kw">reduce</span>(rbind)       <span class="co"># reduce with rbind into one dataframe </span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="co"># add column names to the dataframe</span></a>
-<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)  </a>
-<a class="sourceLine" id="cb21-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="kw">head</span>(data)</a>
-<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="kw">dim</span>(data)</a>
-<a class="sourceLine" id="cb21-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb21-20" data-line-number="20">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</a>
-<a class="sourceLine" id="cb21-21" data-line-number="21">data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># create dataframe with column of the filenames</span></a>
-<a class="sourceLine" id="cb21-22" data-line-number="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">file_contents =</span> <span class="kw">map</span>(filename, <span class="co"># read files in</span></a>
-<a class="sourceLine" id="cb21-23" data-line-number="23">                             <span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-24" data-line-number="24"><span class="st">  </span>unnest <span class="co"># this unlists all the list of dataframe</span></a>
-<a class="sourceLine" id="cb21-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb21-26" data-line-number="26"><span class="co"># add column names</span></a>
-<a class="sourceLine" id="cb21-27" data-line-number="27"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;filename&quot;</span>, <span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)</a>
-<a class="sourceLine" id="cb21-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb21-29" data-line-number="29"><span class="kw">dim</span>(data)</a>
-<a class="sourceLine" id="cb21-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb21-31" data-line-number="31"><span class="co"># save this as an rds file and an rda file!</span></a>
-<a class="sourceLine" id="cb21-32" data-line-number="32">mloa_<span class="dv">2001</span> &lt;-<span class="st"> </span>data <span class="co"># remember with rda we can&#39;t rename the dataframe when we &quot;load()&quot;. </span></a>
-<a class="sourceLine" id="cb21-33" data-line-number="33"></a>
-<a class="sourceLine" id="cb21-34" data-line-number="34">dplyr<span class="op">::</span><span class="kw">write_rds</span>(mloa_<span class="dv">2001</span>, <span class="dt">path =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rds&quot;</span>, <span class="dt">compress =</span> <span class="st">&quot;gz&quot;</span>)</a>
-<a class="sourceLine" id="cb21-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb21-36" data-line-number="36"><span class="kw">save</span>(mloa_<span class="dv">2001</span>, <span class="dt">file =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rda&quot;</span>, <span class="dt">compress =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">require</span>(readr)  <span class="co"># for read_csv()</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw">require</span>(dplyr)  <span class="co"># for mutate()</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="kw">require</span>(tidyr)  <span class="co"># for unnest()</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="kw">require</span>(purrr)  <span class="co"># for map(), reduce()</span></a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6">folder &lt;-<span class="st"> &quot;data/2001_mauna_loa_met_data&quot;</span> <span class="co"># the folder where the data lives</span></a>
+<a class="sourceLine" id="cb21-7" title="7">files_list &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="dt">path =</span> folder, <span class="dt">pattern =</span> <span class="st">&quot;*.txt&quot;</span>) <span class="co"># list all files in that folder ending with .txt</span></a>
+<a class="sourceLine" id="cb21-8" title="8"></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="co"># Option 1:  Simple version, read all files in as one dataframe</span></a>
+<a class="sourceLine" id="cb21-10" title="10">data &lt;-<span class="st"> </span>files_list <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb21-11" title="11"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st">    </span><span class="co"># read in all the files individually</span></a>
+<a class="sourceLine" id="cb21-12" title="12"><span class="st">  </span><span class="kw">reduce</span>(rbind)       <span class="co"># reduce with rbind into one dataframe </span></a>
+<a class="sourceLine" id="cb21-13" title="13"></a>
+<a class="sourceLine" id="cb21-14" title="14"><span class="co"># add column names to the dataframe</span></a>
+<a class="sourceLine" id="cb21-15" title="15"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)  </a>
+<a class="sourceLine" id="cb21-16" title="16"></a>
+<a class="sourceLine" id="cb21-17" title="17"><span class="kw">head</span>(data)</a>
+<a class="sourceLine" id="cb21-18" title="18"><span class="kw">dim</span>(data)</a>
+<a class="sourceLine" id="cb21-19" title="19"></a>
+<a class="sourceLine" id="cb21-20" title="20"><span class="co">## Option 2: read in files &amp; add column with the filename along with all the data from that file, then combine into one dataframe</span></a>
+<a class="sourceLine" id="cb21-21" title="21">data &lt;-<span class="st"> </span><span class="kw">data_frame</span>(<span class="dt">filename =</span> files_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># create dataframe with column of the filenames</span></a>
+<a class="sourceLine" id="cb21-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">file_contents =</span> <span class="kw">map</span>(filename, <span class="co"># read files in</span></a>
+<a class="sourceLine" id="cb21-23" title="23">                             <span class="op">~</span><span class="kw">read.table</span>(<span class="kw">file.path</span>(folder, .), <span class="dt">header =</span> <span class="ot">FALSE</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-24" title="24"><span class="st">  </span>unnest <span class="co"># this unlists all the list of dataframe</span></a>
+<a class="sourceLine" id="cb21-25" title="25"></a>
+<a class="sourceLine" id="cb21-26" title="26"><span class="co"># add column names</span></a>
+<a class="sourceLine" id="cb21-27" title="27"><span class="kw">colnames</span>(data)&lt;-<span class="kw">c</span>(<span class="st">&quot;filename&quot;</span>, <span class="st">&quot;siteID&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour24&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;windDir&quot;</span>,   <span class="st">&quot;windSpeed_m_s&quot;</span>, <span class="st">&quot;windSteady&quot;</span>, <span class="st">&quot;baro_hPa&quot;</span>, <span class="st">&quot;temp_C_2m&quot;</span>, <span class="st">&quot;temp_C_10m&quot;</span>, <span class="st">&quot;temp_C_towertop&quot;</span>, <span class="st">&quot;rel_humid&quot;</span>, <span class="st">&quot;precip_intens_mm_hr&quot;</span>)</a>
+<a class="sourceLine" id="cb21-28" title="28"></a>
+<a class="sourceLine" id="cb21-29" title="29"><span class="kw">dim</span>(data)</a>
+<a class="sourceLine" id="cb21-30" title="30"></a>
+<a class="sourceLine" id="cb21-31" title="31"><span class="co"># save this as an rds file and an rda file!</span></a>
+<a class="sourceLine" id="cb21-32" title="32">mloa_<span class="dv">2001</span> &lt;-<span class="st"> </span>data <span class="co"># remember with rda we can&#39;t rename the dataframe when we &quot;load()&quot;. </span></a>
+<a class="sourceLine" id="cb21-33" title="33"></a>
+<a class="sourceLine" id="cb21-34" title="34">dplyr<span class="op">::</span><span class="kw">write_rds</span>(mloa_<span class="dv">2001</span>, <span class="dt">path =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rds&quot;</span>, <span class="dt">compress =</span> <span class="st">&quot;gz&quot;</span>)</a>
+<a class="sourceLine" id="cb21-35" title="35"></a>
+<a class="sourceLine" id="cb21-36" title="36"><span class="kw">save</span>(mloa_<span class="dv">2001</span>, <span class="dt">file =</span> <span class="st">&quot;data_output/mauna_loa_met_2001_minute.rda&quot;</span>, <span class="dt">compress =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>Wow that’s cool!</p>
 </div>
 </div>

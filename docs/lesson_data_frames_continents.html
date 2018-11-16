@@ -34,7 +34,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -47,13 +47,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -557,21 +555,21 @@ make it powerful. Let’s explore how to work with them.</p>
 <h3>Creating vectors</h3>
 <p>We can also manually create new vectors. There are many ways to do this.</p>
 <p>We also use the <code>:</code> operator as a shortcut to generate a sequence of numbers starting from the number on the left of the <code>:</code> and going to the number on the right side of the <code>:</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="dv">3</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="dv">3</span><span class="op">:</span><span class="dv">10</span></a></code></pre></div>
 <pre><code>## [1]  3  4  5  6  7  8  9 10</code></pre>
 <p>The most flexible way is the concatenate function, <code>c()</code>. We can concatenate any number of objects together, as long as they are the same type. Here’s a vector of characters.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;lemons&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">fruit &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apples&quot;</span>, <span class="st">&quot;oranges&quot;</span>, <span class="st">&quot;lemons&quot;</span>)</a></code></pre></div>
 <p>Let’s store a vector of 6 odd numbers in a new variable. Remember that you must assign the result of an operation to a variable if you want to keep it around. Otherwise R will print out the result but then forget it.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">odds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">odds &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>)</a></code></pre></div>
 </div>
 <div id="vectorization" class="section level3">
 <h3>Vectorization</h3>
 <p>We can do math on a vector and the operation is performed on each element in turn. We can reassign variables just as we did when they weren’t vectors.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">odds <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">odds <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a></code></pre></div>
 <pre><code>## [1] 4 6 8</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">odds &lt;-<span class="st"> </span>odds <span class="op">-</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">odds &lt;-<span class="st"> </span>odds <span class="op">-</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <p>Most functions that accept a single value can also accept a vector of values.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">exp</span>(odds)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">exp</span>(odds)</a></code></pre></div>
 <pre><code>## [1]   2.718282  20.085537 148.413159</code></pre>
 </div>
 </div>
@@ -579,7 +577,7 @@ make it powerful. Let’s explore how to work with them.</p>
 <h2>Intro to loading external data</h2>
 <p>We’ll talk more about importing data later but, for now, use <a href="data/continents.RDA">this link</a> to download a dataset that we’ll use for the next section. Save it in the “data” folder you created earlier.</p>
 <p>R has a variety functions to load specific kinds of data. Two R-specific data-types are <code>.RDA</code> and <code>.RDS</code>. <code>.RDA</code> files, like the one you just downloaded, are created with the <code>save()</code> function and accessed with the <code>load()</code> function. <code>load()</code> needs the location of the saved file, provided as character string file-path, starting with the working directory. If you are using RStudio’s projects (which we recommend), this is made a bit easier because the location of your project (where the <code>.Rproj</code> file is located) is the default working directory. It is displayed at the top of your console pane in RStudio. File-paths should be provided relative to that location. So, to load the file we just saved:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&#39;data/continents.RDA&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">load</span>(<span class="st">&#39;data/continents.RDA&#39;</span>)</a></code></pre></div>
 </div>
 <div id="intro-to-data-frames" class="section level2">
 <h2>Intro to data frames</h2>
@@ -594,7 +592,7 @@ make it powerful. Let’s explore how to work with them.</p>
 <div id="inspecting-a-data-frame" class="section level4">
 <h4>Inspecting a data frame</h4>
 <p>Rather than pulling up the spreadsheet form of a data.frame, we’d like to use R to get more information about it. In this case, our <code>data.frame</code> is so small that we can print the whole thing and inspect it:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">continents</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">continents</a></code></pre></div>
 <pre><code>##    continent area_km2 population percent_total_pop
 ## 1     Africa 30370000 1022234000              15.0
 ## 2   Americas 42330000  934611000              14.0
@@ -603,7 +601,7 @@ make it powerful. Let’s explore how to work with them.</p>
 ## 5     Europe 10180000  738199000              11.0
 ## 6    Oceania  9008500   29127000               0.4</code></pre>
 <p>When we start working with more-realistic datasets, let alone big data, that won’t work. We can get the first few rows of a <code>data.frame</code> with <code>head()</code>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">head</span>(continents)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">head</span>(continents)</a></code></pre></div>
 <pre><code>##    continent area_km2 population percent_total_pop
 ## 1     Africa 30370000 1022234000              15.0
 ## 2   Americas 42330000  934611000              14.0
@@ -612,7 +610,7 @@ make it powerful. Let’s explore how to work with them.</p>
 ## 5     Europe 10180000  738199000              11.0
 ## 6    Oceania  9008500   29127000               0.4</code></pre>
 <p><code>str</code> provides richer information about a <code>data.frame</code> and each element in it. It is generally a good first-step inspection of an R object.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">str</span>(continents)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">str</span>(continents)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  4 variables:
 ##  $ continent        : chr  &quot;Africa&quot; &quot;Americas&quot; &quot;Antarctica&quot; &quot;Asia&quot; ...
 ##  $ area_km2         : num  30370000 42330000 13720000 43820000 10180000 ...
@@ -630,31 +628,31 @@ make it powerful. Let’s explore how to work with them.</p>
 <h3>Accessing a data frame</h3>
 <p>We can extract individual columns of a data frame as vectors.</p>
 <p>We can extract a vector (ie a single variable) from a data frame with the <code>$</code> operator.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">continents<span class="op">$</span>population</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">continents<span class="op">$</span>population</a></code></pre></div>
 <pre><code>## [1] 1022234000  934611000       4490 4164252000  738199000   29127000</code></pre>
 <p>Note that you can use tab-completion to see what variables are available.</p>
 <p>That just printed the six values of <code>population</code>. We are going to work with them some more, so extract them from the data.frame and store them to a new object, called <code>pop</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">pop &lt;-<span class="st"> </span>continents<span class="op">$</span>population</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">pop &lt;-<span class="st"> </span>continents<span class="op">$</span>population</a></code></pre></div>
 <p>Now we have a new object in our environment: a numeric “vector” with 6 entries.</p>
 <p>Another core R concept is the idea that when you manipulate an object, the original object doesn’t change. Note that the <code>continents</code> data.frame still has the dose variable. R didn’t “take it out” of <code>continents</code>; instead, it made a copy of it and stored it to a variable called <code>pop</code>. They are now two separate things. If we make a change to one, it will not affect the other.</p>
 <div id="vectorization-with-data-frames" class="section level4">
 <h4>Vectorization with data frames</h4>
 <p>We can now pair the concept of vectorization with operations on our data frame. Here, we can find the logarithm of each continent’s population:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">log</span>(<span class="dt">x =</span> pop, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">log</span>(<span class="dt">x =</span> pop, <span class="dt">base =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [1] 9.009550 8.970631 3.652246 9.619537 8.868173 7.464296</code></pre>
 <p>R went over each item in <code>pop</code> and took the base-10 logarithm. Some functions take a vector but rather than returning a result for each item, operate on all of them together. E.g. we can find the mean and standard deviation of populations:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">mean</span>(pop)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">mean</span>(pop)</a></code></pre></div>
 <pre><code>## [1] 1148071248</code></pre>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">sd</span>(pop)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">sd</span>(pop)</a></code></pre></div>
 <pre><code>## [1] 1542519717</code></pre>
 <p>Many functions will also operate element-wise over multiple vectors. E.g., to calculate the population density of each continent, we need to divide the population by the land area for each continent. We can do that with a single command:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">continents<span class="op">$</span>population <span class="op">/</span><span class="st"> </span>continents<span class="op">$</span>area_km2</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">continents<span class="op">$</span>population <span class="op">/</span><span class="st"> </span>continents<span class="op">$</span>area_km2</a></code></pre></div>
 <pre><code>## [1] 3.365933e+01 2.207916e+01 3.272595e-04 9.503085e+01 7.251464e+01
 ## [6] 3.233280e+00</code></pre>
 <p>Note that we didn’t have to take those vectors out of the data.frame to use them. We can do vectorized operations right in the data.frame, which helps keep everything organized: recall that each row of a data.frame is a particular observation (in this case a continent), so we often want to do operations with each row.</p>
 <p>Just like we can extract a column from a data.frame with <code>$</code>, we can make a new column:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">continents<span class="op">$</span>pop_density &lt;-<span class="st"> </span>continents<span class="op">$</span>population <span class="op">/</span><span class="st"> </span>continents<span class="op">$</span>area_km2</a>
-<a class="sourceLine" id="cb29-2" data-line-number="2">continents</a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">continents<span class="op">$</span>pop_density &lt;-<span class="st"> </span>continents<span class="op">$</span>population <span class="op">/</span><span class="st"> </span>continents<span class="op">$</span>area_km2</a>
+<a class="sourceLine" id="cb29-2" title="2">continents</a></code></pre></div>
 <pre><code>##    continent area_km2 population percent_total_pop  pop_density
 ## 1     Africa 30370000 1022234000              15.0 3.365933e+01
 ## 2   Americas 42330000  934611000              14.0 2.207916e+01
@@ -669,21 +667,21 @@ make it powerful. Let’s explore how to work with them.</p>
 <div id="subset-by-index" class="section level4">
 <h4>Subset by index</h4>
 <p>We can extract items from a vector by specifying which positions, or indices, we want. R’s syntax for subsetting is square brackets (<code>[ ]</code>) at the end of an object containing the positions to return. So to get the third element out of our <code>pop</code> vector:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">pop</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">pop</a></code></pre></div>
 <pre><code>## [1] 1022234000  934611000       4490 4164252000  738199000   29127000</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">pop[<span class="dv">3</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">pop[<span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## [1] 4490</code></pre>
 <p>To get the first three elements, we need to put a vector containing 1, 2, and 3 inside the <code>[ ]</code>. We just learned how to make such a vector using the combine function.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">pop[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">pop[<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)]</a></code></pre></div>
 <pre><code>## [1] 1022234000  934611000       4490</code></pre>
 <p>Sometimes it will be more useful to provide the desired positions as a variable. Let’s pull out the odd-positioned entries from <code>pop</code>:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">pop[odds]</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">pop[odds]</a></code></pre></div>
 <pre><code>## [1] 1022234000       4490  738199000</code></pre>
 <p>We can also tell R which elements we <em>don’t</em> want with a <code>-</code>. This returns each element in <code>pop</code> except the first one:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">pop[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">pop[<span class="op">-</span><span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1]  934611000       4490 4164252000  738199000   29127000</code></pre>
 <p>If we try to ask for an element that doesn’t exist, R returns <code>NA</code>. <code>NA</code> is a special value in R that means “missing”.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">pop[<span class="dv">10</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">pop[<span class="dv">10</span>]</a></code></pre></div>
 <pre><code>## [1] NA</code></pre>
 <blockquote>
 <h4 id="challenge-create-and-subset-a-vector">Challenge – Create and subset a vector</h4>
@@ -700,7 +698,7 @@ make it powerful. Let’s explore how to work with them.</p>
 <div id="subset-by-logical" class="section level4">
 <h4>Subset by logical</h4>
 <p>Note that the <code>continents</code> data frame contains two common kinds of variables: numbers (num) and strings (chr).</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">str</span>(continents)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">str</span>(continents)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    6 obs. of  5 variables:
 ##  $ continent        : chr  &quot;Africa&quot; &quot;Americas&quot; &quot;Antarctica&quot; &quot;Asia&quot; ...
 ##  $ area_km2         : num  30370000 42330000 13720000 43820000 10180000 ...
@@ -709,11 +707,11 @@ make it powerful. Let’s explore how to work with them.</p>
 ##  $ pop_density      : num  3.37e+01 2.21e+01 3.27e-04 9.50e+01 7.25e+01 ...</code></pre>
 <p>A third important data type in R is logicals. You saw this when making logical comparisons like <code>1 &gt; 0</code>. Logical data can only be <code>TRUE</code> or <code>FALSE</code> (or <code>NA</code> for missing; any variable type in R can have <code>NA</code>-missing values).</p>
 <p>Logical comparisons are vectorized like other things in R. Let’s find the highly populated continents, those with more than one-billion people. One-billion is 10^9, so we can write it as <code>1e9</code>.</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">pop <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e9</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1">pop <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e9</span></a></code></pre></div>
 <pre><code>## [1]  TRUE FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <p>That went over each element in <code>pop</code> and compared it with 10. We say that R “recycled” 10 to compare it with each element in <code>pop</code>.</p>
 <p>In the same way that we subset by index before, we can subset by a logical vector. To find the values of <code>pop</code> that were greater than one-billion, we subset it like so:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1">pop[pop <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e9</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">pop[pop <span class="op">&gt;</span><span class="st"> </span><span class="fl">1e9</span>]</a></code></pre></div>
 <pre><code>## [1] 1022234000 4164252000</code></pre>
 <blockquote>
 <h4 id="shoutout-1">Shoutout</h4>
@@ -721,7 +719,7 @@ make it powerful. Let’s explore how to work with them.</p>
 </blockquote>
 <p>Recall that in a data frame, each row constitutes a single observation. This makes it especially useful to test one column and use it to subset another – we often want the entries of some variable where a condition on another variable is met. For example, to find the land-area of Africa, we can test the continent names for being “Africa” and extract the area where that is true.</p>
 <p>Here as elsewhere, it is often useful to build code from the inside out, i.e., write the logical test first, then go left and write what you want to subset with it.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1">continents<span class="op">$</span>area_km2[continents<span class="op">$</span>continent <span class="op">==</span><span class="st"> &quot;Africa&quot;</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">continents<span class="op">$</span>area_km2[continents<span class="op">$</span>continent <span class="op">==</span><span class="st"> &quot;Africa&quot;</span>]</a></code></pre></div>
 <pre><code>## [1] 30370000</code></pre>
 <blockquote>
 <h4 id="mcq-subset-and-vectorize">MCQ – Subset and vectorize</h4>

@@ -465,6 +465,7 @@ div.tocify {
 <h2>Package Dependencies</h2>
 <p>Because much of the varied content found in the lessons, there are a number of package dependencies to be aware of. This list may not be complete, but before building the site locally, these packages should be installed:</p>
 <p><code>c(&quot;tidyverse&quot;, &quot;ggplot2&quot;, &quot;tidyr&quot;, &quot;readr&quot;, &quot;dplyr&quot;, &quot;purrr&quot;, &quot;emojifont&quot;, &quot;viridis&quot;, &quot;mapdata&quot;, &quot;maps&quot;, &quot;mapview&quot;, &quot;measurements&quot;, &quot;gapminder&quot;, &quot;broom&quot;, &quot;gutenbergr&quot;, &quot;tidytext&quot;, &quot;patchwork&quot;, &quot;cowplot&quot;, &quot;hexbin&quot;, &quot;geosphere&quot;, &quot;ggmap&quot;, &quot;ggthemes&quot;, &quot;magrittr&quot;, &quot;leaflet&quot;, &quot;plotly&quot;, &quot;knitr&quot;)</code></p>
+<p>To get an updated list of packages for the website, navigate to the repo on the command line, then run this command: <code>grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/\'//g; s/&quot;//g' | grep -Eo '^\w+' | sort | uniq</code></p>
 </div>
 <div id="build-site-locally" class="section level2">
 <h2>Build Site Locally</h2>
@@ -473,6 +474,7 @@ div.tocify {
 <li>Open the R-DAVIS project in RStudio. Click on the <code>Build</code> tab, and “<em>More</em>”, select “<em>Clean All</em>”.</li>
 <li>Then select <code>Build Website</code>. This process make take a few minutes.</li>
 </ul>
+<p>You can also clean and build the website from the command line by navigating to the repo and running <code>R -e 'rmarkdown::clean_site()'</code> or <code>R -e 'rmarkdown::render_site()'</code>.</p>
 </div>
 <div id="releases" class="section level2">
 <h2>Releases</h2>
