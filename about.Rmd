@@ -1,6 +1,12 @@
 ---
 title: "About Data Carpentry"
 ---
+<p></p>
+
+This course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology (GGE) at the University of California, Davis, USA.
+
+Funding for this course is provided by the GGE, and the 2019 course faculty sponsor is Andrew Latimer. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.
+
 
 <p></p>
 
@@ -16,58 +22,24 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 
 <br>
 
-## About the Instructors
+## Instructors 
 
-**Ryan Peek** 
-<a href="mailto:rapeek@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> 
-<a href="https://ryanpeek.github.io/"><i class="fa fa-user" aria-hidden="true"></i></a>
-<a href="https://twitter.com/riverpeek"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-<a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> 
-<a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a>
+**Michael Culshaw-Maurer** 
 
-I am a 4th year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I've worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and [meadow conservation](x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/) and restoration in the Sierra Nevada. 
-
-I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the [Davis R Users Group (D-RUG)](http://d-rug.github.io/) and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.
-
-My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.  
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mjculshawmaurer@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://mcmaurer.github.io/)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@MCulshawMaurer](https://twitter.com/MCulshawMaurer)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer](https://github.com/mcmaurer)  
 
 <br>
 
-**Michael Koontz** 
-<a href="mailto:mikoontz@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true" ></i></a> 
-<a href="https://michaeljkoontz.weebly.com/"><i class="fa fa-user" aria-hidden="true"></i></a> 
-<a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter" aria-hidden="true"></i></a> 
-<a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> 
-<a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a>  
+**Martha Wohlfeil** 
 
-I'm a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://marthawohlfeil.github.io/)  
+[<i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil](https://github.com/MarthaWohlfeil)   
 
-I've been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.
-
-My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about *how* to learn more).  
+ 
 
 
 
-## About the TAs
-
-**Martha Wohlfeil**
-<a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
-<a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github" aria-hidden="true"></i></a>
-
-Martha is a 2nd year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software. 
-
-<br> 
-
-**Taylor Reiter**
-<a href="mailto:tereiter@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
-<a href="https://github.com/taylorreiter"><i class="fa fa-github" aria-hidden="true"></i></a>
-
-Taylor is a 2nd year graduate student in the Food Science graduate group at UC Davis. She studies how microbes survive in and change the metabolite profile of olive oil. She has experience wrangling genomic data, building websites, and using git in R. 
-
-<br>
-
-**Michael Culshaw-Maurer**
-<a href="mailto:mjculshawmaurer@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a>
-<a href="https://github.com/MCMaurer"><i class="fa fa-github" aria-hidden="true"></i></a>
-
-Michael is a 3rd year PhD candidate in the GGE. He studies the effects of disease and cannibalism on population dynamics in insects and has experience with statistical modeling, agent-based modeling, and data visualization in R.
