@@ -591,7 +591,7 @@ div.tocify {
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">blood &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&#39;data/wide_eg.csv&#39;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   subject = col_integer(),
+##   subject = col_double(),
 ##   sex = col_character(),
 ##   control = col_double(),
 ##   treatment1 = col_double(),
@@ -600,7 +600,7 @@ div.tocify {
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">blood</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 5
 ##    subject sex   control treatment1 treatment2
-##      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ##  1       1 M        4.49       1.61       3.03
 ##  2       2 F        5.98       3.4        3.79
 ##  3       3 F        3.77       1.92       4.66
@@ -625,7 +625,7 @@ div.tocify {
 <a class="sourceLine" id="cb14-5" data-line-number="5">blood</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 5
 ##    subject sex   control treatment1 treatment2
-##      &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##      &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
 ##  1       1 M        4.49       1.61       3.03
 ##  2       2 F        5.98       3.4        3.79
 ##  3       3 F        3.77       1.92       4.66
@@ -648,7 +648,7 @@ div.tocify {
 <a class="sourceLine" id="cb16-2" data-line-number="2">       control, treatment1, treatment2)</a></code></pre></div>
 <pre><code>## # A tibble: 36 x 4
 ##    subject sex   condition albumin
-##      &lt;int&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;
+##      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt;
 ##  1       1 M     control      4.49
 ##  2       2 F     control      5.98
 ##  3       3 F     control      3.77

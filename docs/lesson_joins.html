@@ -732,18 +732,18 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,704 x 11
-##    country    continent  year lifeExp     pop gdpPercap  total_gdp log_gdp
-##    &lt;fct&gt;      &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Afghanist… Asia       1952    28.8  8.43e6      779.    6.57e 9    9.82
-##  2 Afghanist… Asia       1957    30.3  9.24e6      821.    7.59e 9    9.88
-##  3 Afghanist… Asia       1962    32.0  1.03e7      853.    8.76e 9    9.94
-##  4 Afghanist… Asia       1967    34.0  1.15e7      836.    9.65e 9    9.98
-##  5 Afghanist… Asia       1972    36.1  1.31e7      740.    9.68e 9    9.99
-##  6 Afghanist… Asia       1977    38.4  1.49e7      786.    1.17e10   10.1 
-##  7 Afghanist… Asia       1982    39.9  1.29e7      978.    1.26e10   10.1 
-##  8 Afghanist… Asia       1987    40.8  1.39e7      852.    1.18e10   10.1 
-##  9 Afghanist… Asia       1992    41.7  1.63e7      649.    1.06e10   10.0 
-## 10 Afghanist… Asia       1997    41.8  2.22e7      635.    1.41e10   10.1 
+##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghan… Asia       1952    28.8 8.43e6      779.   6.57e 9    9.82
+##  2 Afghan… Asia       1957    30.3 9.24e6      821.   7.59e 9    9.88
+##  3 Afghan… Asia       1962    32.0 1.03e7      853.   8.76e 9    9.94
+##  4 Afghan… Asia       1967    34.0 1.15e7      836.   9.65e 9    9.98
+##  5 Afghan… Asia       1972    36.1 1.31e7      740.   9.68e 9    9.99
+##  6 Afghan… Asia       1977    38.4 1.49e7      786.   1.17e10   10.1 
+##  7 Afghan… Asia       1982    39.9 1.29e7      978.   1.26e10   10.1 
+##  8 Afghan… Asia       1987    40.8 1.39e7      852.   1.18e10   10.1 
+##  9 Afghan… Asia       1992    41.7 1.63e7      649.   1.06e10   10.0 
+## 10 Afghan… Asia       1997    41.8 2.22e7      635.   1.41e10   10.1 
 ## # ... with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">right_join</span>(gapminder, continents)</a></code></pre></div>
@@ -751,18 +751,18 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1,705 x 11
-##    country continent  year lifeExp      pop gdpPercap    total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1  9279525     2449.      2.27e10    10.4
-##  2 Algeria Africa     1957    45.7 10270856     3014.      3.10e10    10.5
-##  3 Algeria Africa     1962    48.3 11000948     2551.      2.81e10    10.4
-##  4 Algeria Africa     1967    51.4 12760499     3247.      4.14e10    10.6
-##  5 Algeria Africa     1972    54.5 14760787     4183.      6.17e10    10.8
-##  6 Algeria Africa     1977    58.0 17152804     4910.      8.42e10    10.9
-##  7 Algeria Africa     1982    61.4 20033753     5745.      1.15e11    11.1
-##  8 Algeria Africa     1987    65.8 23254956     5681.      1.32e11    11.1
-##  9 Algeria Africa     1992    67.7 26298373     5023.      1.32e11    11.1
-## 10 Algeria Africa     1997    69.2 29072015     4797.      1.39e11    11.1
+##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
+##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Algeria Africa     1952    43.1 9.28e6     2449.   2.27e10    10.4
+##  2 Algeria Africa     1957    45.7 1.03e7     3014.   3.10e10    10.5
+##  3 Algeria Africa     1962    48.3 1.10e7     2551.   2.81e10    10.4
+##  4 Algeria Africa     1967    51.4 1.28e7     3247.   4.14e10    10.6
+##  5 Algeria Africa     1972    54.5 1.48e7     4183.   6.17e10    10.8
+##  6 Algeria Africa     1977    58.0 1.72e7     4910.   8.42e10    10.9
+##  7 Algeria Africa     1982    61.4 2.00e7     5745.   1.15e11    11.1
+##  8 Algeria Africa     1987    65.8 2.33e7     5681.   1.32e11    11.1
+##  9 Algeria Africa     1992    67.7 2.63e7     5023.   1.32e11    11.1
+## 10 Algeria Africa     1997    69.2 2.91e7     4797.   1.39e11    11.1
 ## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
@@ -772,9 +772,9 @@ div.tocify {
 <pre><code>## Warning: Column `continent` joining factor and character vector, coercing
 ## into character vector</code></pre>
 <pre><code>## # A tibble: 1 x 11
-##   country continent   year lifeExp   pop gdpPercap total_gdp log_gdp
-##   &lt;fct&gt;   &lt;chr&gt;      &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 &lt;NA&gt;    Antarctica    NA      NA    NA        NA        NA      NA
+##   country continent  year lifeExp   pop gdpPercap total_gdp log_gdp
+##   &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 &lt;NA&gt;    Antarcti…    NA      NA    NA        NA        NA      NA
 ## # ... with 3 more variables: area_km2 &lt;dbl&gt;, population &lt;dbl&gt;,
 ## #   percent_total_pop &lt;dbl&gt;</code></pre>
 <p>There’s another problem in this data.frame – it has two population measures, one by continent and one by country and it’s not clear which is which! Let’s rename a couple of columns.</p>
@@ -843,13 +843,13 @@ div.tocify {
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1">plots &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/plots.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   plot_id = col_integer(),
+##   plot_id = col_double(),
 ##   plot_type = col_character()
 ## )</code></pre>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">plots</a></code></pre></div>
 <pre><code>## # A tibble: 24 x 2
 ##    plot_id plot_type                
-##      &lt;int&gt; &lt;chr&gt;                    
+##      &lt;dbl&gt; &lt;chr&gt;                    
 ##  1       1 Spectab exclosure        
 ##  2       2 Control                  
 ##  3       3 Long-term Krat Exclosure 
@@ -865,20 +865,20 @@ div.tocify {
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">surveys &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/surveys.csv&quot;</span>)</a></code></pre></div>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   record_id = col_integer(),
-##   month = col_integer(),
-##   day = col_integer(),
-##   year = col_integer(),
-##   plot_id = col_integer(),
+##   record_id = col_double(),
+##   month = col_double(),
+##   day = col_double(),
+##   year = col_double(),
+##   plot_id = col_double(),
 ##   species_id = col_character(),
 ##   sex = col_character(),
-##   hindfoot_length = col_integer(),
-##   weight = col_integer()
+##   hindfoot_length = col_double(),
+##   weight = col_double()
 ## )</code></pre>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">surveys</a></code></pre></div>
 <pre><code>## # A tibble: 35,549 x 9
 ##    record_id month   day  year plot_id species_id sex   hindfoot_length
-##        &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
 ##  1         1     7    16  1977       2 NL         M                  32
 ##  2         2     7    16  1977       3 NL         M                  33
 ##  3         3     7    16  1977       2 DM         F                  37
@@ -889,7 +889,7 @@ div.tocify {
 ##  8         8     7    16  1977       1 DM         M                  37
 ##  9         9     7    16  1977       1 DM         F                  34
 ## 10        10     7    16  1977       6 PF         F                  20
-## # ... with 35,539 more rows, and 1 more variable: weight &lt;int&gt;</code></pre>
+## # ... with 35,539 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
 <p>Because <code>plot_id</code> is listed in both tables, we can use it to look up matching records, and join the two tables.</p>
 <div class="figure">
 <img src="img/joins.svg" alt="diagram illustrating inner and left joins" />
@@ -901,20 +901,20 @@ div.tocify {
 <a class="sourceLine" id="cb68-3" data-line-number="3"><span class="st">  </span><span class="kw">inner_join</span>(surveys)</a></code></pre></div>
 <pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
 <pre><code>## # A tibble: 1,995 x 10
-##    plot_id plot_type         record_id month   day  year species_id sex  
-##      &lt;int&gt; &lt;chr&gt;                 &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;
-##  1       1 Spectab exclosure         6     7    16  1977 PF         M    
-##  2       1 Spectab exclosure         8     7    16  1977 DM         M    
-##  3       1 Spectab exclosure         9     7    16  1977 DM         F    
-##  4       1 Spectab exclosure        78     8    19  1977 PF         M    
-##  5       1 Spectab exclosure        80     8    19  1977 DS         M    
-##  6       1 Spectab exclosure       218     9    13  1977 PF         M    
-##  7       1 Spectab exclosure       222     9    13  1977 DS         M    
-##  8       1 Spectab exclosure       239     9    13  1977 DS         M    
-##  9       1 Spectab exclosure       263    10    16  1977 DM         M    
-## 10       1 Spectab exclosure       270    10    16  1977 DM         F    
-## # ... with 1,985 more rows, and 2 more variables: hindfoot_length &lt;int&gt;,
-## #   weight &lt;int&gt;</code></pre>
+##    plot_id plot_type record_id month   day  year species_id sex  
+##      &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;
+##  1       1 Spectab …         6     7    16  1977 PF         M    
+##  2       1 Spectab …         8     7    16  1977 DM         M    
+##  3       1 Spectab …         9     7    16  1977 DM         F    
+##  4       1 Spectab …        78     8    19  1977 PF         M    
+##  5       1 Spectab …        80     8    19  1977 DS         M    
+##  6       1 Spectab …       218     9    13  1977 PF         M    
+##  7       1 Spectab …       222     9    13  1977 DS         M    
+##  8       1 Spectab …       239     9    13  1977 DS         M    
+##  9       1 Spectab …       263    10    16  1977 DM         M    
+## 10       1 Spectab …       270    10    16  1977 DM         F    
+## # ... with 1,985 more rows, and 2 more variables: hindfoot_length &lt;dbl&gt;,
+## #   weight &lt;dbl&gt;</code></pre>
 <blockquote>
 <h3 id="challenge">Challenge</h3>
 <p>Write some code that returns the number of rodents observed in each plot in each year. Start by reading in the species dataframe.</p>
@@ -932,15 +932,15 @@ div.tocify {
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">glimpse</span>(surveys)</a></code></pre></div>
 <pre><code>## Observations: 35,549
 ## Variables: 9
-## $ record_id       &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,...
-## $ month           &lt;int&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7...
-## $ day             &lt;int&gt; 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16...
-## $ year            &lt;int&gt; 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977...
-## $ plot_id         &lt;int&gt; 2, 3, 2, 7, 3, 1, 2, 1, 1, 6, 5, 7, 3, 8, 6, 4...
+## $ record_id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,...
+## $ month           &lt;dbl&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7...
+## $ day             &lt;dbl&gt; 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16...
+## $ year            &lt;dbl&gt; 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977...
+## $ plot_id         &lt;dbl&gt; 2, 3, 2, 7, 3, 1, 2, 1, 1, 6, 5, 7, 3, 8, 6, 4...
 ## $ species_id      &lt;chr&gt; &quot;NL&quot;, &quot;NL&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;PF&quot;, &quot;PE&quot;, &quot;DM&quot;...
 ## $ sex             &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;...
-## $ hindfoot_length &lt;int&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38...
-## $ weight          &lt;int&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</code></pre>
+## $ hindfoot_length &lt;dbl&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38...
+## $ weight          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</code></pre>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="kw">glimpse</span>(species)</a></code></pre></div>
 <pre><code>## Observations: 54
 ## Variables: 4
@@ -959,7 +959,7 @@ div.tocify {
 <pre><code>## # A tibble: 619 x 4
 ## # Groups:   plot_id, taxa [24]
 ##    plot_id taxa    year     n
-##      &lt;int&gt; &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
+##      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;
 ##  1       1 Rodent  1977    22
 ##  2       1 Rodent  1978    57
 ##  3       1 Rodent  1979    26
@@ -981,7 +981,7 @@ div.tocify {
 <pre><code>## # A tibble: 619 x 3
 ## # Groups:   plot_id [?]
 ##    plot_id  year     n
-##      &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
 ##  1       1  1977    22
 ##  2       1  1978    57
 ##  3       1  1979    26

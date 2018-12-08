@@ -701,14 +701,14 @@ div.tocify {
 ## cols(
 ##   Date = col_date(format = &quot;&quot;),
 ##   Time = col_time(format = &quot;&quot;),
-##   ms = col_integer(),
+##   ms = col_double(),
 ##   Level = col_double(),
 ##   Temperature = col_double()
 ## )</code></pre>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">head</span>(nfy1)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 5
 ##   Date       Time      ms Level Temperature
-##   &lt;date&gt;     &lt;time&gt; &lt;int&gt; &lt;dbl&gt;       &lt;dbl&gt;
+##   &lt;date&gt;     &lt;time&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
 ## 1 2015-05-22 14:00      0 -8.68           0
 ## 2 2015-05-22 14:15      0 -8.29           0
 ## 3 2015-05-22 14:30      0 -8.29           0
@@ -726,7 +726,7 @@ div.tocify {
 ## Variables: 5
 ## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2...
 ## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00,...
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
 ## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
 ## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">glimpse</span>(nfy2)</a></code></pre></div>
