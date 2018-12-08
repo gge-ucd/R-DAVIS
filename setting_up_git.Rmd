@@ -2,11 +2,11 @@
 title: "RStudio and Git"
 ---
 
-Now that you've gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet.
+Now that you've gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet. Please check out [Happy Git with R](http://happygitwithr.com/) if you need some extra help getting everything to work.
 
 This lesson assumes you have:
 
- >  - registered for Github account
+ >  - registered for Github account (which is free!)
  >  - installed R, RStudio, and git
  >  - You accepted your invitation to your repository in the gge-ucd organization
  >  - You've successfully created your `ssh` key or have been able to authenticate with `https`
@@ -52,10 +52,10 @@ You should now have a repository on github. Our class is all housed in the [gge-
 
  > **To _`clone`_ your repository**
     
- - **`SSH`:** Look for the big green "Clone or Download" button. It will appear on the main repository webpage. Click the button, and assuming you've set up your SSH key, make sure you have the **Clone with SSH** version and copy that link (should be something like *`git@github.com:gge-ucd/w01-fix-readme-firstnamelastname.git`*).
- - **`HTTPS`:** Look for the big green "Clone or Download" button. Make sure you have the **Clone with HTTPS** version and copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
+Look for the big green "Clone or Download" button. Make sure you have the **Clone with HTTPS** version and copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
  
 ![](img/ssh_clone.png)
+If you see this box, which says "Clone with SSH", just click "Use HTTPS" in the top right of the box.
 
 ### 3. Create a New Version Controlled (`git`) RStudio Project
 
