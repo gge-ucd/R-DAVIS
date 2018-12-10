@@ -87,11 +87,11 @@ output_dir: docs
 output:
   html_document:
     theme: flatly
-    highlight: pygments
-    code_folding: hide
+    #highlight: pygments
+    code_folding: show
     toc: yes
     toc_float:
-      collapsed: no
+      collapsed: yes
     include:
       in_header: header.html
     css: style.css
