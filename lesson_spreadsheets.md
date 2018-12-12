@@ -127,10 +127,30 @@ So, instead we should have:
 
 ![single-info example](figures/spreadsheet_fig/single-info.png)
 
-An excellent reference, in particular with regard to R scripting is
+An excellent reference, in particular with regard to R scripting is:
 
-> Hadley Wickham, *Tidy Data*, Vol. 59, Issue 10, Sep 2014, Journal of
-> Statistical Software. [http://www.jstatsoft.org/v59/i10](http://www.jstatsoft.org/v59/i10).
+Hadley Wickham, *Tidy Data*, Vol. 59, Issue 10, Sep 2014, Journal of Statistical Software. [http://www.jstatsoft.org/v59/i10](http://www.jstatsoft.org/v59/i10).
+
+<div class = "blue">
+## Exercise
+
+We're going to take a messy version of the survey data and describe how we would clean it up.
+
+1. Download the data by clicking [here](https://ndownloader.figshare.com/files/2252083) to get it from FigShare.
+2. Open up the data in a spreadsheet program. 
+3. You can see that there are two tabs. Two field assistants conducted the surveys, one
+in 2013 and one in 2014, and they both kept track of the data in their own way. Now
+you're the person in charge of this project and you want to be able to 
+start analyzing the data.   
+4. With the person next to you, identify what is wrong with this spreadsheet. Also discuss the steps you would need to take to clean up the 2013 and 2014 tabs, and to put them all together in one spreadsheet. 
+
+**Important:** Do not forget our first piece of advice: to
+create a new file (or tab) for the cleaned data, never
+modify your original (raw) data.
+
+After you go through this exercise, we'll discuss as a group what was wrong
+with this data and how you would fix it. 
+</div>
 
 # Common Mistakes
 
