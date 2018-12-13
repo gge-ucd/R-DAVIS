@@ -22,7 +22,7 @@ navbar:
     - text: Project Management
       href: lesson_project_management.html
     - text: Spreadsheets
-      href: lesson_spreadsheets.html
+      href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types
       href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
     - text: Data frames (continents)
