@@ -9,7 +9,6 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Data Carpentry contributors" />
 
 
 <title>Manipulating and analyzing data with dplyr; Exporting data</title>
@@ -466,20 +465,18 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Manipulating and analyzing data with dplyr; Exporting data</h1>
-<h4 class="author"><em>Data Carpentry contributors</em></h4>
 
 </div>
 
 
 <div id="manipulating-and-analyzing-data-with-dplyr" class="section level3">
 <h3>Manipulating and analyzing data with dplyr</h3>
-<hr />
-<blockquote>
+<div class="blue">
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
 <li>Describe the purpose of the <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong> packages.</li>
 <li>Select certain columns in a data frame with the <strong><code>dplyr</code></strong> function <code>select</code>.</li>
-<li>Select certain rows in a data frame according to filtering conditions with the <strong><code>dplyr</code></strong> function <code>filter</code> .</li>
+<li>Select certain rows in a data frame according to filtering conditions with the <strong><code>dplyr</code></strong> function <code>filter</code>.</li>
 <li>Link the output of one <strong><code>dplyr</code></strong> function to the input of another function with the ‘pipe’ operator <code>%&gt;%</code>.</li>
 <li>Add new columns to a data frame that are functions of existing columns with <code>mutate</code>.</li>
 <li>Use the split-apply-combine concept for data analysis.</li>
@@ -489,8 +486,7 @@ div.tocify {
 <li>Reshape a data frame from long to wide format and back with the <code>spread</code> and <code>gather</code> commands from the <strong><code>tidyr</code></strong> package.</li>
 <li>Export a data frame to a .csv file.</li>
 </ul>
-</blockquote>
-<hr />
+</div>
 </div>
 <div id="data-manipulation-using-dplyr-and-tidyr" class="section level1">
 <h1>Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></h1>
@@ -618,19 +614,17 @@ surveys_sml</code></pre>
 ## 16 RM         M          4
 ## 17 RM         M          4</code></pre>
 <p>Note that the final data frame is the leftmost part of this expression.</p>
-<blockquote>
-<h3 id="challenge" class="challenge">Challenge</h3>
+<div class="blue">
+<h3 id="challenge">Challenge</h3>
 <p>Using pipes, subset the <code>surveys</code> data to include individuals collected before 1995 and retain only the columns <code>year</code>, <code>sex</code>, and <code>weight</code>.</p>
-</blockquote>
-<!---
-
-```r
-## Answer
-surveys %>%
-    filter(year < 1995) %>%
-    select(year, sex, weight)
-```
---->
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>surveys %&gt;%
+    filter(year &lt; 1995) %&gt;%
+    select(year, sex, weight)</code></pre>
+</details>
+</div>
+<p><br></p>
 <div id="mutate" class="section level3">
 <h3>Mutate</h3>
 <p>Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
@@ -705,22 +699,20 @@ surveys %>%
 ## # ... with 6 more variables: weight &lt;dbl&gt;, genus &lt;chr&gt;, species &lt;chr&gt;,
 ## #   taxa &lt;chr&gt;, plot_type &lt;chr&gt;, weight_kg &lt;dbl&gt;</code></pre>
 <p><code>is.na()</code> is a function that determines whether something is an <code>NA</code>. The <code>!</code> symbol negates the result, so we’re asking for every row where weight <em>is not</em> an <code>NA</code>.</p>
-<blockquote>
-<h3 id="challenge-1" class="challenge">Challenge</h3>
+<div class="blue">
+<h3 id="challenge-1">Challenge</h3>
 <p>Create a new data frame from the <code>surveys</code> data that meets the following criteria: contains only the <code>species_id</code> column and a new column called <code>hindfoot_half</code> containing values that are half the <code>hindfoot_length</code> values. In this <code>hindfoot_half</code> column, there are no <code>NA</code>s and all values are less than 30.</p>
 <p><strong>Hint</strong>: think about how the commands should be ordered to produce this data frame!</p>
-</blockquote>
-<!---
-
-```r
-## Answer
-surveys_hindfoot_half <- surveys %>%
-    filter(!is.na(hindfoot_length)) %>%
-    mutate(hindfoot_half = hindfoot_length / 2) %>%
-    filter(hindfoot_half < 30) %>%
-    select(species_id, hindfoot_half)
-```
---->
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>surveys_hindfoot_half &lt;- surveys %&gt;%
+    filter(!is.na(hindfoot_length)) %&gt;%
+    mutate(hindfoot_half = hindfoot_length / 2) %&gt;%
+    filter(hindfoot_half &lt; 30) %&gt;%
+    select(species_id, hindfoot_half)</code></pre>
+</details>
+</div>
+<p><br></p>
 </div>
 <div id="split-apply-combine-data-analysis-and-the-summarize-function" class="section level3">
 <h3>Split-apply-combine data analysis and the summarize() function</h3>
@@ -838,32 +830,40 @@ surveys_hindfoot_half <- surveys %>%
 ## 2 M     17348
 ## 3 &lt;NA&gt;   1748</code></pre>
 <p>Here, <code>tally()</code> is the action applied to the groups created by <code>group_by()</code> and counts the total number of records for each category.</p>
-<blockquote>
-<h3 id="challenge-2" class="challenge">Challenge</h3>
+<div class="blue">
+<h3 id="challenge-2">Challenge</h3>
 <ol style="list-style-type: decimal">
-<li><p>How many individuals were caught in each <code>plot_type</code> surveyed?</p></li>
-<li><p>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max hindfoot length for each species (using <code>species_id</code>).</p></li>
-<li><p>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species_id</code>, and <code>weight</code>.</p></li>
-<li><p>You saw above how to count the number of individuals of each <code>sex</code> using a combination of <code>group_by()</code> and <code>tally()</code>. How could you get the same result using <code>group_by()</code> and <code>summarize()</code>? Hint: see <code>?n</code>.</p></li>
+<li>How many individuals were caught in each <code>plot_type</code> surveyed?</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max hindfoot length for each species (using <code>species_id</code>).</li>
+<li>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species_id</code>, and <code>weight</code>.</li>
+<li>You saw above how to count the number of individuals of each <code>sex</code> using a combination of <code>group_by()</code> and <code>tally()</code>. How could you get the same result using <code>group_by()</code> and <code>summarize()</code>? Hint: see <code>?n</code>.</li>
 </ol>
-</blockquote>
-<!---
-
-```
-## # A tibble: 5 x 2
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## Answer 1
+surveys %&gt;%
+    group_by(plot_type) %&gt;%
+    tally()</code></pre>
+<pre><code>## # A tibble: 5 x 2
 ##   plot_type                     n
-##   <chr>                     <int>
+##   &lt;chr&gt;                     &lt;int&gt;
 ## 1 Control                   15611
 ## 2 Long-term Krat Exclosure   5118
 ## 3 Rodent Exclosure           4233
 ## 4 Short-term Krat Exclosure  5906
-## 5 Spectab exclosure          3918
-```
-
-```
-## # A tibble: 25 x 4
+## 5 Spectab exclosure          3918</code></pre>
+<pre class="r"><code>## Answer 2
+surveys %&gt;%
+    filter(!is.na(hindfoot_length)) %&gt;%
+    group_by(species_id) %&gt;%
+    summarize(
+        mean_hindfoot_length = mean(hindfoot_length),
+        min_hindfoot_length = min(hindfoot_length),
+        max_hindfoot_length = max(hindfoot_length)
+    )</code></pre>
+<pre><code>## # A tibble: 25 x 4
 ##    species_id mean_hindfoot_length min_hindfoot_length max_hindfoot_length
-##    <chr>                     <dbl>               <dbl>               <dbl>
+##    &lt;chr&gt;                     &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;
 ##  1 AH                         33                    31                  35
 ##  2 BA                         13                     6                  16
 ##  3 DM                         36.0                  16                  50
@@ -874,14 +874,18 @@ surveys_hindfoot_half <- surveys %>%
 ##  8 OT                         20.3                  13                  50
 ##  9 OX                         19.1                  13                  21
 ## 10 PB                         26.1                   2                  47
-## # ... with 15 more rows
-```
-
-```
-## # A tibble: 27 x 4
+## # ... with 15 more rows</code></pre>
+<pre class="r"><code>## Answer 3
+surveys %&gt;%
+    filter(!is.na(weight)) %&gt;%
+    group_by(year) %&gt;%
+    filter(weight == max(weight)) %&gt;%
+    select(year, genus, species, weight) %&gt;%
+    arrange(year)</code></pre>
+<pre><code>## # A tibble: 27 x 4
 ## # Groups:   year [26]
 ##     year genus     species     weight
-##    <dbl> <chr>     <chr>        <dbl>
+##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;
 ##  1  1977 Dipodomys spectabilis    149
 ##  2  1978 Neotoma   albigula       232
 ##  3  1978 Neotoma   albigula       232
@@ -892,18 +896,20 @@ surveys_hindfoot_half <- surveys %>%
 ##  8  1983 Neotoma   albigula       256
 ##  9  1984 Neotoma   albigula       259
 ## 10  1985 Neotoma   albigula       225
-## # ... with 17 more rows
-```
-
-```
-## # A tibble: 3 x 2
+## # ... with 17 more rows</code></pre>
+<pre class="r"><code>## Answer 4
+surveys %&gt;%
+  group_by(sex) %&gt;%
+  summarize(n = n())</code></pre>
+<pre><code>## # A tibble: 3 x 2
 ##   sex       n
-##   <chr> <int>
+##   &lt;chr&gt; &lt;int&gt;
 ## 1 F     15690
 ## 2 M     17348
-## 3 <NA>   1748
-```
---->
+## 3 &lt;NA&gt;   1748</code></pre>
+</details>
+</div>
+<p><br></p>
 </div>
 </div>
 <div id="reshaping-with-gather-and-spread" class="section level3">
@@ -1029,70 +1035,82 @@ str(surveys_gather)</code></pre>
 ## 4       4 Baiomys       NA   
 ## 5       5 Baiomys        7.75
 ## 6       6 Baiomys       NA</code></pre>
-<blockquote>
-<h3 id="challenge-3" class="challenge">Challenge</h3>
+<div class="blue">
+<h3 id="challenge-3">Challenge</h3>
 <ol style="list-style-type: decimal">
-<li><p>Spread the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</p></li>
-<li><p>Now take that data frame and <code>gather()</code> it again, so each row is a unique <code>plot_id</code> by <code>year</code> combination.</p></li>
-<li><p>The <code>surveys</code> data set has two measurement columns: <code>hindfoot_length</code> and <code>weight</code>. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use <code>gather()</code> to create a dataset where we have a key column called <code>measurement</code> and a <code>value</code> column that takes on the value of either <code>hindfoot_length</code> or <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns are being gathered.</p></li>
-<li><p>With this new data set, calculate the average of each <code>measurement</code> in each <code>year</code> for each different <code>plot_type</code>. Then <code>spread()</code> them into a data set with a column for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>: You only need to specify the key and value columns for <code>spread()</code>.</p></li>
+<li>Spread the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</li>
+<li>Now take that data frame and <code>gather()</code> it again, so each row is a unique <code>plot_id</code> by <code>year</code> combination.</li>
+<li>The <code>surveys</code> data set has two measurement columns: <code>hindfoot_length</code> and <code>weight</code>. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use <code>gather()</code> to create a dataset where we have a key column called <code>measurement</code> and a <code>value</code> column that takes on the value of either <code>hindfoot_length</code> or <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns are being gathered.</li>
+<li>With this new data set, calculate the average of each <code>measurement</code> in each <code>year</code> for each different <code>plot_type</code>. Then <code>spread()</code> them into a data set with a column for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>: You only need to specify the key and value columns for <code>spread()</code></li>
 </ol>
-</blockquote>
-<!---
-  
-  ```
-  ## # A tibble: 6 x 27
-  ## # Groups:   plot_id [6]
-  ##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985`
-  ##     <dbl>  <int>  <int>  <int>  <int>  <int>  <int>  <int>  <int>  <int>
-  ## 1       1      2      3      4      7      5      6      7      6      4
-  ## 2       2      6      6      6      8      5      9      9      9      6
-  ## 3       3      5      6      4      6      6      8     10     11      7
-  ## 4       4      4      4      3      4      5      4      6      3      4
-  ## 5       5      4      3      2      5      4      6      7      7      3
-  ## 6       6      3      4      3      4      5      9      9      7      5
-  ## # ... with 17 more variables: `1986` <int>, `1987` <int>, `1988` <int>,
-  ## #   `1989` <int>, `1990` <int>, `1991` <int>, `1992` <int>, `1993` <int>,
-  ## #   `1994` <int>, `1995` <int>, `1996` <int>, `1997` <int>, `1998` <int>,
-  ## #   `1999` <int>, `2000` <int>, `2001` <int>, `2002` <int>
-  ```
-  
-  ```
-  ## # A tibble: 624 x 3
-  ## # Groups:   plot_id [24]
-  ##    plot_id year  n_genera
-  ##      <dbl> <chr>    <int>
-  ##  1       1 1977         2
-  ##  2       2 1977         6
-  ##  3       3 1977         5
-  ##  4       4 1977         4
-  ##  5       5 1977         4
-  ##  6       6 1977         3
-  ##  7       7 1977         3
-  ##  8       8 1977         2
-  ##  9       9 1977         3
-  ## 10      10 1977         1
-  ## # ... with 614 more rows
-  ```
-  
-  ```
-  ## # A tibble: 130 x 4
-  ## # Groups:   year [26]
-  ##     year plot_type                 hindfoot_length weight
-  ##    <dbl> <chr>                               <dbl>  <dbl>
-  ##  1  1977 Control                              36.1   50.4
-  ##  2  1977 Long-term Krat Exclosure             33.7   34.8
-  ##  3  1977 Rodent Exclosure                     39.1   48.2
-  ##  4  1977 Short-term Krat Exclosure            35.8   41.3
-  ##  5  1977 Spectab exclosure                    37.2   47.1
-  ##  6  1978 Control                              38.1   70.8
-  ##  7  1978 Long-term Krat Exclosure             22.6   35.9
-  ##  8  1978 Rodent Exclosure                     37.8   67.3
-  ##  9  1978 Short-term Krat Exclosure            36.9   63.8
-  ## 10  1978 Spectab exclosure                    42.3   80.1
-  ## # ... with 120 more rows
-  ```
---->
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## Answer 1
+rich_time &lt;- surveys %&gt;%
+  group_by(plot_id, year) %&gt;%
+  summarize(n_genera = n_distinct(genus)) %&gt;%
+  spread(year, n_genera)
+
+head(rich_time)</code></pre>
+<pre><code>## # A tibble: 6 x 27
+## # Groups:   plot_id [6]
+##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985`
+##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1       1      2      3      4      7      5      6      7      6      4
+## 2       2      6      6      6      8      5      9      9      9      6
+## 3       3      5      6      4      6      6      8     10     11      7
+## 4       4      4      4      3      4      5      4      6      3      4
+## 5       5      4      3      2      5      4      6      7      7      3
+## 6       6      3      4      3      4      5      9      9      7      5
+## # ... with 17 more variables: `1986` &lt;int&gt;, `1987` &lt;int&gt;, `1988` &lt;int&gt;,
+## #   `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;, `1993` &lt;int&gt;,
+## #   `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
+## #   `1999` &lt;int&gt;, `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
+<pre class="r"><code>## Answer 2
+rich_time %&gt;%
+  gather(year, n_genera, -plot_id)</code></pre>
+<pre><code>## # A tibble: 624 x 3
+## # Groups:   plot_id [24]
+##    plot_id year  n_genera
+##      &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
+##  1       1 1977         2
+##  2       2 1977         6
+##  3       3 1977         5
+##  4       4 1977         4
+##  5       5 1977         4
+##  6       6 1977         3
+##  7       7 1977         3
+##  8       8 1977         2
+##  9       9 1977         3
+## 10      10 1977         1
+## # ... with 614 more rows</code></pre>
+<pre class="r"><code>## Answer 3
+surveys_long &lt;- surveys %&gt;%
+  gather(measurement, value, hindfoot_length, weight)
+
+## Answer 4
+surveys_long %&gt;%
+  group_by(year, measurement, plot_type) %&gt;%
+  summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;%
+  spread(measurement, mean_value)</code></pre>
+<pre><code>## # A tibble: 130 x 4
+## # Groups:   year [26]
+##     year plot_type                 hindfoot_length weight
+##    &lt;dbl&gt; &lt;chr&gt;                               &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1977 Control                              36.1   50.4
+##  2  1977 Long-term Krat Exclosure             33.7   34.8
+##  3  1977 Rodent Exclosure                     39.1   48.2
+##  4  1977 Short-term Krat Exclosure            35.8   41.3
+##  5  1977 Spectab exclosure                    37.2   47.1
+##  6  1978 Control                              38.1   70.8
+##  7  1978 Long-term Krat Exclosure             22.6   35.9
+##  8  1978 Rodent Exclosure                     37.8   67.3
+##  9  1978 Short-term Krat Exclosure            36.9   63.8
+## 10  1978 Spectab exclosure                    42.3   80.1
+## # ... with 120 more rows</code></pre>
+</details>
+</div>
+<p><br></p>
 </div>
 </div>
 </div>
