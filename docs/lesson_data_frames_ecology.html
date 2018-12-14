@@ -9,10 +9,9 @@
 <meta name="generator" content="pandoc" />
 
 
-<meta name="author" content="Data Carpentry contributors" />
 
 
-<title>Starting with data</title>
+<title>Starting With Data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -341,13 +340,10 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="lesson_spreadsheets.html">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
       <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
@@ -468,28 +464,27 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Starting with data</h1>
-<h4 class="author"><em>Data Carpentry contributors</em></h4>
+<h1 class="title toc-ignore">Starting With Data</h1>
 
 </div>
 
 
-<hr />
-<blockquote>
+<div class="blue">
 <h3 id="learning-objectives">Learning Objectives</h3>
 <ul>
 <li>Describe what a data frame is.</li>
-<li>Load external data from a .csv file into a data frame in R.</li>
-<li>Summarize the contents of a data frame in R.</li>
-<li>Manipulate categorical data in R.</li>
+<li>Load external data from a .csv file into a data frame.</li>
+<li>Summarize the contents of a data frame.</li>
+<li>Describe what a factor is.</li>
+<li>Convert between strings and factors.</li>
+<li>Reorder and rename factors.</li>
 <li>Change how character strings are handled in a data frame.</li>
-<li>Format dates in R</li>
+<li>Format dates.</li>
 </ul>
-</blockquote>
-<hr />
+</div>
 <div id="presentation-of-the-survey-data" class="section level2">
 <h2>Presentation of the Survey Data</h2>
-<p>We are studying the species and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
+<p>We are studying the species repartition and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
 <table>
 <thead>
 <tr class="header">
@@ -543,7 +538,7 @@ div.tocify {
 <td>species of animal</td>
 </tr>
 <tr class="even">
-<td>taxa</td>
+<td>taxon</td>
 <td>e.g. Rodent, Reptile, Bird, Rabbit</td>
 </tr>
 <tr class="odd">
@@ -552,56 +547,43 @@ div.tocify {
 </tr>
 </tbody>
 </table>
-<p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read.csv()</code> to load into memory the content of the CSV file as an object of class <code>data.frame</code>.</p>
-<p>To download the data into the <code>data/</code> subdirectory, run the following:</p>
-<pre class="r"><code>download.file(&quot;https://ndownloader.figshare.com/files/2292169&quot;,
-              &quot;data/portal_data_joined.csv&quot;)</code></pre>
+<p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read.csv()</code> to load into memory the content of the CSV file as an object of class <code>data.frame</code>. Inside the download.file command, the first entry is a character string with the source URL (“<a href="https://ndownloader.figshare.com/files/2292169" class="uri">https://ndownloader.figshare.com/files/2292169</a>”). This source URL downloads a CSV file from figshare. The text after the comma (“data/portal_data_joined.csv”) is the destination of the file on your local machine. You’ll need to have a folder on your machine called “data” where you’ll download the file. So this command downloads a file from figshare, names it “portal_data_joined.csv,” and adds it to a preexisting folder named “data.”</p>
+<pre class="r"><code>download.file(url=&quot;https://ndownloader.figshare.com/files/2292169&quot;,
+              destfile = &quot;data/portal_data_joined.csv&quot;)</code></pre>
 <p>You are now ready to load the data:</p>
 <pre class="r"><code>surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
-<p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can print the variable’s value: <code>surveys</code>.</p>
+<p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: <code>surveys</code>.</p>
 <p>Wow… that was a lot of output. At least it means the data loaded properly. Let’s check the top (the first 6 lines) of this data frame using the function <code>head()</code>:</p>
 <pre class="r"><code>head(surveys)</code></pre>
-<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
-## 1         1     7  16 1977       2         NL   M              32     NA
-## 2        72     8  19 1977       2         NL   M              31     NA
-## 3       224     9  13 1977       2         NL                  NA     NA
-## 4       266    10  16 1977       2         NL                  NA     NA
-## 5       349    11  12 1977       2         NL                  NA     NA
-## 6       363    11  12 1977       2         NL                  NA     NA
-##     genus  species   taxa plot_type
-## 1 Neotoma albigula Rodent   Control
-## 2 Neotoma albigula Rodent   Control
-## 3 Neotoma albigula Rodent   Control
-## 4 Neotoma albigula Rodent   Control
-## 5 Neotoma albigula Rodent   Control
-## 6 Neotoma albigula Rodent   Control</code></pre>
-<blockquote>
+<pre><code>#&gt;   record_id month day year plot_id species_id sex hindfoot_length weight
+#&gt; 1         1     7  16 1977       2         NL   M              32     NA
+#&gt; 2        72     8  19 1977       2         NL   M              31     NA
+#&gt; 3       224     9  13 1977       2         NL                  NA     NA
+#&gt; 4       266    10  16 1977       2         NL                  NA     NA
+#&gt; 5       349    11  12 1977       2         NL                  NA     NA
+#&gt; 6       363    11  12 1977       2         NL                  NA     NA
+#&gt;     genus  species   taxa plot_type
+#&gt; 1 Neotoma albigula Rodent   Control
+#&gt; 2 Neotoma albigula Rodent   Control
+#&gt; 3 Neotoma albigula Rodent   Control
+#&gt; 4 Neotoma albigula Rodent   Control
+#&gt; 5 Neotoma albigula Rodent   Control
+#&gt; 6 Neotoma albigula Rodent   Control</code></pre>
+<pre class="r"><code>## Try also
+## View(surveys)</code></pre>
+<div class="blue">
 <h3 id="note">Note</h3>
-<p><code>read.csv</code> assumes that fields are delineated by commas, however, in several countries, the comma is used as a decimal separator and the semicolon (;) is used as a field delineator. If you want to read in this type of files in R, you can use the <code>read.csv2</code> function. It behaves exactly like <code>read.csv</code> but uses different parameters for the decimal and the field separators. If you are working with another format, they can be both specified by the user. Check out the help for <code>read.csv()</code> to learn more.</p>
-</blockquote>
+<p><code>read.csv</code> assumes that fields are delineated by commas, however, in several countries, the comma is used as a decimal separator and the semicolon (;) is used as a field delineator. If you want to read in this type of files in R, you can use the <code>read.csv2</code> function. It behaves exactly like <code>read.csv</code> but uses different parameters for the decimal and the field separators. If you are working with another format, they can be both specified by the user. Check out the help for <code>read.csv()</code> by typing <code>?read.csv</code> to learn more. There is also the <code>read.delim()</code> for in tab separated data files. It is important to note that all of these functions are actually wrapper functions for the main <code>read.table()</code> function with different arguments. As such, the surveys data above could have also been loaded by using <code>read.table()</code> with the separation argument as <code>,</code>. The code is as follows: <code>surveys &lt;- read.table(file=&quot;data/portal_data_joined.csv&quot;, sep=&quot;,&quot;, header=TRUE)</code>. The header argument has to be set to TRUE to be able to read the headers as by default <code>read.table()</code> has the header argument set to FALSE.</p>
+</div>
 </div>
 <div id="what-are-data-frames" class="section level2">
 <h2>What are data frames?</h2>
 <p>Data frames are the <em>de facto</em> data structure for most tabular data, and what we use for statistics and plotting.</p>
 <p>A data frame can be created by hand, but most commonly they are generated by the functions <code>read.csv()</code> or <code>read.table()</code>; in other words, when importing spreadsheets from your hard drive (or the web).</p>
-<p>A data frame is the representation of data in the format of a table where the columns are vectors that all have the same length. Because the column are vectors, they all contain the same type of data (e.g., characters, integers, factors). For example, here is a figure depicting a data frame comprising a numeric, a character and a logical vector.</p>
+<p>A data frame is the representation of data in the format of a table where the columns are vectors that all have the same length. Because columns are vectors, each column must contain a single type of data (e.g., characters, integers, factors). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector.</p>
 <p><img src="img/data-frame.svg" /></p>
 <p>We can see this when inspecting the <b>str</b>ucture of a data frame with the function <code>str()</code>:</p>
 <pre class="r"><code>str(surveys)</code></pre>
-<pre><code>## &#39;data.frame&#39;:    34786 obs. of  13 variables:
-##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
-##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
-##  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
-##  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
-##  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
-##  $ species_id     : Factor w/ 48 levels &quot;AB&quot;,&quot;AH&quot;,&quot;AS&quot;,..: 16 16 16 16 16 16 16 16 16 16 ...
-##  $ sex            : Factor w/ 3 levels &quot;&quot;,&quot;F&quot;,&quot;M&quot;: 3 3 1 1 1 1 1 1 3 1 ...
-##  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
-##  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
-##  $ genus          : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 13 13 13 13 13 13 13 13 13 13 ...
-##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
-##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
 </div>
 <div id="inspecting-data.frame-objects" class="section level2">
 <h2>Inspecting <code>data.frame</code> Objects</h2>
@@ -630,150 +612,101 @@ div.tocify {
 </ul></li>
 </ul>
 <p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
-<blockquote>
-<h3 id="challenge">Challenge</h3>
-<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions?</p>
-<ul>
-<li>What is the class of the object <code>surveys</code>?</li>
-<li>How many rows and how many columns are in this object?</li>
-<li>How many species have been recorded during these surveys?</li>
-</ul>
-</blockquote>
-<!---
-
---->
+<div id="challenge" class="section level3">
+<h3>Challenge</h3>
+<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions? * What is the class of the object <code>surveys</code>? * How many rows and how many columns are in this object? * How many species have been recorded during these surveys?</p>
+</div>
 </div>
 <div id="indexing-and-subsetting-data-frames" class="section level2">
 <h2>Indexing and subsetting data frames</h2>
 <p>Our survey data frame has rows and columns (it has 2 dimensions), if we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.</p>
-<pre class="r"><code>surveys[1, 1]   # first element in the first column of the data frame (as a vector)</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code>surveys[1, 6]   # first element in the 6th column (as a vector)</code></pre>
-<pre><code>## [1] NL
-## 48 Levels: AB AH AS BA CB CM CQ CS CT CU CV DM DO DS DX NL OL OT OX ... ZL</code></pre>
-<pre class="r"><code>head(surveys[, 1])    # first column in the data frame (as a vector)</code></pre>
-<pre><code>## [1]   1  72 224 266 349 363</code></pre>
-<pre class="r"><code>head(surveys[1])     # first column in the data frame (as a data.frame)</code></pre>
-<pre><code>##   record_id
-## 1         1
-## 2        72
-## 3       224
-## 4       266
-## 5       349
-## 6       363</code></pre>
-<pre class="r"><code>surveys[1:3, 7] # first three elements in the 7th column (as a vector)</code></pre>
-<pre><code>## [1] M M  
-## Levels:  F M</code></pre>
-<pre class="r"><code>head(surveys[3, ])    # the 3rd element for all columns (as a data.frame)</code></pre>
-<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
-## 3       224     9  13 1977       2         NL                  NA     NA
-##     genus  species   taxa plot_type
-## 3 Neotoma albigula Rodent   Control</code></pre>
-<pre class="r"><code>head_surveys &lt;- surveys[1:6, ] # equivalent to head_surveys &lt;- head(surveys)</code></pre>
+<pre class="r"><code># first element in the first column of the data frame (as a vector)
+surveys[1, 1]   
+# first element in the 6th column (as a vector)
+surveys[1, 6]   
+# first column of the data frame (as a vector)
+surveys[, 1]    
+# first column of the data frame (as a data.frame)
+surveys[1]      
+# first three elements in the 7th column (as a vector)
+surveys[1:3, 7] 
+# the 3rd row of the data frame (as a data.frame)
+surveys[3, ]    
+# equivalent to head_surveys &lt;- head(surveys)
+head_surveys &lt;- surveys[1:6, ] </code></pre>
 <p><code>:</code> is a special function that creates numeric vectors of integers in increasing or decreasing order, test <code>1:10</code> and <code>10:1</code> for instance.</p>
-<p>You can also exclude certain parts of a data frame using the “<code>-</code>” sign:</p>
-<pre class="r"><code>head(surveys[,-1])          # The whole data frame, except the first column</code></pre>
-<pre><code>##   month day year plot_id species_id sex hindfoot_length weight   genus
-## 1     7  16 1977       2         NL   M              32     NA Neotoma
-## 2     8  19 1977       2         NL   M              31     NA Neotoma
-## 3     9  13 1977       2         NL                  NA     NA Neotoma
-## 4    10  16 1977       2         NL                  NA     NA Neotoma
-## 5    11  12 1977       2         NL                  NA     NA Neotoma
-## 6    11  12 1977       2         NL                  NA     NA Neotoma
-##    species   taxa plot_type
-## 1 albigula Rodent   Control
-## 2 albigula Rodent   Control
-## 3 albigula Rodent   Control
-## 4 albigula Rodent   Control
-## 5 albigula Rodent   Control
-## 6 albigula Rodent   Control</code></pre>
-<pre class="r"><code>surveys[-c(7:34786),] # Equivalent to head(surveys)</code></pre>
-<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
-## 1         1     7  16 1977       2         NL   M              32     NA
-## 2        72     8  19 1977       2         NL   M              31     NA
-## 3       224     9  13 1977       2         NL                  NA     NA
-## 4       266    10  16 1977       2         NL                  NA     NA
-## 5       349    11  12 1977       2         NL                  NA     NA
-## 6       363    11  12 1977       2         NL                  NA     NA
-##     genus  species   taxa plot_type
-## 1 Neotoma albigula Rodent   Control
-## 2 Neotoma albigula Rodent   Control
-## 3 Neotoma albigula Rodent   Control
-## 4 Neotoma albigula Rodent   Control
-## 5 Neotoma albigula Rodent   Control
-## 6 Neotoma albigula Rodent   Control</code></pre>
-<p>As well as using numeric values to subset a <code>data.frame</code> (or <code>matrix</code>), columns can be called by name, using one of the four following notations:</p>
+<p>You can also exclude certain indices of a data frame using the “<code>-</code>” sign:</p>
+<pre class="r"><code>surveys[, -1]          # The whole data frame, except the first column
+surveys[-c(7:34786), ] # Equivalent to head(surveys)</code></pre>
+<p>Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:</p>
 <pre class="r"><code>surveys[&quot;species_id&quot;]       # Result is a data.frame
 surveys[, &quot;species_id&quot;]     # Result is a vector
 surveys[[&quot;species_id&quot;]]     # Result is a vector
 surveys$species_id          # Result is a vector</code></pre>
-<p>For our purposes, the last three notations are equivalent. RStudio knows about the columns in your data frame, so you can take advantage of the autocompletion feature to get the full and correct column name.</p>
-<blockquote>
-<h3 id="challenge-1">Challenge</h3>
+<p>In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.</p>
+<div id="challenge-1" class="section level3">
+<h3>Challenge</h3>
 <ol style="list-style-type: decimal">
-<li><p>Create a <code>data.frame</code> (<code>surveys_200</code>) containing only the observations from row 200 of the <code>surveys</code> dataset.</p></li>
-<li><p>Notice how <code>nrow()</code> gave you the number of rows in a <code>data.frame</code>?</p>
+<li>Create a <code>data.frame</code> (<code>surveys_200</code>) containing only the data in row 200 of the <code>surveys</code> dataset.</li>
+<li>Notice how <code>nrow()</code> gave you the number of rows in a <code>data.frame</code>?
 <ul>
 <li>Use that number to pull out just that last row in the data frame.</li>
 <li>Compare that with what you see as the last row using <code>tail()</code> to make sure it’s meeting expectations.</li>
 <li>Pull out that last row using <code>nrow()</code> instead of the row number.</li>
-<li>Create a new data frame object (<code>surveys_last</code>) from that last row.</li>
+<li>Create a new data frame (<code>surveys_last</code>) from that last row.</li>
 </ul></li>
-<li><p>Use <code>nrow()</code> to extract the row that is in the middle of the data frame. Store the content of this row in an object named <code>surveys_middle</code>.</p></li>
-<li><p>Combine <code>nrow()</code> with the <code>-</code> notation above to reproduce the behavior of <code>head(surveys)</code> keeping just the first through 6th rows of the surveys dataset.</p></li>
+<li>Use <code>nrow()</code> to extract the row that is in the middle of the data frame. Store the content of this row in an object named <code>surveys_middle</code>.</li>
+<li>Combine <code>nrow()</code> with the <code>-</code> notation above to reproduce the behavior of <code>head(surveys)</code>, keeping just the first through 6th rows of the surveys dataset.</li>
 </ol>
-</blockquote>
-<!---
-
-```r
-## Answers
-surveys_200 <- surveys[200, ]
-surveys_last <- surveys[nrow(surveys), ]
-surveys_middle <- surveys[nrow(surveys)/2, ]
-surveys_head <- surveys[-c(7:nrow(surveys)),]
-```
---->
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## 1.
+surveys_200 &lt;- surveys[200, ]
+## 2.
+# Saving `n_rows` to improve readability and reduce duplication
+n_rows &lt;- nrow(surveys)
+surveys_last &lt;- surveys[n_rows, ]
+## 3.
+surveys_middle &lt;- surveys[n_rows / 2, ]
+## 4.
+surveys_head &lt;- surveys[-(7:n_rows), ]</code></pre>
+</details>
+<p><br></p>
+</div>
 </div>
 <div id="factors" class="section level2">
 <h2>Factors</h2>
-<p>When we did <code>str(surveys)</code> we saw that several of the columns consist of integers, however, the columns <code>genus</code>, <code>species</code>, <code>sex</code>, <code>plot_type</code>, … are of a special class called a <code>factor</code>. Factors are very useful and are actually something that make R particularly well suited to working with data, so we’re going to spend a little time introducing them.</p>
-<p>Factors are used to represent categorical data. Factors can be ordered or unordered, and understanding them is necessary for statistical analysis and for plotting.</p>
-<p>Factors are stored as integers, and have labels (text) associated with these unique integers. While factors look (and often behave) like character vectors, they are actually integers under the hood, and you need to be careful when treating them like strings.</p>
-<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts <em>levels</em> in alphabetical order. For instance, if you have a factor with 2 levels:</p>
+<p>When we did <code>str(surveys)</code> we saw that several of the columns consist of integers. The columns <code>genus</code>, <code>species</code>, <code>sex</code>, <code>plot_type</code>, … however, are of a special class called <code>factor</code>. Factors are very useful and actually contribute to making R particularly well suited to working with data. So we are going to spend a little time introducing them.</p>
+<p>Factors represent categorical data. They are stored as integers associated with labels and they can be ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:</p>
 <pre class="r"><code>sex &lt;- factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;))</code></pre>
-<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can check this by using the function <code>levels()</code>, and check the number of levels using <code>nlevels()</code>:</p>
-<pre class="r"><code>levels(sex)</code></pre>
-<pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
-<pre class="r"><code>nlevels(sex)</code></pre>
-<pre><code>## [1] 2</code></pre>
+<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can see this by using the function <code>levels()</code> and you can find the number of levels using <code>nlevels()</code>:</p>
+<pre class="r"><code>levels(sex)
+nlevels(sex)</code></pre>
 <p>Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. Here, one way to reorder our levels in the <code>sex</code> vector would be:</p>
 <pre class="r"><code>sex # current order</code></pre>
-<pre><code>## [1] male   female female male  
-## Levels: female male</code></pre>
+<pre><code>#&gt; [1] male   female female male  
+#&gt; Levels: female male</code></pre>
 <pre class="r"><code>sex &lt;- factor(sex, levels = c(&quot;male&quot;, &quot;female&quot;))
 sex # after re-ordering</code></pre>
-<pre><code>## [1] male   female female male  
-## Levels: male female</code></pre>
+<pre><code>#&gt; [1] male   female female male  
+#&gt; Levels: male female</code></pre>
 <p>In R’s memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: <code>&quot;female&quot;</code>, <code>&quot;male&quot;</code> is more descriptive than <code>1</code>, <code>2</code>. Which one is “male”? You wouldn’t be able to tell just from the integer data. Factors, on the other hand, have this information built in. It is particularly helpful when there are many levels (like the species names in our example dataset).</p>
 <div id="converting-factors" class="section level3">
 <h3>Converting factors</h3>
 <p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
 <pre class="r"><code>as.character(sex)</code></pre>
-<pre><code>## [1] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;</code></pre>
-<p>Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. The <code>as.numeric()</code> function returns the index values of the factor, not its levels, so it will result in an entirely new (and unwanted in this case) set of numbers. One method to avoid this is to convert factors to characters and then numbers.<br />
+<p>Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. The <code>as.numeric()</code> function returns the index values of the factor, not its levels, so it will result in an entirely new (and unwanted in this case) set of numbers. One method to avoid this is to convert factors to characters, and then to numbers.<br />
 Another method is to use the <code>levels()</code> function. Compare:</p>
-<pre class="r"><code>f &lt;- factor(c(1990, 1983, 1977, 1998, 1990))
-as.numeric(f)               # Wrong! And there is no warning...</code></pre>
-<pre><code>## [1] 3 2 1 4 3</code></pre>
-<pre class="r"><code>as.numeric(as.character(f)) # Works...</code></pre>
-<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
-<pre class="r"><code>as.numeric(levels(f))[f]    # The recommended way.</code></pre>
-<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
+<pre class="r"><code>year_fct &lt;- factor(c(1990, 1983, 1977, 1998, 1990))
+as.numeric(year_fct)               # Wrong! And there is no warning...
+as.numeric(as.character(year_fct)) # Works...
+as.numeric(levels(year_fct))[year_fct]    # The recommended way.</code></pre>
 <p>Notice that in the <code>levels()</code> approach, three important steps occur:</p>
 <ul>
-<li>We obtain all the factor levels using <code>levels(f)</code></li>
-<li>We convert these levels to numeric values using <code>as.numeric(levels(f))</code></li>
-<li>We then access these numeric values using the underlying integers of the vector <code>f</code> inside the square brackets</li>
+<li>We obtain all the factor levels using <code>levels(year_fct)</code></li>
+<li>We convert these levels to numeric values using <code>as.numeric(levels(year_fct))</code></li>
+<li>We then access these numeric values using the underlying integers of the vector <code>year_fct</code> inside the square brackets</li>
 </ul>
 </div>
 <div id="renaming-factors" class="section level3">
@@ -781,46 +714,45 @@ as.numeric(f)               # Wrong! And there is no warning...</code></pre>
 <p>When your data is stored as a factor, you can use the <code>plot()</code> function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:</p>
 <pre class="r"><code>## bar plot of the number of females and males captured during the experiment:
 plot(surveys$sex)</code></pre>
-<p><img src="lesson_data_frames_ecology_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
+<p><img src="img/R-ecology-unnamed-chunk-18-1.png" width="672" /></p>
+<p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing or undetermined. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
 <pre class="r"><code>sex &lt;- surveys$sex
 head(sex)</code></pre>
-<pre><code>## [1] M M        
-## Levels:  F M</code></pre>
+<pre><code>#&gt; [1] M M        
+#&gt; Levels:  F M</code></pre>
 <pre class="r"><code>levels(sex)</code></pre>
-<pre><code>## [1] &quot;&quot;  &quot;F&quot; &quot;M&quot;</code></pre>
-<pre class="r"><code>levels(sex)[1] &lt;- &quot;missing&quot;
+<pre><code>#&gt; [1] &quot;&quot;  &quot;F&quot; &quot;M&quot;</code></pre>
+<pre class="r"><code>levels(sex)[1] &lt;- &quot;undetermined&quot;
 levels(sex)</code></pre>
-<pre><code>## [1] &quot;missing&quot; &quot;F&quot;       &quot;M&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;undetermined&quot; &quot;F&quot;            &quot;M&quot;</code></pre>
 <pre class="r"><code>head(sex)</code></pre>
-<pre><code>## [1] M       M       missing missing missing missing
-## Levels: missing F M</code></pre>
+<pre><code>#&gt; [1] M            M            undetermined undetermined undetermined
+#&gt; [6] undetermined
+#&gt; Levels: undetermined F M</code></pre>
 <blockquote>
 <h3 id="challenge-2">Challenge</h3>
 <ul>
 <li>Rename “F” and “M” to “female” and “male” respectively.</li>
-<li>Now that we have renamed the factor level to “missing”, can you recreate the barplot such that “missing” is last (after “male”)?</li>
+<li>Now that we have renamed the factor level to “undetermined”, can you recreate the barplot such that “undetermined” is last (after “male”)?</li>
 </ul>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<pre class="r"><code>levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)
+sex &lt;- factor(sex, levels = c(&quot;female&quot;, &quot;male&quot;, &quot;undetermined&quot;))
+plot(sex)</code></pre>
+<img src="img/R-ecology-unnamed-chunk-20-1.png" width="672" />
+</div>
+</div>
 </blockquote>
-<!---
-
-```r
-## Answers
-levels(sex)[2:3] <- c("female", "male")
-sex <- factor(sex, levels = c("female", "male", "missing"))
-plot(sex)
-```
-
-<img src="lesson_data_frames_ecology_files/figure-html/correct-order-1.png" width="672" />
---->
 </div>
 <div id="using-stringsasfactorsfalse" class="section level3">
 <h3>Using <code>stringsAsFactors=FALSE</code></h3>
-<p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the <code>factor</code> data type. Depending on what you want to do with the data, you may want to keep these columns as <code>character</code>. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
-<p>In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
-<p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
-<pre class="r"><code>## Compare the difference between when the data are being read as
-## `factor`, and when they are being read as `character`.
+<p>By default, when building or importing a data frame, the columns that contain characters (i.e. text) are coerced (= converted) into factors. Depending on what you want to do with the data, you may want to keep these columns as <code>character</code>. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
+<p>In most cases, it is preferable to set <code>stringsAsFactors = FALSE</code> when importing data and to convert as a factor only the columns that require this data type.</p>
+<pre class="r"><code>## Compare the difference between our data read as `factor` vs `character`.
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;, stringsAsFactors = TRUE)
 str(surveys)
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;, stringsAsFactors = FALSE)
@@ -830,14 +762,16 @@ surveys$plot_type &lt;- factor(surveys$plot_type)</code></pre>
 <blockquote>
 <h3 id="challenge-3">Challenge</h3>
 <ol style="list-style-type: decimal">
-<li><p>We have seen how data frames are created when using the <code>read.csv()</code>, but they can also be created by hand with the <code>data.frame()</code> function. There are a few mistakes in this hand-crafted <code>data.frame</code>, can you spot and fix them? Don’t hesitate to experiment!</p>
-<pre class="r"><code>animal_data &lt;- data.frame(animal = c(&quot;dog&quot;, &quot;cat&quot;, &quot;sea cucumber&quot;, &quot;sea urchin&quot;),
-                          feel = c(&quot;furry&quot;, &quot;squishy&quot;, &quot;spiny&quot;),
-                          weight = c(45, 8 1.1, 0.8))</code></pre></li>
+<li><p>We have seen how data frames are created when using <code>read.csv()</code>, but they can also be created by hand with the <code>data.frame()</code> function. There are a few mistakes in this hand-crafted <code>data.frame</code>. Can you spot and fix them? Don’t hesitate to experiment!</p>
+<pre class="r"><code>animal_data &lt;- data.frame(
+          animal = c(dog, cat, sea cucumber, sea urchin),
+          feel = c(&quot;furry&quot;, &quot;squishy&quot;, &quot;spiny&quot;),
+          weight = c(45, 8 1.1, 0.8)
+          )</code></pre></li>
 <li>Can you predict the class for each of the columns in the following example? Check your guesses using <code>str(country_climate)</code>:
 <ul>
 <li>Are they what you expected? Why? Why not?</li>
-<li>What would have been different if we had added <code>stringsAsFactors = FALSE</code> to this call?</li>
+<li>What would have been different if we had added <code>stringsAsFactors = FALSE</code> when creating the data frame?</li>
 <li>What would you need to change to ensure that each column had the accurate data type?</li>
 </ul>
 <pre class="r"><code>country_climate &lt;- data.frame(
@@ -847,96 +781,73 @@ surveys$plot_type &lt;- factor(surveys$plot_type)</code></pre>
        northern_hemisphere = c(TRUE, TRUE, FALSE, &quot;FALSE&quot;),
        has_kangaroo = c(FALSE, FALSE, FALSE, 1)
        )</code></pre>
-<!--- Answers
-
-
-
---></li>
+<div class="accordion">
+<h3 class="toc-ignore">
+Answer
+</h3>
+<div style="background: #fff;">
+<p>
+<ul>
+<li>missing quotations around the names of the animals</li>
+<li>missing one entry in the “feel” column (probably for one of the furry animals)</li>
+<li>missing one comma in the weight column</li>
+<li><code>country</code>, <code>climate</code>, <code>temperature</code>, and <code>northern_hemisphere</code> are factors; <code>has_kangaroo</code> is numeric</li>
+<li>using <code>stringsAsFactors = FALSE</code> would have made them character instead of factors</li>
+<li>removing the quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the <code>has_kangaroo</code> column would give what was probably intended
+</div>
+</div></li>
+</ul>
+</p></li>
 </ol>
 </blockquote>
 <p>The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance).</p>
+<p>Learn more in this <a href="https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio">RStudio tutorial</a></p>
 </div>
 </div>
 <div id="formatting-dates" class="section level2">
 <h2>Formatting Dates</h2>
-<p>One of the most common issues that new (and experienced!) R users have is converting date and time information into a variable that is appropriate and usable during analyses. As a reminder from earlier in this lesson, the best practice for dealing with date data is to ensure that each component of your date is stored as a separate variable. Using <code>str()</code>, We can confirm that our data frame has a separate column for day, month, and year, and each contains integer values.</p>
+<p>One of the most common issues that new (and experienced!) R users have is converting date and time information into a variable that is appropriate and usable during analyses. As a reminder from earlier in this lesson, the best practice for dealing with date data is to ensure that each component of your date is stored as a separate variable. Using <code>str()</code>, We can confirm that our data frame has a separate column for day, month, and year, and that each contains integer values.</p>
 <pre class="r"><code>str(surveys)</code></pre>
-<p>We’re going to be using the <code>ymd()</code> function from the package <strong><code>lubridate</code></strong> (this package gets installed during the installation of the <strong><code>tidyverse</code></strong> package). <strong><code>tidyverse</code></strong> is a package of packages. So when you <code>install.packages(&quot;tidyverse&quot;)</code> you are installing all the packages within this one overarching package. All the <strong><code>tidyverse</code></strong> packages are designed to work together and often we want to use functions from several different packages, so we can install and load <strong><code>tidyverse</code></strong>, which then loads all the packages, and use what we need. Or we can install <strong><code>tidyverse</code></strong>, and then load one of the packages within that umbrella, to use on its own. Which is what we are doing here, with <strong><code>lubridate</code></strong>.</p>
-<p>This function is designed to take a vector representing year, month, and day and convert that information to a POSIXct vector. POSIXct is a class of data recognized by R as being a date or date and time. The argument that the function requires is relatively flexible, but, as a best practice, is a character vector formatted as “YYYY-MM-DD”.</p>
+<p>We are going to use the <code>ymd()</code> function from the package <strong><code>lubridate</code></strong> (which belongs to the <strong><code>tidyverse</code></strong>; learn more <a href="https://www.tidyverse.org/">here</a>). . <strong><code>lubridate</code></strong> gets installed as part as the <strong><code>tidyverse</code></strong> installation. When you load the <strong><code>tidyverse</code></strong> (<code>library(tidyverse)</code>), the core packages (the packages used in most data analyses) get loaded. <strong><code>lubridate</code></strong> however does not belong to the core tidyverse, so you have to load it explicitly with <code>library(lubridate)</code></p>
 <p>Start by loading the required package:</p>
 <pre class="r"><code>library(lubridate)</code></pre>
+<p><code>ymd()</code> takes a vector representing year, month, and day, and converts it to a <code>Date</code> vector. <code>Date</code> is a class of data recognized by R as being a date and can be manipulated as such. The argument that the function requires is flexible, but, as a best practice, is a character vector formatted as “YYYY-MM-DD”.</p>
 <p>Let’s create a date object and inspect the structure:</p>
 <pre class="r"><code>my_date &lt;- ymd(&quot;2015-01-01&quot;)
 str(my_date)</code></pre>
 <p>Now let’s paste the year, month, and day separately - we get the same result:</p>
-<pre class="r"><code>my_date &lt;- ymd(paste(&quot;2015&quot;, &quot;1&quot;, &quot;1&quot;, sep = &quot;-&quot;))
+<pre class="r"><code># sep indicates the character to use to separate each component
+my_date &lt;- ymd(paste(&quot;2015&quot;, &quot;1&quot;, &quot;1&quot;, sep = &quot;-&quot;)) 
 str(my_date)</code></pre>
-<p>What happens when we try to define an invalid date? It is worth inspecting the help page for <code>ymd()</code>.</p>
-<pre class="r"><code>ymd(&quot;2015-02-30&quot;, quiet = TRUE) # No warning, even though quiet is TRUE
-?ymd # Note that the default value of quiet is TRUE, which should return a warning if a date failed to parse</code></pre>
-<p>Now we will apply this function to the surveys dataset. Create a character vector from the <code>year</code>, <code>month</code>, and <code>day</code> columns of <code>surveys</code> using <code>paste()</code>:</p>
-<pre class="r"><code>paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;)
-# sep indicates the character to use to separate each component</code></pre>
+<p>Now we apply this function to the surveys dataset. Create a character vector from the <code>year</code>, <code>month</code>, and <code>day</code> columns of <code>surveys</code> using <code>paste()</code>:</p>
+<pre class="r"><code>paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;)</code></pre>
 <p>This character vector can be used as the argument for <code>ymd()</code>:</p>
 <pre class="r"><code>ymd(paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;))</code></pre>
-<p>The resulting POSIXct vector can be added to <code>surveys</code> as a new column called <code>date</code>:</p>
+<pre><code>#&gt; Warning: 129 failed to parse.</code></pre>
+<p>The resulting <code>Date</code> vector can be added to <code>surveys</code> as a new column called <code>date</code>:</p>
 <pre class="r"><code>surveys$date &lt;- ymd(paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;))</code></pre>
-<pre><code>## Warning: 129 failed to parse.</code></pre>
+<pre><code>#&gt; Warning: 129 failed to parse.</code></pre>
 <pre class="r"><code>str(surveys) # notice the new column, with &#39;date&#39; as the class</code></pre>
-<pre><code>## &#39;data.frame&#39;:    34786 obs. of  14 variables:
-##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
-##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
-##  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
-##  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
-##  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
-##  $ species_id     : Factor w/ 48 levels &quot;AB&quot;,&quot;AH&quot;,&quot;AS&quot;,..: 16 16 16 16 16 16 16 16 16 16 ...
-##  $ sex            : Factor w/ 3 levels &quot;&quot;,&quot;F&quot;,&quot;M&quot;: 3 3 1 1 1 1 1 1 3 1 ...
-##  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
-##  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
-##  $ genus          : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 13 13 13 13 13 13 13 13 13 13 ...
-##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
-##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ date           : Date, format: &quot;1977-07-16&quot; &quot;1977-08-19&quot; ...</code></pre>
-<p>Remember, when <strong><code>lubridate</code></strong> fails to parse a date, it will return <code>NA</code> quietly. We can check whether there are missing values using <code>summary()</code>:</p>
-<pre class="r"><code>summary(surveys$date) # yes, some dates failed to parse</code></pre>
-<pre><code>##         Min.      1st Qu.       Median         Mean      3rd Qu. 
-## &quot;1977-07-16&quot; &quot;1984-03-12&quot; &quot;1990-07-22&quot; &quot;1990-12-15&quot; &quot;1997-07-29&quot; 
-##         Max.         NA&#39;s 
-## &quot;2002-12-31&quot;        &quot;129&quot;</code></pre>
-<p>We can use the functions we saw previously to deal with missing data to identify the rows in our data frame that are failing. First, let’s create a vector that contains our dates as a character vector:</p>
-<pre class="r"><code>surveys_dates &lt;- paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;)
-head(surveys_dates)</code></pre>
-<pre><code>## [1] &quot;1977-7-16&quot;  &quot;1977-8-19&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot; &quot;1977-11-12&quot;
-## [6] &quot;1977-11-12&quot;</code></pre>
-<p>The vector <code>surveys_dates</code> contains all the dates from our dataset, in the same order as they are in the data frame. We can therefore use the <code>is.na()</code> function on the <code>surveys</code> data frame to locate the elements in the vectors <code>surveys_dates</code> that failed to parse:</p>
-<pre class="r"><code>surveys_dates[is.na(surveys$date)]</code></pre>
-<pre><code>##   [1] &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##   [6] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [11] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-##  [16] &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot;
-##  [21] &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##  [26] &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-##  [31] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot;
-##  [36] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [41] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-##  [46] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##  [51] &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [56] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-##  [61] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [66] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##  [71] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot;
-##  [76] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##  [81] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [86] &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-##  [91] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-##  [96] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-## [101] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-## [106] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot;
-## [111] &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;
-## [116] &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-9-31&quot;
-## [121] &quot;2000-4-31&quot; &quot;2000-9-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot; &quot;2000-4-31&quot;
-## [126] &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot; &quot;2000-9-31&quot;</code></pre>
+<p>Let’s make sure everything worked correctly. One way to inspect the new column is to use <code>summary()</code>:</p>
+<pre class="r"><code>summary(surveys$date)</code></pre>
+<pre><code>#&gt;         Min.      1st Qu.       Median         Mean      3rd Qu. 
+#&gt; &quot;1977-07-16&quot; &quot;1984-03-12&quot; &quot;1990-07-22&quot; &quot;1990-12-15&quot; &quot;1997-07-29&quot; 
+#&gt;         Max.         NA&#39;s 
+#&gt; &quot;2002-12-31&quot;        &quot;129&quot;</code></pre>
+<p>Something went wrong: some dates have missing values. Let’s investigate where they are coming from.</p>
+<p>We can use the functions we saw previously to deal with missing data to identify the rows in our data frame that are failing. If we combine them with what we learned about subsetting data frames earlier, we can extract the columns “year,”month“,”day&quot; from the records that have <code>NA</code> in our new column <code>date</code>. We will also use <code>head()</code> so we don’t clutter the output:</p>
+<pre class="r"><code>is_missing_date &lt;- is.na(surveys$date)
+date_columns &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;)
+missing_dates &lt;- surveys[is_missing_date,  date_columns]
+
+head(missing_dates)</code></pre>
+<pre><code>#&gt;      year month day
+#&gt; 3144 2000     9  31
+#&gt; 3817 2000     4  31
+#&gt; 3818 2000     4  31
+#&gt; 3819 2000     4  31
+#&gt; 3820 2000     4  31
+#&gt; 3856 2000     9  31</code></pre>
 <p>Why did these dates fail to parse? If you had to use these data for your analyses, how would you deal with this situation?</p>
 <p>This lesson is adapted from the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="https://datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">Starting With Data materials</a>.</p>
 </div>

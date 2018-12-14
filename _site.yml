@@ -24,9 +24,7 @@ navbar:
     - text: Spreadsheets
       href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types
-      href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
-    - text: Data frames (continents)
-      href: lesson_data_frames_continents.html
+      href: lesson_vectors.html
     - text: Data frames (ecology)
       href: lesson_data_frames_ecology.html
     - text: Using dplyr (ecology)
