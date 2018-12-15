@@ -1,6 +1,5 @@
 ---
 title: Manipulating and analyzing data with dplyr; Exporting data
-author: Data Carpentry contributors
 ---
 
 ```{r, echo=FALSE, purl=FALSE, message = FALSE}
@@ -14,24 +13,22 @@ suppressWarnings(surveys$date <- lubridate::ymd(paste(surveys$year,
 
 ### Manipulating and analyzing data with dplyr
 
-------------
+<div class = "blue">
 
-> ### Learning Objectives
->
-> * Describe the purpose of the **`dplyr`** and **`tidyr`** packages.
-> * Select certain columns in a data frame with the **`dplyr`** function `select`.
-> * Select certain rows in a data frame according to filtering conditions with the **`dplyr`** function `filter` .
-> * Link the output of one **`dplyr`** function to the input of another function with the 'pipe' operator `%>%`.
-> * Add new columns to a data frame that are functions of existing columns with `mutate`.
-> * Use the split-apply-combine concept for data analysis.
-> * Use `summarize`, `group_by`, and `tally` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.
-> * Describe the concept of a wide and a long table format and for which purpose those formats are useful.
-> * Describe what key-value pairs are.
-> * Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package.
-> * Export a data frame to a .csv file.
+### Learning Objectives
 
-
-------------
+* Describe the purpose of the **`dplyr`** and **`tidyr`** packages.
+* Select certain columns in a data frame with the **`dplyr`** function `select`.
+* Select certain rows in a data frame according to filtering conditions with the **`dplyr`** function `filter`.
+* Link the output of one **`dplyr`** function to the input of another function with the 'pipe' operator `%>%`.
+* Add new columns to a data frame that are functions of existing columns with `mutate`.
+* Use the split-apply-combine concept for data analysis.
+* Use `summarize`, `group_by`, and `tally` to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.
+* Describe the concept of a wide and a long table format and for which purpose those formats are useful.
+* Describe what key-value pairs are.
+* Reshape a data frame from long to wide format and back with the `spread` and `gather` commands from the **`tidyr`** package.
+* Export a data frame to a .csv file.
+</div>
 
 # Data Manipulation using **`dplyr`** and **`tidyr`**
 
@@ -185,26 +182,21 @@ surveys_sml
 
 Note that the final data frame is the leftmost part of this expression.
 
-> ### Challenge {.challenge}
->
->  Using pipes, subset the `surveys` data to include individuals collected before
->  1995 and retain only the columns `year`, `sex`, and `weight`.
+<div class = "blue">
+### Challenge 
+Using pipes, subset the `surveys` data to include individuals collected before
+1995 and retain only the columns `year`, `sex`, and `weight`.
 
-<!---
+<details>
+<summary>ANSWER</summary>
 ```{r, eval=FALSE, purl=FALSE}
-## Answer
 surveys %>%
     filter(year < 1995) %>%
     select(year, sex, weight)
 ```
---->
-
-    ```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-    ## Pipes Challenge:
-    ##  Using pipes, subset the data to include individuals collected
-    ##  before 1995, and retain the columns `year`, `sex`, and `weight.`
-
-    ```
+</details>
+</div>
+<br>
 
 ### Mutate
 
@@ -250,38 +242,30 @@ surveys %>%
 `is.na()` is a function that determines whether something is an `NA`. The `!`
 symbol negates the result, so we're asking for every row where weight *is not* an `NA`.
 
-> ### Challenge {.challenge}
->
->  Create a new data frame from the `surveys` data that meets the following
->  criteria: contains only the `species_id` column and a new column called
->  `hindfoot_half` containing values that are half the `hindfoot_length` values.
->  In this `hindfoot_half` column, there are no `NA`s and all values are less
->  than 30.
->
->  **Hint**: think about how the commands should be ordered to produce this data frame!
+<div class = "blue">
+### Challenge
 
-<!---
+Create a new data frame from the `surveys` data that meets the following
+criteria: contains only the `species_id` column and a new column called
+`hindfoot_half` containing values that are half the `hindfoot_length` values.
+In this `hindfoot_half` column, there are no `NA`s and all values are less
+than 30.
+
+**Hint**: think about how the commands should be ordered to produce this data frame!
+
+<details>
+<summary>ANSWER</summary>
 ```{r, eval=FALSE, purl=FALSE}
-## Answer
+
 surveys_hindfoot_half <- surveys %>%
     filter(!is.na(hindfoot_length)) %>%
     mutate(hindfoot_half = hindfoot_length / 2) %>%
     filter(hindfoot_half < 30) %>%
     select(species_id, hindfoot_half)
 ```
---->
-
-    ```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-    ## Mutate Challenge:
-    ##  Create a new data frame from the `surveys` data that meets the following
-    ##  criteria: contains only the `species_id` column and a column that
-    ##  contains values that are half the `hindfoot_length` values (e.g. a
-    ##  new column `hindfoot_half`). In this `hindfoot_half` column, there are
-    ##  no NA values and all values are < 30.
-
-    ##  Hint: think about how the commands should be ordered to produce this data frame!
-
-    ```
+</details>
+</div>
+<br>
 
 ### Split-apply-combine data analysis and the summarize() function
 
@@ -371,23 +355,21 @@ surveys %>%
 Here, `tally()` is the action applied to the groups created by `group_by()` and
 counts the total number of records for each category.
 
-> ### Challenge {.challenge}
->
-> 1. How many individuals were caught in each `plot_type` surveyed?
->
-> 2. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
-> length for each species (using `species_id`).
->
-> 3. What was the heaviest animal measured in each year? Return the columns `year`,
-> `genus`, `species_id`, and `weight`.
->
-> 4. You saw above how to count the number of individuals of each `sex` using a
-> combination of `group_by()` and `tally()`. How could you get the same result
-> using `group_by()` and `summarize()`? Hint: see `?n`.
+<div class = "blue">
+### Challenge
 
+1. How many individuals were caught in each `plot_type` surveyed?
+2. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+length for each species (using `species_id`).
+3. What was the heaviest animal measured in each year? Return the columns `year`,
+`genus`, `species_id`, and `weight`.
+4. You saw above how to count the number of individuals of each `sex` using a
+combination of `group_by()` and `tally()`. How could you get the same result
+using `group_by()` and `summarize()`? Hint: see `?n`.
 
-<!---
-```{r, echo=FALSE, purl=FALSE}
+<details>
+<summary>ANSWER</summary>
+```{r, purl=FALSE}
 ## Answer 1
 surveys %>%
     group_by(plot_type) %>%
@@ -416,23 +398,9 @@ surveys %>%
   group_by(sex) %>%
   summarize(n = n())
 ```
---->
-
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-## Tally Challenges:
-##  1. How many individuals were caught in each `plot_type` surveyed?
-
-##  2. Use `group_by()` and `summarize()` to find the mean, min, and
-##  max hindfoot length for each species (using `species_id`).
-
-##  3. What was the heaviest animal measured in each year? Return the
-##  columns `year`, `genus`, `species_id`, and `weight`.
-
-## 4. You saw above how to count the number of individuals of each `sex` using a
-## combination of `group_by()` and `tally()`. How could you get the same result
-## using `group_by()` and `summarize()`? Hint: see `?n`.
-
-```
+</details>
+</div>
+<br>
 
 ### Reshaping with gather and spread
 
@@ -562,46 +530,32 @@ surveys_spread %>%
   head
 ```
 
-> ### Challenge {.challenge}
->
-> 1. Spread the `surveys` data frame with `year` as columns, `plot_id` as rows, and the
->   number of genera per plot as the values. You will need to summarize before
->   reshaping, and use the function `n_distinct()` to get the number of unique
->   genera within a particular chunk of data. It's a powerful function! See `?n_distinct` for more.
->
-> 2. Now take that data frame and `gather()` it again, so each row is a unique
->    `plot_id` by `year` combination.
->
-> 3. The `surveys` data set has
->    two measurement columns: `hindfoot_length` and `weight`.  This makes it
->    difficult to do things like look at the relationship between mean values of
->    each measurement per year in different plot types. Let's walk through a
->    common solution for this type of problem. First, use `gather()` to create a
->     dataset where we have a key column called `measurement` and a
->    `value` column that takes on the value of either `hindfoot_length` or
->    `weight`. *Hint*: You'll need to specify which columns are being gathered.
->
-> 4. With this new data set, calculate the average of each
->    `measurement` in each `year` for each different `plot_type`. Then
->    `spread()` them into a data set with a column for `hindfoot_length` and
->    `weight`. *Hint*: You only need to specify the key and value
->    columns for `spread()`.
+<div class = "blue">
+### Challenge
 
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-## Reshaping challenges
+1. Spread the `surveys` data frame with `year` as columns, `plot_id` as rows, and the
+  number of genera per plot as the values. You will need to summarize before
+  reshaping, and use the function `n_distinct()` to get the number of unique
+  genera within a particular chunk of data. It's a powerful function! See `?n_distinct` for more.
+2. Now take that data frame and `gather()` it again, so each row is a unique
+   `plot_id` by `year` combination.
+3. The `surveys` data set has
+   two measurement columns: `hindfoot_length` and `weight`.  This makes it
+   difficult to do things like look at the relationship between mean values of
+   each measurement per year in different plot types. Let's walk through a
+   common solution for this type of problem. First, use `gather()` to create a
+    dataset where we have a key column called `measurement` and a
+   `value` column that takes on the value of either `hindfoot_length` or
+   `weight`. *Hint*: You'll need to specify which columns are being gathered.
+4. With this new data set, calculate the average of each
+   `measurement` in each `year` for each different `plot_type`. Then
+   `spread()` them into a data set with a column for `hindfoot_length` and
+   `weight`. *Hint*: You only need to specify the key and value
+   columns for `spread()`
 
-## 1. Make a wide data frame with `year` as columns, `plot_id`` as rows, and where the values are the number of genera per plot. You will need to summarize before reshaping, and use the function `n_distinct` to get the number of unique genera within a chunk of data. It's a powerful function! See `?n_distinct` for more.
-
-## 2. Now take that data frame, and make it long again, so each row is a unique `plot_id` `year` combination
-
-## 3. The `surveys` data set is not truly wide or long because there are two columns of measurement - `hindfoot_length` and `weight`.  This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let's walk through a common solution for this type of problem. First, use `gather` to create a truly long dataset where we have a key column called `measurement` and a `value` column that takes on the value of either `hindfoot_length` or `weight`. Hint: You'll need to specify which columns are being gathered.
-
-## 4. With this new truly long data set, calculate the average of each `measurement` in each `year` for each different `plot_type`. Then `spread` them into a wide data set with a column for `hindfoot_length` and `weight`. Hint: Remember, you only need to specify the key and value columns for `spread`.
-
-```
-
-<!---
-  ```{r, echo=FALSE, purl=FALSE}
+<details>
+<summary>ANSWER</summary>   
+```{r, purl=FALSE}
 ## Answer 1
 rich_time <- surveys %>%
   group_by(plot_id, year) %>%
@@ -624,7 +578,9 @@ surveys_long %>%
   summarize(mean_value = mean(value, na.rm=TRUE)) %>%
   spread(measurement, mean_value)
 ```
---->
+</details>
+</div>
+<br>
 
 # Exporting data
 
