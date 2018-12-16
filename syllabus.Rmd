@@ -7,7 +7,7 @@ date: '*Updated:* `r format(Sys.time(), "%Y-%b-%d")`'
 
 ## Course Description
 
-Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question & answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will easily apply to all programming languages and database management systems. **No background in databases or R/computational experience is required.**
+Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question & answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will be applicable to many programming languages and database management systems. **No background in databases or R/computational experience is required.**
 
 ## Prerequisite Knowledge and Skills
 
@@ -23,13 +23,12 @@ The focus of this course is to provide graduate students with training that deve
 
 Students completing this course should be able to:
 
- - Read, Import/Export data
+ - Read, import/export data
  - Tidy/summarize and analyze data
+ - Create publication-quality graphs and figures
  - Write simple functions/programs in R
- - Automate data analysis
- - Scrape websites for data
- - Map/manipulate spatial (raster/vector) data
- - Learn how to apply these tools to address scientific research questions
+ - Search for and access new learning materials to further develop their computational skills
+ - Apply these tools to address scientific research questions
 
 ## Schedule
 
@@ -50,50 +49,50 @@ library(emojifont, quietly = T)
 
 #### Week 1
 
- - `r emojifont::emoji("white_check_mark")` Course Intro
- - `r emojifont::emoji("white_check_mark")` Intro to Git and RStudio
- - `r emojifont::emoji("white_check_mark")` Project management
+ - Course Intro
+ - Intro to Git/GitHub and RStudio
+ - Project Management
 
 #### Week 2
  
- - `r emojifont::emoji("white_check_mark")` Spreadsheets & Project Management
- - `r emojifont::emoji("white_check_mark")` Intro to R
+ - Spreadsheets & Project Management
+ - Intro to R
  
 #### Week 3
 
- - `r emojifont::emoji("white_check_mark")` Data frames & subsetting
+ - Exploring Data Frames
 
 #### Week 4
 
- - `r emojifont::emoji("white_check_mark")` `dplyr` (import, manipulation, visualization)
- - `r emojifont::emoji("white_check_mark")` `ggplot2` (short intro and demo)
+ - `dplyr`: Data Import and Manipulation
+ - ``ggplot2`: Short Intro
 
 #### Week 5
 
- - `r emojifont::emoji("white_check_mark")` `dplyr` (summarize and export)
- - `r emojifont::emoji("white_check_mark")` `ggplot2` (ecology lesson)
+ - `dplyr`: Data Summarization and Export
+ - `ggplot2`: Hands on with Ecology Data
 
 #### Week 6
 
- - `r emojifont::emoji("white_check_mark")` `ggplot2` (finish up)
- - `r emojifont::emoji("white_check_mark")` Data import/export (as assignment)
+ - `ggplot2`: Finishing Up
+ - Data Import/Export Workflow
 
 #### Week 7
 
- - `r emojifont::emoji("white_check_mark")` RMarkdown and literate programming
- - `r emojifont::emoji("white_check_mark")` Visualization do's and don'ts
+ - RMarkdown and Literate Programming
+ - Visualization Do's and Don'ts
 
 #### Week 8
 
- - `r emojifont::emoji("white_check_mark")` `tidyr` (reshape data)
- - `r emojifont::emoji("white_check_mark")` datetime data in R with `lubridate`
+ - `tidyr`: Reshaping Data
+ - Datetime Data in R with `lubridate`
 
 #### Week 9
 
- - `r emojifont::emoji("white_check_mark")` finish datetime data
- - `r emojifont::emoji("white_check_mark")` joins using `dplyr`
+ - For Loops
+ - Iteration with `*apply` and `purrr`
 
 #### Week 10
 
- - `r emojifont::emoji("ballot_box_with_check")` spatial (see [Mapping In R](https://ryanpeek.github.io/mapping_in_R/index.html)) 
+ - Students Choose!
  

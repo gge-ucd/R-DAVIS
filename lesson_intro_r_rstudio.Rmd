@@ -2,17 +2,18 @@
 title: "Orientation to programming, R, and RStudio"
 ---
 
-> ## Learning objectives
->
-> * Appreciate why a researcher might want to write code and why R specifically
-> * Gain familiarity the RStudio IDE
-> * Use basic math functions in R, with calculator and fun() notation
-> * Understand variables and how to assign to them
-> * Use comparison operations
-> * Manage your workspace in an interactive R session
-> * Understand errors, warnings, and messages
-> * To be able to seek help via `?` and Google
->
+<div class = "blue">
+## Learning objectives
+
+1. Appreciate why a researcher might want to write code and why R specifically
+2. Gain familiarity the RStudio IDE
+3. Use basic math functions in R, with calculator and fun() notation
+4. Understand variables and how to assign to them
+5. Use comparison operations
+6. Manage your workspace in an interactive R session
+7. Understand errors, warnings, and messages
+8. To be able to seek help via `?` and Google
+</div>
 
 ## Why programming?
 
@@ -108,21 +109,18 @@ Console vs. script
         - Building preservable pipeline of operations
     
 
-> #### Tip: Pushing to the interactive R console
-> To run the line of your script where the cursor is, you can click on the `Run` 
-> button at the top-right of the script pane or use the keyboard short cut: 
-> `cmd/ctrl-enter`.
->
-> To run a block of code, select (highlight) it and click `Run` or 
-> `cmd/ctrl-enter`. 
->
-> You are working toward selecting a whole script and running it. 
->
-> - You'll write your script interactively, running each line to make sure it 
-> works, and at the end, you'll be able to run the whole analysis by selecting 
-> all and running the script. This way you can later rerun the analysis on new 
-> or modified data or change part of the analysis and everything will work with
-> the click of a button.
+<div class = "blue">
+
+#### Tip: Pushing to the interactive R console
+To run the line of your script where the cursor is, you can click on the `Run` button at the top-right of the script pane or use the keyboard short cut: `cmd/ctrl-enter`.
+
+To run a block of code, select (highlight) it and click `Run` or `cmd/ctrl-enter`. 
+
+You are working toward selecting a whole script and running it. 
+
+- You'll write your script interactively, running each line to make sure it works, and at the end, you'll be able to run the whole analysis by selecting all and running the script. This way you can later rerun the analysis on new or modified data or change part of the analysis and everything will work with the click of a button.
+</div>
+
 
 ## Introduction to R
 
@@ -316,27 +314,27 @@ Assignment values can contain the variable being assigned to:
 x <- x + 1 
 ```
 
-> #### MCQ -- Variable Assignment
->
-> What does the following code print?
-> ```
-> a <- 1
-> b <- 2
-> c <- a + b
-> b <- 4
-> a <- b
-> c <- a
-> c 
-> ```
->
-> ```
-> Option 1) a  
-> Option 2) 3  
-> Option 3) 4  
-> Option 4) ::nothing::  
-> ```
->
+<div class = "blue">
+#### MCQ -- Variable Assignment
 
+What does the following code print?
+```
+a <- 1
+b <- 2
+c <- a + b
+b <- 4
+a <- b
+c <- a
+c 
+```
+
+```
+Option 1) a  
+Option 2) 3  
+Option 3) 4  
+Option 4) ::nothing::  
+```
+</div>
 
 ### Variable name conventions
 
@@ -437,20 +435,17 @@ log(x = 3, base = 10)
 log(base = 10, x = 3)
 ```
 
+<div class = "blue">
+#### MCQ -- Which of these things is not like the other ones?
+Three of the following lines produce the same result. Without running the code, which one will produce a different result than the others? The helpfile for `log` (`?log`) may be helpful.
 
-> #### MCQ -- Which of these things is not like the other ones?
->
-> Three of the following lines produce the same result. Without running the 
-code, which one will produce a different result than the others? The helpfile 
-for `log` (`?log`) may be helpful.
->
-> ```
-> Option 1) log(x = 1000, base = 10)
-> Option 2) log10(1000)
-> Option 3) log(base = 10, x = 1000)
-> Option 4) log(10, 1000)
-> ```
-
+```
+Option 1) log(x = 1000, base = 10)
+Option 2) log10(1000)
+Option 3) log(base = 10, x = 1000)
+Option 4) log(10, 1000)
+```
+</div>
 
 ### When R Wants to Tell You Something
 
@@ -514,17 +509,19 @@ one like this:
 message("Hey buddy!")
 ```
 
-> #### Challenge -- Extra practice: Assignment & Comparison
->
-> Which elephant weighs more? Convert one's weight to the units of the other, 
-and store the result in an appropriately-named new variable. Write a command to 
-test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
->
-> ```{r, eval=FALSE}
-> elephant1_kg <- 3492
-> elephant2_lb <- 7757
-> ```
->
+
+<div class = "blue">
+
+#### Challenge -- Extra practice: Assignment & Comparison
+
+Which elephant weighs more? Convert one's weight to the units of the other, and store the result in an appropriately-named new variable. Write a command to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
+
+```{r, eval=FALSE}
+elephant1_kg <- 3492
+elephant2_lb <- 7757
+```
+
+</div>
 
 <br>
 

@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,13 +340,10 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
       <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
@@ -463,6 +471,10 @@ div.tocify {
 
 <p>
 </p>
+<p>This course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology (GGE) at the University of California, Davis, USA.</p>
+<p>Funding for this course is provided by the GGE, and the 2019 course faculty sponsor is Andrew Latimer. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.</p>
+<p>
+</p>
 <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
 <div class="figure">
 <img src="img/DC-logo-vision.png" />
@@ -474,28 +486,18 @@ div.tocify {
 <p>Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is a sibling organization of Software Carpentry. Where Software Carpentry teaches best practices in software development, our focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain specific, from life and physical sciences to social science and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.</p>
 <p>See the Data Carpentry <a href="http://www.datacarpentry.org/">website</a> for more information.</p>
 <p><br></p>
-<div id="about-the-instructors" class="section level2">
-<h2>About the Instructors</h2>
-<p><strong>Ryan Peek</strong> <a href="mailto:rapeek@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://ryanpeek.github.io/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/riverpeek"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/ryanpeek"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid"></i></a></p>
-<p>I am a 4th year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I’ve worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and <a href="x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/">meadow conservation</a> and restoration in the Sierra Nevada.</p>
-<p>I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the <a href="http://d-rug.github.io/">Davis R Users Group (D-RUG)</a> and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.</p>
-<p>My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.</p>
+<div id="instructors" class="section level2">
+<h2>Instructors</h2>
+<p><strong>Michael Culshaw-Maurer</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mjculshawmaurer@ucdavis.edu">email</a><br />
+<a href="https://mcmaurer.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
+<a href="https://twitter.com/MCulshawMaurer"><i class="fa fa-twitter-square" aria-hidden="true"></i> @MCulshawMaurer</a><br />
+<a href="https://github.com/mcmaurer"><i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer</a></p>
 <p><br></p>
-<p><strong>Michael Koontz</strong> <a href="mailto:mikoontz@gmail.com"><i class="fa fa-envelope-square" aria-hidden="true" ></i></a> <a href="https://michaeljkoontz.weebly.com/"><i class="fa fa-user" aria-hidden="true"></i></a> <a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter" aria-hidden="true"></i></a> <a href="https://github.com/mikoontz"><i class="fa fa-github" aria-hidden="true"></i></a> <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid"></i></a></p>
-<p>I’m a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.</p>
-<p>I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.</p>
-<p>My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p>
-</div>
-<div id="about-the-tas" class="section level2">
-<h2>About the TAs</h2>
-<p><strong>Martha Wohlfeil</strong> <a href="mailto:mwohlfeil@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github" aria-hidden="true"></i></a></p>
-<p>Martha is a 2nd year graduate student in the ecology department at UC Davis. She studies avian biogeography in the Great Basin and has experience building statistical models and working with mapping software.</p>
-<p><br></p>
-<p><strong>Taylor Reiter</strong> <a href="mailto:tereiter@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://github.com/taylorreiter"><i class="fa fa-github" aria-hidden="true"></i></a></p>
-<p>Taylor is a 2nd year graduate student in the Food Science graduate group at UC Davis. She studies how microbes survive in and change the metabolite profile of olive oil. She has experience wrangling genomic data, building websites, and using git in R.</p>
-<p><br></p>
-<p><strong>Michael Culshaw-Maurer</strong> <a href="mailto:mjculshawmaurer@ucdavis.edu"><i class="fa fa-envelope-square" aria-hidden="true"></i></a> <a href="https://github.com/MCMaurer"><i class="fa fa-github" aria-hidden="true"></i></a></p>
-<p>Michael is a 3rd year PhD candidate in the GGE. He studies the effects of disease and cannibalism on population dynamics in insects and has experience with statistical modeling, agent-based modeling, and data visualization in R.</p>
+<p><strong>Martha Wohlfeil</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mwohlfeil@ucdavis.edu">email</a><br />
+<a href="https://marthawohlfeil.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
+<a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil</a></p>
 </div>
 
 

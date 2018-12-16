@@ -22,11 +22,9 @@ navbar:
     - text: Project Management
       href: lesson_project_management.html
     - text: Spreadsheets
-      href: http://www.datacarpentry.org/spreadsheet-ecology-lesson/
+      href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types
-      href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
-    - text: Data frames (continents)
-      href: lesson_data_frames_continents.html
+      href: lesson_vectors.html
     - text: Data frames (ecology)
       href: lesson_data_frames_ecology.html
     - text: Using dplyr (ecology)
@@ -87,11 +85,11 @@ output_dir: docs
 output:
   html_document:
     theme: flatly
-    highlight: pygments
-    code_folding: hide
+    #highlight: pygments
+    code_folding: show
     toc: yes
     toc_float:
-      collapsed: no
+      collapsed: yes
     include:
       in_header: header.html
     css: style.css
