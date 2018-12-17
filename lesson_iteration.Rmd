@@ -22,6 +22,8 @@ Copy-pasting tons of code<br>
 And you may ask yourself, well<br>
 How did I get here?
 
+![](img/david_byrne_once.gif){width=250}
+
 <br>
 
 It's pretty common that you'll want to run the same basic bit of code a bunch of times with different inputs. Maybe you want to read in a bunch of data files with different names or calculate something complex on every row of a dataframe. A general rule of thumb is that any code you want to run 3+ times should be iterated instead of copy-pasted. Copy-pasting code and replacing the parts you want to change is generally a bad practice for several reasons:
@@ -52,7 +54,7 @@ for(i in 1:10) {
 }
 ```
 
-You'll often see `i` used because it refers to "index". For each index value in the vector 1:10, we'll print that index value. You can use the index value more than once in a loop:
+You'll often see `i` used in for loops, you can think of it as the iteration value. For each `i` value in the vector 1:10, we'll print that index value. You can use the `i` value more than once in a loop:
 
 ```{r}
 for (i in 1:10) {
@@ -61,6 +63,43 @@ for (i in 1:10) {
 }
 ```
 
-What's happening is the value of `i` gets inserted into the code block, the block gets run, the value of `i` changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your index value is going in the code.
+What's happening is the value of `i` gets inserted into the code block, the block gets run, the value of `i` changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your `i` value is going in the code.
+
+You can also use the `i` value to index a vector or dataframe, which can be very powerful!
+
+```{r}
+for (i in 1:10) {
+  print(letters[i])
+  print(mtcars$wt[i])
+}
+```
+
+Here we printed out the first 10 letters of the alphabet from the `letters` vector, as well as the first 10 car weights from the `mtcars` dataframe.
+
+If you want to store your results somewhere, it is important that you create an empty object to hold them **before** you run the loop. If you grow your results vector one value at a time, it will be much slower. Here's how to make that empty vector first. We'll also use the function `seq_along` to create a sequence that's the proper length, instead of explicitly writing out something like `1:10`.
+
+```{r}
+results <- rep(NA, nrow(mtcars))
+for (i in seq_along(mtcars$wt)) {
+  results[i] <- mtcars$wt[i] * 1000
+}
+results
+```
+
+
+## `apply` Functions
+
+R includes another way to iterate, using the `apply` family of functions.
+
+## `purrr`
+
+## Conditional Statements
+
+### `if` `else`
+
+### `case_when`
+
+## Complete Workflow
+
 
 

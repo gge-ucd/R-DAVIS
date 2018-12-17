@@ -477,6 +477,7 @@ div.tocify {
 <div id="once-twice-thrice-in-a-lifetime" class="section level1">
 <h1><del>Once</del> <del>Twice</del> Thrice in a Lifetime</h1>
 <p>And you may find yourself<br> Behind the keys of a large computing machine<br> And you may find yourself<br> Copy-pasting tons of code<br> And you may ask yourself, well<br> How did I get here?</p>
+<p><img src="img/david_byrne_once.gif" width="250" /></p>
 <p><br></p>
 <p>It’s pretty common that you’ll want to run the same basic bit of code a bunch of times with different inputs. Maybe you want to read in a bunch of data files with different names or calculate something complex on every row of a dataframe. A general rule of thumb is that any code you want to run 3+ times should be iterated instead of copy-pasted. Copy-pasting code and replacing the parts you want to change is generally a bad practice for several reasons:</p>
 <ul>
@@ -508,7 +509,7 @@ log(x)</code></pre>
 ## [1] 8
 ## [1] 9
 ## [1] 10</code></pre>
-<p>You’ll often see <code>i</code> used because it refers to “index”. For each index value in the vector 1:10, we’ll print that index value. You can use the index value more than once in a loop:</p>
+<p>You’ll often see <code>i</code> used in for loops, you can think of it as the iteration value. For each <code>i</code> value in the vector 1:10, we’ll print that index value. You can use the <code>i</code> value more than once in a loop:</p>
 <pre class="r"><code>for (i in 1:10) {
   print(i)
   print(i^2)
@@ -533,6 +534,60 @@ log(x)</code></pre>
 ## [1] 81
 ## [1] 10
 ## [1] 100</code></pre>
+<p>What’s happening is the value of <code>i</code> gets inserted into the code block, the block gets run, the value of <code>i</code> changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your <code>i</code> value is going in the code.</p>
+<p>You can also use the <code>i</code> value to index a vector or dataframe, which can be very powerful!</p>
+<pre class="r"><code>for (i in 1:10) {
+  print(letters[i])
+  print(mtcars$wt[i])
+}</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] 2.62
+## [1] &quot;b&quot;
+## [1] 2.875
+## [1] &quot;c&quot;
+## [1] 2.32
+## [1] &quot;d&quot;
+## [1] 3.215
+## [1] &quot;e&quot;
+## [1] 3.44
+## [1] &quot;f&quot;
+## [1] 3.46
+## [1] &quot;g&quot;
+## [1] 3.57
+## [1] &quot;h&quot;
+## [1] 3.19
+## [1] &quot;i&quot;
+## [1] 3.15
+## [1] &quot;j&quot;
+## [1] 3.44</code></pre>
+<p>Here we printed out the first 10 letters of the alphabet from the <code>letters</code> vector, as well as the first 10 car weights from the <code>mtcars</code> dataframe.</p>
+<p>If you want to store your results somewhere, it is important that you create an empty object to hold them <strong>before</strong> you run the loop. If you grow your results vector one value at a time, it will be much slower. Here’s how to make that empty vector first. We’ll also use the function <code>seq_along</code> to create a sequence that’s the proper length, instead of explicitly writing out something like <code>1:10</code>.</p>
+<pre class="r"><code>results &lt;- rep(NA, nrow(mtcars))
+for (i in seq_along(mtcars$wt)) {
+  results[i] &lt;- mtcars$wt[i] * 1000
+}
+results</code></pre>
+<pre><code>##  [1] 2620 2875 2320 3215 3440 3460 3570 3190 3150 3440 3440 4070 3730 3780
+## [15] 5250 5424 5345 2200 1615 1835 2465 3520 3435 3840 3845 1935 2140 1513
+## [29] 3170 2770 3570 2780</code></pre>
+</div>
+<div id="apply-functions" class="section level2">
+<h2><code>apply</code> Functions</h2>
+</div>
+<div id="purrr" class="section level2">
+<h2><code>purrr</code></h2>
+</div>
+<div id="conditional-statements" class="section level2">
+<h2>Conditional Statements</h2>
+<div id="if-else" class="section level3">
+<h3><code>if</code> <code>else</code></h3>
+</div>
+<div id="case_when" class="section level3">
+<h3><code>case_when</code></h3>
+</div>
+</div>
+<div id="complete-workflow" class="section level2">
+<h2>Complete Workflow</h2>
 </div>
 </div>
 
