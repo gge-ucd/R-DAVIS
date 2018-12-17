@@ -346,19 +346,13 @@ div.tocify {
       <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -469,8 +463,9 @@ div.tocify {
 </div>
 
 
+<br>
 <div class="blue">
-<h2 id="learning-objectives">Learning objectives</h2>
+<h3 id="learning-objectives">Learning objectives</h3>
 <ol style="list-style-type: decimal">
 <li>Appreciate why a researcher might want to write code and why R specifically</li>
 <li>Gain familiarity the RStudio IDE</li>
@@ -482,8 +477,9 @@ div.tocify {
 <li>To be able to seek help via <code>?</code> and Google</li>
 </ol>
 </div>
-<div id="why-programming" class="section level2">
-<h2>Why programming?</h2>
+<p><br></p>
+<div id="why-programming" class="section level1">
+<h1>Why programming?</h1>
 <p>Programming can make your science even better than it already is.</p>
 <p>The basis of programming is that we write down instructions for the computer to follow, and then we tell the computer to follow those instructions. We write, or <em>code</em>, instructions in R because it is a common language that both the computer and we can understand. We call the instructions <em>commands</em> and we tell the computer to follow the instructions by <em>executing</em> (also called <em>running</em>) those commands.</p>
 <p>The benefits of programming parallel many of the cornerstones of science. Programming makes your workflow:</p>
@@ -497,20 +493,19 @@ div.tocify {
 <li>Transparent</li>
 </ul>
 </div>
-<div id="why-r" class="section level2">
-<h2>Why R?</h2>
+<div id="why-r" class="section level1">
+<h1>Why R?</h1>
 <p>R is a free, open-source programming language that is designed for data analysis and statistics.</p>
 <p>We write code in R because it is a language that both we and the computer can understand. It is a common language between us.</p>
 <p>R also has a huge user-community and is highly extensible, with thousands of packages that add extra functionality. Lots of researchers use R, so it is also a common language between us and our colleagues. In short, for many researchers, it is the best tool to organize, visualize, and analyze data.</p>
 </div>
-<div id="why-rstudio" class="section level2">
-<h2>Why RStudio?</h2>
+<div id="why-rstudio" class="section level1">
+<h1>Why RStudio?</h1>
 <p>RStudio is an IDE (integrated development environment) which we use to manage and execute R code. It is also free and open-source, it works on all platforms (e.g. you can use an Amazon Web Services cluster using RStudio), and it integrates version control and project management.</p>
 <p>You write the same R code in RStudio as you would elsewhere, and it executes the same way. RStudio helps by keeping things nicely organized.</p>
-<p><br></p>
 </div>
-<div id="introduction-to-rstudio" class="section level2">
-<h2>Introduction to RStudio</h2>
+<div id="introduction-to-rstudio" class="section level1">
+<h1>Introduction to RStudio</h1>
 <p>When you open RStudio you should see three panels:</p>
 <ol style="list-style-type: decimal">
 <li>The interactive R <strong>Console</strong> (entire left)</li>
@@ -519,8 +514,8 @@ div.tocify {
 </ol>
 <p>The placement of these panes and their content can be customized (see menu, Tools -&gt; Global Options -&gt; Pane Layout).</p>
 <p>One of the advantages of using RStudio is that all the information you need to write code is available in a single window. Additionally, with many shortcuts, autocompletion, and highlighting for the major file types you use while developing in R, RStudio will make typing easier and less error-prone.</p>
-<div id="workflow-within-rstudio" class="section level3">
-<h3>Workflow within Rstudio</h3>
+<div id="workflow-within-rstudio" class="section level2">
+<h2>Workflow within Rstudio</h2>
 <p>Console vs. script</p>
 <ul>
 <li>Console
@@ -551,8 +546,9 @@ div.tocify {
 </ul></li>
 </ul></li>
 </ul>
+<br>
 <div class="blue">
-<h4 id="tip-pushing-to-the-interactive-r-console">Tip: Pushing to the interactive R console</h4>
+<h3 id="tip-pushing-to-the-interactive-r-console">Tip: Pushing to the interactive R console</h3>
 <p>To run the line of your script where the cursor is, you can click on the <code>Run</code> button at the top-right of the script pane or use the keyboard short cut: <code>cmd/ctrl-enter</code>.</p>
 <p>To run a block of code, select (highlight) it and click <code>Run</code> or <code>cmd/ctrl-enter</code>.</p>
 <p>You are working toward selecting a whole script and running it.</p>
@@ -560,10 +556,11 @@ div.tocify {
 <li>You’ll write your script interactively, running each line to make sure it works, and at the end, you’ll be able to run the whole analysis by selecting all and running the script. This way you can later rerun the analysis on new or modified data or change part of the analysis and everything will work with the click of a button.</li>
 </ul>
 </div>
+<p><br></p>
 </div>
 </div>
-<div id="introduction-to-r" class="section level2">
-<h2>Introduction to R</h2>
+<div id="introduction-to-r" class="section level1">
+<h1>Introduction to R</h1>
 <p>The simplest thing you can do with R is do arithmetic:</p>
 <pre class="r"><code>1 + 100</code></pre>
 <pre><code>## [1] 101</code></pre>
@@ -586,21 +583,21 @@ div.tocify {
 <p>Use parentheses to group to force the order of evaluation, and/or to make code easier to read.</p>
 <pre class="r"><code>(3 + 5) * 2</code></pre>
 <pre><code>## [1] 16</code></pre>
-<div id="whitespace" class="section level3">
-<h3>Whitespace</h3>
+<div id="whitespace" class="section level2">
+<h2>Whitespace</h2>
 <p>Speaking of being easy to read, whitespace is ignored by R. Use it consistently to make code readable. For example, putting a single space on either side of an operator makes code easy to read.</p>
 <pre class="r"><code>(3 + (5 * (2 ^ 2))) # hard to read
 3 + 5 * 2 ^ 2       # easier to read, once you know rules
 3+5*2^2             # very hard to read
 3 + 5 * (2 ^ 2)     # to make order of operations clear, use parentheses</code></pre>
 </div>
-<div id="comments" class="section level3">
-<h3>Comments</h3>
+<div id="comments" class="section level2">
+<h2>Comments</h2>
 <p>The text that appears to the right of each line of code above is called a comment. Anything that follows the hash symbol – <code>#</code> – is ignored by R.</p>
 <p>Liberally add comments to your code as you write. Things that are clear as you write them will be mysterious to others, including your-future-self! Commenting takes little time and will save you time and headaches in the long run.</p>
 </div>
-<div id="scientific-notation" class="section level3">
-<h3>Scientific Notation</h3>
+<div id="scientific-notation" class="section level2">
+<h2>Scientific Notation</h2>
 <p>Really small or large numbers get a scientific notation:</p>
 <pre class="r"><code>2/10000</code></pre>
 <pre><code>## [1] 2e-04</code></pre>
@@ -609,8 +606,8 @@ div.tocify {
 <pre class="r"><code>1e9  # One billion</code></pre>
 <pre><code>## [1] 1e+09</code></pre>
 </div>
-<div id="mathematical-functions" class="section level3">
-<h3>Mathematical functions</h3>
+<div id="mathematical-functions" class="section level2">
+<h2>Mathematical functions</h2>
 <p>R has many built in mathematical functions. To call a function, type its name, follow by open and closing parentheses. Anything we type inside those parentheses is an “argument” to that function.</p>
 <p>Here we call the <code>sin</code> function and provide it the argument 3.14, or approximately <span class="math inline">\(\pi\)</span>.</p>
 <pre class="r"><code>sin(3.14)  # trigonometry functions</code></pre>
@@ -622,15 +619,15 @@ div.tocify {
 <pre class="r"><code>exp(0.5) # e^(1/2)</code></pre>
 <pre><code>## [1] 1.648721</code></pre>
 </div>
-<div id="nested-functions" class="section level3">
-<h3>Nested Functions</h3>
+<div id="nested-functions" class="section level2">
+<h2>Nested Functions</h2>
 <p>You can even put functions inside each other. <code>exp(0.5)</code> raised <code>e</code> to the <code>1/2</code> power. Equivalently we could take the square-root of <code>e</code>. Expressions are interpretted from the inside-out: In the following line, R first takes <code>e^1</code> (which is <code>e</code>), and then takes the square-root (that’s what the <code>sqrt</code> function does) of the result.</p>
 <pre class="r"><code>sqrt(exp(1))</code></pre>
 <pre><code>## [1] 1.648721</code></pre>
 <p>You don’t need to remember function names. There are many ways to discover or rediscover them when you need them. Google is your friend, but we will discuss other ways soon.</p>
 </div>
-<div id="comparison" class="section level3">
-<h3>Comparison</h3>
+<div id="comparison" class="section level2">
+<h2>Comparison</h2>
 <p>We can do logical comparison in R. This will be important later, for example, when we want to filter a dataset based on a logical condition.</p>
 <pre class="r"><code>1 == 1  # equality (note two equals signs, read as &quot;is equal to&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -641,8 +638,8 @@ div.tocify {
 <pre class="r"><code>1 &gt;= -9 # greater than or equal to</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 </div>
-<div id="variables-and-assignment" class="section level3">
-<h3>Variables and assignment</h3>
+<div id="variables-and-assignment" class="section level2">
+<h2>Variables and assignment</h2>
 <p>We can store values in variables using the assignment operator <code>&lt;-</code>. You can also use a single equals sign, <code>=</code>, for assignment.</p>
 <p>Note that unlike every other expression we have run so far, R doesn’t print anything when we run this next line. Instead, it is stored for later in a <strong>variable</strong>, <code>x</code>. <code>x</code> now contains the <strong>value</strong> <code>0.25</code>. Read this as “Assign 1/4 to x.”</p>
 <pre class="r"><code>x &lt;- 1/4</code></pre>
@@ -657,8 +654,9 @@ div.tocify {
 <p><code>x</code> used to contain the value 0.25 and and now it has the value 99.</p>
 <p>Assignment values can contain the variable being assigned to:</p>
 <pre class="r"><code>x &lt;- x + 1 </code></pre>
+<br>
 <div class="blue">
-<h4 id="mcq-variable-assignment">MCQ – Variable Assignment</h4>
+<h3 id="mcq-variable-assignment">MCQ – Variable Assignment</h3>
 <p>What does the following code print?</p>
 <pre><code>a &lt;- 1
 b &lt;- 2
@@ -672,9 +670,10 @@ Option 2) 3
 Option 3) 4  
 Option 4) ::nothing::  </code></pre>
 </div>
+<p><br></p>
 </div>
-<div id="variable-name-conventions" class="section level3">
-<h3>Variable name conventions</h3>
+<div id="variable-name-conventions" class="section level2">
+<h2>Variable name conventions</h2>
 <p>Variable names can contain letters, numbers, underscores and periods. They cannot start with a number nor contain spaces at all. Different people use different conventions for long variable names, especially:</p>
 <ul>
 <li>underscores_between_words</li>
@@ -682,17 +681,17 @@ Option 4) ::nothing::  </code></pre>
 </ul>
 <p>What you use is up to you, but <strong>be consistent</strong>.</p>
 </div>
-<div id="tab-completion" class="section level3">
-<h3>Tab completion</h3>
+<div id="tab-completion" class="section level2">
+<h2>Tab completion</h2>
 <p>Use descriptive variable names, as they make your code easier to understand. It will save time because you’ll remember what each variable is: It’s easier to remember what <code>domesticPopulation</code> is than <code>dp</code> or <code>x</code>. A silly example:</p>
 <pre class="r"><code>theNumberNine &lt;- 9</code></pre>
 <p>Tab-completion is a really nice feature of RStudio that saves typing and avoid typos. After you assign 9 to <code>theNumberNine</code>, if you start typing <code>t...</code>, <code>th...</code>, etc., and then pressing <code>tab</code>, RStudio will pull up a box of all the valid ways to finish that word. You can scroll through them using the up- and down-arrows and press enter to choose the one you want. If you press tab when there is only one valid way to complete something, RStudio will automatically complete it.</p>
 </div>
 </div>
-<div id="understanding-functions-getting-help" class="section level2">
-<h2>Understanding functions &amp; getting help</h2>
-<div id="r-help-files" class="section level3">
-<h3>R help files</h3>
+<div id="understanding-functions-getting-help" class="section level1">
+<h1>Understanding functions &amp; getting help</h1>
+<div id="r-help-files" class="section level2">
+<h2>R help files</h2>
 <p>Once you figure out what function you want, you need to figure out how to use it. Every function has an associated help-file. They can be hard to read, especially at first, but it is important to learn how to make sense of them.</p>
 <p><code>?function</code> brings up help-file. E.g.</p>
 <pre class="r"><code>?log</code></pre>
@@ -707,8 +706,8 @@ Option 4) ::nothing::  </code></pre>
 <li>Examples: Some examples for how to use the function.</li>
 </ul>
 </div>
-<div id="other-ways-to-get-help" class="section level3">
-<h3>Other ways to get help</h3>
+<div id="other-ways-to-get-help" class="section level2">
+<h2>Other ways to get help</h2>
 <ul>
 <li><code>??</code> searches the text of all R help files, e.g. <code>??base</code> will find <code>log</code>.</li>
 <li><a href="https://www.google.com/">Google</a></li>
@@ -717,8 +716,8 @@ Option 4) ::nothing::  </code></pre>
 <li><a href="http://www.cookbook-r.com/">Cookbook for R</a></li>
 </ul>
 </div>
-<div id="arguments-to-functions" class="section level3">
-<h3>Arguments to functions</h3>
+<div id="arguments-to-functions" class="section level2">
+<h2>Arguments to functions</h2>
 <ul>
 <li>Can be specified by order or by name</li>
 <li>Before, when we entered <code>log(3)</code>, <code>log</code> knew <code>3</code> was <code>x</code> because it was in the first position, but we could have also told <code>log</code> explicitly that <code>3</code> is the value <code>x</code> should take. These are the same:</li>
@@ -744,20 +743,22 @@ Option 4) ::nothing::  </code></pre>
 <pre><code>## [1] 0.4771213</code></pre>
 <pre class="r"><code>log(base = 10, x = 3)</code></pre>
 <pre><code>## [1] 0.4771213</code></pre>
+<br>
 <div class="blue">
-<h4 id="mcq-which-of-these-things-is-not-like-the-other-ones">MCQ – Which of these things is not like the other ones?</h4>
+<h3 id="mcq-which-of-these-things-is-not-like-the-other-ones">MCQ – Which of these things is not like the other ones?</h3>
 <p>Three of the following lines produce the same result. Without running the code, which one will produce a different result than the others? The helpfile for <code>log</code> (<code>?log</code>) may be helpful.</p>
 <pre><code>Option 1) log(x = 1000, base = 10)
 Option 2) log10(1000)
 Option 3) log(base = 10, x = 1000)
 Option 4) log(10, 1000)</code></pre>
 </div>
+<p><br></p>
 </div>
-<div id="when-r-wants-to-tell-you-something" class="section level3">
-<h3>When R Wants to Tell You Something</h3>
+<div id="when-r-wants-to-tell-you-something" class="section level2">
+<h2>When R Wants to Tell You Something</h2>
 <p>Besides the value of an expression R has executed, there are a few other kinds of responses you might get from R, including errors, warnings, and messages.</p>
-<div id="errors" class="section level4">
-<h4>Errors</h4>
+<div id="errors" class="section level3">
+<h3>Errors</h3>
 <p>R returns an error when it cannot proceed. It stops you in your tracks. The error message will provide some information on what the problem was, but it is often cryptic. Learning to understand these messages is important but takes practice. Here’s an example of an error:</p>
 <pre class="r"><code>log_of_a_word &lt;- log(&quot;a_word&quot;)</code></pre>
 <pre><code>## Error in log(&quot;a_word&quot;): non-numeric argument to mathematical function</code></pre>
@@ -765,8 +766,8 @@ Option 4) log(10, 1000)</code></pre>
 <pre class="r"><code>log_of_a_word</code></pre>
 <pre><code>## Error in eval(expr, envir, enclos): object &#39;log_of_a_word&#39; not found</code></pre>
 </div>
-<div id="warnings" class="section level4">
-<h4>Warnings</h4>
+<div id="warnings" class="section level3">
+<h3>Warnings</h3>
 <p>Warnings appear in the same red font in the console, but they start with “Warning” instead of “Error”. Warnings are R’s way of telling you that it did something, but it suspects it may not have been what you wanted. <em>Warnings can be more insidious than errors</em> because you can keep going, but keep going with a mistake in your pipeline. Here’s an example:</p>
 <pre class="r"><code>log_of_a_negative &lt;- log(-2)</code></pre>
 <pre><code>## Warning in log(-2): NaNs produced</code></pre>
@@ -775,13 +776,14 @@ Option 4) log(10, 1000)</code></pre>
 <pre class="r"><code>log_of_a_negative</code></pre>
 <pre><code>## [1] NaN</code></pre>
 </div>
-<div id="messages" class="section level4">
-<h4>Messages</h4>
+<div id="messages" class="section level3">
+<h3>Messages</h3>
 <p>There’s a third source of red text in R: messages. These are R’s way of telling you that something happened, but it’s probably nothing to worry about. These don’t start with “Message”; they just print the red text. We can make R print one like this:</p>
 <pre class="r"><code>message(&quot;Hey buddy!&quot;)</code></pre>
 <pre><code>## Hey buddy!</code></pre>
+<br>
 <div class="blue">
-<h4 id="challenge-extra-practice-assignment-comparison">Challenge – Extra practice: Assignment &amp; Comparison</h4>
+<h3 id="challenge-extra-practice-assignment-comparison">Challenge – Extra practice: Assignment &amp; Comparison</h3>
 <p>Which elephant weighs more? Convert one’s weight to the units of the other, and store the result in an appropriately-named new variable. Write a command to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).</p>
 <pre class="r"><code>elephant1_kg &lt;- 3492
 elephant2_lb &lt;- 7757</code></pre>

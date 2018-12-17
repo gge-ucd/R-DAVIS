@@ -25,16 +25,12 @@ navbar:
       href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types
       href: lesson_vectors.html
-    - text: Data frames (ecology)
+    - text: Data Frames 
       href: lesson_data_frames_ecology.html
-    - text: Using dplyr (ecology)
+    - text: Using dplyr
       href: lesson_dplyr_ecology.html
-    - text: Using dplyr (gapminder)
-      href: lesson_dplyr_gapminder.html
-    - text: Using ggplot2 (gapminder)
-      href: lesson_visualization_ggplot2.html
-    - text: Using ggplot2 (ecology)
-      href: http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
+    - text: Using ggplot2
+      href: lesson_ggplot_ecology.html
     - text: Visualization Do's & Don'ts
       href: lesson_visualization_dos.html
     - text: Literate Programming with RMarkdown

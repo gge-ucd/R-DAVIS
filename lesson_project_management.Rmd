@@ -1,6 +1,7 @@
 ---
 title: Project management with RStudio
 ---
+<br>
 <div class = "blue">
 # Learning objectives
 
@@ -8,6 +9,8 @@ title: Project management with RStudio
 * Know how to organize code, data, and results
 * Be able to create and use an RStudio project
 </div>
+
+<br>
 
 # Code & Data Organization
 
@@ -64,6 +67,7 @@ When you want to work on this project using R, double click on the .Rproj file,
 and RStudio will open it and keep everything organized for you. You can also 
 open an existing project from RStudio by clicking "File -> Open project...
 
+<br>
 <div class = "blue">
 ### Challenge -- Create a Project
 Let's create a new project in RStudio that will contain all of our work for 
@@ -80,6 +84,7 @@ today.
   "DataCarpentry-day1" in that directory.
 6. Click "Create Project".
 </div>
+<br>
 
 If everything went right, RStudio should've flickered and you should be looking 
 at a pretty bare RStudio instance. That's okay. Click on the "Files" tab in the 
@@ -89,6 +94,7 @@ described above, a folder for each of data, code, results, and papers. You can
 do this in RStudio by clicking on the "New Folder" button in the Files pane, or 
 in your OS by navigating to the directory you just created. 
 
+<br>
 <div class = "blue">
 #### Challenge -- Project Organization
 - In your project directory, either using the Project tab of RStudio or your OS' file system, 
