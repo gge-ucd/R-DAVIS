@@ -1,6 +1,14 @@
 ---
-title: Project management with RStudio
+title: Project Management with RStudio
 ---
+<br>
+`HOME` is where I want to be<br>
+But I guess I'm already there<br>
+I come home, a clean directory<br>
+I guess this must be the place
+
+![](img/david_byrne_big_suit.gif){width=250px}
+
 <br>
 <div class = "blue">
 # Learning objectives
@@ -103,6 +111,7 @@ create the following directories:
     - code
     - results
     - papers
+
 The finished product should look something like this on your computer:  
 ![](img/good_project_organization.png)
 </div>

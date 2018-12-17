@@ -31,7 +31,7 @@ navbar:
       href: lesson_dplyr_ecology.html
     - text: Using ggplot2
       href: lesson_ggplot_ecology.html
-    - text: Visualization Do's & Don'ts
+    - text: "Visualization Do's & Don'ts"
       href: lesson_visualization_dos.html
     - text: Literate Programming with RMarkdown
       href: lesson_rmarkdown.html

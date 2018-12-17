@@ -1,0 +1,66 @@
+---
+title: "Iteration"
+---
+<br>
+<div class = "blue">
+# Learning objectives
+
+* Understand when and why to iterate code
+* Be able to start with a single use and build up to iteration
+* Use for loops, apply functions, and purrr to iterate
+* Be able to write functions to cleanly iterate code
+</div>
+
+<br>
+
+# ~~Once~~ ~~Twice~~ Thrice in a Lifetime
+
+And you may find yourself<br>
+Behind the keys of a large computing machine<br>
+And you may find yourself<br>
+Copy-pasting tons of code<br>
+And you may ask yourself, well<br>
+How did I get here?
+
+<br>
+
+It's pretty common that you'll want to run the same basic bit of code a bunch of times with different inputs. Maybe you want to read in a bunch of data files with different names or calculate something complex on every row of a dataframe. A general rule of thumb is that any code you want to run 3+ times should be iterated instead of copy-pasted. Copy-pasting code and replacing the parts you want to change is generally a bad practice for several reasons:
+
+- it's easy to forget to change all the parts that need to be different
+- it's easy to mistype 
+- it is ugly to read
+- it scales very poorly (try copy-pasting 100 times...)
+
+Lots of functions (including many `base` functions) are *vectorized*, meaning they already work on vectors of values. Here's an example:
+
+```{r}
+x <- 1:10
+log(x)
+```
+
+The `log()` function already knows we want to take the log of each element in x, and it returns a vector that's the same length as x. If a *vectorized* function already exists to do what you want, use it! It's going to be faster and cleaner than trying to iterate everything yourself.
+
+However, we may want to do more complex iterations, which brings us to our first main iterating concept.
+
+## For Loops
+
+A for loop will repeat some bit of code along a vector you give it. Here's the basic structure:
+
+```{r}
+for(i in 1:10) {
+  print(i)
+}
+```
+
+You'll often see `i` used because it refers to "index". For each index value in the vector 1:10, we'll print that index value. You can use the index value more than once in a loop:
+
+```{r}
+for (i in 1:10) {
+  print(i)
+  print(i^2)
+}
+```
+
+What's happening is the value of `i` gets inserted into the code block, the block gets run, the value of `i` changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your index value is going in the code.
+
+
