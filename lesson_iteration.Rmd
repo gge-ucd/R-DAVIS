@@ -93,6 +93,8 @@ R includes another way to iterate, using the `apply` family of functions.
 
 ## `purrr`
 
+If you've been digging the `tidyverse`, well rest assured, they've got some slick iteration functions too!
+
 ## Conditional Statements
 
 ### `if` `else`
@@ -101,5 +103,11 @@ R includes another way to iterate, using the `apply` family of functions.
 
 ## Complete Workflow
 
+### Starting With a Single Case
 
+### Generalizing
+
+### Making it a Function
+
+### Iterating!
 
