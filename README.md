@@ -13,7 +13,15 @@ Because much of the varied content found in the lessons, there are a number of p
 "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap",
 "ggthemes", "magrittr", "leaflet", "plotly", "knitr")`
 
-To get an updated list of packages for the website, navigate to the repo on the command line, then run this command: `grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/\'//g; s/"//g' | grep -Eo '^\w+' | sort | uniq`
+To get an updated list of packages for the website, navigate to the repo on the command line, then try one of these commands:
+
+```
+grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/"//g' | sed "s/\'//g" | grep -Eo '^\w+' | sort | uniq
+```
+*or*
+```
+grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/"//g' | grep -Eo '^\w+' | sort | uniq
+```
 
 ## Build Site Locally
 
