@@ -1,9 +1,14 @@
 ---
-title: "Iteration"
+title: "Iteration, Iteration, Iteration, Iter"
 ---
+
+```{r setup, echo=FALSE, purl=FALSE, message=F, results=F}
+library(tidyverse)
+```
+
 <br>
 <div class = "blue">
-# Learning objectives
+## Learning objectives
 
 * Understand when and why to iterate code
 * Be able to start with a single use and build up to iteration
@@ -13,7 +18,7 @@ title: "Iteration"
 
 <br>
 
-# ~~Once~~ ~~Twice~~ Thrice in a Lifetime
+## ~~Once~~ ~~Twice~~ Thrice in a Lifetime
 
 And you may find yourself<br>
 Behind the keys of a large computing machine<br>
@@ -46,7 +51,7 @@ However, we may want to do more complex iterations, which brings us to our first
 
 ## For Loops
 
-A for loop will repeat some bit of code along a vector you give it. Here's the basic structure:
+A for loop will repeat some bit of code, each time with a new input value. Here's the basic structure:
 
 ```{r}
 for(i in 1:10) {
@@ -80,6 +85,7 @@ If you want to store your results somewhere, it is important that you create an 
 
 ```{r}
 results <- rep(NA, nrow(mtcars))
+
 for (i in seq_along(mtcars$wt)) {
   results[i] <- mtcars$wt[i] * 1000
 }
@@ -89,25 +95,138 @@ results
 
 ## `apply` Functions
 
-R includes another way to iterate, using the `apply` family of functions.
+R includes another way to iterate, using the `apply` family of functions. These functions all do the same basic thing: take a series of values and apply a function to each of them. That function could be a function from a package, or it could be one you write to do something specific. 
+
+Here we'll use `sapply`, which will return the simplest form it can. Since we give it a vector, it'll give us back a vector. 
+
+```{r}
+sapply(1:10, sqrt)
+```
+
+This is not a useful example, since `sqrt` is vectorized already- we could just call `sqrt(1:10)` and get the same result. However, where `apply` functions become useful is when we want to do something more complicated.
+
+Oftentimes, the translation from a for loop to `apply` is this:
+
+- take the code from inside your for loop
+- turn it into a generalized function
+- use `apply` to apply that function across the range of values you want
+
+Let's do this for a simple example. First our for loop:
+
+```{r}
+result <- rep(NA, 10)
+
+for (i in 1:10) {
+  result[i] <- sqrt(i) / 2
+}
+
+result
+```
+
+We'll use what's called an "anonymous function", which is a function that we only define within the call to `sapply`. With a simple function like `sqrt(x)/2`, it's easier to use an anonymous function than write a whole new function.
+
+```{r}
+sapply(1:10, function(x) sqrt(x)/2)
+```
+
+Notice that the code here is cleaner and we didn't have to create a `result` vector to store the output. If we wanted to save our output, we could assign it to an object.
+
+With the `apply` family of functions, you can also pass other arguments to the functions you apply. Here we'll try applying `mean` to a dataframe with some missing values.
+
+```{r}
+mtcars_na <- mtcars
+mtcars_na[1, 1:4] <- NA
+
+sapply(mtcars_na, mean)
+sapply(mtcars_na, mean, na.rm = T)
+```
 
 ## `purrr`
 
-If you've been digging the `tidyverse`, well rest assured, they've got some slick iteration functions too!
+If you've been digging the `tidyverse`, well rest assured, they've got some slick iteration functions too! The `map` series of functions work very similarly to the `apply` functions, but they're a bit more tidyverse-friendly and allow you to more explicitly say what kinds of values you want returned.
+
+For a wonderful and thorough exploration of the `purrr` package, check out [Jenny Brian's tutorial](https://jennybc.github.io/purrr-tutorial/).
 
 ## Conditional Statements
 
-### `if` `else`
+Sometimes, you want to do something with your code, but only if a certain condition is true. There are a couple main ways to do this.
+
+### `if` and `else`
+
+You can use combinations of `if` and `else` to create conditional statements. Here's a quick example:
+
+```{r}
+for (i in 1:10) {
+  if (i < 5) {
+    print(paste(i, "is less than 5"))
+  } else {
+    print(paste(i, "is greater than or equal to 5"))
+  }
+}
+```
+
+Here we've combined a couple techniques: we've used a for loop to go through a sequence of values, and for each value we've printed a statement based on a condition that our value meets.
 
 ### `case_when`
+
+Sometimes you might want to do a bunch conditional statements together, but typing out a ton of nested if-else statements can be unwieldy and prone to typos. A really useful function is the tidyverse's `case_when`. You feed it a dataframe and then use a series of two-sited formulas where the left-hand side determines which values you want, and the right supplies the replacement value. Here's an example where we take the `mtcars` dataframe and add a column called `car_size`. If the car's weight is over 3.5 **or** it has 8 cylinders, we call it "big". If neither of these conditions is met (denoted by `TRUE`), then we call it "small".
+
+```{r}
+mtcars %>% 
+  mutate(
+    car_size = case_when(
+    wt > 3.5 | cyl == 8 ~ "big",
+    TRUE ~ "small"
+    )
+  )
+```
 
 ## Complete Workflow
 
 ### Starting With a Single Case
 
+The first thing we'll do is figure out if we can do the right thing once! We want to rescale a vector of values to a 0-1 scale. We'll try it out on the weights in `mtcars`. Our heaviest vehicle will have a scaled weight of 1, and our lightest will have a scaled weight of 0. We'll do this by taking our weight, subtracting the minimum car weight from it, and dividing this by the range of the car weights (max minus min). We'll have to be careful about our order of operations...
+
+```{r}
+(mtcars$wt[1] - min(mtcars$wt, na.rm = T)) /
+  (max(mtcars$wt, na.rm = T) - min(mtcars$wt, na.rm = T))
+```
+
+Great! We got a scaled value out of the deal. Because we're working with base functions like `max`, `min`, and `/`, we can vectorize. This means we can give it the whole weight vector, and we'll get a whole scaled vector back.
+
+```{r}
+mtcars$wt_scaled <- (mtcars$wt - min(mtcars$wt, na.rm = T)) /
+  diff(range(mtcars$wt, na.rm = T))
+```
+
 ### Generalizing
+
+Now let's replace our reference to a specific vector of data with something generic: `x`.
+
+```{r, eval=F}
+x_scaled <- (x - min(x, na.rm = T)) /
+  diff(range(x, na.rm = T))
+```
 
 ### Making it a Function
 
+Now that we've got a generalized bit of code, we can turn it into a function. All we need is a name, `function`, and a list of arguments. In this case, we've just got one argument: `x`.
+
+```{r}
+rescale_0_1 <- function(x) {
+  (x - min(x, na.rm = T)) /
+  diff(range(x, na.rm = T))
+}
+```
+
 ### Iterating!
 
+Now that we've got a function that'll rescale a vector of values, we can use one of the `map` functions to iterate across all the columns in a dataframe, rescaling each one. We'll use `map_df` since it returns a dataframe, and we're feeding it a dataframe.
+
+```{r}
+map_df(mtcars, rescale_0_1)
+```
+
+There you have it! We went from some code that calculated one value to being able to iterate it across any number of columns in a dataframe. It can be tempting to jump straight to your final iteration code, but it's often better to start simple and work your way up, verifying that things work at each step, especially if you're trying to do something even moderately complex.
+
+This lesson was contributed by Michael Culshaw-Maurer, with ideas from Mike Koontz and Brandon Hurr's [D-RUG presentation](http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk).
