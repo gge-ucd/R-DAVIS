@@ -46,7 +46,7 @@ My favorite part about teaching R is when students realize a problem they have s
 [<i class="fa fa-github-square" aria-hidden="true"></i> ryanpeek](https://github.com/ryanpeek)  
 [<i class="ai ai-orcid-square"></i> orcid.org/0000-0002-9577-6885](https://orcid.org/0000-0002-9577-6885)   
 
-I recently completed my PhD in Ecology (2018) studying ecological responses to freshwater alteration using a mix of hydrology, genomics, and ecology. I’ve been using R since 2011, and I became a certified Software/Data Carpentry instructor in 2016. I enjoy helping teach Carpentry workshops and R classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help coordinate the Davis R Users Group (D-RUG), and spearheaded a more organized effort at UC Davis to train fellow grad students/ecologists in data science using the R programming language. My favorite part of teaching programming/coding is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing learning experience to teach, and I hope to continue trying to empower others to become better scientists and data wranglers.
+I recently completed my PhD in Ecology (2018) studying ecological responses to freshwater alteration in a sensitive amphibian frog species. I work with many data types, but largely enjoy blending hydrology, genomics, and ecology. I’ve been using R since 2011, and I became a certified Software/Data Carpentry instructor in 2016. I enjoy teaching and helping run Carpentry workshops and R classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help coordinate the Davis R Users Group (D-RUG), and spearheaded a more organized effort at UC Davis to train fellow grad students/ecologists in data science using the R programming language. My favorite part of teaching programming/coding is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing learning experience to teach, and I hope to continue trying to empower others to become better scientists and data wranglers.
 
 <br>
 
@@ -66,7 +66,7 @@ My favorite part of teaching R is helping people make the leap between novice (n
 
 <br>
 
-## Teaching Assistants
+## Helpers
 
 **TBD**
 
