@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Iteration</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
+    </li>
+    <li>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Iteration</h1>
+
+</div>
+
+
+<br>
+<div class="blue">
+<h1 id="learning-objectives">Learning objectives</h1>
+<ul>
+<li>Understand when and why to iterate code</li>
+<li>Be able to start with a single use and build up to iteration</li>
+<li>Use for loops, apply functions, and purrr to iterate</li>
+<li>Be able to write functions to cleanly iterate code</li>
+</ul>
+</div>
+<p><br></p>
+<div id="once-twice-thrice-in-a-lifetime" class="section level1">
+<h1><del>Once</del> <del>Twice</del> Thrice in a Lifetime</h1>
+<p>And you may find yourself<br> Behind the keys of a large computing machine<br> And you may find yourself<br> Copy-pasting tons of code<br> And you may ask yourself, well<br> How did I get here?</p>
+<p><img src="img/david_byrne_once.gif" width="250" /></p>
+<p><br></p>
+<p>It’s pretty common that you’ll want to run the same basic bit of code a bunch of times with different inputs. Maybe you want to read in a bunch of data files with different names or calculate something complex on every row of a dataframe. A general rule of thumb is that any code you want to run 3+ times should be iterated instead of copy-pasted. Copy-pasting code and replacing the parts you want to change is generally a bad practice for several reasons:</p>
+<ul>
+<li>it’s easy to forget to change all the parts that need to be different</li>
+<li>it’s easy to mistype</li>
+<li>it is ugly to read</li>
+<li>it scales very poorly (try copy-pasting 100 times…)</li>
+</ul>
+<p>Lots of functions (including many <code>base</code> functions) are <em>vectorized</em>, meaning they already work on vectors of values. Here’s an example:</p>
+<pre class="r"><code>x &lt;- 1:10
+log(x)</code></pre>
+<pre><code>##  [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379 1.7917595 1.9459101
+##  [8] 2.0794415 2.1972246 2.3025851</code></pre>
+<p>The <code>log()</code> function already knows we want to take the log of each element in x, and it returns a vector that’s the same length as x. If a <em>vectorized</em> function already exists to do what you want, use it! It’s going to be faster and cleaner than trying to iterate everything yourself.</p>
+<p>However, we may want to do more complex iterations, which brings us to our first main iterating concept.</p>
+<div id="for-loops" class="section level2">
+<h2>For Loops</h2>
+<p>A for loop will repeat some bit of code along a vector you give it. Here’s the basic structure:</p>
+<pre class="r"><code>for(i in 1:10) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>You’ll often see <code>i</code> used in for loops, you can think of it as the iteration value. For each <code>i</code> value in the vector 1:10, we’ll print that index value. You can use the <code>i</code> value more than once in a loop:</p>
+<pre class="r"><code>for (i in 1:10) {
+  print(i)
+  print(i^2)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 1
+## [1] 2
+## [1] 4
+## [1] 3
+## [1] 9
+## [1] 4
+## [1] 16
+## [1] 5
+## [1] 25
+## [1] 6
+## [1] 36
+## [1] 7
+## [1] 49
+## [1] 8
+## [1] 64
+## [1] 9
+## [1] 81
+## [1] 10
+## [1] 100</code></pre>
+<p>What’s happening is the value of <code>i</code> gets inserted into the code block, the block gets run, the value of <code>i</code> changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your <code>i</code> value is going in the code.</p>
+<p>You can also use the <code>i</code> value to index a vector or dataframe, which can be very powerful!</p>
+<pre class="r"><code>for (i in 1:10) {
+  print(letters[i])
+  print(mtcars$wt[i])
+}</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] 2.62
+## [1] &quot;b&quot;
+## [1] 2.875
+## [1] &quot;c&quot;
+## [1] 2.32
+## [1] &quot;d&quot;
+## [1] 3.215
+## [1] &quot;e&quot;
+## [1] 3.44
+## [1] &quot;f&quot;
+## [1] 3.46
+## [1] &quot;g&quot;
+## [1] 3.57
+## [1] &quot;h&quot;
+## [1] 3.19
+## [1] &quot;i&quot;
+## [1] 3.15
+## [1] &quot;j&quot;
+## [1] 3.44</code></pre>
+<p>Here we printed out the first 10 letters of the alphabet from the <code>letters</code> vector, as well as the first 10 car weights from the <code>mtcars</code> dataframe.</p>
+<p>If you want to store your results somewhere, it is important that you create an empty object to hold them <strong>before</strong> you run the loop. If you grow your results vector one value at a time, it will be much slower. Here’s how to make that empty vector first. We’ll also use the function <code>seq_along</code> to create a sequence that’s the proper length, instead of explicitly writing out something like <code>1:10</code>.</p>
+<pre class="r"><code>results &lt;- rep(NA, nrow(mtcars))
+for (i in seq_along(mtcars$wt)) {
+  results[i] &lt;- mtcars$wt[i] * 1000
+}
+results</code></pre>
+<pre><code>##  [1] 2620 2875 2320 3215 3440 3460 3570 3190 3150 3440 3440 4070 3730 3780
+## [15] 5250 5424 5345 2200 1615 1835 2465 3520 3435 3840 3845 1935 2140 1513
+## [29] 3170 2770 3570 2780</code></pre>
+</div>
+<div id="apply-functions" class="section level2">
+<h2><code>apply</code> Functions</h2>
+<p>R includes another way to iterate, using the <code>apply</code> family of functions.</p>
+</div>
+<div id="purrr" class="section level2">
+<h2><code>purrr</code></h2>
+<p>If you’ve been digging the <code>tidyverse</code>, well rest assured, they’ve got some slick iteration functions too!</p>
+</div>
+<div id="conditional-statements" class="section level2">
+<h2>Conditional Statements</h2>
+<div id="if-else" class="section level3">
+<h3><code>if</code> <code>else</code></h3>
+</div>
+<div id="case_when" class="section level3">
+<h3><code>case_when</code></h3>
+</div>
+</div>
+<div id="complete-workflow" class="section level2">
+<h2>Complete Workflow</h2>
+<div id="starting-with-a-single-case" class="section level3">
+<h3>Starting With a Single Case</h3>
+</div>
+<div id="generalizing" class="section level3">
+<h3>Generalizing</h3>
+</div>
+<div id="making-it-a-function" class="section level3">
+<h3>Making it a Function</h3>
+</div>
+<div id="iterating" class="section level3">
+<h3>Iterating!</h3>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

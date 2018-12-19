@@ -346,19 +346,13 @@ div.tocify {
       <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -469,13 +463,15 @@ div.tocify {
 </div>
 
 
-<blockquote>
+<br>
+<div class="blue">
 <h2 id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Get comfortable importing different kinds of data</li>
 <li>Understand the concept of “tidy data”</li>
 </ul>
-</blockquote>
+</div>
+<p><br></p>
 <div id="reading-csv-data" class="section level2">
 <h2>Reading csv data</h2>
 <p>Data come in many forms, and we need to be able to load them in R. For our own use and with others who use R, there are R-specific data structures we can use, such as the <code>.rda</code> (<code>.RDATA</code>), or the <code>.rds</code> file-types. We’ll talk about those in more detail later. However, we need to be able to work with more general data types too. Comma-separated value (<code>.csv</code>) tables are perhaps the most universal data structure.</p>
@@ -486,10 +482,9 @@ read.csv(&#39;data/species.csv&#39;)</code></pre>
 <p>Whoa! What just happened? R executed the function and printed the result, just like when you enter <code>log(1)</code>. How do you store an object to a variable?</p>
 <pre class="r"><code>species &lt;- read.csv(&#39;data/species.csv&#39;)</code></pre>
 <p>Now, a data.frame called <code>species</code> is in my Environment, and I can see that it is a data.frame with 54 rows and 4 columns.</p>
-<div id="challenge-read-csv-data" class="section level3">
-<h3>Challenge – read csv data</h3>
+<div class="blue">
+<h3 id="challenge-read-csv-data">Challenge – read csv data</h3>
 <p>The species data are available at <a href="data/species.csv">this link</a>.</p>
-<blockquote>
 <ul>
 <li>Right click on the link to “save file as…”</li>
 <li>Save the .csv file in the <code>/data</code> directory of your project.</li>
@@ -498,19 +493,21 @@ read.csv(&#39;data/species.csv&#39;)</code></pre>
 <li>Inspect the <code>data.frame</code> using whatever means you like.</li>
 <li>Use a <code>dplyr</code> verb to reorder the data frame in alphabetical order by genus</li>
 </ul>
-</blockquote>
-<p><strong>Advanced challenge</strong></p>
-<blockquote>
+</div>
+<p><br></p>
+<div class="blue">
+<h3 id="advanced-challenge">Advanced challenge</h3>
 <p>Suppose you get a .csv file from a colleague in Europe. Because they use <code>,</code> (comma) as a decimal separator, they use <code>;</code> (semi-colons) to separate fields.<br />
 - How can you read it into R? Feel free to use the web and/or R’s helpfiles.</p>
-</blockquote>
 </div>
+<p><br></p>
 <div id="using-stringsasfactorsfalse" class="section level3">
 <h3>Using <code>stringsAsFactors=FALSE</code></h3>
 <p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
-<blockquote>
+<div class="blue">
 <p><strong>Tip</strong>: In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
-</blockquote>
+</div>
+<p><br></p>
 <p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
 <pre class="r"><code>surveys &lt;- read.csv(&#39;data/combined.csv&#39;)
 
@@ -601,6 +598,7 @@ doublenope &lt;- load(file = &quot;data/example.rda&quot;) # wait ...check out &
 doublenope # created a character vector of the objects...but didn&#39;t assign any to the name nope
 
 # [1] &quot;surveys&quot;     &quot;rodents2001&quot; &quot;birds&quot;   </code></pre>
+<p>One extremely time-saving use of <code>.rds</code> files is when you’ve fit a large statistical model that gets saved as a model object. For example, the <code>brms</code> and <code>lme4</code> packages used for multi-level models will return large model objects that contain lots of information about the model. Some models can take hours, days, even <strong>weeks</strong> to finish fitting, so it can be useful to save a fully fitted model object as a <code>.rds</code> file. You can then load that model object back into R and work with it however you want.</p>
 </div>
 </div>
 <div id="excel-googlesheets" class="section level2">
@@ -616,6 +614,17 @@ doublenope # created a character vector of the objects...but didn&#39;t assign a
 <li>Using the <code>foreign</code> package</li>
 <li>reading in <code>.dbf</code>, <em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, <code>.shp</code>, <code>.netcdf</code>, <code>raster</code>, <code>.kml</code>, <code>gpx</code>, <code>xml</code>, <code>geojson</code>, <code>json</code>, etc….</li>
 </ul>
+</div>
+<div id="rio-package" class="section level2">
+<h2><code>rio</code> Package</h2>
+<p>One other data import/export package to check out is called <code>rio</code>. It uses two main functions: <code>import</code> and <code>export</code>, and it automatically detects the file extension you’re using, then picks the fastest function out of a bunch of different specialized packages. It can streamline your data import/export and give you more consistent data frames when you’re working with lots of different file types.</p>
+<pre class="r"><code>#install.packages(&quot;rio&quot;)
+library(rio)
+export(mtcars, &quot;data/mtcars.csv&quot;)
+export(mtcars, &quot;data/mtcars.rds&quot;)
+export(mtcars, &quot;data/mtcars.feather&quot;)</code></pre>
+<pre><code>## Loading required namespace: feather</code></pre>
+<p>You can read more about <code>rio</code> on its <a href="https://github.com/leeper/rio">Github page</a>.</p>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a> and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting Data materials</a>.</p>
 </div>

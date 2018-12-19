@@ -11,7 +11,7 @@ Because much of the varied content found in the lessons, there are a number of p
 `c("tidyverse", "ggplot2", "tidyr", "readr", "dplyr", "purrr", "emojifont",
 "viridis", "mapdata", "maps", "mapview", "measurements", "gapminder", "broom",
 "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap",
-"ggthemes", "magrittr", "leaflet", "plotly", "knitr")`
+"ggthemes", "magrittr", "leaflet", "plotly", "knitr", "rio")`
 
 To get an updated list of packages for the website, navigate to the repo on the command line, then try one of these commands:
 
