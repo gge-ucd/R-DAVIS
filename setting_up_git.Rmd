@@ -2,14 +2,13 @@
 title: "RStudio and Git"
 ---
 
-Now that you've gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet.
+Once we've setup R/RStudio, and installed git, the next step is seeing whether we can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet.
 
-This lesson assumes you have:
+**This lesson assumes you have:**
 
- >  - registered for Github account
- >  - installed R, RStudio, and git
- >  - You accepted your invitation to your repository in the gge-ucd organization
- >  - You've successfully created your `ssh` key or have been able to authenticate with `https`
+ >  - registered for your free Github account
+ >  - installed **R**, **RStudio**, and **git**
+ >  - Filled out our google form and accepted your invitation to the repository in our [`GGE-R-DAVIS` group](https://github.com/gge-ucd)
 
 This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible. 
 
@@ -19,7 +18,7 @@ At some point many of us have probably had files in a directory that may have lo
 
 ![phdcomics](img/phd052810s.gif)
 
-Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren't the same as in the submitted version of the manuscript.
+Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren't the same as in the submitted version of the manuscript. For much more detail on setting git with R (or troubleshooting), see the [happygitwithr.com](http://happygitwithr.com/) website.
 
 ### Benefits of Version Control
 
@@ -42,26 +41,26 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 ### 1. Create a New Repository on Github
 
- - Create a new repository on Github.
-    - For our class, we may be using a Github Classroom, which means we create the repository in advance and send you a link. You click the link, Github copies/creates a new repository for you, move to step 2.)
+ - Typically, the preferred method is to create a new repository on Github...*however*:
+    - *For our class, we are using a Github Classroom, which means we've already created the repository in advance and sent you a link. When you click the link, Github creates a new repository for you, which we as a class can all see and work with!*
 
-### 2. Clone Repository Link
+### 2. Clone Your Repository to your Computer
 
 You should now have a repository on github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
-  - [`https://github.com/gge-ucd/w01-fix-readme-ryanpeek`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
 
- > **To _`clone`_ your repository**
-    
- - **`SSH`:** Look for the big green "Clone or Download" button. It will appear on the main repository webpage. Click the button, and assuming you've set up your SSH key, make sure you have the **Clone with SSH** version and copy that link (should be something like *`git@github.com:gge-ucd/w01-fix-readme-firstnamelastname.git`*).
- - **`HTTPS`:** Look for the big green "Clone or Download" button. Make sure you have the **Clone with HTTPS** version and copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
+  - [`https://github.com/gge-ucd/w01-fix-readme-ryanpeek`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
+  - **To _`clone`_ your repository** (*copy to your computer*):
+      - We're going to stick with using **`HTTPS`:** for now. Look for the big green "*Clone or download*" button. Make sure you select the "**Use HTTPS**" so the top of the box says: **Clone with HTTPS**. 
+      - Copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
  
-![](img/ssh_clone.png)
+![](img/https_clone.png)
 
 ### 3. Create a New Version Controlled (`git`) RStudio Project
 
 Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).
 
-  - In RStudio, start a new Project: `File > New Project > Version Control > Git`. In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
+  - In RStudio, start a new Project: `File > New Project > Version Control > Git`. 
+  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
   
 ![](img/newRStudio_git_proj_named.png)
 
@@ -105,7 +104,7 @@ In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *F
   
   - Click on the small box to the left of the `README.md` to stage the file. Then click the `commit` button. You'll see a new widow, on the upper right you need to type a `commit` message, something simple, short, and descriptive. Then click the `commit` button. You should see a little box with message committed.
   
-  - Finally before you close everything, hit the **PUSH** button. This *pushes* the changes to the github repository (you may need to enter your username & password once depending on whether you used `ssh` or `https`).
+  - Finally before you close everything, hit the **PUSH** button. This *pushes* the changes to the github repository (you may need to enter your Github username & password once depending on whether you used `https` or `ssh`).
   
   - If you go back to the repository in your browser and refresh the page, you should see the changes you've made. Equally important, any collaborator or instructor can now `pull` those exact changes into a copy of the repo on our computer.
 
