@@ -2,10 +2,15 @@
 title: "Data import"
 ---
 
-> ## Learning objectives
->
-> * Get comfortable importing different kinds of data
-> * Understand the concept of "tidy data"
+<br>
+<div class = "blue">
+## Learning objectives
+
+* Get comfortable importing different kinds of data
+* Understand the concept of "tidy data"
+</div>
+
+<br>
 
 ```{r, include = FALSE}
 library(tidyverse)
@@ -45,20 +50,28 @@ species <- read.csv('data/species.csv')
 Now, a data.frame called `species` is in my Environment, and I can see that it 
 is a data.frame with `r nrow(species)` rows and `r ncol(species)` columns. 
 
+<div class = "blue">
 ### Challenge -- read csv data
 
 The species data are available at [this link](data/species.csv).  
  
- >    - Right click on the link to "save file as..."
- >    - Save the .csv file in the `/data` directory of your project.
- >    - Read the data with the `read.csv` function and assign it to the variable `species`.  
- >    - Inspect the `data.frame` using whatever means you like. 
- >    - Use a `dplyr` verb to reorder the data frame in alphabetical order by genus  
- 
-**Advanced challenge**
+ - Right click on the link to "save file as..."
+ - Save the .csv file in the `/data` directory of your project.
+ - Read the data with the `read.csv` function and assign it to the variable `species`.  
+ - Inspect the `data.frame` using whatever means you like. 
+ - Use a `dplyr` verb to reorder the data frame in alphabetical order by genus
+</div>
 
- > Suppose you get a .csv file from a colleague in Europe. Because they use `,` (comma) as a decimal separator, they use `;` (semi-colons) to separate fields.  
- >    - How can you read it into R? Feel free to use the web and/or R's helpfiles.  
+<br>
+ 
+<div class = "blue">
+### Advanced challenge
+
+Suppose you get a .csv file from a colleague in Europe. Because they use `,` (comma) as a decimal separator, they use `;` (semi-colons) to separate fields.  
+ - How can you read it into R? Feel free to use the web and/or R's helpfiles.  
+</div>
+
+<br>
 
 ### Using `stringsAsFactors=FALSE`
 
@@ -68,9 +81,12 @@ Depending on what you want to do with the data, you may want to keep these
 columns as character. To do so, `read.csv()` and `read.table()` have an argument 
 called `stringsAsFactors` which can be set to `FALSE`.
 
- > **Tip**: In most cases, it’s preferable to set `stringsAsFactors = FALSE` 
- > when importing your data, and converting as a factor only the columns that 
- > require this data type.
+<div class = "blue">
+**Tip**: In most cases, it’s preferable to set `stringsAsFactors = FALSE` 
+when importing your data, and converting as a factor only the columns that 
+require this data type.
+</div>
+<br>
 
 Compare the output of `str(surveys)` when setting `stringsAsFactors = TRUE` 
 (default) and `stringsAsFactors = FALSE`:
@@ -223,7 +239,8 @@ doublenope # created a character vector of the objects...but didn't assign any t
 
 # [1] "surveys"     "rodents2001" "birds"   
 ``` 
- 
+
+One extremely time-saving use of `.rds` files is when you've fit a large statistical model that gets saved as a model object. For example, the `brms` and `lme4` packages used for multi-level models will return large model objects that contain lots of information about the model. Some models can take hours, days, even **weeks** to finish fitting, so it can be useful to save a fully fitted model object as a `.rds` file. You can then load that model object back into R and work with it however you want.
 
 ## Excel & GoogleSheets
 
@@ -234,6 +251,20 @@ doublenope # created a character vector of the objects...but didn't assign any t
 
  - Using the `foreign` package
  - reading in `.dbf`, *Stata*, *SAS*, *SPSS*, `.shp`, `.netcdf`, `raster`, `.kml`, `gpx`, `xml`, `geojson`, `json`, etc....
+ 
+## `rio` Package
+
+One other data import/export package to check out is called `rio`. It uses two main functions: `import` and `export`, and it automatically detects the file extension you're using, then picks the fastest function out of a bunch of different specialized packages. It can streamline your data import/export and give you more consistent data frames when you're working with lots of different file types.
+
+```{r}
+#install.packages("rio")
+library(rio)
+export(mtcars, "data/mtcars.csv")
+export(mtcars, "data/mtcars.rds")
+export(mtcars, "data/mtcars.feather")
+```
+
+You can read more about `rio` on its [Github page](https://github.com/leeper/rio).
 
 <br>
 
