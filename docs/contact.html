@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,13 +340,10 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
       <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
@@ -464,12 +472,39 @@ div.tocify {
 <p><br></p>
 <div id="instructors" class="section level2">
 <h2>Instructors</h2>
+<p><strong>Michael Culshaw-Maurer</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mjculshawmaurer@ucdavis.edu">email</a><br />
+<a href="https://mcmaurer.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
+<a href="https://twitter.com/MCulshawMaurer"><i class="fa fa-twitter-square" aria-hidden="true"></i> @MCulshawMaurer</a><br />
+<a href="https://github.com/mcmaurer"><i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer</a></p>
+<p>I’m a 4th-year Ph.D. candidate in the GGE, and I’m co-advised by Jay Rosenheim and Sebastian Schreiber. I study the behavioral responses of insects to natural enemies, ranging from pathogens to predators and parasitoids. I’m working on projects looking at disease-induced cannibalism in <em>Geocoris pallens</em> and non-consumptive effects in pea aphids, using a combination of empirical and theoretical approaches.</p>
+<p>I came to grad school in 2015 as a complete R novice, but thanks to things like the <a href="https://d-rug.github.io/">Davis R Users Group (D-RUG)</a>, <a href="dsi.ucdavis.edu">Data Science Initiative</a>, and several ECL courses, I’ve learned a lot in the last few years. In the spring of 2018, I became a certified Software/Data Carpentries instructor and have taught several Carpentries workshops since then. I also help run D-RUG and will be teaching an undergraduate R course this winter.</p>
+<p>My favorite part of teaching R is seeing people go from being uncomfortable or intimidated to feeling empowered and capable of expanding their research opportunities and saving time. I remember how daunting R was at first, but now I use it every day and am constantly learning new skills!</p>
+<p><br></p>
+<p><strong>Martha Wohlfeil</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mwohlfeil@ucdavis.edu">email</a><br />
+<a href="https://marthawohlfeil.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
+<a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil</a></p>
+<p>I am a 3rd year PhD Candidate in Ecology studying avian biogeography in the Great Basin. I am interested in how birds are responding to climate change, and how species distributions are shaped through both biotic and abiotic factors. I get to conduct field work every summer in the Sierra Nevada and in central Nevada where I collected data on bird abundance, insect biomass, and vegetation.</p>
+<p>I have been using R since 2016. I was a student in the first ever R-DAVIS course in 2016, and was a Helper in 2017. I’m very excited to be instructing, and hope to convince students that having a ton of programming experience is NOT necessary to get the most out of R. In addition, I help run <a href="http://d-rug.github.io/">Davis R Users Group (D-RUG)</a>, and will be launching a graduate student work group on statistical modeling Winter 2019.</p>
+<p>My favorite part about teaching R is when students realize a problem they have struggled with for hours in excel can be solved with a just a few lines of code (see: me early 2016). Teaching R and helping students with data science has been an amazing opportunity, and I am excited to pass on what I have learned to new GGE students.</p>
+<p><br></p>
+</div>
+<div id="course-creatorsformer-instructorsogs" class="section level2">
+<h2>Course Creators/Former Instructors/OGs</h2>
 <p><strong>Ryan Peek</strong></p>
 <p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:rapeek@ucdavis.edu">email</a><br />
 <a href="https://ryanpeek.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
 <a href="https://twitter.com/riverpeek"><i class="fa fa-twitter-square" aria-hidden="true"></i> @riverpeek</a><br />
 <a href="https://github.com/ryanpeek"><i class="fa fa-github-square" aria-hidden="true"></i> ryanpeek</a><br />
 <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid-square"></i> orcid.org/0000-0002-9577-6885</a></p>
+
+<p>I am a 4the year Ph.D. Candidate in Ecology. I study ecological responses to watershed alteration (dams, mining, etc) using conservation genomics and a river-breeding frog, Rana boylii to understand historical, current and future change. I’ve worked on various projects in California and Oregon, including a Sierra yellow-legged frog restoration project with the National Park Service, identifying freshwater fish conservation gaps in California, and <a href="x-webdoc://AD44C118-2660-4255-BCC0-1A5F5629D9F7/">meadow conservation</a> and restoration in the Sierra Nevada.</p>
+<p>I’ve been using R since 2011, and became a certified Software/Data Carpentry instructor in 2016 and help teach workshops and classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help run the <a href="http://d-rug.github.io/">Davis R Users Group (D-RUG)</a> and spearheaded a more organized effort at UC Davis to train fellow ecologists in data science using the R programming language.</p>
+<p>My favorite part of teaching R is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing experience learning from teaching and empowering others to become better scientists and data wranglers.</p>
+
+<p>I recently completed my PhD in Ecology (2018) studying ecological responses to freshwater alteration using a mix of hydrology, genomics, and ecology. I’ve been using R since 2011, and I became a certified Software/Data Carpentry instructor in 2016. I enjoy helping teach Carpentry workshops and R classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help coordinate the Davis R Users Group (D-RUG), and spearheaded a more organized effort at UC Davis to train fellow grad students/ecologists in data science using the R programming language. My favorite part of teaching programming/coding is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing learning experience to teach, and I hope to continue trying to empower others to become better scientists and data wranglers.</p>
+2e1daaca97bf3e8fd6c8fd292cebd6be2ea94f62
 <p><br></p>
 <p><strong>Michael Koontz</strong></p>
 <p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mikoontz@gmail.com">email</a><br />
@@ -477,12 +512,14 @@ div.tocify {
 <a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter-square" aria-hidden="true"></i> @_mikoontz</a><br />
 <a href="https://github.com/mikoontz"><i class="fa fa-github-square" aria-hidden="true"></i> mikoontz</a><br />
 <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid-square"></i> orcid.org/0000-0002-8276-210X</a></p>
+<p>I’m a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.</p>
+<p>I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.</p>
+<p>My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p>
 <p><br></p>
 </div>
 <div id="teaching-assistants" class="section level2">
 <h2>Teaching Assistants</h2>
 <p><strong>TBD</strong></p>
-<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mwohlfeil@ucdavis.edu">email</a></p>
 <p><br></p>
 </div>
 <div id="data-carpentry" class="section level2">

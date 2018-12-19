@@ -11,7 +11,17 @@ Because much of the varied content found in the lessons, there are a number of p
 `c("tidyverse", "ggplot2", "tidyr", "readr", "dplyr", "purrr", "emojifont",
 "viridis", "mapdata", "maps", "mapview", "measurements", "gapminder", "broom",
 "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap",
-"ggthemes", "magrittr", "leaflet", "plotly", "knitr")`
+"ggthemes", "magrittr", "leaflet", "plotly", "knitr", "rio")`
+
+To get an updated list of packages for the website, navigate to the repo on the command line, then try one of these commands:
+
+```
+grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/"//g' | sed "s/\'//g" | grep -Eo '^\w+' | sort | uniq
+```
+*or*
+```
+grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/"//g' | grep -Eo '^\w+' | sort | uniq
+```
 
 ## Build Site Locally
 
@@ -19,6 +29,8 @@ The [course website](https://gge-ucd.github.io/R-DAVIS/) can be rebuilt locally 
 
  - Open the R-DAVIS project in RStudio. Click on the `Build` tab, and "*More*", select "*Clean All*".
  - Then select `Build Website`. This process make take a few minutes.
+
+You can also clean and build the website from the command line by navigating to the repo and running `R -e 'rmarkdown::clean_site()'` or `R -e 'rmarkdown::render_site()'`.
 
 ## Releases
  

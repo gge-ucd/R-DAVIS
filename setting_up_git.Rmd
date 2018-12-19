@@ -55,6 +55,8 @@ You should now have a repository on github. Our class is all housed in the [gge-
  
 ![](img/https_clone.png)
 
+  - *If you see this box, which says "Clone with SSH", just click "Use HTTPS" in the top right of the box.*
+
 ### 3. Create a New Version Controlled (`git`) RStudio Project
 
 Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).

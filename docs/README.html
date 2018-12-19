@@ -24,8 +24,25 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -156,7 +173,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -182,7 +199,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -245,12 +262,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -326,13 +337,10 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
-    </li>
-    <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
       <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
@@ -459,7 +467,27 @@ div.tocify {
 
 <div id="r-davis" class="section level1">
 <h1>R-DAVIS</h1>
-<p>R for Data Analysis &amp; Visualization in Science</p>
+<p><strong>R for Data Analysis &amp; Visualization in Science</strong></p>
+<p>This is the repository for website used to teach the quarter-long graduate seminar course, R-DAVIS. Course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology at the University of California, Davis, USA.</p>
+<div id="package-dependencies" class="section level2">
+<h2>Package Dependencies</h2>
+<p>Because much of the varied content found in the lessons, there are a number of package dependencies to be aware of. This list may not be complete, but before building the site locally, these packages should be installed:</p>
+<p><code>c(&quot;tidyverse&quot;, &quot;ggplot2&quot;, &quot;tidyr&quot;, &quot;readr&quot;, &quot;dplyr&quot;, &quot;purrr&quot;, &quot;emojifont&quot;, &quot;viridis&quot;, &quot;mapdata&quot;, &quot;maps&quot;, &quot;mapview&quot;, &quot;measurements&quot;, &quot;gapminder&quot;, &quot;broom&quot;, &quot;gutenbergr&quot;, &quot;tidytext&quot;, &quot;patchwork&quot;, &quot;cowplot&quot;, &quot;hexbin&quot;, &quot;geosphere&quot;, &quot;ggmap&quot;, &quot;ggthemes&quot;, &quot;magrittr&quot;, &quot;leaflet&quot;, &quot;plotly&quot;, &quot;knitr&quot;)</code></p>
+<p>To get an updated list of packages for the website, navigate to the repo on the command line, then run this command: <code>grep -horE 'library\(.*?\)' . | sed 's/library//g; s/[()]//g; s/\'//g; s/&quot;//g' | grep -Eo '^\w+' | sort | uniq</code></p>
+</div>
+<div id="build-site-locally" class="section level2">
+<h2>Build Site Locally</h2>
+<p>The <a href="https://gge-ucd.github.io/R-DAVIS/">course website</a> can be rebuilt locally by using the “<code>Build</code>” tab in RStudio. Assuming the above packages are installed on your machine:</p>
+<ul>
+<li>Open the R-DAVIS project in RStudio. Click on the <code>Build</code> tab, and “<em>More</em>”, select “<em>Clean All</em>”.</li>
+<li>Then select <code>Build Website</code>. This process make take a few minutes.</li>
+</ul>
+<p>You can also clean and build the website from the command line by navigating to the repo and running <code>R -e 'rmarkdown::clean_site()'</code> or <code>R -e 'rmarkdown::render_site()'</code>.</p>
+</div>
+<div id="releases" class="section level2">
+<h2>Releases</h2>
+<p>See the <a href="https://github.com/gge-ucd/R-DAVIS/releases"><code>Releases</code></a> tab in this repo to find the completed version for a given year. We expect further development of the website for future iterations as the course improves in the future.</p>
+</div>
 </div>
 
 

@@ -2,19 +2,22 @@
 title: "Orientation to programming, R, and RStudio"
 ---
 
-> ## Learning objectives
->
-> * Appreciate why a researcher might want to write code and why R specifically
-> * Gain familiarity the RStudio IDE
-> * Use basic math functions in R, with calculator and fun() notation
-> * Understand variables and how to assign to them
-> * Use comparison operations
-> * Manage your workspace in an interactive R session
-> * Understand errors, warnings, and messages
-> * To be able to seek help via `?` and Google
->
+<br>
+<div class = "blue">
+### Learning objectives
 
-## Why programming?
+1. Appreciate why a researcher might want to write code and why R specifically
+2. Gain familiarity the RStudio IDE
+3. Use basic math functions in R, with calculator and fun() notation
+4. Understand variables and how to assign to them
+5. Use comparison operations
+6. Manage your workspace in an interactive R session
+7. Understand errors, warnings, and messages
+8. To be able to seek help via `?` and Google
+</div>
+<br>
+
+# Why programming?
 
 Programming can make your science even better than it already is.
 
@@ -34,7 +37,7 @@ Programming makes your workflow:
 - Transparent  
 
 
-## Why R?
+# Why R?
 
 R is a free, open-source programming language that is designed for data analysis 
 and statistics.  
@@ -48,7 +51,7 @@ so it is also a common language between us and our colleagues. In short, for
 many researchers, it is the best tool to organize, 
 visualize, and analyze data.
 
-## Why RStudio?
+# Why RStudio?
 
 RStudio is an IDE (integrated development environment) which we use to manage 
 and execute R code. It is also free and open-source, it works on all platforms 
@@ -58,9 +61,7 @@ integrates version control and project management.
 You write the same R code in RStudio as you would elsewhere, and it executes the 
 same way. RStudio helps by keeping things nicely organized.
 
-<br>
-
-## Introduction to RStudio
+# Introduction to RStudio
 
 When you open RStudio you should see three panels:
 
@@ -76,7 +77,7 @@ you need to write code is available in a single window. Additionally, with many
 shortcuts, autocompletion, and highlighting for the major file types you use
 while developing in R, RStudio will make typing easier and less error-prone.
 
-### Workflow within Rstudio
+## Workflow within Rstudio
 
 Console vs. script
 
@@ -108,23 +109,23 @@ Console vs. script
         - Building preservable pipeline of operations
     
 
-> #### Tip: Pushing to the interactive R console
-> To run the line of your script where the cursor is, you can click on the `Run` 
-> button at the top-right of the script pane or use the keyboard short cut: 
-> `cmd/ctrl-enter`.
->
-> To run a block of code, select (highlight) it and click `Run` or 
-> `cmd/ctrl-enter`. 
->
-> You are working toward selecting a whole script and running it. 
->
-> - You'll write your script interactively, running each line to make sure it 
-> works, and at the end, you'll be able to run the whole analysis by selecting 
-> all and running the script. This way you can later rerun the analysis on new 
-> or modified data or change part of the analysis and everything will work with
-> the click of a button.
+<br>
+<div class = "blue">
 
-## Introduction to R
+### Tip: Pushing to the interactive R console
+To run the line of your script where the cursor is, you can click on the `Run` button at the top-right of the script pane or use the keyboard short cut: `cmd/ctrl-enter`.
+
+To run a block of code, select (highlight) it and click `Run` or `cmd/ctrl-enter`. 
+
+You are working toward selecting a whole script and running it. 
+
+- You'll write your script interactively, running each line to make sure it works, and at the end, you'll be able to run the whole analysis by selecting all and running the script. This way you can later rerun the analysis on new or modified data or change part of the analysis and everything will work with the click of a button.
+</div>
+
+<br>
+
+
+# Introduction to R
 
 The simplest thing you can do with R is do arithmetic:
 
@@ -172,7 +173,7 @@ code easier to read.
 (3 + 5) * 2
 ```
 
-### Whitespace
+## Whitespace
 
 Speaking of being easy to read, whitespace is ignored by R. Use it consistently 
 to make code readable. For example, putting a single space on either side of an 
@@ -185,7 +186,7 @@ operator makes code easy to read.
 3 + 5 * (2 ^ 2)     # to make order of operations clear, use parentheses
 ```
 
-### Comments
+## Comments
 
 The text that appears to the right of each line of code above is called a comment. Anything that
 follows the hash symbol -- `#` -- is ignored by R.
@@ -194,7 +195,7 @@ Liberally add comments to your code as you write. Things that are clear as you w
 mysterious to others, including your-future-self! Commenting takes little time and will save you 
 time and headaches in the long run. 
 
-### Scientific Notation
+## Scientific Notation
 
 Really small or large numbers get a scientific notation:
 
@@ -211,7 +212,7 @@ You can write numbers in scientific notation too:
 1e9  # One billion
 ```
 
-### Mathematical functions
+## Mathematical functions
 
 R has many built in mathematical functions. To call a function,
 type its name, follow by open and closing parentheses.
@@ -236,7 +237,7 @@ Or exponentiate:
 exp(0.5) # e^(1/2)
 ```
 
-### Nested Functions
+## Nested Functions
 
 You can even put functions inside each other. `exp(0.5)` raised `e` to the `1/2` 
 power. Equivalently we could take the square-root of `e`. Expressions are 
@@ -252,7 +253,7 @@ You don't need to remember function names. There are many ways to discover or
 rediscover them when you need them. Google is your friend, but we will discuss 
 other ways soon.
 
-### Comparison
+## Comparison
 
 We can do logical comparison in R. This will be important later, for example, 
 when we want to filter a dataset based on a logical condition.
@@ -273,7 +274,7 @@ when we want to filter a dataset based on a logical condition.
 1 >= -9 # greater than or equal to
 ```
 
-### Variables and assignment
+## Variables and assignment
 
 We can store values in variables using the assignment operator `<-`. 
 You can also use a single equals sign, `=`, for assignment.
@@ -316,29 +317,33 @@ Assignment values can contain the variable being assigned to:
 x <- x + 1 
 ```
 
-> #### MCQ -- Variable Assignment
->
-> What does the following code print?
-> ```
-> a <- 1
-> b <- 2
-> c <- a + b
-> b <- 4
-> a <- b
-> c <- a
-> c 
-> ```
->
-> ```
-> Option 1) a  
-> Option 2) 3  
-> Option 3) 4  
-> Option 4) ::nothing::  
-> ```
->
+<br>
+<div class = "blue">
 
+### MCQ -- Variable Assignment
 
-### Variable name conventions
+What does the following code print?
+```
+a <- 1
+b <- 2
+c <- a + b
+b <- 4
+a <- b
+c <- a
+c 
+```
+
+```
+Option 1) a  
+Option 2) 3  
+Option 3) 4  
+Option 4) ::nothing::  
+```
+</div>
+
+<br>
+
+## Variable name conventions
 
 Variable names can contain letters, numbers, underscores and periods. They
 cannot start with a number nor contain spaces at all. Different people use
@@ -349,7 +354,7 @@ different conventions for long variable names, especially:
 
 What you use is up to you, but **be consistent**.
 
-### Tab completion
+## Tab completion
 
 Use descriptive variable names, as they make your code easier to understand. It 
 will save time because you'll remember what each variable is: It's easier to 
@@ -367,9 +372,9 @@ down-arrows and press enter to choose the one you want. If you press tab when
 there is only one valid way to complete something, RStudio will automatically 
 complete it. 
 
-## Understanding functions & getting help
+# Understanding functions & getting help
 
-### R help files
+## R help files
 
 Once you figure out what function you want, you need to figure out how to use 
 it. Every function has an associated help-file. They can be hard to read, 
@@ -392,7 +397,7 @@ Each help-file contains the following components.
 - Examples: Some examples for how to use the function.
 
 
-### Other ways to get help
+## Other ways to get help
 
 - `??` searches the text of all R help files, e.g. `??base` will find `log`.
 - [Google](https://www.google.com/)
@@ -401,7 +406,7 @@ Each help-file contains the following components.
 - [Cookbook for R](http://www.cookbook-r.com/)
 
 
-### Arguments to functions
+## Arguments to functions
 
 - Can be specified by order or by name
 - Before, when we entered `log(3)`, `log` knew `3` was `x` because it was in the 
@@ -437,27 +442,28 @@ log(x = 3, base = 10)
 log(base = 10, x = 3)
 ```
 
+<br>
+<div class = "blue">
 
-> #### MCQ -- Which of these things is not like the other ones?
->
-> Three of the following lines produce the same result. Without running the 
-code, which one will produce a different result than the others? The helpfile 
-for `log` (`?log`) may be helpful.
->
-> ```
-> Option 1) log(x = 1000, base = 10)
-> Option 2) log10(1000)
-> Option 3) log(base = 10, x = 1000)
-> Option 4) log(10, 1000)
-> ```
+### MCQ -- Which of these things is not like the other ones?
+Three of the following lines produce the same result. Without running the code, which one will produce a different result than the others? The helpfile for `log` (`?log`) may be helpful.
 
+```
+Option 1) log(x = 1000, base = 10)
+Option 2) log10(1000)
+Option 3) log(base = 10, x = 1000)
+Option 4) log(10, 1000)
+```
+</div>
 
-### When R Wants to Tell You Something
+<br>
+
+## When R Wants to Tell You Something
 
 Besides the value of an expression R has executed, there are a few other kinds 
 of responses you might get from R, including errors, warnings, and messages. 
 
-#### Errors
+### Errors
 
 R returns an error when it cannot proceed. It stops you in your tracks. The 
 error message will provide some information on what the problem was, but it is 
@@ -478,7 +484,7 @@ style: Do you understand how R is telling you what the problem is?
 log_of_a_word
 ```
 
-#### Warnings
+### Warnings
 
 Warnings appear in the same red font in the console, but they start with 
 "Warning" instead of "Error". Warnings are R's way of telling you that it did 
@@ -503,7 +509,7 @@ when warnings first appear.
 log_of_a_negative
 ```
 
-#### Messages
+### Messages
 
 There's a third source of red text in R: messages. These are R's way of telling 
 you that something happened, but it's probably nothing to worry about. These 
@@ -514,17 +520,20 @@ one like this:
 message("Hey buddy!")
 ```
 
-> #### Challenge -- Extra practice: Assignment & Comparison
->
-> Which elephant weighs more? Convert one's weight to the units of the other, 
-and store the result in an appropriately-named new variable. Write a command to 
-test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
->
-> ```{r, eval=FALSE}
-> elephant1_kg <- 3492
-> elephant2_lb <- 7757
-> ```
->
+
+<br>
+<div class = "blue">
+
+### Challenge
+
+Which elephant weighs more? Convert one's weight to the units of the other, and store the result in an appropriately-named new variable. Write a command to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
+
+```{r, eval=FALSE}
+elephant1_kg <- 3492
+elephant2_lb <- 7757
+```
+
+</div>
 
 <br>
 
