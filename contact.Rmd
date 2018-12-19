@@ -35,6 +35,37 @@ My favorite part about teaching R is when students realize a problem they have s
 
 <br>
 
+## Teaching Assistants/Classroom Helpers
+
+**Christian John**
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
+
+I am a 2nd year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
+
+**Allison Ke**
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:ake@ucdavis.edu)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://a-ke.weebly.com/) 
+
+I am a 2nd year PhD student in Ecology in the Karp lab. I combine field research with existing data to investigate (1) novel statistical modeling methods in community ecology, (2) effects of climate and land-use change on Neotropical bird communities, and (3) land management strategies to optimize biodiversity in agricultural landscapes.
+
+Since 2013, I have used R extensively both by force and by choice for my undergraduate statistics degree and ecological research. I have experience using R in machine learning and in the design/analysis of experiments and ecological data. I'm excited to share what I know and learn more through helping with this course!
+
+**William Hemstrom**
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:whemstrom@ucdavis.edu) 
+
+I'm a PhD student studying the genomics of migration in butterflies and sockeye salmon as well as the use of genomics to predict future population demographics. I have a publicly available [genomic analysis R package in beta](https://github.com/hemstrow/snpR), and use R principally for genomic analysis and demographic simulations. Most of my work in R is available on my [github page](https://github.com/hemstrow).
+
+**Sarah Freidman**
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:sarahtfried@gmail.com)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](fishbiologist.wordpress.com) 
+
+I am broadly interested in the underlying ecological mechanisms that shape the evolution and diversification of marine fishes. My work combines aspects from functional morphology, phylogenetics, and comparative methods to lend insight into the selective pressures driving morphological diversification. I have been using R for nearly 5 years now on a daily basis for all of my analyses, most of which involve phylogenies and multivariate morphological data sets across thousands of species
+
+<br>
 
 ## Course Creators/Former Instructors/OGs
 
@@ -58,19 +89,12 @@ I recently completed my PhD in Ecology (2018) studying ecological responses to f
 [<i class="fa fa-github-square" aria-hidden="true"></i> mikoontz](https://github.com/mikoontz)  
 [<i class="ai ai-orcid-square"></i> orcid.org/0000-0002-8276-210X](https://orcid.org/0000-0002-8276-210X)  
 
-I'm a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
-
+I'm a 5th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
 I've been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.
-
 My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about *how* to learn more). 
 
 <br>
 
-## Helpers
-
-**TBD**
-
-<br>
 
 ## Data Carpentry  
 
