@@ -147,6 +147,51 @@ If you've been digging the `tidyverse`, well rest assured, they've got some slic
 
 For a wonderful and thorough exploration of the `purrr` package, check out [Jenny Brian's tutorial](https://jennybc.github.io/purrr-tutorial/).
 
+When using the `map` family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.
+
+```{r}
+mtcars %>% map(mean) # gives a list
+
+mtcars %>% map_dbl(mean) # gives a numeric vector
+
+mtcars %>% map_chr(mean) # gives a character vector
+```
+
+You can use the `map2` series of functions if you need to map across two lists in parallel. Here, we'll map across both the names of cars and their mpg values, using an anonymous function to paste the two together into a sentence. 
+
+```{r}
+map2_chr(rownames(mtcars), mtcars$mpg, function(x,y) paste(x, "gets", y, "miles per gallon")) %>% 
+  head()
+```
+
+You can use the `pmap` series of functions if you need to use more than two input lists.
+
+Here we'll take a look at a cool way to use `map`: applying a linear model across different sets of data. We'll take the mtcars dataset, use `split` to split it into a list, with one data frame for each value of `cyl`, and then map the same linear model to each entry in the list.
+
+```{r}
+mtcars %>%
+  split(.$cyl) %>%
+  map(~ lm(mpg ~ wt, data = .x))
+```
+
+What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, `broom`, and its function `tidy` to pull out the information from the `lm` model object. We'll repeat what we did last time, but then we'll use `map_dfr` to map across each model object, tidy it up, and include an `id` column called cyl, so we know which cylinder value the linear model terms correspond to. The "dfr" portion of `map_dfr` will make sure the output is a dataframe.
+
+```{r}
+mtcars %>%
+  split(.$cyl) %>%
+  map(~ lm(mpg ~ wt, data = .x)) %>%
+  map_dfr(broom::tidy, .id = "cyl")
+```
+
+Sometimes you want to use a function for its "side effect", such as when using the `plot` function. Using plot alone doesn't return anything, but its side effect is to generate a plot. We use the exact same format as with `map`, but instead we use the function `walk`.
+
+```{r}
+mtcars %>% 
+  select(cyl, mpg, wt) %>% 
+  split(.$cyl) %>% 
+  walk(plot)
+```
+
 ## Conditional Statements
 
 Sometimes, you want to do something with your code, but only if a certain condition is true. There are a couple main ways to do this.
@@ -176,9 +221,30 @@ mtcars %>%
   mutate(
     car_size = case_when(
     wt > 3.5 | cyl == 8 ~ "big",
+    wt > 2.5 ~ "medium",
     TRUE ~ "small"
     )
   )
+```
+
+### Conditional `map`
+
+Let's throw it back to the `map` family for a sec. Sometimes you might only want to map a function to part of a dataframe. `map_if` allows you to give the data, a condition for the data to meet, and the function you want to apply to the data that meet the condition. Here, we'll map `as.character` to the columns of the iris dataset that meet the condition `is.factor`.
+
+```{r}
+str(iris)
+
+iris %>%
+  map_if(is.factor, as.character) %>%
+  str()
+```
+
+`map_at` does something similar, but it allows you to directly specify the locations you'd like to map the function to, using either names or positions.
+
+```{r}
+mtcars %>% 
+  map_at(c("cyl", "am"), as.character) %>% 
+  str()
 ```
 
 ## Complete Workflow
