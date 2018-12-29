@@ -147,6 +147,8 @@ If you've been digging the `tidyverse`, well rest assured, they've got some slic
 
 For a wonderful and thorough exploration of the `purrr` package, check out [Jenny Brian's tutorial](https://jennybc.github.io/purrr-tutorial/).
 
+### `map`
+
 When using the `map` family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.
 
 ```{r}
@@ -156,6 +158,8 @@ mtcars %>% map_dbl(mean) # gives a numeric vector
 
 mtcars %>% map_chr(mean) # gives a character vector
 ```
+
+### `map2`
 
 You can use the `map2` series of functions if you need to map across two lists in parallel. Here, we'll map across both the names of cars and their mpg values, using an anonymous function to paste the two together into a sentence. 
 
@@ -174,7 +178,10 @@ mtcars %>%
   map(~ lm(mpg ~ wt, data = .x))
 ```
 
-What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, `broom`, and its function `tidy` to pull out the information from the `lm` model object. We'll repeat what we did last time, but then we'll use `map_dfr` to map across each model object, tidy it up, and include an `id` column called cyl, so we know which cylinder value the linear model terms correspond to. The "dfr" portion of `map_dfr` will make sure the output is a dataframe.
+
+### `map_df`
+
+What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, `broom`, and its function `tidy` to pull out the information from the `lm` model object. We'll repeat what we did last time, but then we'll use `map_dfr` to map across each model object, tidy it up, and include an `id` column called cyl, so we know which cylinder value the linear model terms correspond to. The "dfr" portion of `map_dfr` will make sure the output is a dataframe, bound together by rows. `map_dfc` would bind columns together into a dataframe output.
 
 ```{r}
 mtcars %>%
@@ -182,6 +189,8 @@ mtcars %>%
   map(~ lm(mpg ~ wt, data = .x)) %>%
   map_dfr(broom::tidy, .id = "cyl")
 ```
+
+### `walk`
 
 Sometimes you want to use a function for its "side effect", such as when using the `plot` function. Using plot alone doesn't return anything, but its side effect is to generate a plot. We use the exact same format as with `map`, but instead we use the function `walk`.
 

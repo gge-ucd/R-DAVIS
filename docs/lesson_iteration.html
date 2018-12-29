@@ -593,6 +593,8 @@ sapply(mtcars_na, mean)</code></pre>
 <h2><code>purrr</code></h2>
 <p>If you’ve been digging the <code>tidyverse</code>, well rest assured, they’ve got some slick iteration functions too! The <code>map</code> series of functions work very similarly to the <code>apply</code> functions, but they’re a bit more tidyverse-friendly and allow you to more explicitly say what kinds of values you want returned.</p>
 <p>For a wonderful and thorough exploration of the <code>purrr</code> package, check out <a href="https://jennybc.github.io/purrr-tutorial/">Jenny Brian’s tutorial</a>.</p>
+<div id="map" class="section level3">
+<h3><code>map</code></h3>
 <p>When using the <code>map</code> family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.</p>
 <pre class="r"><code>mtcars %&gt;% map(mean) # gives a list</code></pre>
 <pre><code>## $mpg
@@ -639,6 +641,9 @@ sapply(mtcars_na, mean)</code></pre>
 ##   &quot;3.217250&quot;  &quot;17.848750&quot;   &quot;0.437500&quot;   &quot;0.406250&quot;   &quot;3.687500&quot; 
 ##         carb 
 ##   &quot;2.812500&quot;</code></pre>
+</div>
+<div id="map2" class="section level3">
+<h3><code>map2</code></h3>
 <p>You can use the <code>map2</code> series of functions if you need to map across two lists in parallel. Here, we’ll map across both the names of cars and their mpg values, using an anonymous function to paste the two together into a sentence.</p>
 <pre class="r"><code>map2_chr(rownames(mtcars), mtcars$mpg, function(x,y) paste(x, &quot;gets&quot;, y, &quot;miles per gallon&quot;)) %&gt;% 
   head()</code></pre>
@@ -681,7 +686,10 @@ sapply(mtcars_na, mean)</code></pre>
 ## Coefficients:
 ## (Intercept)           wt  
 ##      23.868       -2.192</code></pre>
-<p>What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, <code>broom</code>, and its function <code>tidy</code> to pull out the information from the <code>lm</code> model object. We’ll repeat what we did last time, but then we’ll use <code>map_dfr</code> to map across each model object, tidy it up, and include an <code>id</code> column called cyl, so we know which cylinder value the linear model terms correspond to. The “dfr” portion of <code>map_dfr</code> will make sure the output is a dataframe.</p>
+</div>
+<div id="map_df" class="section level3">
+<h3><code>map_df</code></h3>
+<p>What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, <code>broom</code>, and its function <code>tidy</code> to pull out the information from the <code>lm</code> model object. We’ll repeat what we did last time, but then we’ll use <code>map_dfr</code> to map across each model object, tidy it up, and include an <code>id</code> column called cyl, so we know which cylinder value the linear model terms correspond to. The “dfr” portion of <code>map_dfr</code> will make sure the output is a dataframe, bound together by rows. <code>map_dfc</code> would bind columns together into a dataframe output.</p>
 <pre class="r"><code>mtcars %&gt;%
   split(.$cyl) %&gt;%
   map(~ lm(mpg ~ wt, data = .x)) %&gt;%
@@ -695,12 +703,16 @@ sapply(mtcars_na, mean)</code></pre>
 ## 4 6     wt             -2.78     1.33      -2.08 0.0918    
 ## 5 8     (Intercept)    23.9      3.01       7.94 0.00000405
 ## 6 8     wt             -2.19     0.739     -2.97 0.0118</code></pre>
+</div>
+<div id="walk" class="section level3">
+<h3><code>walk</code></h3>
 <p>Sometimes you want to use a function for its “side effect”, such as when using the <code>plot</code> function. Using plot alone doesn’t return anything, but its side effect is to generate a plot. We use the exact same format as with <code>map</code>, but instead we use the function <code>walk</code>.</p>
 <pre class="r"><code>mtcars %&gt;% 
   select(cyl, mpg, wt) %&gt;% 
   split(.$cyl) %&gt;% 
   walk(plot)</code></pre>
 <p><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-2.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+</div>
 </div>
 <div id="conditional-statements" class="section level2">
 <h2>Conditional Statements</h2>
