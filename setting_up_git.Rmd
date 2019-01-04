@@ -6,10 +6,10 @@ Now that you've gone through the setup, the next step is seeing whether you can 
 
 This lesson assumes you have:
 
- >  - registered for Github account (which is free!)
- >  - installed R, RStudio, and git
- >  - You accepted your invitation to your repository in the gge-ucd organization
- >  - You've successfully created your `ssh` key or have been able to authenticate with `https`
+- registered for Github account (which is free!)
+- installed R, RStudio, and git
+- You accepted your invitation to your repository in the gge-ucd organization
+- You've successfully created your `ssh` key or have been able to authenticate with `https`
 
 This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible. 
 
