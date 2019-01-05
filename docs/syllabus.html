@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,28 +340,22 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -359,19 +364,7 @@ div.tocify {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -380,26 +373,7 @@ div.tocify {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -463,7 +437,7 @@ div.tocify {
 <p><br></p>
 <div id="course-description" class="section level2">
 <h2>Course Description</h2>
-<p>Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question &amp; answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will easily apply to all programming languages and database management systems. <strong>No background in databases or R/computational experience is required.</strong></p>
+<p>Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question &amp; answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will be applicable to many programming languages and database management systems. <strong>No background in databases or R/computational experience is required.</strong></p>
 </div>
 <div id="prerequisite-knowledge-and-skills" class="section level2">
 <h2>Prerequisite Knowledge and Skills</h2>
@@ -478,13 +452,12 @@ div.tocify {
 <h2>Course Objectives</h2>
 <p>Students completing this course should be able to:</p>
 <ul>
-<li>Read, Import/Export data</li>
+<li>Read, import/export data</li>
 <li>Tidy/summarize and analyze data</li>
+<li>Create publication-quality graphs and figures</li>
 <li>Write simple functions/programs in R</li>
-<li>Automate data analysis</li>
-<li>Scrape websites for data</li>
-<li>Map/manipulate spatial (raster/vector) data</li>
-<li>Learn how to apply these tools to address scientific research questions</li>
+<li>Search for and access new learning materials to further develop their computational skills</li>
+<li>Apply these tools to address scientific research questions</li>
 </ul>
 </div>
 <div id="schedule" class="section level2">
@@ -498,70 +471,70 @@ http://emoji.muan.co/ to look up emoji
 <div id="week-1" class="section level4">
 <h4>Week 1</h4>
 <ul>
-<li>✅ Course Intro</li>
-<li>✅ Intro to Git and RStudio</li>
-<li>✅ Project management</li>
+<li>Course Intro</li>
+<li>Intro to Git/GitHub and RStudio</li>
+<li>Project Management</li>
 </ul>
 </div>
 <div id="week-2" class="section level4">
 <h4>Week 2</h4>
 <ul>
-<li>✅ Spreadsheets &amp; Project Management</li>
-<li>✅ Intro to R</li>
+<li>Spreadsheets &amp; Project Management</li>
+<li>Intro to R</li>
 </ul>
 </div>
 <div id="week-3" class="section level4">
 <h4>Week 3</h4>
 <ul>
-<li>✅ Data frames &amp; subsetting</li>
+<li>Exploring Data Frames</li>
 </ul>
 </div>
 <div id="week-4" class="section level4">
 <h4>Week 4</h4>
 <ul>
-<li>✅ <code>dplyr</code> (import, manipulation, visualization)</li>
-<li>✅ <code>ggplot2</code> (short intro and demo)</li>
+<li><code>dplyr</code>: Data Import and Manipulation</li>
+<li>`<code>ggplot2</code>: Short Intro</li>
 </ul>
 </div>
 <div id="week-5" class="section level4">
 <h4>Week 5</h4>
 <ul>
-<li>✅ <code>dplyr</code> (summarize and export)</li>
-<li>✅ <code>ggplot2</code> (ecology lesson)</li>
+<li><code>dplyr</code>: Data Summarization and Export</li>
+<li><code>ggplot2</code>: Hands on with Ecology Data</li>
 </ul>
 </div>
 <div id="week-6" class="section level4">
 <h4>Week 6</h4>
 <ul>
-<li>✅ <code>ggplot2</code> (finish up)</li>
-<li>✅ Data import/export (as assignment)</li>
+<li><code>ggplot2</code>: Finishing Up</li>
+<li>Data Import/Export Workflow</li>
 </ul>
 </div>
 <div id="week-7" class="section level4">
 <h4>Week 7</h4>
 <ul>
-<li>✅ RMarkdown and literate programming</li>
-<li>✅ Visualization do’s and don’ts</li>
+<li>RMarkdown and Literate Programming</li>
+<li>Visualization Do’s and Don’ts</li>
 </ul>
 </div>
 <div id="week-8" class="section level4">
 <h4>Week 8</h4>
 <ul>
-<li>✅ <code>tidyr</code> (reshape data)</li>
-<li>✅ datetime data in R with <code>lubridate</code></li>
+<li><code>tidyr</code>: Reshaping Data</li>
+<li>Datetime Data in R with <code>lubridate</code></li>
 </ul>
 </div>
 <div id="week-9" class="section level4">
 <h4>Week 9</h4>
 <ul>
-<li>✅ finish datetime data</li>
-<li>✅ joins using <code>dplyr</code></li>
+<li>For Loops</li>
+<li>Iteration with <code>*apply</code> and <code>purrr</code></li>
 </ul>
 </div>
 <div id="week-10" class="section level4">
 <h4>Week 10</h4>
 <ul>
-<li>☑️ spatial (see <a href="https://ryanpeek.github.io/mapping_in_R/index.html">Mapping In R</a>)</li>
+<li>Students Choose!</li>
 </ul>
 </div>
 </div>

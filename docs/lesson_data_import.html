@@ -24,84 +24,29 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
-
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-div.sourceCode {
-  overflow-x: visible;
-}
-</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
 
 
 <style type="text/css">
@@ -231,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -257,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -320,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -401,28 +340,22 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -431,19 +364,7 @@ div.tocify {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -452,26 +373,7 @@ div.tocify {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -533,27 +435,28 @@ div.tocify {
 </div>
 
 
-<blockquote>
+<br>
+<div class="blue">
 <h2 id="learning-objectives">Learning objectives</h2>
 <ul>
 <li>Get comfortable importing different kinds of data</li>
 <li>Understand the concept of “tidy data”</li>
 </ul>
-</blockquote>
+</div>
+<p><br></p>
 <div id="reading-csv-data" class="section level2">
 <h2>Reading csv data</h2>
 <p>Data come in many forms, and we need to be able to load them in R. For our own use and with others who use R, there are R-specific data structures we can use, such as the <code>.rda</code> (<code>.RDATA</code>), or the <code>.rds</code> file-types. We’ll talk about those in more detail later. However, we need to be able to work with more general data types too. Comma-separated value (<code>.csv</code>) tables are perhaps the most universal data structure.</p>
 <p>This <a href="https://gge-ucd.github.io/R-DAVIS/data/species.csv">species dataset</a> provides genus and species information for animals caught during a trapping survey. I downloaded it and put it in the <code>data</code> directory of my project. Click on the link and download the file.</p>
 <p>We can read csv’s with the <code>read.csv</code> function. The argument to <code>read.csv</code> is the location of the file, relative to your working directory. Since I saved the gapminder data to the <code>data</code> directory of my project, I can load it with this. Note the use of tab-completion to find the file and get it exactly right without typos.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># download and read from your data folder</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</a></code></pre></div>
+<pre class="r"><code># download and read from your data folder
+read.csv(&#39;data/species.csv&#39;)</code></pre>
 <p>Whoa! What just happened? R executed the function and printed the result, just like when you enter <code>log(1)</code>. How do you store an object to a variable?</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">species &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/species.csv&#39;</span>)</a></code></pre></div>
+<pre class="r"><code>species &lt;- read.csv(&#39;data/species.csv&#39;)</code></pre>
 <p>Now, a data.frame called <code>species</code> is in my Environment, and I can see that it is a data.frame with 54 rows and 4 columns.</p>
-<div id="challenge-read-csv-data" class="section level3">
-<h3>Challenge – read csv data</h3>
+<div class="blue">
+<h3 id="challenge-read-csv-data">Challenge – read csv data</h3>
 <p>The species data are available at <a href="data/species.csv">this link</a>.</p>
-<blockquote>
 <ul>
 <li>Right click on the link to “save file as…”</li>
 <li>Save the .csv file in the <code>/data</code> directory of your project.</li>
@@ -562,30 +465,32 @@ div.tocify {
 <li>Inspect the <code>data.frame</code> using whatever means you like.</li>
 <li>Use a <code>dplyr</code> verb to reorder the data frame in alphabetical order by genus</li>
 </ul>
-</blockquote>
-<p><strong>Advanced challenge</strong></p>
-<blockquote>
+</div>
+<p><br></p>
+<div class="blue">
+<h3 id="advanced-challenge">Advanced challenge</h3>
 <p>Suppose you get a .csv file from a colleague in Europe. Because they use <code>,</code> (comma) as a decimal separator, they use <code>;</code> (semi-colons) to separate fields.<br />
 - How can you read it into R? Feel free to use the web and/or R’s helpfiles.</p>
-</blockquote>
 </div>
+<p><br></p>
 <div id="using-stringsasfactorsfalse" class="section level3">
 <h3>Using <code>stringsAsFactors=FALSE</code></h3>
 <p>By default, when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. Depending on what you want to do with the data, you may want to keep these columns as character. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
-<blockquote>
+<div class="blue">
 <p><strong>Tip</strong>: In most cases, it’s preferable to set <code>stringsAsFactors = FALSE</code> when importing your data, and converting as a factor only the columns that require this data type.</p>
-</blockquote>
+</div>
+<p><br></p>
 <p>Compare the output of <code>str(surveys)</code> when setting <code>stringsAsFactors = TRUE</code> (default) and <code>stringsAsFactors = FALSE</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co">## Compare the difference between when the data are being read as</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">## `factor`, and when they are being read as `character`.</span></a>
-<a class="sourceLine" id="cb3-5" title="5">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb3-7" title="7">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/combined.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="kw">str</span>(surveys)</a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">## Convert the column &quot;plot_type&quot; into a factor</span></a>
-<a class="sourceLine" id="cb3-10" title="10">surveys<span class="op">$</span>plot_type &lt;-<span class="st"> </span><span class="kw">factor</span>(surveys<span class="op">$</span>plot_type)</a></code></pre></div>
+<pre class="r"><code>surveys &lt;- read.csv(&#39;data/combined.csv&#39;)
+
+## Compare the difference between when the data are being read as
+## `factor`, and when they are being read as `character`.
+surveys &lt;- read.csv(&quot;data/combined.csv&quot;, stringsAsFactors = TRUE)
+str(surveys)
+surveys &lt;- read.csv(&quot;data/combined.csv&quot;, stringsAsFactors = FALSE)
+str(surveys)
+## Convert the column &quot;plot_type&quot; into a factor
+surveys$plot_type &lt;- factor(surveys$plot_type)</code></pre>
 </div>
 </div>
 <div id="reading-messier-data" class="section level2">
@@ -593,18 +498,18 @@ div.tocify {
 <p>Sometimes data can be a bit trickier to read because it isn’t in tidy format. If it is <strong>close</strong> to being tidy, we may be able add some more arguments to the <code>read.csv()</code> call to to help R interpret how the file should be read. If there are a few things that R will need help with, using the <code>read.table()</code> gives you the most flexibility but you’ll also have to always specify more information about the file to help R interpret it.</p>
 <p>Use <a href="data/wide_eg.csv">this link</a> to download this “wide” dataset and inspect it with a spreadsheet program. Why isn’t it tidy?</p>
 <p>Try using the <code>read.csv()</code> function on the file.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">read.csv</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>)</a></code></pre></div>
+<pre class="r"><code>read.csv(&quot;data/wide_eg.csv&quot;)</code></pre>
 <p>We need to tell R to skip 2 rows!</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">read.csv</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre class="r"><code>read.csv(&quot;data/wide_eg.csv&quot;, skip = 2)</code></pre>
 <p>Or using <code>read.table()</code>…</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">read.table</span>(<span class="st">&quot;data/wide_eg.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre class="r"><code>read.table(&quot;data/wide_eg.csv&quot;, header = TRUE, sep = &quot;,&quot;, skip = 2)</code></pre>
 </div>
 <div id="reading-directly-from-websites" class="section level2">
 <h2>Reading directly from websites</h2>
 <p>We can use the <code>read.csv()</code> function to read files directly from a website if we first call the <code>url()</code> function on the web address.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">read.csv</span>(<span class="kw">url</span>(<span class="st">&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;</span>), <span class="dt">skip =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre class="r"><code>read.csv(url(&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;), skip = 2)</code></pre>
 <p>We can also use the <code>read_csv()</code> (note that’s an underscore in the function name, not a period) from the <code>readr</code> package which is part of the <code>tidyverse</code>. In this case, we don’t have to use the <code>url()</code> function.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">read_csv</span>(<span class="st">&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;</span>, <span class="dt">skip =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre class="r"><code>read_csv(&quot;https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv&quot;, skip = 2)</code></pre>
 </div>
 <div id="exporting-data" class="section level2">
 <h2>Exporting data</h2>
@@ -623,11 +528,11 @@ div.tocify {
 <h2>Using <code>save</code> and <code>load</code></h2>
 <p>We’ve seen how to save out specific data types in R. One additional option is you can save anything in your workspace or working “environment”. You can save a single object, or multiple objects together. This is best done using the <code>.rda</code> file type. The <strong>.Rda</strong>ta file type is a great way to save objects from R that you have already tidied or modeled, and you want to maintain the structure and format of the data. Because these are native “R” file types, they can be read back in and will appear exactly as when you saved them.</p>
 <p>Let’s assume we have the “surveys” object and the “counts” objects in our environment, and we want save them both in one file. We’ll use <code>save()</code> and the <code>.rda</code> filetype.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">save</span>(surveys, counts, <span class="dt">file =</span> <span class="st">&quot;data_output/surveys_counts.rda&quot;</span>)</a></code></pre></div>
+<pre class="r"><code>save(surveys, counts, file = &quot;data_output/surveys_counts.rda&quot;)</code></pre>
 <p>To re-load these back into R, we use the <code>load</code> function.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">load</span>(<span class="st">&quot;data_output/surveys_counts.rda&quot;</span>)</a></code></pre></div>
-<div id="rds-vs..rda" class="section level3">
-<h3><code>.rds</code> vs. <code>.rda</code></h3>
+<pre class="r"><code>load(&quot;data_output/surveys_counts.rda&quot;)</code></pre>
+<div id="rds-vs.-.rda" class="section level3">
+<h3><code>.rds</code> vs. <code>.rda</code></h3>
 <p>Why use one vs. the other? What do these file types provide that a simple csv doesn’t provide?</p>
 <p>Short answer is they maintain not only the structure, but also the format and data types within your data sets. However it appears in your environment in R is exactly how it will be saved (with <code>save()</code>), and then read back in (with <code>load()</code> or <code>readRDS</code>. This can save time and code, once you have your data in a format/shape you are happy with. An added bonus is the format (<code>rda</code> and <code>rds</code>) are both highly compressed, and can save significant space on your hard drive.</p>
 <p>The main differences between the two:</p>
@@ -636,35 +541,36 @@ div.tocify {
 <li><code>.rds</code> can only save file/object</li>
 </ul>
 <p>For example, let’s use the surveys dataset we loaded earlier and save a few <code>rda</code> and <code>rds</code> files.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb11-2" title="2"></a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co"># load data</span></a>
-<a class="sourceLine" id="cb11-4" title="4">surveys &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/combined.csv&#39;</span>) <span class="co"># the combined.csv is 3.1 MB in size</span></a>
-<a class="sourceLine" id="cb11-5" title="5"></a>
-<a class="sourceLine" id="cb11-6" title="6"><span class="co"># filter to years &gt; 2000 and only rodents</span></a>
-<a class="sourceLine" id="cb11-7" title="7">rodents2001 &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2000</span> <span class="op">&amp;</span><span class="st"> </span>taxa <span class="op">==</span><span class="st"> &quot;Rodent&quot;</span>)</a>
-<a class="sourceLine" id="cb11-8" title="8"></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="co"># filter to only birds</span></a>
-<a class="sourceLine" id="cb11-10" title="10">birds &lt;-<span class="st"> </span>surveys <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(taxa<span class="op">==</span><span class="st">&quot;Bird&quot;</span>)</a>
-<a class="sourceLine" id="cb11-11" title="11"></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="co"># RDA files: now we can save all these objects together:</span></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="kw">save</span>(surveys, rodents2001, birds, <span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>) <span class="co"># this file is 245 kb (0.2 MB)</span></a>
-<a class="sourceLine" id="cb11-14" title="14"></a>
-<a class="sourceLine" id="cb11-15" title="15"><span class="co"># RDS files: this can only be one file:</span></a>
-<a class="sourceLine" id="cb11-16" title="16"><span class="kw">saveRDS</span>(rodents2001, <span class="dt">file =</span> <span class="st">&quot;data/rodents2001.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb11-17" title="17"></a>
-<a class="sourceLine" id="cb11-18" title="18"><span class="co"># to load an rds file back in:</span></a>
-<a class="sourceLine" id="cb11-19" title="19">any_name_i_choose &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;data/rodents2001.rds&quot;</span>)</a>
-<a class="sourceLine" id="cb11-20" title="20"></a>
-<a class="sourceLine" id="cb11-21" title="21"><span class="co"># but won&#39;t work with rda</span></a>
-<a class="sourceLine" id="cb11-22" title="22">nope &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>)</a>
-<a class="sourceLine" id="cb11-23" title="23"></a>
-<a class="sourceLine" id="cb11-24" title="24"><span class="co"># same with trying to assign a name to an rda file on load</span></a>
-<a class="sourceLine" id="cb11-25" title="25">doublenope &lt;-<span class="st"> </span><span class="kw">load</span>(<span class="dt">file =</span> <span class="st">&quot;data/example.rda&quot;</span>) <span class="co"># wait ...check out &quot;doublenope&quot;</span></a>
-<a class="sourceLine" id="cb11-26" title="26"></a>
-<a class="sourceLine" id="cb11-27" title="27">doublenope <span class="co"># created a character vector of the objects...but didn&#39;t assign any to the name nope</span></a>
-<a class="sourceLine" id="cb11-28" title="28"></a>
-<a class="sourceLine" id="cb11-29" title="29"><span class="co"># [1] &quot;surveys&quot;     &quot;rodents2001&quot; &quot;birds&quot;   </span></a></code></pre></div>
+<pre class="r"><code>library(dplyr)
+
+# load data
+surveys &lt;- read.csv(&#39;data/combined.csv&#39;) # the combined.csv is 3.1 MB in size
+
+# filter to years &gt; 2000 and only rodents
+rodents2001 &lt;- surveys %&gt;% filter(year &gt; 2000 &amp; taxa == &quot;Rodent&quot;)
+
+# filter to only birds
+birds &lt;- surveys %&gt;% filter(taxa==&quot;Bird&quot;)
+
+# RDA files: now we can save all these objects together:
+save(surveys, rodents2001, birds, file = &quot;data/example.rda&quot;) # this file is 245 kb (0.2 MB)
+
+# RDS files: this can only be one file:
+saveRDS(rodents2001, file = &quot;data/rodents2001.rds&quot;)
+
+# to load an rds file back in:
+any_name_i_choose &lt;- readRDS(file = &quot;data/rodents2001.rds&quot;)
+
+# but won&#39;t work with rda
+nope &lt;- readRDS(file = &quot;data/example.rda&quot;)
+
+# same with trying to assign a name to an rda file on load
+doublenope &lt;- load(file = &quot;data/example.rda&quot;) # wait ...check out &quot;doublenope&quot;
+
+doublenope # created a character vector of the objects...but didn&#39;t assign any to the name nope
+
+# [1] &quot;surveys&quot;     &quot;rodents2001&quot; &quot;birds&quot;   </code></pre>
+<p>One extremely time-saving use of <code>.rds</code> files is when you’ve fit a large statistical model that gets saved as a model object. For example, the <code>brms</code> and <code>lme4</code> packages used for multi-level models will return large model objects that contain lots of information about the model. Some models can take hours, days, even <strong>weeks</strong> to finish fitting, so it can be useful to save a fully fitted model object as a <code>.rds</code> file. You can then load that model object back into R and work with it however you want.</p>
 </div>
 </div>
 <div id="excel-googlesheets" class="section level2">
@@ -680,6 +586,17 @@ div.tocify {
 <li>Using the <code>foreign</code> package</li>
 <li>reading in <code>.dbf</code>, <em>Stata</em>, <em>SAS</em>, <em>SPSS</em>, <code>.shp</code>, <code>.netcdf</code>, <code>raster</code>, <code>.kml</code>, <code>gpx</code>, <code>xml</code>, <code>geojson</code>, <code>json</code>, etc….</li>
 </ul>
+</div>
+<div id="rio-package" class="section level2">
+<h2><code>rio</code> Package</h2>
+<p>One other data import/export package to check out is called <code>rio</code>. It uses two main functions: <code>import</code> and <code>export</code>, and it automatically detects the file extension you’re using, then picks the fastest function out of a bunch of different specialized packages. It can streamline your data import/export and give you more consistent data frames when you’re working with lots of different file types.</p>
+<pre class="r"><code>#install.packages(&quot;rio&quot;)
+library(rio)
+export(mtcars, &quot;data/mtcars.csv&quot;)
+export(mtcars, &quot;data/mtcars.rds&quot;)
+export(mtcars, &quot;data/mtcars.feather&quot;)</code></pre>
+<pre><code>## Loading required namespace: feather</code></pre>
+<p>You can read more about <code>rio</code> on its <a href="https://github.com/leeper/rio">Github page</a>.</p>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a> and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting Data materials</a>.</p>
 </div>

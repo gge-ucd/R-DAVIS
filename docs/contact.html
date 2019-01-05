@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,28 +340,22 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -359,19 +364,7 @@ div.tocify {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -380,26 +373,7 @@ div.tocify {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -509,7 +483,11 @@ div.tocify {
 <a href="https://twitter.com/riverpeek"><i class="fa fa-twitter-square" aria-hidden="true"></i> @riverpeek</a><br />
 <a href="https://github.com/ryanpeek"><i class="fa fa-github-square" aria-hidden="true"></i> ryanpeek</a><br />
 <a href="https://orcid.org/0000-0002-9577-6885"><i class="ai ai-orcid-square"></i> orcid.org/0000-0002-9577-6885</a></p>
+<<<<<<< HEAD
 <p>I recently completed my PhD in Ecology (2018) studying ecological responses to freshwater alteration using a mix of hydrology, genomics, and ecology. I’ve been using R since 2011, and I became a certified Software/Data Carpentry instructor in 2016. I enjoy helping teach Carpentry workshops and R classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help coordinate the Davis R Users Group (D-RUG), and spearheaded a more organized effort at UC Davis to train fellow grad students/ecologists in data science using the R programming language. My favorite part of teaching programming/coding is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing learning experience to teach, and I hope to continue trying to empower others to become better scientists and data wranglers.</p>
+=======
+<p>I recently completed my PhD in Ecology (2018) studying ecological responses to freshwater alteration in a sensitive amphibian frog species. I work with many data types, but largely enjoy blending hydrology, genomics, and ecology. I’ve been using R since 2011, and I became a certified Software/Data Carpentry instructor in 2016. I enjoy teaching and helping run Carpentry workshops and R classes to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I help coordinate the Davis R Users Group (D-RUG), and spearheaded a more organized effort at UC Davis to train fellow grad students/ecologists in data science using the R programming language. My favorite part of teaching programming/coding is seeing folks make their first plot or read in their first dataset, and recognizing that programming can be useful and fun. It is an amazing learning experience to teach, and I hope to continue trying to empower others to become better scientists and data wranglers.</p>
+>>>>>>> 468d947ca93cf0c703ea046c88f3ca2071c84fad
 <p><br></p>
 <p><strong>Michael Koontz</strong></p>
 <p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mikoontz@gmail.com">email</a><br />
@@ -517,9 +495,8 @@ div.tocify {
 <a href="https://twitter.com/_mikoontz"><i class="fa fa-twitter-square" aria-hidden="true"></i> @_mikoontz</a><br />
 <a href="https://github.com/mikoontz"><i class="fa fa-github-square" aria-hidden="true"></i> mikoontz</a><br />
 <a href="https://orcid.org/0000-0002-8276-210X"><i class="ai ai-orcid-square"></i> orcid.org/0000-0002-8276-210X</a></p>
-<p>I’m a 4th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.</p>
-<p>I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.</p>
-<p>My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p>
+<p>I’m a 5th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity. I’ve been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016. My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about <em>how</em> to learn more).</p
+468d947ca93cf0c703ea046c88f3ca2071c84fad
 <p><br></p>
 </div>
 <div id="data-carpentry" class="section level2">

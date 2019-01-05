@@ -11,65 +11,64 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 1
 
-* What we covered ([livecode](https://raw.githubusercontent.com/gge-ucd/R-DAVIS-live-code/master/scripts/2018-R-DAVIS-w01.R))
-* [**Screencast**](https://www.youtube.com/watch?v=j0x6OZi_OGE) (*video cuts out in second half, audio good*)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-1)
+* What we covered ([livecode](https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0))
+* [**Screencast**]()
+* [**GoogleDoc**](https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing)
 
 ### Week 2
 
-* What we covered ([livecode](https://dl.dropboxusercontent.com/s/nd15b2o4rojq83f/2018-R-DAVIS-w02.R?dl=0))
-* [**Screencast**](https://www.youtube.com/watch?v=O2X3d7sA1vU)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-2)
+* What we covered ([livecode]())
+* [**Screencast**]()
+* [**GoogleDoc**]()
 
 ### Week 3
 
-* What we covered ([livecode](https://dl.dropboxusercontent.com/s/gnzcuy5p2bl3nlv/2018-R-DAVIS-w03.R?dl=0))
-* [**Screencast**](https://www.youtube.com/watch?v=ypVTFzAxrRw) (*video cuts out halfway, audio still good*)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-3)
+* What we covered ([livecode]())
+* [**Screencast**]()
+* [**GoogleDoc**]()
 
 ### Week 4
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/ht32bw2siddnwyz/2018-R-DAVIS-w04.R?dl=0))
-* [Screencast](https://www.youtube.com/watch?v=Sn1_K95uXx4)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-4)
+* What we covered (link to [livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
 
 ### Week 5
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/5gf17w7xo58a4vw/2018-R-DAVIS-w05.R?dl=0))
-* [Screencast](https://www.youtube.com/watch?v=zjQxdu0CUsE) (*video cuts out halfway, audio still good*)
-* [**GoogleDoc**](https://tinyurl.com/r-davis-week-5)
+* What we covered (link to [livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
 
 ### Week 6
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/60y47vubn84jvi8/2018-R-DAVIS-w06.R?dl=0))
-* [Screencast](https://www.youtube.com/watch?v=7PCQ5vfCsZU)
-* [**GoogleDoc**](https://docs.google.com/document/d/1TLHA_MYEs38ZIfS0am4HHyNdwQK9WLfKMGTmOt5ZdDA/edit?usp=sharing)
-* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
+* What we covered (link to [livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
 
 ### Week 7
 
-* What we covered (link to [livecode R](https://dl.dropboxusercontent.com/s/fu43gc7th8iouiz/2018-R-DAVIS-w07.R?dl=0), [Rmd](https://dl.dropboxusercontent.com/s/pbb9fz0g5lv0r6c/demo_rmarkdown.Rmd))
-* [Screencast](https://www.youtube.com/watch?v=TeU4UyDzsCc)
-* [**GoogleDoc**](https://docs.google.com/document/d/1LmR-DqYNfGfn7DoecjfpjX8Ex0i8pdwaMqhFGLfmh0E/edit)
-* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
+* What we covered (link to [livecode R](), [Rmd]())
+* [Screencast]()
+* [**GoogleDoc**]()
+
 
 ### Week 8
 
-* What we covered (link to [Rmd livecode](https://dl.dropboxusercontent.com/s/wtoiwdcdd6nvm8w/2018-R-DAVIS-w08.Rmd))
-* [Screencast](https://www.youtube.com/watch?v=ERlzn8Cw9Ls)
-* [**GoogleDoc**](https://docs.google.com/document/d/10iZ7B4ikQzOF59ABXhm67-zSiUV-T0qxBWwbXoT6DHE/edit)
-* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
+* What we covered (link to [Rmd livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
+
 
 ### Week 9
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/kans88x940g3m12/2018-R-DAVIS-w09.Rmd))
-* [Screencast](https://www.youtube.com/watch?v=orgb6CIzjVo)
-* [**GoogleDoc**](https://docs.google.com/document/d/1IdM25wj8WfVZv1D1XGMDjiJx4YCFoN3zb6tGyAbNJjM/edit)
-* [End of class survey](https://goo.gl/forms/9xgl3Ae1PxL5wiJe2)
+* What we covered (link to [livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
+
 
 ### Week 10
 
-* What we covered (link to [livecode](https://dl.dropboxusercontent.com/s/mx1z10f17wlwkro/2018-R-DAVIS-w10.Rmd))
-* [Screencast](https://www.youtube.com/watch?v=6gO_QSmmmq4)
-* [**GoogleDoc**](https://docs.google.com/document/d/12grTEZu4AwiP_JURlaAQ4VgCV_7dgrLLlxxRv1Lv-Ik/edit)
+* What we covered (link to [livecode]())
+* [Screencast]()
+* [**GoogleDoc**]()
 

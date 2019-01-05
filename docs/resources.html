@@ -21,11 +21,28 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -156,7 +173,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -225,28 +242,22 @@ $(document).ready(function () {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -255,19 +266,7 @@ $(document).ready(function () {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -276,26 +275,7 @@ $(document).ready(function () {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -360,6 +340,20 @@ $(document).ready(function () {
 <div id="section" class="section level2 tabset tabset-fade">
 <h2></h2>
 <p>There are many resources online and in print. This is by no means a comprehensive list, but hopefully a launching pad for some very useful website and books. All of these examples provide code in same shape or form.</p>
+<div id="bonus-lessons" class="section level3">
+<h3>Bonus Lessons</h3>
+<ul>
+<li><a href="lesson_joins.html">Joining Data</a></li>
+<li><a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a></li>
+<li><a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a></li>
+<li><a href="lesson_for_loops.html">For Loops</a></li>
+<li><a href="lesson_purrr_tutorial.html">Using purrr</a></li>
+<li><a href="https://ryanpeek.github.io/mapping_in_R/index.html">Mapping in R</a></li>
+<li><a href="lesson_text_mining_mlk.html">Text Mining</a></li>
+<li><a href="lesson_github_collaboration.html">Github Collaboration with Branches</a></li>
+<li><a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">Data Carpentry: R and SQL</a></li>
+</ul>
+</div>
 <div id="resources" class="section level3">
 <h3>Resources</h3>
 <div id="r-lessons-tutorials" class="section level4">
@@ -446,7 +440,7 @@ $(document).ready(function () {
 <li><a href="https://youtu.be/jgghG1K3740">Clark Fitzgerald on integrating the shell with R</a></li>
 <li><a href="https://youtu.be/8G6bBum3O9A">Myfanwy Johnston on unit testing (or code testing) in R</a></li>
 <li><a href="https://youtu.be/9q7gssUP8UA">Michael Levy tutorial on using the <code>tidyverse</code></a></li>
-<li><a href="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1">Brandon Hurr &quot;Intro to using <code>purrr</code></a></li>
+<li><a href="http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1">Brandon Hurr “Intro to using <code>purrr</code></a></li>
 <li><a href="http://d-rug.github.io/blog/2016/hurr-dplyr2">Brandon Hurr “dplyr II: Joins and Set Operations”</a></li>
 </ul>
 </div>

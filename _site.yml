@@ -22,52 +22,48 @@ navbar:
     - text: Project Management
       href: lesson_project_management.html
     - text: Spreadsheets
-      href: http://www.datacarpentry.org/spreadsheet-ecology-lesson/
+      href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types
-      href: http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types
-    - text: Data frames (continents)
-      href: lesson_data_frames_continents.html
-    - text: Data frames (ecology)
+      href: lesson_vectors.html
+    - text: Data Frames 
       href: lesson_data_frames_ecology.html
-    - text: Using dplyr (ecology)
+    - text: Using dplyr
       href: lesson_dplyr_ecology.html
-    - text: Using dplyr (gapminder)
-      href: lesson_dplyr_gapminder.html
-    - text: Using ggplot2 (gapminder)
-      href: lesson_visualization_ggplot2.html
-    - text: Using ggplot2 (ecology)
-      href: http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html
-    - text: Visualization Do's & Don'ts
+    - text: Using ggplot2
+      href: lesson_ggplot_ecology.html
+    - text: Data Import & Export
+      href: lesson_data_import.html
+    - text: "Visualization Do's & Don'ts"
       href: lesson_visualization_dos.html
     - text: Literate Programming with RMarkdown
       href: lesson_rmarkdown.html
-    - text: Data import & export
-      href: lesson_data_import.html
     - text: Using tidyr
       href: lesson_tidyr.html
-    - text: Joining data
-      href: lesson_joins.html
-    - text: 'Pipelines: data import %>% dplyr %>% ggplot2'
-      href: lesson_import_dplyr_ggplot2.html
-    - text: 'Pipelines: Download CO2 & Ice Core Data & Visualize'
-      href: lesson_ice_core_CO2_web_data.html
+#    - text: Joining data
+#      href: lesson_joins.html
+#    - text: 'Pipelines: data import %>% dplyr %>% ggplot2'
+#      href: lesson_import_dplyr_ggplot2.html
+#    - text: 'Pipelines: Download CO2 & Ice Core Data & Visualize'
+#      href: lesson_ice_core_CO2_web_data.html
     - text: Times & Dates with lubridate
       href: lesson_lubridate.html
     - text: Writing functions
       href: lesson_functions.html
-    - text: For loops
-      href: lesson_for_loops.html
-    - text: Using purrr
-      href: lesson_purrr_tutorial.html
-    - text: Mapping in R
-      icon: fa-map fa-1.5x
-      href: https://ryanpeek.github.io/mapping_in_R/index.html
-    - text: Text mining
-      href: lesson_text_mining_mlk.html
-    - text: Github collaboration with branches
-      href: lesson_github_collaboration.html
-    - text: R and SQL
-      href: http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html
+#    - text: For loops
+#      href: lesson_for_loops.html
+    - text: Iteration
+      href: lesson_iteration.html
+#    - text: Using purrr
+#      href: lesson_purrr_tutorial.html
+#    - text: Mapping in R
+#      icon: fa-map fa-1.5x
+#      href: https://ryanpeek.github.io/mapping_in_R/index.html
+#    - text: Text mining
+#      href: lesson_text_mining_mlk.html
+#    - text: Github collaboration with branches
+#      href: lesson_github_collaboration.html
+#    - text: R and SQL
+#      href: http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html
   - text: Lectures
     icon: fa-slideshare fa-1x
     href: lectures.html
@@ -87,11 +83,11 @@ output_dir: docs
 output:
   html_document:
     theme: flatly
-    highlight: pygments
-    code_folding: hide
+    #highlight: pygments
+    code_folding: show
     toc: yes
     toc_float:
-      collapsed: no
+      collapsed: yes
     include:
       in_header: header.html
     css: style.css

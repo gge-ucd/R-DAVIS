@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,28 +340,22 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -359,19 +364,7 @@ div.tocify {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -380,26 +373,7 @@ div.tocify {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -461,25 +435,24 @@ div.tocify {
 </div>
 
 
-<p>Now that you’ve gone through the setup, the next step is seeing whether you can connect RStudio with Git. Please try this at home before class, and then we’ll go through it when we meet.</p>
-<p>This lesson assumes you have:</p>
-<blockquote>
+<p>Once we’ve setup R/RStudio, and installed git, the next step is seeing whether we can connect RStudio with Git. Please try this at home before class, and then we’ll go through it when we meet.</p>
+<br>
+<div class="blue">
+<p><strong>This lesson assumes you have:</strong></p>
 <ul>
-<li>registered for Github account</li>
-<li>installed R, RStudio, and git</li>
-<li>You accepted your invitation to your repository in the gge-ucd organization</li>
-<li>You’ve successfully created your <code>ssh</code> key or have been able to authenticate with <code>https</code></li>
+<li>registered for your free Github account</li>
+<li>installed <strong>R</strong>, <strong>RStudio</strong>, and <strong>git</strong></li>
+<li>Filled out our google form and accepted your invitation to the repository in our <a href="https://github.com/gge-ucd"><code>GGE-R-DAVIS</code> group</a></li>
 </ul>
-</blockquote>
-<p>This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible.</p>
+</div>
+<p><br> This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible.</p>
+<p><br></p>
 <div id="introduction-to-version-control" class="section level2">
 <h2>Introduction to Version Control</h2>
 <p>At some point many of us have probably had files in a directory that may have looked like this (<em><a href="http://phdcomics.com/comics/archive.php?comicid=1323">from PHDcomics</a></em>):</p>
-<div class="figure">
-<img src="img/phd052810s.gif" alt="phdcomics" />
-<p class="caption">phdcomics</p>
-</div>
-<p>Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren’t the same as in the submitted version of the manuscript.</p>
+<p><img src="img/phd052810s.gif" /></p>
+<p>Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren’t the same as in the submitted version of the manuscript. For much more detail on setting git with R (or troubleshooting), see the <a href="http://happygitwithr.com/">happygitwithr.com</a> website.</p>
+<p><br></p>
 <div id="benefits-of-version-control" class="section level3">
 <h3>Benefits of Version Control</h3>
 <ul>
@@ -498,41 +471,48 @@ div.tocify {
 <li>Everyone has the most recent version of everything</li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
 </div>
 <div id="connecting-rstudio-github" class="section level2">
 <h2>Connecting RStudio &amp; Github</h2>
 <p>For our purposes the “<em>best practice</em>” (i.e., <strong>easier</strong>) for setting up a new github repository in RStudio is through an RStudio <em>Project</em>. First, ideally what we want to do is create a new repository on <a href="https://github.com/">Github</a>, then create a new RStudio Project to <strong>clone</strong> (copy) our repository onto our computer (a local version). See the steps below.</p>
+<p><br></p>
 <div id="create-a-new-repository-on-github" class="section level3">
 <h3>1. Create a New Repository on Github</h3>
 <ul>
-<li>Create a new repository on Github.
+<li>Typically, the preferred method is to create a new repository on Github…<em>however</em>:
 <ul>
-<li>For our class, we may be using a Github Classroom, which means we create the repository in advance and send you a link. You click the link, Github copies/creates a new repository for you, move to step 2.)</li>
+<li><em>For our class, we are using a Github Classroom, which means we’ve already created the repository in advance and sent you a link. When you click the link, Github creates a new repository for you, which we as a class can all see and work with!</em></li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
-<div id="clone-repository-link" class="section level3">
-<h3>2. Clone Repository Link</h3>
-<p>You should now have a repository on github. Our class is all housed in the <a href="https://github.com/gge-ucd">gge-ucd</a> Organization, so your repository should appear there, and it should look something like this: - <a href="https://github.com/gge-ucd/w01-fix-readme-ryanpeek"><code>https://github.com/gge-ucd/w01-fix-readme-ryanpeek</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file by clicking on it.</p>
-<blockquote>
-<p><strong>To <em><code>clone</code></em> your repository</strong></p>
-</blockquote>
+<div id="clone-your-repository-to-your-computer" class="section level3">
+<h3>2. Clone Your Repository to your Computer</h3>
+<p>You should now have a repository on github. Our class is all housed in the <a href="https://github.com/gge-ucd">gge-ucd</a> Organization, so your repository should appear there, and it should look something like this:</p>
 <ul>
-<li><strong><code>SSH</code>:</strong> Look for the big green “Clone or Download” button. It will appear on the main repository webpage. Click the button, and assuming you’ve set up your SSH key, make sure you have the <strong>Clone with SSH</strong> version and copy that link (should be something like <em><code>git@github.com:gge-ucd/w01-fix-readme-firstnamelastname.git</code></em>).</li>
-<li><strong><code>HTTPS</code>:</strong> Look for the big green “Clone or Download” button. Make sure you have the <strong>Clone with HTTPS</strong> version and copy that link (should be something like <em><code>https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git</code></em>).</li>
+<li><a href="https://github.com/gge-ucd/w01-fix-readme-ryanpeek"><code>https://github.com/gge-ucd/w01-fix-readme-ryanpeek</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file by clicking on it.</li>
+<li><strong>To <em><code>clone</code></em> your repository</strong> (<em>copy to your computer</em>):
+<ul>
+<li>We’re going to stick with using <strong><code>HTTPS</code>:</strong> for now. Look for the big green “<em>Clone or download</em>” button. Make sure you select the “<strong>Use HTTPS</strong>” so the top of the box says: <strong>Clone with HTTPS</strong>.</li>
+<li>Copy that link (should be something like <em><code>https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git</code></em>).</li>
+</ul></li>
 </ul>
-<p><img src="img/ssh_clone.png" /></p>
+<p><img src="img/https_clone.png" /></p>
+<p><strong>If you see this box, but it says “Clone with SSH”, just click “Use HTTPS” in the top right of the box.</strong></p>
+<p><br></p>
 </div>
 <div id="create-a-new-version-controlled-git-rstudio-project" class="section level3">
 <h3>3. Create a New Version Controlled (<code>git</code>) RStudio Project</h3>
 <p>Now we’ll create an RStudio Project and link our Github repository (following <a href="http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio"><em>Section 13.3</em> of <code>happygitwithR</code></a>).</p>
 <ul>
-<li>In RStudio, start a new Project: <code>File &gt; New Project &gt; Version Control &gt; Git</code>. In the “<strong>Repository URL</strong>” paste the URL of your new GitHub repository. If you hit <strong><code>Tab</code></strong>, the <em>Project directory name</em> will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the <em>Nuts &amp; Bolts</em> notes below for more info.</li>
+<li>In RStudio, start a new Project: <code>File &gt; New Project &gt; Version Control &gt; Git</code>.</li>
+<li>In the “<strong>Repository URL</strong>” paste the URL of your new GitHub repository. If you hit <strong><code>Tab</code></strong>, the <em>Project directory name</em> will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the <em>Nuts &amp; Bolts</em> notes below for more info.</li>
 </ul>
 <p><img src="img/newRStudio_git_proj_named.png" /></p>
 <p><br></p>
-<p>🔩 <em><strong>More about github/RStudio projects</strong>: One thing to keep in mind is each github repository should only have <strong>ONE</strong> corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository…there are hidden files which track your changes (the version control record), and there’s potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is <code>github</code> or <code>Rprojects</code>, and then each project or repository will have it’s own single folder within that general directory.</em></p>
+<p><strong>More about github/RStudio projects:</strong> One thing to keep in mind is each github repository should only have <strong>ONE</strong> corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository…there are hidden files which track your changes (the version control record), and there’s potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is <code>github</code> or <code>Rprojects</code>, and then each project or repository will have it’s own single folder within that general directory.</p>
 <ul>
 <li>This new subdirectory that you specified will be all these things:
 <ul>
@@ -543,6 +523,7 @@ div.tocify {
 </ul></li>
 </ul>
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
+<p><br></p>
 <div id="if-you-made-it-thus-far-congrats" class="section level4">
 <h4><em>IF YOU MADE IT THUS FAR CONGRATS!</em></h4>
 <p><br></p>
@@ -556,6 +537,7 @@ div.tocify {
 <li><strong><code>commit</code></strong> these changes (make a version control record of your change/s)</li>
 <li><strong><code>push</code></strong> these change back to the <code>remote</code> which is the copy of the repository on Github.com.</li>
 </ul>
+<p><br></p>
 <div id="edit-readme" class="section level4">
 <h4>Edit README</h4>
 <p>In RStudio, open your new project (<strong><code>Firstname_Lastname</code></strong>). Navigate to the <em>Files</em> tab and open the <code>README.md</code> file. You can click on it in the window and it will automatically open up.</p>
@@ -568,13 +550,14 @@ div.tocify {
 <li>Add an “X” inside the <strong>Edited by student</strong> box</li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
 <div id="stage-commit-to-git" class="section level4">
 <h4>Stage &amp; Commit to Git</h4>
 <ul>
 <li><p>Click on the <strong>Git</strong> tab. When you click on the git tab, you should see the <code>README.md</code>, and a <code>.Rproj</code> file, and perhaps a few other files. That’s ok!</p></li>
 <li><p>Click on the small box to the left of the <code>README.md</code> to stage the file. Then click the <code>commit</code> button. You’ll see a new widow, on the upper right you need to type a <code>commit</code> message, something simple, short, and descriptive. Then click the <code>commit</code> button. You should see a little box with message committed.</p></li>
-<li><p>Finally before you close everything, hit the <strong>PUSH</strong> button. This <em>pushes</em> the changes to the github repository (you may need to enter your username &amp; password once depending on whether you used <code>ssh</code> or <code>https</code>).</p></li>
+<li><p>Finally before you close everything, hit the <strong>PUSH</strong> button. This <em>pushes</em> the changes to the github repository (you may need to enter your Github username &amp; password once depending on whether you used <code>https</code> or <code>ssh</code>).</p></li>
 <li><p>If you go back to the repository in your browser and refresh the page, you should see the changes you’ve made. Equally important, any collaborator or instructor can now <code>pull</code> those exact changes into a copy of the repo on our computer.</p></li>
 </ul>
 <p>Hopefully that all worked! You can now push and pull from your repository.</p>

@@ -11,7 +11,7 @@
 
 
 
-<title>Project management with RStudio</title>
+<title>Project Management with RStudio</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,11 +24,28 @@
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
 <script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
 <script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -159,7 +176,7 @@ $(document).ready(function () {
 </style>
 <script>
 $(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
+  window.initializeCodeFolding("show" === "show");
 });
 </script>
 
@@ -185,7 +202,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = false;
+    options.showAndHide = true;
     options.smoothScroll = true;
 
     // tocify
@@ -248,12 +265,6 @@ div.tocify {
   border-radius: 0px;
 }
 
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
 
 </style>
 
@@ -329,28 +340,22 @@ div.tocify {
       <a href="lesson_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">Spreadsheets</a>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html#vectors_and_data_types">Vectors &amp; Data Types</a>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
     </li>
     <li>
-      <a href="lesson_data_frames_continents.html">Data frames (continents)</a>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
     </li>
     <li>
-      <a href="lesson_data_frames_ecology.html">Data frames (ecology)</a>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr (ecology)</a>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
     </li>
     <li>
-      <a href="lesson_dplyr_gapminder.html">Using dplyr (gapminder)</a>
-    </li>
-    <li>
-      <a href="lesson_visualization_ggplot2.html">Using ggplot2 (gapminder)</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html">Using ggplot2 (ecology)</a>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
     </li>
     <li>
       <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
@@ -359,19 +364,7 @@ div.tocify {
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data import &amp; export</a>
-    </li>
-    <li>
       <a href="lesson_tidyr.html">Using tidyr</a>
-    </li>
-    <li>
-      <a href="lesson_joins.html">Joining data</a>
-    </li>
-    <li>
-      <a href="lesson_import_dplyr_ggplot2.html">Pipelines: data import %&gt;% dplyr %&gt;% ggplot2</a>
-    </li>
-    <li>
-      <a href="lesson_ice_core_CO2_web_data.html">Pipelines: Download CO2 &amp; Ice Core Data &amp; Visualize</a>
     </li>
     <li>
       <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
@@ -380,26 +373,7 @@ div.tocify {
       <a href="lesson_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_for_loops.html">For loops</a>
-    </li>
-    <li>
-      <a href="lesson_purrr_tutorial.html">Using purrr</a>
-    </li>
-    <li>
-      <a href="https://ryanpeek.github.io/mapping_in_R/index.html">
-        <span class="fa fa-map fa-1.5x"></span>
-         
-        Mapping in R
-      </a>
-    </li>
-    <li>
-      <a href="lesson_text_mining_mlk.html">Text mining</a>
-    </li>
-    <li>
-      <a href="lesson_github_collaboration.html">Github collaboration with branches</a>
-    </li>
-    <li>
-      <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and SQL</a>
+      <a href="lesson_iteration.html">Iteration</a>
     </li>
   </ul>
 </li>
@@ -456,27 +430,31 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Project management with RStudio</h1>
+<h1 class="title toc-ignore">Project Management with RStudio</h1>
 
 </div>
 
 
-<blockquote>
-<h2 id="learning-objectives">Learning objectives</h2>
+<p><br> <code>HOME</code> is where I want to be<br> But I guess I’m already there<br> I come home, a clean directory<br> I guess this must be the place</p>
+<p><img src="img/david_byrne_big_suit.gif" width="250" /></p>
+<br>
+<div class="blue">
+<h1 id="learning-objectives">Learning objectives</h1>
 <ul>
 <li>Understand motivation for code and data management</li>
 <li>Know how to organize code, data, and results</li>
 <li>Be able to create and use an RStudio project</li>
 </ul>
-</blockquote>
-<div id="code-data-organization" class="section level2">
-<h2>Code &amp; Data Organization</h2>
+</div>
+<p><br></p>
+<div id="code-data-organization" class="section level1">
+<h1>Code &amp; Data Organization</h1>
 <p>The scientific process is naturally incremental, and many projects start life as random notes, some code, then a manuscript, and eventually everything is a bit mixed together.</p>
 <blockquote class="twitter-tweet">
 <p>
 Managing your projects in a reproducible fashion doesn’t just make your science reproducible, it makes your life easier.
 </p>
-— Vince Buffalo (@vsbuffalo) <a href="https://twitter.com/vsbuffalo/status/323638476153167872">April 15, 2013</a>
+— Vince Buffalo (<span class="citation">@vsbuffalo</span>) <a href="https://twitter.com/vsbuffalo/status/323638476153167872">April 15, 2013</a>
 </blockquote>
 <script async src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <p>A good project layout will ultimately make your life easier:</p>
@@ -487,15 +465,15 @@ Managing your projects in a reproducible fashion doesn’t just make your scienc
 <li>It allows you to easily upload your code with your manuscript submission</li>
 <li>It makes it easier to pick the project back up after a break</li>
 </ul>
-<div id="best-practices-for-project-organization" class="section level3">
-<h3>Best practices for project organization</h3>
+<div id="best-practices-for-project-organization" class="section level2">
+<h2>Best practices for project organization</h2>
 <p>Although there is no “best” way to lay out a project, there are some general principles to adhere to that will make project management easier:</p>
-<div id="treat-raw-data-as-read-only" class="section level4">
-<h4>Treat raw data as read only</h4>
+<div id="treat-raw-data-as-read-only" class="section level3">
+<h3>Treat raw data as read only</h3>
 <p>This is probably the most important goal of setting up a project. Raw data should never be edited, because you can never be sure that you will want to keep any edit you make, and you want to have a record of any changes you make to data. Therefore, treat your raw data as “read only”, perhaps even making a <code>raw_data</code> directory that is never modified. If you do some data cleaning or modification, save the modified file separate from the raw data, and ideally keep all the modifying actions in a script so that you can review and revise them as needed in the future.</p>
 </div>
-<div id="treat-generated-output-as-disposable" class="section level4">
-<h4>Treat generated output as disposable</h4>
+<div id="treat-generated-output-as-disposable" class="section level3">
+<h3>Treat generated output as disposable</h3>
 <p>Anything generated by your scripts should be treated as disposable: it should all be able to be regenerated from your scripts. There are lots of different ways to manage this output, and what’s best may depend on the particular kind of project. At a minimum, it’s useful to have separate directories for each of the following:</p>
 <ul>
 <li>data: Ideally .csv files as these are flat, transparent, and universal. You may have other specialized formats as well. .rda and .rds are R-specific data files but you never <em>need</em> to use these.</li>
@@ -505,17 +483,15 @@ Managing your projects in a reproducible fashion doesn’t just make your scienc
 </ul>
 </div>
 </div>
-<div id="rstudio-projects" class="section level3">
-<h3>RStudio Projects</h3>
+<div id="rstudio-projects" class="section level2">
+<h2>RStudio Projects</h2>
 <p>RStudio has a feature to help keep everything organized in a self-contained, reproducible package, called a “project”.</p>
 <p>A project is a small file with a <code>.Rproj</code> extension, but you can think of all the files and sub-directories as belonging to that project. We recommend creating a directory and a project file for each project you work on. It should look something like this:</p>
-<div class="figure">
-<img src="img/working-directory-structure.png" alt="Example of a working directory structure" />
-<p class="caption">Example of a working directory structure</p>
-</div>
-<p>When you want to work on this project using R, double click on the .Rproj file, and RStudio will open it and keep everything organized for you. You can also open an existing project from RStudio by clicking “File -&gt; Open project…”</p>
-<blockquote>
-<h4 id="challenge-create-a-project">Challenge – Create a Project</h4>
+<p><img src="img/working-directory-structure.png" /></p>
+<p>When you want to work on this project using R, double click on the .Rproj file, and RStudio will open it and keep everything organized for you. You can also open an existing project from RStudio by clicking “File -&gt; Open project…</p>
+<br>
+<div class="blue">
+<h3 id="challenge-create-a-project">Challenge – Create a Project</h3>
 <p>Let’s create a new project in RStudio that will contain all of our work for today.</p>
 <ol style="list-style-type: decimal">
 <li>Click the “File” menu button, then “New Project”.</li>
@@ -525,9 +501,11 @@ Managing your projects in a reproducible fashion doesn’t just make your scienc
 <li>Store the new directory in a sensible place in your computer’s organizational scheme. If you have a “workshops” or “classes” directory that would make sense. This will create a new directory called “DataCarpentry-day1” in that directory.</li>
 <li>Click “Create Project”.</li>
 </ol>
-</blockquote>
+</div>
+<p><br></p>
 <p>If everything went right, RStudio should’ve flickered and you should be looking at a pretty bare RStudio instance. That’s okay. Click on the “Files” tab in the lower right pane. Your .Rproj file should be there with nothing else. You’ve got the bare bones of a new project. Let’s now create the directory structure described above, a folder for each of data, code, results, and papers. You can do this in RStudio by clicking on the “New Folder” button in the Files pane, or in your OS by navigating to the directory you just created.</p>
-<blockquote>
+<br>
+<div class="blue">
 <h4 id="challenge-project-organization">Challenge – Project Organization</h4>
 <ul>
 <li>In your project directory, either using the Project tab of RStudio or your OS’ file system, create the following directories:
@@ -538,9 +516,9 @@ Managing your projects in a reproducible fashion doesn’t just make your scienc
 <li>papers</li>
 </ul></li>
 </ul>
-<p>The finished product should look something like this on your computer:</p>
-<p><img src="img/good_project_organization.png" /></p>
-</blockquote>
+<p>The finished product should look something like this on your computer:<br />
+<img src="img/good_project_organization.png" /></p>
+</div>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/02-project-intro.html">Project management with RStudio materials</a> and the Data Carpentry: R for data analysis and visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html">Before We Start materials</a>. .</p>
 </div>
