@@ -11,64 +11,66 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 1
 
-* What we covered ([livecode](https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0))
-* [**Screencast**]()
-* [**GoogleDoc**](https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing)
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 2
 
-* What we covered ([livecode]())
-* [**Screencast**]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 3
 
-* What we covered ([livecode]())
-* [**Screencast**]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 4
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 5
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 6
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 7
 
 * What we covered (link to [livecode R](), [Rmd]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 
 ### Week 8
 
 * What we covered (link to [Rmd livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 
 ### Week 9
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
 
 ### Week 10
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
 
