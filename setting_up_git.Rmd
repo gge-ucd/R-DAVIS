@@ -4,21 +4,29 @@ title: "RStudio and Git"
 
 Once we've setup R/RStudio, and installed git, the next step is seeing whether we can connect RStudio with Git. Please try this at home before class, and then we'll go through it when we meet.
 
+<br>
+<div class = "blue">
 **This lesson assumes you have:**
 
- >  - registered for your free Github account
- >  - installed **R**, **RStudio**, and **git**
- >  - Filled out our google form and accepted your invitation to the repository in our [`GGE-R-DAVIS` group](https://github.com/gge-ucd)
+- registered for your free Github account
+- installed **R**, **RStudio**, and **git**
+- Filled out our google form and accepted your invitation to the repository in our [`GGE-R-DAVIS` group](https://github.com/gge-ucd)
+</div>
 
+<br>
 This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible. 
+
+<br>
 
 ## Introduction to Version Control
 
 At some point many of us have probably had files in a directory that may have looked like this (*[from PHDcomics](http://phdcomics.com/comics/archive.php?comicid=1323)*): 
 
-![phdcomics](img/phd052810s.gif)
+![](img/phd052810s.gif)
 
 Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren't the same as in the submitted version of the manuscript. For much more detail on setting git with R (or troubleshooting), see the [happygitwithr.com](http://happygitwithr.com/) website.
+
+<br>
 
 ### Benefits of Version Control
 
@@ -35,14 +43,20 @@ Version control gives you a better way to track changes for things like data fil
     - Everyone has the most recent version of everything
     
 
+<br>
+
 ## Connecting RStudio & Github
 
 For our purposes the "*best practice*" (i.e., **easier**) for setting up a new github repository in RStudio is through an RStudio *Project*. First, ideally what we want to do is create a new repository on [Github](https://github.com/), then create a new RStudio Project to **clone** (copy) our repository onto our computer (a local version). See the steps below.
+
+<br>
 
 ### 1. Create a New Repository on Github
 
  - Typically, the preferred method is to create a new repository on Github...*however*:
     - *For our class, we are using a Github Classroom, which means we've already created the repository in advance and sent you a link. When you click the link, Github creates a new repository for you, which we as a class can all see and work with!*
+
+<br>
 
 ### 2. Clone Your Repository to your Computer
 
@@ -55,7 +69,9 @@ You should now have a repository on github. Our class is all housed in the [gge-
  
 ![](img/https_clone.png)
 
-  - *If you see this box, which says "Clone with SSH", just click "Use HTTPS" in the top right of the box.*
+**If you see this box, but it says "Clone with SSH", just click "Use HTTPS" in the top right of the box.**
+
+<br>
 
 ### 3. Create a New Version Controlled (`git`) RStudio Project
 
@@ -68,7 +84,7 @@ Now we'll create an RStudio Project and link our Github repository (following [*
 
 <br>
 
-`r emojifont::emoji("nut_and_bolt")` *__More about github/RStudio projects__: One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.*
+**More about github/RStudio projects:** One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.
 
   - This new subdirectory that you specified will be all these things:
     - a directory on your computer
@@ -77,7 +93,9 @@ Now we'll create an RStudio Project and link our Github repository (following [*
     - It should contain a `README.md` file with some content that we've created...we'll edit that next.
     
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
- 
+
+<br>
+
 #### *IF YOU MADE IT THUS FAR CONGRATS!*
 
 <br>
@@ -90,6 +108,8 @@ We'll go over this part in class. If you have `ssh` set up and you created your 
  - **`commit`** these changes (make a version control record of your change/s)
  - **`push`** these change back to the `remote` which is the copy of the repository on Github.com.
 
+<br>
+
 #### Edit README
 
 In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
@@ -99,6 +119,8 @@ In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *F
     - Delete the limerick and other bullets
     - Add 1-2 sentences about what you study or what you hope to study
     - Add an "X" inside the **Edited by student** box
+
+<br>
 
 #### Stage & Commit to Git
 
