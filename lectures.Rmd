@@ -11,9 +11,9 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 1
 
-* What we covered ([livecode]())
+* What we covered ([livecode](https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0))
 * [**Screencast**]()
-* [**GoogleDoc**]()
+* [**GoogleDoc**](https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing)
 
 ### Week 2
 

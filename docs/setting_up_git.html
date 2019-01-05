@@ -436,23 +436,23 @@ div.tocify {
 
 
 <p>Once we’ve setup R/RStudio, and installed git, the next step is seeing whether we can connect RStudio with Git. Please try this at home before class, and then we’ll go through it when we meet.</p>
+<br>
+<div class="blue">
 <p><strong>This lesson assumes you have:</strong></p>
-<blockquote>
 <ul>
 <li>registered for your free Github account</li>
 <li>installed <strong>R</strong>, <strong>RStudio</strong>, and <strong>git</strong></li>
 <li>Filled out our google form and accepted your invitation to the repository in our <a href="https://github.com/gge-ucd"><code>GGE-R-DAVIS</code> group</a></li>
 </ul>
-</blockquote>
-<p>This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible.</p>
+</div>
+<p><br> This lesson is to demonstrate the basics of using git with RStudio, and should provide a basic understanding of why we want to use version control where possible.</p>
+<p><br></p>
 <div id="introduction-to-version-control" class="section level2">
 <h2>Introduction to Version Control</h2>
 <p>At some point many of us have probably had files in a directory that may have looked like this (<em><a href="http://phdcomics.com/comics/archive.php?comicid=1323">from PHDcomics</a></em>):</p>
-<div class="figure">
-<img src="img/phd052810s.gif" alt="phdcomics" />
-<p class="caption">phdcomics</p>
-</div>
+<p><img src="img/phd052810s.gif" /></p>
 <p>Version control gives you a better way to track changes for things like data files and code, and in a more manageable way. That’s important because when the reviews come back on your paper and ask you to perform some additional analyses and you open up this directory, it can be pretty difficult to figure out which file you should actually use. At the very least you’ll spend a bunch of extra time figuring it out before you get to work, or at worst you may pick the wrong file and then have to redo all your work after realizing the results weren’t the same as in the submitted version of the manuscript. For much more detail on setting git with R (or troubleshooting), see the <a href="http://happygitwithr.com/">happygitwithr.com</a> website.</p>
+<p><br></p>
 <div id="benefits-of-version-control" class="section level3">
 <h3>Benefits of Version Control</h3>
 <ul>
@@ -471,11 +471,13 @@ div.tocify {
 <li>Everyone has the most recent version of everything</li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
 </div>
 <div id="connecting-rstudio-github" class="section level2">
 <h2>Connecting RStudio &amp; Github</h2>
 <p>For our purposes the “<em>best practice</em>” (i.e., <strong>easier</strong>) for setting up a new github repository in RStudio is through an RStudio <em>Project</em>. First, ideally what we want to do is create a new repository on <a href="https://github.com/">Github</a>, then create a new RStudio Project to <strong>clone</strong> (copy) our repository onto our computer (a local version). See the steps below.</p>
+<p><br></p>
 <div id="create-a-new-repository-on-github" class="section level3">
 <h3>1. Create a New Repository on Github</h3>
 <ul>
@@ -484,6 +486,7 @@ div.tocify {
 <li><em>For our class, we are using a Github Classroom, which means we’ve already created the repository in advance and sent you a link. When you click the link, Github creates a new repository for you, which we as a class can all see and work with!</em></li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
 <div id="clone-your-repository-to-your-computer" class="section level3">
 <h3>2. Clone Your Repository to your Computer</h3>
@@ -497,9 +500,8 @@ div.tocify {
 </ul></li>
 </ul>
 <p><img src="img/https_clone.png" /></p>
-<ul>
-<li><em>If you see this box, which says “Clone with SSH”, just click “Use HTTPS” in the top right of the box.</em></li>
-</ul>
+<p><strong>If you see this box, but it says “Clone with SSH”, just click “Use HTTPS” in the top right of the box.</strong></p>
+<p><br></p>
 </div>
 <div id="create-a-new-version-controlled-git-rstudio-project" class="section level3">
 <h3>3. Create a New Version Controlled (<code>git</code>) RStudio Project</h3>
@@ -510,7 +512,7 @@ div.tocify {
 </ul>
 <p><img src="img/newRStudio_git_proj_named.png" /></p>
 <p><br></p>
-<p>🔩 <em><strong>More about github/RStudio projects</strong>: One thing to keep in mind is each github repository should only have <strong>ONE</strong> corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository…there are hidden files which track your changes (the version control record), and there’s potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is <code>github</code> or <code>Rprojects</code>, and then each project or repository will have it’s own single folder within that general directory.</em></p>
+<p><strong>More about github/RStudio projects:</strong> One thing to keep in mind is each github repository should only have <strong>ONE</strong> corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository…there are hidden files which track your changes (the version control record), and there’s potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is <code>github</code> or <code>Rprojects</code>, and then each project or repository will have it’s own single folder within that general directory.</p>
 <ul>
 <li>This new subdirectory that you specified will be all these things:
 <ul>
@@ -521,6 +523,7 @@ div.tocify {
 </ul></li>
 </ul>
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
+<p><br></p>
 <div id="if-you-made-it-thus-far-congrats" class="section level4">
 <h4><em>IF YOU MADE IT THUS FAR CONGRATS!</em></h4>
 <p><br></p>
@@ -534,6 +537,7 @@ div.tocify {
 <li><strong><code>commit</code></strong> these changes (make a version control record of your change/s)</li>
 <li><strong><code>push</code></strong> these change back to the <code>remote</code> which is the copy of the repository on Github.com.</li>
 </ul>
+<p><br></p>
 <div id="edit-readme" class="section level4">
 <h4>Edit README</h4>
 <p>In RStudio, open your new project (<strong><code>Firstname_Lastname</code></strong>). Navigate to the <em>Files</em> tab and open the <code>README.md</code> file. You can click on it in the window and it will automatically open up.</p>
@@ -546,6 +550,7 @@ div.tocify {
 <li>Add an “X” inside the <strong>Edited by student</strong> box</li>
 </ul></li>
 </ul>
+<p><br></p>
 </div>
 <div id="stage-commit-to-git" class="section level4">
 <h4>Stage &amp; Commit to Git</h4>
