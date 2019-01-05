@@ -1,0 +1,14 @@
+body {
+    font-size: 15px;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+pre {
+    font-size: 15px;
+}
+
+.golden { background-color:#ffe8aa; border-radius: 5px; padding: 15px;}
+.blue { background-color:#f2f8ff; border-radius: 5px; padding: 15px;}

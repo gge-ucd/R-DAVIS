@@ -1,0 +1,23 @@
+---
+author: "Ryan Peek"
+date: "12/12/2017"
+output: html_document
+---
+
+# To Do
+
+## Globally
+
+ - add survey feedback component (via google forms?)
+ - add live googleDocs that everyone can access for live notes?
+ - add more challenges/question components (how to hide "answer" code...on separate tab?
+
+
+
+## Specific Lessons
+
+### `purrr` lesson
+
+ - Need to split out the data types and trim lesson down
+ - split out loops/functions, add hadley's lesson on functions and looping
+ 

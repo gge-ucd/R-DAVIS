@@ -3,7 +3,8 @@ title: "Iteration, Iteration, Iteration, Iter"
 ---
 
 ```{r setup, echo=FALSE, purl=FALSE, message=F, results=F}
-library(tidyverse)
+library(purrr)
+library(dplyr)
 ```
 
 <br>
@@ -40,7 +41,7 @@ It's pretty common that you'll want to run the same basic bit of code a bunch of
 
 Lots of functions (including many `base` functions) are *vectorized*, meaning they already work on vectors of values. Here's an example:
 
-```{r}
+```{r chunk1}
 x <- 1:10
 log(x)
 ```
@@ -53,7 +54,7 @@ However, we may want to do more complex iterations, which brings us to our first
 
 A for loop will repeat some bit of code, each time with a new input value. Here's the basic structure:
 
-```{r}
+```{r chunk2}
 for(i in 1:10) {
   print(i)
 }
@@ -61,7 +62,7 @@ for(i in 1:10) {
 
 You'll often see `i` used in for loops, you can think of it as the iteration value. For each `i` value in the vector 1:10, we'll print that index value. You can use the `i` value more than once in a loop:
 
-```{r}
+```{r chunk3}
 for (i in 1:10) {
   print(i)
   print(i^2)
@@ -72,7 +73,7 @@ What's happening is the value of `i` gets inserted into the code block, the bloc
 
 You can also use the `i` value to index a vector or dataframe, which can be very powerful!
 
-```{r}
+```{r chunk4}
 for (i in 1:10) {
   print(letters[i])
   print(mtcars$wt[i])
@@ -83,7 +84,7 @@ Here we printed out the first 10 letters of the alphabet from the `letters` vect
 
 If you want to store your results somewhere, it is important that you create an empty object to hold them **before** you run the loop. If you grow your results vector one value at a time, it will be much slower. Here's how to make that empty vector first. We'll also use the function `seq_along` to create a sequence that's the proper length, instead of explicitly writing out something like `1:10`.
 
-```{r}
+```{r chunk5}
 results <- rep(NA, nrow(mtcars))
 
 for (i in seq_along(mtcars$wt)) {
@@ -99,7 +100,7 @@ R includes another way to iterate, using the `apply` family of functions. These 
 
 Here we'll use `sapply`, which will return the simplest form it can. Since we give it a vector, it'll give us back a vector. 
 
-```{r}
+```{r chunk6}
 sapply(1:10, sqrt)
 ```
 
@@ -113,7 +114,7 @@ Oftentimes, the translation from a for loop to `apply` is this:
 
 Let's do this for a simple example. First our for loop:
 
-```{r}
+```{r chunk7}
 result <- rep(NA, 10)
 
 for (i in 1:10) {
@@ -125,7 +126,7 @@ result
 
 We'll use what's called an "anonymous function", which is a function that we only define within the call to `sapply`. With a simple function like `sqrt(x)/2`, it's easier to use an anonymous function than write a whole new function.
 
-```{r}
+```{r chunk8}
 sapply(1:10, function(x) sqrt(x)/2)
 ```
 
@@ -133,7 +134,7 @@ Notice that the code here is cleaner and we didn't have to create a `result` vec
 
 With the `apply` family of functions, you can also pass other arguments to the functions you apply. Here we'll try applying `mean` to a dataframe with some missing values.
 
-```{r}
+```{r chunk9}
 mtcars_na <- mtcars
 mtcars_na[1, 1:4] <- NA
 
@@ -151,19 +152,17 @@ For a wonderful and thorough exploration of the `purrr` package, check out [Jenn
 
 When using the `map` family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.
 
-```{r}
-mtcars %>% map(mean) # gives a list
-
-mtcars %>% map_dbl(mean) # gives a numeric vector
-
-mtcars %>% map_chr(mean) # gives a character vector
+```{r chunk10}
+mtcars %>% purrr::map(mean) # gives a list
+mtcars %>% purrr::map_dbl(mean) # gives a numeric vector
+mtcars %>% purrr::map_chr(mean) # gives a character vector
 ```
 
 ### `map2`
 
 You can use the `map2` series of functions if you need to map across two lists in parallel. Here, we'll map across both the names of cars and their mpg values, using an anonymous function to paste the two together into a sentence. 
 
-```{r}
+```{r map2_example}
 map2_chr(rownames(mtcars), mtcars$mpg, function(x,y) paste(x, "gets", y, "miles per gallon")) %>% 
   head()
 ```
@@ -172,10 +171,10 @@ You can use the `pmap` series of functions if you need to use more than two inpu
 
 Here we'll take a look at a cool way to use `map`: applying a linear model across different sets of data. We'll take the mtcars dataset, use `split` to split it into a list, with one data frame for each value of `cyl`, and then map the same linear model to each entry in the list.
 
-```{r}
+```{r map_lm}
 mtcars %>%
   split(.$cyl) %>%
-  map(~ lm(mpg ~ wt, data = .x))
+  purrr::map(~ lm(mpg ~ wt, data = .x))
 ```
 
 
@@ -186,7 +185,7 @@ What if we want to do the same thing, but extract the useful information from th
 ```{r}
 mtcars %>%
   split(.$cyl) %>%
-  map(~ lm(mpg ~ wt, data = .x)) %>%
+  purrr::map(~ lm(mpg ~ wt, data = .x)) %>%
   map_dfr(broom::tidy, .id = "cyl")
 ```
 
@@ -209,7 +208,7 @@ Sometimes, you want to do something with your code, but only if a certain condit
 
 You can use combinations of `if` and `else` to create conditional statements. Here's a quick example:
 
-```{r}
+```{r if_loop}
 for (i in 1:10) {
   if (i < 5) {
     print(paste(i, "is less than 5"))

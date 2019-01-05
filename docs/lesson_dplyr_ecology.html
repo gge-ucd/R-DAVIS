@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Manipulating and analyzing data with dplyr; Exporting data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
+    </li>
+    <li>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Manipulating and analyzing data with dplyr; Exporting data</h1>
+
+</div>
+
+
+<div class="blue">
+<h3 id="learning-objectives">Learning Objectives</h3>
+<ul>
+<li>Describe the purpose of the <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong> packages.</li>
+<li>Select certain columns in a data frame with the <strong><code>dplyr</code></strong> function <code>select</code>.</li>
+<li>Select certain rows in a data frame according to filtering conditions with the <strong><code>dplyr</code></strong> function <code>filter</code>.</li>
+<li>Link the output of one <strong><code>dplyr</code></strong> function to the input of another function with the ‘pipe’ operator <code>%&gt;%</code>.</li>
+<li>Add new columns to a data frame that are functions of existing columns with <code>mutate</code>.</li>
+<li>Use the split-apply-combine concept for data analysis.</li>
+<li>Use <code>summarize</code>, <code>group_by</code>, and <code>tally</code> to split a data frame into groups of observations, apply a summary statistics for each group, and then combine the results.</li>
+<li>Describe the concept of a wide and a long table format and for which purpose those formats are useful.</li>
+<li>Describe what key-value pairs are.</li>
+<li>Reshape a data frame from long to wide format and back with the <code>spread</code> and <code>gather</code> commands from the <strong><code>tidyr</code></strong> package.</li>
+<li>Export a data frame to a .csv file.</li>
+</ul>
+</div>
+<div id="data-manipulation-using-dplyr-and-tidyr" class="section level1">
+<h1>Data Manipulation using <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong></h1>
+<p>Bracket subsetting is handy, but it can be cumbersome and difficult to read, especially for complicated operations. Enter <strong><code>dplyr</code></strong>. <strong><code>dplyr</code></strong> is a package for making tabular data manipulation easier. It pairs nicely with <strong><code>tidyr</code></strong> which enables you to swiftly convert between different data formats for plotting and analysis.</p>
+<p>Packages in R are basically sets of additional functions that let you do more stuff. The functions we’ve been using so far, like <code>str()</code> or <code>data.frame()</code>, come built into R; packages give you access to more of them. Before you use a package for the first time you need to install it on your machine, and then you should import it in every subsequent R session when you need it. You should already have installed the <strong><code>tidyverse</code></strong> package. This is an “umbrella-package” that installs several packages useful for data analysis which work together well such as <strong><code>tidyr</code></strong>, <strong><code>dplyr</code></strong>, <strong><code>ggplot2</code></strong>, <strong><code>tibble</code></strong>, etc.</p>
+<p>The <strong><code>tidyverse</code></strong> package tries to address 3 major problems with some of base R functions: 1. The results from a base R function sometimes depend on the type of data. 2. Using R expressions in a non standard way, which can be confusing for new learners. 3. Hidden arguments, having default operations that new learners are not aware of.</p>
+<p>We have seen in our previous lesson that when building or importing a data frame, the columns that contain characters (i.e., text) are coerced (=converted) into the factor data type. We had to set <strong><code>stringsAsFactors</code></strong> to <strong><code>FALSE</code></strong> to avoid this hidden argument to convert our data type.</p>
+<p>This time will use the <strong><code>tidyverse</code></strong> package to read the data and avoid having to set <strong><code>stringsAsFactors</code></strong> to <strong><code>FALSE</code></strong></p>
+<p>To load the package type:</p>
+<pre class="r"><code>library(&quot;tidyverse&quot;)    ## load the tidyverse packages, incl. dplyr</code></pre>
+<div id="what-are-dplyr-and-tidyr" class="section level2">
+<h2>What are <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong>?</h2>
+<p>The package <strong><code>dplyr</code></strong> provides easy tools for the most common data manipulation tasks. It is built to work directly with data frames, with many common tasks optimized by being written in a compiled language (C++). An additional feature is the ability to work directly with data stored in an external database. The benefits of doing this are that the data can be managed natively in a relational database, queries can be conducted on that database, and only the results of the query are returned.</p>
+<p>This addresses a common problem with R in that all operations are conducted in-memory and thus the amount of data you can work with is limited by available memory. The database connections essentially remove that limitation in that you can connect to a database of many hundreds of GB, conduct queries on it directly, and pull back into R only what you need for analysis.</p>
+<p>The package <strong><code>tidyr</code></strong> addresses the common problem of wanting to reshape your data for plotting and use by different R functions. Sometimes we want data sets where we have one row per measurement. Sometimes we want a data frame where each measurement type has its own column, and rows are instead more aggregated groups - like plots or aquaria. Moving back and forth between these formats is nontrivial, and <strong><code>tidyr</code></strong> gives you tools for this and more sophisticated data manipulation.</p>
+<p>To learn more about <strong><code>dplyr</code></strong> and <strong><code>tidyr</code></strong> after the workshop, you may want to check out this <a href="https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf">handy data transformation with <strong><code>dplyr</code></strong> cheatsheet</a> and this <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">one about <strong><code>tidyr</code></strong></a>.</p>
+<p>We’ll read in our data using the <code>read_csv()</code> function, from the tidyverse package <strong><code>readr</code></strong>, instead of <code>read.csv()</code>.</p>
+<pre class="r"><code>surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   record_id = col_double(),
+##   month = col_double(),
+##   day = col_double(),
+##   year = col_double(),
+##   plot_id = col_double(),
+##   species_id = col_character(),
+##   sex = col_character(),
+##   hindfoot_length = col_double(),
+##   weight = col_double(),
+##   genus = col_character(),
+##   species = col_character(),
+##   taxa = col_character(),
+##   plot_type = col_character()
+## )</code></pre>
+<pre class="r"><code>## inspect the data
+str(surveys)</code></pre>
+<p>Notice that the class of the data is now <code>tbl_df</code> This is referred to as a “tibble”. Tibbles are almost identical to R’s standard data frames, but they tweak some of the old behaviors of data frames. For our purposes the only differences between data frames and tibbles are that:</p>
+<ol style="list-style-type: decimal">
+<li>When you print a tibble, R displays the data type of each column under its name; it prints only the first few rows of data and only as many columns as fit on one screen.</li>
+<li>Columns of class <code>character</code> are never automatically converted into factors.</li>
+</ol>
+</div>
+<div id="selecting-columns-and-filtering-rows" class="section level2">
+<h2>Selecting columns and filtering rows</h2>
+<p>We’re going to learn some of the most common <strong><code>dplyr</code></strong> functions: <code>select()</code>, <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code>, and <code>summarize()</code>. To select columns of a data frame, use <code>select()</code>. The first argument to this function is the data frame (<code>surveys</code>), and the subsequent arguments are the columns to keep.</p>
+<pre class="r"><code>select(surveys, plot_id, species_id, weight)</code></pre>
+<p>To choose rows based on a specific criteria, use <code>filter()</code>:</p>
+<pre class="r"><code>filter(surveys, year == 1995)</code></pre>
+<pre><code>## # A tibble: 1,180 x 13
+##    record_id month   day  year plot_id species_id sex   hindfoot_length
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+##  1     22314     6     7  1995       2 NL         M                  34
+##  2     22728     9    23  1995       2 NL         F                  32
+##  3     22899    10    28  1995       2 NL         F                  32
+##  4     23032    12     2  1995       2 NL         F                  33
+##  5     22003     1    11  1995       2 DM         M                  37
+##  6     22042     2     4  1995       2 DM         F                  36
+##  7     22044     2     4  1995       2 DM         M                  37
+##  8     22105     3     4  1995       2 DM         F                  37
+##  9     22109     3     4  1995       2 DM         M                  37
+## 10     22168     4     1  1995       2 DM         M                  36
+## # ... with 1,170 more rows, and 5 more variables: weight &lt;dbl&gt;,
+## #   genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
+</div>
+<div id="pipes" class="section level2">
+<h2>Pipes</h2>
+<p>What if you want to select and filter at the same time? There are three ways to do this: use intermediate steps, nested functions, or pipes.</p>
+<p>With intermediate steps, you create a temporary data frame and use that as input to the next function, like this:</p>
+<pre class="r"><code>surveys2 &lt;- filter(surveys, weight &lt; 5)
+surveys_sml &lt;- select(surveys2, species_id, sex, weight)</code></pre>
+<p>This is readable, but can clutter up your workspace with lots of objects that you have to name individually. With multiple steps, that can be hard to keep track of.</p>
+<p>You can also nest functions (i.e. one function inside of another), like this:</p>
+<pre class="r"><code>surveys_sml &lt;- select(filter(surveys, weight &lt; 5), species_id, sex, weight)</code></pre>
+<p>This is handy, but can be difficult to read if too many functions are nested, as R evaluates the expression from the inside out (in this case, filtering, then selecting).</p>
+<p>The last option, <em>pipes</em>, are a recent addition to R. Pipes let you take the output of one function and send it directly to the next, which is useful when you need to do many things to the same dataset. Pipes in R look like <code>%&gt;%</code> and are made available via the <strong><code>magrittr</code></strong> package, installed automatically with <strong><code>dplyr</code></strong>. If you use RStudio, you can type the pipe with <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a PC or <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> if you have a Mac.</p>
+<pre class="r"><code>surveys %&gt;%
+  filter(weight &lt; 5) %&gt;%
+  select(species_id, sex, weight)</code></pre>
+<pre><code>## # A tibble: 17 x 3
+##    species_id sex   weight
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+##  1 PF         F          4
+##  2 PF         F          4
+##  3 PF         M          4
+##  4 RM         F          4
+##  5 RM         M          4
+##  6 PF         &lt;NA&gt;       4
+##  7 PP         M          4
+##  8 RM         M          4
+##  9 RM         M          4
+## 10 RM         M          4
+## 11 PF         M          4
+## 12 PF         F          4
+## 13 RM         M          4
+## 14 RM         M          4
+## 15 RM         F          4
+## 16 RM         M          4
+## 17 RM         M          4</code></pre>
+<p>In the above code, we use the pipe to send the <code>surveys</code> dataset first through <code>filter()</code> to keep rows where <code>weight</code> is less than 5, then through <code>select()</code> to keep only the <code>species_id</code>, <code>sex</code>, and <code>weight</code> columns. Since <code>%&gt;%</code> takes the object on its left and passes it as the first argument to the function on its right, we don’t need to explicitly include the data frame as an argument to the <code>filter()</code> and <code>select()</code> functions any more.</p>
+<p>Some may find it helpful to read the pipe like the word “then”. For instance, in the above example, we took the data frame <code>surveys</code>, <em>then</em> we <code>filter</code>ed for rows with <code>weight &lt; 5</code>, <em>then</em> we <code>select</code>ed columns <code>species_id</code>, <code>sex</code>, and <code>weight</code>. The <strong><code>dplyr</code></strong> functions by themselves are somewhat simple, but by combining them into linear workflows with the pipe, we can accomplish more complex manipulations of data frames.</p>
+<p>If we want to create a new object with this smaller version of the data, we can assign it a new name:</p>
+<pre class="r"><code>surveys_sml &lt;- surveys %&gt;%
+  filter(weight &lt; 5) %&gt;%
+  select(species_id, sex, weight)
+
+surveys_sml</code></pre>
+<pre><code>## # A tibble: 17 x 3
+##    species_id sex   weight
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;
+##  1 PF         F          4
+##  2 PF         F          4
+##  3 PF         M          4
+##  4 RM         F          4
+##  5 RM         M          4
+##  6 PF         &lt;NA&gt;       4
+##  7 PP         M          4
+##  8 RM         M          4
+##  9 RM         M          4
+## 10 RM         M          4
+## 11 PF         M          4
+## 12 PF         F          4
+## 13 RM         M          4
+## 14 RM         M          4
+## 15 RM         F          4
+## 16 RM         M          4
+## 17 RM         M          4</code></pre>
+<p>Note that the final data frame is the leftmost part of this expression.</p>
+<div class="blue">
+<h3 id="challenge">Challenge</h3>
+<p>Using pipes, subset the <code>surveys</code> data to include individuals collected before 1995 and retain only the columns <code>year</code>, <code>sex</code>, and <code>weight</code>.</p>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>surveys %&gt;%
+    filter(year &lt; 1995) %&gt;%
+    select(year, sex, weight)</code></pre>
+</details>
+</div>
+<p><br></p>
+<div id="mutate" class="section level3">
+<h3>Mutate</h3>
+<p>Frequently you’ll want to create new columns based on the values in existing columns, for example to do unit conversions, or to find the ratio of values in two columns. For this we’ll use <code>mutate()</code>.</p>
+<p>To create a new column of weight in kg:</p>
+<pre class="r"><code>surveys %&gt;%
+  mutate(weight_kg = weight / 1000)</code></pre>
+<pre><code>## # A tibble: 34,786 x 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+##  1         1     7    16  1977       2 NL         M                  32
+##  2        72     8    19  1977       2 NL         M                  31
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA
+##  9       588     2    18  1978       2 NL         M                  NA
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA
+## # ... with 34,776 more rows, and 6 more variables: weight &lt;dbl&gt;,
+## #   genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;,
+## #   weight_kg &lt;dbl&gt;</code></pre>
+<p>You can also create a second new column based on the first new column within the same call of <code>mutate()</code>:</p>
+<pre class="r"><code>surveys %&gt;%
+  mutate(weight_kg = weight / 1000,
+         weight_kg2 = weight_kg * 2)</code></pre>
+<pre><code>## # A tibble: 34,786 x 15
+##    record_id month   day  year plot_id species_id sex   hindfoot_length
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+##  1         1     7    16  1977       2 NL         M                  32
+##  2        72     8    19  1977       2 NL         M                  31
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA
+##  9       588     2    18  1978       2 NL         M                  NA
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA
+## # ... with 34,776 more rows, and 7 more variables: weight &lt;dbl&gt;,
+## #   genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;,
+## #   weight_kg &lt;dbl&gt;, weight_kg2 &lt;dbl&gt;</code></pre>
+<p>If this runs off your screen and you just want to see the first few rows, you can use a pipe to view the <code>head()</code> of the data. (Pipes work with non-<strong><code>dplyr</code></strong> functions, too, as long as the <strong><code>dplyr</code></strong> or <code>magrittr</code> package is loaded).</p>
+<pre class="r"><code>surveys %&gt;%
+  mutate(weight_kg = weight / 1000) %&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 14
+##   record_id month   day  year plot_id species_id sex   hindfoot_length
+##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+## 1         1     7    16  1977       2 NL         M                  32
+## 2        72     8    19  1977       2 NL         M                  31
+## 3       224     9    13  1977       2 NL         &lt;NA&gt;               NA
+## 4       266    10    16  1977       2 NL         &lt;NA&gt;               NA
+## 5       349    11    12  1977       2 NL         &lt;NA&gt;               NA
+## 6       363    11    12  1977       2 NL         &lt;NA&gt;               NA
+## # ... with 6 more variables: weight &lt;dbl&gt;, genus &lt;chr&gt;, species &lt;chr&gt;,
+## #   taxa &lt;chr&gt;, plot_type &lt;chr&gt;, weight_kg &lt;dbl&gt;</code></pre>
+<p>The first few rows of the output are full of <code>NA</code>s, so if we wanted to remove those we could insert a <code>filter()</code> in the chain:</p>
+<pre class="r"><code>surveys %&gt;%
+  filter(!is.na(weight)) %&gt;%
+  mutate(weight_kg = weight / 1000) %&gt;%
+  head()</code></pre>
+<pre><code>## # A tibble: 6 x 14
+##   record_id month   day  year plot_id species_id sex   hindfoot_length
+##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+## 1       588     2    18  1978       2 NL         M                  NA
+## 2       845     5     6  1978       2 NL         M                  32
+## 3       990     6     9  1978       2 NL         M                  NA
+## 4      1164     8     5  1978       2 NL         M                  34
+## 5      1261     9     4  1978       2 NL         M                  32
+## 6      1453    11     5  1978       2 NL         M                  NA
+## # ... with 6 more variables: weight &lt;dbl&gt;, genus &lt;chr&gt;, species &lt;chr&gt;,
+## #   taxa &lt;chr&gt;, plot_type &lt;chr&gt;, weight_kg &lt;dbl&gt;</code></pre>
+<p><code>is.na()</code> is a function that determines whether something is an <code>NA</code>. The <code>!</code> symbol negates the result, so we’re asking for every row where weight <em>is not</em> an <code>NA</code>.</p>
+<div class="blue">
+<h3 id="challenge-1">Challenge</h3>
+<p>Create a new data frame from the <code>surveys</code> data that meets the following criteria: contains only the <code>species_id</code> column and a new column called <code>hindfoot_half</code> containing values that are half the <code>hindfoot_length</code> values. In this <code>hindfoot_half</code> column, there are no <code>NA</code>s and all values are less than 30.</p>
+<p><strong>Hint</strong>: think about how the commands should be ordered to produce this data frame!</p>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>surveys_hindfoot_half &lt;- surveys %&gt;%
+    filter(!is.na(hindfoot_length)) %&gt;%
+    mutate(hindfoot_half = hindfoot_length / 2) %&gt;%
+    filter(hindfoot_half &lt; 30) %&gt;%
+    select(species_id, hindfoot_half)</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="split-apply-combine-data-analysis-and-the-summarize-function" class="section level3">
+<h3>Split-apply-combine data analysis and the summarize() function</h3>
+<p>Many data analysis tasks can be approached using the <em>split-apply-combine</em> paradigm: split the data into groups, apply some analysis to each group, and then combine the results. <strong><code>dplyr</code></strong> makes this very easy through the use of the <code>group_by()</code> function.</p>
+<div id="the-summarize-function" class="section level4">
+<h4>The <code>summarize()</code> function</h4>
+<p><code>group_by()</code> is often used together with <code>summarize()</code>, which collapses each group into a single-row summary of that group. <code>group_by()</code> takes as arguments the column names that contain the <strong>categorical</strong> variables for which you want to calculate the summary statistics. So to compute the mean <code>weight</code> by sex:</p>
+<pre class="r"><code>surveys %&gt;%
+  group_by(sex) %&gt;%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   sex   mean_weight
+##   &lt;chr&gt;       &lt;dbl&gt;
+## 1 F            42.2
+## 2 M            43.0
+## 3 &lt;NA&gt;         64.7</code></pre>
+<p>You may also have noticed that the output from these calls doesn’t run off the screen anymore. It’s one of the advantages of <code>tbl_df</code> over data frame.</p>
+<p>You can also group by multiple columns:</p>
+<pre class="r"><code>surveys %&gt;%
+  group_by(sex, species_id) %&gt;%
+  summarize(mean_weight = mean(weight, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 92 x 3
+## # Groups:   sex [?]
+##    sex   species_id mean_weight
+##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
+## # ... with 82 more rows</code></pre>
+<p>When grouping both by <code>sex</code> and <code>species_id</code>, the first rows are for individuals that escaped before their sex could be determined and weighted. You may notice that the last column does not contain <code>NA</code> but <code>NaN</code> (which refers to “Not a Number”). To avoid this, we can remove the missing values for weight before we attempt to calculate the summary statistics on weight. Because the missing values are removed first, we can omit <code>na.rm = TRUE</code> when computing the mean:</p>
+<pre class="r"><code>surveys %&gt;%
+  filter(!is.na(weight)) %&gt;%
+  group_by(sex, species_id) %&gt;%
+  summarize(mean_weight = mean(weight))</code></pre>
+<pre><code>## # A tibble: 64 x 3
+## # Groups:   sex [?]
+##    sex   species_id mean_weight
+##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
+## # ... with 54 more rows</code></pre>
+<p>Here, again, the output from these calls doesn’t run off the screen anymore. If you want to display more data, you can use the <code>print()</code> function at the end of your chain with the argument <code>n</code> specifying the number of rows to display:</p>
+<pre class="r"><code>surveys %&gt;%
+  filter(!is.na(weight)) %&gt;%
+  group_by(sex, species_id) %&gt;%
+  summarize(mean_weight = mean(weight)) %&gt;%
+  print(n = 15)</code></pre>
+<pre><code>## # A tibble: 64 x 3
+## # Groups:   sex [?]
+##    sex   species_id mean_weight
+##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
+## 11 F     PF                7.97
+## 12 F     PH               30.8 
+## 13 F     PL               19.3 
+## 14 F     PM               22.1 
+## 15 F     PP               17.2 
+## # ... with 49 more rows</code></pre>
+<p>Once the data are grouped, you can also summarize multiple variables at the same time (and not necessarily on the same variable). For instance, we could add a column indicating the minimum weight for each species for each sex:</p>
+<pre class="r"><code>surveys %&gt;%
+  filter(!is.na(weight)) %&gt;%
+  group_by(sex, species_id) %&gt;%
+  summarize(mean_weight = mean(weight),
+            min_weight = min(weight))</code></pre>
+<pre><code>## # A tibble: 64 x 4
+## # Groups:   sex [?]
+##    sex   species_id mean_weight min_weight
+##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+##  1 F     BA                9.16          6
+##  2 F     DM               41.6          10
+##  3 F     DO               48.5          12
+##  4 F     DS              118.           45
+##  5 F     NL              154.           32
+##  6 F     OL               31.1          10
+##  7 F     OT               24.8           5
+##  8 F     OX               21            20
+##  9 F     PB               30.2          12
+## 10 F     PE               22.8          11
+## # ... with 54 more rows</code></pre>
+</div>
+<div id="tallying" class="section level4">
+<h4>Tallying</h4>
+<p>When working with data, we often want to know the number of observations found for each factor or combination of factors. For this task, <strong><code>dplyr</code></strong> provides <code>tally()</code>. For example, if we wanted to group by sex and find the number of rows of data for each sex, we would do:</p>
+<pre class="r"><code>surveys %&gt;%
+  group_by(sex) %&gt;%
+  tally()</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   sex       n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 F     15690
+## 2 M     17348
+## 3 &lt;NA&gt;   1748</code></pre>
+<p>Here, <code>tally()</code> is the action applied to the groups created by <code>group_by()</code> and counts the total number of records for each category.</p>
+<div class="blue">
+<h3 id="challenge-2">Challenge</h3>
+<ol style="list-style-type: decimal">
+<li>How many individuals were caught in each <code>plot_type</code> surveyed?</li>
+<li>Use <code>group_by()</code> and <code>summarize()</code> to find the mean, min, and max hindfoot length for each species (using <code>species_id</code>).</li>
+<li>What was the heaviest animal measured in each year? Return the columns <code>year</code>, <code>genus</code>, <code>species_id</code>, and <code>weight</code>.</li>
+<li>You saw above how to count the number of individuals of each <code>sex</code> using a combination of <code>group_by()</code> and <code>tally()</code>. How could you get the same result using <code>group_by()</code> and <code>summarize()</code>? Hint: see <code>?n</code>.</li>
+</ol>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## Answer 1
+surveys %&gt;%
+    group_by(plot_type) %&gt;%
+    tally()</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   plot_type                     n
+##   &lt;chr&gt;                     &lt;int&gt;
+## 1 Control                   15611
+## 2 Long-term Krat Exclosure   5118
+## 3 Rodent Exclosure           4233
+## 4 Short-term Krat Exclosure  5906
+## 5 Spectab exclosure          3918</code></pre>
+<pre class="r"><code>## Answer 2
+surveys %&gt;%
+    filter(!is.na(hindfoot_length)) %&gt;%
+    group_by(species_id) %&gt;%
+    summarize(
+        mean_hindfoot_length = mean(hindfoot_length),
+        min_hindfoot_length = min(hindfoot_length),
+        max_hindfoot_length = max(hindfoot_length)
+    )</code></pre>
+<pre><code>## # A tibble: 25 x 4
+##    species_id mean_hindfoot_length min_hindfoot_length max_hindfoot_length
+##    &lt;chr&gt;                     &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;
+##  1 AH                         33                    31                  35
+##  2 BA                         13                     6                  16
+##  3 DM                         36.0                  16                  50
+##  4 DO                         35.6                  26                  64
+##  5 DS                         49.9                  39                  58
+##  6 NL                         32.3                  21                  70
+##  7 OL                         20.5                  12                  39
+##  8 OT                         20.3                  13                  50
+##  9 OX                         19.1                  13                  21
+## 10 PB                         26.1                   2                  47
+## # ... with 15 more rows</code></pre>
+<pre class="r"><code>## Answer 3
+surveys %&gt;%
+    filter(!is.na(weight)) %&gt;%
+    group_by(year) %&gt;%
+    filter(weight == max(weight)) %&gt;%
+    select(year, genus, species, weight) %&gt;%
+    arrange(year)</code></pre>
+<pre><code>## # A tibble: 27 x 4
+## # Groups:   year [26]
+##     year genus     species     weight
+##    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;        &lt;dbl&gt;
+##  1  1977 Dipodomys spectabilis    149
+##  2  1978 Neotoma   albigula       232
+##  3  1978 Neotoma   albigula       232
+##  4  1979 Neotoma   albigula       274
+##  5  1980 Neotoma   albigula       243
+##  6  1981 Neotoma   albigula       264
+##  7  1982 Neotoma   albigula       252
+##  8  1983 Neotoma   albigula       256
+##  9  1984 Neotoma   albigula       259
+## 10  1985 Neotoma   albigula       225
+## # ... with 17 more rows</code></pre>
+<pre class="r"><code>## Answer 4
+surveys %&gt;%
+  group_by(sex) %&gt;%
+  summarize(n = n())</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   sex       n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 F     15690
+## 2 M     17348
+## 3 &lt;NA&gt;   1748</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="reshaping-with-gather-and-spread" class="section level3">
+<h3>Reshaping with gather and spread</h3>
+<p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable has its own column</li>
+<li>Each observation has its own row</li>
+<li>Each value must have its own cell</li>
+<li>Each type of observational unit forms a table</li>
+</ol>
+<p>Here we examine the fourth rule: Each type of observational unit forms a table.</p>
+<p>In <code>surveys</code> , the rows of <code>surveys</code> contain the values of variables associated with each record (the unit), values such the weight or sex of each animal associated with each record. What if instead of comparing records, we wanted to compare the different mean weight of each species between plots? (Ignoring <code>plot_type</code> for simplicity).</p>
+<p>We’d need to create a new table where each row (the unit) is comprise of values of variables associated with each plot. In practical terms this means the values of the species in <code>genus</code> would become the names of column variables and the cells would contain the values of the mean weight observed on each plot.</p>
+<p>Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have <strong>reshaped</strong> the data according to the observations of interest: average species weight per plot instead of recordings per date.</p>
+<p>The opposite transformation would be to transform column names into values of a variable.</p>
+<p>We can do both these of transformations with two <code>tidyr</code> functions, <code>spread()</code> and <code>gather()</code>.</p>
+<div id="spreading" class="section level4">
+<h4>Spreading</h4>
+<p><code>spread()</code> takes three principal arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the data</li>
+<li>the <em>key</em> column variable whose values will become new column names.<br />
+</li>
+<li>the <em>value</em> column variable whose values will fill the new column variables.</li>
+</ol>
+<p>Further arguments include <code>fill</code> which, if set, fills in missing values with the value provided.</p>
+<p>Let’s use <code>spread()</code> to transform surveys to find the mean weight of each species in each plot over the entire survey period. We use <code>filter()</code>, <code>group_by()</code> and <code>summarise()</code> to filter our observations and variables of interest, and create a new variable for the <code>mean_weight</code>. We use the pipe as before too.</p>
+<pre class="r"><code>surveys_gw &lt;- surveys %&gt;%
+  filter(!is.na(weight)) %&gt;%
+  group_by(genus, plot_id) %&gt;%
+  summarize(mean_weight = mean(weight))
+
+str(surveys_gw)</code></pre>
+<pre><code>## Classes &#39;grouped_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:  196 obs. of  3 variables:
+##  $ genus      : chr  &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
+##  $ plot_id    : num  1 2 3 5 18 19 20 21 1 2 ...
+##  $ mean_weight: num  7 6 8.61 7.75 9.5 ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   record_id = col_double(),
+##   ..   month = col_double(),
+##   ..   day = col_double(),
+##   ..   year = col_double(),
+##   ..   plot_id = col_double(),
+##   ..   species_id = col_character(),
+##   ..   sex = col_character(),
+##   ..   hindfoot_length = col_double(),
+##   ..   weight = col_double(),
+##   ..   genus = col_character(),
+##   ..   species = col_character(),
+##   ..   taxa = col_character(),
+##   ..   plot_type = col_character()
+##   .. )
+##  - attr(*, &quot;vars&quot;)= chr &quot;genus&quot;
+##  - attr(*, &quot;drop&quot;)= logi TRUE</code></pre>
+<p>This yields <code>surveys_gw</code> where the observations for each plot are spread across multiple rows, 196 observations of 13 variables. Using <code>spread()</code> to key on <code>genus</code> with values from <code>mean_weight</code> this becomes 24 observations of 11 variables, one row for each plot. We again use pipes:</p>
+<pre class="r"><code>surveys_spread &lt;- surveys_gw %&gt;%
+  spread(key = genus, value = mean_weight)
+
+str(surveys_spread)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    24 obs. of  11 variables:
+##  $ plot_id        : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Baiomys        : num  7 6 8.61 NA 7.75 ...
+##  $ Chaetodipus    : num  22.2 25.1 24.6 23 18 ...
+##  $ Dipodomys      : num  60.2 55.7 52 57.5 51.1 ...
+##  $ Neotoma        : num  156 169 158 164 190 ...
+##  $ Onychomys      : num  27.7 26.9 26 28.1 27 ...
+##  $ Perognathus    : num  9.62 6.95 7.51 7.82 8.66 ...
+##  $ Peromyscus     : num  22.2 22.3 21.4 22.6 21.2 ...
+##  $ Reithrodontomys: num  11.4 10.7 10.5 10.3 11.2 ...
+##  $ Sigmodon       : num  NA 70.9 65.6 82 82.7 ...
+##  $ Spermophilus   : num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<p><img src="img/spread_data_R.png" /></p>
+<p>We could now plot comparisons between the weight of species in different plots, although we may wish to fill in the missing values first.</p>
+<pre class="r"><code>surveys_gw %&gt;%
+  spread(genus, mean_weight, fill = 0) %&gt;%
+  head</code></pre>
+<pre><code>## # A tibble: 6 x 11
+##   plot_id Baiomys Chaetodipus Dipodomys Neotoma Onychomys Perognathus
+##     &lt;dbl&gt;   &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
+## 1       1    7           22.2      60.2    156.      27.7        9.62
+## 2       2    6           25.1      55.7    169.      26.9        6.95
+## 3       3    8.61        24.6      52.0    158.      26.0        7.51
+## 4       4    0           23.0      57.5    164.      28.1        7.82
+## 5       5    7.75        18.0      51.1    190.      27.0        8.66
+## 6       6    0           24.9      58.6    180.      25.9        7.81
+## # ... with 4 more variables: Peromyscus &lt;dbl&gt;, Reithrodontomys &lt;dbl&gt;,
+## #   Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
+</div>
+<div id="gathering" class="section level4">
+<h4>Gathering</h4>
+<p>The opposing situation could occur if we had been provided with data in the form of <code>surveys_spread</code>, where the genus names are column names, but we wish to treat them as values of a genus variable instead.</p>
+<p>In this situation we are gathering the column names and turning them into a pair of new variables. One variable represents the column names as values, and the other variable contains the values previously associated with the column names.</p>
+<p><code>gather()</code> takes four principal arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the data</li>
+<li>the <em>key</em> column variable we wish to create from column names.</li>
+<li>the <em>values</em> column variable we wish to create and fill with values associated with the key.</li>
+<li>the names of the columns we use to fill the key variable (or to drop).</li>
+</ol>
+<p>To recreate <code>surveys_gw</code> from <code>surveys_spread</code> we would create a key called <code>genus</code> and value called <code>mean_weight</code> and use all columns except <code>plot_id</code> for the key variable. Here we drop <code>plot_id</code> column with a minus sign.</p>
+<pre class="r"><code>surveys_gather &lt;- surveys_spread %&gt;%
+  gather(key = genus, value = mean_weight, -plot_id)
+
+str(surveys_gather)</code></pre>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    240 obs. of  3 variables:
+##  $ plot_id    : num  1 2 3 4 5 6 7 8 9 10 ...
+##  $ genus      : chr  &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
+##  $ mean_weight: num  7 6 8.61 NA 7.75 ...</code></pre>
+<p><img src="img/gather_data_R.png" /></p>
+<p>Note that now the <code>NA</code> genera are included in the re-gathered format. Spreading and then gathering can be a useful way to balance out a dataset so every replicate has the same composition.</p>
+<p>We could also have used a specification for what columns to include. This can be useful if you have a large number of identifying columns, and it’s easier to specify what to gather than what to leave alone. And if the columns are in a row, we don’t even need to list them all out - just use the <code>:</code> operator!</p>
+<pre class="r"><code>surveys_spread %&gt;%
+  gather(key = genus, value = mean_weight, Baiomys:Spermophilus) %&gt;%
+  head</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   plot_id genus   mean_weight
+##     &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;
+## 1       1 Baiomys        7   
+## 2       2 Baiomys        6   
+## 3       3 Baiomys        8.61
+## 4       4 Baiomys       NA   
+## 5       5 Baiomys        7.75
+## 6       6 Baiomys       NA</code></pre>
+<div class="blue">
+<h3 id="challenge-3">Challenge</h3>
+<ol style="list-style-type: decimal">
+<li>Spread the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</li>
+<li>Now take that data frame and <code>gather()</code> it again, so each row is a unique <code>plot_id</code> by <code>year</code> combination.</li>
+<li>The <code>surveys</code> data set has two measurement columns: <code>hindfoot_length</code> and <code>weight</code>. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use <code>gather()</code> to create a dataset where we have a key column called <code>measurement</code> and a <code>value</code> column that takes on the value of either <code>hindfoot_length</code> or <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns are being gathered.</li>
+<li>With this new data set, calculate the average of each <code>measurement</code> in each <code>year</code> for each different <code>plot_type</code>. Then <code>spread()</code> them into a data set with a column for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>: You only need to specify the key and value columns for <code>spread()</code></li>
+</ol>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## Answer 1
+rich_time &lt;- surveys %&gt;%
+  group_by(plot_id, year) %&gt;%
+  summarize(n_genera = n_distinct(genus)) %&gt;%
+  spread(year, n_genera)
+
+head(rich_time)</code></pre>
+<pre><code>## # A tibble: 6 x 27
+## # Groups:   plot_id [6]
+##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985`
+##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1       1      2      3      4      7      5      6      7      6      4
+## 2       2      6      6      6      8      5      9      9      9      6
+## 3       3      5      6      4      6      6      8     10     11      7
+## 4       4      4      4      3      4      5      4      6      3      4
+## 5       5      4      3      2      5      4      6      7      7      3
+## 6       6      3      4      3      4      5      9      9      7      5
+## # ... with 17 more variables: `1986` &lt;int&gt;, `1987` &lt;int&gt;, `1988` &lt;int&gt;,
+## #   `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;, `1993` &lt;int&gt;,
+## #   `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
+## #   `1999` &lt;int&gt;, `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
+<pre class="r"><code>## Answer 2
+rich_time %&gt;%
+  gather(year, n_genera, -plot_id)</code></pre>
+<pre><code>## # A tibble: 624 x 3
+## # Groups:   plot_id [24]
+##    plot_id year  n_genera
+##      &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
+##  1       1 1977         2
+##  2       2 1977         6
+##  3       3 1977         5
+##  4       4 1977         4
+##  5       5 1977         4
+##  6       6 1977         3
+##  7       7 1977         3
+##  8       8 1977         2
+##  9       9 1977         3
+## 10      10 1977         1
+## # ... with 614 more rows</code></pre>
+<pre class="r"><code>## Answer 3
+surveys_long &lt;- surveys %&gt;%
+  gather(measurement, value, hindfoot_length, weight)
+
+## Answer 4
+surveys_long %&gt;%
+  group_by(year, measurement, plot_type) %&gt;%
+  summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;%
+  spread(measurement, mean_value)</code></pre>
+<pre><code>## # A tibble: 130 x 4
+## # Groups:   year [26]
+##     year plot_type                 hindfoot_length weight
+##    &lt;dbl&gt; &lt;chr&gt;                               &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1977 Control                              36.1   50.4
+##  2  1977 Long-term Krat Exclosure             33.7   34.8
+##  3  1977 Rodent Exclosure                     39.1   48.2
+##  4  1977 Short-term Krat Exclosure            35.8   41.3
+##  5  1977 Spectab exclosure                    37.2   47.1
+##  6  1978 Control                              38.1   70.8
+##  7  1978 Long-term Krat Exclosure             22.6   35.9
+##  8  1978 Rodent Exclosure                     37.8   67.3
+##  9  1978 Short-term Krat Exclosure            36.9   63.8
+## 10  1978 Spectab exclosure                    42.3   80.1
+## # ... with 120 more rows</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div id="exporting-data" class="section level1">
+<h1>Exporting data</h1>
+<p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new data sets to share them with your collaborators or for archival.</p>
+<p>Similar to the <code>read_csv()</code> function used for reading CSV files into R, the tidyverse includes a <code>write_csv()</code> function that generates CSV files from data frames.</p>
+<p>Before using <code>write_csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated data set. We don’t want to write generated data sets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>
+<p>In preparation for our next lesson on plotting, we are going to prepare a cleaned up version of the data set that doesn’t include any missing data.</p>
+<p>Let’s start by removing observations for which the <code>species_id</code> is missing. In this data set, the missing species are represented by an empty string and not an <code>NA</code>. Let’s also remove observations for which <code>weight</code> and the <code>hindfoot_length</code> are missing. This data set should also only contain observations of animals for which the sex has been determined:</p>
+<pre class="r"><code>surveys_complete &lt;- surveys %&gt;%
+  filter(!is.na(weight),           # remove missing weight
+         !is.na(hindfoot_length),  # remove missing hindfoot_length
+         !is.na(sex))                # remove missing sex</code></pre>
+<p>Because we are interested in plotting how species abundances have changed through time, we are also going to remove observations for rare species (i.e., that have been observed less than 50 times). We will do this in two steps: first we are going to create a data set that counts how often each species has been observed, and filter out the rare species; then, we will extract only the observations for these more common species:</p>
+<pre class="r"><code>## Extract the most common species_id
+species_counts &lt;- surveys_complete %&gt;%
+  group_by(species_id) %&gt;%
+  tally() %&gt;%
+  filter(n &gt;= 50)
+
+## Only keep the most common species
+surveys_complete &lt;- surveys_complete %&gt;%
+  filter(species_id %in% species_counts$species_id)</code></pre>
+<p>To make sure that everyone has the same data set, check that <code>surveys_complete</code> has 30463 rows and 13 columns by typing <code>dim(surveys_complete)</code>.</p>
+<p>Now that our data set is ready, we can save it as a CSV file in our <code>data_output</code> folder.</p>
+<pre class="r"><code>write_csv(surveys_complete, path = &quot;data_output/surveys_complete.csv&quot;)</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
