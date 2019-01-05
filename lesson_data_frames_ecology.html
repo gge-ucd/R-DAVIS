@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Starting With Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Orientation to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_vectors.html">Vectors &amp; Data Types</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_ecology.html">Data Frames</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr</a>
+    </li>
+    <li>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Do's &amp; Don'ts</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+    <li>
+      <a href="lesson_tidyr.html">Using tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Times &amp; Dates with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Starting With Data</h1>
+
+</div>
+
+
+<div class="blue">
+<h3 id="learning-objectives">Learning Objectives</h3>
+<ul>
+<li>Describe what a data frame is.</li>
+<li>Load external data from a .csv file into a data frame.</li>
+<li>Summarize the contents of a data frame.</li>
+<li>Describe what a factor is.</li>
+<li>Convert between strings and factors.</li>
+<li>Reorder and rename factors.</li>
+<li>Change how character strings are handled in a data frame.</li>
+<li>Format dates.</li>
+</ul>
+</div>
+<div id="presentation-of-the-survey-data" class="section level2">
+<h2>Presentation of the Survey Data</h2>
+<p>We are studying the species repartition and weight of animals caught in plots in our study area. The dataset is stored as a comma separated value (CSV) file. Each row holds information for a single animal, and the columns represent:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>record_id</td>
+<td>Unique id for the observation</td>
+</tr>
+<tr class="even">
+<td>month</td>
+<td>month of observation</td>
+</tr>
+<tr class="odd">
+<td>day</td>
+<td>day of observation</td>
+</tr>
+<tr class="even">
+<td>year</td>
+<td>year of observation</td>
+</tr>
+<tr class="odd">
+<td>plot_id</td>
+<td>ID of a particular plot</td>
+</tr>
+<tr class="even">
+<td>species_id</td>
+<td>2-letter code</td>
+</tr>
+<tr class="odd">
+<td>sex</td>
+<td>sex of animal (“M”, “F”)</td>
+</tr>
+<tr class="even">
+<td>hindfoot_length</td>
+<td>length of the hindfoot in mm</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>weight of the animal in grams</td>
+</tr>
+<tr class="even">
+<td>genus</td>
+<td>genus of animal</td>
+</tr>
+<tr class="odd">
+<td>species</td>
+<td>species of animal</td>
+</tr>
+<tr class="even">
+<td>taxon</td>
+<td>e.g. Rodent, Reptile, Bird, Rabbit</td>
+</tr>
+<tr class="odd">
+<td>plot_type</td>
+<td>type of plot</td>
+</tr>
+</tbody>
+</table>
+<p>We are going to use the R function <code>download.file()</code> to download the CSV file that contains the survey data from figshare, and we will use <code>read.csv()</code> to load into memory the content of the CSV file as an object of class <code>data.frame</code>. Inside the download.file command, the first entry is a character string with the source URL (“<a href="https://ndownloader.figshare.com/files/2292169" class="uri">https://ndownloader.figshare.com/files/2292169</a>”). This source URL downloads a CSV file from figshare. The text after the comma (“data/portal_data_joined.csv”) is the destination of the file on your local machine. You’ll need to have a folder on your machine called “data” where you’ll download the file. So this command downloads a file from figshare, names it “portal_data_joined.csv,” and adds it to a preexisting folder named “data.”</p>
+<pre class="r"><code>download.file(url=&quot;https://ndownloader.figshare.com/files/2292169&quot;,
+              destfile = &quot;data/portal_data_joined.csv&quot;)</code></pre>
+<p>You are now ready to load the data:</p>
+<pre class="r"><code>surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<p>This statement doesn’t produce any output because, as you might recall, assignments don’t display anything. If we want to check that our data has been loaded, we can see the contents of the data frame by typing its name: <code>surveys</code>.</p>
+<p>Wow… that was a lot of output. At least it means the data loaded properly. Let’s check the top (the first 6 lines) of this data frame using the function <code>head()</code>:</p>
+<pre class="r"><code>head(surveys)</code></pre>
+<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
+## 1         1     7  16 1977       2         NL   M              32     NA
+## 2        72     8  19 1977       2         NL   M              31     NA
+## 3       224     9  13 1977       2         NL                  NA     NA
+## 4       266    10  16 1977       2         NL                  NA     NA
+## 5       349    11  12 1977       2         NL                  NA     NA
+## 6       363    11  12 1977       2         NL                  NA     NA
+##     genus  species   taxa plot_type
+## 1 Neotoma albigula Rodent   Control
+## 2 Neotoma albigula Rodent   Control
+## 3 Neotoma albigula Rodent   Control
+## 4 Neotoma albigula Rodent   Control
+## 5 Neotoma albigula Rodent   Control
+## 6 Neotoma albigula Rodent   Control</code></pre>
+<pre class="r"><code>## Try also
+## View(surveys)</code></pre>
+<div class="blue">
+<h3 id="note">Note</h3>
+<p><code>read.csv</code> assumes that fields are delineated by commas, however, in several countries, the comma is used as a decimal separator and the semicolon (;) is used as a field delineator. If you want to read in this type of files in R, you can use the <code>read.csv2</code> function. It behaves exactly like <code>read.csv</code> but uses different parameters for the decimal and the field separators. If you are working with another format, they can be both specified by the user. Check out the help for <code>read.csv()</code> by typing <code>?read.csv</code> to learn more. There is also the <code>read.delim()</code> for in tab separated data files. It is important to note that all of these functions are actually wrapper functions for the main <code>read.table()</code> function with different arguments. As such, the surveys data above could have also been loaded by using <code>read.table()</code> with the separation argument as <code>,</code>. The code is as follows: <code>surveys &lt;- read.table(file=&quot;data/portal_data_joined.csv&quot;, sep=&quot;,&quot;, header=TRUE)</code>. The header argument has to be set to TRUE to be able to read the headers as by default <code>read.table()</code> has the header argument set to FALSE.</p>
+</div>
+</div>
+<div id="what-are-data-frames" class="section level2">
+<h2>What are data frames?</h2>
+<p>Data frames are the <em>de facto</em> data structure for most tabular data, and what we use for statistics and plotting.</p>
+<p>A data frame can be created by hand, but most commonly they are generated by the functions <code>read.csv()</code> or <code>read.table()</code>; in other words, when importing spreadsheets from your hard drive (or the web).</p>
+<p>A data frame is the representation of data in the format of a table where the columns are vectors that all have the same length. Because columns are vectors, each column must contain a single type of data (e.g., characters, integers, factors). For example, here is a figure depicting a data frame comprising a numeric, a character, and a logical vector.</p>
+<p><img src="img/data-frame.svg" /></p>
+<p>We can see this when inspecting the <b>str</b>ucture of a data frame with the function <code>str()</code>:</p>
+<pre class="r"><code>str(surveys)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    34786 obs. of  13 variables:
+##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
+##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
+##  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
+##  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
+##  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ species_id     : Factor w/ 48 levels &quot;AB&quot;,&quot;AH&quot;,&quot;AS&quot;,..: 16 16 16 16 16 16 16 16 16 16 ...
+##  $ sex            : Factor w/ 3 levels &quot;&quot;,&quot;F&quot;,&quot;M&quot;: 3 3 1 1 1 1 1 1 3 1 ...
+##  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
+##  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
+##  $ genus          : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 13 13 13 13 13 13 13 13 13 13 ...
+##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+<div id="inspecting-data.frame-objects" class="section level2">
+<h2>Inspecting <code>data.frame</code> Objects</h2>
+<p>We already saw how the functions <code>head()</code> and <code>str()</code> can be useful to check the content and the structure of a data frame. Here is a non-exhaustive list of functions to get a sense of the content/structure of the data. Let’s try them out!</p>
+<ul>
+<li>Size:
+<ul>
+<li><code>dim(surveys)</code> - returns a vector with the number of rows in the first element, and the number of columns as the second element (the <strong>dim</strong>ensions of the object)</li>
+<li><code>nrow(surveys)</code> - returns the number of rows</li>
+<li><code>ncol(surveys)</code> - returns the number of columns</li>
+</ul></li>
+<li>Content:
+<ul>
+<li><code>head(surveys)</code> - shows the first 6 rows</li>
+<li><code>tail(surveys)</code> - shows the last 6 rows</li>
+</ul></li>
+<li>Names:
+<ul>
+<li><code>names(surveys)</code> - returns the column names (synonym of <code>colnames()</code> for <code>data.frame</code> objects)</li>
+<li><code>rownames(surveys)</code> - returns the row names</li>
+</ul></li>
+<li>Summary:
+<ul>
+<li><code>str(surveys)</code> - structure of the object and information about the class, length and content of each column</li>
+<li><code>summary(surveys)</code> - summary statistics for each column</li>
+</ul></li>
+</ul>
+<p>Note: most of these functions are “generic”, they can be used on other types of objects besides <code>data.frame</code>.</p>
+<div class="blue">
+<h3 id="challenge">Challenge</h3>
+<p>Based on the output of <code>str(surveys)</code>, can you answer the following questions? * What is the class of the object <code>surveys</code>? * How many rows and how many columns are in this object? * How many species have been recorded during these surveys?</p>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>str(surveys)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    34786 obs. of  13 variables:
+##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
+##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
+##  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
+##  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
+##  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ species_id     : Factor w/ 48 levels &quot;AB&quot;,&quot;AH&quot;,&quot;AS&quot;,..: 16 16 16 16 16 16 16 16 16 16 ...
+##  $ sex            : Factor w/ 3 levels &quot;&quot;,&quot;F&quot;,&quot;M&quot;: 3 3 1 1 1 1 1 1 3 1 ...
+##  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
+##  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
+##  $ genus          : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 13 13 13 13 13 13 13 13 13 13 ...
+##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre class="r"><code>## * class: data frame
+## * how many rows: 34786,  how many columns: 13
+## * how many species: 48</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="indexing-and-subsetting-data-frames" class="section level2">
+<h2>Indexing and subsetting data frames</h2>
+<p>Our survey data frame has rows and columns (it has 2 dimensions), if we want to extract some specific data from it, we need to specify the “coordinates” we want from it. Row numbers come first, followed by column numbers. However, note that different ways of specifying these coordinates lead to results with different classes.</p>
+<pre class="r"><code># first element in the first column of the data frame (as a vector)
+surveys[1, 1]   </code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># first element in the 6th column (as a vector)
+surveys[1, 6]   </code></pre>
+<pre><code>## [1] NL
+## 48 Levels: AB AH AS BA CB CM CQ CS CT CU CV DM DO DS DX NL OL OT OX ... ZL</code></pre>
+<pre class="r"><code># first column of the data frame (as a vector)
+surveys[, 1]    </code></pre>
+<pre><code>##   [1]     1    72   224   266   349   363   435   506   588   661   748
+##  [12]   845   990  1164  1261  1374  1453  1756  1818  1882  2133  2184
+##  [23]  2406  2728  3000  3002  4667  4859  5048  5180  5299  5485  5558
+##  [34]  5583  5966  6020  6023  6036  6167  6479  6500  8022  8263  8387
+##  [45]  8394  8407  8514  8543  8657  8675  8755  9048  9132  9270  9349
+##  [56]  9512  9605  9703 10606 10617 10627 10720 10923 10949 11215 11329
+##  [67] 11496 11498 11611 11628 11709 11877 11879 11887 11953 12299 12458
+##  [78] 12602 12678 12708 12729 12756 12871 12997 13025 13114 13275 13326
+##  [89] 13434 13465 13476 13615 13630 13748 13977 14646 14740 14796 14804
+## [100] 14896 14984 15302 15780 16407 17230 17877 17941 18110 18364 18486
+## [111] 18639 18678 18680 18846 18948 19032 19245 20040 20089 20364 20466
+## [122] 20992 21113 21120 21161 21232 21235 21286 21507 21558 22314 22728
+## [133] 22899 23032 24589 24690 24703 25247 25701 26028 26644 26827 26857
+## [144] 27042 27326 27734 27781 27860 27897 27919 28022 28077 28328 28551
+## [155] 28556 28662 28928 29039 29310 29435 29572 29823 29865 29950 30066
+## [166] 30067 30172 30174 30175 30307 30308 30309 30443 30741 31516 31517
+## [177] 31633 31717 31721 31862 31946 32045 32167 32391 32817 33040 33041
+## [188] 33237 33238 33339 33415 33583 33586 33837 33847 33966 34198 34783
+## [199] 34991 35212 35404     3   226   233   245   251   257   259   268
+## [210]   346   350   354   361   422   424   427   438   449   507   511
+## [221]   518   519   521   522   523   527   533   593   595   600   601
+## [232]   660   664   733   754   757   764   838   842   849   914   924
+## [243]   930  1018  1061  1062  1159  1183  1269  1272  1277  1370  1382
+## [254]  1461  1469  1519  1529  1534  1535  1539  1581  1611  1644  1661
+## [265]  1676  1692  1701  1768  1839  1845  1846  2014  2060  2070  2122
+## [276]  2131  2176  2181  2338  2339  2340  2372  2400  2456  2460  2525
+## [287]  2555  2589  2600  2622  2631  2635  2643  2653  2662  2667  2692
+## [298]  2695  2701  2715  2740  2790  2814  2901  2902  2906  2975  2981
+## [309]  3033  3035  3099  3107  3182  3236  3302  3388  3454  3456  3525
+## [320]  3547  3550  3564  3566  3569  3580  3738  3741  3781  3790  3867
+## [331]  3877  3889  3897  3899  3901  3947  3960  3979  3998  4004  4198
+## [342]  4238  4243  4251  4268  4271  4276  4306  4317  4320  4341  4347
+## [353]  4452  4482  4520  4548  4685  4693  4714  4952  5044  5063  5167
+## [364]  5288  5483  6006  6184  6470  6474  6491  6520  6523  6528  6549
+## [375]  6553  6824  6832  6837  6842  6889  6939  6944  6945  7061  7080
+## [386]  7246  7294  7402  7420  7553  7558  7715  7723  7735  7884  7895
+## [397]  7916  8125  8235  8339  8359  8413  8494  8631  8656  8800  8903
+## [408]  8954  8961  9034  9133  9156  9180  9182  9269  9452  9572  9672
+## [419]  9762  9767  9873  9880  9894  9901  9920  9980  9984 10001 10004
+## [430] 10006 10021 10031 10092 10109 10114 10254 10277 10290 10318 10354
+## [441] 10363 10366 10411 10415 10421 10430 10447 10500 10517 10518 10532
+## [452] 10595 10600 10603 10610 10621 10623 10686 10693 10716 10784 10802
+## [463] 10804 10899 10909 10920 11013 11015 11063 11074 11092 11148 11150
+## [474] 11161 11186 11187 11197 11210 11284 11291 11304 11305 11316 11327
+## [485] 11387 11388 11391 11408 11421 11489 11514 11515 11535 11584 11595
+## [496] 11600 11608 11684 11695 11722 11772 11784 11788 11791 11841 11862
+## [507] 11920 12011 12014 12056 12117 12137 12138 12234 12249 12389 12394
+## [518] 12407 12419 12439 12533 12535 12545 12676 12764 12780 12966 12972
+## [529] 13112 13145 13167 13267 13481 13589 13757 13820 13822 13920 13922
+## [540] 13935 14098 14104 14119 14123 14134 14258 14279 14322 14423 14491
+## [551] 14540 14603 14697 14787 14794 14797 14889 14988 16292 16377 17298
+## [562] 17320 17331 17910 17915 17973 18096 18193 18201 18654 18743 18821
+## [573] 19378 19427 19539 19806 19866 20856 21167 21215 21223 21269 21275
+## [584] 21284 21325 21385 21435 21442 21448 21502 21505 21555 21560 21708
+## [595] 21757 21814 21879 21940 22003 22042 22044 22105 22109 22168 22250
+## [606] 22368 22375 22444 22550 22560 22689 22842 22853 22865 22880 22896
+## [617] 22997 23002 23003 23041 23044 23115 23117 23120 23136 23144 23156
+## [628] 23169 23220 23225 23234 23237 23243 23257 23341 23345 23357 23365
+## [639] 23368 23403 23498 23519 23522 23549 23565 23645 23650 23687 23703
+## [650] 23895 23899 23902 23904 23922 23929 23936 24027 24045 24197 24292
+## [661] 24306 24393 24396 24407 24443 24537 24546 24549 24553 24681 24682
+## [672] 24694 24822 24844 24939 24947 25014 25164 25175 25181 25183 25193
+## [683] 25197 25211 25214 25217 25422 25446 25720 25944 26259 26567 26773
+## [694] 27005 27212 27240 27293 27444 27458 27559 27567 27686 27701 27702
+## [705] 27704 27715 27747 27753 27776 27778 27862 27884 27896 27909 28019
+## [716] 28065 28067 28177 28184 28323 28550 28554 28561 28660 28663 28798
+## [727] 28799 28921 28926 29036 29037 29168 29308 29311 29431 29434 29577
+## [738] 29704 31215 31386 31515 31632 31718 31792 31858 31859 31860 31861
+## [749] 31945 31948 32380 32386 32601 32604 32605 32607 32822 32827 32828
+## [760] 33027 33035 33232 33234 33329 33336 33410 33579 33580 33581 33842
+## [771] 33844 33958 34192 34428 34672 34985 34987 35210 35397    69   432
+## [782]   532   590   650   652   833   995  1351  2051  2167  2536  2883
+## [793]  2900  4283  6457  6518  7040  7784 21031 23912     7   238   279
+## [804]   517   604   671   673  1283  1301  1467  1603  2457  2530  5071
+## [815]  5074  5076  5178  5184  5192  5196  5301  5321  5322  5484  5487
+## [826]  5490  5493  5544  5562  6215  6496  7087  7311  7417  7440  7578
+## [837]  7742  9561  9777  9780  9999 10018 11083 11084 11207 11315 11948
+## [848] 12280 12288 12459 12589 12731 13010 13103 13148 13309 13332 13463
+## [859] 13611 13780 13787 13791 13831 13960 13963 13986 13992 14183 14301
+## [870] 14428 14430 14516 14624 14630 14820 14822 14841 15106 15130 15132
+## [881] 15136 15267 15431 15750 15772 15853 16498 16693 16709 16816 16847
+## [892] 16955 17085 19041 19394 19426 19429 19562 19580 19657 19661 19671
+## [903] 19673 19800 19818 19895 20354 20607 23258 23260 23379 23393 23396
+## [914] 23399 23504 23547 23583 23598 23658 23716 23729 23944 23945 24711
+## [925] 24714 24992 25277 25280 25494 26022 27214 29035 31520 32815 33032
+## [936] 33036 33228 33231 33331 33411 33953 33963 34194 34426 35201 35209
+## [947]   220   247   585   657   731   749   835   912   934   993  1151
+## [958]  1266  1365  1673  1922  3008  3009  3010  3034  3083  3380  3457
+## [969]  3505  3546  3778  3869  3875  3958  3973  3976  3977  3980  4190
+## [980]  4203  4216  4221  4225  4230  4233  4248  4299  4334  4447  4449
+## [991]  4514  4517  4648  4858  4948  5013  5027  5164  5173
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 33787 entries ]</code></pre>
+<pre class="r"><code># first column of the data frame (as a data.frame)
+surveys[1]      </code></pre>
+<pre><code>##     record_id
+## 1           1
+## 2          72
+## 3         224
+## 4         266
+## 5         349
+## 6         363
+## 7         435
+## 8         506
+## 9         588
+## 10        661
+## 11        748
+## 12        845
+## 13        990
+## 14       1164
+## 15       1261
+## 16       1374
+## 17       1453
+## 18       1756
+## 19       1818
+## 20       1882
+## 21       2133
+## 22       2184
+## 23       2406
+## 24       2728
+## 25       3000
+## 26       3002
+## 27       4667
+## 28       4859
+## 29       5048
+## 30       5180
+## 31       5299
+## 32       5485
+## 33       5558
+## 34       5583
+## 35       5966
+## 36       6020
+## 37       6023
+## 38       6036
+## 39       6167
+## 40       6479
+## 41       6500
+## 42       8022
+## 43       8263
+## 44       8387
+## 45       8394
+## 46       8407
+## 47       8514
+## 48       8543
+## 49       8657
+## 50       8675
+## 51       8755
+## 52       9048
+## 53       9132
+## 54       9270
+## 55       9349
+## 56       9512
+## 57       9605
+## 58       9703
+## 59      10606
+## 60      10617
+## 61      10627
+## 62      10720
+## 63      10923
+## 64      10949
+## 65      11215
+## 66      11329
+## 67      11496
+## 68      11498
+## 69      11611
+## 70      11628
+## 71      11709
+## 72      11877
+## 73      11879
+## 74      11887
+## 75      11953
+## 76      12299
+## 77      12458
+## 78      12602
+## 79      12678
+## 80      12708
+## 81      12729
+## 82      12756
+## 83      12871
+## 84      12997
+## 85      13025
+## 86      13114
+## 87      13275
+## 88      13326
+## 89      13434
+## 90      13465
+## 91      13476
+## 92      13615
+## 93      13630
+## 94      13748
+## 95      13977
+## 96      14646
+## 97      14740
+## 98      14796
+## 99      14804
+## 100     14896
+## 101     14984
+## 102     15302
+## 103     15780
+## 104     16407
+## 105     17230
+## 106     17877
+## 107     17941
+## 108     18110
+## 109     18364
+## 110     18486
+## 111     18639
+## 112     18678
+## 113     18680
+## 114     18846
+## 115     18948
+## 116     19032
+## 117     19245
+## 118     20040
+## 119     20089
+## 120     20364
+## 121     20466
+## 122     20992
+## 123     21113
+## 124     21120
+## 125     21161
+## 126     21232
+## 127     21235
+## 128     21286
+## 129     21507
+## 130     21558
+## 131     22314
+## 132     22728
+## 133     22899
+## 134     23032
+## 135     24589
+## 136     24690
+## 137     24703
+## 138     25247
+## 139     25701
+## 140     26028
+## 141     26644
+## 142     26827
+## 143     26857
+## 144     27042
+## 145     27326
+## 146     27734
+## 147     27781
+## 148     27860
+## 149     27897
+## 150     27919
+## 151     28022
+## 152     28077
+## 153     28328
+## 154     28551
+## 155     28556
+## 156     28662
+## 157     28928
+## 158     29039
+## 159     29310
+## 160     29435
+## 161     29572
+## 162     29823
+## 163     29865
+## 164     29950
+## 165     30066
+## 166     30067
+## 167     30172
+## 168     30174
+## 169     30175
+## 170     30307
+## 171     30308
+## 172     30309
+## 173     30443
+## 174     30741
+## 175     31516
+## 176     31517
+## 177     31633
+## 178     31717
+## 179     31721
+## 180     31862
+## 181     31946
+## 182     32045
+## 183     32167
+## 184     32391
+## 185     32817
+## 186     33040
+## 187     33041
+## 188     33237
+## 189     33238
+## 190     33339
+## 191     33415
+## 192     33583
+## 193     33586
+## 194     33837
+## 195     33847
+## 196     33966
+## 197     34198
+## 198     34783
+## 199     34991
+## 200     35212
+## 201     35404
+## 202         3
+## 203       226
+## 204       233
+## 205       245
+## 206       251
+## 207       257
+## 208       259
+## 209       268
+## 210       346
+## 211       350
+## 212       354
+## 213       361
+## 214       422
+## 215       424
+## 216       427
+## 217       438
+## 218       449
+## 219       507
+## 220       511
+## 221       518
+## 222       519
+## 223       521
+## 224       522
+## 225       523
+## 226       527
+## 227       533
+## 228       593
+## 229       595
+## 230       600
+## 231       601
+## 232       660
+## 233       664
+## 234       733
+## 235       754
+## 236       757
+## 237       764
+## 238       838
+## 239       842
+## 240       849
+## 241       914
+## 242       924
+## 243       930
+## 244      1018
+## 245      1061
+## 246      1062
+## 247      1159
+## 248      1183
+## 249      1269
+## 250      1272
+## 251      1277
+## 252      1370
+## 253      1382
+## 254      1461
+## 255      1469
+## 256      1519
+## 257      1529
+## 258      1534
+## 259      1535
+## 260      1539
+## 261      1581
+## 262      1611
+## 263      1644
+## 264      1661
+## 265      1676
+## 266      1692
+## 267      1701
+## 268      1768
+## 269      1839
+## 270      1845
+## 271      1846
+## 272      2014
+## 273      2060
+## 274      2070
+## 275      2122
+## 276      2131
+## 277      2176
+## 278      2181
+## 279      2338
+## 280      2339
+## 281      2340
+## 282      2372
+## 283      2400
+## 284      2456
+## 285      2460
+## 286      2525
+## 287      2555
+## 288      2589
+## 289      2600
+## 290      2622
+## 291      2631
+## 292      2635
+## 293      2643
+## 294      2653
+## 295      2662
+## 296      2667
+## 297      2692
+## 298      2695
+## 299      2701
+## 300      2715
+## 301      2740
+## 302      2790
+## 303      2814
+## 304      2901
+## 305      2902
+## 306      2906
+## 307      2975
+## 308      2981
+## 309      3033
+## 310      3035
+## 311      3099
+## 312      3107
+## 313      3182
+## 314      3236
+## 315      3302
+## 316      3388
+## 317      3454
+## 318      3456
+## 319      3525
+## 320      3547
+## 321      3550
+## 322      3564
+## 323      3566
+## 324      3569
+## 325      3580
+## 326      3738
+## 327      3741
+## 328      3781
+## 329      3790
+## 330      3867
+## 331      3877
+## 332      3889
+## 333      3897
+## 334      3899
+## 335      3901
+## 336      3947
+## 337      3960
+## 338      3979
+## 339      3998
+## 340      4004
+## 341      4198
+## 342      4238
+## 343      4243
+## 344      4251
+## 345      4268
+## 346      4271
+## 347      4276
+## 348      4306
+## 349      4317
+## 350      4320
+## 351      4341
+## 352      4347
+## 353      4452
+## 354      4482
+## 355      4520
+## 356      4548
+## 357      4685
+## 358      4693
+## 359      4714
+## 360      4952
+## 361      5044
+## 362      5063
+## 363      5167
+## 364      5288
+## 365      5483
+## 366      6006
+## 367      6184
+## 368      6470
+## 369      6474
+## 370      6491
+## 371      6520
+## 372      6523
+## 373      6528
+## 374      6549
+## 375      6553
+## 376      6824
+## 377      6832
+## 378      6837
+## 379      6842
+## 380      6889
+## 381      6939
+## 382      6944
+## 383      6945
+## 384      7061
+## 385      7080
+## 386      7246
+## 387      7294
+## 388      7402
+## 389      7420
+## 390      7553
+## 391      7558
+## 392      7715
+## 393      7723
+## 394      7735
+## 395      7884
+## 396      7895
+## 397      7916
+## 398      8125
+## 399      8235
+## 400      8339
+## 401      8359
+## 402      8413
+## 403      8494
+## 404      8631
+## 405      8656
+## 406      8800
+## 407      8903
+## 408      8954
+## 409      8961
+## 410      9034
+## 411      9133
+## 412      9156
+## 413      9180
+## 414      9182
+## 415      9269
+## 416      9452
+## 417      9572
+## 418      9672
+## 419      9762
+## 420      9767
+## 421      9873
+## 422      9880
+## 423      9894
+## 424      9901
+## 425      9920
+## 426      9980
+## 427      9984
+## 428     10001
+## 429     10004
+## 430     10006
+## 431     10021
+## 432     10031
+## 433     10092
+## 434     10109
+## 435     10114
+## 436     10254
+## 437     10277
+## 438     10290
+## 439     10318
+## 440     10354
+## 441     10363
+## 442     10366
+## 443     10411
+## 444     10415
+## 445     10421
+## 446     10430
+## 447     10447
+## 448     10500
+## 449     10517
+## 450     10518
+## 451     10532
+## 452     10595
+## 453     10600
+## 454     10603
+## 455     10610
+## 456     10621
+## 457     10623
+## 458     10686
+## 459     10693
+## 460     10716
+## 461     10784
+## 462     10802
+## 463     10804
+## 464     10899
+## 465     10909
+## 466     10920
+## 467     11013
+## 468     11015
+## 469     11063
+## 470     11074
+## 471     11092
+## 472     11148
+## 473     11150
+## 474     11161
+## 475     11186
+## 476     11187
+## 477     11197
+## 478     11210
+## 479     11284
+## 480     11291
+## 481     11304
+## 482     11305
+## 483     11316
+## 484     11327
+## 485     11387
+## 486     11388
+## 487     11391
+## 488     11408
+## 489     11421
+## 490     11489
+## 491     11514
+## 492     11515
+## 493     11535
+## 494     11584
+## 495     11595
+## 496     11600
+## 497     11608
+## 498     11684
+## 499     11695
+## 500     11722
+## 501     11772
+## 502     11784
+## 503     11788
+## 504     11791
+## 505     11841
+## 506     11862
+## 507     11920
+## 508     12011
+## 509     12014
+## 510     12056
+## 511     12117
+## 512     12137
+## 513     12138
+## 514     12234
+## 515     12249
+## 516     12389
+## 517     12394
+## 518     12407
+## 519     12419
+## 520     12439
+## 521     12533
+## 522     12535
+## 523     12545
+## 524     12676
+## 525     12764
+## 526     12780
+## 527     12966
+## 528     12972
+## 529     13112
+## 530     13145
+## 531     13167
+## 532     13267
+## 533     13481
+## 534     13589
+## 535     13757
+## 536     13820
+## 537     13822
+## 538     13920
+## 539     13922
+## 540     13935
+## 541     14098
+## 542     14104
+## 543     14119
+## 544     14123
+## 545     14134
+## 546     14258
+## 547     14279
+## 548     14322
+## 549     14423
+## 550     14491
+## 551     14540
+## 552     14603
+## 553     14697
+## 554     14787
+## 555     14794
+## 556     14797
+## 557     14889
+## 558     14988
+## 559     16292
+## 560     16377
+## 561     17298
+## 562     17320
+## 563     17331
+## 564     17910
+## 565     17915
+## 566     17973
+## 567     18096
+## 568     18193
+## 569     18201
+## 570     18654
+## 571     18743
+## 572     18821
+## 573     19378
+## 574     19427
+## 575     19539
+## 576     19806
+## 577     19866
+## 578     20856
+## 579     21167
+## 580     21215
+## 581     21223
+## 582     21269
+## 583     21275
+## 584     21284
+## 585     21325
+## 586     21385
+## 587     21435
+## 588     21442
+## 589     21448
+## 590     21502
+## 591     21505
+## 592     21555
+## 593     21560
+## 594     21708
+## 595     21757
+## 596     21814
+## 597     21879
+## 598     21940
+## 599     22003
+## 600     22042
+## 601     22044
+## 602     22105
+## 603     22109
+## 604     22168
+## 605     22250
+## 606     22368
+## 607     22375
+## 608     22444
+## 609     22550
+## 610     22560
+## 611     22689
+## 612     22842
+## 613     22853
+## 614     22865
+## 615     22880
+## 616     22896
+## 617     22997
+## 618     23002
+## 619     23003
+## 620     23041
+## 621     23044
+## 622     23115
+## 623     23117
+## 624     23120
+## 625     23136
+## 626     23144
+## 627     23156
+## 628     23169
+## 629     23220
+## 630     23225
+## 631     23234
+## 632     23237
+## 633     23243
+## 634     23257
+## 635     23341
+## 636     23345
+## 637     23357
+## 638     23365
+## 639     23368
+## 640     23403
+## 641     23498
+## 642     23519
+## 643     23522
+## 644     23549
+## 645     23565
+## 646     23645
+## 647     23650
+## 648     23687
+## 649     23703
+## 650     23895
+## 651     23899
+## 652     23902
+## 653     23904
+## 654     23922
+## 655     23929
+## 656     23936
+## 657     24027
+## 658     24045
+## 659     24197
+## 660     24292
+## 661     24306
+## 662     24393
+## 663     24396
+## 664     24407
+## 665     24443
+## 666     24537
+## 667     24546
+## 668     24549
+## 669     24553
+## 670     24681
+## 671     24682
+## 672     24694
+## 673     24822
+## 674     24844
+## 675     24939
+## 676     24947
+## 677     25014
+## 678     25164
+## 679     25175
+## 680     25181
+## 681     25183
+## 682     25193
+## 683     25197
+## 684     25211
+## 685     25214
+## 686     25217
+## 687     25422
+## 688     25446
+## 689     25720
+## 690     25944
+## 691     26259
+## 692     26567
+## 693     26773
+## 694     27005
+## 695     27212
+## 696     27240
+## 697     27293
+## 698     27444
+## 699     27458
+## 700     27559
+## 701     27567
+## 702     27686
+## 703     27701
+## 704     27702
+## 705     27704
+## 706     27715
+## 707     27747
+## 708     27753
+## 709     27776
+## 710     27778
+## 711     27862
+## 712     27884
+## 713     27896
+## 714     27909
+## 715     28019
+## 716     28065
+## 717     28067
+## 718     28177
+## 719     28184
+## 720     28323
+## 721     28550
+## 722     28554
+## 723     28561
+## 724     28660
+## 725     28663
+## 726     28798
+## 727     28799
+## 728     28921
+## 729     28926
+## 730     29036
+## 731     29037
+## 732     29168
+## 733     29308
+## 734     29311
+## 735     29431
+## 736     29434
+## 737     29577
+## 738     29704
+## 739     31215
+## 740     31386
+## 741     31515
+## 742     31632
+## 743     31718
+## 744     31792
+## 745     31858
+## 746     31859
+## 747     31860
+## 748     31861
+## 749     31945
+## 750     31948
+## 751     32380
+## 752     32386
+## 753     32601
+## 754     32604
+## 755     32605
+## 756     32607
+## 757     32822
+## 758     32827
+## 759     32828
+## 760     33027
+## 761     33035
+## 762     33232
+## 763     33234
+## 764     33329
+## 765     33336
+## 766     33410
+## 767     33579
+## 768     33580
+## 769     33581
+## 770     33842
+## 771     33844
+## 772     33958
+## 773     34192
+## 774     34428
+## 775     34672
+## 776     34985
+## 777     34987
+## 778     35210
+## 779     35397
+## 780        69
+## 781       432
+## 782       532
+## 783       590
+## 784       650
+## 785       652
+## 786       833
+## 787       995
+## 788      1351
+## 789      2051
+## 790      2167
+## 791      2536
+## 792      2883
+## 793      2900
+## 794      4283
+## 795      6457
+## 796      6518
+## 797      7040
+## 798      7784
+## 799     21031
+## 800     23912
+## 801         7
+## 802       238
+## 803       279
+## 804       517
+## 805       604
+## 806       671
+## 807       673
+## 808      1283
+## 809      1301
+## 810      1467
+## 811      1603
+## 812      2457
+## 813      2530
+## 814      5071
+## 815      5074
+## 816      5076
+## 817      5178
+## 818      5184
+## 819      5192
+## 820      5196
+## 821      5301
+## 822      5321
+## 823      5322
+## 824      5484
+## 825      5487
+## 826      5490
+## 827      5493
+## 828      5544
+## 829      5562
+## 830      6215
+## 831      6496
+## 832      7087
+## 833      7311
+## 834      7417
+## 835      7440
+## 836      7578
+## 837      7742
+## 838      9561
+## 839      9777
+## 840      9780
+## 841      9999
+## 842     10018
+## 843     11083
+## 844     11084
+## 845     11207
+## 846     11315
+## 847     11948
+## 848     12280
+## 849     12288
+## 850     12459
+## 851     12589
+## 852     12731
+## 853     13010
+## 854     13103
+## 855     13148
+## 856     13309
+## 857     13332
+## 858     13463
+## 859     13611
+## 860     13780
+## 861     13787
+## 862     13791
+## 863     13831
+## 864     13960
+## 865     13963
+## 866     13986
+## 867     13992
+## 868     14183
+## 869     14301
+## 870     14428
+## 871     14430
+## 872     14516
+## 873     14624
+## 874     14630
+## 875     14820
+## 876     14822
+## 877     14841
+## 878     15106
+## 879     15130
+## 880     15132
+## 881     15136
+## 882     15267
+## 883     15431
+## 884     15750
+## 885     15772
+## 886     15853
+## 887     16498
+## 888     16693
+## 889     16709
+## 890     16816
+## 891     16847
+## 892     16955
+## 893     17085
+## 894     19041
+## 895     19394
+## 896     19426
+## 897     19429
+## 898     19562
+## 899     19580
+## 900     19657
+## 901     19661
+## 902     19671
+## 903     19673
+## 904     19800
+## 905     19818
+## 906     19895
+## 907     20354
+## 908     20607
+## 909     23258
+## 910     23260
+## 911     23379
+## 912     23393
+## 913     23396
+## 914     23399
+## 915     23504
+## 916     23547
+## 917     23583
+## 918     23598
+## 919     23658
+## 920     23716
+## 921     23729
+## 922     23944
+## 923     23945
+## 924     24711
+## 925     24714
+## 926     24992
+## 927     25277
+## 928     25280
+## 929     25494
+## 930     26022
+## 931     27214
+## 932     29035
+## 933     31520
+## 934     32815
+## 935     33032
+## 936     33036
+## 937     33228
+## 938     33231
+## 939     33331
+## 940     33411
+## 941     33953
+## 942     33963
+## 943     34194
+## 944     34426
+## 945     35201
+## 946     35209
+## 947       220
+## 948       247
+## 949       585
+## 950       657
+## 951       731
+## 952       749
+## 953       835
+## 954       912
+## 955       934
+## 956       993
+## 957      1151
+## 958      1266
+## 959      1365
+## 960      1673
+## 961      1922
+## 962      3008
+## 963      3009
+## 964      3010
+## 965      3034
+## 966      3083
+## 967      3380
+## 968      3457
+## 969      3505
+## 970      3546
+## 971      3778
+## 972      3869
+## 973      3875
+## 974      3958
+## 975      3973
+## 976      3976
+## 977      3977
+## 978      3980
+## 979      4190
+## 980      4203
+## 981      4216
+## 982      4221
+## 983      4225
+## 984      4230
+## 985      4233
+## 986      4248
+## 987      4299
+## 988      4334
+## 989      4447
+## 990      4449
+## 991      4514
+## 992      4517
+## 993      4648
+## 994      4858
+## 995      4948
+## 996      5013
+## 997      5027
+## 998      5164
+## 999      5173
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 33787 rows ]</code></pre>
+<pre class="r"><code># first three elements in the 7th column (as a vector)
+surveys[1:3, 7] </code></pre>
+<pre><code>## [1] M M  
+## Levels:  F M</code></pre>
+<pre class="r"><code># the 3rd row of the data frame (as a data.frame)
+surveys[3, ]    </code></pre>
+<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
+## 3       224     9  13 1977       2         NL                  NA     NA
+##     genus  species   taxa plot_type
+## 3 Neotoma albigula Rodent   Control</code></pre>
+<pre class="r"><code># equivalent to head_surveys &lt;- head(surveys)
+head_surveys &lt;- surveys[1:6, ] </code></pre>
+<p><code>:</code> is a special function that creates numeric vectors of integers in increasing or decreasing order, test <code>1:10</code> and <code>10:1</code> for instance.</p>
+<p>You can also exclude certain indices of a data frame using the “<code>-</code>” sign:</p>
+<pre class="r"><code>surveys[, -1]          # The whole data frame, except the first column</code></pre>
+<pre><code>##    month day year plot_id species_id sex hindfoot_length weight   genus
+## 1      7  16 1977       2         NL   M              32     NA Neotoma
+## 2      8  19 1977       2         NL   M              31     NA Neotoma
+## 3      9  13 1977       2         NL                  NA     NA Neotoma
+## 4     10  16 1977       2         NL                  NA     NA Neotoma
+## 5     11  12 1977       2         NL                  NA     NA Neotoma
+## 6     11  12 1977       2         NL                  NA     NA Neotoma
+## 7     12  10 1977       2         NL                  NA     NA Neotoma
+## 8      1   8 1978       2         NL                  NA     NA Neotoma
+## 9      2  18 1978       2         NL   M              NA    218 Neotoma
+## 10     3  11 1978       2         NL                  NA     NA Neotoma
+## 11     4   8 1978       2         NL                  NA     NA Neotoma
+## 12     5   6 1978       2         NL   M              32    204 Neotoma
+## 13     6   9 1978       2         NL   M              NA    200 Neotoma
+## 14     8   5 1978       2         NL   M              34    199 Neotoma
+## 15     9   4 1978       2         NL   M              32    197 Neotoma
+## 16    10   8 1978       2         NL                  NA     NA Neotoma
+## 17    11   5 1978       2         NL   M              NA    218 Neotoma
+## 18     4  29 1979       2         NL   M              33    166 Neotoma
+## 19     5  30 1979       2         NL   M              32    184 Neotoma
+## 20     7   4 1979       2         NL   M              32    206 Neotoma
+## 21    10  25 1979       2         NL   F              33    274 Neotoma
+## 22    11  17 1979       2         NL   F              30    186 Neotoma
+## 23     1  16 1980       2         NL   F              33    184 Neotoma
+## 24     3   9 1980       2         NL   F              NA     NA Neotoma
+## 25     5  18 1980       2         NL   F              31     87 Neotoma
+## 26     5  18 1980       2         NL   F              33    174 Neotoma
+## 27     7   8 1981       2         NL   F              30    130 Neotoma
+## 28    10   1 1981       2         NL   M              34    208 Neotoma
+## 29    11  23 1981       2         NL   M              34    192 Neotoma
+## 30     1   1 1982       2         NL   M              NA    206 Neotoma
+## 31     1  25 1982       2         NL   F              32    165 Neotoma
+## 32     2  24 1982       2         NL   M              34    202 Neotoma
+## 33     3  29 1982       2         NL   M              33    211 Neotoma
+## 34     3  29 1982       2         NL   M              31    120 Neotoma
+## 35     5  22 1982       2         NL   F              32     40 Neotoma
+## 36     6  28 1982       2         NL   M              33    222 Neotoma
+## 37     6  28 1982       2         NL   F              30    100 Neotoma
+## 38     6  28 1982       2         NL   F              33    120 Neotoma
+## 39     7  25 1982       2         NL   M              NA    219 Neotoma
+## 40     8  16 1982       2         NL   F              31    112 Neotoma
+## 41     8  16 1982       2         NL   F              33    152 Neotoma
+## 42     6  18 1983       2         NL   F              30    126 Neotoma
+## 43     8  16 1983       2         NL   F              32    147 Neotoma
+## 44     9  11 1983       2         NL   F              32    138 Neotoma
+## 45     9  11 1983       2         NL   F              32    161 Neotoma
+## 46     9  11 1983       2         NL   M              33    148 Neotoma
+## 47    10  16 1983       2         NL   F              32    151 Neotoma
+## 48    10  16 1983       2         NL   F              31    175 Neotoma
+## 49    11  13 1983       2         NL   F              32    158 Neotoma
+## 50    11  13 1983       2         NL   F              32    164 Neotoma
+## 51    12   9 1983       2         NL   F              32    150 Neotoma
+## 52     4  10 1984       2         NL   F              32    157 Neotoma
+## 53     5  13 1984       2         NL   M              32    125 Neotoma
+## 54     5  28 1984       2         NL   M              33    125 Neotoma
+## 55     7   4 1984       2         NL   M              35    130 Neotoma
+## 56     8  26 1984       2         NL   F              31    151 Neotoma
+## 57     9  30 1984       2         NL   F              32    173 Neotoma
+## 58    10  21 1984       2         NL   M              30    126 Neotoma
+## 59     7  24 1985       2         NL   F              30     91 Neotoma
+## 60     7  24 1985       2         NL   M              32    186 Neotoma
+## 61     7  24 1985       2         NL   F              32    174 Neotoma
+## 62     8  20 1985       2         NL   F              31    106 Neotoma
+## 63    10  13 1985       2         NL   F              31    136 Neotoma
+## 64    10  13 1985       2         NL   F              33    148 Neotoma
+## 65    12   8 1985       2         NL   F              32    160 Neotoma
+## 66     3   9 1986       2         NL   M              34    240 Neotoma
+## 67     5  11 1986       2         NL   F              31    163 Neotoma
+## 68     5  11 1986       2         NL   F              31     82 Neotoma
+## 69     6   5 1986       2         NL   F              32    110 Neotoma
+## 70     6   5 1986       2         NL   M              34    227 Neotoma
+## 71     7   4 1986       2         NL   F              31    184 Neotoma
+## 72     9   7 1986       2         NL   M              34    202 Neotoma
+## 73     9   7 1986       2         NL   F              32    135 Neotoma
+## 74     9   7 1986       2         NL   M              33    177 Neotoma
+## 75    10   5 1986       2         NL   M              33    221 Neotoma
+## 76     2   1 1987       2         NL   M              32    253 Neotoma
+## 77     3   2 1987       2         NL   M              33    259 Neotoma
+## 78     4   6 1987       2         NL   M              34    260 Neotoma
+## 79     4  26 1987       2         NL   M              30     79 Neotoma
+## 80     4  26 1987       2         NL   F              28     72 Neotoma
+## 81     4  26 1987       2         NL   M              32    270 Neotoma
+## 82     5  28 1987       2         NL   F              30     99 Neotoma
+## 83     5  28 1987       2         NL   M              32    278 Neotoma
+##     species   taxa plot_type
+## 1  albigula Rodent   Control
+## 2  albigula Rodent   Control
+## 3  albigula Rodent   Control
+## 4  albigula Rodent   Control
+## 5  albigula Rodent   Control
+## 6  albigula Rodent   Control
+## 7  albigula Rodent   Control
+## 8  albigula Rodent   Control
+## 9  albigula Rodent   Control
+## 10 albigula Rodent   Control
+## 11 albigula Rodent   Control
+## 12 albigula Rodent   Control
+## 13 albigula Rodent   Control
+## 14 albigula Rodent   Control
+## 15 albigula Rodent   Control
+## 16 albigula Rodent   Control
+## 17 albigula Rodent   Control
+## 18 albigula Rodent   Control
+## 19 albigula Rodent   Control
+## 20 albigula Rodent   Control
+## 21 albigula Rodent   Control
+## 22 albigula Rodent   Control
+## 23 albigula Rodent   Control
+## 24 albigula Rodent   Control
+## 25 albigula Rodent   Control
+## 26 albigula Rodent   Control
+## 27 albigula Rodent   Control
+## 28 albigula Rodent   Control
+## 29 albigula Rodent   Control
+## 30 albigula Rodent   Control
+## 31 albigula Rodent   Control
+## 32 albigula Rodent   Control
+## 33 albigula Rodent   Control
+## 34 albigula Rodent   Control
+## 35 albigula Rodent   Control
+## 36 albigula Rodent   Control
+## 37 albigula Rodent   Control
+## 38 albigula Rodent   Control
+## 39 albigula Rodent   Control
+## 40 albigula Rodent   Control
+## 41 albigula Rodent   Control
+## 42 albigula Rodent   Control
+## 43 albigula Rodent   Control
+## 44 albigula Rodent   Control
+## 45 albigula Rodent   Control
+## 46 albigula Rodent   Control
+## 47 albigula Rodent   Control
+## 48 albigula Rodent   Control
+## 49 albigula Rodent   Control
+## 50 albigula Rodent   Control
+## 51 albigula Rodent   Control
+## 52 albigula Rodent   Control
+## 53 albigula Rodent   Control
+## 54 albigula Rodent   Control
+## 55 albigula Rodent   Control
+## 56 albigula Rodent   Control
+## 57 albigula Rodent   Control
+## 58 albigula Rodent   Control
+## 59 albigula Rodent   Control
+## 60 albigula Rodent   Control
+## 61 albigula Rodent   Control
+## 62 albigula Rodent   Control
+## 63 albigula Rodent   Control
+## 64 albigula Rodent   Control
+## 65 albigula Rodent   Control
+## 66 albigula Rodent   Control
+## 67 albigula Rodent   Control
+## 68 albigula Rodent   Control
+## 69 albigula Rodent   Control
+## 70 albigula Rodent   Control
+## 71 albigula Rodent   Control
+## 72 albigula Rodent   Control
+## 73 albigula Rodent   Control
+## 74 albigula Rodent   Control
+## 75 albigula Rodent   Control
+## 76 albigula Rodent   Control
+## 77 albigula Rodent   Control
+## 78 albigula Rodent   Control
+## 79 albigula Rodent   Control
+## 80 albigula Rodent   Control
+## 81 albigula Rodent   Control
+## 82 albigula Rodent   Control
+## 83 albigula Rodent   Control
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 34703 rows ]</code></pre>
+<pre class="r"><code>surveys[-c(7:34786), ] # Equivalent to head(surveys)</code></pre>
+<pre><code>##   record_id month day year plot_id species_id sex hindfoot_length weight
+## 1         1     7  16 1977       2         NL   M              32     NA
+## 2        72     8  19 1977       2         NL   M              31     NA
+## 3       224     9  13 1977       2         NL                  NA     NA
+## 4       266    10  16 1977       2         NL                  NA     NA
+## 5       349    11  12 1977       2         NL                  NA     NA
+## 6       363    11  12 1977       2         NL                  NA     NA
+##     genus  species   taxa plot_type
+## 1 Neotoma albigula Rodent   Control
+## 2 Neotoma albigula Rodent   Control
+## 3 Neotoma albigula Rodent   Control
+## 4 Neotoma albigula Rodent   Control
+## 5 Neotoma albigula Rodent   Control
+## 6 Neotoma albigula Rodent   Control</code></pre>
+<p>Data frames can be subset by calling indices (as shown previously), but also by calling their column names directly:</p>
+<pre class="r"><code>surveys[&quot;species_id&quot;]       # Result is a data.frame
+surveys[, &quot;species_id&quot;]     # Result is a vector
+surveys[[&quot;species_id&quot;]]     # Result is a vector
+surveys$species_id          # Result is a vector</code></pre>
+<p>In RStudio, you can use the autocompletion feature to get the full and correct names of the columns.</p>
+<div class="blue">
+<h3 id="challenge-1">Challenge</h3>
+<ol style="list-style-type: decimal">
+<li>Create a <code>data.frame</code> (<code>surveys_200</code>) containing only the data in row 200 of the <code>surveys</code> dataset.</li>
+<li>Notice how <code>nrow()</code> gave you the number of rows in a <code>data.frame</code>?
+<ul>
+<li>Use that number to pull out just that last row in the data frame.</li>
+<li>Compare that with what you see as the last row using <code>tail()</code> to make sure it’s meeting expectations.</li>
+<li>Pull out that last row using <code>nrow()</code> instead of the row number.</li>
+<li>Create a new data frame (<code>surveys_last</code>) from that last row.</li>
+</ul></li>
+<li>Use <code>nrow()</code> to extract the row that is in the middle of the data frame. Store the content of this row in an object named <code>surveys_middle</code>.</li>
+<li>Combine <code>nrow()</code> with the <code>-</code> notation above to reproduce the behavior of <code>head(surveys)</code>, keeping just the first through 6th rows of the surveys dataset.</li>
+</ol>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>## 1.
+surveys_200 &lt;- surveys[200, ]
+## 2.
+# Saving `n_rows` to improve readability and reduce duplication
+n_rows &lt;- nrow(surveys)
+surveys_last &lt;- surveys[n_rows, ]
+## 3.
+surveys_middle &lt;- surveys[n_rows / 2, ]
+## 4.
+surveys_head &lt;- surveys[-(7:n_rows), ]</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="factors" class="section level2">
+<h2>Factors</h2>
+<p>When we did <code>str(surveys)</code> we saw that several of the columns consist of integers. The columns <code>genus</code>, <code>species</code>, <code>sex</code>, <code>plot_type</code>, … however, are of a special class called <code>factor</code>. Factors are very useful and actually contribute to making R particularly well suited to working with data. So we are going to spend a little time introducing them.</p>
+<p>Factors represent categorical data. They are stored as integers associated with labels and they can be ordered or unordered. While factors look (and often behave) like character vectors, they are actually treated as integer vectors by R. So you need to be very careful when treating them as strings.</p>
+<p>Once created, factors can only contain a pre-defined set of values, known as <em>levels</em>. By default, R always sorts levels in alphabetical order. For instance, if you have a factor with 2 levels:</p>
+<pre class="r"><code>sex &lt;- factor(c(&quot;male&quot;, &quot;female&quot;, &quot;female&quot;, &quot;male&quot;))</code></pre>
+<p>R will assign <code>1</code> to the level <code>&quot;female&quot;</code> and <code>2</code> to the level <code>&quot;male&quot;</code> (because <code>f</code> comes before <code>m</code>, even though the first element in this vector is <code>&quot;male&quot;</code>). You can see this by using the function <code>levels()</code> and you can find the number of levels using <code>nlevels()</code>:</p>
+<pre class="r"><code>levels(sex)</code></pre>
+<pre><code>## [1] &quot;female&quot; &quot;male&quot;</code></pre>
+<pre class="r"><code>nlevels(sex)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Sometimes, the order of the factors does not matter, other times you might want to specify the order because it is meaningful (e.g., “low”, “medium”, “high”), it improves your visualization, or it is required by a particular type of analysis. Here, one way to reorder our levels in the <code>sex</code> vector would be:</p>
+<pre class="r"><code>sex # current order</code></pre>
+<pre><code>## [1] male   female female male  
+## Levels: female male</code></pre>
+<pre class="r"><code>sex &lt;- factor(sex, levels = c(&quot;male&quot;, &quot;female&quot;))
+sex # after re-ordering</code></pre>
+<pre><code>## [1] male   female female male  
+## Levels: male female</code></pre>
+<p>In R’s memory, these factors are represented by integers (1, 2, 3), but are more informative than integers because factors are self describing: <code>&quot;female&quot;</code>, <code>&quot;male&quot;</code> is more descriptive than <code>1</code>, <code>2</code>. Which one is “male”? You wouldn’t be able to tell just from the integer data. Factors, on the other hand, have this information built in. It is particularly helpful when there are many levels (like the species names in our example dataset).</p>
+<div id="converting-factors" class="section level3">
+<h3>Converting factors</h3>
+<p>If you need to convert a factor to a character vector, you use <code>as.character(x)</code>.</p>
+<pre class="r"><code>as.character(sex)</code></pre>
+<pre><code>## [1] &quot;male&quot;   &quot;female&quot; &quot;female&quot; &quot;male&quot;</code></pre>
+<p>Converting factors where the levels appear as numbers (such as concentration levels, or years) to a numeric vector is a little trickier. The <code>as.numeric()</code> function returns the index values of the factor, not its levels, so it will result in an entirely new (and unwanted in this case) set of numbers. One method to avoid this is to convert factors to characters, and then to numbers.<br />
+Another method is to use the <code>levels()</code> function. Compare:</p>
+<pre class="r"><code>year_fct &lt;- factor(c(1990, 1983, 1977, 1998, 1990))
+as.numeric(year_fct)               # Wrong! And there is no warning...</code></pre>
+<pre><code>## [1] 3 2 1 4 3</code></pre>
+<pre class="r"><code>as.numeric(as.character(year_fct)) # Works...</code></pre>
+<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
+<pre class="r"><code>as.numeric(levels(year_fct))[year_fct]    # The recommended way.</code></pre>
+<pre><code>## [1] 1990 1983 1977 1998 1990</code></pre>
+<p>Notice that in the <code>levels()</code> approach, three important steps occur:</p>
+<ul>
+<li>We obtain all the factor levels using <code>levels(year_fct)</code></li>
+<li>We convert these levels to numeric values using <code>as.numeric(levels(year_fct))</code></li>
+<li>We then access these numeric values using the underlying integers of the vector <code>year_fct</code> inside the square brackets</li>
+</ul>
+</div>
+<div id="renaming-factors" class="section level3">
+<h3>Renaming factors</h3>
+<p>When your data is stored as a factor, you can use the <code>plot()</code> function to get a quick glance at the number of observations represented by each factor level. Let’s look at the number of males and females captured over the course of the experiment:</p>
+<pre class="r"><code>## bar plot of the number of females and males captured during the experiment:
+plot(surveys$sex)</code></pre>
+<p><img src="lesson_data_frames_ecology_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>In addition to males and females, there are about 1700 individuals for which the sex information hasn’t been recorded. Additionally, for these individuals, there is no label to indicate that the information is missing or undetermined. Let’s rename this label to something more meaningful. Before doing that, we’re going to pull out the data on sex and work with that data, so we’re not modifying the working copy of the data frame:</p>
+<pre class="r"><code>sex &lt;- surveys$sex
+head(sex)</code></pre>
+<pre><code>## [1] M M        
+## Levels:  F M</code></pre>
+<pre class="r"><code>levels(sex)</code></pre>
+<pre><code>## [1] &quot;&quot;  &quot;F&quot; &quot;M&quot;</code></pre>
+<pre class="r"><code>levels(sex)[1] &lt;- &quot;undetermined&quot;
+levels(sex)</code></pre>
+<pre><code>## [1] &quot;undetermined&quot; &quot;F&quot;            &quot;M&quot;</code></pre>
+<pre class="r"><code>head(sex)</code></pre>
+<pre><code>## [1] M            M            undetermined undetermined undetermined
+## [6] undetermined
+## Levels: undetermined F M</code></pre>
+<div class="blue">
+<h3 id="challenge-2">Challenge</h3>
+<ul>
+<li>Rename “F” and “M” to “female” and “male” respectively.</li>
+<li>Now that we have renamed the factor level to “undetermined”, can you recreate the barplot such that “undetermined” is last (after “male”)?</li>
+</ul>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>levels(sex)[2:3] &lt;- c(&quot;female&quot;, &quot;male&quot;)
+sex &lt;- factor(sex, levels = c(&quot;female&quot;, &quot;male&quot;, &quot;undetermined&quot;))
+plot(sex)</code></pre>
+<img src="lesson_data_frames_ecology_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="using-stringsasfactorsfalse" class="section level3">
+<h3>Using <code>stringsAsFactors=FALSE</code></h3>
+<p>By default, when building or importing a data frame, the columns that contain characters (i.e. text) are coerced (= converted) into factors. Depending on what you want to do with the data, you may want to keep these columns as <code>character</code>. To do so, <code>read.csv()</code> and <code>read.table()</code> have an argument called <code>stringsAsFactors</code> which can be set to <code>FALSE</code>.</p>
+<p>In most cases, it is preferable to set <code>stringsAsFactors = FALSE</code> when importing data and to convert as a factor only the columns that require this data type.</p>
+<pre class="r"><code>## Compare the difference between our data read as `factor` vs `character`.
+surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;, stringsAsFactors = TRUE)
+str(surveys)
+surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;, stringsAsFactors = FALSE)
+str(surveys)
+## Convert the column &quot;plot_type&quot; into a factor
+surveys$plot_type &lt;- factor(surveys$plot_type)</code></pre>
+<div class="blue">
+<h3 id="challenge-3">Challenge</h3>
+<ol style="list-style-type: decimal">
+<li><p>We have seen how data frames are created when using <code>read.csv()</code>, but they can also be created by hand with the <code>data.frame()</code> function. There are a few mistakes in this hand-crafted <code>data.frame</code>. Can you spot and fix them? Don’t hesitate to experiment!</p>
+<pre class="r"><code>animal_data &lt;- data.frame(
+          animal = c(dog, cat, sea cucumber, sea urchin),
+          feel = c(&quot;furry&quot;, &quot;squishy&quot;, &quot;spiny&quot;),
+          weight = c(45, 8 1.1, 0.8)
+          )</code></pre></li>
+<li>Can you predict the class for each of the columns in the following example? Check your guesses using <code>str(country_climate)</code>:
+<ul>
+<li>Are they what you expected? Why? Why not?</li>
+<li>What would have been different if we had added <code>stringsAsFactors = FALSE</code> when creating the data frame?</li>
+<li>What would you need to change to ensure that each column had the accurate data type?</li>
+</ul>
+<pre class="r"><code>country_climate &lt;- data.frame(
+       country = c(&quot;Canada&quot;, &quot;Panama&quot;, &quot;South Africa&quot;, &quot;Australia&quot;),
+       climate = c(&quot;cold&quot;, &quot;hot&quot;, &quot;temperate&quot;, &quot;hot/temperate&quot;),
+       temperature = c(10, 30, 18, &quot;15&quot;),
+       northern_hemisphere = c(TRUE, TRUE, FALSE, &quot;FALSE&quot;),
+       has_kangaroo = c(FALSE, FALSE, FALSE, 1)
+       )</code></pre></li>
+</ol>
+<details>
+<p><summary>ANSWER</summary></p>
+<ul>
+<li>missing quotations around the names of the animals</li>
+<li>missing one entry in the “feel” column (probably for one of the furry animals)</li>
+<li>missing one comma in the weight column</li>
+<li><code>country</code>, <code>climate</code>, <code>temperature</code>, and <code>northern_hemisphere</code> are factors; <code>has_kangaroo</code> is numeric</li>
+<li>using <code>stringsAsFactors = FALSE</code> would have made them character instead of factors</li>
+<li>removing the quotes in temperature and northern_hemisphere and replacing 1 by TRUE in the <code>has_kangaroo</code> column would give what was probably intended</li>
+</ul>
+</details>
+</div>
+<p><br></p>
+<p>The automatic conversion of data type is sometimes a blessing, sometimes an annoyance. Be aware that it exists, learn the rules, and double check that data you import in R are of the correct type within your data frame. If not, use it to your advantage to detect mistakes that might have been introduced during data entry (a letter in a column that should only contain numbers for instance).</p>
+<p>Learn more in this <a href="https://support.rstudio.com/hc/en-us/articles/218611977-Importing-Data-with-RStudio">RStudio tutorial</a></p>
+</div>
+</div>
+<div id="formatting-dates" class="section level2">
+<h2>Formatting Dates</h2>
+<p>One of the most common issues that new (and experienced!) R users have is converting date and time information into a variable that is appropriate and usable during analyses. As a reminder from earlier in this lesson, the best practice for dealing with date data is to ensure that each component of your date is stored as a separate variable. Using <code>str()</code>, We can confirm that our data frame has a separate column for day, month, and year, and that each contains integer values.</p>
+<pre class="r"><code>str(surveys)</code></pre>
+<p>We are going to use the <code>ymd()</code> function from the package <strong><code>lubridate</code></strong> (which belongs to the <strong><code>tidyverse</code></strong>; learn more <a href="https://www.tidyverse.org/">here</a>). . <strong><code>lubridate</code></strong> gets installed as part as the <strong><code>tidyverse</code></strong> installation. When you load the <strong><code>tidyverse</code></strong> (<code>library(tidyverse)</code>), the core packages (the packages used in most data analyses) get loaded. <strong><code>lubridate</code></strong> however does not belong to the core tidyverse, so you have to load it explicitly with <code>library(lubridate)</code></p>
+<p>Start by loading the required package:</p>
+<pre class="r"><code>library(lubridate)</code></pre>
+<p><code>ymd()</code> takes a vector representing year, month, and day, and converts it to a <code>Date</code> vector. <code>Date</code> is a class of data recognized by R as being a date and can be manipulated as such. The argument that the function requires is flexible, but, as a best practice, is a character vector formatted as “YYYY-MM-DD”.</p>
+<p>Let’s create a date object and inspect the structure:</p>
+<pre class="r"><code>my_date &lt;- ymd(&quot;2015-01-01&quot;)
+str(my_date)</code></pre>
+<pre><code>##  Date[1:1], format: &quot;2015-01-01&quot;</code></pre>
+<p>Now let’s paste the year, month, and day separately - we get the same result:</p>
+<pre class="r"><code># sep indicates the character to use to separate each component
+my_date &lt;- ymd(paste(&quot;2015&quot;, &quot;1&quot;, &quot;1&quot;, sep = &quot;-&quot;)) 
+str(my_date)</code></pre>
+<pre><code>##  Date[1:1], format: &quot;2015-01-01&quot;</code></pre>
+<p>Now we apply this function to the surveys dataset. Create a character vector from the <code>year</code>, <code>month</code>, and <code>day</code> columns of <code>surveys</code> using <code>paste()</code>:</p>
+<pre class="r"><code>paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;)</code></pre>
+<pre><code>##   [1] &quot;1977-7-16&quot;  &quot;1977-8-19&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot; &quot;1977-11-12&quot;
+##   [6] &quot;1977-11-12&quot; &quot;1977-12-10&quot; &quot;1978-1-8&quot;   &quot;1978-2-18&quot;  &quot;1978-3-11&quot; 
+##  [11] &quot;1978-4-8&quot;   &quot;1978-5-6&quot;   &quot;1978-6-9&quot;   &quot;1978-8-5&quot;   &quot;1978-9-4&quot;  
+##  [16] &quot;1978-10-8&quot;  &quot;1978-11-5&quot;  &quot;1979-4-29&quot;  &quot;1979-5-30&quot;  &quot;1979-7-4&quot;  
+##  [21] &quot;1979-10-25&quot; &quot;1979-11-17&quot; &quot;1980-1-16&quot;  &quot;1980-3-9&quot;   &quot;1980-5-18&quot; 
+##  [26] &quot;1980-5-18&quot;  &quot;1981-7-8&quot;   &quot;1981-10-1&quot;  &quot;1981-11-23&quot; &quot;1982-1-1&quot;  
+##  [31] &quot;1982-1-25&quot;  &quot;1982-2-24&quot;  &quot;1982-3-29&quot;  &quot;1982-3-29&quot;  &quot;1982-5-22&quot; 
+##  [36] &quot;1982-6-28&quot;  &quot;1982-6-28&quot;  &quot;1982-6-28&quot;  &quot;1982-7-25&quot;  &quot;1982-8-16&quot; 
+##  [41] &quot;1982-8-16&quot;  &quot;1983-6-18&quot;  &quot;1983-8-16&quot;  &quot;1983-9-11&quot;  &quot;1983-9-11&quot; 
+##  [46] &quot;1983-9-11&quot;  &quot;1983-10-16&quot; &quot;1983-10-16&quot; &quot;1983-11-13&quot; &quot;1983-11-13&quot;
+##  [51] &quot;1983-12-9&quot;  &quot;1984-4-10&quot;  &quot;1984-5-13&quot;  &quot;1984-5-28&quot;  &quot;1984-7-4&quot;  
+##  [56] &quot;1984-8-26&quot;  &quot;1984-9-30&quot;  &quot;1984-10-21&quot; &quot;1985-7-24&quot;  &quot;1985-7-24&quot; 
+##  [61] &quot;1985-7-24&quot;  &quot;1985-8-20&quot;  &quot;1985-10-13&quot; &quot;1985-10-13&quot; &quot;1985-12-8&quot; 
+##  [66] &quot;1986-3-9&quot;   &quot;1986-5-11&quot;  &quot;1986-5-11&quot;  &quot;1986-6-5&quot;   &quot;1986-6-5&quot;  
+##  [71] &quot;1986-7-4&quot;   &quot;1986-9-7&quot;   &quot;1986-9-7&quot;   &quot;1986-9-7&quot;   &quot;1986-10-5&quot; 
+##  [76] &quot;1987-2-1&quot;   &quot;1987-3-2&quot;   &quot;1987-4-6&quot;   &quot;1987-4-26&quot;  &quot;1987-4-26&quot; 
+##  [81] &quot;1987-4-26&quot;  &quot;1987-5-28&quot;  &quot;1987-5-28&quot;  &quot;1987-7-1&quot;   &quot;1987-7-1&quot;  
+##  [86] &quot;1987-7-26&quot;  &quot;1987-8-26&quot;  &quot;1987-8-26&quot;  &quot;1987-9-27&quot;  &quot;1987-9-27&quot; 
+##  [91] &quot;1987-9-27&quot;  &quot;1987-10-25&quot; &quot;1987-10-25&quot; &quot;1987-11-22&quot; &quot;1988-1-24&quot; 
+##  [96] &quot;1988-6-12&quot;  &quot;1988-7-15&quot;  &quot;1988-8-10&quot;  &quot;1988-8-10&quot;  &quot;1988-9-12&quot; 
+## [101] &quot;1988-10-9&quot;  &quot;1988-12-14&quot; &quot;1989-3-13&quot;  &quot;1989-7-30&quot;  &quot;1990-2-25&quot; 
+## [106] &quot;1990-9-25&quot;  &quot;1990-10-16&quot; &quot;1990-12-15&quot; &quot;1991-2-16&quot;  &quot;1991-3-13&quot; 
+## [111] &quot;1991-4-21&quot;  &quot;1991-5-13&quot;  &quot;1991-5-13&quot;  &quot;1991-7-12&quot;  &quot;1991-8-7&quot;  
+## [116] &quot;1991-9-9&quot;   &quot;1991-11-13&quot; &quot;1992-5-30&quot;  &quot;1992-7-3&quot;   &quot;1992-9-26&quot; 
+## [121] &quot;1992-10-18&quot; &quot;1993-7-14&quot;  &quot;1993-9-16&quot;  &quot;1993-9-16&quot;  &quot;1993-10-15&quot;
+## [126] &quot;1993-11-13&quot; &quot;1993-11-13&quot; &quot;1993-12-14&quot; &quot;1994-4-10&quot;  &quot;1994-5-18&quot; 
+## [131] &quot;1995-6-7&quot;   &quot;1995-9-23&quot;  &quot;1995-10-28&quot; &quot;1995-12-2&quot;  &quot;1996-10-12&quot;
+## [136] &quot;1996-11-16&quot; &quot;1996-11-16&quot; &quot;1997-3-15&quot;  &quot;1997-5-10&quot;  &quot;1997-6-9&quot;  
+## [141] &quot;1997-7-29&quot;  &quot;1997-9-27&quot;  &quot;1997-9-27&quot;  &quot;1997-10-25&quot; &quot;1997-12-28&quot;
+## [146] &quot;1998-3-29&quot;  &quot;1998-5-2&quot;   &quot;1998-5-28&quot;  &quot;1998-5-28&quot;  &quot;1998-5-28&quot; 
+## [151] &quot;1998-6-27&quot;  &quot;1998-6-27&quot;  &quot;1998-8-22&quot;  &quot;1998-9-20&quot;  &quot;1998-9-20&quot; 
+## [156] &quot;1998-10-24&quot; &quot;1998-12-22&quot; &quot;1999-1-16&quot;  &quot;1999-3-14&quot;  &quot;1999-4-17&quot; 
+## [161] &quot;1999-5-15&quot;  &quot;1999-9-11&quot;  &quot;1999-10-9&quot;  &quot;1999-11-6&quot;  &quot;1999-12-5&quot; 
+## [166] &quot;1999-12-5&quot;  &quot;2000-1-8&quot;   &quot;2000-1-8&quot;   &quot;2000-1-8&quot;   &quot;2000-2-5&quot;  
+## [171] &quot;2000-2-5&quot;   &quot;2000-2-5&quot;   &quot;2000-3-4&quot;   &quot;2000-6-3&quot;   &quot;2000-11-25&quot;
+## [176] &quot;2000-11-25&quot; &quot;2000-12-22&quot; &quot;2001-1-21&quot;  &quot;2001-1-21&quot;  &quot;2001-3-24&quot; 
+## [181] &quot;2001-4-21&quot;  &quot;2001-5-26&quot;  &quot;2001-6-25&quot;  &quot;2001-8-25&quot;  &quot;2001-10-13&quot;
+## [186] &quot;2001-11-17&quot; &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-1-12&quot; 
+## [191] &quot;2002-2-9&quot;   &quot;2002-3-13&quot;  &quot;2002-3-13&quot;  &quot;2002-4-17&quot;  &quot;2002-4-17&quot; 
+## [196] &quot;2002-5-15&quot;  &quot;2002-6-15&quot;  &quot;2002-10-5&quot;  &quot;2002-11-9&quot;  &quot;2002-12-7&quot; 
+## [201] &quot;2002-12-29&quot; &quot;1977-7-16&quot;  &quot;1977-9-13&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot;
+## [206] &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-11-12&quot;
+## [211] &quot;1977-11-12&quot; &quot;1977-11-12&quot; &quot;1977-11-12&quot; &quot;1977-12-10&quot; &quot;1977-12-10&quot;
+## [216] &quot;1977-12-10&quot; &quot;1977-12-10&quot; &quot;1977-12-10&quot; &quot;1978-1-8&quot;   &quot;1978-1-8&quot;  
+## [221] &quot;1978-1-8&quot;   &quot;1978-1-8&quot;   &quot;1978-1-8&quot;   &quot;1978-1-8&quot;   &quot;1978-1-8&quot;  
+## [226] &quot;1978-1-8&quot;   &quot;1978-1-8&quot;   &quot;1978-2-18&quot;  &quot;1978-2-18&quot;  &quot;1978-2-18&quot; 
+## [231] &quot;1978-2-18&quot;  &quot;1978-3-11&quot;  &quot;1978-3-11&quot;  &quot;1978-4-8&quot;   &quot;1978-4-8&quot;  
+## [236] &quot;1978-4-8&quot;   &quot;1978-4-8&quot;   &quot;1978-5-6&quot;   &quot;1978-5-6&quot;   &quot;1978-5-6&quot;  
+## [241] &quot;1978-5-19&quot;  &quot;1978-5-19&quot;  &quot;1978-5-19&quot;  &quot;1978-6-9&quot;   &quot;1978-7-7&quot;  
+## [246] &quot;1978-7-7&quot;   &quot;1978-8-5&quot;   &quot;1978-8-5&quot;   &quot;1978-9-4&quot;   &quot;1978-9-4&quot;  
+## [251] &quot;1978-9-4&quot;   &quot;1978-10-8&quot;  &quot;1978-10-8&quot;  &quot;1978-11-5&quot;  &quot;1978-11-5&quot; 
+## [256] &quot;1978-12-3&quot;  &quot;1978-12-3&quot;  &quot;1978-12-3&quot;  &quot;1978-12-3&quot;  &quot;1978-12-3&quot; 
+## [261] &quot;1979-1-29&quot;  &quot;1979-1-29&quot;  &quot;1979-2-25&quot;  &quot;1979-2-25&quot;  &quot;1979-3-31&quot; 
+## [266] &quot;1979-3-31&quot;  &quot;1979-3-31&quot;  &quot;1979-4-29&quot;  &quot;1979-5-30&quot;  &quot;1979-5-30&quot; 
+## [271] &quot;1979-5-30&quot;  &quot;1979-8-23&quot;  &quot;1979-9-23&quot;  &quot;1979-9-23&quot;  &quot;1979-10-25&quot;
+## [276] &quot;1979-10-25&quot; &quot;1979-11-17&quot; &quot;1979-11-17&quot; &quot;1980-1-16&quot;  &quot;1980-1-16&quot; 
+## [281] &quot;1980-1-16&quot;  &quot;1980-1-16&quot;  &quot;1980-1-16&quot;  &quot;1980-2-25&quot;  &quot;1980-2-25&quot; 
+## [286] &quot;1980-2-25&quot;  &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;  
+## [291] &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;  
+## [296] &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;   &quot;1980-3-9&quot;  
+## [301] &quot;1980-3-9&quot;   &quot;1980-3-22&quot;  &quot;1980-3-22&quot;  &quot;1980-4-18&quot;  &quot;1980-4-18&quot; 
+## [306] &quot;1980-4-18&quot;  &quot;1980-5-18&quot;  &quot;1980-5-18&quot;  &quot;1980-6-2&quot;   &quot;1980-6-2&quot;  
+## [311] &quot;1980-6-23&quot;  &quot;1980-6-23&quot;  &quot;1980-7-22&quot;  &quot;1980-8-14&quot;  &quot;1980-9-8&quot;  
+## [316] &quot;1980-10-12&quot; &quot;1980-11-9&quot;  &quot;1980-11-9&quot;  &quot;1980-11-9&quot;  &quot;1980-12-15&quot;
+## [321] &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot;
+## [326] &quot;1981-1-12&quot;  &quot;1981-1-12&quot;  &quot;1981-1-12&quot;  &quot;1981-1-12&quot;  &quot;1981-2-1&quot;  
+## [331] &quot;1981-2-1&quot;   &quot;1981-2-1&quot;   &quot;1981-2-1&quot;   &quot;1981-2-1&quot;   &quot;1981-2-1&quot;  
+## [336] &quot;1981-3-9&quot;   &quot;1981-3-9&quot;   &quot;1981-3-9&quot;   &quot;1981-3-9&quot;   &quot;1981-3-9&quot;  
+## [341] &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;  
+## [346] &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;  
+## [351] &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-5-4&quot;   &quot;1981-5-4&quot;   &quot;1981-6-4&quot;  
+## [356] &quot;1981-6-4&quot;   &quot;1981-7-8&quot;   &quot;1981-7-30&quot;  &quot;1981-7-30&quot;  &quot;1981-10-26&quot;
+## [361] &quot;1981-11-23&quot; &quot;1981-11-23&quot; &quot;1982-1-1&quot;   &quot;1982-1-25&quot;  &quot;1982-2-24&quot; 
+## [366] &quot;1982-6-28&quot;  &quot;1982-7-25&quot;  &quot;1982-8-16&quot;  &quot;1982-8-16&quot;  &quot;1982-8-16&quot; 
+## [371] &quot;1982-9-18&quot;  &quot;1982-9-18&quot;  &quot;1982-9-18&quot;  &quot;1982-9-18&quot;  &quot;1982-9-18&quot; 
+## [376] &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot;
+## [381] &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-11-22&quot; &quot;1982-11-22&quot;
+## [386] &quot;1983-1-13&quot;  &quot;1983-1-13&quot;  &quot;1983-2-27&quot;  &quot;1983-2-27&quot;  &quot;1983-3-15&quot; 
+## [391] &quot;1983-3-15&quot;  &quot;1983-4-17&quot;  &quot;1983-4-17&quot;  &quot;1983-4-17&quot;  &quot;1983-5-15&quot; 
+## [396] &quot;1983-5-15&quot;  &quot;1983-5-15&quot;  &quot;1983-7-17&quot;  &quot;1983-8-16&quot;  &quot;1983-9-11&quot; 
+## [401] &quot;1983-9-11&quot;  &quot;1983-9-11&quot;  &quot;1983-10-16&quot; &quot;1983-11-13&quot; &quot;1983-11-13&quot;
+## [406] &quot;1983-12-9&quot;  &quot;1984-2-5&quot;   &quot;1984-3-13&quot;  &quot;1984-3-13&quot;  &quot;1984-4-10&quot; 
+## [411] &quot;1984-5-13&quot;  &quot;1984-5-13&quot;  &quot;1984-5-13&quot;  &quot;1984-5-13&quot;  &quot;1984-5-28&quot; 
+## [416] &quot;1984-8-1&quot;   &quot;1984-9-30&quot;  &quot;1984-10-21&quot; &quot;1984-12-31&quot; &quot;1984-12-31&quot;
+## [421] &quot;1985-1-20&quot;  &quot;1985-1-20&quot;  &quot;1985-1-20&quot;  &quot;1985-1-20&quot;  &quot;1985-1-20&quot; 
+## [426] &quot;1985-2-17&quot;  &quot;1985-2-17&quot;  &quot;1985-2-17&quot;  &quot;1985-2-17&quot;  &quot;1985-2-17&quot; 
+## [431] &quot;1985-2-17&quot;  &quot;1985-2-17&quot;  &quot;1985-3-17&quot;  &quot;1985-3-17&quot;  &quot;1985-3-17&quot; 
+## [436] &quot;1985-4-21&quot;  &quot;1985-4-21&quot;  &quot;1985-4-21&quot;  &quot;1985-4-21&quot;  &quot;1985-4-21&quot; 
+## [441] &quot;1985-4-21&quot;  &quot;1985-4-21&quot;  &quot;1985-5-24&quot;  &quot;1985-5-24&quot;  &quot;1985-5-24&quot; 
+## [446] &quot;1985-5-24&quot;  &quot;1985-5-24&quot;  &quot;1985-6-16&quot;  &quot;1985-6-16&quot;  &quot;1985-6-16&quot; 
+## [451] &quot;1985-6-16&quot;  &quot;1985-7-24&quot;  &quot;1985-7-24&quot;  &quot;1985-7-24&quot;  &quot;1985-7-24&quot; 
+## [456] &quot;1985-7-24&quot;  &quot;1985-7-24&quot;  &quot;1985-8-20&quot;  &quot;1985-8-20&quot;  &quot;1985-8-20&quot; 
+## [461] &quot;1985-9-22&quot;  &quot;1985-9-22&quot;  &quot;1985-9-22&quot;  &quot;1985-10-13&quot; &quot;1985-10-13&quot;
+## [466] &quot;1985-10-13&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot;
+## [471] &quot;1985-11-17&quot; &quot;1985-12-8&quot;  &quot;1985-12-8&quot;  &quot;1985-12-8&quot;  &quot;1985-12-8&quot; 
+## [476] &quot;1985-12-8&quot;  &quot;1985-12-8&quot;  &quot;1985-12-8&quot;  &quot;1986-3-9&quot;   &quot;1986-3-9&quot;  
+## [481] &quot;1986-3-9&quot;   &quot;1986-3-9&quot;   &quot;1986-3-9&quot;   &quot;1986-3-9&quot;   &quot;1986-4-13&quot; 
+## [486] &quot;1986-4-13&quot;  &quot;1986-4-13&quot;  &quot;1986-4-13&quot;  &quot;1986-4-13&quot;  &quot;1986-5-11&quot; 
+## [491] &quot;1986-5-11&quot;  &quot;1986-5-11&quot;  &quot;1986-5-11&quot;  &quot;1986-6-5&quot;   &quot;1986-6-5&quot;  
+## [496] &quot;1986-6-5&quot;   &quot;1986-6-5&quot;   &quot;1986-7-4&quot;   &quot;1986-7-4&quot;   &quot;1986-7-4&quot;  
+## [501] &quot;1986-8-10&quot;  &quot;1986-8-10&quot;  &quot;1986-8-10&quot;  &quot;1986-8-10&quot;  &quot;1986-9-7&quot;  
+## [506] &quot;1986-9-7&quot;   &quot;1986-10-5&quot;  &quot;1986-11-16&quot; &quot;1986-11-16&quot; &quot;1986-11-16&quot;
+## [511] &quot;1986-12-15&quot; &quot;1986-12-15&quot; &quot;1986-12-15&quot; &quot;1987-2-1&quot;   &quot;1987-2-1&quot;  
+## [516] &quot;1987-3-2&quot;   &quot;1987-3-2&quot;   &quot;1987-3-2&quot;   &quot;1987-3-2&quot;   &quot;1987-3-2&quot;  
+## [521] &quot;1987-4-6&quot;   &quot;1987-4-6&quot;   &quot;1987-4-6&quot;   &quot;1987-4-26&quot;  &quot;1987-5-28&quot; 
+## [526] &quot;1987-5-28&quot;  &quot;1987-7-1&quot;   &quot;1987-7-1&quot;   &quot;1987-7-26&quot;  &quot;1987-7-26&quot; 
+## [531] &quot;1987-7-26&quot;  &quot;1987-8-26&quot;  &quot;1987-9-27&quot;  &quot;1987-10-25&quot; &quot;1987-11-22&quot;
+## [536] &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1988-1-24&quot;  &quot;1988-1-24&quot;  &quot;1988-1-24&quot; 
+## [541] &quot;1988-2-22&quot;  &quot;1988-2-22&quot;  &quot;1988-2-22&quot;  &quot;1988-2-22&quot;  &quot;1988-2-22&quot; 
+## [546] &quot;1988-3-21&quot;  &quot;1988-3-21&quot;  &quot;1988-3-21&quot;  &quot;1988-4-19&quot;  &quot;1988-5-15&quot; 
+## [551] &quot;1988-5-15&quot;  &quot;1988-6-12&quot;  &quot;1988-7-15&quot;  &quot;1988-8-9&quot;   &quot;1988-8-10&quot; 
+## [556] &quot;1988-8-10&quot;  &quot;1988-9-12&quot;  &quot;1988-10-9&quot;  &quot;1989-7-4&quot;   &quot;1989-7-30&quot; 
+## [561] &quot;1990-3-30&quot;  &quot;1990-3-30&quot;  &quot;1990-3-30&quot;  &quot;1990-10-16&quot; &quot;1990-10-16&quot;
+## [566] &quot;1990-11-10&quot; &quot;1990-12-15&quot; &quot;1991-1-11&quot;  &quot;1991-1-11&quot;  &quot;1991-5-13&quot; 
+## [571] &quot;1991-6-13&quot;  &quot;1991-7-12&quot;  &quot;1991-12-7&quot;  &quot;1991-12-7&quot;  &quot;1992-1-8&quot;  
+## [576] &quot;1992-3-7&quot;   &quot;1992-4-4&quot;   &quot;1993-5-22&quot;  &quot;1993-10-15&quot; &quot;1993-11-13&quot;
+## [581] &quot;1993-11-13&quot; &quot;1993-12-14&quot; &quot;1993-12-14&quot; &quot;1993-12-14&quot; &quot;1994-2-1&quot;  
+## [586] &quot;1994-2-20&quot;  &quot;1994-3-11&quot;  &quot;1994-3-11&quot;  &quot;1994-3-11&quot;  &quot;1994-4-10&quot; 
+## [591] &quot;1994-4-10&quot;  &quot;1994-5-18&quot;  &quot;1994-5-18&quot;  &quot;1994-8-17&quot;  &quot;1994-9-6&quot;  
+## [596] &quot;1994-10-12&quot; &quot;1994-11-1&quot;  &quot;1994-12-4&quot;  &quot;1995-1-11&quot;  &quot;1995-2-4&quot;  
+## [601] &quot;1995-2-4&quot;   &quot;1995-3-4&quot;   &quot;1995-3-4&quot;   &quot;1995-4-1&quot;   &quot;1995-4-29&quot; 
+## [606] &quot;1995-6-27&quot;  &quot;1995-6-27&quot;  &quot;1995-7-20&quot;  &quot;1995-8-26&quot;  &quot;1995-8-26&quot; 
+## [611] &quot;1995-9-23&quot;  &quot;1995-10-28&quot; &quot;1995-10-28&quot; &quot;1995-10-28&quot; &quot;1995-10-28&quot;
+## [616] &quot;1995-10-28&quot; &quot;1995-12-2&quot;  &quot;1995-12-2&quot;  &quot;1995-12-2&quot;  &quot;1995-12-2&quot; 
+## [621] &quot;1995-12-2&quot;  &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot;
+## [626] &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1996-1-27&quot;  &quot;1996-1-27&quot; 
+## [631] &quot;1996-1-27&quot;  &quot;1996-1-27&quot;  &quot;1996-1-27&quot;  &quot;1996-1-27&quot;  &quot;1996-2-24&quot; 
+## [636] &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-2-24&quot; 
+## [641] &quot;1996-3-23&quot;  &quot;1996-3-23&quot;  &quot;1996-3-23&quot;  &quot;1996-3-23&quot;  &quot;1996-3-23&quot; 
+## [646] &quot;1996-4-14&quot;  &quot;1996-4-14&quot;  &quot;1996-4-14&quot;  &quot;1996-4-14&quot;  &quot;1996-5-23&quot; 
+## [651] &quot;1996-5-23&quot;  &quot;1996-5-23&quot;  &quot;1996-5-23&quot;  &quot;1996-5-23&quot;  &quot;1996-5-23&quot; 
+## [656] &quot;1996-5-23&quot;  &quot;1996-6-13&quot;  &quot;1996-6-13&quot;  &quot;1996-7-20&quot;  &quot;1996-8-14&quot; 
+## [661] &quot;1996-8-14&quot;  &quot;1996-9-21&quot;  &quot;1996-9-21&quot;  &quot;1996-9-21&quot;  &quot;1996-9-21&quot; 
+## [666] &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-11-16&quot;
+## [671] &quot;1996-11-16&quot; &quot;1996-11-16&quot; &quot;1996-12-18&quot; &quot;1996-12-18&quot; &quot;1997-2-8&quot;  
+## [676] &quot;1997-2-8&quot;   &quot;1997-2-8&quot;   &quot;1997-3-15&quot;  &quot;1997-3-15&quot;  &quot;1997-3-15&quot; 
+## [681] &quot;1997-3-15&quot;  &quot;1997-3-15&quot;  &quot;1997-3-15&quot;  &quot;1997-3-15&quot;  &quot;1997-3-15&quot; 
+## [686] &quot;1997-3-15&quot;  &quot;1997-4-12&quot;  &quot;1997-4-12&quot;  &quot;1997-5-10&quot;  &quot;1997-6-9&quot;  
+## [691] &quot;1997-7-9&quot;   &quot;1997-7-29&quot;  &quot;1997-9-27&quot;  &quot;1997-10-25&quot; &quot;1997-11-22&quot;
+## [696] &quot;1997-11-22&quot; &quot;1997-12-28&quot; &quot;1998-1-31&quot;  &quot;1998-1-31&quot;  &quot;1998-3-1&quot;  
+## [701] &quot;1998-3-1&quot;   &quot;1998-3-29&quot;  &quot;1998-3-29&quot;  &quot;1998-3-29&quot;  &quot;1998-3-29&quot; 
+## [706] &quot;1998-3-29&quot;  &quot;1998-5-2&quot;   &quot;1998-5-2&quot;   &quot;1998-5-2&quot;   &quot;1998-5-2&quot;  
+## [711] &quot;1998-5-28&quot;  &quot;1998-5-28&quot;  &quot;1998-5-28&quot;  &quot;1998-5-28&quot;  &quot;1998-6-27&quot; 
+## [716] &quot;1998-6-27&quot;  &quot;1998-6-27&quot;  &quot;1998-7-18&quot;  &quot;1998-7-18&quot;  &quot;1998-8-22&quot; 
+## [721] &quot;1998-9-20&quot;  &quot;1998-9-20&quot;  &quot;1998-9-20&quot;  &quot;1998-10-24&quot; &quot;1998-10-24&quot;
+## [726] &quot;1998-11-21&quot; &quot;1998-11-21&quot; &quot;1998-12-22&quot; &quot;1998-12-22&quot; &quot;1999-1-16&quot; 
+## [731] &quot;1999-1-16&quot;  &quot;1999-2-20&quot;  &quot;1999-3-14&quot;  &quot;1999-3-14&quot;  &quot;1999-4-17&quot; 
+## [736] &quot;1999-4-17&quot;  &quot;1999-5-15&quot;  &quot;1999-6-12&quot;  &quot;2000-8-25&quot;  &quot;2000-9-30&quot; 
+## [741] &quot;2000-11-25&quot; &quot;2000-12-22&quot; &quot;2001-1-21&quot;  &quot;2001-3-3&quot;   &quot;2001-3-24&quot; 
+## [746] &quot;2001-3-24&quot;  &quot;2001-3-24&quot;  &quot;2001-3-24&quot;  &quot;2001-4-21&quot;  &quot;2001-4-21&quot; 
+## [751] &quot;2001-8-25&quot;  &quot;2001-8-25&quot;  &quot;2001-9-22&quot;  &quot;2001-9-22&quot;  &quot;2001-9-22&quot; 
+## [756] &quot;2001-9-22&quot;  &quot;2001-10-13&quot; &quot;2001-10-13&quot; &quot;2001-10-13&quot; &quot;2001-11-17&quot;
+## [761] &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-1-12&quot;  &quot;2002-1-12&quot; 
+## [766] &quot;2002-2-9&quot;   &quot;2002-3-13&quot;  &quot;2002-3-13&quot;  &quot;2002-3-13&quot;  &quot;2002-4-17&quot; 
+## [771] &quot;2002-4-17&quot;  &quot;2002-5-15&quot;  &quot;2002-6-15&quot;  &quot;2002-7-13&quot;  &quot;2002-9-8&quot;  
+## [776] &quot;2002-11-9&quot;  &quot;2002-11-9&quot;  &quot;2002-12-7&quot;  &quot;2002-12-29&quot; &quot;1977-8-19&quot; 
+## [781] &quot;1977-12-10&quot; &quot;1978-1-8&quot;   &quot;1978-2-18&quot;  &quot;1978-3-11&quot;  &quot;1978-3-11&quot; 
+## [786] &quot;1978-5-6&quot;   &quot;1978-6-9&quot;   &quot;1978-10-8&quot;  &quot;1979-9-23&quot;  &quot;1979-11-17&quot;
+## [791] &quot;1980-3-9&quot;   &quot;1980-4-18&quot;  &quot;1980-4-18&quot;  &quot;1981-4-6&quot;   &quot;1982-8-16&quot; 
+## [796] &quot;1982-9-18&quot;  &quot;1982-11-22&quot; &quot;1983-4-17&quot;  &quot;1993-8-19&quot;  &quot;1996-5-23&quot; 
+## [801] &quot;1977-7-16&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot; &quot;1978-1-8&quot;   &quot;1978-2-18&quot; 
+## [806] &quot;1978-3-11&quot;  &quot;1978-3-11&quot;  &quot;1978-9-4&quot;   &quot;1978-9-4&quot;   &quot;1978-11-5&quot; 
+## [811] &quot;1979-1-29&quot;  &quot;1980-2-25&quot;  &quot;1980-2-25&quot;  &quot;1981-11-23&quot; &quot;1981-11-23&quot;
+## [816] &quot;1981-11-23&quot; &quot;1982-1-1&quot;   &quot;1982-1-1&quot;   &quot;1982-1-1&quot;   &quot;1982-1-1&quot;  
+## [821] &quot;1982-1-25&quot;  &quot;1982-1-25&quot;  &quot;1982-1-25&quot;  &quot;1982-2-24&quot;  &quot;1982-2-24&quot; 
+## [826] &quot;1982-2-24&quot;  &quot;1982-2-24&quot;  &quot;1982-3-29&quot;  &quot;1982-3-29&quot;  &quot;1982-7-25&quot; 
+## [831] &quot;1982-8-16&quot;  &quot;1982-11-22&quot; &quot;1983-1-13&quot;  &quot;1983-2-27&quot;  &quot;1983-2-27&quot; 
+## [836] &quot;1983-3-15&quot;  &quot;1983-4-17&quot;  &quot;1984-9-29&quot;  &quot;1984-12-31&quot; &quot;1984-12-31&quot;
+## [841] &quot;1985-2-17&quot;  &quot;1985-2-17&quot;  &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-12-8&quot; 
+## [846] &quot;1986-3-9&quot;   &quot;1986-10-5&quot;  &quot;1987-2-1&quot;   &quot;1987-2-1&quot;   &quot;1987-3-2&quot;  
+## [851] &quot;1987-4-6&quot;   &quot;1987-4-26&quot;  &quot;1987-7-1&quot;   &quot;1987-7-26&quot;  &quot;1987-7-26&quot; 
+## [856] &quot;1987-8-26&quot;  &quot;1987-8-26&quot;  &quot;1987-9-27&quot;  &quot;1987-10-25&quot; &quot;1987-11-22&quot;
+## [861] &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1988-1-24&quot;  &quot;1988-1-24&quot; 
+## [866] &quot;1988-1-24&quot;  &quot;1988-1-24&quot;  &quot;1988-2-22&quot;  &quot;1988-3-21&quot;  &quot;1988-4-19&quot; 
+## [871] &quot;1988-4-19&quot;  &quot;1988-5-15&quot;  &quot;1988-6-12&quot;  &quot;1988-6-12&quot;  &quot;1988-8-10&quot; 
+## [876] &quot;1988-8-10&quot;  &quot;1988-8-10&quot;  &quot;1988-11-6&quot;  &quot;1988-11-6&quot;  &quot;1988-11-6&quot; 
+## [881] &quot;1988-11-6&quot;  &quot;1988-12-14&quot; &quot;1989-1-11&quot;  &quot;1989-3-13&quot;  &quot;1989-3-13&quot; 
+## [886] &quot;1989-4-1&quot;   &quot;1989-10-7&quot;  &quot;1989-11-5&quot;  &quot;1989-11-5&quot;  &quot;1989-12-5&quot; 
+## [891] &quot;1989-12-5&quot;  &quot;1990-1-7&quot;   &quot;1990-1-30&quot;  &quot;1991-9-9&quot;   &quot;1991-12-7&quot; 
+## [896] &quot;1991-12-7&quot;  &quot;1991-12-7&quot;  &quot;1992-1-8&quot;   &quot;1992-1-8&quot;   &quot;1992-2-6&quot;  
+## [901] &quot;1992-2-6&quot;   &quot;1992-2-6&quot;   &quot;1992-2-6&quot;   &quot;1992-3-7&quot;   &quot;1992-3-7&quot;  
+## [906] &quot;1992-4-4&quot;   &quot;1992-9-26&quot;  &quot;1993-1-24&quot;  &quot;1996-1-27&quot;  &quot;1996-1-27&quot; 
+## [911] &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-2-24&quot;  &quot;1996-3-23&quot; 
+## [916] &quot;1996-3-23&quot;  &quot;1996-3-23&quot;  &quot;1996-3-23&quot;  &quot;1996-4-14&quot;  &quot;1996-4-14&quot; 
+## [921] &quot;1996-4-14&quot;  &quot;1996-5-23&quot;  &quot;1996-5-23&quot;  &quot;1996-11-16&quot; &quot;1996-11-16&quot;
+## [926] &quot;1997-2-8&quot;   &quot;1997-3-15&quot;  &quot;1997-3-15&quot;  &quot;1997-4-12&quot;  &quot;1997-6-9&quot;  
+## [931] &quot;1997-11-22&quot; &quot;1999-1-16&quot;  &quot;2000-11-25&quot; &quot;2001-10-13&quot; &quot;2001-11-17&quot;
+## [936] &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-1-12&quot;  &quot;2002-2-9&quot;  
+## [941] &quot;2002-5-15&quot;  &quot;2002-5-15&quot;  &quot;2002-6-15&quot;  &quot;2002-7-13&quot;  &quot;2002-12-7&quot; 
+## [946] &quot;2002-12-7&quot;  &quot;1977-9-13&quot;  &quot;1977-10-16&quot; &quot;1978-2-18&quot;  &quot;1978-3-11&quot; 
+## [951] &quot;1978-4-8&quot;   &quot;1978-4-8&quot;   &quot;1978-5-6&quot;   &quot;1978-5-19&quot;  &quot;1978-5-19&quot; 
+## [956] &quot;1978-6-9&quot;   &quot;1978-8-5&quot;   &quot;1978-9-4&quot;   &quot;1978-10-8&quot;  &quot;1979-3-31&quot; 
+## [961] &quot;1979-7-25&quot;  &quot;1980-5-24&quot;  &quot;1980-5-24&quot;  &quot;1980-5-24&quot;  &quot;1980-6-2&quot;  
+## [966] &quot;1980-6-23&quot;  &quot;1980-10-12&quot; &quot;1980-11-9&quot;  &quot;1980-11-9&quot;  &quot;1980-12-15&quot;
+## [971] &quot;1981-1-12&quot;  &quot;1981-2-1&quot;   &quot;1981-2-1&quot;   &quot;1981-3-9&quot;   &quot;1981-3-9&quot;  
+## [976] &quot;1981-3-9&quot;   &quot;1981-3-9&quot;   &quot;1981-3-9&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;  
+## [981] &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;  
+## [986] &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-4-6&quot;   &quot;1981-5-4&quot;   &quot;1981-5-4&quot;  
+## [991] &quot;1981-6-4&quot;   &quot;1981-6-4&quot;   &quot;1981-7-8&quot;   &quot;1981-10-1&quot;  &quot;1981-10-26&quot;
+## [996] &quot;1981-11-23&quot; &quot;1981-11-23&quot; &quot;1982-1-1&quot;   &quot;1982-1-1&quot;  
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 33787 entries ]</code></pre>
+<p>This character vector can be used as the argument for <code>ymd()</code>:</p>
+<pre class="r"><code>ymd(paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;))</code></pre>
+<pre><code>## Warning: 129 failed to parse.</code></pre>
+<pre><code>##   [1] &quot;1977-07-16&quot; &quot;1977-08-19&quot; &quot;1977-09-13&quot; &quot;1977-10-16&quot; &quot;1977-11-12&quot;
+##   [6] &quot;1977-11-12&quot; &quot;1977-12-10&quot; &quot;1978-01-08&quot; &quot;1978-02-18&quot; &quot;1978-03-11&quot;
+##  [11] &quot;1978-04-08&quot; &quot;1978-05-06&quot; &quot;1978-06-09&quot; &quot;1978-08-05&quot; &quot;1978-09-04&quot;
+##  [16] &quot;1978-10-08&quot; &quot;1978-11-05&quot; &quot;1979-04-29&quot; &quot;1979-05-30&quot; &quot;1979-07-04&quot;
+##  [21] &quot;1979-10-25&quot; &quot;1979-11-17&quot; &quot;1980-01-16&quot; &quot;1980-03-09&quot; &quot;1980-05-18&quot;
+##  [26] &quot;1980-05-18&quot; &quot;1981-07-08&quot; &quot;1981-10-01&quot; &quot;1981-11-23&quot; &quot;1982-01-01&quot;
+##  [31] &quot;1982-01-25&quot; &quot;1982-02-24&quot; &quot;1982-03-29&quot; &quot;1982-03-29&quot; &quot;1982-05-22&quot;
+##  [36] &quot;1982-06-28&quot; &quot;1982-06-28&quot; &quot;1982-06-28&quot; &quot;1982-07-25&quot; &quot;1982-08-16&quot;
+##  [41] &quot;1982-08-16&quot; &quot;1983-06-18&quot; &quot;1983-08-16&quot; &quot;1983-09-11&quot; &quot;1983-09-11&quot;
+##  [46] &quot;1983-09-11&quot; &quot;1983-10-16&quot; &quot;1983-10-16&quot; &quot;1983-11-13&quot; &quot;1983-11-13&quot;
+##  [51] &quot;1983-12-09&quot; &quot;1984-04-10&quot; &quot;1984-05-13&quot; &quot;1984-05-28&quot; &quot;1984-07-04&quot;
+##  [56] &quot;1984-08-26&quot; &quot;1984-09-30&quot; &quot;1984-10-21&quot; &quot;1985-07-24&quot; &quot;1985-07-24&quot;
+##  [61] &quot;1985-07-24&quot; &quot;1985-08-20&quot; &quot;1985-10-13&quot; &quot;1985-10-13&quot; &quot;1985-12-08&quot;
+##  [66] &quot;1986-03-09&quot; &quot;1986-05-11&quot; &quot;1986-05-11&quot; &quot;1986-06-05&quot; &quot;1986-06-05&quot;
+##  [71] &quot;1986-07-04&quot; &quot;1986-09-07&quot; &quot;1986-09-07&quot; &quot;1986-09-07&quot; &quot;1986-10-05&quot;
+##  [76] &quot;1987-02-01&quot; &quot;1987-03-02&quot; &quot;1987-04-06&quot; &quot;1987-04-26&quot; &quot;1987-04-26&quot;
+##  [81] &quot;1987-04-26&quot; &quot;1987-05-28&quot; &quot;1987-05-28&quot; &quot;1987-07-01&quot; &quot;1987-07-01&quot;
+##  [86] &quot;1987-07-26&quot; &quot;1987-08-26&quot; &quot;1987-08-26&quot; &quot;1987-09-27&quot; &quot;1987-09-27&quot;
+##  [91] &quot;1987-09-27&quot; &quot;1987-10-25&quot; &quot;1987-10-25&quot; &quot;1987-11-22&quot; &quot;1988-01-24&quot;
+##  [96] &quot;1988-06-12&quot; &quot;1988-07-15&quot; &quot;1988-08-10&quot; &quot;1988-08-10&quot; &quot;1988-09-12&quot;
+## [101] &quot;1988-10-09&quot; &quot;1988-12-14&quot; &quot;1989-03-13&quot; &quot;1989-07-30&quot; &quot;1990-02-25&quot;
+## [106] &quot;1990-09-25&quot; &quot;1990-10-16&quot; &quot;1990-12-15&quot; &quot;1991-02-16&quot; &quot;1991-03-13&quot;
+## [111] &quot;1991-04-21&quot; &quot;1991-05-13&quot; &quot;1991-05-13&quot; &quot;1991-07-12&quot; &quot;1991-08-07&quot;
+## [116] &quot;1991-09-09&quot; &quot;1991-11-13&quot; &quot;1992-05-30&quot; &quot;1992-07-03&quot; &quot;1992-09-26&quot;
+## [121] &quot;1992-10-18&quot; &quot;1993-07-14&quot; &quot;1993-09-16&quot; &quot;1993-09-16&quot; &quot;1993-10-15&quot;
+## [126] &quot;1993-11-13&quot; &quot;1993-11-13&quot; &quot;1993-12-14&quot; &quot;1994-04-10&quot; &quot;1994-05-18&quot;
+## [131] &quot;1995-06-07&quot; &quot;1995-09-23&quot; &quot;1995-10-28&quot; &quot;1995-12-02&quot; &quot;1996-10-12&quot;
+## [136] &quot;1996-11-16&quot; &quot;1996-11-16&quot; &quot;1997-03-15&quot; &quot;1997-05-10&quot; &quot;1997-06-09&quot;
+## [141] &quot;1997-07-29&quot; &quot;1997-09-27&quot; &quot;1997-09-27&quot; &quot;1997-10-25&quot; &quot;1997-12-28&quot;
+## [146] &quot;1998-03-29&quot; &quot;1998-05-02&quot; &quot;1998-05-28&quot; &quot;1998-05-28&quot; &quot;1998-05-28&quot;
+## [151] &quot;1998-06-27&quot; &quot;1998-06-27&quot; &quot;1998-08-22&quot; &quot;1998-09-20&quot; &quot;1998-09-20&quot;
+## [156] &quot;1998-10-24&quot; &quot;1998-12-22&quot; &quot;1999-01-16&quot; &quot;1999-03-14&quot; &quot;1999-04-17&quot;
+## [161] &quot;1999-05-15&quot; &quot;1999-09-11&quot; &quot;1999-10-09&quot; &quot;1999-11-06&quot; &quot;1999-12-05&quot;
+## [166] &quot;1999-12-05&quot; &quot;2000-01-08&quot; &quot;2000-01-08&quot; &quot;2000-01-08&quot; &quot;2000-02-05&quot;
+## [171] &quot;2000-02-05&quot; &quot;2000-02-05&quot; &quot;2000-03-04&quot; &quot;2000-06-03&quot; &quot;2000-11-25&quot;
+## [176] &quot;2000-11-25&quot; &quot;2000-12-22&quot; &quot;2001-01-21&quot; &quot;2001-01-21&quot; &quot;2001-03-24&quot;
+## [181] &quot;2001-04-21&quot; &quot;2001-05-26&quot; &quot;2001-06-25&quot; &quot;2001-08-25&quot; &quot;2001-10-13&quot;
+## [186] &quot;2001-11-17&quot; &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-01-12&quot;
+## [191] &quot;2002-02-09&quot; &quot;2002-03-13&quot; &quot;2002-03-13&quot; &quot;2002-04-17&quot; &quot;2002-04-17&quot;
+## [196] &quot;2002-05-15&quot; &quot;2002-06-15&quot; &quot;2002-10-05&quot; &quot;2002-11-09&quot; &quot;2002-12-07&quot;
+## [201] &quot;2002-12-29&quot; &quot;1977-07-16&quot; &quot;1977-09-13&quot; &quot;1977-09-13&quot; &quot;1977-10-16&quot;
+## [206] &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-10-16&quot; &quot;1977-11-12&quot;
+## [211] &quot;1977-11-12&quot; &quot;1977-11-12&quot; &quot;1977-11-12&quot; &quot;1977-12-10&quot; &quot;1977-12-10&quot;
+## [216] &quot;1977-12-10&quot; &quot;1977-12-10&quot; &quot;1977-12-10&quot; &quot;1978-01-08&quot; &quot;1978-01-08&quot;
+## [221] &quot;1978-01-08&quot; &quot;1978-01-08&quot; &quot;1978-01-08&quot; &quot;1978-01-08&quot; &quot;1978-01-08&quot;
+## [226] &quot;1978-01-08&quot; &quot;1978-01-08&quot; &quot;1978-02-18&quot; &quot;1978-02-18&quot; &quot;1978-02-18&quot;
+## [231] &quot;1978-02-18&quot; &quot;1978-03-11&quot; &quot;1978-03-11&quot; &quot;1978-04-08&quot; &quot;1978-04-08&quot;
+## [236] &quot;1978-04-08&quot; &quot;1978-04-08&quot; &quot;1978-05-06&quot; &quot;1978-05-06&quot; &quot;1978-05-06&quot;
+## [241] &quot;1978-05-19&quot; &quot;1978-05-19&quot; &quot;1978-05-19&quot; &quot;1978-06-09&quot; &quot;1978-07-07&quot;
+## [246] &quot;1978-07-07&quot; &quot;1978-08-05&quot; &quot;1978-08-05&quot; &quot;1978-09-04&quot; &quot;1978-09-04&quot;
+## [251] &quot;1978-09-04&quot; &quot;1978-10-08&quot; &quot;1978-10-08&quot; &quot;1978-11-05&quot; &quot;1978-11-05&quot;
+## [256] &quot;1978-12-03&quot; &quot;1978-12-03&quot; &quot;1978-12-03&quot; &quot;1978-12-03&quot; &quot;1978-12-03&quot;
+## [261] &quot;1979-01-29&quot; &quot;1979-01-29&quot; &quot;1979-02-25&quot; &quot;1979-02-25&quot; &quot;1979-03-31&quot;
+## [266] &quot;1979-03-31&quot; &quot;1979-03-31&quot; &quot;1979-04-29&quot; &quot;1979-05-30&quot; &quot;1979-05-30&quot;
+## [271] &quot;1979-05-30&quot; &quot;1979-08-23&quot; &quot;1979-09-23&quot; &quot;1979-09-23&quot; &quot;1979-10-25&quot;
+## [276] &quot;1979-10-25&quot; &quot;1979-11-17&quot; &quot;1979-11-17&quot; &quot;1980-01-16&quot; &quot;1980-01-16&quot;
+## [281] &quot;1980-01-16&quot; &quot;1980-01-16&quot; &quot;1980-01-16&quot; &quot;1980-02-25&quot; &quot;1980-02-25&quot;
+## [286] &quot;1980-02-25&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot;
+## [291] &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot;
+## [296] &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot; &quot;1980-03-09&quot;
+## [301] &quot;1980-03-09&quot; &quot;1980-03-22&quot; &quot;1980-03-22&quot; &quot;1980-04-18&quot; &quot;1980-04-18&quot;
+## [306] &quot;1980-04-18&quot; &quot;1980-05-18&quot; &quot;1980-05-18&quot; &quot;1980-06-02&quot; &quot;1980-06-02&quot;
+## [311] &quot;1980-06-23&quot; &quot;1980-06-23&quot; &quot;1980-07-22&quot; &quot;1980-08-14&quot; &quot;1980-09-08&quot;
+## [316] &quot;1980-10-12&quot; &quot;1980-11-09&quot; &quot;1980-11-09&quot; &quot;1980-11-09&quot; &quot;1980-12-15&quot;
+## [321] &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot; &quot;1980-12-15&quot;
+## [326] &quot;1981-01-12&quot; &quot;1981-01-12&quot; &quot;1981-01-12&quot; &quot;1981-01-12&quot; &quot;1981-02-01&quot;
+## [331] &quot;1981-02-01&quot; &quot;1981-02-01&quot; &quot;1981-02-01&quot; &quot;1981-02-01&quot; &quot;1981-02-01&quot;
+## [336] &quot;1981-03-09&quot; &quot;1981-03-09&quot; &quot;1981-03-09&quot; &quot;1981-03-09&quot; &quot;1981-03-09&quot;
+## [341] &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot;
+## [346] &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot;
+## [351] &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-05-04&quot; &quot;1981-05-04&quot; &quot;1981-06-04&quot;
+## [356] &quot;1981-06-04&quot; &quot;1981-07-08&quot; &quot;1981-07-30&quot; &quot;1981-07-30&quot; &quot;1981-10-26&quot;
+## [361] &quot;1981-11-23&quot; &quot;1981-11-23&quot; &quot;1982-01-01&quot; &quot;1982-01-25&quot; &quot;1982-02-24&quot;
+## [366] &quot;1982-06-28&quot; &quot;1982-07-25&quot; &quot;1982-08-16&quot; &quot;1982-08-16&quot; &quot;1982-08-16&quot;
+## [371] &quot;1982-09-18&quot; &quot;1982-09-18&quot; &quot;1982-09-18&quot; &quot;1982-09-18&quot; &quot;1982-09-18&quot;
+## [376] &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot;
+## [381] &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-10-24&quot; &quot;1982-11-22&quot; &quot;1982-11-22&quot;
+## [386] &quot;1983-01-13&quot; &quot;1983-01-13&quot; &quot;1983-02-27&quot; &quot;1983-02-27&quot; &quot;1983-03-15&quot;
+## [391] &quot;1983-03-15&quot; &quot;1983-04-17&quot; &quot;1983-04-17&quot; &quot;1983-04-17&quot; &quot;1983-05-15&quot;
+## [396] &quot;1983-05-15&quot; &quot;1983-05-15&quot; &quot;1983-07-17&quot; &quot;1983-08-16&quot; &quot;1983-09-11&quot;
+## [401] &quot;1983-09-11&quot; &quot;1983-09-11&quot; &quot;1983-10-16&quot; &quot;1983-11-13&quot; &quot;1983-11-13&quot;
+## [406] &quot;1983-12-09&quot; &quot;1984-02-05&quot; &quot;1984-03-13&quot; &quot;1984-03-13&quot; &quot;1984-04-10&quot;
+## [411] &quot;1984-05-13&quot; &quot;1984-05-13&quot; &quot;1984-05-13&quot; &quot;1984-05-13&quot; &quot;1984-05-28&quot;
+## [416] &quot;1984-08-01&quot; &quot;1984-09-30&quot; &quot;1984-10-21&quot; &quot;1984-12-31&quot; &quot;1984-12-31&quot;
+## [421] &quot;1985-01-20&quot; &quot;1985-01-20&quot; &quot;1985-01-20&quot; &quot;1985-01-20&quot; &quot;1985-01-20&quot;
+## [426] &quot;1985-02-17&quot; &quot;1985-02-17&quot; &quot;1985-02-17&quot; &quot;1985-02-17&quot; &quot;1985-02-17&quot;
+## [431] &quot;1985-02-17&quot; &quot;1985-02-17&quot; &quot;1985-03-17&quot; &quot;1985-03-17&quot; &quot;1985-03-17&quot;
+## [436] &quot;1985-04-21&quot; &quot;1985-04-21&quot; &quot;1985-04-21&quot; &quot;1985-04-21&quot; &quot;1985-04-21&quot;
+## [441] &quot;1985-04-21&quot; &quot;1985-04-21&quot; &quot;1985-05-24&quot; &quot;1985-05-24&quot; &quot;1985-05-24&quot;
+## [446] &quot;1985-05-24&quot; &quot;1985-05-24&quot; &quot;1985-06-16&quot; &quot;1985-06-16&quot; &quot;1985-06-16&quot;
+## [451] &quot;1985-06-16&quot; &quot;1985-07-24&quot; &quot;1985-07-24&quot; &quot;1985-07-24&quot; &quot;1985-07-24&quot;
+## [456] &quot;1985-07-24&quot; &quot;1985-07-24&quot; &quot;1985-08-20&quot; &quot;1985-08-20&quot; &quot;1985-08-20&quot;
+## [461] &quot;1985-09-22&quot; &quot;1985-09-22&quot; &quot;1985-09-22&quot; &quot;1985-10-13&quot; &quot;1985-10-13&quot;
+## [466] &quot;1985-10-13&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot;
+## [471] &quot;1985-11-17&quot; &quot;1985-12-08&quot; &quot;1985-12-08&quot; &quot;1985-12-08&quot; &quot;1985-12-08&quot;
+## [476] &quot;1985-12-08&quot; &quot;1985-12-08&quot; &quot;1985-12-08&quot; &quot;1986-03-09&quot; &quot;1986-03-09&quot;
+## [481] &quot;1986-03-09&quot; &quot;1986-03-09&quot; &quot;1986-03-09&quot; &quot;1986-03-09&quot; &quot;1986-04-13&quot;
+## [486] &quot;1986-04-13&quot; &quot;1986-04-13&quot; &quot;1986-04-13&quot; &quot;1986-04-13&quot; &quot;1986-05-11&quot;
+## [491] &quot;1986-05-11&quot; &quot;1986-05-11&quot; &quot;1986-05-11&quot; &quot;1986-06-05&quot; &quot;1986-06-05&quot;
+## [496] &quot;1986-06-05&quot; &quot;1986-06-05&quot; &quot;1986-07-04&quot; &quot;1986-07-04&quot; &quot;1986-07-04&quot;
+## [501] &quot;1986-08-10&quot; &quot;1986-08-10&quot; &quot;1986-08-10&quot; &quot;1986-08-10&quot; &quot;1986-09-07&quot;
+## [506] &quot;1986-09-07&quot; &quot;1986-10-05&quot; &quot;1986-11-16&quot; &quot;1986-11-16&quot; &quot;1986-11-16&quot;
+## [511] &quot;1986-12-15&quot; &quot;1986-12-15&quot; &quot;1986-12-15&quot; &quot;1987-02-01&quot; &quot;1987-02-01&quot;
+## [516] &quot;1987-03-02&quot; &quot;1987-03-02&quot; &quot;1987-03-02&quot; &quot;1987-03-02&quot; &quot;1987-03-02&quot;
+## [521] &quot;1987-04-06&quot; &quot;1987-04-06&quot; &quot;1987-04-06&quot; &quot;1987-04-26&quot; &quot;1987-05-28&quot;
+## [526] &quot;1987-05-28&quot; &quot;1987-07-01&quot; &quot;1987-07-01&quot; &quot;1987-07-26&quot; &quot;1987-07-26&quot;
+## [531] &quot;1987-07-26&quot; &quot;1987-08-26&quot; &quot;1987-09-27&quot; &quot;1987-10-25&quot; &quot;1987-11-22&quot;
+## [536] &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1988-01-24&quot; &quot;1988-01-24&quot; &quot;1988-01-24&quot;
+## [541] &quot;1988-02-22&quot; &quot;1988-02-22&quot; &quot;1988-02-22&quot; &quot;1988-02-22&quot; &quot;1988-02-22&quot;
+## [546] &quot;1988-03-21&quot; &quot;1988-03-21&quot; &quot;1988-03-21&quot; &quot;1988-04-19&quot; &quot;1988-05-15&quot;
+## [551] &quot;1988-05-15&quot; &quot;1988-06-12&quot; &quot;1988-07-15&quot; &quot;1988-08-09&quot; &quot;1988-08-10&quot;
+## [556] &quot;1988-08-10&quot; &quot;1988-09-12&quot; &quot;1988-10-09&quot; &quot;1989-07-04&quot; &quot;1989-07-30&quot;
+## [561] &quot;1990-03-30&quot; &quot;1990-03-30&quot; &quot;1990-03-30&quot; &quot;1990-10-16&quot; &quot;1990-10-16&quot;
+## [566] &quot;1990-11-10&quot; &quot;1990-12-15&quot; &quot;1991-01-11&quot; &quot;1991-01-11&quot; &quot;1991-05-13&quot;
+## [571] &quot;1991-06-13&quot; &quot;1991-07-12&quot; &quot;1991-12-07&quot; &quot;1991-12-07&quot; &quot;1992-01-08&quot;
+## [576] &quot;1992-03-07&quot; &quot;1992-04-04&quot; &quot;1993-05-22&quot; &quot;1993-10-15&quot; &quot;1993-11-13&quot;
+## [581] &quot;1993-11-13&quot; &quot;1993-12-14&quot; &quot;1993-12-14&quot; &quot;1993-12-14&quot; &quot;1994-02-01&quot;
+## [586] &quot;1994-02-20&quot; &quot;1994-03-11&quot; &quot;1994-03-11&quot; &quot;1994-03-11&quot; &quot;1994-04-10&quot;
+## [591] &quot;1994-04-10&quot; &quot;1994-05-18&quot; &quot;1994-05-18&quot; &quot;1994-08-17&quot; &quot;1994-09-06&quot;
+## [596] &quot;1994-10-12&quot; &quot;1994-11-01&quot; &quot;1994-12-04&quot; &quot;1995-01-11&quot; &quot;1995-02-04&quot;
+## [601] &quot;1995-02-04&quot; &quot;1995-03-04&quot; &quot;1995-03-04&quot; &quot;1995-04-01&quot; &quot;1995-04-29&quot;
+## [606] &quot;1995-06-27&quot; &quot;1995-06-27&quot; &quot;1995-07-20&quot; &quot;1995-08-26&quot; &quot;1995-08-26&quot;
+## [611] &quot;1995-09-23&quot; &quot;1995-10-28&quot; &quot;1995-10-28&quot; &quot;1995-10-28&quot; &quot;1995-10-28&quot;
+## [616] &quot;1995-10-28&quot; &quot;1995-12-02&quot; &quot;1995-12-02&quot; &quot;1995-12-02&quot; &quot;1995-12-02&quot;
+## [621] &quot;1995-12-02&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot;
+## [626] &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1995-12-21&quot; &quot;1996-01-27&quot; &quot;1996-01-27&quot;
+## [631] &quot;1996-01-27&quot; &quot;1996-01-27&quot; &quot;1996-01-27&quot; &quot;1996-01-27&quot; &quot;1996-02-24&quot;
+## [636] &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-02-24&quot;
+## [641] &quot;1996-03-23&quot; &quot;1996-03-23&quot; &quot;1996-03-23&quot; &quot;1996-03-23&quot; &quot;1996-03-23&quot;
+## [646] &quot;1996-04-14&quot; &quot;1996-04-14&quot; &quot;1996-04-14&quot; &quot;1996-04-14&quot; &quot;1996-05-23&quot;
+## [651] &quot;1996-05-23&quot; &quot;1996-05-23&quot; &quot;1996-05-23&quot; &quot;1996-05-23&quot; &quot;1996-05-23&quot;
+## [656] &quot;1996-05-23&quot; &quot;1996-06-13&quot; &quot;1996-06-13&quot; &quot;1996-07-20&quot; &quot;1996-08-14&quot;
+## [661] &quot;1996-08-14&quot; &quot;1996-09-21&quot; &quot;1996-09-21&quot; &quot;1996-09-21&quot; &quot;1996-09-21&quot;
+## [666] &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-10-12&quot; &quot;1996-11-16&quot;
+## [671] &quot;1996-11-16&quot; &quot;1996-11-16&quot; &quot;1996-12-18&quot; &quot;1996-12-18&quot; &quot;1997-02-08&quot;
+## [676] &quot;1997-02-08&quot; &quot;1997-02-08&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot;
+## [681] &quot;1997-03-15&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot;
+## [686] &quot;1997-03-15&quot; &quot;1997-04-12&quot; &quot;1997-04-12&quot; &quot;1997-05-10&quot; &quot;1997-06-09&quot;
+## [691] &quot;1997-07-09&quot; &quot;1997-07-29&quot; &quot;1997-09-27&quot; &quot;1997-10-25&quot; &quot;1997-11-22&quot;
+## [696] &quot;1997-11-22&quot; &quot;1997-12-28&quot; &quot;1998-01-31&quot; &quot;1998-01-31&quot; &quot;1998-03-01&quot;
+## [701] &quot;1998-03-01&quot; &quot;1998-03-29&quot; &quot;1998-03-29&quot; &quot;1998-03-29&quot; &quot;1998-03-29&quot;
+## [706] &quot;1998-03-29&quot; &quot;1998-05-02&quot; &quot;1998-05-02&quot; &quot;1998-05-02&quot; &quot;1998-05-02&quot;
+## [711] &quot;1998-05-28&quot; &quot;1998-05-28&quot; &quot;1998-05-28&quot; &quot;1998-05-28&quot; &quot;1998-06-27&quot;
+## [716] &quot;1998-06-27&quot; &quot;1998-06-27&quot; &quot;1998-07-18&quot; &quot;1998-07-18&quot; &quot;1998-08-22&quot;
+## [721] &quot;1998-09-20&quot; &quot;1998-09-20&quot; &quot;1998-09-20&quot; &quot;1998-10-24&quot; &quot;1998-10-24&quot;
+## [726] &quot;1998-11-21&quot; &quot;1998-11-21&quot; &quot;1998-12-22&quot; &quot;1998-12-22&quot; &quot;1999-01-16&quot;
+## [731] &quot;1999-01-16&quot; &quot;1999-02-20&quot; &quot;1999-03-14&quot; &quot;1999-03-14&quot; &quot;1999-04-17&quot;
+## [736] &quot;1999-04-17&quot; &quot;1999-05-15&quot; &quot;1999-06-12&quot; &quot;2000-08-25&quot; &quot;2000-09-30&quot;
+## [741] &quot;2000-11-25&quot; &quot;2000-12-22&quot; &quot;2001-01-21&quot; &quot;2001-03-03&quot; &quot;2001-03-24&quot;
+## [746] &quot;2001-03-24&quot; &quot;2001-03-24&quot; &quot;2001-03-24&quot; &quot;2001-04-21&quot; &quot;2001-04-21&quot;
+## [751] &quot;2001-08-25&quot; &quot;2001-08-25&quot; &quot;2001-09-22&quot; &quot;2001-09-22&quot; &quot;2001-09-22&quot;
+## [756] &quot;2001-09-22&quot; &quot;2001-10-13&quot; &quot;2001-10-13&quot; &quot;2001-10-13&quot; &quot;2001-11-17&quot;
+## [761] &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-01-12&quot; &quot;2002-01-12&quot;
+## [766] &quot;2002-02-09&quot; &quot;2002-03-13&quot; &quot;2002-03-13&quot; &quot;2002-03-13&quot; &quot;2002-04-17&quot;
+## [771] &quot;2002-04-17&quot; &quot;2002-05-15&quot; &quot;2002-06-15&quot; &quot;2002-07-13&quot; &quot;2002-09-08&quot;
+## [776] &quot;2002-11-09&quot; &quot;2002-11-09&quot; &quot;2002-12-07&quot; &quot;2002-12-29&quot; &quot;1977-08-19&quot;
+## [781] &quot;1977-12-10&quot; &quot;1978-01-08&quot; &quot;1978-02-18&quot; &quot;1978-03-11&quot; &quot;1978-03-11&quot;
+## [786] &quot;1978-05-06&quot; &quot;1978-06-09&quot; &quot;1978-10-08&quot; &quot;1979-09-23&quot; &quot;1979-11-17&quot;
+## [791] &quot;1980-03-09&quot; &quot;1980-04-18&quot; &quot;1980-04-18&quot; &quot;1981-04-06&quot; &quot;1982-08-16&quot;
+## [796] &quot;1982-09-18&quot; &quot;1982-11-22&quot; &quot;1983-04-17&quot; &quot;1993-08-19&quot; &quot;1996-05-23&quot;
+## [801] &quot;1977-07-16&quot; &quot;1977-09-13&quot; &quot;1977-10-16&quot; &quot;1978-01-08&quot; &quot;1978-02-18&quot;
+## [806] &quot;1978-03-11&quot; &quot;1978-03-11&quot; &quot;1978-09-04&quot; &quot;1978-09-04&quot; &quot;1978-11-05&quot;
+## [811] &quot;1979-01-29&quot; &quot;1980-02-25&quot; &quot;1980-02-25&quot; &quot;1981-11-23&quot; &quot;1981-11-23&quot;
+## [816] &quot;1981-11-23&quot; &quot;1982-01-01&quot; &quot;1982-01-01&quot; &quot;1982-01-01&quot; &quot;1982-01-01&quot;
+## [821] &quot;1982-01-25&quot; &quot;1982-01-25&quot; &quot;1982-01-25&quot; &quot;1982-02-24&quot; &quot;1982-02-24&quot;
+## [826] &quot;1982-02-24&quot; &quot;1982-02-24&quot; &quot;1982-03-29&quot; &quot;1982-03-29&quot; &quot;1982-07-25&quot;
+## [831] &quot;1982-08-16&quot; &quot;1982-11-22&quot; &quot;1983-01-13&quot; &quot;1983-02-27&quot; &quot;1983-02-27&quot;
+## [836] &quot;1983-03-15&quot; &quot;1983-04-17&quot; &quot;1984-09-29&quot; &quot;1984-12-31&quot; &quot;1984-12-31&quot;
+## [841] &quot;1985-02-17&quot; &quot;1985-02-17&quot; &quot;1985-11-17&quot; &quot;1985-11-17&quot; &quot;1985-12-08&quot;
+## [846] &quot;1986-03-09&quot; &quot;1986-10-05&quot; &quot;1987-02-01&quot; &quot;1987-02-01&quot; &quot;1987-03-02&quot;
+## [851] &quot;1987-04-06&quot; &quot;1987-04-26&quot; &quot;1987-07-01&quot; &quot;1987-07-26&quot; &quot;1987-07-26&quot;
+## [856] &quot;1987-08-26&quot; &quot;1987-08-26&quot; &quot;1987-09-27&quot; &quot;1987-10-25&quot; &quot;1987-11-22&quot;
+## [861] &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1987-11-22&quot; &quot;1988-01-24&quot; &quot;1988-01-24&quot;
+## [866] &quot;1988-01-24&quot; &quot;1988-01-24&quot; &quot;1988-02-22&quot; &quot;1988-03-21&quot; &quot;1988-04-19&quot;
+## [871] &quot;1988-04-19&quot; &quot;1988-05-15&quot; &quot;1988-06-12&quot; &quot;1988-06-12&quot; &quot;1988-08-10&quot;
+## [876] &quot;1988-08-10&quot; &quot;1988-08-10&quot; &quot;1988-11-06&quot; &quot;1988-11-06&quot; &quot;1988-11-06&quot;
+## [881] &quot;1988-11-06&quot; &quot;1988-12-14&quot; &quot;1989-01-11&quot; &quot;1989-03-13&quot; &quot;1989-03-13&quot;
+## [886] &quot;1989-04-01&quot; &quot;1989-10-07&quot; &quot;1989-11-05&quot; &quot;1989-11-05&quot; &quot;1989-12-05&quot;
+## [891] &quot;1989-12-05&quot; &quot;1990-01-07&quot; &quot;1990-01-30&quot; &quot;1991-09-09&quot; &quot;1991-12-07&quot;
+## [896] &quot;1991-12-07&quot; &quot;1991-12-07&quot; &quot;1992-01-08&quot; &quot;1992-01-08&quot; &quot;1992-02-06&quot;
+## [901] &quot;1992-02-06&quot; &quot;1992-02-06&quot; &quot;1992-02-06&quot; &quot;1992-03-07&quot; &quot;1992-03-07&quot;
+## [906] &quot;1992-04-04&quot; &quot;1992-09-26&quot; &quot;1993-01-24&quot; &quot;1996-01-27&quot; &quot;1996-01-27&quot;
+## [911] &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-02-24&quot; &quot;1996-03-23&quot;
+## [916] &quot;1996-03-23&quot; &quot;1996-03-23&quot; &quot;1996-03-23&quot; &quot;1996-04-14&quot; &quot;1996-04-14&quot;
+## [921] &quot;1996-04-14&quot; &quot;1996-05-23&quot; &quot;1996-05-23&quot; &quot;1996-11-16&quot; &quot;1996-11-16&quot;
+## [926] &quot;1997-02-08&quot; &quot;1997-03-15&quot; &quot;1997-03-15&quot; &quot;1997-04-12&quot; &quot;1997-06-09&quot;
+## [931] &quot;1997-11-22&quot; &quot;1999-01-16&quot; &quot;2000-11-25&quot; &quot;2001-10-13&quot; &quot;2001-11-17&quot;
+## [936] &quot;2001-11-17&quot; &quot;2001-12-15&quot; &quot;2001-12-15&quot; &quot;2002-01-12&quot; &quot;2002-02-09&quot;
+## [941] &quot;2002-05-15&quot; &quot;2002-05-15&quot; &quot;2002-06-15&quot; &quot;2002-07-13&quot; &quot;2002-12-07&quot;
+## [946] &quot;2002-12-07&quot; &quot;1977-09-13&quot; &quot;1977-10-16&quot; &quot;1978-02-18&quot; &quot;1978-03-11&quot;
+## [951] &quot;1978-04-08&quot; &quot;1978-04-08&quot; &quot;1978-05-06&quot; &quot;1978-05-19&quot; &quot;1978-05-19&quot;
+## [956] &quot;1978-06-09&quot; &quot;1978-08-05&quot; &quot;1978-09-04&quot; &quot;1978-10-08&quot; &quot;1979-03-31&quot;
+## [961] &quot;1979-07-25&quot; &quot;1980-05-24&quot; &quot;1980-05-24&quot; &quot;1980-05-24&quot; &quot;1980-06-02&quot;
+## [966] &quot;1980-06-23&quot; &quot;1980-10-12&quot; &quot;1980-11-09&quot; &quot;1980-11-09&quot; &quot;1980-12-15&quot;
+## [971] &quot;1981-01-12&quot; &quot;1981-02-01&quot; &quot;1981-02-01&quot; &quot;1981-03-09&quot; &quot;1981-03-09&quot;
+## [976] &quot;1981-03-09&quot; &quot;1981-03-09&quot; &quot;1981-03-09&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot;
+## [981] &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot;
+## [986] &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-04-06&quot; &quot;1981-05-04&quot; &quot;1981-05-04&quot;
+## [991] &quot;1981-06-04&quot; &quot;1981-06-04&quot; &quot;1981-07-08&quot; &quot;1981-10-01&quot; &quot;1981-10-26&quot;
+## [996] &quot;1981-11-23&quot; &quot;1981-11-23&quot; &quot;1982-01-01&quot; &quot;1982-01-01&quot;
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 33787 entries ]</code></pre>
+<p>The resulting <code>Date</code> vector can be added to <code>surveys</code> as a new column called <code>date</code>:</p>
+<pre class="r"><code>surveys$date &lt;- ymd(paste(surveys$year, surveys$month, surveys$day, sep = &quot;-&quot;))</code></pre>
+<pre><code>## Warning: 129 failed to parse.</code></pre>
+<pre class="r"><code>str(surveys) # notice the new column, with &#39;date&#39; as the class</code></pre>
+<pre><code>## &#39;data.frame&#39;:    34786 obs. of  14 variables:
+##  $ record_id      : int  1 72 224 266 349 363 435 506 588 661 ...
+##  $ month          : int  7 8 9 10 11 11 12 1 2 3 ...
+##  $ day            : int  16 19 13 16 12 12 10 8 18 11 ...
+##  $ year           : int  1977 1977 1977 1977 1977 1977 1977 1978 1978 1978 ...
+##  $ plot_id        : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ species_id     : Factor w/ 48 levels &quot;AB&quot;,&quot;AH&quot;,&quot;AS&quot;,..: 16 16 16 16 16 16 16 16 16 16 ...
+##  $ sex            : Factor w/ 3 levels &quot;&quot;,&quot;F&quot;,&quot;M&quot;: 3 3 1 1 1 1 1 1 3 1 ...
+##  $ hindfoot_length: int  32 31 NA NA NA NA NA NA NA NA ...
+##  $ weight         : int  NA NA NA NA NA NA NA NA 218 NA ...
+##  $ genus          : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 13 13 13 13 13 13 13 13 13 13 ...
+##  $ species        : Factor w/ 40 levels &quot;albigula&quot;,&quot;audubonii&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ taxa           : Factor w/ 4 levels &quot;Bird&quot;,&quot;Rabbit&quot;,..: 4 4 4 4 4 4 4 4 4 4 ...
+##  $ plot_type      : Factor w/ 5 levels &quot;Control&quot;,&quot;Long-term Krat Exclosure&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ date           : Date, format: &quot;1977-07-16&quot; &quot;1977-08-19&quot; ...</code></pre>
+<p>Let’s make sure everything worked correctly. One way to inspect the new column is to use <code>summary()</code>:</p>
+<pre class="r"><code>summary(surveys$date)</code></pre>
+<pre><code>##         Min.      1st Qu.       Median         Mean      3rd Qu. 
+## &quot;1977-07-16&quot; &quot;1984-03-12&quot; &quot;1990-07-22&quot; &quot;1990-12-15&quot; &quot;1997-07-29&quot; 
+##         Max.         NA&#39;s 
+## &quot;2002-12-31&quot;        &quot;129&quot;</code></pre>
+<p>Something went wrong: some dates have missing values. Let’s investigate where they are coming from.</p>
+<p>We can use the functions we saw previously to deal with missing data to identify the rows in our data frame that are failing. If we combine them with what we learned about subsetting data frames earlier, we can extract the columns “year,”month“,”day&quot; from the records that have <code>NA</code> in our new column <code>date</code>. We will also use <code>head()</code> so we don’t clutter the output:</p>
+<pre class="r"><code>is_missing_date &lt;- is.na(surveys$date)
+date_columns &lt;- c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;)
+missing_dates &lt;- surveys[is_missing_date,  date_columns]
+
+head(missing_dates)</code></pre>
+<pre><code>##      year month day
+## 3144 2000     9  31
+## 3817 2000     4  31
+## 3818 2000     4  31
+## 3819 2000     4  31
+## 3820 2000     4  31
+## 3856 2000     9  31</code></pre>
+<p>Why did these dates fail to parse? If you had to use these data for your analyses, how would you deal with this situation?</p>
+<p>This lesson is adapted from the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="https://datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">Starting With Data materials</a>.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
