@@ -11,6 +11,7 @@ There are many resources online and in print. This is by no means a comprehensiv
 
 ### Bonus Lessons
 
+- [Longer Spreadsheets Lesson](lesson_spreadsheets.html)
 - [Joining Data](lesson_joins.html)
 - [Pipelines: data import %>% dplyr %>% ggplot2](lesson_import_dplyr_ggplot2.html)
 - [Pipelines: Download CO2 & Ice Core Data & Visualize](lesson_ice_core_CO2_web_data.html)
