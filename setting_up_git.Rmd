@@ -62,7 +62,7 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 You should now have a repository on github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
 
-  - [`https://github.com/gge-ucd/w01-fix-readme-ryanpeek`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
+  - [`https://github.com/gge-ucd/first_lastname`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
   - **To _`clone`_ your repository** (*copy to your computer*):
       - We're going to stick with using **`HTTPS`:** for now. Look for the big green "*Clone or download*" button. Make sure you select the "**Use HTTPS**" so the top of the box says: **Clone with HTTPS**. 
       - Copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
