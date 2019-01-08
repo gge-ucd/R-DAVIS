@@ -12,7 +12,7 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 ### Week 1
 
 * What we covered (<a href="https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0" target="_blank">livecode</a>)
-* <a href="" target="_blank">Screencast</a>
+* <a href="https://www.youtube.com/watch?v=HI9u-Io-Uks" target="_blank">Screencast</a>
 * <a href="https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 
 ### Week 2
