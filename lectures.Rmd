@@ -25,9 +25,10 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 3
 
-* What we covered (<a href="" target="_blank">livecode</a>)
-* <a href="" target="_blank">Screencast</a>
-* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/m4h4l12unl33hpp/Week_3_LiveCode.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=Oozf91TYxLE" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1JO-6igCdWCv4AtxfSFsDvozXa2K8-BSdZt8Fhq5uVqE/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://www.google.com/url?q=https://goo.gl/forms/SCowXQt6m5oyruiU2&sa=D&source=hangouts&ust=1548279445794000&usg=AFQjCNEUaWtlsFE9rZq0zKdb52RJJQxtrg" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
 
