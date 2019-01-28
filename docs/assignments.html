@@ -23,9 +23,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -102,6 +101,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -116,7 +118,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -136,6 +137,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,13 +195,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -176,7 +274,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -349,6 +446,30 @@ $(document).ready(function () {
 </div>
 <div id="week4" class="section level3">
 <h3><small>Week4</small></h3>
+<div id="week-4-assignment-instructions" class="section level4">
+<h4><strong>Week 4 Assignment Instructions</strong></h4>
+<p>Since we just touched on <code>dplyr</code>, this will only cover what we talked about in class. The objective of the assignment is for you to write a new, clean script, commit and push it to github, and then someone else will download and run that script on their computer, and file an issue in your repository with some comments about the script.</p>
+</div>
+<div id="part-i-filterselect" class="section level4">
+<h4><strong>Part I: Filter/Select</strong></h4>
+<p><strong>Create a new script</strong> - Create a new script named: <code>w3_assignment_ABC.R</code> (but with your initials instead of ABC). Save it in the <strong><code>scripts</code></strong> folder. - Use clear commenting about what your script does throughout. Include at least one section break (hint: <code>Ctrl/Cmd + Shift + R</code>)</p>
+<p><strong>Read Data in and Filter and Select</strong> - Read <code>portal_data_joined.csv</code> into R using the <code>read_csv</code> command from the <code>tidyverse</code> package and create a dataframe named <code>surveys</code>. - Using <code>dplyr</code>, <strong>filter</strong> data to <code>hindfoot_length  &gt; 10</code>, and months between May and October. - Then use a <code>%&gt;%</code> and <strong>select</strong> the following columns: <code>weight</code>, <code>hindfoot_length</code>, <code>month</code>, <code>species_id</code> - Check and see how many <code>NA</code>’s are in the <code>weight</code> column (<em>hint, it’s a function we’ve already covered, nothing new</em>) - Finally, using the <code>table()</code> function, identify which <code>species_id</code> has the greatest number of observations, and which has the least.</p>
+<p><strong>Make a Histogram Plot!</strong> - Using the <code>hist()</code> function and the <code>$</code> way of subsetting to a specific column in a dataframe, make a histogram of the <code>weight</code> column. It should look something like this (minus a few of the labels that I modified): <img src="https://user-images.githubusercontent.com/5864880/35349101-eb35877e-00ee-11e8-9e8f-ffcc3f47c42d.png" alt="histo_weight" /></p>
+<p><strong>Commit &amp; Push the R script to Github</strong> - Check your repository on Github and make sure your script is there.</p>
+</div>
+<div id="part-ii-code-review" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w3_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. <strong>Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</strong></li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><p><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</p>
+<p>Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a> <span class="citation">@marthawohlfeil</span>, <span class="citation">@mcmaurer</span> <span class="citation">@ryanpeek</span>, etc.</p></li>
+</ul>
+<p>Thanks!</p>
+</div>
 </div>
 <div id="week5" class="section level3">
 <h3><small>Week5</small></h3>
