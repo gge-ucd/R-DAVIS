@@ -446,30 +446,27 @@ $(document).ready(function () {
 </div>
 <div id="week4" class="section level3">
 <h3><small>Week4</small></h3>
-<div id="week-4-assignment-instructions" class="section level4">
-<h4><strong>Week 4 Assignment Instructions</strong></h4>
-<p>Since we just touched on <code>dplyr</code>, this will only cover what we talked about in class. The objective of the assignment is for you to write a new, clean script, commit and push it to github, and then someone else will download and run that script on their computer, and file an issue in your repository with some comments about the script.</p>
-</div>
-<div id="part-i-filterselect" class="section level4">
-<h4><strong>Part I: Filter/Select</strong></h4>
-<p><strong>Create a new script</strong> - Create a new script named: <code>w3_assignment_ABC.R</code> (but with your initials instead of ABC). Save it in the <strong><code>scripts</code></strong> folder. - Use clear commenting about what your script does throughout. Include at least one section break (hint: <code>Ctrl/Cmd + Shift + R</code>)</p>
-<p><strong>Read Data in and Filter and Select</strong> - Read <code>portal_data_joined.csv</code> into R using the <code>read_csv</code> command from the <code>tidyverse</code> package and create a dataframe named <code>surveys</code>. - Using <code>dplyr</code>, <strong>filter</strong> data to <code>hindfoot_length  &gt; 10</code>, and months between May and October. - Then use a <code>%&gt;%</code> and <strong>select</strong> the following columns: <code>weight</code>, <code>hindfoot_length</code>, <code>month</code>, <code>species_id</code> - Check and see how many <code>NA</code>’s are in the <code>weight</code> column (<em>hint, it’s a function we’ve already covered, nothing new</em>) - Finally, using the <code>table()</code> function, identify which <code>species_id</code> has the greatest number of observations, and which has the least.</p>
-<p><strong>Make a Histogram Plot!</strong> - Using the <code>hist()</code> function and the <code>$</code> way of subsetting to a specific column in a dataframe, make a histogram of the <code>weight</code> column. It should look something like this (minus a few of the labels that I modified): <img src="https://user-images.githubusercontent.com/5864880/35349101-eb35877e-00ee-11e8-9e8f-ffcc3f47c42d.png" alt="histo_weight" /></p>
-<p><strong>Commit &amp; Push the R script to Github</strong> - Check your repository on Github and make sure your script is there.</p>
-</div>
-<div id="part-ii-code-review" class="section level4">
-<h4><strong>Part II: Code Review</strong></h4>
-<ul>
-<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w3_assignment_ABC.R</code></li>
-<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
-<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. <strong>Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</strong></li>
-<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
-<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
-<li><p><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</p>
-<p>Any questions? comments? Issues? Remember you can always ping us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a> <span class="citation">@marthawohlfeil</span>, <span class="citation">@mcmaurer</span> <span class="citation">@ryanpeek</span>, etc.</p></li>
-</ul>
+<p><strong>Week 4 Assignment</strong></p>
+<p>For you assignment this week, we will be practicing subsetting the same data frame we were working with in class, <code>surveys</code>.</p>
+<p>The objective of the assignment is for you to write a new, clean script, commit and push it to github, and then someone else will download and run that script on their computer, and file an issue in your repository with some comments about the script.</p>
+<p><strong>Part I: Coding Practice</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new script in your <code>r-davis-in-class-yourname</code> project named <code>week_4_assignment_ABC.R</code> but with your initials in place of ABC. Save it to your <code>scripts</code> folder.</p></li>
+<li><p>Read <code>portal_data_joined.csv</code> into R using the <code>read.csv</code> command and create a dataframe named <code>surveys</code> (just like we did in class).</p></li>
+<li><p>Subset to just the first column and columns five through 8. Include only the first 400 rows. Save this as a dataframe called <code>surveys_subset</code>.</p></li>
+<li><p><em>CHALLENGE:</em> Select all rows that have a <code>hindfoot_length</code> greater than 32, save these in a new data.frame named <code>surveys_long_feet</code>, then plot its <code>hindfoot_length</code> values as a histogram using the <code>hist</code> function.</p></li>
+<li><p>Change the column <code>hindfoot_lengths</code> into a character vector.</p></li>
+<li><p>Plot the <code>hindfoot_lengths</code> in a histogram (if this doesn’t work, just leave it, and think about it during Part II of the assignment, <em>wink wink</em>).</p></li>
+<li><p>Commit &amp; Push the R script to GitHub - check your repository on GitHub and make sure your script is there.</p></li>
+</ol>
+<p><strong>Part II: Code Review</strong></p>
+<p>Find your code partner’s repository on GitHub, click on the scripts folder, and find the script named <code>w3_assignment_ABC.R</code></p>
+<p>Click on the script, then find the RAW button on the right hand side of the screen. Click on RAW.</p>
+<p>You should see a plain text version of the script. Right click anywhere on the page, and select “Save As”, save the script to your scripts folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</p>
+<p>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (we hope!).</p>
+<p>Try to run the script line by line. Where does it break? Can you fix it? File an Issue in your code partner’s repository. Write up a few sentences describing a few good things about the script (what worked! Was it clearly commented?) and what didn’t (where did it break for you, and why? How might it be fixed?). Remember to be constructive and positive…we’re all learning!</p>
+<p>Any questions? comments? Issues? Remember you can always tag us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a>: <span class="citation">@marthawohlfeil</span>, <span class="citation">@mcmaurer</span> <span class="citation">@ryanpeek</span>, etc.</p>
 <p>Thanks!</p>
-</div>
 </div>
 <div id="week5" class="section level3">
 <h3><small>Week5</small></h3>
