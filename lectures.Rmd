@@ -40,7 +40,7 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 5
 
-* What we covered (<a href="" target="_blank">livecode</a>)
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/knklng647ndc3sb/Week_5_LiveCode.R?dl=0" target="_blank">livecode</a>)
 * <a href="" target="_blank">Screencast</a>
 * <a href="" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
