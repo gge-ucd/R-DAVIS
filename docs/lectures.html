@@ -23,9 +23,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -102,6 +101,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -116,7 +118,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -136,6 +137,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,13 +195,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -176,7 +274,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -343,81 +440,88 @@ $(document).ready(function () {
 <div id="week-1" class="section level3">
 <h3>Week 1</h3>
 <ul>
-<li>What we covered (<a href="">livecode</a>)</li>
-<li><a href=""><strong>Screencast</strong></a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0" target="_blank">livecode</a>)</li>
+<li><a href="https://www.youtube.com/watch?v=HI9u-Io-Uks" target="_blank">Screencast</a></li>
+<li><a href="https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
+<li><a href="https://goo.gl/forms/Xfxps4ZVM5KtWe8w1" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-2" class="section level3">
 <h3>Week 2</h3>
 <ul>
-<li>What we covered (<a href="">livecode</a>)</li>
-<li><a href=""><strong>Screencast</strong></a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="https://www.dl.dropboxusercontent.com/s/kt9x1sgob8l52fk/Week_2_Live_Code.R?dl=0" target="_blank">livecode</a>)</li>
+<li><a href="https://www.youtube.com/watch?v=WWdBUtJwe88" target="_blank">Screencast</a></li>
+<li><a href="https://docs.google.com/document/d/1scl8iYC-3uedinC7c43fHzczjI83NC9JKg6aXmq_1_8/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
+<li><a href="https://www.google.com/url?q=https://goo.gl/forms/Zh3r7vxgbJfDore92&sa=D&source=hangouts&ust=1547674139690000&usg=AFQjCNGZh-XOMYvbC3NnF7IdngphttlzqA" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-3" class="section level3">
 <h3>Week 3</h3>
 <ul>
-<li>What we covered (<a href="">livecode</a>)</li>
-<li><a href=""><strong>Screencast</strong></a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="https://www.dl.dropboxusercontent.com/s/m4h4l12unl33hpp/Week_3_LiveCode.R?dl=0" target="_blank">livecode</a>)</li>
+<li><a href="https://www.youtube.com/watch?v=Oozf91TYxLE" target="_blank">Screencast</a></li>
+<li><a href="https://docs.google.com/document/d/1JO-6igCdWCv4AtxfSFsDvozXa2K8-BSdZt8Fhq5uVqE/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
+<li><a href="https://www.google.com/url?q=https://goo.gl/forms/SCowXQt6m5oyruiU2&sa=D&source=hangouts&ust=1548279445794000&usg=AFQjCNEUaWtlsFE9rZq0zKdb52RJJQxtrg" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><strong>hey folks</strong>, we had some technical difficulties and it looks like our screens weren’t shared in the screencast. You can follow along with the lessons, we covered the whole “Spreadsheets” lesson and the whole “Vectors and Data Types” lesson. You can watch <a href="https://www.youtube.com/watch?v=O2X3d7sA1vU" target="_blank">last year’s Week 2 Lecture</a> on Spreadsheets from about 1:10:00 to 1:33:00 and <a href="https://www.youtube.com/watch?v=ypVTFzAxrRw" target="_blank">last year’s Week 3 Lecture</a> on Vectors from about 5:30 to 52:00. The lessons are slightly different from what we covered, but they’re quite close, and Mike Koontz and Taylor Reiter have such lovely voices.</li>
 </ul>
 </div>
 <div id="week-4" class="section level3">
 <h3>Week 4</h3>
 <ul>
-<li>What we covered (link to <a href="">livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="https://www.dl.dropboxusercontent.com/s/pzeuwxk1jfbe2sr/Week_4_LiveCode.R?dl=0" target="_blank">livecode</a>)</li>
+<li><a href="https://www.youtube.com/watch?v=lcslhP6u-ko" target="_blank">Screencast</a></li>
+<li><a href="https://docs.google.com/document/d/1ipoyiHEd2IglQvOcULxsj5fNl_3mKu8xtD7GW4bgeIQ/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
+<li><a href="https://docs.google.com/forms/d/1EsIKsEzyXyMYd3qO6pbr82pw5fnb-O1RmD2V-fDsZmc/edit" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-5" class="section level3">
 <h3>Week 5</h3>
 <ul>
-<li>What we covered (link to <a href="">livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 <div id="week-6" class="section level3">
 <h3>Week 6</h3>
 <ul>
-<li>What we covered (link to <a href="">livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 <div id="week-7" class="section level3">
 <h3>Week 7</h3>
 <ul>
 <li>What we covered (link to <a href="">livecode R</a>, <a href="">Rmd</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 <div id="week-8" class="section level3">
 <h3>Week 8</h3>
 <ul>
 <li>What we covered (link to <a href="">Rmd livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 <div id="week-9" class="section level3">
 <h3>Week 9</h3>
 <ul>
-<li>What we covered (link to <a href="">livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 <div id="week-10" class="section level3">
 <h3>Week 10</h3>
 <ul>
-<li>What we covered (link to <a href="">livecode</a>)</li>
-<li><a href="">Screencast</a></li>
-<li><a href=""><strong>GoogleDoc</strong></a></li>
+<li>What we covered (<a href="" target="_blank">livecode</a>)</li>
+<li><a href="" target="_blank">Screencast</a></li>
+<li><a href="" target="_blank">Google Doc Collaborative Notes</a></li>
 </ul>
 </div>
 </div>

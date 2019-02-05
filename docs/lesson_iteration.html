@@ -596,7 +596,7 @@ sapply(mtcars_na, mean)</code></pre>
 <div id="map" class="section level3">
 <h3><code>map</code></h3>
 <p>When using the <code>map</code> family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.</p>
-<pre class="r"><code>mtcars %&gt;% map(mean) # gives a list</code></pre>
+<pre class="r"><code>mtcars %&gt;% purrr::map(mean) # gives a list</code></pre>
 <pre><code>## $mpg
 ## [1] 20.09062
 ## 
@@ -629,12 +629,12 @@ sapply(mtcars_na, mean)</code></pre>
 ## 
 ## $carb
 ## [1] 2.8125</code></pre>
-<pre class="r"><code>mtcars %&gt;% map_dbl(mean) # gives a numeric vector</code></pre>
+<pre class="r"><code>mtcars %&gt;% purrr::map_dbl(mean) # gives a numeric vector</code></pre>
 <pre><code>##        mpg        cyl       disp         hp       drat         wt 
 ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
 ##       qsec         vs         am       gear       carb 
 ##  17.848750   0.437500   0.406250   3.687500   2.812500</code></pre>
-<pre class="r"><code>mtcars %&gt;% map_chr(mean) # gives a character vector</code></pre>
+<pre class="r"><code>mtcars %&gt;% purrr::map_chr(mean) # gives a character vector</code></pre>
 <pre><code>##          mpg          cyl         disp           hp         drat 
 ##  &quot;20.090625&quot;   &quot;6.187500&quot; &quot;230.721875&quot; &quot;146.687500&quot;   &quot;3.596563&quot; 
 ##           wt         qsec           vs           am         gear 
@@ -657,7 +657,7 @@ sapply(mtcars_na, mean)</code></pre>
 <p>Here we’ll take a look at a cool way to use <code>map</code>: applying a linear model across different sets of data. We’ll take the mtcars dataset, use <code>split</code> to split it into a list, with one data frame for each value of <code>cyl</code>, and then map the same linear model to each entry in the list.</p>
 <pre class="r"><code>mtcars %&gt;%
   split(.$cyl) %&gt;%
-  map(~ lm(mpg ~ wt, data = .x))</code></pre>
+  purrr::map(~ lm(mpg ~ wt, data = .x))</code></pre>
 <pre><code>## $`4`
 ## 
 ## Call:
@@ -692,7 +692,7 @@ sapply(mtcars_na, mean)</code></pre>
 <p>What if we want to do the same thing, but extract the useful information from the model object? We can use another tidyverse package, <code>broom</code>, and its function <code>tidy</code> to pull out the information from the <code>lm</code> model object. We’ll repeat what we did last time, but then we’ll use <code>map_dfr</code> to map across each model object, tidy it up, and include an <code>id</code> column called cyl, so we know which cylinder value the linear model terms correspond to. The “dfr” portion of <code>map_dfr</code> will make sure the output is a dataframe, bound together by rows. <code>map_dfc</code> would bind columns together into a dataframe output.</p>
 <pre class="r"><code>mtcars %&gt;%
   split(.$cyl) %&gt;%
-  map(~ lm(mpg ~ wt, data = .x)) %&gt;%
+  purrr::map(~ lm(mpg ~ wt, data = .x)) %&gt;%
   map_dfr(broom::tidy, .id = &quot;cyl&quot;)</code></pre>
 <pre><code>## # A tibble: 6 x 6
 ##   cyl   term        estimate std.error statistic    p.value
@@ -711,7 +711,7 @@ sapply(mtcars_na, mean)</code></pre>
   select(cyl, mpg, wt) %&gt;% 
   split(.$cyl) %&gt;% 
   walk(plot)</code></pre>
-<p><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-2.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+<p><img src="lesson_iteration_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-2-2.png" width="672" /><img src="lesson_iteration_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 </div>
 </div>
 <div id="conditional-statements" class="section level2">

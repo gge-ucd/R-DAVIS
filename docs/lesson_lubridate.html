@@ -550,10 +550,10 @@ six.weeks</code></pre>
 <p>Making some POSXct objects:</p>
 <pre class="r"><code>tm1 &lt;- as.POSIXct(&quot;2016-07-24 23:55:26&quot;)
 tm1</code></pre>
-<pre><code>## [1] &quot;2016-07-24 23:55:26 CDT&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-24 23:55:26 PDT&quot;</code></pre>
 <pre class="r"><code>tm2 &lt;- as.POSIXct(&quot;25072016 08:32:07&quot;, format = &quot;%d%m%Y %H:%M:%S&quot;)
 tm2</code></pre>
-<pre><code>## [1] &quot;2016-07-25 08:32:07 CDT&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-25 08:32:07 PDT&quot;</code></pre>
 <pre class="r"><code># specify the time zone:
 tm3 &lt;- as.POSIXct(&quot;2010-12-01 11:42:03&quot;, tz = &quot;GMT&quot;)
 tm3</code></pre>

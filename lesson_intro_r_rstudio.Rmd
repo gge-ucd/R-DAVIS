@@ -129,7 +129,7 @@ You are working toward selecting a whole script and running it.
 
 The simplest thing you can do with R is do arithmetic:
 
-```{r}
+```{r chunk1}
 1 + 100
 ```
 
@@ -162,14 +162,14 @@ to lowest precedence:
  * Add: `+`
  * Subtract: `-`
 
-```{r}
+```{r chunk2}
 3 + 5 * 2
 ```
 
 Use parentheses to group to force the order of evaluation, and/or to make
 code easier to read.
 
-```{r}
+```{r chunk3}
 (3 + 5) * 2
 ```
 
@@ -179,7 +179,7 @@ Speaking of being easy to read, whitespace is ignored by R. Use it consistently
 to make code readable. For example, putting a single space on either side of an 
 operator makes code easy to read. 
 
-```{r, eval=FALSE}
+```{r chunk4, eval=FALSE}
 (3 + (5 * (2 ^ 2))) # hard to read
 3 + 5 * 2 ^ 2       # easier to read, once you know rules
 3+5*2^2             # very hard to read
@@ -199,7 +199,7 @@ time and headaches in the long run.
 
 Really small or large numbers get a scientific notation:
 
-```{r}
+```{r chunk5}
 2/10000
 ```
 
@@ -208,7 +208,7 @@ is shorthand for `2 * 10^(-4)`.
 
 You can write numbers in scientific notation too:
 
-```{r}
+```{r chunk6}
 1e9  # One billion
 ```
 
@@ -221,19 +221,19 @@ Anything we type inside those parentheses is an "argument" to that function.
 Here we call the `sin` function and provide it the argument 3.14, or 
 approximately $\pi$.
 
-```{r}
+```{r chunk7}
 sin(3.14)  # trigonometry functions
 ```
 
 We can take a logarithm:
 
-```{r}
+```{r chunk8}
 log(3)  # natural logarithm
 ```
 
 Or exponentiate:
 
-```{r}
+```{r chunk9}
 exp(0.5) # e^(1/2)
 ```
 
@@ -245,7 +245,7 @@ interpretted from the inside-out: In the following line, R first takes `e^1`
 (which is `e`), and then takes the square-root (that's what the `sqrt` function 
 does) of the result.
 
-```{r}
+```{r chunk10}
 sqrt(exp(1))
 ```
 
@@ -258,19 +258,19 @@ other ways soon.
 We can do logical comparison in R. This will be important later, for example, 
 when we want to filter a dataset based on a logical condition.
 
-```{r}
+```{r chunk11}
 1 == 1  # equality (note two equals signs, read as "is equal to")
 ```
 
-```{r}
+```{r chunk12}
 1 != 2  # not-equal (read, "is not equal to")
 ```
 
-```{r}
+```{r chunk13}
 1 < 2  # less than
 ```
 
-```{r}
+```{r chunk14}
 1 >= -9 # greater than or equal to
 ```
 
@@ -284,7 +284,7 @@ anything when we run this next line. Instead, it is stored for later in a
 **variable**, `x`. `x` now contains the **value** `0.25`. Read this as 
 "Assign 1/4 to x."
 
-```{r}
+```{r chunk15}
 x <- 1/4
 ```
 
@@ -292,11 +292,11 @@ Look for the `Environment` tab in one of the panes of RStudio, and you will see
 that `x` and its value have appeared. Our variable `x` can be used in place of a 
 number in any calculation that expects a number:
 
-```{r}
+```{r chunk16}
 x
 ```
 
-```{r}
+```{r chunk17}
 log(x)
 ```
 
@@ -305,7 +305,7 @@ prints the answer to the console.
 
 Variables can be reassigned:
 
-```{r}
+```{r chunk18}
 x <- 99
 ```
 
@@ -313,7 +313,7 @@ x <- 99
 
 Assignment values can contain the variable being assigned to:
 
-```{r}
+```{r chunk19}
 x <- x + 1 
 ```
 
@@ -360,7 +360,7 @@ Use descriptive variable names, as they make your code easier to understand. It
 will save time because you'll remember what each variable is: It's easier to 
 remember what `domesticPopulation` is than `dp` or `x`. A silly example:
 
-```{r}
+```{r chunk20}
 theNumberNine <- 9
 ```
 

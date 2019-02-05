@@ -517,21 +517,28 @@ head(mtcars)</code></pre>
 ## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
 ## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                   wt_scaled
+## Mazda RX4         0.2830478
+## Mazda RX4 Wag     0.3482485
+## Datsun 710        0.2063411
+## Hornet 4 Drive    0.4351828
+## Hornet Sportabout 0.4927129
+## Valiant           0.4978266</code></pre>
 <pre class="r"><code>dim(mtcars) # how many rows, cols</code></pre>
-<pre><code>## [1] 32 11</code></pre>
+<pre><code>## [1] 32 12</code></pre>
 <pre class="r"><code># assign NULL to a given column to remove it
 mtcars[1] &lt;- NULL #this gets rid of the mpg column completely
 head(mtcars)</code></pre>
-<pre><code>##                   cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4           6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag       6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710          4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive      6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant             6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<pre><code>##                   cyl disp  hp drat    wt  qsec vs am gear carb wt_scaled
+## Mazda RX4           6  160 110 3.90 2.620 16.46  0  1    4    4 0.2830478
+## Mazda RX4 Wag       6  160 110 3.90 2.875 17.02  0  1    4    4 0.3482485
+## Datsun 710          4  108  93 3.85 2.320 18.61  1  1    4    1 0.2063411
+## Hornet 4 Drive      6  258 110 3.08 3.215 19.44  1  0    3    1 0.4351828
+## Hornet Sportabout   8  360 175 3.15 3.440 17.02  0  0    3    2 0.4927129
+## Valiant             6  225 105 2.76 3.460 20.22  1  0    3    1 0.4978266</code></pre>
 <pre class="r"><code>dim(mtcars) # how many rows, cols</code></pre>
-<pre><code>## [1] 32 10</code></pre>
+<pre><code>## [1] 32 11</code></pre>
 <pre class="r"><code>data(mtcars) # restore full mtcars dataset
 dim(mtcars) # how many rows, cols</code></pre>
 <pre><code>## [1] 32 11</code></pre>

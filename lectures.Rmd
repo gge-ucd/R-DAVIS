@@ -11,64 +11,78 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 1
 
-* What we covered ([livecode](https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0))
-* [**Screencast**]()
-* [**GoogleDoc**](https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing)
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/2vuarabxik00y57/Week_1_LiveCode.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=HI9u-Io-Uks" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1BRTOps1dZ_2VFRIPRwV2GoNHr3coI9XCXYXttJQdc4E/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/Xfxps4ZVM5KtWe8w1" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 2
 
-* What we covered ([livecode]())
-* [**Screencast**]()
-* [**GoogleDoc**]()
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/kt9x1sgob8l52fk/Week_2_Live_Code.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=WWdBUtJwe88" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1scl8iYC-3uedinC7c43fHzczjI83NC9JKg6aXmq_1_8/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://www.google.com/url?q=https://goo.gl/forms/Zh3r7vxgbJfDore92&sa=D&source=hangouts&ust=1547674139690000&usg=AFQjCNGZh-XOMYvbC3NnF7IdngphttlzqA" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 3
 
-* What we covered ([livecode]())
-* [**Screencast**]()
-* [**GoogleDoc**]()
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/m4h4l12unl33hpp/Week_3_LiveCode.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=Oozf91TYxLE" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1JO-6igCdWCv4AtxfSFsDvozXa2K8-BSdZt8Fhq5uVqE/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://www.google.com/url?q=https://goo.gl/forms/SCowXQt6m5oyruiU2&sa=D&source=hangouts&ust=1548279445794000&usg=AFQjCNEUaWtlsFE9rZq0zKdb52RJJQxtrg" target="_blank">Post-Class Survey (complete after class)</a>
+* **hey folks**, we had some technical difficulties and it looks like our screens weren't shared in the screencast. You can follow along with the lessons, we covered the whole "Spreadsheets" lesson and the whole "Vectors and Data Types" lesson. You can watch <a href="https://www.youtube.com/watch?v=O2X3d7sA1vU" target="_blank">last year's Week 2 Lecture</a> on Spreadsheets from about 1:10:00 to 1:33:00 and <a href="https://www.youtube.com/watch?v=ypVTFzAxrRw" target="_blank">last year's Week 3 Lecture</a> on Vectors from about 5:30 to 52:00. The lessons are slightly different from what we covered, but they're quite close, and Mike Koontz and Taylor Reiter have such lovely voices.
 
 ### Week 4
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/pzeuwxk1jfbe2sr/Week_4_LiveCode.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=lcslhP6u-ko" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1ipoyiHEd2IglQvOcULxsj5fNl_3mKu8xtD7GW4bgeIQ/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/1EsIKsEzyXyMYd3qO6pbr82pw5fnb-O1RmD2V-fDsZmc/edit" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
+
 
 ### Week 6
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 7
 
 * What we covered (link to [livecode R](), [Rmd]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 8
 
 * What we covered (link to [Rmd livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 9
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 10
 
-* What we covered (link to [livecode]())
-* [Screencast]()
-* [**GoogleDoc**]()
+* What we covered (<a href="" target="_blank">livecode</a>)
+* <a href="" target="_blank">Screencast</a>
+* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://goo.gl/forms/JC9Pm66lMWWn8fHm1" target="_blank">Post-Class Survey (complete after class)</a>
 
