@@ -470,6 +470,28 @@ $(document).ready(function () {
 </div>
 <div id="week5" class="section level3">
 <h3><small>Week5</small></h3>
+<p><strong>WEEK 5 ASSIGNMENT</strong></p>
+<p>Alright folks, we’ve ventured into the <code>tidyverse</code>! We’re going to test out your <code>dplyr</code> skills, pipe (<code>%&gt;%</code>) some data, and make a <code>tibble</code> or two.</p>
+<p><strong>Part I: Enter the Tidyverse</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>Create a new script in your <code>r-davis-in-class-yourname</code> project, and name it <code>w_5_assignment_ABC.R</code>, with your initials in place of <code>ABC</code>. Save it in your <code>scripts</code> folder.</p></li>
+<li><p>Read <code>portal_data_joined.csv</code> into R using the <code>tidyverse</code>’s command called <code>read_csv()</code>, and assign it to an object named <code>surveys</code>.</p></li>
+<li><p>Using <code>tidyverse</code> functions and pipes, subset to keep all the rows where weight is between 30 and 60, then print the first few (maybe… 6?) rows of the resulting tibble.</p></li>
+<li><p>Make a tibble that shows the <code>max</code> (hint hint) weight for each species+sex combination, and name it <code>biggest_critters</code>. Use the <code>arrange</code> function to look at the biggest and smallest critters in the tibble (use <code>?</code>, tab-complete, or Google if you need help with <code>arrange</code>).</p></li>
+<li><p>Try to figure out where the <code>NA</code> weights are concentrated in the data- is there a particular species, taxa, plot, or whatever, where there are lots of <code>NA</code> values? There isn’t necessarily a right or wrong answer here, but manipulate <code>surveys</code> a few different ways to explore this. Maybe use <code>tally</code> and <code>arrange</code> here.</p></li>
+<li><p>Take surveys, remove the rows where weight is <code>NA</code> and add a column that contains the average weight of each species+sex combination. Then get rid of all the columns except for species, sex, weight, and your new average weight column. Save this tibble as <code>surveys_avg_weight</code>. The resulting tibble should have 32,283 rows.</p></li>
+<li><p><em>Challenge</em>: Take <code>surveys_avg_weight</code> and add a new column called <code>above_average</code> that contains logical values stating whether or not a row’s weight is above average for its species+sex combination (recall the new column we made for this tibble).</p></li>
+<li><p><em>Extra Challenge</em>: Figure out what the <code>scale</code> function does, and add a column to <code>surveys</code> that has the scaled weight, by species. Then sort by this column and look at the relative biggest and smallest individuals. Do any of them stand out as particularly big or small?</p></li>
+</ol>
+<p><strong>Part II: Code Review</strong></p>
+<p>Find your code partner’s repository on GitHub, click on the scripts folder, and find the script named <code>w5_assignment_ABC.R</code></p>
+<p>Click on the script, then find the RAW button on the right hand side of the screen. Click on RAW.</p>
+<p>You should see a plain text version of the script. Right click anywhere on the page, and select “Save As”, save the script to your scripts folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</p>
+<p>If you can’t save your partner’s file in this way, you can copy the text from the RAW view, then create a new <code>.R</code> file in your RProject, and paste the text there.</p>
+<p>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (we hope!).</p>
+<p>Try to run your partner’s script, stepping through each question, and compare your methods and answers to theirs. Did they use the same steps in the same order? Do their answers look like yours? If not, try to figure out why!</p>
+<p>Any questions? comments? Issues? Remember you can always tag us using individual names when you file an issue in the <a href="https://github.com/gge-ucd/Discussion/issues">Discussion repository</a>: <span class="citation">@marthawohlfeil</span>, <span class="citation">@mcmaurer</span> <span class="citation">@ryanpeek</span>, etc.</p>
+<p>Thanks!</p>
 </div>
 <div id="week6" class="section level3">
 <h3><small>Week6</small></h3>
