@@ -495,6 +495,68 @@ $(document).ready(function () {
 </div>
 <div id="week6" class="section level3">
 <h3><small>Week6</small></h3>
+<p>This week’s assignment builds on the <code>ggplot</code> skills that we learned during Week 06. Just like last week, there are two parts: the exercsise and a code review. Please pick a partner for the code review as you have been doing in past weeks. If you do not have a partner, please email Martha at <a href="mailto:mwohlfeil@ucdavis.edu" class="email">mwohlfeil@ucdavis.edu</a>.</p>
+<div id="part-1" class="section level4">
+<h4><strong>Part 1</strong></h4>
+<p>This exercise asks you to <strong>modify existing code to complete a new task.</strong></p>
+<p>We will work in the same repository that you’ve been working in for the last couple of weeks: r-davis-in-class-YourName.</p>
+<p>For this homework, we are going to be working with a new dataset called <code>gapminder</code>. Download the data using the code below. Remember, this code is looking for a folder called <code>data</code> to put the .csv in, so make sure you have a folder named <code>data</code>, or modify the code to the correct folder name.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.1.0.9000     ✔ purrr   0.2.5     
+## ✔ tibble  2.0.1          ✔ dplyr   0.7.8     
+## ✔ tidyr   0.8.2          ✔ stringr 1.4.0     
+## ✔ readr   1.2.1          ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   country = col_character(),
+##   year = col_double(),
+##   pop = col_double(),
+##   continent = col_character(),
+##   lifeExp = col_double(),
+##   gdpPercap = col_double()
+## )</code></pre>
+</div>
+<div id="a." class="section level4">
+<h4><em>1A</em>.</h4>
+<p>Modify the following code to make a figure that shows how life expectancy has changed over time:</p>
+<pre class="r"><code>ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) + 
+geom_point()</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="b." class="section level4">
+<h4><em>1B</em>.</h4>
+<p>Look at the following code. What do you think the <code>scale_x_log10()</code> line is doing? What do you think the <code>geom_smooth()</code> line is doing?</p>
+<p><strong>Hint:</strong> There’s no cost to tinkering! Try some code out and see what happens with or without particular elements.</p>
+<pre class="r"><code>ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent), size = .25) + 
+    scale_x_log10() +
+    geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
+    theme_bw()</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="c.-challenge" class="section level4">
+<h4><em>1C</em>. (Challenge!)</h4>
+<p>Modify the above code to size the points in proportion to the population of the county. <strong>Hint:</strong> Are you translating data to a visual feature of the plot?</p>
+</div>
+<div id="save-this-code-in-your-scripts-folder-and-name-is-w6_assignment_abc.r-with-your-initials." class="section level4">
+<h4>Save this code in your scripts folder and name is <code>w6_assignment_ABC.R</code> with your initials.</h4>
+</div>
+<div id="part-ii-code-review" class="section level4">
+<h4><strong>Part II: Code Review</strong></h4>
+<ul>
+<li>Find your code partner’s repository on github, click on the scripts folder, and find the script named: <code>w6_assignment_ABC.R</code></li>
+<li>Click on the script, then find the <code>RAW</code> button on the right hand side of the screen. Click on <code>RAW</code>.</li>
+<li>You should see a plain text version of the script. Right click anywhere on the page, and select “<strong>Save As</strong>”, save the script to your <code>scripts</code> folder in your repository. Make sure to change the file extension to <code>.R</code> (instead of <code>.txt</code>).</li>
+<li>Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (<em>we hope!</em>).</li>
+<li>Try to run the script line by line. Where does it break? Can you fix it?</li>
+<li><strong>File an Issue</strong> in your code partner’s repository. Write up a few sentences describing a few good things about the script (<em>what worked! Was it clearly commented?</em>) and what didn’t (<em>where did it break for you, and why? How might it be fixed?</em>). Remember to be constructive and positive…we’re all learning!</li>
+</ul>
+</div>
 </div>
 <div id="week7" class="section level3">
 <h3><small>Week7</small></h3>
