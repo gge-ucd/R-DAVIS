@@ -26,9 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -105,6 +104,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -119,7 +121,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -139,6 +140,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -160,13 +198,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -179,7 +277,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -571,8 +668,10 @@ x</code></pre>
 <div id="set-operations" class="section level1">
 <h1>Set Operations</h1>
 <pre class="r"><code>df1 &lt;- data_frame(x = LETTERS[1:2], 
-                  y = c(1L, 1L))
-df2 &lt;- data_frame(x = LETTERS[1:2], 
+                  y = c(1L, 1L))</code></pre>
+<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.</code></pre>
+<pre class="r"><code>df2 &lt;- data_frame(x = LETTERS[1:2], 
                   y = 1:2)
 
 df1</code></pre>
@@ -598,9 +697,9 @@ dplyr::union(df1, df2)</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   x         y
 ##   &lt;chr&gt; &lt;int&gt;
-## 1 B         2
+## 1 A         1
 ## 2 B         1
-## 3 A         1</code></pre>
+## 3 B         2</code></pre>
 <pre class="r"><code>#What&#39;s unique to df1?
 dplyr::setdiff(df1, df2)</code></pre>
 <pre><code>## # A tibble: 1 x 2
@@ -629,74 +728,66 @@ continents</code></pre>
 <p>We can join the two data.frames using any of the <code>dplyr</code> functions. We will pass the results to <code>str</code> to avoid printing more than we can read, and to get more high-level information on the resulting data.frames.</p>
 <pre class="r"><code>left_join(gapminder, continents) </code></pre>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
-<pre><code>## Warning: Column `continent` joining factor and character vector, coercing
-## into character vector</code></pre>
 <pre><code>## # A tibble: 1,704 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Afghan… Asia       1952    28.8 8.43e6      779.   6.57e 9    9.82
-##  2 Afghan… Asia       1957    30.3 9.24e6      821.   7.59e 9    9.88
-##  3 Afghan… Asia       1962    32.0 1.03e7      853.   8.76e 9    9.94
-##  4 Afghan… Asia       1967    34.0 1.15e7      836.   9.65e 9    9.98
-##  5 Afghan… Asia       1972    36.1 1.31e7      740.   9.68e 9    9.99
-##  6 Afghan… Asia       1977    38.4 1.49e7      786.   1.17e10   10.1 
-##  7 Afghan… Asia       1982    39.9 1.29e7      978.   1.26e10   10.1 
-##  8 Afghan… Asia       1987    40.8 1.39e7      852.   1.18e10   10.1 
-##  9 Afghan… Asia       1992    41.7 1.63e7      649.   1.06e10   10.0 
-## 10 Afghan… Asia       1997    41.8 2.22e7      635.   1.41e10   10.1 
-## # ... with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
+##    country  year    pop continent lifeExp gdpPercap total_gdp log_gdp
+##    &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Afghan…  1952 8.43e6 Asia         28.8      779.   6.57e 9    9.82
+##  2 Afghan…  1957 9.24e6 Asia         30.3      821.   7.59e 9    9.88
+##  3 Afghan…  1962 1.03e7 Asia         32.0      853.   8.76e 9    9.94
+##  4 Afghan…  1967 1.15e7 Asia         34.0      836.   9.65e 9    9.98
+##  5 Afghan…  1972 1.31e7 Asia         36.1      740.   9.68e 9    9.99
+##  6 Afghan…  1977 1.49e7 Asia         38.4      786.   1.17e10   10.1 
+##  7 Afghan…  1982 1.29e7 Asia         39.9      978.   1.26e10   10.1 
+##  8 Afghan…  1987 1.39e7 Asia         40.8      852.   1.18e10   10.1 
+##  9 Afghan…  1992 1.63e7 Asia         41.7      649.   1.06e10   10.0 
+## 10 Afghan…  1997 2.22e7 Asia         41.8      635.   1.41e10   10.1 
+## # … with 1,694 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <pre class="r"><code>right_join(gapminder, continents)</code></pre>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
-<pre><code>## Warning: Column `continent` joining factor and character vector, coercing
-## into character vector</code></pre>
 <pre><code>## # A tibble: 1,705 x 11
-##    country continent  year lifeExp    pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;  &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1 9.28e6     2449.   2.27e10    10.4
-##  2 Algeria Africa     1957    45.7 1.03e7     3014.   3.10e10    10.5
-##  3 Algeria Africa     1962    48.3 1.10e7     2551.   2.81e10    10.4
-##  4 Algeria Africa     1967    51.4 1.28e7     3247.   4.14e10    10.6
-##  5 Algeria Africa     1972    54.5 1.48e7     4183.   6.17e10    10.8
-##  6 Algeria Africa     1977    58.0 1.72e7     4910.   8.42e10    10.9
-##  7 Algeria Africa     1982    61.4 2.00e7     5745.   1.15e11    11.1
-##  8 Algeria Africa     1987    65.8 2.33e7     5681.   1.32e11    11.1
-##  9 Algeria Africa     1992    67.7 2.63e7     5023.   1.32e11    11.1
-## 10 Algeria Africa     1997    69.2 2.91e7     4797.   1.39e11    11.1
-## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
+##    country  year    pop continent lifeExp gdpPercap total_gdp log_gdp
+##    &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Algeria  1952 9.28e6 Africa       43.1     2449.   2.27e10    10.4
+##  2 Algeria  1957 1.03e7 Africa       45.7     3014.   3.10e10    10.5
+##  3 Algeria  1962 1.10e7 Africa       48.3     2551.   2.81e10    10.4
+##  4 Algeria  1967 1.28e7 Africa       51.4     3247.   4.14e10    10.6
+##  5 Algeria  1972 1.48e7 Africa       54.5     4183.   6.17e10    10.8
+##  6 Algeria  1977 1.72e7 Africa       58.0     4910.   8.42e10    10.9
+##  7 Algeria  1982 2.00e7 Africa       61.4     5745.   1.15e11    11.1
+##  8 Algeria  1987 2.33e7 Africa       65.8     5681.   1.32e11    11.1
+##  9 Algeria  1992 2.63e7 Africa       67.7     5023.   1.32e11    11.1
+## 10 Algeria  1997 2.91e7 Africa       69.2     4797.   1.39e11    11.1
+## # … with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   population &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
 <pre class="r"><code>right_join(gapminder, continents) %&gt;% 
   filter(continent == &quot;Antarctica&quot;)</code></pre>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
-<pre><code>## Warning: Column `continent` joining factor and character vector, coercing
-## into character vector</code></pre>
 <pre><code>## # A tibble: 1 x 11
-##   country continent  year lifeExp   pop gdpPercap total_gdp log_gdp
-##   &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 &lt;NA&gt;    Antarcti…    NA      NA    NA        NA        NA      NA
-## # ... with 3 more variables: area_km2 &lt;dbl&gt;, population &lt;dbl&gt;,
+##   country  year   pop continent lifeExp gdpPercap total_gdp log_gdp
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 &lt;NA&gt;       NA    NA Antarcti…      NA        NA        NA      NA
+## # … with 3 more variables: area_km2 &lt;dbl&gt;, population &lt;dbl&gt;,
 ## #   percent_total_pop &lt;dbl&gt;</code></pre>
 <p>There’s another problem in this data.frame – it has two population measures, one by continent and one by country and it’s not clear which is which! Let’s rename a couple of columns.</p>
 <pre class="r"><code>right_join(gapminder, continents) %&gt;% 
   rename(country_pop = pop, continent_pop = population)</code></pre>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
-<pre><code>## Warning: Column `continent` joining factor and character vector, coercing
-## into character vector</code></pre>
 <pre><code>## # A tibble: 1,705 x 11
-##    country continent  year lifeExp country_pop gdpPercap total_gdp log_gdp
-##    &lt;fct&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;       &lt;int&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-##  1 Algeria Africa     1952    43.1     9279525     2449.   2.27e10    10.4
-##  2 Algeria Africa     1957    45.7    10270856     3014.   3.10e10    10.5
-##  3 Algeria Africa     1962    48.3    11000948     2551.   2.81e10    10.4
-##  4 Algeria Africa     1967    51.4    12760499     3247.   4.14e10    10.6
-##  5 Algeria Africa     1972    54.5    14760787     4183.   6.17e10    10.8
-##  6 Algeria Africa     1977    58.0    17152804     4910.   8.42e10    10.9
-##  7 Algeria Africa     1982    61.4    20033753     5745.   1.15e11    11.1
-##  8 Algeria Africa     1987    65.8    23254956     5681.   1.32e11    11.1
-##  9 Algeria Africa     1992    67.7    26298373     5023.   1.32e11    11.1
-## 10 Algeria Africa     1997    69.2    29072015     4797.   1.39e11    11.1
-## # ... with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
+##    country  year country_pop continent lifeExp gdpPercap total_gdp log_gdp
+##    &lt;chr&gt;   &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Algeria  1952     9279525 Africa       43.1     2449.   2.27e10    10.4
+##  2 Algeria  1957    10270856 Africa       45.7     3014.   3.10e10    10.5
+##  3 Algeria  1962    11000948 Africa       48.3     2551.   2.81e10    10.4
+##  4 Algeria  1967    12760499 Africa       51.4     3247.   4.14e10    10.6
+##  5 Algeria  1972    14760787 Africa       54.5     4183.   6.17e10    10.8
+##  6 Algeria  1977    17152804 Africa       58.0     4910.   8.42e10    10.9
+##  7 Algeria  1982    20033753 Africa       61.4     5745.   1.15e11    11.1
+##  8 Algeria  1987    23254956 Africa       65.8     5681.   1.32e11    11.1
+##  9 Algeria  1992    26298373 Africa       67.7     5023.   1.32e11    11.1
+## 10 Algeria  1997    29072015 Africa       69.2     4797.   1.39e11    11.1
+## # … with 1,695 more rows, and 3 more variables: area_km2 &lt;dbl&gt;,
 ## #   continent_pop &lt;dbl&gt;, percent_total_pop &lt;dbl&gt;</code></pre>
 <blockquote>
 <h4 id="challenge-putting-the-pieces-together">Challenge – Putting the pieces together</h4>
@@ -729,8 +820,6 @@ gapminder %&gt;%
 # And label them
     geom_text(aes(label = continent), nudge_y = 5e3)  </code></pre>
 <pre><code>## Joining, by = &quot;continent&quot;</code></pre>
-<pre><code>## Warning: Column `continent` joining factor and character vector, coercing
-## into character vector</code></pre>
 <p><img src="lesson_joins_files/figure-html/Putting%20the%20pieces%20together%20-%20solution-1.png" width="672" /></p>
 </blockquote>
 </div>
@@ -760,7 +849,7 @@ gapminder %&gt;%
 ##  8       8 Control                  
 ##  9       9 Spectab exclosure        
 ## 10      10 Rodent Exclosure         
-## # ... with 14 more rows</code></pre>
+## # … with 14 more rows</code></pre>
 <p>The <code>plot_id</code> column also features in the <code>surveys</code> table:</p>
 <pre class="r"><code>surveys &lt;- read_csv(&quot;data/surveys.csv&quot;)</code></pre>
 <pre><code>## Parsed with column specification:
@@ -789,7 +878,7 @@ gapminder %&gt;%
 ##  8         8     7    16  1977       1 DM         M                  37
 ##  9         9     7    16  1977       1 DM         F                  34
 ## 10        10     7    16  1977       6 PF         F                  20
-## # ... with 35,539 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
+## # … with 35,539 more rows, and 1 more variable: weight &lt;dbl&gt;</code></pre>
 <p>Because <code>plot_id</code> is listed in both tables, we can use it to look up matching records, and join the two tables.</p>
 <div class="figure">
 <img src="img/joins.svg" alt="diagram illustrating inner and left joins" />
@@ -813,7 +902,7 @@ gapminder %&gt;%
 ##  8       1 Spectab …       239     9    13  1977 DS         M    
 ##  9       1 Spectab …       263    10    16  1977 DM         M    
 ## 10       1 Spectab …       270    10    16  1977 DM         F    
-## # ... with 1,985 more rows, and 2 more variables: hindfoot_length &lt;dbl&gt;,
+## # … with 1,985 more rows, and 2 more variables: hindfoot_length &lt;dbl&gt;,
 ## #   weight &lt;dbl&gt;</code></pre>
 <blockquote>
 <h3 id="challenge">Challenge</h3>
@@ -832,22 +921,22 @@ gapminder %&gt;%
 <pre class="r"><code>glimpse(surveys)</code></pre>
 <pre><code>## Observations: 35,549
 ## Variables: 9
-## $ record_id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,...
-## $ month           &lt;dbl&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7...
-## $ day             &lt;dbl&gt; 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16...
-## $ year            &lt;dbl&gt; 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977...
-## $ plot_id         &lt;dbl&gt; 2, 3, 2, 7, 3, 1, 2, 1, 1, 6, 5, 7, 3, 8, 6, 4...
-## $ species_id      &lt;chr&gt; &quot;NL&quot;, &quot;NL&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;PF&quot;, &quot;PE&quot;, &quot;DM&quot;...
-## $ sex             &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;...
-## $ hindfoot_length &lt;dbl&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38...
-## $ weight          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA...</code></pre>
+## $ record_id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 1…
+## $ month           &lt;dbl&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, …
+## $ day             &lt;dbl&gt; 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, …
+## $ year            &lt;dbl&gt; 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, …
+## $ plot_id         &lt;dbl&gt; 2, 3, 2, 7, 3, 1, 2, 1, 1, 6, 5, 7, 3, 8, 6, 4, …
+## $ species_id      &lt;chr&gt; &quot;NL&quot;, &quot;NL&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;PF&quot;, &quot;PE&quot;, &quot;DM&quot;, …
+## $ sex             &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;…
+## $ hindfoot_length &lt;dbl&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38, …
+## $ weight          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, …</code></pre>
 <pre class="r"><code>glimpse(species)</code></pre>
 <pre><code>## Observations: 54
 ## Variables: 4
-## $ species_id &lt;chr&gt; &quot;AB&quot;, &quot;AH&quot;, &quot;AS&quot;, &quot;BA&quot;, &quot;CB&quot;, &quot;CM&quot;, &quot;CQ&quot;, &quot;CS&quot;, &quot;CT...
-## $ genus      &lt;chr&gt; &quot;Amphispiza&quot;, &quot;Ammospermophilus&quot;, &quot;Ammodramus&quot;, &quot;Ba...
-## $ species    &lt;chr&gt; &quot;bilineata&quot;, &quot;harrisi&quot;, &quot;savannarum&quot;, &quot;taylori&quot;, &quot;b...
-## $ taxa       &lt;chr&gt; &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Bird&quot;,...</code></pre>
+## $ species_id &lt;chr&gt; &quot;AB&quot;, &quot;AH&quot;, &quot;AS&quot;, &quot;BA&quot;, &quot;CB&quot;, &quot;CM&quot;, &quot;CQ&quot;, &quot;CS&quot;, &quot;CT&quot;,…
+## $ genus      &lt;chr&gt; &quot;Amphispiza&quot;, &quot;Ammospermophilus&quot;, &quot;Ammodramus&quot;, &quot;Baio…
+## $ species    &lt;chr&gt; &quot;bilineata&quot;, &quot;harrisi&quot;, &quot;savannarum&quot;, &quot;taylori&quot;, &quot;bru…
+## $ taxa       &lt;chr&gt; &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Bird&quot;, &quot;…</code></pre>
 <pre class="r"><code>## with dplyr syntax
 
 surveys %&gt;% 
@@ -870,7 +959,7 @@ surveys %&gt;%
 ##  8       1 Rodent  1984    49
 ##  9       1 Rodent  1985   102
 ## 10       1 Rodent  1986    57
-## # ... with 609 more rows</code></pre>
+## # … with 609 more rows</code></pre>
 <pre class="r"><code># Alternatively, filter to rodents *before* summarizing by plot and year
 surveys %&gt;% 
   left_join(species) %&gt;%
@@ -879,7 +968,7 @@ surveys %&gt;%
   summarize(n = n())</code></pre>
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
 <pre><code>## # A tibble: 619 x 3
-## # Groups:   plot_id [?]
+## # Groups:   plot_id [24]
 ##    plot_id  year     n
 ##      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
 ##  1       1  1977    22
@@ -892,7 +981,7 @@ surveys %&gt;%
 ##  8       1  1984    49
 ##  9       1  1985   102
 ## 10       1  1986    57
-## # ... with 609 more rows</code></pre>
+## # … with 609 more rows</code></pre>
 </blockquote>
 <blockquote>
 <h3 id="challenge-1">Challenge</h3>
@@ -910,7 +999,7 @@ surveys %&gt;%
 <pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
 <pre class="r"><code>genus_counts</code></pre>
 <pre><code>## # A tibble: 59 x 4
-## # Groups:   plot_type, genus [?]
+## # Groups:   plot_type, genus [59]
 ##    plot_type genus            taxa       n
 ##    &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;  &lt;int&gt;
 ##  1 Control   Ammospermophilus Rodent   125
@@ -923,7 +1012,7 @@ surveys %&gt;%
 ##  8 Control   Peromyscus       Rodent   464
 ##  9 Control   Reithrodontomys  Rodent   415
 ## 10 Control   Rodent           Rodent     5
-## # ... with 49 more rows</code></pre>
+## # … with 49 more rows</code></pre>
 </blockquote>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/12-joins.html">Multi-Table Joins materials</a>, Brandon Hurr’s dplyr II: Joins and Set Ops <a href="https://github.com/bhive01/2016-02-D-RUG-dplyr-II-talk">presentation</a> to the Davis R UsersGroup on Februrary 2, 2016, and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and Databases materials</a>.</p>

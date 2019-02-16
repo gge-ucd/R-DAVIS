@@ -102,6 +102,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -116,7 +119,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -136,6 +138,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -157,13 +196,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -176,7 +275,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -438,7 +536,7 @@ div.tocify {
 <div id="package-dependencies" class="section level2">
 <h2>Package Dependencies</h2>
 <p>Because much of the varied content found in the lessons, there are a number of package dependencies to be aware of. This list may not be complete, but before building the site locally, these packages should be installed:</p>
-<p><code>c(&quot;tidyverse&quot;, &quot;ggplot2&quot;, &quot;tidyr&quot;, &quot;readr&quot;, &quot;dplyr&quot;, &quot;purrr&quot;, &quot;emojifont&quot;, &quot;viridis&quot;, &quot;mapdata&quot;, &quot;maps&quot;, &quot;mapview&quot;, &quot;measurements&quot;, &quot;gapminder&quot;, &quot;broom&quot;, &quot;gutenbergr&quot;, &quot;tidytext&quot;, &quot;patchwork&quot;, &quot;cowplot&quot;, &quot;hexbin&quot;, &quot;geosphere&quot;, &quot;ggmap&quot;, &quot;ggthemes&quot;, &quot;magrittr&quot;, &quot;leaflet&quot;, &quot;plotly&quot;, &quot;knitr&quot;, &quot;rio&quot;)</code></p>
+<p><code>c("tidyverse", "ggplot2", "tidyr", "readr", "dplyr", "purrr", "emojifont", "viridis", "mapdata", "maps", "mapview", "measurements", "gapminder", "broom", "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap", "ggthemes", "magrittr", "leaflet", "plotly", "knitr", "rio")</code></p>
 <p>To get an updated list of packages for the website, navigate to the repo on the command line, then try one of these commands:</p>
 <pre><code>grep -horE &#39;library\(.*?\)&#39; . | sed &#39;s/library//g; s/[()]//g; s/&quot;//g&#39; | sed &quot;s/\&#39;//g&quot; | grep -Eo &#39;^\w+&#39; | sort | uniq</code></pre>
 <p><em>or</em></p>
