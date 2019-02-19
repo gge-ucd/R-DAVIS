@@ -26,9 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -105,6 +104,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -119,7 +121,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -139,6 +140,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -160,13 +198,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -179,7 +277,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -471,7 +568,7 @@ div.tocify {
 <h2>Dates</h2>
 <p>The <code>Date</code> class in R can easily be converted or operated on numerically, depending on the interest. Let’s make a string of dates to use for our example:</p>
 <ul>
-<li><code>sample_dates_1 &lt;- c(&quot;2016-02-01&quot;, &quot;2016-03-21&quot;, &quot;2016-10-05&quot;, &quot;2017-01-01&quot;, &quot;2017-02-18&quot;)</code> <em>notice we have dates across two years here</em></li>
+<li><code>sample_dates_1 &lt;- c("2016-02-01", "2016-03-21", "2016-10-05", "2017-01-01", "2017-02-18")</code> <em>notice we have dates across two years here</em></li>
 </ul>
 <p>So to translate these into the <code>Date</code> class in R, we need to do a few things…first notice our sample dates are in a very nice order (YYYY-MM-DD). This works well with the function <code>as.Date</code>:</p>
 <ul>
@@ -492,8 +589,8 @@ as.Date(sample_dates_2, format = &quot;%m-%d-%Y&quot; ) # date code preceded by 
 <p>To see a list of the date-time format codes in R, check out this <a href="https://www.stat.berkeley.edu/~s133/dates.html">page and table</a>, or you can use: <code>?(strptime)</code></p>
 <p>The nice thing is this method works well with pretty much any format, you just need to provide the associated codes and structure:</p>
 <ul>
-<li><p><code>as.Date(&quot;2016/01/01&quot;, format=&quot;%Y/%m/%d&quot;)</code>=2016-01-01</p></li>
-<li><p><code>as.Date(&quot;05A21A2011&quot;, format=&quot;%mA%dA%Y&quot;)</code>=2011-05-21</p></li>
+<li><p><code>as.Date("2016/01/01", format="%Y/%m/%d")</code>=2016-01-01</p></li>
+<li><p><code>as.Date("05A21A2011", format="%mA%dA%Y")</code>=2011-05-21</p></li>
 </ul>
 <blockquote>
 <h3 id="challenge">Challenge:</h3>
@@ -538,10 +635,10 @@ six.weeks</code></pre>
 <p><code>library(lubridate)</code></p>
 <p>Same idea here, just simpler to type, read, write.</p>
 <ul>
-<li><code>lubridate::ymd(&quot;2016/01/01&quot;)</code>=2016-01-01</li>
-<li><code>lubridate::ymd(&quot;2011-03-19&quot;)</code>=2011-03-19</li>
-<li><code>lubridate::mdy(&quot;Feb 19, 2011&quot;)</code>=2011-02-19</li>
-<li><code>lubridate::dmy(&quot;22051997&quot;)</code>=1997-05-22</li>
+<li><code>lubridate::ymd("2016/01/01")</code>=2016-01-01</li>
+<li><code>lubridate::ymd("2011-03-19")</code>=2011-03-19</li>
+<li><code>lubridate::mdy("Feb 19, 2011")</code>=2011-02-19</li>
+<li><code>lubridate::dmy("22051997")</code>=1997-05-22</li>
 </ul>
 </div>
 <div id="using-posixct" class="section level2">
@@ -566,9 +663,9 @@ tm3</code></pre>
 <div id="as.posixct" class="section level3">
 <h3><strong>as.POSIXct</strong></h3>
 <ul>
-<li>Example 1 (default doesn’t need <code>strptime</code>): <code>as.POSIXct(&quot;2016-01-01 12:00&quot;, &quot;America/Los_Angeles&quot;)</code> = 2016-01-01 12:00:00</li>
-<li>Example 2 (24 hr time): <code>as.POSIXct(strptime(&quot;2016/04/05 14:47&quot;,format = &quot;%Y/%m/%d %H:%M&quot;), &quot;America/Los_Angeles&quot;)</code> = 2016-04-05 14:47:00</li>
-<li>Example 3 (12 hr time): <code>as.POSIXct(strptime(&quot;2016/04/05 4:47 PM&quot;,format = &quot;%Y/%m/%d %H:%M PM&quot;), &quot;America/Los_Angeles&quot;)</code> = 2016-04-05 04:47:00</li>
+<li>Example 1 (default doesn’t need <code>strptime</code>): <code>as.POSIXct("2016-01-01 12:00", "America/Los_Angeles")</code> = 2016-01-01 12:00:00</li>
+<li>Example 2 (24 hr time): <code>as.POSIXct(strptime("2016/04/05 14:47",format = "%Y/%m/%d %H:%M"), "America/Los_Angeles")</code> = 2016-04-05 14:47:00</li>
+<li>Example 3 (12 hr time): <code>as.POSIXct(strptime("2016/04/05 4:47 PM",format = "%Y/%m/%d %H:%M PM"), "America/Los_Angeles")</code> = 2016-04-05 04:47:00</li>
 </ul>
 </div>
 </div>
@@ -576,17 +673,17 @@ tm3</code></pre>
 <h2>The <code>lubridate</code> package &amp; timezones</h2>
 <p>Same as before, now just add <code>_hms</code> or <code>_hm</code> to <code>ymd</code> and a <code>tz</code> arguement. <code>lubridate</code> will default to the POSIXct format.</p>
 <ul>
-<li>Example 1: <code>lubridate::ymd_hm(&quot;2016-01-01 12:00&quot;, tz=&quot;America/Los_Angeles&quot;)</code> = 2016-01-01 12:00:00</li>
-<li>Example 2 (24 hr time): <code>lubridate::ymd_hm(&quot;2016/04/05 14:47&quot;, tz=&quot;America/Los_Angeles&quot;)</code> = 2016-04-05 14:47:00</li>
-<li>Example 3 (12 hr time but converts to 24): <code>lubridate::ymd_hms(&quot;2016/04/05 4:47:21 PM&quot;, tz=&quot;America/Los_Angeles&quot;)</code> = 2016-04-05 16:47:21</li>
+<li>Example 1: <code>lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")</code> = 2016-01-01 12:00:00</li>
+<li>Example 2 (24 hr time): <code>lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")</code> = 2016-04-05 14:47:00</li>
+<li>Example 3 (12 hr time but converts to 24): <code>lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")</code> = 2016-04-05 16:47:21</li>
 </ul>
 </div>
 <div id="datetimes-without-timezones-and-chron" class="section level2">
 <h2>Datetimes without Timezones (and <code>chron</code>)</h2>
 <p>The <code>chron</code> package may be helpful for these tasks, however, this may also be a suitable use of the POSIXlt class.</p>
 <ul>
-<li><code>chron::as.chron(&quot;2013-07-24 23:55:26&quot;)</code> = 1.591099710^{4}</li>
-<li><code>chron::as.chron(&quot;07/25/13 08:32:07&quot;, &quot;%m/%d/%y %H:%M:%S&quot;)</code> = 1.591135610^{4}</li>
+<li><code>chron::as.chron("2013-07-24 23:55:26")</code> = 1.591099710^{4}</li>
+<li><code>chron::as.chron("07/25/13 08:32:07", "%m/%d/%y %H:%M:%S")</code> = 1.591135610^{4}</li>
 </ul>
 <div id="lubridate-tips" class="section level4">
 <h4>Lubridate Tips</h4>
@@ -624,27 +721,27 @@ nfy3 &lt;- read.csv(&quot;data/2015_NFY_solinst.csv&quot;, skip = 12)
 glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code></pre>
 <pre><code>## Observations: 7,764
 ## Variables: 5
-## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2...
-## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00,...
-## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
+## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 201…
+## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 1…
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <pre class="r"><code>glimpse(nfy2)</code></pre>
 <pre><code>## Observations: 7,764
 ## Variables: 5
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05...
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;1...
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <pre class="r"><code>glimpse(nfy3)</code></pre>
 <pre><code>## Observations: 7,764
 ## Variables: 5
-## $ Date        &lt;fct&gt; 2015/05/22, 2015/05/22, 2015/05/22, 2015/05/22, 20...
-## $ Time        &lt;fct&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, ...
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.29...
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...</code></pre>
+## $ Date        &lt;fct&gt; 2015/05/22, 2015/05/22, 2015/05/22, 2015/05/22, 2015…
+## $ Time        &lt;fct&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <pre class="r"><code># make a datetime col:
 nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot;)
 
@@ -874,17 +971,17 @@ summary(mloa_2001) # notice a new column called &quot;datetime&quot;</code></pre
 ##     extract</code></pre>
 <pre><code>## Observations: 23
 ## Variables: 4
-## $ day            &lt;int&gt; 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, ...
-## $ avg_temp_2m    &lt;dbl&gt; 7.129730, 13.271782, 11.039383, 10.856874, 11.5...
-## $ avg_temp_10m   &lt;dbl&gt; 6.594595, 11.164356, 11.024387, 10.486253, 11.0...
-## $ avg_temp_tower &lt;dbl&gt; 6.364865, 9.789604, 10.967694, 10.474180, 10.96...</code></pre>
+## $ day            &lt;int&gt; 1, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19…
+## $ avg_temp_2m    &lt;dbl&gt; 7.129730, 13.271782, 11.039383, 10.856874, 11.563…
+## $ avg_temp_10m   &lt;dbl&gt; 6.594595, 11.164356, 11.024387, 10.486253, 11.080…
+## $ avg_temp_tower &lt;dbl&gt; 6.364865, 9.789604, 10.967694, 10.474180, 10.9629…</code></pre>
 <p><img src="lesson_lubridate_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre><code>## Observations: 24
 ## Variables: 4
-## $ `hour(datetime)` &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13,...
-## $ avg_temp_2m      &lt;dbl&gt; 12.279380, 12.021068, 11.643950, 11.213201, 1...
-## $ avg_temp_10m     &lt;dbl&gt; 10.071898, 10.001907, 9.858428, 9.821122, 9.7...
-## $ avg_temp_tower   &lt;dbl&gt; 9.136405, 9.162726, 9.165874, 9.267327, 9.327...</code></pre>
+## $ `hour(datetime)` &lt;int&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1…
+## $ avg_temp_2m      &lt;dbl&gt; 12.279380, 12.021068, 11.643950, 11.213201, 10.…
+## $ avg_temp_10m     &lt;dbl&gt; 10.071898, 10.001907, 9.858428, 9.821122, 9.714…
+## $ avg_temp_tower   &lt;dbl&gt; 9.136405, 9.162726, 9.165874, 9.267327, 9.32710…</code></pre>
 <p><img src="lesson_lubridate_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="example-2-pressure-transducer-solinst-data-logger" class="section level2">
@@ -935,14 +1032,16 @@ summary(mloa_2001) # notice a new column called &quot;datetime&quot;</code></pre
 ## 4 31 217 11
 ## 5 31 217 12
 ## 6 31 217 12</code></pre>
-<pre><code>## `summarise_each()` is deprecated.
-## Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
-## To map `funs` over all variables, use `summarise_all()`</code></pre>
-<p><img src="lesson_lubridate_files/figure-html/solution2-1.png" width="672" /><img src="lesson_lubridate_files/figure-html/solution2-2.png" width="672" /></p>
-<pre><code>## `summarise_each()` is deprecated.
-## Use `summarise_all()`, `summarise_at()` or `summarise_if()` instead.
-## To map `funs` over all variables, use `summarise_all()`</code></pre>
-<p><img src="lesson_lubridate_files/figure-html/solution2-3.png" width="672" /></p>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
+<p><img src="lesson_lubridate_files/figure-html/solution2-1.png" width="672" /><img src="lesson_lubridate_files/figure-html/solution2-2.png" width="672" /><img src="lesson_lubridate_files/figure-html/solution2-3.png" width="672" /></p>
 <p>This lesson was contributed by <a href="https://ryanpeek.github.io/">Ryan Peek</a>.</p>
 </div>
 </div>

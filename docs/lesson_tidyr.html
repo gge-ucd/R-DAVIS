@@ -26,9 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -105,6 +104,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -119,7 +121,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -139,6 +140,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -160,13 +198,73 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
@@ -179,7 +277,6 @@ $(document).ready(function () {
   window.initializeCodeFolding("show" === "show");
 });
 </script>
-
 
 
 
@@ -485,8 +582,20 @@ str(surveys_gw)</code></pre>
 ##  $ genus      : Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 4 4 4 4 4 4 4 4 8 8 ...
 ##  $ plot_id    : int  1 2 3 5 18 19 20 21 1 2 ...
 ##  $ mean_weight: num  7 6 8.61 7.75 9.5 ...
-##  - attr(*, &quot;vars&quot;)= chr &quot;genus&quot;
-##  - attr(*, &quot;drop&quot;)= logi TRUE</code></pre>
+##  - attr(*, &quot;groups&quot;)=Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:   10 obs. of  2 variables:
+##   ..$ genus: Factor w/ 26 levels &quot;Ammodramus&quot;,&quot;Ammospermophilus&quot;,..: 4 8 11 13 14 15 16 19 22 24
+##   ..$ .rows:List of 10
+##   .. ..$ : int  1 2 3 4 5 6 7 8
+##   .. ..$ : int  9 10 11 12 13 14 15 16 17 18 ...
+##   .. ..$ : int  33 34 35 36 37 38 39 40 41 42 ...
+##   .. ..$ : int  57 58 59 60 61 62 63 64 65 66 ...
+##   .. ..$ : int  81 82 83 84 85 86 87 88 89 90 ...
+##   .. ..$ : int  105 106 107 108 109 110 111 112 113 114 ...
+##   .. ..$ : int  128 129 130 131 132 133 134 135 136 137 ...
+##   .. ..$ : int  152 153 154 155 156 157 158 159 160 161 ...
+##   .. ..$ : int  176 177 178 179 180 181 182 183 184 185 ...
+##   .. ..$ : int  195 196
+##   ..- attr(*, &quot;.drop&quot;)= logi TRUE</code></pre>
 <p>This yields <code>surveys_gw</code> where the observations for each plot are spread across multiple rows, 196 observations of 3 variables. Using <code>spread()</code> to key on <code>genus</code> with values from <code>mean_weight</code> this becomes 24 observations of 11 variables, one row for each plot.</p>
 <p><img src="img/spread_data_R.png" /></p>
 <pre class="r"><code>surveys_spread &lt;- surveys_gw %&gt;%
@@ -518,7 +627,7 @@ str(surveys_spread)</code></pre>
 ## 4       4    0           23.0      57.5    164.      28.1        7.82
 ## 5       5    7.75        18.0      51.1    190.      27.0        8.66
 ## 6       6    0           24.9      58.6    180.      25.9        7.81
-## # ... with 4 more variables: Peromyscus &lt;dbl&gt;, Reithrodontomys &lt;dbl&gt;,
+## # … with 4 more variables: Peromyscus &lt;dbl&gt;, Reithrodontomys &lt;dbl&gt;,
 ## #   Sigmodon &lt;dbl&gt;, Spermophilus &lt;dbl&gt;</code></pre>
 </div>
 <div id="gathering" class="section level2">
@@ -580,7 +689,7 @@ head(rich_time)</code></pre>
 ## 4       4      4      4      3      4      5      4      6      3      4
 ## 5       5      4      3      2      5      4      6      7      7      3
 ## 6       6      3      4      3      4      5      9      9      7      5
-## # ... with 17 more variables: `1986` &lt;int&gt;, `1987` &lt;int&gt;, `1988` &lt;int&gt;,
+## # … with 17 more variables: `1986` &lt;int&gt;, `1987` &lt;int&gt;, `1988` &lt;int&gt;,
 ## #   `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;, `1993` &lt;int&gt;,
 ## #   `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
 ## #   `1999` &lt;int&gt;, `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
@@ -607,7 +716,7 @@ head(rich_time)</code></pre>
 ##  8       8 1977         2
 ##  9       9 1977         3
 ## 10      10 1977         1
-## # ... with 614 more rows</code></pre>
+## # … with 614 more rows</code></pre>
 </details>
 <p><br></p>
 <ol start="3" style="list-style-type: decimal">
@@ -642,7 +751,7 @@ head(rich_time)</code></pre>
 ##  8  1978 Rodent Exclosure                     37.8   67.3
 ##  9  1978 Short-term Krat Exclosure            36.9   63.8
 ## 10  1978 Spectab exclosure                    42.3   80.1
-## # ... with 120 more rows</code></pre>
+## # … with 120 more rows</code></pre>
 </details>
 </div>
 <p><br></p>
