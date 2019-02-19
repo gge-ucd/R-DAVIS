@@ -78,19 +78,16 @@ library(emojifont, quietly = T)
  - Data Import/Export Workflow
 
 #### Week 7
-
- - RMarkdown and Literate Programming
- - Visualization Do's and Don'ts
+ - Visualization Dos and Don'ts
+ - Data Import/Export
+ - More Dates and Times with `lubridate`
 
 #### Week 8
-
- - `tidyr`: Reshaping Data
- - Datetime Data in R with `lubridate`
+ - Writing Functions
+ - Iteration
 
 #### Week 9
-
- - For Loops
- - Iteration with `*apply` and `purrr`
+ - RMarkdown and Literate Programming
 
 #### Week 10
 
