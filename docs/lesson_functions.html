@@ -533,8 +533,8 @@ div.tocify {
 </div>
 
 
-<blockquote>
-<h2 id="learning-objectives" class="objectives">Learning objectives</h2>
+<div class="blue">
+<h3 id="learning-objectives">Learning objectives</h3>
 <ul>
 <li>Define a function that takes arguments.</li>
 <li>Return a value from a function.</li>
@@ -542,10 +542,11 @@ div.tocify {
 <li>Set default values for function arguments.</li>
 <li>Explain why we should divide programs into small, single-purpose functions.</li>
 </ul>
-</blockquote>
+</div>
+<p><br></p>
 <p>Any operation you will perform more than once can be put into a function. That way, rather than retyping all the commands (and potentially making errors), you can simply call the function, passing it a new dataset or parameters. This may seem cumbersome at first, but writing functions to automate repetitive tasks is incredibly powerful. E.g. each time you call <code>ggplot</code> you are calling a function that someone wrote. Imagine if each time you wanted to make a plot you had to copy and paste or write that code from scratch!</p>
-<div id="defining-a-function" class="section level3">
-<h3>Defining a function</h3>
+<div id="defining-a-function" class="section level2">
+<h2>Defining a function</h2>
 <p>Recall the components of a function. E.g. the <code>log</code> function (see <code>?log</code>) takes “arguments” <code>x</code> and <code>base</code> and “returns” the base-<code>base</code> logarithm of <code>x</code>. Functions take arguments as input and yield return-values as output. You can define functions to do any number of operations on any number of arguments, but always output a single return value (however there are complex objects into which you can put multiple objects, should you need to).</p>
 <p>Let’s start by defining a simple function to add two numbers. This is the basic structure, which you can read as “assign to the variable <code>my_sum</code> a function that takes arguments <code>a</code> and <code>b</code> and returns <code>the_sum</code>.” The body of the function is delimited by the curly-braces. The statements in the body are indented. This makes the code easier to read but does not affect how the code operates.</p>
 <pre class="r"><code>my_sum &lt;- function(a, b) {
@@ -566,12 +567,14 @@ my_sum2()</code></pre>
 <pre><code>## [1] 3</code></pre>
 <pre class="r"><code>my_sum2(b = 7)</code></pre>
 <pre><code>## [1] 8</code></pre>
-<blockquote>
-<h2 id="tip" class="callout">Tip</h2>
+<div class="blue">
+<h3 id="tip">Tip</h3>
 <p>One feature unique to R is that the return statement is not required. R automatically returns the output of the last line of the body of the function unless a <code>return</code> statement is specified elsewhere. Since other languages require a <code>return</code> statement and because it can make reading a function easier, we will explicitly define the return statement.</p>
-</blockquote>
-<div id="temperature-conversion" class="section level4">
-<h4>Temperature conversion</h4>
+</div>
+<p><br></p>
+</div>
+<div id="temperature-conversion" class="section level2">
+<h2>Temperature conversion</h2>
 <p>Let’s define a function F_to_K that converts temperatures from Fahrenheit to Kelvin:</p>
 <pre class="r"><code>F_to_K &lt;- function(temp) {
   K &lt;- ((temp - 32) * (5 / 9)) + 273.15
@@ -584,8 +587,8 @@ F_to_K(32)</code></pre>
 <pre class="r"><code># boiling point of water
 F_to_K(212)</code></pre>
 <pre><code>## [1] 373.15</code></pre>
-<blockquote>
-<h4 id="challenge-1" class="challenge">Challenge 1</h4>
+<div class="blue">
+<h4 id="challenge-1">Challenge 1</h4>
 <ul>
 <li>Write a function called <code>K_to_C</code> that takes a temperature in K and returns that temperature in C
 <ul>
@@ -593,62 +596,50 @@ F_to_K(212)</code></pre>
 </ul></li>
 <li>Create a new R script, copy <code>F_to_K</code> and <code>K_to_C</code> in it, and save it as functions.R in the <code>code</code> directory of your project.</li>
 </ul>
-</blockquote>
 </div>
-<div id="sourceing-functions" class="section level4">
-<h4><code>source()</code>ing functions</h4>
+<p><br></p>
+</div>
+<div id="sourceing-functions" class="section level2">
+<h2><code>source()</code>ing functions</h2>
 <p>You can load all the functions in your <code>code/functions.R</code> script without even opening the file, via the <code>source</code> function. This allows you to keep your functions separate from the analyses which use them.</p>
 <pre class="r"><code>source(&#39;code/functions.R&#39;)</code></pre>
 </div>
-<div id="combining-functions" class="section level4">
-<h4>Combining functions</h4>
+<div id="combining-functions" class="section level2">
+<h2>Combining functions</h2>
 <p>The real power of functions comes from mixing, matching and combining them into ever large chunks to get the effect we want.</p>
-<blockquote>
-<h4 id="challenge-2" class="challenge">Challenge 2</h4>
+<div class="blue">
+<h4 id="challenge-2">Challenge 2</h4>
 <ul>
 <li>Write a new function called <code>F_to_C</code> in your functions.R file that converts temperature directly from F to C by reusing the two functions above.</li>
 <li>Load the function not by highlighting the code but by <code>source</code>-ing your functions.R file.</li>
 <li>Use the function to find today’s high temperature in your location in C.</li>
 </ul>
-</blockquote>
 </div>
+<p><br></p>
+<!-- ### A more-useful function -->
+<!-- Let's write a function to calculate countries' GDPs in their local currency.  -->
+<!-- - Start with Canada, exchange rate is 1.279098 -->
+<!-- - Turn that into a function that takes country and exchange rate. -->
+<!-- - Here is a [table of exchange rates for many countries](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/simple_exchange_rate.csv). -->
+<!-- - Call the function with some row -->
+<!-- - lapply over rows -->
+<!-- ### Do by joins -->
+<!-- And by year -->
+<!-- - Get all the exchange rates over time. You can [download that here](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/exchange_rate.csv). -->
+<!-- - join, filter -->
 </div>
-<div id="a-more-useful-function" class="section level3">
-<h3>A more-useful function</h3>
-<p>Let’s write a function to calculate countries’ GDPs in their local currency.</p>
-<ul>
-<li><p>Start with Canada, exchange rate is 1.279098</p></li>
-<li><p>Turn that into a function that takes country and exchange rate.</p></li>
-<li><p>Here is a <a href="https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/simple_exchange_rate.csv">table of exchange rates for many countries</a>.</p></li>
-<li><p>Call the function with some row</p></li>
-<li><p>lapply over rows</p></li>
-</ul>
+<div id="pass-by-value" class="section level2">
+<h2>Pass by value</h2>
+<p>Functions in R almost always make copies of the data to operate on inside of a function body. When we modify <code>dat</code> inside the function we are modifying the copy of the gapminder dataset stored in <code>dat</code>, not the original variable we gave as the first argument. This is called “pass-by-value” and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.</p>
 </div>
-<div id="do-by-joins" class="section level3">
-<h3>Do by joins</h3>
-<p>And by year</p>
-<ul>
-<li><p>Get all the exchange rates over time. You can <a href="https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/exchange_rate.csv">download that here</a>.</p></li>
-<li><p>join, filter</p></li>
-</ul>
-<blockquote>
-<h4 id="tip-pass-by-value" class="callout">Tip: Pass by value</h4>
-<p>Functions in R almost always make copies of the data to operate on inside of a function body. When we modify <code>dat</code> inside the function we are modifying the copy of the gapminder dataset stored in <code>dat</code>, not the original variable we gave as the first argument.</p>
-<p>This is called “pass-by-value” and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.</p>
-</blockquote>
-<blockquote>
-<h4 id="tip-function-scope" class="callout">Tip: Function scope</h4>
+<div id="function-scope" class="section level2">
+<h2>Function scope</h2>
 <p>A related concept is scoping: any variables you create or modify inside the body of a function only exist for the lifetime of the function’s execution. When we call <code>calcGDP</code>, the variables <code>dat</code>, <code>years</code>, and <code>filteredDF</code> only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.</p>
-</blockquote>
-<blockquote>
+<div class="blue">
 <h4 id="challenge-a-new-function" class="challenge">Challenge – A new function</h4>
 <p>Write a new function that takes two arguments, the gapminder data.frame and the name of a country, and plots the change in the country’s population over time. That is, the return value from the function should be a ggplot object. - It is often easier to modify existing code than to start from scratch. Feel free to start with the calcGDP function code.</p>
-</blockquote>
-</div>
-<div id="challenge-solutions" class="section level3">
-<h3>Challenge solutions</h3>
-<blockquote>
-<h4 id="solution-a-new-function" class="challenge">Solution – A new function</h4>
+<details>
+<p><summary>ANSWER</summary></p>
 <pre class="r"><code>plotPopGrowth &lt;- function(countrytoplot, dat = gapminder) {
     df &lt;- filter(dat, country == countrytoplot) 
     plot &lt;- ggplot(df, aes(year, pop)) + 
@@ -656,8 +647,9 @@ F_to_K(212)</code></pre>
     return(plot)
 }
 plotPopGrowth(&#39;Canada&#39;)</code></pre>
-<p><img src="lesson_functions_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-</blockquote>
+<img src="lesson_functions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+</details>
+</div>
 <p><br></p>
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/07-functions.html">Creating Functions materials</a>.</p>
 </div>
