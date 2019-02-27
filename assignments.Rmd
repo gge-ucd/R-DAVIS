@@ -163,6 +163,141 @@ Modify the above code to size the points in proportion to the population of the 
 
 ### <small>Week8</small>
 
+
+For the homework this week, we are going to be combining a lot of the packages we have learned the past three weeks: `dplyr`, `ggplot`, `lubridate`, and functions.
+
+*SPOILER: You are currently looking at an RMarkdown document! If you are curious about what RMarkdown is and what we are going to be covering next week, check out the lesson "Literate Programming with RMarkdown" on the website*
+
+#### **Part 1**
+
+Download a new American River data set using this piece of code: 
+```{r, message=FALSE}
+library(tidyverse)
+
+am_riv <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/2015_NFA_solinst_08_05.csv", skip = 13)
+
+#should have a data frame with 35,038 obs of 5 variables
+```
+1. Make a datetime column by using `paste` to combine the date and time columns; remember to convert it to a datetime! 
+2. Calculate the weekly mean, max, and min water temperatures and plot as a point plot (all on the same graph)
+3. Calculate the hourly mean *Level* for April through June and make a line plot (y axis should be the hourly mean level, x axis should be datetime)
+
+#### **Part 2** 
+
+Use the mloa_2001 data set (if you don't have it, download the .rda file from the resources tab on the website). Remeber to remove the NAs (-99 and -999) and to create a datetime column (we did this in class).
+
+Then, write a **function** called `plot_temp` that **returns** a graph of the `temp_C_2m` for a single month. The x-axis of the graph should be pulled from a datetime column (so if your data set does not already have a datetime column, you'll need to create one!)
+
+*Hint! Take a look at the Challenge problem at the bottom of the functions lesson (https://gge-ucd.github.io/R-DAVIS/lesson_functions.html) to figure out how to feed a function a dataframe*
+
+**Save the code from Part 1 and 2 in your scripts folder and name is `w8_assignment_ABC.R` with your initials.**
+
+#### **Part 3 : Code Review**
+
+ - Find your code partner’s repository on github, click on the scripts folder, and find the script named: `w8_assignment_ABC.R`
+ - Click on the script, then find the `RAW` button on the right hand side of the screen. Click on `RAW`.
+ - You should see a plain text version of the script. Right click anywhere on the page, and select “**Save As**”, save the script to your `scripts` folder in your repository. Make sure to change the file extension to `.R` (instead of `.txt`).
+ - Now, if you open up your RProject where you saved the script, you should see it, and better yet, you should have the same path/folder structure that is used in the script (*we hope!*).
+ - Try to run the script line by line. Where does it break? Can you fix it?
+ - **File an Issue** in your code partner’s repository. Write up a few sentences describing a few good things about the script (*what worked! Was it clearly commented?*) and what didn’t (*where did it break for you, and why? How might it be fixed?*). 
+ 
+**We have included a Key for this assignment, find it below**
+
+
+ 
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers</summary>
+```{r, eval=FALSE}
+
+
+####WEEK 8 HOMEWORK KEY####
+
+
+#load necessary libraries 
+
+library(lubridate)
+library(tidyverse)
+
+#Part 1
+
+am_riv <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/2015_NFA_solinst_08_05.csv", skip = 13)
+
+am_riv$datetime <- paste(am_riv$Date, " ", am_riv$Time, sep = "")
+glimpse(am_riv) #pasting the date and time columns together
+
+am_riv$datetime <- ymd_hms(am_riv$datetime) #making the new column a datetime datatype
+
+#new column for week
+am_riv$wk <- week(am_riv$datetime)
+
+#calculating mean, min, and max weekly temps
+am_riv2 <- am_riv %>% 
+  group_by(wk) %>% 
+  summarize(mean_wk = mean(Temperature), min_wk = min(Temperature), max_wk = max(Temperature))
+
+glimpse(am_riv2)
+
+#plotting mean, min and max temperatures on the same graph
+am_riv2 %>% 
+  ggplot()+
+  geom_point(aes(x=wk, y = mean_wk), color = "blue")+
+  geom_point(aes(x=wk, y = min_wk), color = "red")+
+  geom_point(aes(x=wk, y = max_wk), color= "green")+
+  xlab("Week Number")+ ylab("Temperature")+
+  theme_bw()
+
+#making new columns for hour and month 
+am_riv$hourly <- hour(am_riv$datetime)
+am_riv$month <- month(am_riv$datetime)
+
+#finding the mean hourly level for April through June
+am_riv3 <- am_riv %>% 
+  filter(month == 4 | month == 5 | month == 6) %>% 
+  group_by(hourly, month, datetime) %>% 
+  summarize(mean_level = mean(Level))
+
+#plotting the mean level from April through June 
+am_riv3%>% 
+  ggplot()+
+  geom_line(aes(x=datetime, y = mean_level), color = "blue") +
+  ylim(1.1, 1.9)+
+  theme_bw()
+
+
+
+####Part 2#### 
+
+load("data/mauna_loa_met_2001_minute.rda")
+
+#making datetime column 
+mloa_2001$datetime <- paste0(mloa_2001$year, "-", mloa_2001$month, "-", mloa_2001$day, " ", mloa_2001$hour24, ":", mloa_2001$min)
+
+glimpse(mloa_2001)
+
+#putting it in datetime format
+mloa_2001$datetime<- ymd_hm(mloa_2001$datetime)  
+
+#removing the NAs
+mloa2 <- mloa_2001 %>% 
+  filter(rel_humid != -99, rel_humid != -999) %>% 
+  filter(temp_C_2m!= -99, temp_C_2m != -999) %>% 
+  filter(windSpeed_m_s!= -99, windSpeed_m_s != -999)
+
+#writing the function 
+
+plot_temp <- function(monthtoimput, dat = mloa2){
+  df <- filter(dat, month == monthtoimput)
+  plot <- df %>% 
+    ggplot()+ geom_line(aes(x=datetime, y = temp_C_2m), color = "red")+
+    theme_bw()
+  return(plot)
+}
+
+#testing the function, should get a plot for just March temperatures 
+plot_temp(3)
+```
+</details>
+
 ### <small>Week9</small>
 
 
