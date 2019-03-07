@@ -300,5 +300,80 @@ plot_temp(3)
 
 ### <small>Week9</small>
 
+This is your last assignment for the R-DAVIS course! We hope you have gotten a good overview of all the amazing tools R can offer for your graduate work (and beyond!) during the past 10 weeks.
 
+For your homework this week, we are going to be working with Rmarkdown and iteration, the two topics we covered last class. 
+
+#### Part 1: Rmarkdown
+
+1. Create a new Rmarkdown document and save it as **week9_assignment_ABC.Rmd** with your initals in place of ABC. 
+
+2. Tell your coding partner about your research! Write a small paragraph about what you think (or know) your central research question might be for your PhD or Masters. **Bold** your main question, *italisize* the name of your study species, and be sure to include a picture of your study species/study site/or another picture. 
+
+2. Use the `storms` data (included in RStudio) to create a `plotly` graph of the relationship between wind and pressure, where the status of the storm is indicated by a color. 
+
+3. Create a table that identifies the **mean** wind, pressure, ts_diameter, hu_diameter of each status of storm (remember to remove NAs!). Use the package `htmlTable`. Round each mean to only two decimal places (Hint
+: look up the function `round`)
+
+**CHALLENGE** Find the duration, in number of days, of every hurricane from 2010 and later, and then use one of the `map` functions from `purrr` to write a sentence saying "Hurricane X lasted Y days" for each of these storms. You can look for some help with these functions [here](https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf) and [here](https://purrr.tidyverse.org/reference/map.html).
+
+4. Knit your Rmrkdown document. Hide the messages from appearing in the knited document. Save and push to Github.
+
+5. Pull down your partner's Rmarkdown and see if you can knit the document on your computer. 
+
+
+#### Answers:
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers</summary>
+```{r, eval=FALSE}
+library(tidyverse)
+glimpse(storms)
+?storms
+storms <- storms
+
+#2 Creating the plotly map
+
+plotly::ggplotly(storms %>%  
+  ggplot()+
+  geom_point(aes(wind, pressure, color = status))
+)
+
+#3 Creating the htmlTable
+
+table <- storms %>%
+  drop_na(ts_diameter, hu_diameter) %>% 
+  group_by(status) %>% 
+  summarise(mean_wind = mean(wind), mean_pressure = mean(pressure), mean_ts = mean(ts_diameter), mean_hu = mean(hu_diameter))
+
+# rounding the columns
+table$mean_wind<- round(table$mean_wind, digits = 2)
+table$mean_pressure <- round(table$mean_pressure, digits = 2)
+table$mean_ts <- round(table$mean_ts, digits = 2)
+table$mean_hu <- round(table$mean_hu, digits=2)
+
+htmlTable::htmlTable(table)
+
+# Bonus, how to do this with a purrr function
+# modify functions are like map functions, but they always return the data type you give them (vector, dataframe, etc.). modify_if lets you include a conditional statement
+
+storms %>%
+  drop_na(ts_diameter, hu_diameter) %>% 
+  group_by(status) %>% 
+  summarise(mean_wind = mean(wind), mean_pressure = mean(pressure), mean_ts = mean(ts_diameter), mean_hu = mean(hu_diameter)) %>% 
+  modify_if(is.numeric, round, digits = 2) %>% # if a column is numeric, round it to 2 digits
+  htmlTable::htmlTable()
+
+
+
+# CHALLENGE
+
+hurr_len <- storms %>% 
+  filter(status == "hurricane", year >= 2010) %>% 
+  group_by(name, year) %>% 
+  summarise(num_days = diff(range(day)))
+  
+map2_chr(.x = hurr_len$name, .y = hurr_len$num_days, function(x,y) paste("Hurricane", x, "lasted", y, "days"))
+            
+```
+</details>
 

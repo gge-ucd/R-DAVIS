@@ -689,6 +689,79 @@ plot_temp(3)</code></pre>
 </div>
 <div id="week9" class="section level3">
 <h3><small>Week9</small></h3>
+<p>This is your last assignment for the R-DAVIS course! We hope you have gotten a good overview of all the amazing tools R can offer for your graduate work (and beyond!) during the past 10 weeks.</p>
+<p>For your homework this week, we are going to be working with Rmarkdown and iteration, the two topics we covered last class.</p>
+<div id="part-1-rmarkdown" class="section level4">
+<h4>Part 1: Rmarkdown</h4>
+<ol style="list-style-type: decimal">
+<li><p>Create a new Rmarkdown document and save it as <strong>week9_assignment_ABC.Rmd</strong> with your initals in place of ABC.</p></li>
+<li><p>Tell your coding partner about your research! Write a small paragraph about what you think (or know) your central research question might be for your PhD or Masters. <strong>Bold</strong> your main question, <em>italisize</em> the name of your study species, and be sure to include a picture of your study species/study site/or another picture.</p></li>
+<li><p>Use the <code>storms</code> data (included in RStudio) to create a <code>plotly</code> graph of the relationship between wind and pressure, where the status of the storm is indicated by a color.</p></li>
+<li><dl>
+<dt>Create a table that identifies the <strong>mean</strong> wind, pressure, ts_diameter, hu_diameter of each status of storm (remember to remove NAs!). Use the package <code>htmlTable</code>. Round each mean to only two decimal places (Hint</dt>
+<dd>look up the function <code>round</code>)
+</dd>
+</dl></li>
+</ol>
+<p><strong>CHALLENGE</strong> Find the duration, in number of days, of every hurricane from 2010 and later, and then use one of the <code>map</code> functions from <code>purrr</code> to write a sentence saying “Hurricane X lasted Y days” for each of these storms. You can look for some help with these functions <a href="https://github.com/rstudio/cheatsheets/blob/master/purrr.pdf">here</a> and <a href="https://purrr.tidyverse.org/reference/map.html">here</a>.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Knit your Rmrkdown document. Hide the messages from appearing in the knited document. Save and push to Github.</p></li>
+<li><p>Pull down your partner’s Rmarkdown and see if you can knit the document on your computer.</p></li>
+</ol>
+</div>
+<div id="answers" class="section level4">
+<h4>Answers:</h4>
+<details>
+<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<pre class="r"><code>library(tidyverse)
+glimpse(storms)
+?storms
+storms &lt;- storms
+
+#2 Creating the plotly map
+
+plotly::ggplotly(storms %&gt;%  
+  ggplot()+
+  geom_point(aes(wind, pressure, color = status))
+)
+
+#3 Creating the htmlTable
+
+table &lt;- storms %&gt;%
+  drop_na(ts_diameter, hu_diameter) %&gt;% 
+  group_by(status) %&gt;% 
+  summarise(mean_wind = mean(wind), mean_pressure = mean(pressure), mean_ts = mean(ts_diameter), mean_hu = mean(hu_diameter))
+
+# rounding the columns
+table$mean_wind&lt;- round(table$mean_wind, digits = 2)
+table$mean_pressure &lt;- round(table$mean_pressure, digits = 2)
+table$mean_ts &lt;- round(table$mean_ts, digits = 2)
+table$mean_hu &lt;- round(table$mean_hu, digits=2)
+
+htmlTable::htmlTable(table)
+
+# Bonus, how to do this with a purrr function
+# modify functions are like map functions, but they always return the data type you give them (vector, dataframe, etc.). modify_if lets you include a conditional statement
+
+storms %&gt;%
+  drop_na(ts_diameter, hu_diameter) %&gt;% 
+  group_by(status) %&gt;% 
+  summarise(mean_wind = mean(wind), mean_pressure = mean(pressure), mean_ts = mean(ts_diameter), mean_hu = mean(hu_diameter)) %&gt;% 
+  modify_if(is.numeric, round, digits = 2) %&gt;% # if a column is numeric, round it to 2 digits
+  htmlTable::htmlTable()
+
+
+
+# CHALLENGE
+
+hurr_len &lt;- storms %&gt;% 
+  filter(status == &quot;hurricane&quot;, year &gt;= 2010) %&gt;% 
+  group_by(name, year) %&gt;% 
+  summarise(num_days = diff(range(day)))
+  
+map2_chr(.x = hurr_len$name, .y = hurr_len$num_days, function(x,y) paste(&quot;Hurricane&quot;, x, &quot;lasted&quot;, y, &quot;days&quot;))</code></pre>
+</details>
+</div>
 </div>
 </div>
 
