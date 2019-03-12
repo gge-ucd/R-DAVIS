@@ -91,5 +91,5 @@ library(emojifont, quietly = T)
 
 #### Week 10
 
- - Students Choose!
+ - [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
  

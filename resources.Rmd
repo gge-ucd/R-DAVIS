@@ -17,7 +17,7 @@ There are many resources online and in print. This is by no means a comprehensiv
 - [Pipelines: Download CO2 & Ice Core Data & Visualize](lesson_ice_core_CO2_web_data.html)
 - [For Loops](lesson_for_loops.html)
 - [Using purrr](lesson_purrr_tutorial.html)
-- [Mapping in R](https://ryanpeek.github.io/mapping_in_R/index.html)
+- [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
 - [Text Mining](lesson_text_mining_mlk.html)
 - [Github Collaboration with Branches](lesson_github_collaboration.html)
 - [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html)
