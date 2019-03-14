@@ -557,129 +557,129 @@ div.tocify {
 <div id="avoiding-common-mistakes" class="section level1">
 <h1>Avoiding Common Mistakes</h1>
 <ul>
-<li>Avoid using multiple tables within one spreadsheet.</li>
-<li>Avoid spreading data across multiple tabs.
+<li><p>Avoid using multiple tables within one spreadsheet.</p></li>
+<li><p>Avoid spreading data across multiple tabs.</p>
 <ul>
 <li>Programs other than Excel will have a tough time seeing tabs</li>
 <li>Instead of adding a new tab, keep adding rows, and maybe use a new column for the info you’d be splitting across tabs. For example, use a column for Year instead of a new tab for a new year.</li>
 <li>If your table gets big, <a href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">freeze your column headers</a> to make them easier to see while you scroll.</li>
 </ul></li>
-<li>Record zeros as zeros.
+<li><p>Record zeros as zeros.</p>
 <ul>
 <li>Zeros are data! Don’t use blanks, and don’t use zeros as null values</li>
 </ul></li>
-<li>Use an appropriate null value to record missing data.
+<li><p>Use an appropriate null value to record missing data.</p>
 <ul>
 <li>There’s a broader discussion of this in <a href="https://peerj.com/preprints/7/">White et al 2013</a>, but here’s a quick look at their recommendations:</li>
 </ul>
 <p><img src="figures/spreadsheet_fig/3_white_table_1.jpg" alt="White et al." /></p></li>
-<li>Don’t use formatting to convey information or to make your spreadsheet look pretty.
+<li><p>Don’t use formatting to convey information or to make your spreadsheet look pretty.</p>
 <ul>
 <li>R won’t see cell colors or bold fonts</li>
 <li>Keep data as characters or numbers</li>
 </ul></li>
-<li>Place comments in a separate column.
+<li><p>Place comments in a separate column.</p>
 <ul>
 <li>Don’t use Excel’s “comments” functionality, other programs don’t recognize these</li>
 <li>Just use a separate text column</li>
 </ul></li>
-<li>Record units in column headers.
+<li><p>Record units in column headers.</p>
 <ul>
 <li>Don’t put units in your data cells!</li>
 <li>10cm will be read as characters, not numbers</li>
 </ul></li>
-<li>Include only one piece of information in a cell.</li>
-<li>Avoid spaces, numbers and special characters in column headers.
+<li><p>Include only one piece of information in a cell.</p></li>
+<li><p>Avoid spaces, numbers and special characters in column headers.</p>
 <table align="center" style="width =80%; border: 1px solid black;">
 <tr>
 <td>
-<b>Good Name</b>
+<p><b>Good Name</b></p>
 </td>
-<br />
+<p><br /></p>
 <td>
-<b>Good Alternative </b>
+<p><b>Good Alternative </b></p>
 </td>
-<br />
+<p><br /></p>
 <td>
-<b>Avoid </b>
+<p><b>Avoid </b></p>
 </td>
-<br />
+<p><br /></p>
 </tr>
 <tr>
 <td>
-Max_temp_C
+<p>Max_temp_C</p>
 </td>
 <td>
-MaxTemp
+<p>MaxTemp</p>
 </td>
 <td>
-Maximum Temp (°C)
-</td>
-</tr>
-<tr>
-<td>
-Precipitation_mm
-</td>
-<td>
-Precipitation
-</td>
-<td>
-precmm
+<p>Maximum Temp (°C)</p>
 </td>
 </tr>
 <tr>
 <td>
-Mean_year_growth
+<p>Precipitation_mm</p>
 </td>
 <td>
-MeanYearGrowth
+<p>Precipitation</p>
 </td>
 <td>
-Mean growth/year
-</td>
-</tr>
-<tr>
-<td>
-sex
-</td>
-<td>
-sex
-</td>
-<td>
-M/F
+<p>precmm</p>
 </td>
 </tr>
 <tr>
 <td>
-weight
+<p>Mean_year_growth</p>
 </td>
 <td>
-weight
+<p>MeanYearGrowth</p>
 </td>
 <td>
-w.
-</td>
-</tr>
-<tr>
-<td>
-cell_type
-</td>
-<td>
-CellType
-</td>
-<td>
-Cell Type
+<p>Mean growth/year</p>
 </td>
 </tr>
 <tr>
 <td>
-Observation_01
+<p>sex</p>
 </td>
 <td>
-first_observation
+<p>sex</p>
 </td>
 <td>
-1st Obs
+<p>M/F</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>weight</p>
+</td>
+<td>
+<p>weight</p>
+</td>
+<td>
+<p>w.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>cell_type</p>
+</td>
+<td>
+<p>CellType</p>
+</td>
+<td>
+<p>Cell Type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Observation_01</p>
+</td>
+<td>
+<p>first_observation</p>
+</td>
+<td>
+<p>1st Obs</p>
 </td>
 </tr>
 </table></li>

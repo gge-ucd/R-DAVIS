@@ -53,14 +53,14 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 ### 1. Create a New Repository on Github
 
- - Typically, the preferred method is to create a new repository on Github...*however*:
-    - *For our class, we are using a Github Classroom, which means we've already created the repository in advance and sent you a link. When you click the link, Github creates a new repository for you, which we as a class can all see and work with!*
+ - Typically, the preferred method is to create a new repository on Github...**HOWEVER**:
+ - For this class we've already created a repository for you, and you should have already gotten the link via email! When you click the link, Github creates a new repository for you, which our class will be able to view and work with!
 
 <br>
 
 ### 2. Clone Your Repository to your Computer
 
-You should now have a repository on github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
+You should now have a repository on Github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
 
   - [`https://github.com/gge-ucd/first_lastname`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
   - **To _`clone`_ your repository** (*copy to your computer*):
