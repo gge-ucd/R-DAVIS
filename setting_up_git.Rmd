@@ -54,7 +54,15 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 ### 1. Create a New Repository on Github
 
  - Typically, the preferred method is to create a new repository on Github...**HOWEVER**:
- - For this class we've already created a repository for you, and you should have already gotten the link via email! When you click the link, Github creates a new repository for you, which our class will be able to view and work with!
+ - For this class we've already created a repository for you, and you should have already gotten a Github Classrom link via email! When you click the link, Github creates a new repository for you, which our class will be able to view and work with.
+ - When you use the Github Classroom link, a repository will created that looks like "gge-ucd/r-davis-in-class-project-YourGithubUsername"
+
+#### Students not enrolled in the class
+**Note**: If you are not *enrolled* in the course but have contacted the instructors about following along, the instructions will differ slightly. You will not be a part of the Github classroom, but we can still get you the repositories you will need to follow along. This will involve creating a **fork** of the repositories, which is an independent copy of the repository that lives under **your** Github account.
+
+For the start of the class, we will be working with this repository: [](https://github.com/gge-ucd/R_DAVIS_in_class_project). Open that page, then go to the upper right corner of the screen and click the button that says "Fork".
+
+This will create a repository called "YourGithubUsername/R_DAVIS_in_class_project". It will have all the same stuff as the students enrolled in the class, it just won't be underneath the gge-ucd Organization. All the other steps from here on out should be the same!
 
 <br>
 
@@ -62,10 +70,10 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 You should now have a repository on Github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
 
-  - [`https://github.com/gge-ucd/first_lastname`](https://github.com/gge-ucd/w01-fix-readme-ryanpeek). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
+  - [`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername`](https://github.com/gge-ucd/r-davis-in-class-project-MCMaurer). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
   - **To _`clone`_ your repository** (*copy to your computer*):
       - We're going to stick with using **`HTTPS`:** for now. Look for the big green "*Clone or download*" button. Make sure you select the "**Use HTTPS**" so the top of the box says: **Clone with HTTPS**. 
-      - Copy that link (should be something like *`https://github.com/gge-ucd/w01-fix-readme-firstnamelastname.git`*).
+      - Copy that link (should be something like *`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername.git`*).
  
 ![](img/https_clone.png)
 
@@ -78,19 +86,24 @@ You should now have a repository on Github. Our class is all housed in the [gge-
 Now we'll create an RStudio Project and link our Github repository (following [*Section 13.3* of `happygitwithR`](http://happygitwithr.com/rstudio-git-github.html#clone-the-new-github-repository-to-your-computer-via-rstudio)).
 
   - In RStudio, start a new Project: `File > New Project > Version Control > Git`. 
-  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automagically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. If you want to save your github projects or RStudio projects in one place, you can do so by specifying the subdirectory. See the *Nuts & Bolts* notes below for more info.
   
-![](img/newRStudio_git_proj_named.png)
+
+  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automatically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. You should put this project into a subdirectory, which will be **Desktop/R_DAVIS_2020** for this class. You should make a folder on your desktop called **R_DAVIS_2020** spelled **EXACTLY** like that, and put your new GitHub repository into that folder. It should look like this:
+  
+![](img/rstudio_git_repo_setup.png)
 
 <br>
 
-**More about github/RStudio projects:** One thing to keep in mind is each github repository should only have **ONE** corresponding Rstudio project file. In addition, you never want to save or move a github repository into another github repository...there are hidden files which track your changes (the version control record), and there's potential for conflict if you try to nest or overwite repos and RStudio projects. Best practice is generally make one folder that is `github` or `Rprojects`, and then each project or repository will have it's own single folder within that general directory.
+For the rest of this class, **everything** we do will be in the R_DAVIS_2020 folder on your Desktop. For the rest of your life, however, you can put GitHub repositories anywhere on your computer, but it's really useful to keep them well organized. A common way to do this would be a folder under your username called "GitHub_Projects" or something like that.
+
+Another critical thing with git and GitHub is that you should **never** nest projects inside of projects. Treat each RProject/git repository as a completely separate entity, containing only the stuff pertaining to that project. If you try to put a folder that's an RProject inside another folder that's an RProject, stuff is gonna go wrong. Just keep them all separate, but ideally contained in some other folder, like "GitHub_Projects", which is NOT a GitHub repository or RProject, just a boring regular folder.
 
   - This new subdirectory that you specified will be all these things:
     - a directory on your computer
     - a local Git repository, linked to a remote GitHub repository
     - an RStudio Project
-    - It should contain a `README.md` file with some content that we've created...we'll edit that next.
+    - it should contain a `README.md` file with some content that we've created...we'll edit that next.
+    - it should have a data folder with some data we'll use soon
     
 <!-- STOP and check in here...have folks gotten this part? Are there questions? Ask some paired/group questions?-->
 
@@ -102,7 +115,7 @@ Now we'll create an RStudio Project and link our Github repository (following [*
 
 ### 4. Push & Commit Changes to your `README.md`
 
-We'll go over this part in class. If you have `ssh` set up and you created your RStudio project, you've done most of the hard work...what remains is:
+We'll go over this part in class. If you successfully created your RStudio project, you've done most of the hard work...what remains is:
 
  - Test whether we can make changes or **edit** our README on our local `master` branch (copy of the repository on your computer).
  - **`commit`** these changes (make a version control record of your change/s)
@@ -112,13 +125,12 @@ We'll go over this part in class. If you have `ssh` set up and you created your 
 
 #### Edit README
 
-In RStudio, open your new project (**`Firstname_Lastname`**). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
+In RStudio, open your new project (`r-davis-in-class-project-YourGithubUsername`). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
 
   - **Edit your README:**
     - Add your name
-    - Delete the limerick and other bullets
-    - Add 1-2 sentences about what you study or what you hope to study
-    - Add an "X" inside the **Edited by student** box
+    - Answer the other questions
+    - Delete all the original text in the README, leaving just the information about you
 
 <br>
 

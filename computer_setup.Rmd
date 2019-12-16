@@ -18,6 +18,7 @@ knitr::include_graphics("img/woodybewildered.gif")
 ### Please complete these 4 main tasks before our first class:
 
  1. <i class="fa fa-github fa-2x" aria-hidden="true"></i> &nbsp; Install [**`git`**](https://git-scm.com/downloads) & register for a free [**github** account](https://github.com/) with your `.edu` email address
+    - **IMPORTANT NOTE**: When installing **git** on your computer, please do not change the installation location! The default installation location is what you want, and if during the installation you click something like "Change Install Location", it will mess everything up
  
  2. <img src="img/R_logo.png" alt="R" width = "6%"> &nbsp; Install *current* [**R**](https://cran.rstudio.com/) on your laptop
  
