@@ -9,7 +9,7 @@ title: "Orientation to programming, R, and RStudio"
 1. Appreciate why a researcher might want to write code and why R specifically
 2. Gain familiarity the RStudio IDE
 3. Use basic math functions in R, with calculator and fun() notation
-4. Understand variables and how to assign to them
+4. Understand objects and how to assign to them
 5. Use comparison operations
 6. Manage your workspace in an interactive R session
 7. Understand errors, warnings, and messages
@@ -42,9 +42,6 @@ Programming makes your workflow:
 R is a free, open-source programming language that is designed for data analysis 
 and statistics.  
 
-We write code in R because it is a language that both we and the
-computer can understand. It is a common language between us.  
-
 R also has a huge user-community and is highly extensible, with 
 thousands of packages that add extra functionality. Lots of researchers use R,
 so it is also a common language between us and our colleagues. In short, for 
@@ -52,6 +49,8 @@ many researchers, it is the best tool to organize,
 visualize, and analyze data.
 
 # Why RStudio?
+
+RStudio is essentially an interface to work with R, with lots of nice features and bells and whistles. It's like the difference between driving a really old car and a nice new one with GPS and Bluetooth and heated seats and power steering: they both use 4 wheels to get you where you need to go, but one will get you there in comfort and style, and maybe keep you safer along the way.
 
 RStudio is an IDE (integrated development environment) which we use to manage 
 and execute R code. It is also free and open-source, it works on all platforms 
@@ -80,6 +79,8 @@ while developing in R, RStudio will make typing easier and less error-prone.
 ## Workflow within Rstudio
 
 Console vs. script
+
+You can think of working in the Console vs. working in the Script as something like cooking. The console is like making up a new recipe, but not writing anything down. You can carry out a series of steps and produce a nice, beautiful dish at the end, but you didn't write anything down, so it's harder to figure out exactly what you did, and in what order. Writing a script is like taking nice notes while cooking- you can tweak and edit the recipe all you want, you can come back in 6 months and try it again, and you don't have to try to remember what went well and what didn't.
 
 - Console
     - The R console is where code is run/executed
@@ -124,6 +125,30 @@ You are working toward selecting a whole script and running it.
 
 <br>
 
+# R Projects
+
+One of the biggest benefits in using RStudio is that you get to use R Projects, which are extremely helpful for keeping a given project neatly organized and consistent. An R Project is essentially a single folder/directory on your computer, containing all the files you need for that given project. It should be totally self-contained, with all your data, scripts, and results inside it. What makes it an "R Project" is a small .RProject file that sits inside the project folder, which tells RStudio that this folder is for a single R Project.
+
+If you take a look in the very upper-right corner of the RStudio window, you should see a little cube icon with an R in it, possibly with "Project (None)" next to it. If you click on this, you'll see some options to create a New Project, Open Project, etc. 
+
+# Always Start Clean
+
+By default, RStudio is set up so that every time you reopen a project, the environment is exactly as you left it. This might sound great, but it can actually get you into a bit of trouble! Think back to our recipe analogy for a second. You want to start the recipe fresh each time you make the dish- if you were good about writing down the directions (writing an R script), then you should be able to recreate everything the same as before. However, RStudio bringing stuff back in can be more like leaving residue on pots and pans, messing with your nice start-to-finish recipe.
+
+We're going to change the settings in RStudio so that you'll be working with a nice clean environment each time. As long as you save your scripts, you shouldn't lose any work, and you'll avoid a lot of unforseen problems when you open a project up a few months later. In the menu bar at the top of your computer, navigate to Tools, then Global Options. Find the box that says "Restore .RData into workspace at startup" and make sure it is **unchecked**. 
+
+<br>
+<div class = "blue">
+
+### Tip
+
+While you're in Global Options, you can navigate to the Code tab on the lefthand side of the window. Find the box that says "Soft-wrap R source files" and make sure it is **checked**.
+
+This will make long lines of code in an R script wrap around onto a new line so you don't have to do a huge horizontal scroll, which is super annoying.
+</div>
+
+<br>
+
 
 # Introduction to R
 
@@ -152,15 +177,7 @@ a command you can simply hit "Esc" and RStudio will give you back the ">"
 prompt. You can also cancel commands with "Esc" if R is taking too long to 
 finish a calculation.
 
-Order of operations works in R just like it did in algebra class. From highest 
-to lowest precedence:
-
- * Parentheses: `(`, `)`
- * Exponents: `^`
- * Divide: `/`
- * Multiply: `*`
- * Add: `+`
- * Subtract: `-`
+R can use order of operations, just like you learned way back in algebra.
 
 ```{r chunk2}
 3 + 5 * 2
@@ -241,12 +258,10 @@ exp(0.5) # e^(1/2)
 
 You can even put functions inside each other. `exp(0.5)` raised `e` to the `1/2` 
 power. Equivalently we could take the square-root of `e`. Expressions are 
-interpretted from the inside-out: In the following line, R first takes `e^1` 
-(which is `e`), and then takes the square-root (that's what the `sqrt` function 
-does) of the result.
+interpretted from the inside-out: In the following line, R first takes `e^4`, and then takes the square-root (that's what the `sqrt` function does) of the result.
 
 ```{r chunk10}
-sqrt(exp(1))
+sqrt(exp(4))
 ```
 
 You don't need to remember function names. There are many ways to discover or 
@@ -274,14 +289,15 @@ when we want to filter a dataset based on a logical condition.
 1 >= -9 # greater than or equal to
 ```
 
-## Variables and assignment
+## Objects and assignment
 
-We can store values in variables using the assignment operator `<-`. 
-You can also use a single equals sign, `=`, for assignment.
+Now we're getting to the actual coding stuff. You can store values/data in "objects", also known as variables. An object has a name, and it has something stored in it, which could be a number, a string of characters, or even a whole dataset.
+
+We can store values in objects using the assignment operator `<-`. You can also use a single equals sign, `=`, for assignment.
 
 Note that unlike every other expression we have run so far, R doesn't print 
 anything when we run this next line. Instead, it is stored for later in a 
-**variable**, `x`. `x` now contains the **value** `0.25`. Read this as 
+**object**, `x`. `x` now contains the **value** `0.25`. Read this as 
 "Assign 1/4 to x."
 
 ```{r chunk15}
@@ -289,7 +305,7 @@ x <- 1/4
 ```
 
 Look for the `Environment` tab in one of the panes of RStudio, and you will see 
-that `x` and its value have appeared. Our variable `x` can be used in place of a 
+that `x` and its value have appeared. Our object `x` can be used in place of a 
 number in any calculation that expects a number:
 
 ```{r chunk16}
@@ -303,7 +319,7 @@ log(x)
 This doesn't change the value of `x` or store the result anywhere, it simply 
 prints the answer to the console.
 
-Variables can be reassigned:
+Objects can be reassigned:
 
 ```{r chunk18}
 x <- 99
@@ -311,16 +327,22 @@ x <- 99
 
 `x` used to contain the value 0.25 and and now it has the value 99.
 
-Assignment values can contain the variable being assigned to:
+Assignment values can contain the object being assigned to:
 
 ```{r chunk19}
 x <- x + 1 
 ```
 
+Finally, objects can have values assigned using other objects:
+
+```{r}
+y <- x*10
+```
+
 <br>
 <div class = "blue">
 
-### MCQ -- Variable Assignment
+### MCQ -- object Assignment
 
 What does the following code print?
 ```
@@ -343,26 +365,27 @@ Option 4) ::nothing::
 
 <br>
 
-## Variable name conventions
+## Object name conventions
 
-Variable names can contain letters, numbers, underscores and periods. They
+Object names can contain letters, numbers, underscores and periods. They
 cannot start with a number nor contain spaces at all. Different people use
-different conventions for long variable names, especially:
+different conventions for long object names, especially:
 
 - underscores\_between_words
 - camelCaseToSeparateWords
 
 What you use is up to you, but **be consistent**.
 
-## Tab completion
-
-Use descriptive variable names, as they make your code easier to understand. It 
-will save time because you'll remember what each variable is: It's easier to 
+Use descriptive object names, as they make your code easier to understand. It 
+will save time because you'll remember what each object is: It's easier to 
 remember what `domesticPopulation` is than `dp` or `x`. A silly example:
 
 ```{r chunk20}
 theNumberNine <- 9
 ```
+
+
+## Tab completion
 
 Tab-completion is a really nice feature of RStudio that saves typing and avoid 
 typos. After you assign 9 to `theNumberNine`, if you start typing `t...`, 
@@ -440,6 +463,25 @@ all the same:
 log(3, 10)
 log(x = 3, base = 10)
 log(base = 10, x = 3)
+log()
+```
+
+Remember tab-completion? Well it **works with functions too**! Type the name of a function, followed by parentheses, and make sure your cursor is between the parentheses. If you hit tab, a window should pop up showing the names of the arguments, with little purple rectangles next to them. 
+
+```{r, eval = F}
+log()
+```
+
+If you use your arrow keys, you can move around, and RStudio will display a little description of each argument. If you hit Enter, it will paste that argument and an equals sign in between the parentheses.
+
+```{r, eval=F}
+log(x = )
+```
+
+You can type in whatever you want for that argument, type a comma, then hit Tab again, and RStudio will bring up a list of all *remaining* arguments.
+
+```{r, eval = F}
+log(x = 3, )
 ```
 
 <br>
@@ -513,20 +555,14 @@ log_of_a_negative
 
 There's a third source of red text in R: messages. These are R's way of telling 
 you that something happened, but it's probably nothing to worry about. These 
-don't start with "Message"; they just print the red text. We can make R print 
-one like this:
-
-```{r, Message}
-message("Hey buddy!")
-```
-
+don't start with "Message"; they just print the red text.
 
 <br>
 <div class = "blue">
 
 ### Challenge
 
-Which elephant weighs more? Convert one's weight to the units of the other, and store the result in an appropriately-named new variable. Write a command to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
+Which elephant weighs more? Convert one's weight to the units of the other, and store the result in an appropriately-named new object. Write a bit of code to test whether elephant1 weights more than elephant2 (1 kg ≈ 2.2 lb).
 
 ```{r, eval=FALSE}
 elephant1_kg <- 3492
