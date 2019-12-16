@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -77,9 +78,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -93,7 +92,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -198,8 +196,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -256,56 +252,12 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -354,8 +306,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -364,6 +314,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -664,8 +624,8 @@ e # check it</code></pre>
 ## [1]  1  2  3  4  5  6  7 NA
 ## 
 ## [[3]]
-## [1] -0.2841597 -0.9193220 -0.1162478  1.8173120  0.3706279  0.5202165
-## [7] -0.7505320  0.8168998         NA
+## [1]  0.54604321 -0.27976609  0.11066213 -0.03871764 -2.51287248  0.47283240
+## [7] -0.35411707  1.30559401          NA
 ## 
 ## [[4]]
 ## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
@@ -816,17 +776,17 @@ out$b &lt;- rescale_0_1(df$b)
 out$c &lt;- rescale_0_1(df$c)
 out$d &lt;- rescale_0_1(df$d)
 out</code></pre>
-<pre><code>##            a          b         c           d
-## 1  0.6763377 0.60223401 0.4980153 0.576331081
-## 2  0.7058622 0.79674954 0.0000000 0.234580934
-## 3  1.0000000 0.49984406 0.3915857 0.529072153
-## 4  0.0000000 0.00000000 0.5573102 0.629626055
-## 5  0.5557727 0.37237145 0.4430155 0.005834701
-## 6  0.2235998 0.14092566 0.5639649 0.043782717
-## 7  0.6456459 0.06792785 0.1542186 1.000000000
-## 8  0.8764245 1.00000000 1.0000000 0.205334672
-## 9  0.3918212 0.74413690 0.5420949 0.000000000
-## 10 0.1145516 0.61725294 0.8145101 0.581662975</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
 </div>
 <div id="for-loops-to-apply-a-function" class="section level2">
 <h2><code>for</code> Loops to <em>apply</em> a function</h2>
@@ -836,17 +796,17 @@ for (i in 1:ncol(df)) { # loop through each element
   out[i] &lt;- rescale_0_1(df[[i]]) #apply function and store it to out
 }
 out</code></pre>
-<pre><code>##            a          b         c           d
-## 1  0.6763377 0.60223401 0.4980153 0.576331081
-## 2  0.7058622 0.79674954 0.0000000 0.234580934
-## 3  1.0000000 0.49984406 0.3915857 0.529072153
-## 4  0.0000000 0.00000000 0.5573102 0.629626055
-## 5  0.5557727 0.37237145 0.4430155 0.005834701
-## 6  0.2235998 0.14092566 0.5639649 0.043782717
-## 7  0.6456459 0.06792785 0.1542186 1.000000000
-## 8  0.8764245 1.00000000 1.0000000 0.205334672
-## 9  0.3918212 0.74413690 0.5420949 0.000000000
-## 10 0.1145516 0.61725294 0.8145101 0.581662975</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
 <div id="using-seq_along" class="section level3">
 <h3>Using <code>seq_along</code></h3>
 <p>Handy command that sequences along a list for you, so you don’t have to specify columns or rows, or series of numbers.</p>
@@ -855,17 +815,17 @@ for (i in seq_along(df)) {
   out[i] &lt;- rescale_0_1(df[[i]])
 }
 out</code></pre>
-<pre><code>##            a          b         c           d
-## 1  0.6763377 0.60223401 0.4980153 0.576331081
-## 2  0.7058622 0.79674954 0.0000000 0.234580934
-## 3  1.0000000 0.49984406 0.3915857 0.529072153
-## 4  0.0000000 0.00000000 0.5573102 0.629626055
-## 5  0.5557727 0.37237145 0.4430155 0.005834701
-## 6  0.2235998 0.14092566 0.5639649 0.043782717
-## 7  0.6456459 0.06792785 0.1542186 1.000000000
-## 8  0.8764245 1.00000000 1.0000000 0.205334672
-## 9  0.3918212 0.74413690 0.5420949 0.000000000
-## 10 0.1145516 0.61725294 0.8145101 0.581662975</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
 </div>
 </div>
 </div>
@@ -991,15 +951,16 @@ read_files_bind(folder = fileloc, pattern = &quot;(csv|CSV)$&quot;, FUN = read_c
 <pre class="r"><code>cars_nested &lt;-
   mtcars %&gt;%            # motortrend car dataset
     group_by(cyl) %&gt;%   # group by cylinder
-    nest(.key = &quot;data&quot;) # nest data by cyl, default key is &quot;data&quot;
-
-cars_nested</code></pre>
+    nest(.key = &quot;data&quot;) # nest data by cyl, default key is &quot;data&quot;</code></pre>
+<pre><code>## Warning: `.key` is deprecated</code></pre>
+<pre class="r"><code>cars_nested</code></pre>
 <pre><code>## # A tibble: 3 x 2
-##     cyl data              
-##   &lt;dbl&gt; &lt;list&gt;            
-## 1     6 &lt;tibble [7 × 10]&gt; 
-## 2     4 &lt;tibble [11 × 10]&gt;
-## 3     8 &lt;tibble [14 × 10]&gt;</code></pre>
+## # Groups:   cyl [3]
+##     cyl            data
+##   &lt;dbl&gt; &lt;list&lt;df[,10]&gt;&gt;
+## 1     6        [7 × 10]
+## 2     4       [11 × 10]
+## 3     8       [14 × 10]</code></pre>
 </div>
 <div id="interacting-with-list-data-using-map" class="section level2">
 <h2>Interacting with list-data using <code>map</code></h2>
@@ -1142,6 +1103,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -77,9 +78,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -93,7 +92,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -198,8 +196,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -256,56 +252,12 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -354,8 +306,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -364,6 +314,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -786,9 +746,9 @@ surveys_sml</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   sex   mean_weight
 ##   &lt;chr&gt;       &lt;dbl&gt;
-## 1 &lt;NA&gt;         64.7
-## 2 F            42.2
-## 3 M            43.0</code></pre>
+## 1 F            42.2
+## 2 M            43.0
+## 3 &lt;NA&gt;         64.7</code></pre>
 <p>You may also have noticed that the output from these calls doesn’t run off the screen anymore. It’s one of the advantages of <code>tbl_df</code> over data frame.</p>
 <p>You can also group by multiple columns:</p>
 <pre class="r"><code>surveys %&gt;%
@@ -798,16 +758,16 @@ surveys_sml</code></pre>
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
 ##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
-##  1 &lt;NA&gt;  AB                 NaN
-##  2 &lt;NA&gt;  AH                 NaN
-##  3 &lt;NA&gt;  AS                 NaN
-##  4 &lt;NA&gt;  BA                 NaN
-##  5 &lt;NA&gt;  CB                 NaN
-##  6 &lt;NA&gt;  CM                 NaN
-##  7 &lt;NA&gt;  CQ                 NaN
-##  8 &lt;NA&gt;  CS                 NaN
-##  9 &lt;NA&gt;  CT                 NaN
-## 10 &lt;NA&gt;  CU                 NaN
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
 ## # … with 82 more rows</code></pre>
 <p>When grouping both by <code>sex</code> and <code>species_id</code>, the first rows are for individuals that escaped before their sex could be determined and weighted. You may notice that the last column does not contain <code>NA</code> but <code>NaN</code> (which refers to “Not a Number”). To avoid this, we can remove the missing values for weight before we attempt to calculate the summary statistics on weight. Because the missing values are removed first, we can omit <code>na.rm = TRUE</code> when computing the mean:</p>
 <pre class="r"><code>surveys %&gt;%
@@ -818,16 +778,16 @@ surveys_sml</code></pre>
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
 ##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
-##  1 &lt;NA&gt;  DM                38.3
-##  2 &lt;NA&gt;  DO                50.7
-##  3 &lt;NA&gt;  DS               120  
-##  4 &lt;NA&gt;  NL               168. 
-##  5 &lt;NA&gt;  OL                29  
-##  6 &lt;NA&gt;  OT                21.2
-##  7 &lt;NA&gt;  PB                30.6
-##  8 &lt;NA&gt;  PE                17.7
-##  9 &lt;NA&gt;  PF                 6  
-## 10 &lt;NA&gt;  PI                18  
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
 ## # … with 54 more rows</code></pre>
 <p>Here, again, the output from these calls doesn’t run off the screen anymore. If you want to display more data, you can use the <code>print()</code> function at the end of your chain with the argument <code>n</code> specifying the number of rows to display:</p>
 <pre class="r"><code>surveys %&gt;%
@@ -839,21 +799,21 @@ surveys_sml</code></pre>
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
 ##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;
-##  1 &lt;NA&gt;  DM                38.3
-##  2 &lt;NA&gt;  DO                50.7
-##  3 &lt;NA&gt;  DS               120  
-##  4 &lt;NA&gt;  NL               168. 
-##  5 &lt;NA&gt;  OL                29  
-##  6 &lt;NA&gt;  OT                21.2
-##  7 &lt;NA&gt;  PB                30.6
-##  8 &lt;NA&gt;  PE                17.7
-##  9 &lt;NA&gt;  PF                 6  
-## 10 &lt;NA&gt;  PI                18  
-## 11 &lt;NA&gt;  PL                25  
-## 12 &lt;NA&gt;  PM                20.2
-## 13 &lt;NA&gt;  PP                14.6
-## 14 &lt;NA&gt;  RM                11.1
-## 15 &lt;NA&gt;  SF                40.5
+##  1 F     BA                9.16
+##  2 F     DM               41.6 
+##  3 F     DO               48.5 
+##  4 F     DS              118.  
+##  5 F     NL              154.  
+##  6 F     OL               31.1 
+##  7 F     OT               24.8 
+##  8 F     OX               21   
+##  9 F     PB               30.2 
+## 10 F     PE               22.8 
+## 11 F     PF                7.97
+## 12 F     PH               30.8 
+## 13 F     PL               19.3 
+## 14 F     PM               22.1 
+## 15 F     PP               17.2 
 ## # … with 49 more rows</code></pre>
 <p>Once the data are grouped, you can also summarize multiple variables at the same time (and not necessarily on the same variable). For instance, we could add a column indicating the minimum weight for each species for each sex:</p>
 <pre class="r"><code>surveys %&gt;%
@@ -865,16 +825,16 @@ surveys_sml</code></pre>
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight min_weight
 ##    &lt;chr&gt; &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
-##  1 &lt;NA&gt;  DM                38.3         24
-##  2 &lt;NA&gt;  DO                50.7         44
-##  3 &lt;NA&gt;  DS               120           78
-##  4 &lt;NA&gt;  NL               168.          83
-##  5 &lt;NA&gt;  OL                29           21
-##  6 &lt;NA&gt;  OT                21.2         18
-##  7 &lt;NA&gt;  PB                30.6         20
-##  8 &lt;NA&gt;  PE                17.7         17
-##  9 &lt;NA&gt;  PF                 6            4
-## 10 &lt;NA&gt;  PI                18           18
+##  1 F     BA                9.16          6
+##  2 F     DM               41.6          10
+##  3 F     DO               48.5          12
+##  4 F     DS              118.           45
+##  5 F     NL              154.           32
+##  6 F     OL               31.1          10
+##  7 F     OT               24.8           5
+##  8 F     OX               21            20
+##  9 F     PB               30.2          12
+## 10 F     PE               22.8          11
 ## # … with 54 more rows</code></pre>
 </div>
 <div id="tallying" class="section level4">
@@ -886,9 +846,9 @@ surveys_sml</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   sex       n
 ##   &lt;chr&gt; &lt;int&gt;
-## 1 &lt;NA&gt;   1748
-## 2 F     15690
-## 3 M     17348</code></pre>
+## 1 F     15690
+## 2 M     17348
+## 3 &lt;NA&gt;   1748</code></pre>
 <p>Here, <code>tally()</code> is the action applied to the groups created by <code>group_by()</code> and counts the total number of records for each category.</p>
 <div class="blue">
 <h3 id="challenge-2">Challenge</h3>
@@ -964,9 +924,9 @@ surveys %&gt;%
 <pre><code>## # A tibble: 3 x 2
 ##   sex       n
 ##   &lt;chr&gt; &lt;int&gt;
-## 1 &lt;NA&gt;   1748
-## 2 F     15690
-## 3 M     17348</code></pre>
+## 1 F     15690
+## 2 M     17348
+## 3 &lt;NA&gt;   1748</code></pre>
 </details>
 </div>
 <p><br></p>
@@ -1231,6 +1191,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -77,9 +78,7 @@ h6 {
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -93,7 +92,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -198,8 +196,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -256,56 +252,12 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 <style type="text/css">
 .code-folding-btn { margin-bottom: 4px; }
 </style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("show" === "show");
-});
-</script>
 
 
-
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <style type="text/css">
 
@@ -354,8 +306,6 @@ div.tocify {
 
 .tocify-subheader .tocify-item {
   font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
 }
 
 .tocify .list-group-item {
@@ -364,6 +314,16 @@ div.tocify {
 
 
 </style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row-fluid">
@@ -575,65 +535,65 @@ y &lt;- data.frame(key= LETTERS[c(1:4)],
 
 x</code></pre>
 <pre><code>##   key value1
-## 1   A      8
-## 2   B     10
-## 3   C      7
-## 4   E      9</code></pre>
+## 1   A      3
+## 2   B      8
+## 3   C      2
+## 4   E      5</code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>##   key value2
-## 1   A      5
+## 1   A      8
 ## 2   B      2
-## 3   C      3
-## 4   D      4</code></pre>
+## 3   C      6
+## 4   D      3</code></pre>
 </div>
 <div id="joining-joins" class="section level2">
 <h2>“Joining” joins</h2>
 <pre class="r"><code># What&#39;s in both x and y?
 inner_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1 value2
-## 1   A      8      5
-## 2   B     10      2
-## 3   C      7      3</code></pre>
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6</code></pre>
 <pre class="r"><code># What&#39;s in X and bring with it the stuff that matches in Y
 left_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1 value2
-## 1   A      8      5
-## 2   B     10      2
-## 3   C      7      3
-## 4   E      9     NA</code></pre>
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   E      5     NA</code></pre>
 <pre class="r"><code># What&#39;s in Y and bring with it the stuff that matches in Y
 right_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1 value2
-## 1   A      8      5
-## 2   B     10      2
-## 3   C      7      3
-## 4   D     NA      4</code></pre>
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   D     NA      3</code></pre>
 <pre class="r"><code># Give me everything!
 full_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1 value2
-## 1   A      8      5
-## 2   B     10      2
-## 3   C      7      3
-## 4   E      9     NA
-## 5   D     NA      4</code></pre>
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   E      5     NA
+## 5   D     NA      3</code></pre>
 </div>
 <div id="filtering-joins" class="section level2">
 <h2>Filtering “joins”</h2>
 <pre class="r"><code># Give me the stuff in X that is also in Y
 semi_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1
-## 1   A      8
-## 2   B     10
-## 3   C      7</code></pre>
+## 1   A      3
+## 2   B      8
+## 3   C      2</code></pre>
 <pre class="r"><code># Give me the stuff in X that is not in Y
 anti_join(x, y, by = &quot;key&quot;)</code></pre>
 <pre><code>##   key value1
-## 1   E      9</code></pre>
+## 1   E      5</code></pre>
 <pre class="r"><code># Want everything that doesn&#39;t match?
 full_join(anti_join(x,y, by = &quot;key&quot;), anti_join(y,x, by = &quot;key&quot;), by= &quot;key&quot;)</code></pre>
 <pre><code>##   key value1 value2
-## 1   E      9     NA
-## 2   D     NA      4</code></pre>
+## 1   E      5     NA
+## 2   D     NA      3</code></pre>
 <pre class="r"><code># keys with different names?
 x &lt;- data.frame(keyX = LETTERS[c(1:3, 5)], 
                 value1 = sample(1:10, 4), 
@@ -644,25 +604,25 @@ y &lt;- data.frame(keyY = LETTERS[c(1:4)],
 
 x</code></pre>
 <pre><code>##   keyX value1
-## 1    A      8
-## 2    B      9
-## 3    C      1
+## 1    A      6
+## 2    B      7
+## 3    C     10
 ## 4    E      2</code></pre>
 <pre class="r"><code>y</code></pre>
 <pre><code>##   keyY value2
-## 1    A      8
-## 2    B      1
-## 3    C      4
-## 4    D     10</code></pre>
+## 1    A      1
+## 2    B      8
+## 3    C      7
+## 4    D      6</code></pre>
 <pre class="r"><code>full_join(x, y) #should error out</code></pre>
 <pre><code>## Error: `by` required, because the data sources have no common variables</code></pre>
 <pre class="r"><code>full_join(x, y, by=c(&quot;keyX&quot; = &quot;keyY&quot;))</code></pre>
 <pre><code>##   keyX value1 value2
-## 1    A      8      8
-## 2    B      9      1
-## 3    C      1      4
+## 1    A      6      1
+## 2    B      7      8
+## 3    C     10      7
 ## 4    E      2     NA
-## 5    D     NA     10</code></pre>
+## 5    D     NA      6</code></pre>
 </div>
 </div>
 <div id="set-operations" class="section level1">
@@ -995,8 +955,7 @@ surveys %&gt;%
   filter(taxa == &quot;Rodent&quot;) %&gt;% 
   group_by(plot_type, genus, taxa) %&gt;%
   summarize(n = n())</code></pre>
-<pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
-<pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
+<pre><code>## Joining, by = &quot;plot_id&quot;Joining, by = &quot;species_id&quot;</code></pre>
 <pre class="r"><code>genus_counts</code></pre>
 <pre><code>## # A tibble: 59 x 4
 ## # Groups:   plot_type, genus [59]
@@ -1036,6 +995,54 @@ $(document).ready(function () {
 });
 
 
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
 </script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
