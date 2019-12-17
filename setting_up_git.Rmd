@@ -60,7 +60,7 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 #### Students not enrolled in the class
 **Note**: If you are not *enrolled* in the course but have contacted the instructors about following along, the instructions will differ slightly. You will not be a part of the Github classroom, but we can still get you the repositories you will need to follow along. This will involve creating a **fork** of the repositories, which is an independent copy of the repository that lives under **your** Github account.
 
-For the start of the class, we will be working with this repository: [](https://github.com/gge-ucd/R_DAVIS_in_class_project). Open that page, then go to the upper right corner of the screen and click the button that says "Fork".
+For the start of the class, we will be working with this repository: [https://github.com/gge-ucd/R_DAVIS_in_class_project](https://github.com/gge-ucd/R_DAVIS_in_class_project). Open that page, then go to the upper right corner of the screen and click the button that says "Fork".
 
 This will create a repository called "YourGithubUsername/R_DAVIS_in_class_project". It will have all the same stuff as the students enrolled in the class, it just won't be underneath the gge-ucd Organization. All the other steps from here on out should be the same!
 
