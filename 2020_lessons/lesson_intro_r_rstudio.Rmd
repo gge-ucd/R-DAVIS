@@ -129,7 +129,8 @@ You are working toward selecting a whole script and running it.
 
 One of the biggest benefits in using RStudio is that you get to use R Projects, which are extremely helpful for keeping a given project neatly organized and consistent. An R Project is essentially a single folder/directory on your computer, containing all the files you need for that given project. It should be totally self-contained, with all your data, scripts, and results inside it. What makes it an "R Project" is a small .RProject file that sits inside the project folder, which tells RStudio that this folder is for a single R Project.
 
-If you take a look in the very upper-right corner of the RStudio window, you should see a little cube icon with an R in it, possibly with "Project (None)" next to it. If you click on this, you'll see some options to create a New Project, Open Project, etc. 
+If you take a look in the very upper-right corner of the RStudio window, you should see a little cube icon with an R in it, possibly with "Project (None)" next to it. If you click on this, you'll see some options to create a New Project, Open Project, etc.
+
 
 # Always Start Clean
 

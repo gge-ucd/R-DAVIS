@@ -15,6 +15,11 @@ title: "Starting With Data"
 
 </div>
 
+```{r, echo=FALSE}
+knitr::opts_chunk$set(rows.print=10, R.options=list(max.print=50))
+```
+
+
 Now that we've learned a bit about how R is thinking about data under the hood, using different types of vectors to build more complicated data structures, let's actually look at some data.
 
 ## Presentation of the Survey Data
@@ -64,7 +69,7 @@ Wow, printing a data frame gives us quite a bit of output. This is a lot more da
 
 Data frames are really just a collection of vectors: every column is a vector with a single data type, and every column is the exact same length. You can make a data frame "by hand", but they're usually created when you import some sort of tabular data into R using a function like `read.csv()`.
 
-![](./img/data-frame.svg)
+[](img/data-frame.svg)
 
 ## Inspecting `data.frame` Objects
 
