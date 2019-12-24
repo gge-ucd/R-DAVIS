@@ -48,48 +48,36 @@ library(emojifont, quietly = T)
 ```
 
 #### Week 1
-
- - Course Intro
- - Intro to Git/GitHub and RStudio
- - Project Management
+- Course intro
+- Intro to git/GitHub and RStudio
 
 #### Week 2
- 
- - Spreadsheets & Project Management
- - Intro to R
+- Spreadsheets best practices
+- Project Management
  
 #### Week 3
-
- - Exploring Data Frames
+- How R thinks about data
 
 #### Week 4
-
- - `dplyr`: Data Import and Manipulation
- - ``ggplot2`: Short Intro
+- Working with data in R
 
 #### Week 5
-
- - `dplyr`: Data Summarization and Export
- - `ggplot2`: Hands on with Ecology Data
+- Data cleaning with `dplyr` and `tidyr`
 
 #### Week 6
-
- - `ggplot2`: Finishing Up
- - Data Import/Export Workflow
+- Finish data cleaning
+- Intro to plotting with `ggplot`
 
 #### Week 7
- - Visualization Dos and Don'ts
- - Data Import/Export
- - More Dates and Times with `lubridate`
+- Finishing up `ggplot`
 
 #### Week 8
- - Writing Functions
- - Iteration
+- Date-time data with `lubridate`
+- Exporting data
 
 #### Week 9
- - RMarkdown and Literate Programming
+- Writing Functions
+- Iteration
 
 #### Week 10
-
- - [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
- 
+- RMarkdown and Literate Programming
