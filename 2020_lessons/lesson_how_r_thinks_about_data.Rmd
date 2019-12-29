@@ -2,8 +2,6 @@
 title: How R Thinks About Data
 ---
 
-This lesson is adapted from [Data Carpentry's Ecology Workshop Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)
-
 <br>
 <div class = "blue">
 ### Learning objectives
@@ -255,8 +253,10 @@ examples.
 
 ```{r, purl=FALSE}
 ## Extract those elements which are not missing values.
-!is.na(heights)
-heights[!is.na(heights)]
+
+is.na(heights) # this returns a logical vector with TRUE where there is an NA
+!is.na(heights) # the ! means "is not", so now we get a logical vector with FALSE for NAs
+heights[!is.na(heights)] # now we put that logical vector in, and it will NOT return the entries with NA
 
 ## Extract those elements which are complete cases. The returned object is an atomic vector of type `"numeric"` (or `"double"`).
 heights[complete.cases(heights)]
@@ -400,3 +400,5 @@ sex
 Factors can be convenient at times, and they will pop up pretty frequently, but in most circumstances, character strings will give you fewer hassles. It's usually best to start with character vectors, and convert them explicitly to factors if you need to.
 
 Some functions in R will automatically convert character strings to factors. For instance, `read.csv()` is a common function to read CSV files into R, but it will turn any character data into factors. You can use the argument `stringsAsFactors=FALSE` in `read.csv()` to turn off this behavior, keeping your character strings as character strings.
+
+This lesson is adapted from [Data Carpentry's Ecology Workshop Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)
