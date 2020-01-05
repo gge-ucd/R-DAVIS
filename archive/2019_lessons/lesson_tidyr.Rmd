@@ -1,0 +1,232 @@
+---
+title: Reshaping Data with tidyr
+---
+
+```{r setup, echo = FALSE, message = FALSE}
+library(tidyverse)
+surveys <- read.csv("data/portal_data_joined.csv")
+suppressWarnings(surveys$date <- lubridate::ymd(paste(surveys$year,
+                                                      surveys$month,
+                                                      surveys$day,
+                                                      sep = "-")))
+```
+
+<br>
+<div class = "blue">
+### Learning objectives
+
+- Understand what it means for data to be tidy
+    - Each variable forms a column.
+    - Each observation forms a row.
+    - Each type of observational unit forms a table.
+- Be able to use `tidyr::gather` to make "wide" data "long"
+</div>
+
+<br>
+
+# Reshaping with gather and spread
+
+In the [spreadsheet
+lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/),
+we discussed how to structure our data leading to the four rules defining a tidy
+dataset:
+
+1. Each variable has its own column
+2. Each observation has its own row
+3. Each value must have its own cell
+4. Each type of observational unit forms a table
+
+Here we examine the fourth rule: Each type of observational unit forms a table.
+
+In `surveys` , the rows of `surveys` contain the values of variables associated with each record (the unit), values such the weight or sex of each animal associated with each record. What if instead of comparing records, we wanted to compare the different mean weight of each species between plots? (Ignoring `plot_type` for simplicity).
+
+We'd need to create a new table where each row (the unit) is comprise of values of variables associated with each plot. In practical terms this means the values of the species in `genus` would become the names of column variables and the cells would contain the values of the mean weight observed on each plot.
+
+Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have **reshaped** the data according to the observations of interest: average species weight per plot instead of recordings per date.
+
+The opposite transformation would be to transform column names into values of a variable.
+
+We can do both these of transformations with two `tidyr` functions, `spread()`
+and `gather()`.
+
+## Spreading
+
+`spread()` takes three principal arguments:
+
+1. the data 
+2. the *key* column variable whose values will become new column names.  
+3. the *value* column variable whose values will fill the new column variables.
+
+Further arguments include `fill` which, if set, fills in missing values with 
+the value provided.
+
+Let's use `spread()` to transform surveys to find the mean weight of each 
+species in each plot over the entire survey period. We use `filter()`,
+`group_by()` and `summarise()` to filter our observations and variables of 
+interest, and create a new variable for the `mean_weight`. We use the pipe as 
+before too.
+
+```{r, purl=FALSE}
+surveys_gw <- surveys %>%
+  filter(!is.na(weight)) %>%
+  group_by(genus, plot_id) %>%
+  summarize(mean_weight = mean(weight))
+
+str(surveys_gw)
+```
+
+This yields `surveys_gw` where the observations for each plot are spread across
+multiple rows, 196 observations of 3 variables. 
+Using `spread()` to key on `genus` with values from `mean_weight` this becomes
+24 observations of 11 variables, one row for each plot.
+
+![](img/spread_data_R.png)
+
+```{r, purl=FALSE}
+surveys_spread <- surveys_gw %>%
+  spread(key = genus, value = mean_weight)
+
+str(surveys_spread)
+```
+
+We could now plot comparisons between the weight of species in different plots, 
+although we may wish to fill in the missing values first.
+
+```{r, purl=FALSE}
+surveys_gw %>%
+  spread(genus, mean_weight, fill = 0) %>%
+  head()
+```
+
+## Gathering
+
+The opposing situation could occur if we had been provided with data in the
+form of `surveys_spread`, where the genus names are column names, but we 
+wish to treat them as values of a genus variable instead.
+
+In this situation we are gathering the column names and turning them into a
+pair of new variables. One variable represents the column names as values, and
+the other variable contains the values previously associated with the column names.
+
+`gather()` takes four principal arguments:
+
+1. the data
+2. the *key* column variable we wish to create from column names.
+3. the *values* column variable we wish to create and fill with values 
+associated with the key.
+4. the names of the columns we use to fill the key variable (or to drop).
+
+To recreate `surveys_gw` from `surveys_spread` we would create a key called
+`genus` and value called `mean_weight` and use all columns except `plot_id` for
+the key variable. Here we drop `plot_id` column with a minus sign.
+
+![](img/gather_data_R.png)
+
+```{r, purl=FALSE}
+surveys_gather <- surveys_spread %>%
+  gather(key = genus, value = mean_weight, -plot_id)
+
+str(surveys_gather)
+```
+
+Note that now the `NA` genera are included in the re-gathered format. Spreading
+and then gathering can be a useful way to balance out a dataset so every
+replicate has the same composition.
+
+We could also have used a specification for what columns to include. This can be
+useful if you have a large number of identifying columns, and it's easier to
+specify what to gather than what to leave alone. And if the columns are in a
+row, we don't even need to list them all out - just use the `:` operator!
+
+```{r, purl=FALSE}
+surveys_spread %>%
+  gather(key = genus, value = mean_weight, Baiomys:Spermophilus) %>%
+  head()
+```
+
+<br>
+<div class = "blue">
+### Challenge
+
+1. Spread the `surveys` data frame with `year` as columns, `plot_id` 
+  as rows, and the
+  number of genera per plot as the values. You will need to summarize before
+  reshaping, and use the function `n_distinct()` to get the number of unique
+  genera within a particular chunk of data. It's a powerful function! See
+  `?n_distinct` for more.
+  
+<details>
+<summary>ANSWER</summary>
+```{r, answer=TRUE, purl=FALSE}
+rich_time <- surveys %>%
+  group_by(plot_id, year) %>%
+  summarize(n_genera = n_distinct(genus)) %>%
+  spread(year, n_genera)
+
+head(rich_time)
+```
+</details>
+<br>
+
+2. Now take that data frame and `gather()` it again, so each row is a unique
+   `plot_id` by `year` combination.
+   
+<details>
+<summary>ANSWER</summary>
+```{r, answer=TRUE, purl=FALSE}
+rich_time %>%
+  gather(year, n_genera, -plot_id)
+```
+</details>
+<br>
+
+3. The `surveys` data set has
+   two measurement columns: `hindfoot_length` and `weight`.  This makes it
+   difficult to do things like look at the relationship between mean values of
+   each measurement per year in different plot types. Let's walk through a
+   common solution for this type of problem. First, use `gather()` to create a
+    dataset where we have a key column called `measurement` and a
+   `value` column that takes on the value of either `hindfoot_length` or
+   `weight`. *Hint*: You'll need to specify which columns are being gathered.
+   
+<details>
+<summary>ANSWER</summary>
+```{r, answer=TRUE, purl=FALSE}
+surveys_long <- surveys %>%
+  gather(measurement, value, hindfoot_length, weight)
+```
+</details>
+<br>
+
+4. With this new data set, calculate the average of each
+   `measurement` in each `year` for each different `plot_type`. Then
+   `spread()` them into a data set with a column for `hindfoot_length` and
+   `weight`. *Hint*: You only need to specify the key and value
+   columns for `spread()`.
+   
+<details>
+<summary>ANSWER</summary>
+```{r, answer=TRUE, purl=FALSE}
+surveys_long %>%
+  group_by(year, measurement, plot_type) %>%
+  summarize(mean_value = mean(value, na.rm=TRUE)) %>%
+  spread(measurement, mean_value)
+```
+</details>
+</div>
+
+<br>
+
+<div class = "blue">
+
+### Challenge
+
+Download [this dataset](data/stocks.tsv) of closing prices for several restaurant stocks over a year.
+- Is the data tidy?  
+- If not, tidy it
+- Which stock performed the best over this year? Use any method you want to answer that question.
+</div>
+
+<br>
+
+

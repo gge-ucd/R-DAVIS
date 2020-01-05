@@ -18,9 +18,9 @@ navbar:
     icon: fa-book  fa-1x
     menu:
     - text: Orientation to Programming, R, & RStudio
-      href: lesson_intro_r_rstudio.html
+      href: 2020_lessons/lesson_intro_r_rstudio.html
     - text: Project Management
-      href: lesson_project_management.html
+      href: 2020_lessons/project_management.html
     - text: Spreadsheets
       href: lesson_spreadsheets_condensed.html
     - text: Vectors & Data Types

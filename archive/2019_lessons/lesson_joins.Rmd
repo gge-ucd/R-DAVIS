@@ -1,0 +1,325 @@
+---
+title: Multi-table joins
+minutes: ?20
+---
+
+```{r, include=FALSE}
+# Silently load in the data so the rest of the lesson works
+library(tidyverse)
+library(gapminder)
+```
+
+> ## Learning objectives
+>
+> - Focus on the third tidy data principle
+>     - Each variable forms a column.
+>     - Each observation forms a row.
+>     - Each type of observational unit forms a table.
+> - Be able to use `dplyr`'s join functions to merge tables
+>
+
+### Joins
+
+The third tidy data maxim states that each observation type gets its own table. The idea of multiple tables within a dataset will be familiar to anyone who has worked with a relational database but may seem foreign to those who have not. 
+
+The idea is this: Suppose we conduct a behavioral experiment that puts individuals in groups, and we measure both individual- and group-level variables. We should have a table for the individual-level variables and a separate table for the group-level variables. Then, should we need to merge them, we can do so using the `join` functions of `dplyr`. 
+
+The join functions are nicely illustrated in RStudio's [Data wrangling cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf). Each function takes two data.frames and, optionally, the name(s) of columns on which to match. If no column names are provided, the functions match on all shared column names.
+
+The different join functions control what happens to rows that exist in one table but not the other. 
+
+- `left_join` keeps all the entries that are present in the left (first) table and excludes any that are only in the right table. 
+- `right_join` keeps all the entries that are present in the right table and excludes any that are only in the left table.
+- `inner_join` keeps only the entries that are present in both tables. `inner_join` is the only function that guarantees you won't generate any missing entries.
+- `full_join` keeps all of the entries in both tables, regardless of whether or not they appear in the other table.
+
+![dplyr joins, via RStudio](img/dplyr-joins.png)
+
+# Practice with joins
+
+## Fabricate some example data
+
+```{r}
+set.seed(12345)
+x <- data.frame(key= LETTERS[c(1:3, 5)], 
+                value1 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+y <- data.frame(key= LETTERS[c(1:4)], 
+                value2 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+
+x
+y
+```
+
+## "Joining" joins
+
+```{r}
+# What's in both x and y?
+inner_join(x, y, by = "key")
+```
+
+```{r}
+# What's in X and bring with it the stuff that matches in Y
+left_join(x, y, by = "key")
+```
+
+```{r}
+# What's in Y and bring with it the stuff that matches in Y
+right_join(x, y, by = "key")
+```
+
+```{r}
+# Give me everything!
+full_join(x, y, by = "key")
+```
+
+## Filtering "joins"
+
+```{r}
+# Give me the stuff in X that is also in Y
+semi_join(x, y, by = "key")
+```
+
+```{r}
+# Give me the stuff in X that is not in Y
+anti_join(x, y, by = "key")
+```
+
+```{r}
+# Want everything that doesn't match?
+full_join(anti_join(x,y, by = "key"), anti_join(y,x, by = "key"), by= "key")
+```
+
+```{r}
+# keys with different names?
+x <- data.frame(keyX = LETTERS[c(1:3, 5)], 
+                value1 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+y <- data.frame(keyY = LETTERS[c(1:4)], 
+                value2 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+
+x
+y
+```
+
+```{r, error = TRUE}
+full_join(x, y) #should error out
+full_join(x, y, by=c("keyX" = "keyY"))
+```
+
+# Set Operations
+```{r setup_dataframes}
+df1 <- data_frame(x = LETTERS[1:2], 
+                  y = c(1L, 1L))
+df2 <- data_frame(x = LETTERS[1:2], 
+                  y = 1:2)
+
+df1
+df2
+```
+
+
+```{r}
+# Which rows are common in both datasets?
+dplyr::intersect(df1, df2)
+```
+
+```{r}
+#Want all unique rows between both datasets?
+dplyr::union(df1, df2)
+```
+
+```{r}
+#What's unique to df1?
+dplyr::setdiff(df1, df2)
+```
+
+```{r}
+#What's unique to df2?
+dplyr::setdiff(df2, df1)
+```
+
+# Practice with joins using gapminder
+
+We will practice on our continents data.frame from module 2 and the gapminder data.frame. Note how these are tidy data: We have observations at the level of continent and at the level of country, so they go in different tables. The continent column in the gapminder data.frame allows us to link them now. If continents data.frame isn't in your Environment, load it and recall what it consists of:
+
+```{r}
+load('data/continents.RDA')
+continents
+```
+
+We can join the two data.frames using any of the `dplyr` functions. We will pass the results to `str` to avoid printing more than we can read, and to get more high-level information on the resulting data.frames.
+
+```{r}
+left_join(gapminder, continents) 
+
+right_join(gapminder, continents)
+```
+
+These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn't appear in the gapminder data.frame. When we use `left_join` it gets filtered from the results, but when we use `right_join` it appears, with missing values for all of the country-level variables:
+  
+```{r}
+right_join(gapminder, continents) %>% 
+  filter(continent == "Antarctica")
+```
+
+There's another problem in this data.frame -- it has two population measures, one by continent and one by country and it's not clear which is which! Let's rename a couple of columns.
+
+```{r}
+right_join(gapminder, continents) %>% 
+  rename(country_pop = pop, continent_pop = population)
+```
+
+> #### Challenge -- Putting the pieces together
+> 
+> A colleague suggests that the more land area an individual has, the greater their gdp will be and that this relationship will be observable at any scale of observation. You chuckle and mutter "Not at the continental scale," but your colleague insists. Test your colleague's hypothesis by:
+> 
+> - Calculating the total GDP of each continent, 
+>       - Hint: Use `dplyr`'s `group_by` and `summarize`
+> - Joining the resulting data.frame to the `continents` data.frame, 
+> - Calculating the per-capita GDP for each continent, and 
+> - Plotting per-capita gdp versus population density. 
+>
+
+## Challenge solutions
+
+> #### Solution to Challenge -- Putting the pieces together
+>
+>
+> ```{r, Putting the pieces together - solution}
+> library(ggplot2)
+> 
+> gapminder %>%
+>   mutate(GDP = gdpPercap * pop) %>%  # Calculate country-level GDP
+>   group_by(continent) %>%  # Group by continent
+>   summarize(cont_gdp = sum(GDP)) %>%  # Calculate continent-level GDP
+> # Join the continent-GDP data.frame to the continents data.frame
+>     left_join(continents) %>%  
+> # Calculate continent-level per-capita GDP
+>     mutate(per_cap = cont_gdp / population) %>%  
+> # Plot gdp versus land area
+>     ggplot(aes(x = area_km2, y = per_cap)) +  
+> # Draw points
+>     geom_point() +  
+> # And label them
+>     geom_text(aes(label = continent), nudge_y = 5e3)  
+> ```
+>
+
+# Practice with joins using surveys
+
+To illustrate how to use **`dplyr`** with these complex queries, we are going to join
+the `plots` and `surveys` tables. The `plots` table in the database contains
+information about the different plots surveyed by the researchers.
+
+The datasets can be found here: [plots.csv](data/plots.csv), [surveys.csv](data/surveys.csv), and [species.csv](data/species.csv).
+
+Download them and save them to your downloads folder. Alternatively, copy the link and use the `read_csv()` function directly on that.
+
+```{r plots, results='markup', purl=FALSE}
+plots <- read_csv("data/plots.csv")
+plots
+```
+
+The `plot_id` column also features in the `surveys` table:
+
+```{r surveys, results='markup', purl=FALSE}
+surveys <- read_csv("data/surveys.csv")
+surveys
+```
+
+Because `plot_id` is listed in both tables, we can use it to look up matching
+records, and join the two tables.
+
+
+![diagram illustrating inner and left joins](img/joins.svg)
+
+
+For example, to extract all surveys for the first plot, which has `plot_id` 1,
+we can do:
+
+```{r join, results='markup', purl=FALSE}
+plots %>%
+  filter(plot_id == 1) %>%
+  inner_join(surveys)
+```
+
+> ### Challenge
+>
+> 
+>
+> Write some code that returns the number of rodents observed in each plot in
+> each year. Start by reading in the species dataframe.
+>
+> ```{r get_species}
+> species <- read_csv("data/species.csv")
+> ```
+>
+> Hint: All the information you need isn't contained in one single dataframe
+> just yet. The "taxa" information is contained in the species dataframe, and the
+> observation data is contained in the surveys dataframe. Write some code that 
+> joins the species and survey tables together on a common column. What are the 
+> common columns?
+>
+> Hint: How would you use a split-apply-combine strategy to count the number of
+> observations *per plot, per year*? Which part of this hint refers to the
+> "splitting", and which part refers to the "applying"?
+>
+> Hint: How would you subset the resulting dataframe to just include the rodents?
+>
+>
+> ```{r left_join_answer, answer=TRUE, eval=TRUE}
+> 
+> glimpse(surveys)
+> glimpse(species)
+> ## with dplyr syntax
+> 
+> surveys %>% 
+>   left_join(species) %>%
+>   group_by(plot_id, taxa, year) %>%
+>   summarize(n = n()) %>% 
+>   filter(taxa == "Rodent")
+> 
+> # Alternatively, filter to rodents *before* summarizing by plot and year
+> surveys %>% 
+>   left_join(species) %>%
+>   filter(taxa == "Rodent") %>% 
+>   group_by(plot_id, year) %>%
+>   summarize(n = n())
+> 
+``` 
+
+> ### Challenge
+>
+> Write some code that returns the total number of rodents in each genus caught
+> in the different plot types.
+>
+> Hint: Not all the data you need are contained in 1 dataframe. The plot_type data
+> are in the plots dataframe, the taxa data are in the species dataframe, and the
+> observation data are in the surveys dataframe. Start by joining these three dataframes
+> together.
+>
+> Hint: Think "split-apply-combine". We want to *count* the number of observations in
+> each group defined by `plot_type` and `genus` combinations. That is, what is the 
+> count of observations *per plot_type, per genus* for *just the Rodent taxa*.
+> 
+> ```{r genus_by_type_answer, answer=TRUE, results='markup', eval=TRUE}
+> genus_counts <- 
+>   surveys %>% 
+>   left_join(plots) %>%
+>   left_join(species) %>% 
+>   filter(taxa == "Rodent") %>% 
+>   group_by(plot_type, genus, taxa) %>%
+>   summarize(n = n())
+>
+> genus_counts
+> ```
+
+
+<br>
+
+This lesson is adapted from the Software Carpentry: R for Reproducible 
+Scientific Analysis [Multi-Table Joins materials](http://data-lessons.github.io/gapminder-R/12-joins.html), Brandon Hurr's dplyr II: Joins and Set Ops [presentation](https://github.com/bhive01/2016-02-D-RUG-dplyr-II-talk)
+to the Davis R UsersGroup on Februrary 2, 2016, and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data [R and Databases materials](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
