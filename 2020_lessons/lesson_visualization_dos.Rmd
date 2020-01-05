@@ -41,7 +41,7 @@ Because there are so many options and methods to plot our data in R, we need to 
 
 A very nice example of this is provided by this animation (created by Darkhorse Analytics, and used in Jenny Bryan's excellent [stat545](http://stat545.com/block015_graph-dos-donts.html) course). It shows how *simplification* can make a big difference in communication. 
 
-![](../img/less-is-more-darkhorse-analytics.gif)
+![](img/less-is-more-darkhorse-analytics.gif)
 
 ### Exploration vs. Communication
 
@@ -83,7 +83,7 @@ Take a look at the [vignette online](https://cran.r-project.org/web/packages/vir
 
 An example:
 
-![viridis](../img/viridis_demo.png)
+![viridis](img/viridis_demo.png)
 
 ## Visualization Tips {.tabset .tabset-fade}
 
