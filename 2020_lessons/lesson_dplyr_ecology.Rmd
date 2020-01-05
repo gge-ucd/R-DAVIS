@@ -4,7 +4,7 @@ title: Manipulating and analyzing data with dplyr; Exporting data
 
 ```{r, echo=FALSE, purl=FALSE, message = FALSE}
 #source("setup.R")
-surveys <- read.csv("../data/portal_data_joined.csv")
+surveys <- read.csv("data/portal_data_joined.csv")
 suppressWarnings(surveys$date <- lubridate::ymd(paste(surveys$year,
                                                       surveys$month,
                                                       surveys$day,
@@ -79,7 +79,7 @@ To learn more about **`dplyr`** and **`tidyr`** after the workshop, you may want
 We'll read in our data using the `read_csv()` function, from the tidyverse package **`readr`**, instead of `read.csv()`, the base function for reading in data. The data we are going to be using today should already be in your R_DAVIS_2020 project in the folder `data`. 
 
 ```{r,results = 'hide', purl = FALSE}
-surveys <- read_csv("../data/portal_data_joined.csv")
+surveys <- read_csv("data/portal_data_joined.csv")
 
 ## inspect the data
 str(surveys)
@@ -384,7 +384,7 @@ To learn more about the `join` family of functions, check out this [useful link]
 Let's read in another dataset. This data set is a record of the tail length of every rodent in our `surveys` dataframe. For some annoying reason, it was recorded on a seperate data sheet. We want to take the tail length data and add it to our surveys dataframe. 
 
 ```{r, message=FALSE}
-tail <- read_csv("../data/tail_length.csv")
+tail <- read_csv("data/tail_length.csv")
 ```
 
 The `join` functions join dataframes together based on shared columns between the two data frames. Luckily, both our `surveys` dataframe and our new `tail_length` data frame both have the column `record_id`. Let's double check that our record_id columns in the two data frames are the same by using the `summary` function. 

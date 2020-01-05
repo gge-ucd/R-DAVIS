@@ -24,7 +24,7 @@ This lesson is adapted from [Data Carpentry's Data Organization in Spreadsheets 
 - Never modify your raw data. Always make a copy before making any changes.  
 - Keep track of all of the steps you take to clean your data in a plain text file.
   
-![spreadsheet setup](../figures/spreadsheet_fig/spreadsheet-setup-updated.png)
+![spreadsheet setup](figures/spreadsheet_fig/spreadsheet-setup-updated.png)
 
 - Organize your data according to tidy data principles.
   - Each column is a variable like "weight" or "site_ID"
@@ -33,7 +33,7 @@ This lesson is adapted from [Data Carpentry's Data Organization in Spreadsheets 
   
 This is bad:
 
-![multiple-info example](../figures/spreadsheet_fig/multiple-info.png)
+![multiple-info example](figures/spreadsheet_fig/multiple-info.png)
 
 Why? Species and sex should be split into separate columns.
 
@@ -48,7 +48,7 @@ Why? Species and sex should be split into separate columns.
 - Use an appropriate null value to record missing data.
   - There's a broader discussion of this in [White et al 2013](https://peerj.com/preprints/7/), but here's a quick look at their recommendations:
   
-  ![White et al.](../figures/spreadsheet_fig/3_white_table_1.jpg)
+  ![White et al.](figures/spreadsheet_fig/3_white_table_1.jpg)
 
 
 - Don't use formatting to convey information or to make your spreadsheet look pretty.

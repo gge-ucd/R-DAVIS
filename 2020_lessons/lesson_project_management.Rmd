@@ -7,7 +7,7 @@ But I guess I'm already there<br>
 I come home, a clean directory<br>
 I guess this must be the place
 
-![](../img/david_byrne_big_suit.gif){width=250px}
+![](img/david_byrne_big_suit.gif){width=250px}
 
 <br>
 <div class = "blue">
@@ -67,7 +67,7 @@ the files and sub-directories as belonging to that project. We recommend
 creating a directory and a project file for each project you work on. It should 
 look something like this:
 
-![](../img/working-directory-structure.png)
+![](img/working-directory-structure.png)
 
 
 When you want to work on this project using R, double click on the .Rproj file, 
@@ -107,7 +107,7 @@ create the following directories:
     - papers
 
 The finished product should look something like this on your computer:  
-![](../img/good_project_organization.png)
+![](img/good_project_organization.png)
 </div>
 
 <br>
