@@ -1,0 +1,212 @@
+---
+title: "ggplot2_extras"
+author: "Martha Wohlfeil"
+date: "12/19/2019"
+output: html_document
+---
+
+<div class = "blue">
+### Challenge (optional)
+Scatter plots can be useful exploratory tools for small datasets. For data
+sets with large numbers of observations, such as the `surveys_complete` data
+set, overplotting of points can be a limitation of scatter plots. One strategy
+for handling such settings is to use hexagonal binning of observations. The
+plot space is tessellated into hexagons. Each hexagon is assigned a color
+based on the number of observations that fall within its boundaries.  To use
+hexagonal binning with **`ggplot2`**, first install the R package `hexbin`
+from CRAN:
+
+```{r, eval = FALSE}
+install.packages("hexbin")
+library(hexbin)
+```
+
+Then use the `geom_hex()` function:
+
+```{r, eval = FALSE}
+surveys_plot +
+ geom_hex()
+```
+
+- What are the relative strengths and weaknesses of a hexagonal bin plot
+  compared to a scatter plot? Examine the above scatter plot and compare it
+  with the hexagonal bin plot that you created.
+</div>
+
+<br>
+
+## Arranging and exporting plots
+
+Faceting is a great tool for splitting one plot into multiple plots, but sometimes you may want to produce a single figure that contains multiple plots using different variables or even different data frames. The **`gridExtra`** package allows us to combine separate ggplots into a single figure using `grid.arrange()`:
+
+```{r install-gridextra, message=FALSE, purl=TRUE, eval=FALSE}
+install.packages("gridExtra")
+```
+
+```{r gridarrange-example, message=FALSE, purl=FALSE, fig.width=10}
+library(gridExtra)
+
+spp_weight_boxplot <- ggplot(data = surveys_complete, 
+                             mapping = aes(x = species_id, y = weight)) +
+  geom_boxplot() +
+  xlab("Species") + ylab("Weight (g)") +
+  scale_y_log10()
+
+spp_count_plot <- ggplot(data = yearly_counts, 
+                         mapping = aes(x = year, y = n, color = species_id)) +
+  geom_line() + 
+  xlab("Year") + ylab("Abundance")
+
+grid.arrange(spp_weight_boxplot, spp_count_plot, ncol = 2, widths = c(4, 6))
+
+```
+
+In addition to the `ncol` and `nrow` arguments, used to make simple arrangements, there are tools for [constructing more complex layouts](https://cran.r-project.org/web/packages/gridExtra/vignettes/arrangeGrob.html). 
+
+After creating your plot, you can save it to a file in your favorite format. The Export tab in the **Plot** pane in RStudio will save your plots at low resolution, which will not be accepted by many journals and will not scale well for posters. 
+
+Instead, use the `ggsave()` function, which allows you easily change the dimension and resolution of your plot by adjusting the appropriate arguments (`width`, `height` and `dpi`). 
+
+Make sure you have the `fig_output/` folder in your working directory.
+
+```{r ggsave-example, eval=FALSE, purl=FALSE}
+my_plot <- ggplot(data = yearly_sex_counts, 
+                  mapping = aes(x = year, y = n, color = sex)) +
+    geom_line() +
+    facet_wrap(~ species_id) +
+    labs(title = "Observed species in time",
+        x = "Year of observation",
+        y = "Number of species") +
+    theme_bw() +
+    theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
+                        axis.text.y = element_text(colour = "grey20", size = 12),
+          text=element_text(size = 16))
+ggsave("fig_output/yearly_sex_counts.png", my_plot, width = 15, height = 10)
+
+# This also works for grid.arrange() plots
+combo_plot <- grid.arrange(spp_weight_boxplot, spp_count_plot, ncol = 2, widths = c(4, 6))
+ggsave("fig_output/combo_plot_abun_weight.png", combo_plot, width = 10, dpi = 300)
+```
+
+Note: The parameters `width` and `height` also determine the font size in the saved plot.
+
+## Customization
+
+Take a look at the [**`ggplot2`** cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf), and
+think of ways you could improve the plot.
+
+Now, let's change names of axes to something more informative than 'year'
+and 'n' and add a title to the figure:
+
+```{r number-species-year-with-right-labels, purl=FALSE}
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+    geom_line() +
+    facet_wrap(~ species_id) +
+    labs(title = "Observed species in time",
+         x = "Year of observation",
+         y = "Number of species") +
+    theme_bw()
+```
+
+The axes have more informative names, but their readability can be improved by
+increasing the font size:
+
+```{r number-species-year-with-right-labels-xfont-size, purl=FALSE}
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+    geom_line() +
+    facet_wrap(~ species_id) +
+    labs(title = "Observed species in time",
+        x = "Year of observation",
+        y = "Number of species") +
+    theme_bw() +
+    theme(text=element_text(size = 16))
+```
+
+Note that it is also possible to change the fonts of your plots. If you are on
+Windows, you may have to install
+the [**`extrafont`** package](https://github.com/wch/extrafont), and follow the
+instructions included in the README for this package.
+
+After our manipulations, you may notice that the values on the x-axis are still not
+properly readable. Let's change the orientation of the labels and adjust them
+vertically and horizontally so they don't overlap. You can use a 90-degree
+angle, or experiment to find the appropriate angle for diagonally oriented
+labels:
+
+```{r number-species-year-with-theme, purl=FALSE}
+ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+    geom_line() +
+    facet_wrap(~ species_id) +
+    labs(title = "Observed species in time",
+        x = "Year of observation",
+        y = "Number of species") +
+    theme_bw() +
+    theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
+                        axis.text.y = element_text(colour = "grey20", size = 12),
+          text = element_text(size = 16))
+```
+
+If you like the changes you created better than the default theme, you can save them as
+an object to be able to easily apply them to other plots you may create:
+
+
+```{r number-species-year-with-right-labels-xfont-orientation, purl=FALSE}
+grey_theme <- theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
+                          axis.text.y = element_text(colour = "grey20", size = 12),
+                          text = element_text(size = 16))
+ggplot(surveys_complete, aes(x = species_id, y = hindfoot_length)) +
+    geom_boxplot() +
+    grey_theme
+```
+
+The
+[ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) package
+provides a wide variety of options (including an Excel 2003 theme).
+The [**`ggplot2`** extensions website](https://www.ggplot2-exts.org) provides a list
+of packages that extend the capabilities of **`ggplot2`**, including additional
+themes.
+
+The `facet_wrap` geometry extracts plots into an arbitrary number of dimensions
+to allow them to cleanly fit on one page. On the other hand, the `facet_grid`
+geometry allows you to explicitly specify how you want your plots to be
+arranged via formula notation (`rows ~ columns`; a `.` can be used as
+a placeholder that indicates only one row or column).
+
+Let's modify the previous plot to compare how the weights of males and females
+has changed through time:
+
+```{r average-weight-time-facet-sex-rows, purl=FALSE}
+# One column, facet by rows
+yearly_sex_weight <- surveys_complete %>%
+    group_by(year, sex, species_id) %>%
+    summarize(avg_weight = mean(weight))
+ggplot(data = yearly_sex_weight, 
+       mapping = aes(x = year, y = avg_weight, color = species_id)) +
+    geom_line() +
+    facet_grid(sex ~ .)
+```
+
+```{r average-weight-time-facet-sex-columns, purl=FALSE}
+# One row, facet by column
+ggplot(data = yearly_sex_weight, 
+       mapping = aes(x = year, y = avg_weight, color = species_id)) +
+    geom_line() +
+    facet_grid(. ~ sex)
+```
+
+
+<div class = "blue">
+### Challenge
+
+With all of this information in hand, please take another five minutes to
+either improve one of the plots generated in this exercise or create a
+beautiful graph of your own. Use the RStudio [**`ggplot2`** cheat sheet](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+for inspiration. Here are some ideas:
+
+* See if you can change the thickness of the lines.
+* Can you find a way to change the name of the legend? What about its labels?
+* Try using a different color palette (see
+  http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/)
+</div>
+
+<br>
