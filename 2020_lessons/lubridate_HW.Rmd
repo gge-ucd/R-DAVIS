@@ -1,0 +1,81 @@
+---
+title: "Untitled"
+author: "Martha Wohlfeil"
+date: "1/3/2020"
+output: html_document
+---
+## Example 2: Pressure Transducer (Solinst) Data Logger 
+
+Let's practice with another data file, a logger that records water temperature and river stage every 15 minutes from the NF American River. You can download the file by right clicking on the [webpage](../data/2015_NFA_solinst_08_05.csv), or simply use the web URL. We've practiced both now. (The file is also available on the R-DAVIS website in the [Resources->Datasets](https://gge-ucd.github.io/R-DAVIS/resources.html) tab.)
+
+*This dataset has 35,038 observations for water temperature, and stage (pressure transducer info).*
+
+ > Task 1: Read in and assign the data to your environment using either the direct webpage URL, or the downloaded file.
+
+```{r solinst_data, eval=T}
+
+# pressure transducer data
+
+# read in file directly from a weblink
+dat <- read.csv("https://github.com/gge-ucd/R-DAVIS/raw/master/data/2015_NFA_solinst_08_05.csv", skip=13)
+
+library(lubridate, warn.conflicts = F)
+library(dplyr, warn.conflicts = F)
+
+summary(dat)
+names(dat)
+
+```
+
+ > ### Task 2
+ - Make a `datetime` column and then...
+ > - Calculate Weekly **Mean, Max, Min** Water Temperatures and plot as point or line plot *(HINT: `dplyr` function)*
+ > - Calculate Hourly mean **Level** for April through June and make a line plot (using `ggplot2`). 
+ > - Make a ggplot geom_pointrange plot of the avg. max, min monthly temperatures.
+
+**Solutions**
+
+```{r solution2, eval=T, echo=F}
+
+# make datetime column
+dat$datetime <- paste0(dat$Date, " ", dat$Time)
+
+# format as POSIXct using lubridate
+dat$datetime <- ymd_hms(dat$datetime)
+
+library(ggplot2)
+
+dat %>% 
+  mutate(yr = year(datetime),
+         mon = month(datetime),
+         wk = week(datetime),
+         DOY = yday(datetime),
+         hr = hour(datetime))
+
+head(dat)
+
+# Weekly Plot
+dat %>%  select(Level, Temperature, wk) %>% # select only cols we want
+  group_by(wk) %>% 
+  summarise_each(funs(mean, max, min)) %>%  # apply functions to each column
+  ggplot() + geom_point(aes(x=wk, y=Temperature_max), color="gray40", fill="maroon", pch=21) +
+  geom_line(aes(x=wk, y=Temperature_mean), color="red3")+
+  geom_point(aes(x=wk, y=Temperature_min), color="gray40", fill="navyblue", pch=21) + xlab("July 2015: Week")
+
+
+# Hourly July Plot
+dat %>%  filter(mon>=4 & mon<=6) %>% 
+  select(Level, DOY, hr, yr) %>%
+  group_by(yr, DOY, hr) %>% 
+  summarise(mean_Level=mean(Level)) %>% 
+  mutate(datetimes = ymd_hms(strptime(paste0(yr,"-",DOY," ",hr, ":00"), format="%Y-%j %H:%M"))) %>% 
+  ggplot() + geom_line(aes(x=datetimes, y=mean_Level), color="forestgreen") + xlab("Date") + ylab("Hourly Stage (m)")
+
+# Monthly Plot
+dat %>%  
+  select(Temperature, mon) %>% # select only cols we want
+  group_by(mon) %>% 
+  summarise_each(funs(mean, max, min)) %>%  # apply functions to each column
+  ggplot() + geom_pointrange(aes(x=mon, y=mean, ymax=max, ymin=min), fill="maroon", size=1, pch=21) + xlab("Avg Monthly Water Temperature: Months")
+
+```
