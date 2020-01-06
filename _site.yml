@@ -22,7 +22,7 @@ navbar:
     - text: Spreadsheets
       href: lesson_spreadsheets_condensed.html
     - text: Project Management
-      href: project_management.html
+      href: lesson_project_management.html
     - text: How R Thinks About Data
       href: lesson_how_r_thinks_about_data.html
     - text: Starting With Data in R
