@@ -53,7 +53,7 @@ Each row holds information for a single animal, and the columns represent:
 Your current R project should already have a `data` folder with the surveys data CSV file in it. We can read it into R and assign it to an object by using the `read.csv()` function. The first argument to `read.csv()` is the path of the file you want to read, in quotes. This path will be relative to your current **working directory**, which in our case is the R Project folder. So from there, we want to access the "data" folder, and then the name of the CSV file.
 
 ```{r, eval=TRUE,  purl=FALSE}
-surveys <- read.csv("../data/portal_data_joined.csv")
+surveys <- read.csv("data/portal_data_joined.csv")
 ```
 
 * Hint: tab-completion works with file paths too. Type the pair of quotes, and with your cursor between them, hit tab to bring up the files in your working directory.
@@ -244,7 +244,7 @@ Loading the `tidyverse` package actually loads a whole bunch of commonly used ti
 A common feature of `tidyverse` functions is that they use underscores in the name. For example, the `tidyverse` function for reading a CSV file is `read_csv()` instead of `read.csv()`. Let's try it:
 
 ```{r}
-t_surveys <- read_csv("../data/portal_data_joined.csv")
+t_surveys <- read_csv("data/portal_data_joined.csv")
 ```
 
 Now let's take a look at how  prints and check the class:
