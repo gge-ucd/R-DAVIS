@@ -1,0 +1,343 @@
+---
+title: Vectors and data frames
+minutes: 50
+---
+
+> ## Learning objectives
+>
+> - Understand vectors as fundamental R units
+> - Understand and be able to use vectorized operations
+> - Understand `data.frame` as common R object and familiar research data table.
+>     - Columns = variables, rows = observations
+>     - Columns = vectors
+> - Be able to examine the structure and content of a data frame.
+> - Be able to subset vectors with index and logical notation
+>
+
+## Intro to vectors
+
+Vectors are a collection of observations of a single variable. They are the 
+fundamental unit of R. In data analysis and statistics, we don't often work with 
+individual numbers, but multiple observations. This is baked into R and helps  
+make it powerful. Let's explore how to work with them.
+
+### Creating vectors
+
+We can also manually create new vectors. There are many ways to do this. 
+
+We also use the `:` operator as a shortcut to generate a sequence of numbers 
+starting from the number on the left of the `:` and going to the number on the 
+right side of the `:`.
+
+```{r colon}
+3:10
+```
+
+The most flexible way is the concatenate function, `c()`. We can concatenate any
+number of objects together, as long as they are the same type. Here's a vector
+of characters.
+
+```{r c}
+fruit <- c("apples", "oranges", "lemons")
+```
+
+Let's store a vector of 6 odd numbers in a new variable. Remember that you must 
+assign the result of an operation to a variable if you want to keep it around. 
+Otherwise R will print out the result but then forget it.
+
+```{r c_odds}
+odds <- c(3, 5, 7)
+```
+
+### Vectorization
+
+We can do math on a vector and the operation is performed on each element in
+turn. We can reassign variables just as we did when they weren't vectors.
+
+```{r vector_math}
+odds + 1
+odds <- odds - 2
+```
+
+Most functions that accept a single value can also accept a vector of values.
+
+```{r log_vector}
+exp(odds)
+```
+
+## Intro to loading external data 
+
+We'll talk more about importing data later but, for now, use 
+[this link](data/continents.RDA) to download a dataset that we'll use for the 
+next section. Save it in the "data" folder you created earlier.
+
+R has a variety functions to load specific kinds of data. Two R-specific 
+data-types are `.RDA` and `.RDS`. `.RDA` files, like the one you just 
+downloaded, are created with the `save()` function and accessed with the 
+`load()` function. `load()` needs the location of the saved file, provided as 
+character string file-path, starting with the working directory. If you are 
+using RStudio's projects (which we recommend), this is made a bit easier because 
+the location of your project (where the `.Rproj` file is located) is the 
+default working directory. It is displayed at the top of your console pane in 
+RStudio. File-paths should be provided relative to that location. So, to load 
+the file we just saved:
+
+```{r load data}
+load('data/continents.RDA')
+```
+
+## Intro to data frames
+
+```{r df, echo = FALSE}
+continents
+```
+
+This is a `data.frame` -- the type of object most of us work with most of the 
+time in R. In a `data.frame` each column represents a variable, and each row is 
+an observation. This is the basic data organizational scheme -- one column per 
+variable, one row per observation. You might recognize this form from from a 
+statistics class or your own data analysis. 
+
+#### Inspecting a data frame
+
+Rather than pulling up the spreadsheet form of a data.frame, we'd like to use R 
+to get more information about it. In this case, our `data.frame` is so small 
+that we can print the whole thing and inspect it:
+
+```{r}
+continents
+```
+
+When we start working with more-realistic datasets, let alone big data, that 
+won't work. We can get the first few rows of a `data.frame` with `head()`. 
+
+```{r}
+head(continents)
+```
+
+`str` provides richer information about a `data.frame` and each element in it. 
+It is generally a good first-step inspection of an R object.
+
+```{r}
+str(continents)
+```
+
+We get some summary information on `continents`: it's type and dimensions, and 
+we get some information on each variable in the `data.frame`. 
+
+> #### Shoutout
+>
+> There is another function like `head()` and `str()` that provides information 
+> on a `data.frame`: `summary()`  
+> - Call the `summary` function on the `continents` data.  
+> - What is the average (mean) change in tooth growth overall?
+>
+
+### Accessing a data frame 
+
+We can extract individual columns of a data frame as vectors. 
+
+We can extract a vector (ie a single variable) from a data frame with the `$` 
+operator.
+
+```{r extract}
+continents$population
+```
+
+Note that you can use tab-completion to see what variables are available.
+
+That just printed the six values of `population`. We are going to work with them 
+some more, so extract them from the data.frame and store them to a new object, 
+called `pop`:
+
+```{r extract and assign}
+pop <- continents$population
+```
+
+Now we have a new object in our environment: a numeric "vector" with 6 entries. 
+
+Another core R concept is the idea that when you manipulate an object, the 
+original object doesn't change. Note that the `continents` data.frame still has 
+the dose variable. R didn't "take it out" of `continents`; instead, it made a 
+copy of it and stored it to a variable called `pop`. They are now two 
+separate things. If we make a change to one, it will not affect the other. 
+
+#### Vectorization with data frames
+
+We can now pair the concept of vectorization with operations on our data frame.
+Here, we can find the logarithm of each continent's population:
+
+```{r first vectorization}
+log(x = pop, base = 10)
+```
+
+R went over each item in `pop` and took the base-10 logarithm. Some functions 
+take a vector but rather than returning a result for each item, operate on all 
+of them together. E.g. we can find the mean and standard deviation of 
+populations:
+
+```{r mean and sd}
+mean(pop)
+sd(pop)
+```
+
+Many functions will also operate element-wise over multiple vectors. E.g., to 
+calculate the population density of each continent, we need to divide the 
+population by the land area for each continent. We can do that with a single 
+command:
+
+```{r}
+continents$population / continents$area_km2
+```
+
+Note that we didn't have to take those vectors out of the data.frame to use 
+them. We can do vectorized operations right in the data.frame, which helps keep 
+everything organized: recall that each row of a data.frame is a particular 
+observation (in this case a continent), so we often want to do operations with 
+each row.
+
+Just like we can extract a column from a data.frame with `$`, we can make a new 
+column:
+
+```{r new column}
+continents$pop_density <- continents$population / continents$area_km2
+continents
+```
+
+### Subsetting
+
+#### Subset by index
+
+We can extract items from a vector by specifying which positions, or indices, we 
+want. R's syntax for subsetting is square brackets (`[ ]`) at the end of an 
+object containing the positions to return. So to get the third element out of 
+our `pop` vector:
+
+```{r subsetting1}
+pop
+pop[3]
+```
+
+To get the first three elements, we need to put a vector containing 1, 2, and 3 
+inside the `[ ]`. We just learned how to make such a vector using the combine 
+function.
+
+```{r}
+pop[c(1, 2, 3)]
+```
+
+Sometimes it will be more useful to provide the desired positions as a variable. 
+Let's pull out the odd-positioned entries from `pop`:
+
+```{r}
+pop[odds]
+```
+
+We can also tell R which elements we *don't* want with a `-`. This returns each 
+element in `pop` except the first one:
+
+```{r}
+pop[-1]
+```
+
+If we try to ask for an element that doesn't exist, R returns `NA`. `NA` is a 
+special value in R that means "missing".
+
+```{r}
+pop[10]
+```
+
+
+> #### Challenge -- Create and subset a vector
+>
+> Similar to `c`, the `seq` function creates a vector: a **seq**uence of 
+> numbers. 
+>
+> - Your first task is to create a sequence of all the multiples of three from 
+> three to 300. Figure out how to do this. Some combination of playing with the 
+> function in the console and reading its helpfile (`?seq`) should work. 
+> Helpfiles are challenging at first, but it's important to learn how to find 
+> the info you need in them. Hint: The arguments you need here are `from`, `to`, 
+> and `by`.
+>
+> - Store your sequence in a variable.
+> - Extract the 33rd entry from the sequence
+> - **Bonus**: Create a vector with ten evenly-spaced numbers starting with one 
+> and ending with one-million. What is the sum of the second and ninth entries 
+> in this vector?
+> - **Super-Bonus**: Returning to the multiples-of-three vector, what is the sum 
+> of the numbers in positions that are not evenly divisible by three? That is, 
+> the sum of the first, second, fourth, fifth, seventh, etc. entries.
+>
+
+#### Subset by logical
+
+Note that the `continents` data frame contains two common kinds of variables: 
+numbers (num) and strings (chr).
+
+```{r}
+str(continents)
+```
+
+A third important data type in R is logicals. You saw this when making logical 
+comparisons like `1 > 0`. Logical data can only be `TRUE` or `FALSE` (or `NA` 
+for missing; any variable type in R can have `NA`-missing values). 
+
+Logical comparisons are vectorized like other things in R. Let's find the highly 
+populated continents, those with more than one-billion people. One-billion is 
+10^9, so we can write it as `1e9`.
+
+```{r}
+pop > 1e9
+```
+
+That went over each element in `pop` and compared it with 10. We say that R 
+"recycled" 10 to compare it with each element in `pop`. 
+
+In the same way that we subset by index before, we can subset by a logical 
+vector. To find the values of `pop` that were greater than one-billion, we 
+subset it like so:
+
+```{r}
+pop[pop > 1e9]
+```
+
+> #### Shoutout
+>
+> How could you extract the names of the continents with more than one-billion
+> people?
+>
+
+Recall that in a data frame, each row constitutes a single observation. This 
+makes it especially useful to test one column and use it to subset another -- we 
+often want the entries of some variable where a condition on another variable is 
+met. For example, to find the land-area of Africa, we can test the continent 
+names for being "Africa" and extract the area where that is true. 
+
+Here as elsewhere, it is often useful to build code from the inside out, i.e., 
+write the logical test first, then go left and write what you want to subset 
+with it.
+
+```{r}
+continents$area_km2[continents$continent == "Africa"]
+```
+
+> #### MCQ -- Subset and vectorize 
+>
+> What is the total land area of continents that have at least 10% of the 
+> world's population? 
+>
+> - Use subsetting to get the areas you want
+> - Use the `sum()` function to find the total land area
+>
+> a. 149428500
+> b. 126700000
+> c. 22728500
+> d. 100
+>
+
+This lesson is adapted from the Software Carpentry: R for Reproducible 
+Scientific Analysis [Vectors and Data Frames materials](http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html).
+
+
+

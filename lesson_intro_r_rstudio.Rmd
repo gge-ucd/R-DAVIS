@@ -464,7 +464,6 @@ all the same:
 log(3, 10)
 log(x = 3, base = 10)
 log(base = 10, x = 3)
-log()
 ```
 
 Remember tab-completion? Well it **works with functions too**! Type the name of a function, followed by parentheses, and make sure your cursor is between the parentheses. If you hit tab, a window should pop up showing the names of the arguments, with little purple rectangles next to them. 

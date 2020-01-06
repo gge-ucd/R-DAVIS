@@ -1,0 +1,124 @@
+---
+layout: page
+title: R for reproducible scientific analysis
+subtitle: Tidy Data
+minutes: 75
+---
+
+```{r setup, echo = FALSE, message = FALSE}
+library(tidyverse)
+```
+> ## Learning objectives
+>
+> - Understand what it means for data to be tidy
+>     - Each variable forms a column.
+>     - Each observation forms a row.
+>     - Each type of observational unit forms a table.
+> - Be able to use `tidyr::gather` to make "wide" data "long"
+>
+
+### Tidy data
+
+Data can be organized many ways. While there may be times that call for other organizational schemes, this is the standard and generally-best way to organize data:
+
+1. Each variable forms a column
+1. Each observation forms a row
+1. Each observational type forms a table
+
+What exactly constitutes a variable can be difficult to define out of context, but as a general rule, if observations are measured in different units, they should be in different columns, and if they are measured in the same units, there is a good chance they should be in the same column.
+
+An example will clarify. Download [this fake data](data/wide_eg.csv) on blood readings under several medical treatments. Save it to your data directory and read it into R. Is this data in tidy format? Why not -- which of the three principles does it not satisfy?
+
+```{r}
+blood <- read_csv('data/wide_eg.csv')
+blood
+```
+
+Hmm, that doesn't look quite right? What do you think happened? How could we fix it? The answer, of course, is in the `?read_csv` helpfile.
+
+```{r}
+blood <- read_csv('data/wide_eg.csv', skip = 2)
+blood
+```
+
+There's one other little problem in this dataset -- do you see it? One of the subject's sexes was entered as "m" instead of "M". If we later try to `group_by` sex or plot by sex, we will get three groups: "F", "M", and "m". To fix this, we could identify the errant entry and replace it specifically with something like `blood$sex[blood$sex == "m"] = "M"`, or we can simply tell R to make all the entries in that variable upper-case with the `toupper` function:
+
+```{r}
+blood$sex
+toupper(blood$sex)
+blood$sex = toupper(blood$sex)
+# Or, using dplyr:
+blood = mutate(blood, sex = toupper(sex))
+# Note that those accomplish the exact same thing in very different ways. Studying the difference may be useful. 
+blood
+```
+
+It looks like we've got 12 individuals, each subjected to three conditions -- a control and two treatments. Each observation here is a person in a treatment (we don't know what the measured value is), so each row should be defined by a person-treatment; that is, we should have 12 rows with four columns: subject, sex, condition, and the measured value. 
+
+#### `gather()` 
+
+A typical analysis of data like these consists of calculating means and standard deviations by condition and sex. It is possible to do this with the data in their current form, but it will be much easier if we tidy the data first.
+
+We can transform the data to tidy form with the `gather` function from the `tidyr` package, which of course is part of the `tidyverse`.
+
+Let's look at the arguments to `gather` include the data.frame you're gathering, which columns to gather, and names for two columns in the new data.frame: the key and the value. The key will consist of the old names of gathered columns, and the value will consist of the entries in those columns. The order of arguments is data.frame, key, value, columns-to-gather:
+
+```{r tidyr}
+gather(blood, key = condition, value = albumin,
+       control, treatment1, treatment2)
+```
+
+You can also tell `gather` which columns *not* to gather -- these are the "ID variables"; that is, they identify the unit of analysis on each row.
+
+```{r tidyr 2}
+blood.tidy <- gather(blood, key = condition, value = albumin,
+                     -subject, -sex)
+```
+
+Note that the variables with `-` in front of them aren't removed from the data.frame. Instead we get one row for each combination of those variables.
+
+### Packages in the tidyverse expect tidy data
+
+Now that the `blood` data is in tidy form we can easily summarize and plot it using *dplyr* and *ggplot2*.
+
+```{r}
+summarize(group_by(blood.tidy, sex, condition),
+          mean(albumin),
+          sd(albumin))
+```
+
+```{r}
+ggplot(blood.tidy, aes(x = condition, y = albumin, color = sex)) +
+          geom_violin()
+```
+
+> #### Challenge -- Gather and plot
+>
+> The following code produces a data.frame with the annual relative standard deviation of gdp among countries, both by per-capita gdp and country-total gdp. Run the code. Is the resulting dataset in tidy form? 
+> 
+> ```
+> gapminder %>%
+>     mutate(gdpCountry = gdpPercap * pop) %>%
+>     group_by(year) %>%
+>     summarize(RSD_individual = sd(gdpPercap) / mean(gdpPercap),
+>               RSD_country = sd(gdpCountry) / mean(gdpCountry))
+> ```
+>
+> You could argue that it is or is not in tidy form, because you could see the two outcomes as different variables or two ways of measuring the same variable. For our purposes, consider them two ways of measuring the same variable and `gather` the data.frame so that there is only one measurement of RSD on each row.
+> 
+> Make a plot with two lines, one for each measure of RSD in gdp, by year. To make the plot black-and-white-printer friendly, distinguish the lines using the `linetype` **aes**thetic. Could you have made this plot without tidying the data? Why or why not?
+>
+
+
+> #### Challenge -- More practice with gather
+>
+> Download [this dataset](data/stocks.tsv) of closing prices for several restaurant stocks over a year.
+>
+> - Is the data tidy?  
+> - If not, tidy it
+> - Which stock performed the best over this year? Use any method you want to answer that question.
+>
+
+<br>
+
+This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis [Tidy Data materials](http://data-lessons.github.io/gapminder-R/06-tidy-data.html).

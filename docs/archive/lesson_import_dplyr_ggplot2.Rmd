@@ -1,0 +1,347 @@
+---
+title: "Data import %>% dplyr %>% ggplot2"
+---
+
+> ## Learning objectives
+>
+> * Get comfortable importing different kinds of data
+> * Get comfortable manipulating a new data set
+> * Get comforatble visualizing a new data set
+>
+
+## A long form challenge
+
+Let's see a workflow from start to finish. You're going to go find a dataset
+online, get it into R, learn some things from it, and visualize it. Finally,
+we'll save some of the results of our data manipulations and our figures so we
+can easily send them to our colleagues.
+
+Close out of RStudio entirely, then open today's project folder fresh. Create a 
+new script file for this exercise and save it to the appropriate subfolder 
+within your project folder.
+
+## Presentation of the survey data
+
+We are studying the species and weight of animals caught in plots in our study
+area. The dataset is stored as a comma separated value (CSV) file.
+Each row holds information for a single animal, and the columns represent:
+
+| Column           | Description                        |
+|------------------|------------------------------------|
+| record\_id       | Unique id for the observation      |
+| month            | month of observation               |
+| day              | day of observation                 |
+| year             | year of observation                |
+| plot\_id         | ID of a particular plot            |
+| species\_id      | 2-letter code                      |
+| sex              | sex of animal ("M", "F")           |
+| hindfoot\_length | length of the hindfoot in mm       |
+| weight           | weight of the animal in grams      |
+| genus            | genus of animal                    |
+| species          | species of animal                  |
+| taxa             | e.g. Rodent, Reptile, Bird, Rabbit |
+| plot\_type       | type of plot                       |
+
+## Load libraries
+
+Remember libraries need to be loaded before you can use them in a new R session.
+Be sure to include all of the libraries you use in your script by using the 
+`library()` function at the top of your code.
+
+```{r include = FALSE}
+library(tidyverse)
+```
+
+## Get the data
+
+The data can be found on Figshare at [this link](https://figshare.com/articles/Portal_Project_Teaching_Database/1314459).
+The file we want is called "combined.csv" and can be found as one of the icons
+labeled "dataset" near the top of the page. Get the `combined.csv` file using
+either of the 2 methods we've seen so far. If you are choosing a download
+option, be sure to put the file in the appropriate subfolder within your project
+folder.
+
+For a third way to get data from a web source, check out the `download.file()`
+using `?download.file()` or Google.
+
+Load the data into R if your method from above didn't do this already. Be sure 
+to assign the data a variable name!
+
+```{r getData, include = FALSE}
+surveys <- read.csv("data/combined.csv")
+```
+
+## Inspect the data
+
+How would you inspect this? Write a few lines of code that will
+describe it (e.g., what kind of object is it? how many observations? 
+how many variables? what are the column names? what does the head look like?)
+
+## Filter rows and select columns
+
+> #### Challenge
+>
+>  Using pipes, subset the `survey` data to include individuals collected before
+>  1995 and retain only the columns `year`, `sex`, and `weight`.
+
+```{r, eval = FALSE, include = FALSE}
+## Answer
+surveys %>%
+    filter(year < 1995) %>%
+    select(year, sex, weight)
+```
+
+## Modify the data frame
+
+> #### Challenge
+>
+>  Create a new data frame from the `surveys` data that meets the following
+>  criteria: contains only the `species_id` column and a new column called
+>  `hindfoot_half` containing values that are half the `hindfoot_length` values.
+>  In this `hindfoot_half` column, there are no `NA`s and all values are less
+>  than 30.
+>
+>  **Hint**: think about how the commands should be ordered to produce this data 
+> frame!
+>
+
+```{r, eval = FALSE, include = FALSE}
+## Answer
+surveys_hindfoot_half <- surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    mutate(hindfoot_half = hindfoot_length / 2) %>%
+    filter(hindfoot_half < 30) %>%
+    select(species_id, hindfoot_half)
+```
+
+## Learn from the data frame
+
+> #### Challenge
+>
+> 1. How many individuals were caught in each `plot_type` surveyed? (**Hint**: 
+> check out the `tally()` function.)
+>
+> 2. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
+> length for each species (using `species_id`).
+>
+> 3. What was the heaviest animal measured in each year? Return the columns 
+> `year`, `genus`, `species_id`, and `weight`.
+>
+> 4. You saw above how to count the number of individuals of each `sex` using a
+> combination of `group_by()` and `tally()`. How could you get the same result
+> using `group_by()` and `summarize()`? **Hint**: see `?n`.
+
+
+```{r, echo = FALSE, include = FALSE}
+## Answer 1
+surveys %>%
+    group_by(plot_type) %>%
+    tally
+
+## Answer 2
+surveys %>%
+    filter(!is.na(hindfoot_length)) %>%
+    group_by(species_id) %>%
+    summarize(
+        mean_hindfoot_length = mean(hindfoot_length),
+        min_hindfoot_length = min(hindfoot_length),
+        max_hindfoot_length = max(hindfoot_length)
+    )
+
+## Answer 3
+surveys %>%
+    filter(!is.na(weight)) %>%
+    group_by(year) %>%
+    filter(weight == max(weight)) %>%
+    select(year, genus, species, weight) %>%
+    arrange(year)
+
+## Answer 4
+surveys %>%
+  group_by(sex) %>%
+  summarize(n = n())
+```
+
+## Clean the data
+
+In preparation for plotting these data, prepare a cleaned up version of the 
+dataset that doesn't include any missing data.
+
+Let's start by removing observations for which the `species_id` is missing. In
+this dataset, the missing species are represented by an empty string and not an
+`NA`. Let's also remove observations for which `weight` and the
+`hindfoot_length` are missing. This dataset should also only contain
+observations of animals for which the sex has been determined:
+
+Save the result to a new object called `surveys_complete`.
+
+```{r, include = FALSE}
+surveys_complete <- surveys %>%
+  filter(species_id != "",         # remove missing species_id
+         !is.na(weight),           # remove missing weight
+         !is.na(hindfoot_length),  # remove missing hindfoot_length
+         sex != "")                # remove missing sex
+```
+
+Because we are interested in plotting how species abundances have changed
+through time, we are also going to remove observations for rare species (i.e.,
+that have been observed less than 50 times). We will do this in two steps: first
+we are going to create a dataset that counts how often each species has been
+observed, and filter out the rare species; then, we will extract only the
+observations for these more common species:
+
+```{r, include = FALSE}
+## Extract the most common species_id
+species_counts <- surveys_complete %>%
+  group_by(species_id) %>%
+  tally %>%
+  filter(n >= 50)
+
+## Only keep the most common species
+surveys_complete <- surveys_complete %>%
+  filter(species_id %in% species_counts$species_id)
+```
+
+```{r, eval=FALSE, purl=TRUE, echo=FALSE}
+    ### Create the dataset for exporting:
+    ##  Start by removing observations for which the `species_id`, `weight`,
+    ##  `hindfoot_length`, or `sex` data are missing:
+    surveys_complete <- surveys %>%
+      filter(species_id != "",        # remove missing species_id
+      !is.na(weight),                 # remove missing weight
+		  !is.na(hindfoot_length),        # remove missing hindfoot_length
+		  sex != "")                      # remove missing sex
+
+    ##  Now remove rare species in two steps. First, make a list of species which
+    ##  appear at least 50 times in our dataset:
+    species_counts <- surveys_complete %>%
+                  group_by(species_id) %>%
+                  tally %>%
+				          filter(n >= 50) %>%
+				          select(species_id)
+
+    ##  Second, keep only those species:
+    surveys_complete <- surveys_complete %>%
+                 filter(species_id %in% species_counts$species_id)
+
+    ```
+
+To make sure that everyone has the same dataset, check that
+`surveys_complete` has `r nrow(surveys_complete)` rows and 
+`r ncol(surveys_complete)` columns by typing `dim(surveys_complete)`.
+
+
+## Export the cleaned data set
+
+Save the `surveys_complete` object as a CSV file in a `data_output`
+folder. By default, `write.csv()` includes a column with row names (in our case
+the names are just the row numbers), so add the `row.names = FALSE` argument to
+the `write.csv()` function call so they are not included.
+
+```{r, include = FALSE, eval = FALSE}
+write.csv(surveys_complete, file = "data_output/surveys_complete.csv",
+          row.names = FALSE)
+```
+
+```{r, purl=FALSE, eval=TRUE, echo=FALSE}
+if (!file.exists("data_output")) dir.create("data_output")
+write.csv(surveys_complete, file = "data_output/surveys_complete.csv")
+```
+
+## Visualize the data
+
+Explore the surveys_complete dataset further using `ggplot2`.
+
+> #### Challenge -- visualize the distribution of variables
+>
+> - Use a boxplot or a violin plot to visualize the distribution of the `weight` 
+> variable for each species.
+> - Create a different boxplot to show the distribution of the `hindfoot_length` 
+> variable for each species.
+> 
+> Boxplots are great for showing a lot of information about the spread of a
+> variable, but some information from the raw data is lost. 
+>
+> - Add a point geometry to your boxplot to visualze the raw `hindfoot_length`
+> data
+> 
+> Unfortunately, adding the raw data makes our figure "overplotted". There are
+> too many points overlapping and information is lost this way, too. 
+>
+> - Make a new boxplot of `hindfoot_length` for each species, but this time plot 
+> a jittered version of the raw data as a geometry on top of your boxplot 
+> (**Hint**: If a geom_point() makes a point geometry, what do you expect will
+> make a jitter geometry?)
+> - Color your jittered datapoints on your boxplot according to the plot from 
+> which the observation was taken (plot_id).
+>
+
+> #### Challenge -- Publication-quality plot
+> 
+> The goal of this challenge will be to recreate the figure below, and then add
+> some improvements to make it publication ready. The figure shows the yearly
+> counts of each species through time by sex and species. Does our 
+> `surveys_complete` dataframe have the information that we need to make this
+> figure?
+>
+> - Create a new object called `yearly_sex_counts` that has the uses the
+> `surveys_complete` dataframe to calculate the total number of individuals 
+> observed in each year of each sex of each species. 
+> **Hint**: Think about what subgroups you need to **split** your data into,
+> what function you want to **apply** to those subgroups, and what variables in
+> your new dataframe you will need when it is **combined** back together.
+>
+> Build your plot piece-by-piece, making sure you can get each new component to
+> work before adding more complexity. 
+>
+> - For instance, start by building a plot that only sets up the x position and
+> y position aesthetics. What data should be mapped to these visual features of
+> the plot? 
+> - Now add a geometry. Which one should you use to match the plot below?
+> - Color the geometry you just added by sex.
+> - Create subplots by species using faceting.
+> - Test out some of the different [themes](http://docs.ggplot2.org/current/ggtheme.html)
+> available and pick one that has more of a white background, which will be 
+> easier to read when printed.
+> - Save your plot to your figures subdirectory in your project folder
+
+```{r, include = FALSE}
+ yearly_sex_counts <- surveys_complete %>%
+                      group_by(year, species_id, sex) %>%
+                      summarize(n = n())
+```
+
+```{r facet-by-species-and-sex, echo = FALSE}
+ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex)) +
+  geom_line() +
+  facet_wrap(~ species_id) +
+  theme_bw()
+```
+
+> **Bonus**: Take a look at the [`ggplot2` cheatsheet pdf](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf) 
+> for some ideas on how to improve the plot (e.g., renaming the axes to 
+> something more informative, add a title, rotate axis labels so they're 
+> readable).
+>
+> **Bonus**: Create a similar plot that shows the mean weight of individuals by
+> year for each sex of each species and save it to your figures subdirectory.
+>
+> **Bonus**: Generate a dynamic document using RMarkdown that incorporates
+> both the data-manipulation required to create your final plot for this
+> challenge as well as the plot itself.
+>
+> **Double bonus**: Add to your dynamic document all of the data manipulation
+> steps you needed to take going all the way back to the original "combined.csv"
+> file. Just include the fewest steps required to go from the "combined.csv" 
+> file to the publication-quality plot.
+>
+
+
+<br>
+
+This lesson is adapted from the Data Carpentry: R for Data Analysis and 
+Visualization of Ecological Data [Starting with Data materials](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html),
+the Data Carpentry: R for Data Analysis and Visualization of Ecological Data 
+[Data Visualization with ggplot2 materials](http://www.datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html), 
+and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data 
+[Manipulating and Analyzing Data with dplyr materials](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html).
