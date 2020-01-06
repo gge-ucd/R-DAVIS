@@ -497,10 +497,16 @@ div.tocify {
 <ul>
 <li>Understand motivation for code and data management</li>
 <li>Know how to organize code, data, and results</li>
+<li>Know the basics of file paths and directory structures</li>
 <li>Be able to create and use an RStudio project</li>
 </ul>
 </div>
 <p><br></p>
+<div id="working-directory-and-file-paths" class="section level1">
+<h1>Working Directory and File Paths</h1>
+<p>Any time you’re working in R, R needs to know where you are within your computer, which is referred to as the <em>working directory</em>. The working directory could be something like <code>"YourUsername/Documents"</code>, or it could be something more specific like <code>"YourUsername/Documents/GradSchool/Chapter1"</code>. Either way, R will think of everything in your computer as located relative to your working directory. One of the nicest parts of using R Projects is that they automatically set the working directory to the folder containing the .RProject file. You can see your current working directory by running the function <code>getwd()</code>, and you can set it using <code>setwd()</code>, but if you’re using an R Project, you generally shouldn’t mess with this too much.</p>
+<p>All directories and files in R (and most computer languages) are located using <em>file paths</em>. The two working directory examples we just used are written as file paths, with <code>/</code> put between different levels. Within <code>YourUsername</code> there is a folder called <code>Documents</code>, and within that there is a folder called <code>GradSchool</code>, and so on. In R, file paths are always wrapped in quotes. There are 2 basic kinds of file paths: <em>absolute</em> and <em>relative</em>. Absolute paths list out the full file path, usually starting with your username, which you can also refer to using the shortcut <code>~</code>. So instead of <code>YourUsername/Documents</code>, you can type <code>~/Documents</code>. However, if you’ve got folders within folders within folders, typing out absolute paths can get really tedious. <em>Relative</em> paths are <em>relative</em> to your working directory. So if R thinks we’re in that <code>Chapter1</code> folder, and we want to access a folder inside it called <code>data</code>, we can just type <code>data</code> instead of <code>"YourUsername/Documents/GradSchool/Chapter1/data"</code>. What happens if we need to go up a level, into <code>GradSchool</code>? Well we can type <code>..</code> to go up a level. So if we need to grab something from our <code>Chapter2</code> folder, but our working directory is <code>Chapter1</code>, we would type <code>../Chapter2/FileWeWant</code>.</p>
+</div>
 <div id="code-data-organization" class="section level1">
 <h1>Code &amp; Data Organization</h1>
 <p>The scientific process is naturally incremental, and many projects start life as random notes, some code, then a manuscript, and eventually everything is a bit mixed together.</p>

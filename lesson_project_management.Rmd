@@ -15,10 +15,17 @@ I guess this must be the place
 
 * Understand motivation for code and data management
 * Know how to organize code, data, and results
+* Know the basics of file paths and directory structures
 * Be able to create and use an RStudio project
 </div>
 
 <br>
+
+# Working Directory and File Paths
+
+Any time you're working in R, R needs to know where you are within your computer, which is referred to as the *working directory*. The working directory could be something like `"YourUsername/Documents"`, or it could be something more specific like `"YourUsername/Documents/GradSchool/Chapter1"`. Either way, R will think of everything in your computer as located relative to your working directory. One of the nicest parts of using R Projects is that they automatically set the working directory to the folder containing the .RProject file. You can see your current working directory by running the function `getwd()`, and you can set it using `setwd()`, but if you're using an R Project, you generally shouldn't mess with this too much.
+
+All directories and files in R (and most computer languages) are located using *file paths*. The two working directory examples we just used are written as file paths, with `/` put between different levels. Within `YourUsername` there is a folder called `Documents`, and within that there is a folder called `GradSchool`, and so on. In R, file paths are always wrapped in quotes. There are 2 basic kinds of file paths: *absolute* and *relative*. Absolute paths list out the full file path, usually starting with your username, which you can also refer to using the shortcut `~`. So instead of `YourUsername/Documents`, you can type `~/Documents`. However, if you've got folders within folders within folders, typing out absolute paths can get really tedious. *Relative* paths are *relative* to your working directory. So if R thinks we're in that `Chapter1` folder, and we want to access a folder inside it called `data`, we can just type `data` instead of `"YourUsername/Documents/GradSchool/Chapter1/data"`. What happens if we need to go up a level, into `GradSchool`? Well we can type `..` to go up a level. So if we need to grab something from our `Chapter2` folder, but our working directory is `Chapter1`, we would type `../Chapter2/FileWeWant`.
 
 # Code & Data Organization
 
