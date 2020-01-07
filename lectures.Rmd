@@ -15,7 +15,7 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 * <a href="https://youtu.be/PIiCc4iQomM" target="_blank">Live Stream</a>
 * <a href="" target="_blank">YouTube recording of lecture</a>
 * <a href="https://docs.google.com/document/d/1a5HIhCkQpJ9UWQj5UPkqSyogUEgSE3t8oHKv6mFnc7M/edit" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://forms.gle/E63qJw8tqNQH47sM6" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 2
 
