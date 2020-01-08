@@ -48,6 +48,11 @@ I am a 3rd year student in the GGE studying bighorn sheep migration in the Sierr
 
 **Christine Parisek**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
+
+I am a 2nd year PhD student and freshwater ecologist in the Ecology Graduate Group, advised by Andrew Rypel. I currently study the mechanisms that govern lake food web structure and function across heterogeneous mountain landscapes. My interests range from local scale trophic dynamics in Sierra Nevada high elevation lakes, to landscape and global scale patterns in lake distributions.
+
+I never thought I’d say it, but I love working in R! I used to think that people who helped me with my code must be gifted R wizaRds. Something someone said that stuck with me though, is that they’re not an R wizaRd, they’ve just had more time to make that many more coding mistakes! I was a novice in R when I began my PhD in 2018, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!
 
 **Conor Higgins**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
