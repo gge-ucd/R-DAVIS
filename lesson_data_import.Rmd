@@ -25,45 +25,31 @@ This [species dataset](https://gge-ucd.github.io/R-DAVIS/data/species.csv) provi
 during a trapping survey. I downloaded it and put it in the `data` directory of my 
 project. Click on the link and download the file.
 
-We can read csv's with the `read.csv` function. The argument to `read.csv` is 
-the location of the file, relative to your working directory. Since I saved the 
-gapminder data to the `data` directory of my project, I can load it with this. 
-Note the use of tab-completion to find the file and get it exactly right without 
-typos.
+## Review: What's the main difference between `read.csv` and `read_csv`? 
 
-```{r, eval = FALSE}
+#### Answer: `stringsAsFactors=FALSE`
 
-# download and read from your data folder
-read.csv('data/species.csv')
+By default, when building or importing a data frame, the columns that contain 
+characters (i.e., text) are coerced (=converted) into the factor data type when we use the `read.csv`. 
+Depending on what you want to do with the data, you may want to keep these 
+columns as character. To do so, `read.csv()` and `read.table()` have an argument 
+called `stringsAsFactors` which can be set to `FALSE`.
 
-```
+When we use the `tidyverse` `read_csv` all character columns are automatically kept as characters, NOT coherced into factors. 
 
-Whoa! What just happened? R executed the function and printed the result, just 
-like when you enter `log(1)`. How do you store an object to a variable?
-
+Let's look at the same data file read in with `read.csv` and `read_csv`
 ```{r}
+surveys_dot <- read.csv('data/combined.csv')
 
-species <- read.csv('data/species.csv')
+surveys_underscore <- read_csv("data/combined.csv")
 
+#using stringAsfactor
+
+surveys_dot2 <- read.csv("data/combined.csv", stringsAsFactors = FALSE)
+
+#can use as.character or as.factor to change single column types 
 ```
 
-Now, a data.frame called `species` is in my Environment, and I can see that it 
-is a data.frame with `r nrow(species)` rows and `r ncol(species)` columns. 
-
-<div class = "blue">
-### Challenge -- read csv data
-
-The species data are available at [this link](data/species.csv).  
- 
- - Right click on the link to "save file as..."
- - Save the .csv file in the `/data` directory of your project.
- - Read the data with the `read.csv` function and assign it to the variable `species`.  
- - Inspect the `data.frame` using whatever means you like. 
- - Use a `dplyr` verb to reorder the data frame in alphabetical order by genus
-</div>
-
-<br>
- 
 <div class = "blue">
 ### Advanced challenge
 
@@ -73,46 +59,11 @@ Suppose you get a .csv file from a colleague in Europe. Because they use `,` (co
 
 <br>
 
-### Using `stringsAsFactors=FALSE`
-
-By default, when building or importing a data frame, the columns that contain 
-characters (i.e., text) are coerced (=converted) into the factor data type. 
-Depending on what you want to do with the data, you may want to keep these 
-columns as character. To do so, `read.csv()` and `read.table()` have an argument 
-called `stringsAsFactors` which can be set to `FALSE`.
-
-<div class = "blue">
-**Tip**: In most cases, it’s preferable to set `stringsAsFactors = FALSE` 
-when importing your data, and converting as a factor only the columns that 
-require this data type.
-</div>
-<br>
-
-Compare the output of `str(surveys)` when setting `stringsAsFactors = TRUE` 
-(default) and `stringsAsFactors = FALSE`:
-
-```{r eval = FALSE, echo = TRUE}
-surveys <- read.csv('data/combined.csv')
-
-## Compare the difference between when the data are being read as
-## `factor`, and when they are being read as `character`.
-surveys <- read.csv("data/combined.csv", stringsAsFactors = TRUE)
-str(surveys)
-surveys <- read.csv("data/combined.csv", stringsAsFactors = FALSE)
-str(surveys)
-## Convert the column "plot_type" into a factor
-surveys$plot_type <- factor(surveys$plot_type)
-
-```
-
 ## Reading messier data
 
 Sometimes data can be a bit trickier to read because it isn't in tidy format.
 If it is **close** to being tidy, we may be able add some more arguments to the
-`read.csv()` call to to help R interpret how the file should be read. If there
-are a few things that R will need help with, using the `read.table()` gives you
-the most flexibility but you'll also have to always specify more information
-about the file to help R interpret it.
+`read_csv()` call to to help R interpret how the file should be read. 
 
 Use [this link](data/wide_eg.csv) to download this "wide" dataset and inspect it with
 a spreadsheet program. Why isn't it tidy?
@@ -120,33 +71,17 @@ a spreadsheet program. Why isn't it tidy?
 Try using the `read.csv()` function on the file.
 
 ```{r, eval = FALSE}
-read.csv("data/wide_eg.csv")
+read_csv("data/wide_eg.csv")
 ```
 
 We need to tell R to skip 2 rows!
 
 ```{r, eval = FALSE}
-read.csv("data/wide_eg.csv", skip = 2)
+read_csv("data/wide_eg.csv", skip = 2)
 ```
 
-Or using `read.table()`...
 
-```{r, eval = FALSE}
-read.table("data/wide_eg.csv", header = TRUE, sep = ",", skip = 2)
-```
-
-## Reading directly from websites
-
-We can use the `read.csv()` function to read files directly from a website if we
-first call the `url()` function on the web address.
-
-```{r wwwReadCsv, eval = FALSE}
-read.csv(url("https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv"), skip = 2)
-```
-
-We can also use the `read_csv()` (note that's an underscore in the function
-name, not a period) from the `readr` package which is part of the `tidyverse`.
-In this case, we don't have to use the `url()` function.
+We can use the `read_csv()` function to read files directly from a website. 
 
 ```{r, eval = FALSE}
 read_csv("https://mikoontz.github.io/data-carpentry-week/data/wide_eg.csv", skip = 2)
@@ -158,10 +93,10 @@ Now that you have learned how to use **`dplyr`** to extract information from
 or summarize your raw data, you may want to export these new datasets to share
 them with your collaborators or for archival.
 
-Similar to the `read.csv()` function used for reading CSV files into R, there is
-a `write.csv()` function that generates CSV files from data frames.
+Similar to the `read_csv()` function used for reading CSV files into R, there is
+a `write_csv()` function that generates CSV files from data frames.
 
-Before using `write.csv()`, we are going to create a new folder, `data_output`,
+Before using `write_csv()`, we are going to create a new folder, `data_output`,
 in our working directory that will store this generated dataset. We don't want
 to write generated datasets in the same directory as our raw data. It's good
 practice to keep them separate. The `data` folder should only contain the raw,
@@ -170,27 +105,23 @@ it. In contrast, our script will generate the contents of the `data_output`
 directory, so even if the files it contains are deleted, we can always
 re-generate them.
 
- - Type in `write.` and hit TAB. Scroll down and take a look at the many options that exist for writing out data in R. 
-
-The `tidyverse` has a similar set of functions that are part of the `readr` package. 
-
- - Type in `write_` and hit TAB. Use the F1 key on any of these options to read more about how to use it.
+ - Type in `write_` and hit TAB. Scroll down and take a look at the many options that exist for writing out data in R. Use the F1 key on any of these options to read more about how to use it.
 
 ## Using `save` and `load`
 
-We've seen how to save out specific data types in R. One additional option is you can save anything in your workspace or working "environment". You can save a single object, or multiple objects together. This is best done using the `.rda` file type. The **.Rda**ta file type is a great way to save objects from R that you have already tidied or modeled, and you want to maintain the structure and format of the data. Because these are native "R" file types, they can be read back in and will appear exactly as when you saved them. 
+We've seen how to save out specific data types in R. One additional option is you can save anything in your workspace or working "environment". You can save a single object, or multiple objects together. This is best done using the `.rda` file type. The **.Rda** file type is a great way to save objects from R that you have already tidied or modeled, and you want to maintain the structure and format of the data. Because these are native "R" file types, they can be read back in and will appear exactly as when you saved them. 
 
-Let's assume we have the "surveys" object and the "counts" objects in our environment, and we want save them both in one file. We'll use `save()` and the `.rda` filetype.
+Let's assume we have the "surveys_underscore" object and the "surveys_dot2" objects in our environment, and we want save them both in one file. We'll use `save()` and the `.rda` filetype.
 
 ```{r, eval=FALSE}
-save(surveys, counts, file = "data_output/surveys_counts.rda")
+save(surveys_underscore, surveys_dot2, file = "data_output/surveys_types.rda")
 ```
 
 To re-load these back into R, we use the `load` function. 
 
 ```{r loaddata, eval=F}
 
-load("data_output/surveys_counts.rda")
+load("data_output/surveys_types.rda")
 
 ```
 
@@ -212,7 +143,7 @@ For example, let's use the surveys dataset we loaded earlier and save a few `rda
 library(dplyr)
 
 # load data
-surveys <- read.csv('data/combined.csv') # the combined.csv is 3.1 MB in size
+surveys <- read_csv('data/combined.csv') # the combined.csv is 3.1 MB in size
 
 # filter to years > 2000 and only rodents
 rodents2001 <- surveys %>% filter(year > 2000 & taxa == "Rodent")
@@ -242,6 +173,49 @@ doublenope # created a character vector of the objects...but didn't assign any t
 
 One extremely time-saving use of `.rds` files is when you've fit a large statistical model that gets saved as a model object. For example, the `brms` and `lme4` packages used for multi-level models will return large model objects that contain lots of information about the model. Some models can take hours, days, even **weeks** to finish fitting, so it can be useful to save a fully fitted model object as a `.rds` file. You can then load that model object back into R and work with it however you want.
 
+## Saving Figures and Plots 
+
+A plot you created with ggplot or another plotting package can be saved as .JPEGS (or .tiff, .img, etc) onto you. For any ggplot objects, we reccomend using `ggsave`. 
+
+Let's start by making a plot together with our `survey` data using only data that is for Rodents in years after 2000:  
+
+```{r, warning = F, message = F}
+
+# load data
+surveys <- read_csv('data/combined.csv') # the combined.csv is 3.1 MB in size
+
+# filter to years > 2000 and only rodents
+rodents2001 <- surveys %>% filter(year > 2000 & taxa == "Rodent")
+
+rodents2001 %>% ggplot()+
+        geom_point(aes(x=hindfoot_length, y = weight, color = sex))
+```
+`ggsave` allows us to easily save this plot. First, let's create a new folder in this project called `figures`. Let's save all the figures we create to that folder. `ggsave` will default to saving the last plot you created, however, we think it is always a good idea to specify exactly which plot you want saved. To do that, we have to save our plot as an object. 
+
+```{r, eval = F}
+#saving plot as an object
+rodent_plot <- rodents2001 %>% ggplot()+
+        geom_point(aes(x=hindfoot_length, y = weight, color = sex))
+
+ggsave("figures/rodent1.png", rodent_plot)
+```
+#### With `ggsave` you can save images as
+
+ - .png, .jpeg, .tiff, .pdf, .bmp, or .svg
+
+#### Other arguments of `ggsave`
+
+ - `scale` can scale the image (multiplicative scaling factor)
+ - `width` and `height` let you specify the size of the image in `units` that you specify
+ - `dpi` can change the quality of the image; for publication graphs we suggest over 700 dpi
+
+```{r, eval = F}
+
+ggsave("figures/rodent2.png", rodent_plot, width = 4, height = 3, units = "in", dpi = 500)
+
+```
+
+
 ## Excel & GoogleSheets
 
  - [`readxl`](http://readxl.tidyverse.org/) (Part of `tidyverse`)
@@ -261,7 +235,7 @@ One other data import/export package to check out is called `rio`. It uses two m
 library(rio)
 export(mtcars, "data/mtcars.csv")
 export(mtcars, "data/mtcars.rds")
-export(mtcars, "data/mtcars.feather")
+export(mtcars, "data/mtcars.tsv")
 ```
 
 You can read more about `rio` on its [Github page](https://github.com/leeper/rio).

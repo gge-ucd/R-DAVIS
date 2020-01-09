@@ -21,15 +21,16 @@ My favorite part of teaching R is seeing people go from being uncomfortable or i
 
 <br>
 
-**Martha Wohlfeil** 
+**Martha Zillig** 
 
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
 [<i class="fa fa-globe" aria-hidden="true"></i> website](https://marthawohlfeil.github.io/)  
 [<i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil](https://github.com/MarthaWohlfeil)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@mw_avianecology](https://twitter.com/mw_avianecology)
 
-I am a 4th year PhD Candidate in Ecology studying avian biogeography in the Great Basin. I am interested in how birds are responding to climate change, and how species distributions are shaped through both biotic and abiotic factors. I get to conduct field work every summer in the Sierra Nevada and in central Nevada where I collected data on bird abundance, insect biomass, and vegetation. 
+I am a 4th year PhD Candidate in Ecology studying avian biogeography in the Great Basin. I am interested in how birds are responding to climate change, and how species distributions are shaped through both biotic and abiotic factors. I get to conduct field work every summer in the Sierra Nevada and in central Nevada where I collected data on bird abundance, insect biomass, microclimate, and vegetation. 
 
-I have been using R since 2016. I was a student in the first ever R-DAVIS course in 2016, and was a Helper in 2017. I'm very excited to be instructing, and hope to convince students that having a ton of programming experience is NOT necessary to get the most out of R. In addition, I help run [Davis R Users Group (D-RUG)](http://d-rug.github.io/), and will be launching a graduate student work group on statistical modeling Winter 2019. 
+I have been using R since 2016. I was a student in the first ever R-DAVIS course 2016, and have been teaching R in some form since then. I'm very excited to be instructing this course again, and hope to convince students that having a ton of programming experience is NOT necessary to get the most out of R. In addition, I help run [Davis R Users Group (D-RUG)](http://d-rug.github.io/), and co-lead the GGE Statistical Support Group at UC Davis (email me for more details!).
 
 My favorite part about teaching R is when students realize a problem they have struggled with for hours in excel can be solved with a just a few lines of code (see: me early 2016). Teaching R and helping students with data science has been an amazing opportunity, and I am excited to pass on what I have learned to new GGE students. 
 
@@ -40,30 +41,24 @@ My favorite part about teaching R is when students realize a problem they have s
 **Christian John**
 
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
+[<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@JepsonNomad](https://twitter.com/JepsonNomad)
 
-I am a 2nd year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
+I am a 3rd year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
 
-**Allison Ke**
+**Christine Parisek**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:ake@ucdavis.edu)  
-[<i class="fa fa-globe" aria-hidden="true"></i> website](https://a-ke.weebly.com/) 
+I am a 2nd year PhD student and freshwater ecologist in the Ecology Graduate Group, advised by Andrew Rypel. I currently study the mechanisms that govern lake food web structure and function across heterogeneous mountain landscapes. My interests range from local scale trophic dynamics in Sierra Nevada high elevation lakes, to landscape and global scale patterns in lake distributions.
 
-I am a 2nd year PhD student in Ecology in the Karp lab. I combine field research with existing data to investigate (1) novel statistical modeling methods in community ecology, (2) effects of climate and land-use change on Neotropical bird communities, and (3) land management strategies to optimize biodiversity in agricultural landscapes.
+I never thought I’d say it, but I love working in R! I used to think that people who helped me with my code must be gifted R wizaRds. Something someone said that stuck with me though, is that they’re not an R wizaRd, they’ve just had more time to make that many more coding mistakes! I was a novice in R when I began my PhD in 2018, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!
 
-Since 2013, I have used R extensively both by force and by choice for my undergraduate statistics degree and ecological research. I have experience using R in machine learning and in the design/analysis of experiments and ecological data. I'm excited to share what I know and learn more through helping with this course!
+**Conor Higgins**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
 
-**William Hemstrom**
+I'm a 2nd year student in the GGE in the Post Lab.  I study the interactions between arctic plant and animal communities and how climate change is impacting these interactions.  Specifically, I study the population dynamics of a Greenlandic muskox population and the timing of life history events (phenology) for the plants they consume.  I began using R last year as a student in R-DAVIS and another statistics course, and I am still learning a lot.  It has been a rewarding process figuring it out, and I feel like if I can do it, anybody can.
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:whemstrom@ucdavis.edu) 
-
-I'm a PhD student studying the genomics of migration in butterflies and sockeye salmon as well as the use of genomics to predict future population demographics. I have a publicly available [genomic analysis R package in beta](https://github.com/hemstrow/snpR), and use R principally for genomic analysis and demographic simulations. Most of my work in R is available on my [github page](https://github.com/hemstrow).
-
-**Sarah Freidman**
-
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:sarahtfried@gmail.com)  
-[<i class="fa fa-globe" aria-hidden="true"></i> website](fishbiologist.wordpress.com) 
-
-I am broadly interested in the underlying ecological mechanisms that shape the evolution and diversification of marine fishes. My work combines aspects from functional morphology, phylogenetics, and comparative methods to lend insight into the selective pressures driving morphological diversification. I have been using R for nearly 5 years now on a daily basis for all of my analyses, most of which involve phylogenies and multivariate morphological data sets across thousands of species
 
 <br>
 
@@ -91,7 +86,7 @@ I recently completed my PhD in Ecology (2018) studying ecological responses to f
 
 I'm a 5th year PhD candidate at University of California, Davis in the Graduate Group in Ecology. I study how complex forest structure affects natural disturbances in the Sierra Nevada mountain range of California. I use satellite imagery, Google Earth Engine, small uncrewed aerial systems (sUAS), and field measurements to map trees and track the spatial patterns of tree mortality as a result of wildfires and bark beetle activity.
 I've been using R since 2012, and teaching it since 2014 to a wide variety of folks including grad students, post docs, professors, industry researchers, and government scientists. I became a certified DataCarpentry instructor in 2016.
-My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgable about *how* to learn more). 
+My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgeable about *how* to learn more). 
 
 <br>
 
