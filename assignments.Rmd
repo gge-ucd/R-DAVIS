@@ -35,7 +35,7 @@ details>
 </details>
 
 ### <small>Week9</small>
-### Answers:
+Answers:
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=FALSE}
