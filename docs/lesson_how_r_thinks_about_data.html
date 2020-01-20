@@ -614,6 +614,39 @@ animals[animals == &quot;cat&quot; | animals == &quot;rat&quot;] # returns both 
 </ul>
 </div>
 </div>
+<div id="vector-math-and-recycling" class="section level3">
+<h3>Vector Math and Recycling</h3>
+<p>You can do basic mathematical operations with vectors in R. We won’t get into this too deeply, but you should be aware of how R approaches these operations.</p>
+<p>By default, R will do value-by-value math. So if you add together two vectors of equal length, R will return a vector of the 1st value of each added together, then the 2nd value of each added together, etc. Let’s take a look here:</p>
+<pre class="r"><code>x &lt;- 1:10
+y &lt;- 100:109
+
+x + y</code></pre>
+<pre><code>##  [1] 101 103 105 107 109 111 113 115 117 119</code></pre>
+<p>As you can see, the first entry we get back is 1 + 100, the second is 2 + 101, and so on. What happens if we try to add two vectors that aren’t the same length?</p>
+<pre class="r"><code>z &lt;- 1:2
+
+x + z</code></pre>
+<pre><code>##  [1]  2  4  4  6  6  8  8 10 10 12</code></pre>
+<p>Whoa… what happened here? R does something called <strong>recycling</strong>. It adds together the first values of each vector, then the second values, but then it runs out of values in vector z. It then <strong>recycles</strong> the values of z, so it will add the 3rd value of x to the 1st value of z, then the 4th value of x to the 2nd value of z, and so on. Essentially, it recycles z from <code>1,2</code> into <code>1,2,1,2,1,2,1,2,1,2</code>, then does the addition.</p>
+<p>Since the length of x is 10, it is a multiple of the length of z, which is 2. What happens if the longer vector isn’t a multiple of the shorter one?</p>
+<pre class="r"><code>z &lt;- 1:3
+
+x + z</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
+## length</code></pre>
+<pre><code>##  [1]  2  4  6  5  7  9  8 10 12 11</code></pre>
+<pre class="r"><code>a &lt;- x + z</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
+## length</code></pre>
+<p>R warns us about this! However, if you try to assign this result to an object, we get the warning, but the assignment works. z will get recycled until it reaches the length of x. So z gets recycled from being <code>1,2,3</code> to being <code>1,2,3,1,2,3,1,2,3,1</code>, then gets added to x. This can give you unexpected results if you’re doing math with vectors and you’re not paying attention to what’s going on.</p>
+<p>Recycling also happens with logical vectors:</p>
+<pre class="r"><code>x[c(TRUE, FALSE)]</code></pre>
+<pre><code>## [1] 1 3 5 7 9</code></pre>
+<pre class="r"><code>x[c(TRUE, FALSE, FALSE)]</code></pre>
+<pre><code>## [1]  1  4  7 10</code></pre>
+<p>As mentioned earlier, logical vectors are often generated as intermediate steps when we’re subsetting. If you’re not careful about the lengths of these intermediate logical vectors, you can get some funky results without even noticing how they happened.</p>
+</div>
 </div>
 <div id="missing-data" class="section level2">
 <h2>Missing data</h2>
