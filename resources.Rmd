@@ -11,17 +11,17 @@ There are many resources online and in print. This is by no means a comprehensiv
 
 ### Bonus Lessons
 
-- [Longer Spreadsheets Lesson](archive/2019_lessons/lesson_spreadsheets.html)
-- [Joining Data](archive/2019_lessons/lesson_joins.html)
-- [Pipelines: data import %>% dplyr %>% ggplot2](archive/2019_lessons/lesson_import_dplyr_ggplot2.html)
-- [Pipelines: Download CO2 & Ice Core Data & Visualize](archive/2019_lessons/lesson_ice_core_CO2_web_data.html)
-- [For Loops](archive/2019_lessons/lesson_for_loops.html)
-- [Using purrr](archive/2019_lessons/lesson_purrr_tutorial.html)
+- [Longer Spreadsheets Lesson](archive/2019_lesson_spreadsheets.html)
+- [Joining Data](archive/2019_lesson_joins.html)
+- [Pipelines: data import %>% dplyr %>% ggplot2](archive/2019_lesson_import_dplyr_ggplot2.html)
+- [Pipelines: Download CO2 & Ice Core Data & Visualize](archive/2019_lesson_ice_core_CO2_web_data.html)
+- [For Loops](archive/2019_lesson_for_loops.html)
+- [Using purrr](archive/2019_lesson_purrr_tutorial.html)
 - [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
-- [Text Mining](archive/2019_lessons/lesson_text_mining_mlk.html)
-- [Github Collaboration with Branches](lesson_github_collaboration.html)
+- [Text Mining](archive/2019_lesson_text_mining_mlk.html)
+- [Github Collaboration with Branches](archive/2019_lesson_github_collaboration.html)
 - [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html)
-- [Longer Iteration Lesson](archive/2019_lessons/lesson_iteration.html)
+- [Longer Iteration Lesson](archive/2019_lesson_iteration.html)
 
 
 

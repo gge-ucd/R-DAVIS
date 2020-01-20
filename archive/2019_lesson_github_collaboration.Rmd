@@ -1,5 +1,12 @@
 ---
 title: "Github Collaboration: Branching & Pull-Requests"
+output:
+  html_document:
+    theme: flatly
+    code_folding: show
+    toc: yes
+    toc_float:
+      collapsed: yes
 ---
 
 <br>
@@ -44,7 +51,13 @@ At this point you've pushed changes up to the `master` (on github). If you got t
 
 <br>
 
-![](img/compare_pullrequest.png)
+```{r comparePR}
+library(knitr)
+library(here)
+
+include_graphics(path = paste0(here(), "/img/compare_pullrequest.png"))
+
+```
 
 <br>
 <br>
@@ -53,7 +66,14 @@ The next screen gives you an opportunity to request a review, and tag your pull 
 
 <br>
 
-![](img/open_pull_request.png)
+```{r openPR}
+library(knitr)
+library(here)
+
+include_graphics(path = paste0(here(), "/img/open_pull_request.png"))
+
+```
+
 
 <br>
 
@@ -61,7 +81,13 @@ After entering relevant info, you can create your pull request. Github will auto
 
 <br>
 
-![](img/add_PR_lesson.png)
+```{r addPR}
+library(knitr)
+library(here)
+
+include_graphics(path = paste0(here(), "/img/add_PR_lesson.png"))
+
+```
 
 <br>
 
