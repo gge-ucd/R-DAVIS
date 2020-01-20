@@ -226,6 +226,52 @@ Here "four" comes after "five", and therefore is "greater than" it.
 ```
 </div>
 
+### Vector Math and Recycling
+
+You can do basic mathematical operations with vectors in R. We won't get into this too deeply, but you should be aware of how R approaches these operations.
+
+By default, R will do value-by-value math. So if you add together two vectors of equal length, R will return a vector of the 1st value of each added together, then the 2nd value of each added together, etc. Let's take a look here:
+
+```{r}
+x <- 1:10
+y <- 100:109
+
+x + y
+```
+
+As you can see, the first entry we get back is 1 + 100, the second is 2 + 101, and so on. What happens if we try to add two vectors that aren't the same length?
+
+```{r}
+z <- 1:2
+
+x + z
+
+```
+
+Whoa... what happened here? R does something called **recycling**. It adds together the first values of each vector, then the second values, but then it runs out of values in vector z. It then **recycles** the values of z, so it will add the 3rd value of x to the 1st value of z, then the 4th value of x to the 2nd value of z, and so on. Essentially, it recycles z from `1,2` into `1,2,1,2,1,2,1,2,1,2`, then does the addition.
+
+Since the length of x is 10, it is a multiple of the length of z, which is 2. What happens if the longer vector isn't a multiple of the shorter one?
+
+```{r}
+z <- 1:3
+
+x + z
+
+a <- x + z
+```
+
+R warns us about this! However, if you try to assign this result to an object, we get the warning, but the assignment works. z will get recycled until it reaches the length of x. So z gets recycled from being `1,2,3` to being `1,2,3,1,2,3,1,2,3,1`, then gets added to x. This can give you unexpected results if you're doing math with vectors and you're not paying attention to what's going on.
+
+Recycling also happens with logical vectors:
+
+```{r}
+x[c(TRUE, FALSE)]
+
+x[c(TRUE, FALSE, FALSE)]
+```
+
+As mentioned earlier, logical vectors are often generated as intermediate steps when we're subsetting. If you're not careful about the lengths of these intermediate logical vectors, you can get some funky results without even noticing how they happened.
+
 ## Missing data
 
 As R was designed to analyze datasets, it includes the concept of missing data
