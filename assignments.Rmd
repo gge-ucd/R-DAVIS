@@ -23,6 +23,69 @@ Today we talked quite a bit about project management, directory structure, and f
 
 ### <small>Week3</small>
 
+In Week 3's homework we are going to practice subsetting and manipulating vectors. Fun! 
+
+First, open your r-davis-in-class-project-YourName and `pull`! Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).
+
+Second, open a new script in your r-davis-in-class-project-YourName and save it to your `scripts` folder. Call this new script `week_3_homework`. 
+
+Copy and paste the chunck of code below into your new `week_3_homework` script and run it. This chunck of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing? 
+
+```{r}
+set.seed(15)
+hw3 <- runif(50, 4, 50)
+hw3 <- replace(hw3, c(4,12,22,27), NA)
+hw3
+```
+
+*PROBLEM 1:*
+
+Take you `hw3` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
+
+*PROBLEM 2:* 
+
+Multiply each number in the `prob1` vector by 3 to create a new vector called `times3`. Then add 10 to each number in your `times3` vector to create a new vector called `plus10`. 
+
+*PROBLEM 3:*
+
+Select every other number in your `plus10` vector by selecting the first number, not the second, the third, not the fourth, etc. If you've worked through these three problems in order, you should now have a vector that is 12 numbers long that looks **exactly** like this one:
+
+```{r, echo = F}
+prob1 <- hw3[!is.na(hw3)] #removing the NAs
+
+prob1 <- prob1[prob1 >14 & prob1 < 38] #only selecting numbers between 14 and 38
+
+times3 <- prob1 * 3 #multiplying by 3
+
+plus10 <- times3 + 10 #adding 10 to the whole vector 
+
+final <- plus10[c(TRUE, FALSE)] #selecting every other number
+```
+
+```{r}
+final
+```
+
+Finally, save your script and push all your changes to your github account! 
+
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers</summary>
+```{r, eval=T}
+
+prob1 <- hw3[!is.na(hw3)] #removing the NAs
+
+prob1 <- prob1[prob1 >14 & prob1 < 38] #only selecting numbers between 14 and 38
+
+times3 <- prob1 * 3 #multiplying by 3
+
+plus10 <- times3 + 10 #adding 10 to the whole vector 
+
+final <- plus10[c(TRUE, FALSE)] #selecting every other number using logical subsetting
+
+```
+</details>
+
+
 ### <small>Week4</small>
 
 Any questions? comments? Issues? Remember you can always tag us using individual names when you file an issue in the [Discussion repository](https://github.com/gge-ucd/Discussion/issues): @marthawohlfeil, @mcmaurer @ryanpeek, etc.
