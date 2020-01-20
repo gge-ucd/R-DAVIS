@@ -1051,9 +1051,6 @@ head(wide_survey)</code></pre>
 surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quot;plot_id&quot;, values_to = &quot;mean_weight&quot;)</code></pre>
 <p>This data set should look just like <code>surveys_mz</code>. But this one is 240 rows, and <code>surveys_mz</code> is 196 rows. What’s going on?</p>
 <pre class="r"><code>View(surveys_long)</code></pre>
-<pre><code>## Warning in system2(&quot;/usr/bin/otool&quot;, c(&quot;-L&quot;, shQuote(DSO)), stdout = TRUE):
-## running command &#39;&#39;/usr/bin/otool&#39; -L &#39;/Library/Frameworks/R.framework/
-## Resources/modules/R_de.so&#39;&#39; had status 1</code></pre>
 <p>Looks like all the NAs are included in this data set. This is always going to happen when moving between <code>pivot_longer</code> and <code>pivot_wider</code>, but is actually a useful way to balance out a dataset so every replicate has the same composition. Luckily, we now know how to remove the NAs if we want!</p>
 <pre class="r"><code>surveys_long &lt;- surveys_long %&gt;% 
   filter(!is.na(mean_weight)) #now 196 rows</code></pre>

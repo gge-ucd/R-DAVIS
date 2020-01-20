@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -236,7 +237,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -470,7 +470,7 @@ times3 &lt;- prob1 * 3 #multiplying by 3
 
 plus10 &lt;- times3 + 10 #adding 10 to the whole vector 
 
-final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number</code></pre>
+final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical subsetting</code></pre>
 </details>
 </div>
 <div id="week4" class="section level3">

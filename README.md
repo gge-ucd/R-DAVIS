@@ -32,6 +32,8 @@ The [course website](https://gge-ucd.github.io/R-DAVIS/) can be rebuilt locally 
 
 You can also clean and build the website from the command line by navigating to the repo and running `R -e 'rmarkdown::clean_site()'` or `R -e 'rmarkdown::render_site()'`.
 
+If you only need to rebuild one lesson or one page, you can run `rmarkdown::render_site(input = "path_to_page_from_project_directory")`.
+
 ## Releases
  
 See the [`Releases`](https://github.com/gge-ucd/R-DAVIS/releases) tab in this repo to find the completed version for a given year. We expect further development of the website for future iterations as the course improves in the future.
