@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -237,6 +236,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -434,6 +434,44 @@ $(document).ready(function () {
 </div>
 <div id="week3" class="section level3">
 <h3><small>Week3</small></h3>
+<p>In Week 3’s homework we are going to practice subsetting and manipulating vectors. Fun!</p>
+<p>First, open your r-davis-in-class-project-YourName and <code>pull</code>! Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).</p>
+<p>Second, open a new script in your r-davis-in-class-project-YourName and save it to your <code>scripts</code> folder. Call this new script <code>week_3_homework</code>.</p>
+<p>Copy and paste the chunck of code below into your new <code>week_3_homework</code> script and run it. This chunck of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
+<pre class="r"><code>set.seed(15)
+hw3 &lt;- runif(50, 4, 50)
+hw3 &lt;- replace(hw3, c(4,12,22,27), NA)
+hw3</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897
+##  [8] 15.682545 35.612619 42.245735  8.814791        NA 27.418158 36.504914
+## [15] 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776 40.971460
+## [22]        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658
+## [29] 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087
+## [36] 34.262403  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810
+## [43] 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312
+## [50]  4.500130</code></pre>
+<p><em>PROBLEM 1:</em></p>
+<p>Take you <code>hw3</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
+<p><em>PROBLEM 2:</em></p>
+<p>Multiply each number in the <code>prob1</code> vector by 3 to create a new vector called <code>times3</code>. Then add 10 to each number in your <code>times3</code> vector to create a new vector called <code>plus10</code>.</p>
+<p><em>PROBLEM 3:</em></p>
+<p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p>
+<pre class="r"><code>final</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049
+##  [8]  92.76726  93.19901  85.12543  69.44137  67.57845</code></pre>
+<p>Finally, save your script and push all your changes to your github account!</p>
+<details>
+<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<pre class="r"><code>prob1 &lt;- hw3[!is.na(hw3)] #removing the NAs
+
+prob1 &lt;- prob1[prob1 &gt;14 &amp; prob1 &lt; 38] #only selecting numbers between 14 and 38
+
+times3 &lt;- prob1 * 3 #multiplying by 3
+
+plus10 &lt;- times3 + 10 #adding 10 to the whole vector 
+
+final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number</code></pre>
+</details>
 </div>
 <div id="week4" class="section level3">
 <h3><small>Week4</small></h3>
