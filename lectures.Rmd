@@ -25,9 +25,9 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 3
 
-* What we covered (<a href="" target="_blank">livecode</a>)
-* <a href="" target="_blank">Screencast</a>
-* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* What we covered (<a href="https://tinyurl.com/r-davis-2020-w3" target="_blank">livecode</a>)
+* <a href="https://www.youtube.com/watch?v=g7OktcRX8Ow" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1By0MRGp7vKIwHHSCX4t-V0CvoRcHdNzYpceYNVVRLfs/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
