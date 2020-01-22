@@ -231,10 +231,24 @@ Here "four" comes after "five", and therefore is "greater than" it.
 
 You can do basic mathematical operations with vectors in R. We won't get into this too deeply, but you should be aware of how R approaches these operations.
 
+You can add a number to a vector of numbers like this:
+```{r}
+x <- 1:10
+
+x + 3
+```
+
+
+Or multiply all the values in a vector by a number:
+
+```{r}
+x * 10
+```
+
+
 By default, R will do value-by-value math. So if you add together two vectors of equal length, R will return a vector of the 1st value of each added together, then the 2nd value of each added together, etc. Let's take a look here:
 
 ```{r}
-x <- 1:10
 y <- 100:109
 
 x + y
@@ -250,6 +264,8 @@ x + z
 ```
 
 Whoa... what happened here? R does something called **recycling**. It adds together the first values of each vector, then the second values, but then it runs out of values in vector z. It then **recycles** the values of z, so it will add the 3rd value of x to the 1st value of z, then the 4th value of x to the 2nd value of z, and so on. Essentially, it recycles z from `1,2` into `1,2,1,2,1,2,1,2,1,2`, then does the addition.
+
+We actually already saw this behavior: when we added 3 to x, 3 gets recycled into a vector of 3s that is the same length as x.
 
 Since the length of x is 10, it is a multiple of the length of z, which is 2. What happens if the longer vector isn't a multiple of the shorter one?
 

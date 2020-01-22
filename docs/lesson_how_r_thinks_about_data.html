@@ -618,9 +618,16 @@ animals[animals == &quot;cat&quot; | animals == &quot;rat&quot;] # returns both 
 <div id="vector-math-and-recycling" class="section level3">
 <h3>Vector Math and Recycling</h3>
 <p>You can do basic mathematical operations with vectors in R. We won’t get into this too deeply, but you should be aware of how R approaches these operations.</p>
-<p>By default, R will do value-by-value math. So if you add together two vectors of equal length, R will return a vector of the 1st value of each added together, then the 2nd value of each added together, etc. Let’s take a look here:</p>
+<p>You can add a number to a vector of numbers like this:</p>
 <pre class="r"><code>x &lt;- 1:10
-y &lt;- 100:109
+
+x + 3</code></pre>
+<pre><code>##  [1]  4  5  6  7  8  9 10 11 12 13</code></pre>
+<p>Or multiply all the values in a vector by a number:</p>
+<pre class="r"><code>x * 10</code></pre>
+<pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
+<p>By default, R will do value-by-value math. So if you add together two vectors of equal length, R will return a vector of the 1st value of each added together, then the 2nd value of each added together, etc. Let’s take a look here:</p>
+<pre class="r"><code>y &lt;- 100:109
 
 x + y</code></pre>
 <pre><code>##  [1] 101 103 105 107 109 111 113 115 117 119</code></pre>
@@ -630,6 +637,7 @@ x + y</code></pre>
 x + z</code></pre>
 <pre><code>##  [1]  2  4  4  6  6  8  8 10 10 12</code></pre>
 <p>Whoa… what happened here? R does something called <strong>recycling</strong>. It adds together the first values of each vector, then the second values, but then it runs out of values in vector z. It then <strong>recycles</strong> the values of z, so it will add the 3rd value of x to the 1st value of z, then the 4th value of x to the 2nd value of z, and so on. Essentially, it recycles z from <code>1,2</code> into <code>1,2,1,2,1,2,1,2,1,2</code>, then does the addition.</p>
+<p>We actually already saw this behavior: when we added 3 to x, 3 gets recycled into a vector of 3s that is the same length as x.</p>
 <p>Since the length of x is 10, it is a multiple of the length of z, which is 2. What happens if the longer vector isn’t a multiple of the shorter one?</p>
 <pre class="r"><code>z &lt;- 1:3
 
