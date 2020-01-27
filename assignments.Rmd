@@ -88,7 +88,77 @@ final <- plus10[c(TRUE, FALSE)] #selecting every other number using logical subs
 
 ### <small>Week4</small>
 
-Any questions? comments? Issues? Remember you can always tag us using individual names when you file an issue in the [Discussion repository](https://github.com/gge-ucd/Discussion/issues): @marthawohlfeil, @mcmaurer @ryanpeek, etc.
+Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and PULL! Then create a new script in your `scripts` folder called `homework_week4.R`. 
+
+We are going to ask you to use the two different types of subsetting techniques we learned about: Base R and `Tidyverse`. It's important to understand both, although in your own work you will probably be using just one. 
+
+**PROBLEM 1:**
+
+**Frist, Base R** (DON'T use any tidyverse functions for this part!)
+
+Load your `survey` data frame with read.csv. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
+
+CHALLENGE!
+Create a second data frame called `challenge_base` that only consists of those species from your surveys_new data frame with weights greater than 150g.  
+
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the Base R portion of the homework</summary>
+```{r, eval=T}
+#PROBLEM 1
+
+surveys <- read.csv("data/portal_data_joined.csv") #reading the data in
+
+colnames(surveys) #a list of the column names 
+
+surveys_new <- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
+
+surveys_new$species_id <- as.character(surveys_new$species_id) #converting factor data to character
+
+surveys_new$plot_type <- as.character(surveys_new$plot_type) #converting factor data to character 
+
+surveys_new <- surveys_new[complete.cases(surveys_new), ] #selecting only the ROWS that have complete cases (no NAs) **Notice the comma was needed for this to work**
+
+#CHALLENGE
+challenge_base <- surveys_new[(surveys_new[, 2]>150),] #selecting just the weights (column 2) that are greater than 150
+
+```
+</details>
+
+<br> 
+
+**PROBLEM 2:**
+
+**Now, `tidyverse`!** For this second problem, you can use the tidyverse commands we learned in class (although you may need a base function or two). 
+
+Load your `survey` data frame with `read_csv` and call it `surveys2`. Create a new data frame called `surveys_tidy` with only the species_id, hindfoot_length, and the year columns.  Remove all rows with hindfoot_length == NA. Next, select only the last 100 rows. *Remember, species_id should already be a character column, so there is no need to convert*
+
+CHALLENGE!
+Create a second data frame called `challenge_tidy` that only consists of the species "RM" in the year 1997. 
+
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
+```{r, eval = T}
+#PROBLEM 2
+
+library(tidyverse) #load tidyverse 
+
+surveys2 <- read_csv("data/portal_data_joined.csv") #read in data with tidyverse command
+
+surveys_tidy <- surveys2 %>% 
+  select(species_id, hindfoot_length, year) %>% 
+  filter(!is.na(hindfoot_length)) #removing all the NAs from hindfoot_length
+
+surveys_tidy <- surveys_tidy[-c(1:31338), ] #selecting the LAST 100 rows, data frame was 31438 rows long initially
+
+#CALLENGE 
+challenge_tidy <- surveys_tidy %>% 
+  filter(year == 1997) %>% 
+  filter(species_id == "RM")
+
+```
+</details>
+
+**Finally, save your script and PUSH the changes to github.** 
 
 
 ### <small>Week5</small>
