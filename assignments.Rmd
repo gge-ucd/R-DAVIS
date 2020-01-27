@@ -99,7 +99,7 @@ We are going to ask you to use the two different types of subsetting techniques 
 Load your `survey` data frame with read.csv. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
 
 CHALLENGE!
-Create a second data frame called `challenge_base` that only consists of those species from your surveys_new data frame with weights greater than 150g.  
+Create a second data frame called `challenge_base` that only consists of individuals from your `surveys_base` data frame with weights greater than 150g.  
 
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers for the Base R portion of the homework</summary>
