@@ -94,7 +94,7 @@ We are going to ask you to use the two different types of subsetting techniques 
 
 **PROBLEM 1:**
 
-**Frist, Base R** (DON'T use any tidyverse functions for this part!)
+**First, Base R** (DON'T use any tidyverse functions for this part!)
 
 Load your `survey` data frame with read.csv. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
 
