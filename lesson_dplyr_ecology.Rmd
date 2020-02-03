@@ -515,7 +515,7 @@ head(wide_survey)
 3. `names_to` the name of the new column you'll create to put the column names in
 4. `values_to` the name of the new column to put the column values in
 
-![pivot_longer figure](../img/pivot_longer.JPG)
+![pivot_longer figure](img/pivot_longer.JPG)
 
 Let's pretend that we got sent the dataset we just created (`wide_survey`) and we want to reshape it to be in a long format. We can easily do that using `pivot_longer`
 
