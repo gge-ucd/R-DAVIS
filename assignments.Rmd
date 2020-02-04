@@ -224,9 +224,13 @@ surveys_avg_weight <- surveys %>%
   mutate(avg_weight = mean(weight)) %>% 
   select(species_id, sex, weight, avg_weight)
 
+surveys_avg_weight
+
 #6
 surveys_avg_weight <- surveys_avg_weight %>% 
   mutate(above_average = weight > avg_weight)
+
+surveys_avg_weight
 
 #7
 surveys %>% 

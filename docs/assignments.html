@@ -698,11 +698,43 @@ surveys_avg_weight &lt;- surveys %&gt;%
   mutate(avg_weight = mean(weight)) %&gt;% 
   select(species_id, sex, weight, avg_weight)
 
-#6
+surveys_avg_weight</code></pre>
+<pre><code>## # A tibble: 32,283 x 4
+## # Groups:   species_id, sex [64]
+##    species_id sex   weight avg_weight
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+##  1 NL         M        218       166.
+##  2 NL         M        204       166.
+##  3 NL         M        200       166.
+##  4 NL         M        199       166.
+##  5 NL         M        197       166.
+##  6 NL         M        218       166.
+##  7 NL         M        166       166.
+##  8 NL         M        184       166.
+##  9 NL         M        206       166.
+## 10 NL         F        274       154.
+## # … with 32,273 more rows</code></pre>
+<pre class="r"><code>#6
 surveys_avg_weight &lt;- surveys_avg_weight %&gt;% 
   mutate(above_average = weight &gt; avg_weight)
 
-#7
+surveys_avg_weight</code></pre>
+<pre><code>## # A tibble: 32,283 x 5
+## # Groups:   species_id, sex [64]
+##    species_id sex   weight avg_weight above_average
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
+##  1 NL         M        218       166. TRUE         
+##  2 NL         M        204       166. TRUE         
+##  3 NL         M        200       166. TRUE         
+##  4 NL         M        199       166. TRUE         
+##  5 NL         M        197       166. TRUE         
+##  6 NL         M        218       166. TRUE         
+##  7 NL         M        166       166. TRUE         
+##  8 NL         M        184       166. TRUE         
+##  9 NL         M        206       166. TRUE         
+## 10 NL         F        274       154. TRUE         
+## # … with 32,273 more rows</code></pre>
+<pre class="r"><code>#7
 surveys %&gt;% 
   filter(!is.na(hindfoot_length)) %&gt;% 
   group_by(genus, plot_type) %&gt;% 
