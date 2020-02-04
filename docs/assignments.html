@@ -550,12 +550,181 @@ challenge_tidy &lt;- surveys_tidy %&gt;%
 <ol style="list-style-type: decimal">
 <li><p>Create a tibble named <code>surveys</code> from the portal_data_joined.csv file.</p></li>
 <li><p>Subset <code>surveys</code> to keep rows with weight between 30 and 60, and print out the first 6 rows.</p></li>
-<li><p>Create a new tibble showing the maximum weight for each species + sex combination and name it <code>biggest_critters</code>. Sort the tibble to take a look at the biggest and smallest species + sex combinations.</p></li>
+<li><p>Create a new tibble showing the maximum weight for each species + sex combination and name it <code>biggest_critters</code>. Sort the tibble to take a look at the biggest and smallest species + sex combinations. HINT: it’s easier to calculate max if there are no NAs in the dataframe…</p></li>
 <li><p>Try to figure out where the NA weights are concentrated in the data- is there a particular species, taxa, plot, or whatever, where there are lots of NA values? There isn’t necessarily a right or wrong answer here, but manipulate surveys a few different ways to explore this. Maybe use <code>tally</code> and <code>arrange</code> here.</p></li>
 <li><p>Take <code>surveys</code>, remove the rows where weight is NA and add a column that contains the average weight of each species+sex combination to the <strong>full</strong> <code>surveys</code> dataframe. Then get rid of all the columns except for species, sex, weight, and your new average weight column. Save this tibble as <code>surveys_avg_weight</code>.</p></li>
 <li><p>Take <code>surveys_avg_weight</code> and add a new column called <code>above_average</code> that contains logical values stating whether or not a row’s weight is above average for its species+sex combination (recall the new column we made for this tibble).</p></li>
 <li><p>Manipulate <code>surveys</code> to create a dataframe with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you’ve used so far, and it may be useful to sketch out the steps to get to the final result.</p></li>
 </ol>
+<details>
+<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
+<pre class="r"><code>library(tidyverse)
+#1
+surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   record_id = col_double(),
+##   month = col_double(),
+##   day = col_double(),
+##   year = col_double(),
+##   plot_id = col_double(),
+##   species_id = col_character(),
+##   sex = col_character(),
+##   hindfoot_length = col_double(),
+##   weight = col_double(),
+##   genus = col_character(),
+##   species = col_character(),
+##   taxa = col_character(),
+##   plot_type = col_character()
+## )</code></pre>
+<pre class="r"><code>#2
+surveys %&gt;% 
+  filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
+<pre><code>## # A tibble: 14,730 x 13
+##    record_id month   day  year plot_id species_id sex   hindfoot_length
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
+##  1      5966     5    22  1982       2 NL         F                  32
+##  2       226     9    13  1977       2 DM         M                  37
+##  3       233     9    13  1977       2 DM         M                  25
+##  4       245    10    16  1977       2 DM         M                  37
+##  5       251    10    16  1977       2 DM         M                  36
+##  6       257    10    16  1977       2 DM         M                  37
+##  7       259    10    16  1977       2 DM         M                  36
+##  8       268    10    16  1977       2 DM         F                  36
+##  9       346    11    12  1977       2 DM         F                  37
+## 10       350    11    12  1977       2 DM         M                  37
+## # … with 14,720 more rows, and 5 more variables: weight &lt;dbl&gt;,
+## #   genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
+<pre class="r"><code>#3
+biggest_critters &lt;- surveys %&gt;% 
+  filter(!is.na(weight)) %&gt;% 
+  group_by(species_id, sex) %&gt;% 
+  summarise(max_weight = max(weight))
+
+biggest_critters %&gt;% arrange(max_weight)</code></pre>
+<pre><code>## # A tibble: 64 x 3
+## # Groups:   species_id [25]
+##    species_id sex   max_weight
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
+##  1 PF         &lt;NA&gt;           8
+##  2 BA         M              9
+##  3 RO         M             11
+##  4 RO         F             13
+##  5 RF         M             15
+##  6 RM         &lt;NA&gt;          16
+##  7 BA         F             18
+##  8 PE         &lt;NA&gt;          18
+##  9 PI         &lt;NA&gt;          18
+## 10 PP         &lt;NA&gt;          18
+## # … with 54 more rows</code></pre>
+<pre class="r"><code>biggest_critters %&gt;% arrange(desc(max_weight))</code></pre>
+<pre><code>## # A tibble: 64 x 3
+## # Groups:   species_id [25]
+##    species_id sex   max_weight
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
+##  1 NL         M            280
+##  2 NL         F            274
+##  3 NL         &lt;NA&gt;         243
+##  4 SF         F            199
+##  5 DS         F            190
+##  6 DS         M            170
+##  7 DS         &lt;NA&gt;         152
+##  8 SH         F            140
+##  9 SH         &lt;NA&gt;         130
+## 10 SS         M            130
+## # … with 54 more rows</code></pre>
+<pre class="r"><code>#4
+surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(species) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 37 x 2
+##    species          n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 harrisi        437
+##  2 merriami       334
+##  3 bilineata      303
+##  4 spilosoma      246
+##  5 spectabilis    160
+##  6 ordii          123
+##  7 albigula       100
+##  8 penicillatus    99
+##  9 torridus        89
+## 10 baileyi         81
+## # … with 27 more rows</code></pre>
+<pre class="r"><code>surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(plot_id) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 24 x 2
+##    plot_id     n
+##      &lt;dbl&gt; &lt;int&gt;
+##  1      13   160
+##  2      15   155
+##  3      14   152
+##  4      20   152
+##  5      12   144
+##  6      17   144
+##  7      11   119
+##  8       9   118
+##  9       2   117
+## 10      21   106
+## # … with 14 more rows</code></pre>
+<pre class="r"><code>surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(year) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 26 x 2
+##     year     n
+##    &lt;dbl&gt; &lt;int&gt;
+##  1  1977   221
+##  2  1998   195
+##  3  1987   151
+##  4  1988   130
+##  5  1978   124
+##  6  1982   123
+##  7  1989   123
+##  8  1991   108
+##  9  2002   108
+## 10  1992   106
+## # … with 16 more rows</code></pre>
+<pre class="r"><code>#5
+surveys_avg_weight &lt;- surveys %&gt;% 
+  filter(!is.na(weight)) %&gt;% 
+  group_by(species_id, sex) %&gt;% 
+  mutate(avg_weight = mean(weight)) %&gt;% 
+  select(species_id, sex, weight, avg_weight)
+
+#6
+surveys_avg_weight &lt;- surveys_avg_weight %&gt;% 
+  mutate(above_average = weight &gt; avg_weight)
+
+#7
+surveys %&gt;% 
+  filter(!is.na(hindfoot_length)) %&gt;% 
+  group_by(genus, plot_type) %&gt;% 
+  summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
+  pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
+  arrange(Control)</code></pre>
+<pre><code>## # A tibble: 10 x 6
+## # Groups:   genus [10]
+##    genus Control `Rodent Exclosu… `Long-term Krat… `Short-term Kra…
+##    &lt;chr&gt;   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Baio…    13               13.5             12.9             13  
+##  2 Pero…    15.9             16.1             15.8             15.7
+##  3 Reit…    16.6             16.5             16.4             16.5
+##  4 Pero…    20.3             20.3             20.3             20.3
+##  5 Onyc…    20.4             20.3             20.3             20.3
+##  6 Chae…    23.6             22.7             24.1             24.3
+##  7 Sigm…    27.8             28.2             28.0             25.7
+##  8 Ammo…    31               35               NA               NA  
+##  9 Neot…    32.2             32.4             32.5             32.2
+## 10 Dipo…    37.8             36.9             36.7             38.8
+## # … with 1 more variable: `Spectab exclosure` &lt;dbl&gt;</code></pre>
+</details>
 </div>
 <div id="week6" class="section level3">
 <h3><small>Week6</small></h3>
