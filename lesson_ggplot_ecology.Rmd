@@ -5,7 +5,8 @@ title: Data visualization with ggplot2
 
 ```{r setup, echo=FALSE, purl=FALSE, message=F, results=F, warning = FALSE}
 library(tidyverse)
-surveys_complete <- read_csv(file = "data_output/surveys_complete.csv", col_types = cols())
+surveys_complete <- read_csv("data/portal_data_joined.csv") %>% 
+  filter(complete.cases(.))
 ```
 
 
@@ -27,10 +28,11 @@ We start by loading the required packages. **`ggplot2`** is included in the **`t
 library(tidyverse)
 ```
 
-If not still in the workspace, load the data we saved in the previous lesson.
+Let's read in our surveys data, but filter it to only get back rows where ALL the data are present, also known as "complete cases". We're also showing you a new little trick: using a period with a pipe. Normally, a pipe just sends the stuff on the left into the FIRST argument position in the function on the right. However, sometimes we want that stuff to get sent to a slightly different place in the righthand function. In this case, we want to send it into the `complete.cases()` function, so that function will run on the whole dataset. In order to specifically tell the pipe to send the lefthand side into this function, we put a period there. You can think of this as the target for the pipe.
 
 ```{r load-data, eval=FALSE, purl=FALSE}
-surveys_complete <- read_csv("data_output/surveys_complete.csv")
+surveys_complete <- read_csv("data/portal_data_joined.csv") %>% 
+  filter(complete.cases(.))
 ```
 
 ## Plotting with **`ggplot2`**

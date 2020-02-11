@@ -502,8 +502,9 @@ div.tocify {
 <p><br></p>
 <p>We start by loading the required packages. <strong><code>ggplot2</code></strong> is included in the <strong><code>tidyverse</code></strong> package.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<p>If not still in the workspace, load the data we saved in the previous lesson.</p>
-<pre class="r"><code>surveys_complete &lt;- read_csv(&quot;data_output/surveys_complete.csv&quot;)</code></pre>
+<p>Let’s read in our surveys data, but filter it to only get back rows where ALL the data are present, also known as “complete cases”. We’re also showing you a new little trick: using a period with a pipe. Normally, a pipe just sends the stuff on the left into the FIRST argument position in the function on the right. However, sometimes we want that stuff to get sent to a slightly different place in the righthand function. In this case, we want to send it into the <code>complete.cases()</code> function, so that function will run on the whole dataset. In order to specifically tell the pipe to send the lefthand side into this function, we put a period there. You can think of this as the target for the pipe.</p>
+<pre class="r"><code>surveys_complete &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) %&gt;% 
+  filter(complete.cases(.))</code></pre>
 <div id="plotting-with-ggplot2" class="section level2">
 <h2>Plotting with <strong><code>ggplot2</code></strong></h2>
 <p><strong><code>ggplot2</code></strong> is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatterplot. This helps in creating publication quality plots with minimal amounts of adjustments and tweaking.</p>
@@ -661,6 +662,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 <pre class="r"><code>ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
     facet_wrap(~ species_id)</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/first-facet-1.png" width="672" /></p>
 </div>
 <div id="ggplot2-themes" class="section level2">
@@ -673,6 +676,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      facet_wrap(~ species_id) +
      theme_bw() +
      theme(panel.grid = element_blank())</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div class = "blue">
 <div id="challenge-1" class="section level3">
@@ -690,6 +695,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      geom_line() +
      facet_wrap(~ species_id) +
      theme_bw()</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="blue">
 <h3 id="challenge-2">Challenge 2</h3>
@@ -706,6 +713,8 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
    geom_line() +
    facet_wrap(~ species_id) +
    theme_bw()</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to
+## adjust the group aesthetic?</code></pre>
 <img src="lesson_ggplot_ecology_files/figure-html/average-weight-time-series-1.png" width="672" />
 </details>
 </div>
