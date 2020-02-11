@@ -245,6 +245,93 @@ surveys %>%
 
 ### <small>Week6</small>
 
+For our week six homework, we are going to be practicing the skills we learned with ggplot during class. You will be happy to know that we are going to be using a brand new data set called `gapminder`. This data set is looking at statistics for a few different counties including population, GDP per capita, and life expentancy. Download the data using the code below. Remember, this code is looking for a folder called `data` to put the .csv in, so make sure you have a folder named `data`, or modify the code to the correct folder name. 
+
+```{r, warnings = F}
+library(tidyverse)
+
+gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #ONLY change the "data" part of this path if necessary
+
+```
+
+
+#### *Problem 1*.
+
+First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)
+
+#### *Problem 2*.
+
+Look at the following code and answer the following questions. What do you think the `scale_x_log10()` line of code is achieving? What about the `geom_smooth()` line of code? 
+
+*Challenge!* Modify the above code to size the points in proportion to the population of the country. 
+**Hint:** Are you translating data to a visual feature of the plot?
+
+**Hint:** There's no cost to tinkering! Try some code out and see what happens with or without particular elements.
+
+```{r}
+
+
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent), size = .25) + 
+    scale_x_log10() +
+    geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') +
+    theme_bw()
+
+```
+
+
+#### *Problem 3*
+
+Create a boxplot that shows the life expectency for Brazil, China, El Salvador, Niger, and the United States, with the data points in the backgroud using geom_jitter. Label the X and Y axis with "Country" and "Life Expectancy" and title the plot "Life Expectancy of Five Countries".
+
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers! </summary>
+```{r, eval = T}
+
+library(tidyverse)
+
+#PROBLEM 1:
+
+gapminder %>%
+  group_by(continent, year) %>% 
+  summarize(mean_lifeExp = mean(lifeExp)) %>% #calculating the mean life expectancy for each continent and year
+  ggplot()+
+  geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
+  geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot
+
+#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
+
+
+
+#PROBLEM 2:
+
+#challenge answer
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent, size = pop)) + 
+    scale_x_log10() +
+    geom_smooth(method = 'lm', color = 'black', linetype = 'dashed') +
+    theme_bw()
+
+
+#PROBLEM 3: 
+
+countries <- c("Brazil", "China", "El Salvador", "Niger", "United States") #create a vector with just the countries we are interested in
+
+gapminder %>% 
+  filter(country %in% countries) %>% 
+  ggplot(aes(x = country, y = lifeExp))+
+  geom_boxplot() +
+  geom_jitter(alpha = 0.3, color = "blue")+
+  theme_minimal() +
+  ggtitle("Life Expectancy of Five Countries") + #title the figure
+  theme(plot.title = element_text(hjust = 0.5)) + #centered the plot title
+  xlab("Country") + ylab("Life Expectancy") #how to change axis names
+
+
+```
+</details>
+
+
 ### <small>Week7</small>
 
 ### <small>Week8</small>
