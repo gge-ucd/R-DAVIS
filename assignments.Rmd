@@ -338,11 +338,10 @@ For week 7, we're going to be working on 2 critical `ggplot` skills: recreating 
 
 Our goal will be to make this final graph:
 
-```{r, eval=T, echo=F, warning=F, message=F}
+```{r, eval=T, echo=F, warning=F, message=F, }
 library(tidyverse)
 
 gapminder <- read_csv("data/gapminder.csv")
-gapminder
 
 pg <- gapminder %>% 
   select(country, year, pop, continent) %>% 
@@ -373,7 +372,6 @@ pg %>%
 library(tidyverse)
 
 gapminder <- read_csv("data/gapminder.csv")
-gapminder
 
 pg <- gapminder %>% 
   select(country, year, pop, continent) %>% 

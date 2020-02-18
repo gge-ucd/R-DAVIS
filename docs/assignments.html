@@ -839,27 +839,12 @@ gapminder %&gt;%
 <h3><small>Week7</small></h3>
 <p>For week 7, we’re going to be working on 2 critical <code>ggplot</code> skills: recreating a graph from a dataset and <strong>googling stuff</strong>.</p>
 <p>Our goal will be to make this final graph:</p>
-<pre><code>## # A tibble: 1,704 x 6
-##    country      year      pop continent lifeExp gdpPercap
-##    &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-##  1 Afghanistan  1952  8425333 Asia         28.8      779.
-##  2 Afghanistan  1957  9240934 Asia         30.3      821.
-##  3 Afghanistan  1962 10267083 Asia         32.0      853.
-##  4 Afghanistan  1967 11537966 Asia         34.0      836.
-##  5 Afghanistan  1972 13079460 Asia         36.1      740.
-##  6 Afghanistan  1977 14880372 Asia         38.4      786.
-##  7 Afghanistan  1982 12881816 Asia         39.9      978.
-##  8 Afghanistan  1987 13867957 Asia         40.8      852.
-##  9 Afghanistan  1992 16317921 Asia         41.7      649.
-## 10 Afghanistan  1997 22227415 Asia         41.8      635.
-## # … with 1,694 more rows</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
 <pre class="r"><code>library(tidyverse)
 
 gapminder &lt;- read_csv(&quot;data/gapminder.csv&quot;)
-gapminder
 
 pg &lt;- gapminder %&gt;% 
   select(country, year, pop, continent) %&gt;% 
