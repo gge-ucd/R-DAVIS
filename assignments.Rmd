@@ -365,7 +365,7 @@ pg %>%
 
 ```
 
-The x axis labels are all scrunched up because the image is so small on this page, but if you make it and then zoom it bigger in RStudio it looks much better.
+The x axis labels are all scrunched up because we can't make the image bigger on the webpage, but if you make it and then zoom it bigger in RStudio it looks much better.
 
 We'll touch on some intermediate steps here, since it might take quite a few steps to get from start to finish. Here are some things to note:
 
