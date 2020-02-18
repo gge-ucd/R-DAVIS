@@ -334,7 +334,11 @@ gapminder %>%
 
 ### <small>Week7</small>
 
-```{r, eval=T, echo=F}
+For week 7, we're going to be working on 2 critical `ggplot` skills: recreating a graph from a dataset and **googling stuff**.
+
+Our goal will be to make this final graph:
+
+```{r, eval=T, echo=F, warning=F, message=F}
 library(tidyverse)
 
 gapminder <- read_csv("data/gapminder.csv")
