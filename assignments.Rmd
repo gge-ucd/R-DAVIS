@@ -350,7 +350,7 @@ pg <- gapminder %>%
   mutate(pop_change_0207 = `2007` - `2002`)
 ```
 
-```{r, eval=T, echo=F, warning=F, message=F, width = 8, height = 5}
+```{r, eval=T, echo=F, warning=F, message=F, fig.width = 8, fig.height = 5}
 pg %>% 
   filter(continent != "Oceania") %>% 
   ggplot(aes(x = reorder(country, pop_change_0207), y = pop_change_0207)) +
