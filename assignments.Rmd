@@ -347,28 +347,47 @@ pg <- gapminder %>%
   select(country, year, pop, continent) %>% 
   filter(year > 2000) %>% 
   pivot_wider(names_from = year, values_from = pop) %>% 
-  mutate(pop_growth_0207 = (`2007` - `2002`) / 5)
-
-
+  mutate(pop_change_0207 = `2007` - `2002`)
 
 pg %>% 
-  filter(continent %in% c("Africa", "Americas", "Asia", "Europe")) %>% 
-  ggplot(aes(x = reorder(country, pop_growth_0207), y = pop_growth_0207)) +
+  filter(continent != "Oceania") %>% 
+  ggplot(aes(x = reorder(country, pop_change_0207), y = pop_change_0207)) +
   geom_col(aes(fill = continent)) +
-  facet_wrap(vars(continent), scales = "free") +
+  facet_wrap(~continent, scales = "free") +
   theme_bw() +
   scale_fill_viridis_d() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "none") +
   xlab("Country") +
-  ylab("Yearly Pop Growth Between 2002 and 2007")
+  ylab("Change in Population Between 2002 and 2007")
+
 ```
 
+The x axis labels are all scrunched up because the image is so small on this page, but if you make it and then zoom it bigger in RStudio it looks much better.
+
+We'll touch on some intermediate steps here, since it might take quite a few steps to get from start to finish. Here are some things to note:
+
+1. To get the population difference between 2002 and 2007 for each country, it would probably be easiest to have a country in each row and a column for 2002 population and a column for 2007 population.
+
+1. Notice the order of countries within each facet. You'll have to look up how to order them in this way.
+
+1. Also look at how the axes are different for each facet. Try looking through `?facet_wrap` to see if you can figure this one out.
+
+1. The color scale is different from the default- feel free to try out other color scales, just don't use the defaults!
+
+1. The theme here is different from the default in a few ways, again, feel free to play around with other non-default themes.
+
+1. The axis labels are rotated! Here's a hint: `angle = 45, hjust = 1`. It's up to you (and Google) to figure out where this code goes!
+
+1. Is there a legend on this plot?
+
+This lesson should illustrate a key reality of making plots in R, one that applies as much to experts as beginners: 10% of your effort gets the plot 90% right, and 90% of the effort is getting the plot perfect. `ggplot` is incredibly powerful for exploratory analysis, as you can get a good plot with only a few lines of code. It's also extremely flexible, allowing you to tweak nearly everything about a plot to get a highly polished final product, but these little tweaks can take a lot of time to figure out!
+
+So if you spend most of your time on this lesson googling stuff, you're not alone!
 
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=FALSE}
-
 library(tidyverse)
 
 gapminder <- read_csv("data/gapminder.csv")
@@ -377,21 +396,19 @@ pg <- gapminder %>%
   select(country, year, pop, continent) %>% 
   filter(year > 2000) %>% 
   pivot_wider(names_from = year, values_from = pop) %>% 
-  mutate(pop_growth_0207 = (`2007` - `2002`) / 5)
-
-
+  mutate(pop_change_0207 = `2007` - `2002`)
 
 pg %>% 
-  filter(continent %in% c("Africa", "Americas", "Asia", "Europe")) %>% 
-  ggplot(aes(x = reorder(country, pop_growth_0207), y = pop_growth_0207)) +
+  filter(continent != "Oceania") %>% 
+  ggplot(aes(x = reorder(country, pop_change_0207), y = pop_change_0207)) +
   geom_col(aes(fill = continent)) +
-  facet_wrap(vars(continent), scales = "free") +
+  facet_wrap(~continent, scales = "free") +
   theme_bw() +
   scale_fill_viridis_d() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1), 
         legend.position = "none") +
   xlab("Country") +
-  ylab("Yearly Pop Growth Between 2002 and 2007")
+  ylab("Change in Population Between 2002 and 2007")
 ```
 </details>
 
