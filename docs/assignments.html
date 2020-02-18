@@ -837,6 +837,56 @@ gapminder %&gt;%
 </div>
 <div id="week7" class="section level3">
 <h3><small>Week7</small></h3>
+<pre><code>## Parsed with column specification:
+## cols(
+##   country = col_character(),
+##   year = col_double(),
+##   pop = col_double(),
+##   continent = col_character(),
+##   lifeExp = col_double(),
+##   gdpPercap = col_double()
+## )</code></pre>
+<pre><code>## # A tibble: 1,704 x 6
+##    country      year      pop continent lifeExp gdpPercap
+##    &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+##  1 Afghanistan  1952  8425333 Asia         28.8      779.
+##  2 Afghanistan  1957  9240934 Asia         30.3      821.
+##  3 Afghanistan  1962 10267083 Asia         32.0      853.
+##  4 Afghanistan  1967 11537966 Asia         34.0      836.
+##  5 Afghanistan  1972 13079460 Asia         36.1      740.
+##  6 Afghanistan  1977 14880372 Asia         38.4      786.
+##  7 Afghanistan  1982 12881816 Asia         39.9      978.
+##  8 Afghanistan  1987 13867957 Asia         40.8      852.
+##  9 Afghanistan  1992 16317921 Asia         41.7      649.
+## 10 Afghanistan  1997 22227415 Asia         41.8      635.
+## # … with 1,694 more rows</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>details&gt; <summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<pre class="r"><code>library(tidyverse)
+
+gapminder &lt;- read_csv(&quot;data/gapminder.csv&quot;)
+gapminder
+
+pg &lt;- gapminder %&gt;% 
+  select(country, year, pop, continent) %&gt;% 
+  filter(year &gt; 2000) %&gt;% 
+  pivot_wider(names_from = year, values_from = pop) %&gt;% 
+  mutate(pop_growth_0207 = (`2007` - `2002`) / 5)
+
+
+
+pg %&gt;% 
+  filter(continent %in% c(&quot;Africa&quot;, &quot;Americas&quot;, &quot;Asia&quot;, &quot;Europe&quot;)) %&gt;% 
+  ggplot(aes(x = reorder(country, pop_growth_0207), y = pop_growth_0207)) +
+  geom_col(aes(fill = continent)) +
+  facet_wrap(vars(continent), scales = &quot;free&quot;) +
+  theme_bw() +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = &quot;none&quot;) +
+  xlab(&quot;Country&quot;) +
+  ylab(&quot;Yearly Pop Growth Between 2002 and 2007&quot;)</code></pre>
+</details>
 </div>
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>

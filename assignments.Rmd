@@ -334,6 +334,65 @@ gapminder %>%
 
 ### <small>Week7</small>
 
+```{r, eval=T, echo=F}
+library(tidyverse)
+
+gapminder <- read_csv("data/gapminder.csv")
+gapminder
+
+pg <- gapminder %>% 
+  select(country, year, pop, continent) %>% 
+  filter(year > 2000) %>% 
+  pivot_wider(names_from = year, values_from = pop) %>% 
+  mutate(pop_growth_0207 = (`2007` - `2002`) / 5)
+
+
+
+pg %>% 
+  filter(continent %in% c("Africa", "Americas", "Asia", "Europe")) %>% 
+  ggplot(aes(x = reorder(country, pop_growth_0207), y = pop_growth_0207)) +
+  geom_col(aes(fill = continent)) +
+  facet_wrap(vars(continent), scales = "free") +
+  theme_bw() +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "none") +
+  xlab("Country") +
+  ylab("Yearly Pop Growth Between 2002 and 2007")
+```
+
+
+details>
+<summary>**DO NOT OPEN** until you are ready to see the answers</summary>
+```{r, eval=FALSE}
+
+library(tidyverse)
+
+gapminder <- read_csv("data/gapminder.csv")
+gapminder
+
+pg <- gapminder %>% 
+  select(country, year, pop, continent) %>% 
+  filter(year > 2000) %>% 
+  pivot_wider(names_from = year, values_from = pop) %>% 
+  mutate(pop_growth_0207 = (`2007` - `2002`) / 5)
+
+
+
+pg %>% 
+  filter(continent %in% c("Africa", "Americas", "Asia", "Europe")) %>% 
+  ggplot(aes(x = reorder(country, pop_growth_0207), y = pop_growth_0207)) +
+  geom_col(aes(fill = continent)) +
+  facet_wrap(vars(continent), scales = "free") +
+  theme_bw() +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = "none") +
+  xlab("Country") +
+  ylab("Yearly Pop Growth Between 2002 and 2007")
+```
+</details>
+
 ### <small>Week8</small>
 details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
