@@ -338,7 +338,7 @@ For week 7, we're going to be working on 2 critical `ggplot` skills: recreating 
 
 Our goal will be to make this final graph:
 
-```{r, eval=T, echo=F, warning=F, message=F, }
+```{r, eval=T, echo=F, warning=F, message=F}
 library(tidyverse)
 
 gapminder <- read_csv("data/gapminder.csv")
@@ -348,7 +348,9 @@ pg <- gapminder %>%
   filter(year > 2000) %>% 
   pivot_wider(names_from = year, values_from = pop) %>% 
   mutate(pop_change_0207 = `2007` - `2002`)
+```
 
+```{r, eval=T, echo=F, warning=F, message=F, width = 8, height = 5}
 pg %>% 
   filter(continent != "Oceania") %>% 
   ggplot(aes(x = reorder(country, pop_change_0207), y = pop_change_0207)) +
