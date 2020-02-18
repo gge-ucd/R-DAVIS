@@ -366,7 +366,7 @@ pg %>%
 ```
 
 
-details>
+<details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=FALSE}
 
