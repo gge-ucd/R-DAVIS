@@ -336,7 +336,7 @@ gapminder %>%
 
 For week 7, we're going to be working on 2 critical `ggplot` skills: recreating a graph from a dataset and **googling stuff**.
 
-Our goal will be to make this final graph:
+Our goal will be to make this final graph using the `gapminder` dataset:
 
 ```{r, eval=T, echo=F, warning=F, message=F}
 library(tidyverse)
