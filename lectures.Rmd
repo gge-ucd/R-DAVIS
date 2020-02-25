@@ -62,7 +62,7 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 8
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w8" target="_blank">livecode</a>)
+* What we covered (<a href="https://tinyurl.com/vef4dzf" target="_blank">livecode</a>)
 * <a href="https://youtu.be/wtKAAqJo-Rg" target="_blank">Screencast</a>
 * <a href="https://docs.google.com/document/d/1srS39BM6OfKky3qtwRucMQcJbLLMKBWZOLzD4xnjtjc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>

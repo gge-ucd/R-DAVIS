@@ -787,20 +787,7 @@ df2 %&gt;%
   ggplot() + 
   geom_point(aes(x=mon, y=avg_temp_2m), color=&quot;darkblue&quot;, size= 3)+
   ylab(&quot;Avg Monthly Temperature (C)&quot;) + xlab(&quot;Month&quot;)</code></pre>
-<p><img src="lesson_lubridate_files/figure-html/challenge2-1.png" width="672" /></p>
-<pre class="r"><code>#EXTRA CHALLENGE
-
-# avg hourly for july 
-df3&lt;- df %&gt;% filter(mon==&quot;Jul&quot;) %&gt;% # or month==7
-  group_by(hour(datetime)) %&gt;% 
-  summarize(avg_temp_2m = mean(temp_C_2m))
-            
-df3 %&gt;%             
-ggplot() + 
-  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color=&quot;Temp-2m&quot;), lty=4)+
-  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill=&quot;Temp-2m&quot;), size=3, pch=21, alpha=0.5)+
-  ylab(&quot;2001 Avg Daily Temperature (C)&quot;) + xlab(&quot;July Hour&quot;) </code></pre>
-<img src="lesson_lubridate_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="lesson_lubridate_files/figure-html/challenge2-1.png" width="672" />
 </details>
 </div>
 <p><br></p>

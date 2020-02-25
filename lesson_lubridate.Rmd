@@ -280,23 +280,6 @@ df2 %>%
   ylab("Avg Monthly Temperature (C)") + xlab("Month")
 
 ```
-```{r}
-
-#EXTRA CHALLENGE
-
-# avg hourly for july 
-df3<- df %>% filter(mon=="Jul") %>% # or month==7
-  group_by(hour(datetime)) %>% 
-  summarize(avg_temp_2m = mean(temp_C_2m))
-            
-df3 %>%             
-ggplot() + 
-  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color="Temp-2m"), lty=4)+
-  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill="Temp-2m"), size=3, pch=21, alpha=0.5)+
-  ylab("2001 Avg Daily Temperature (C)") + xlab("July Hour") 
- 
-  
-```
 </details>
 </div>
 

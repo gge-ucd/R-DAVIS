@@ -513,16 +513,9 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
 <pre class="r"><code>#PROBLEM 2
 
-library(tidyverse) #load tidyverse </code></pre>
-<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.2.1          ✔ purrr   0.3.3     
-## ✔ tibble  2.1.3          ✔ dplyr   0.8.3     
-## ✔ tidyr   1.0.0.9000     ✔ stringr 1.4.0     
-## ✔ readr   1.3.1          ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
+library(tidyverse) #load tidyverse 
+
+surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   record_id = col_double(),
@@ -888,6 +881,18 @@ pg %&gt;%
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>
 <p>details&gt; <summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<pre class="r"><code>#EXTRA CHALLENGE
+
+# avg hourly for july 
+df3&lt;- df %&gt;% filter(mon==&quot;Jul&quot;) %&gt;% # or month==7
+  group_by(hour(datetime)) %&gt;% 
+  summarize(avg_temp_2m = mean(temp_C_2m))
+            
+df3 %&gt;%             
+ggplot() + 
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color=&quot;Temp-2m&quot;), lty=4)+
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill=&quot;Temp-2m&quot;), size=3, pch=21, alpha=0.5)+
+  ylab(&quot;2001 Avg Daily Temperature (C)&quot;) + xlab(&quot;July Hour&quot;) </code></pre>
 </details>
 </div>
 <div id="week9" class="section level3">
