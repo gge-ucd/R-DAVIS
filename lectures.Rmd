@@ -70,9 +70,9 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 9
 
-* What we covered (<a href="" target="_blank">livecode</a>)
-* <a href="" target="_blank">Screencast</a>
-* <a href="" target="_blank">Google Doc Collaborative Notes</a>
+* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/qbgn554za2nofkj/week_9_live_code.R?dl=0" target="_blank">livecode</a>)
+* <a href="https://youtu.be/8-jHc0uJ74Y" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1SJbozn9Kmm_JG0tvsXYsfuc9BZjj-I9wnETJi-Q4Mac/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 
