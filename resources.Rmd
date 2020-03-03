@@ -95,3 +95,7 @@ This is a list of most of the data sources used in this course.
 * [Michael Levy tutorial on using the `tidyverse`](https://youtu.be/9q7gssUP8UA)
 * [Brandon Hurr "Intro to using `purrr`](http://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1)
 * [Brandon Hurr "dplyr II: Joins and Set Operations"](http://d-rug.github.io/blog/2016/hurr-dplyr2)
+
+### Quantitative Courses
+
+[This is a list of quantitative courses](https://docs.google.com/spreadsheets/d/1aENRlOvGxgvLS4DCiJy6WuhzQCc7LYZAVSqbHHBSzWA/edit?usp=sharing) commonly taken by students in the Graduate Group in Ecology at UC Davis. For those of you taking the course in person, these are classes you may end up taking in the future that will put your new R skills to use.
