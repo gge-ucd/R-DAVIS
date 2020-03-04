@@ -897,10 +897,71 @@ ggplot() +
 </div>
 <div id="week9" class="section level3">
 <h3><small>Week9</small></h3>
+<p>Let’s plot some of the Mauna Loa data we downloaded last class. First, remove the NAs (here designated with -99.9 and -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot of the mean monthly temperature.</p>
 Answers:
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+
+load(&quot;data/mauna_loa_met_2001_minute.rda&quot;)
+mloa &lt;- mloa_2001
+
+# make the datetime column
+mloa$datetime &lt;- ymd_hm(paste0(mloa$year,&quot;-&quot;, mloa$month, &quot;-&quot;, mloa$day,&quot; &quot;, mloa$hour24, &quot;:&quot;, mloa$min), tz = &quot;Pacific/Honolulu&quot;)
+
+# clean up the NA data (NA&#39;s are = -99 or -999 depending on data col)
+df &lt;- mloa %&gt;% 
+  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %&gt;% #removing NAs
+  mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
+
+df2 &lt;- df %&gt;% 
+  group_by(mon) %&gt;% 
+  summarize(avg_temp_2m = mean(temp_C_2m)) #average monthly temperature
+
+df2 %&gt;% 
+  ggplot() + 
+  geom_point(aes(x=mon, y=avg_temp_2m), color=&quot;darkblue&quot;, size= 3)+
+  ylab(&quot;Avg Monthly Temperature (C)&quot;) + xlab(&quot;Month&quot;)</code></pre>
 </details>
+</div>
+<div id="final-assignment" class="section level3">
+<h3><small>Final Assignment</small></h3>
+<p>Alright folks, it’s time for the final assignment of the quarter. The goal here is to generate an html report using RMarkdown, containing several plots, tables, and images. This assignment will put many of your newfound skills to the test, and will ask you to go through data import, cleaning, manipulation, plotting, and communication. There may be some components you haven’t seen before, but tackling new topics is also a big part of any project, and we’re confident you’ll put your Google skills to good use.</p>
+<div id="lets-get-started" class="section level4">
+<h4>Let’s Get Started!</h4>
+<p>Create a new RMarkdown document. To create an RMarkdown document that we can view on GitHub, your YAML header should look like this:</p>
+<pre class="yaml"><code>---
+title: &quot;R-DAVIS Final Assignment&quot;
+author: &quot;Michael Culshaw-Maurer&quot;
+date: &quot;3/3/2020&quot;
+output: github_document
+---</code></pre>
+<p>For the RMarkdown document, we want to see all your code and all the outputs, <strong>except</strong> for when you’re loading packages. Try loading all your packages in one chunk and make sure we can’t see the code or the output for it.</p>
+</div>
+<div id="the-data" class="section level4">
+<h4>The Data</h4>
+<p>For this project you are going to be using some data sets about flights departing New York City in 2013. There are <strong>several</strong> CSV files you will need to use. As with any CSVs you’re handed, they might contain some issues…</p>
+<p>You should download the <a href="data/nyc_13_flights.csv">flights</a>, <a href="data/nyc_13_planes.csv">planes</a>, and <a href="data/nyc_13_weather.csv">weather</a> CSV files.</p>
+<p>Hint! You may have to combine dataframes to answer some questions. Remember our <code>join</code> family of functions? You should be able to use the <code>join</code> type we covered in class. The <code>flights</code> dataset is the biggest one, so you should probably join the other data onto this one, meaning <code>flights</code> would be the first argument in the join. You can’t join 3 tables together at once, but you can join tables <code>a</code> and <code>b</code> to make table <code>ab</code>, then join <code>ab</code> and <code>c</code> to get table <code>abc</code> which contains the columns from all 3 original tables.</p>
+<p>The exact layout of the RMarkdown document is up to you, but it should include the following elements, as well as a short description of each item, in your own words. This could be a simple description of the pattern you observe or a description of issues you had in creating that element. One or two sentences should be just fine.</p>
+<p><strong>One</strong> of the plots you make should be <strong>interactive</strong>! Also, use a non-default ggplot theme, and keep it the same for all your plots. Hint: You can do this in a single code chunk.</p>
+</div>
+<div id="things-to-include" class="section level4">
+<h4>Things to Include</h4>
+<ol style="list-style-type: decimal">
+<li><p>Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a <code>geom_</code> that will plot a simple <code>y ~ x</code> regression line for you, but you might have to use an argument to make sure it’s a regular <strong>l</strong>inear <strong>m</strong>odel.</p></li>
+<li><p>Create a figure that has date on the x axis and mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Hint: You have the columns sched_dep_time (scheduled departure time) and dep_time (the actual departure time). Calculate the difference for the departure delay.</p></li>
+<li><p>Create a table with these columns: date (year, month and day), mean_temp_EWR, mean_temp_JFK, mean_temp_LGA. Notice the names share a prefix, wonder if there’s an argument somewhere for that… Also, it’s a lot of data, so think about whether you want a really long table or an interactive one you can click through (check out the RMarkdown lesson if you need help).</p></li>
+<li><p>Make a combination violin/scatterplot showing departure delay by manufacturer, and add a facet for whether or not it’s raining. Hint: you’ll have to make a new column to classify “raining” or “not raining”, the exact method is up to you.</p></li>
+<li><p>Insert an image of the coolest plane in the <code>planes</code> dataset (the choice is yours). Add a link to a webpage with some information on this super cool plane. Bonus points if your image is a GIF (not really bonus points but we’ll like it).</p></li>
+</ol>
+</div>
+<div id="knit-and-push-to-github" class="section level4">
+<h4>Knit and Push to GitHub</h4>
+<p>When you are finished with this assignment and ready to push to GitHub, make sure you push the <code>.Rmd</code> file, the <code>.md</code> file, and the <strong>folder</strong> containing relevant files that shares the same name as your <code>.Rmd file</code>. The <code>.md</code> file and the folder will be created after the first time you <code>knit</code> your document (so you don’t have to create these, R will do it for you).</p>
+<p>Remember! Any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise Github won’t be able to find it and we won’t be able to see it!</p>
+</div>
 </div>
 </div>
 

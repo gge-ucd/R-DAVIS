@@ -218,7 +218,10 @@ So, now that we have a decent idea how to format these things, let's look at som
 
 ```{r mloa_data, eval=T, echo=T}
 
-mloa <- readRDS("data/mauna_loa_met_2001_minute.rds")
+load("data/mauna_loa_met_2001_minute.rda")
+
+# just renaming the object loaded by the RDA file
+mloa <- mloa_2001
 
 library(lubridate, warn.conflicts = F)
 library(dplyr, warn.conflicts = F)

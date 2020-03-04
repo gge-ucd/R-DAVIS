@@ -436,11 +436,82 @@ ggplot() +
 </details>
 
 ### <small>Week9</small>
+
+Let’s plot some of the Mauna Loa data we downloaded last class. First, remove the NAs (here designated with -99.9 and -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot of the mean monthly temperature.
+
 Answers:
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=FALSE}
-            
+library(tidyverse)
+library(lubridate)
+
+load("data/mauna_loa_met_2001_minute.rda")
+mloa <- mloa_2001
+
+# make the datetime column
+mloa$datetime <- ymd_hm(paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min), tz = "Pacific/Honolulu")
+
+# clean up the NA data (NA's are = -99 or -999 depending on data col)
+df <- mloa %>% 
+  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %>% #removing NAs
+  mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
+
+df2 <- df %>% 
+  group_by(mon) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m)) #average monthly temperature
+
+df2 %>% 
+  ggplot() + 
+  geom_point(aes(x=mon, y=avg_temp_2m), color="darkblue", size= 3)+
+  ylab("Avg Monthly Temperature (C)") + xlab("Month")
 ```
 </details>
 
+### <small>Final Assignment</small>
+
+Alright folks, it's time for the final assignment of the quarter. The goal here is to generate an html report using RMarkdown, containing several plots, tables, and images. This assignment will put many of your newfound skills to the test, and will ask you to go through data import, cleaning, manipulation, plotting, and communication. There may be some components you haven't seen before, but tackling new topics is also a big part of any project, and we're confident you'll put your Google skills to good use.
+
+#### Let's Get Started!
+
+Create a new RMarkdown document. To create an RMarkdown document that we can view on GitHub, your YAML header should look like this:
+
+```{yaml, eval = F}
+---
+title: "R-DAVIS Final Assignment"
+author: "Michael Culshaw-Maurer"
+date: "3/3/2020"
+output: github_document
+---
+```
+
+For the RMarkdown document, we want to see all your code and all the outputs, **except** for when you're loading packages. Try loading all your packages in one chunk and make sure we can't see the code or the output for it.
+
+#### The Data
+For this project you are going to be using some data sets about flights departing New York City in 2013. There are **several** CSV files you will need to use. As with any CSVs you're handed, they might contain some issues...
+
+You should download the [flights](data/nyc_13_flights.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files.
+
+Hint! You may have to combine dataframes to answer some questions. Remember our `join` family of functions? You should be able to use the `join` type we covered in class. The `flights` dataset is the biggest one, so you should probably join the other data onto this one, meaning `flights` would be the first argument in the join. You can't join 3 tables together at once, but you can join tables `a` and `b` to make table `ab`, then join `ab` and `c` to get table `abc` which contains the columns from all 3 original tables.
+
+The exact layout of the RMarkdown document is up to you, but it should include the following elements, as well as a short description of each item, in your own words. This could be a simple description of the pattern you observe or a description of issues you had in creating that element. One or two sentences should be just fine. 
+
+**One** of the plots you make should be **interactive**! Also, use a non-default ggplot theme, and keep it the same for all your plots. Hint: You can do this in a single code chunk.
+
+#### Things to Include
+
+1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel.
+
+2. Create a figure that has date on the x axis and mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Hint: You have the columns sched_dep_time (scheduled departure time) and dep_time (the actual departure time). Calculate the difference for the departure delay. 
+
+3. Create a table with these columns: date (year, month and day), mean_temp_EWR, mean_temp_JFK, mean_temp_LGA. Notice the names share a prefix, wonder if there's an argument somewhere for that... Also, it's a lot of data, so think about whether you want a really long table or an interactive one you can click through (check out the RMarkdown lesson if you need help).
+
+4. Make a combination violin/scatterplot showing departure delay by manufacturer, and add a facet for whether or not it's raining. Hint: you'll have to make a new column to classify "raining" or "not raining", the exact method is up to you.
+
+5. Insert an image of the coolest plane in the `planes` dataset (the choice is yours). Add a link to a webpage with some information on this super cool plane. Bonus points if your image is a GIF (not really bonus points but we'll like it).
+
+#### Knit and Push to GitHub
+
+When you are finished with this assignment and ready to push to GitHub, make sure you push the `.Rmd` file, the `.md` file, and the **folder** containing relevant files that shares the same name as your `.Rmd file`. The `.md` file and the folder will be created after the first time you `knit` your document (so you don’t have to create these, R will do it for you).
+
+Remember! Any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise Github won’t be able to find it and we won’t be able to see it! 

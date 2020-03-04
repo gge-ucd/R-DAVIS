@@ -666,7 +666,10 @@ tz(nfy1$datetime)</code></pre>
 <div id="example-1-mauna-loa-meteorological-data" class="section level2">
 <h2>Example 1: Mauna Loa Meteorological Data</h2>
 <p>So, now that we have a decent idea how to format these things, let’s look at some real data, try to format and plot. Let’s use the Mauna Loa meteorological data, collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can find it on the R-DAVIS website in the <a href="https://gge-ucd.github.io/R-DAVIS/resources.html">Resources-&gt;Datasets</a> tab.</p>
-<pre class="r"><code>mloa &lt;- readRDS(&quot;data/mauna_loa_met_2001_minute.rds&quot;)
+<pre class="r"><code>load(&quot;data/mauna_loa_met_2001_minute.rda&quot;)
+
+# just renaming the object loaded by the RDA file
+mloa &lt;- mloa_2001
 
 library(lubridate, warn.conflicts = F)
 library(dplyr, warn.conflicts = F)
