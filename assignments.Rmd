@@ -523,4 +523,5 @@ The exact layout of the RMarkdown document is up to you, but it should include t
 
 When you are finished with this assignment and ready to push to GitHub, make sure you push the `.Rmd` file, the `.md` file, and the **folder** containing relevant files that shares the same name as your `.Rmd file`. The `.md` file and the folder will be created after the first time you `knit` your document (so you don’t have to create these, R will do it for you).
 
-Remember! Any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise Github won’t be able to find it and we won’t be able to see it! 
+**Remember** that any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise GitHub won’t be able to find it and we won’t be able to see it! 
+
