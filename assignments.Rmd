@@ -472,9 +472,10 @@ df2 %>%
 
 Alright folks, it's time for the final assignment of the quarter. The goal here is to generate an html report using RMarkdown, containing several plots, tables, and images. This assignment will put many of your newfound skills to the test, and will ask you to go through data import, cleaning, manipulation, plotting, and communication. There may be some components you haven't seen before, but tackling new topics is also a big part of any project, and we're confident you'll put your Google skills to good use.
 
+<br>
 #### Let's Get Started!
 
-Create a new RMarkdown document. To create an RMarkdown document that we can view on GitHub, your YAML header should look like this:
+Create a new RMarkdown document in your in-class R Project, and put it in the top level of your project (not into a sub-folder like `scripts/`. To create an RMarkdown document that we can view on GitHub, your YAML header should look like this:
 
 ```{yaml, eval = F}
 ---
@@ -487,7 +488,9 @@ output: github_document
 
 For the RMarkdown document, we want to see all your code and all the outputs, **except** for when you're loading packages. Try loading all your packages in one chunk and make sure we can't see the code or the output for it.
 
+<br>
 #### The Data
+
 For this project you are going to be using some data sets about flights departing New York City in 2013. There are **several** CSV files you will need to use. As with any CSVs you're handed, they might contain some issues...
 
 You should download the [flights](data/nyc_13_flights.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files.
@@ -498,6 +501,7 @@ The exact layout of the RMarkdown document is up to you, but it should include t
 
 **One** of the plots you make should be **interactive**! Also, use a non-default ggplot theme, and keep it the same for all your plots. Hint: You can do this in a single code chunk.
 
+<br>
 #### Things to Include
 
 1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel.
@@ -510,6 +514,7 @@ The exact layout of the RMarkdown document is up to you, but it should include t
 
 5. Insert an image of the coolest plane in the `planes` dataset (the choice is yours). Add a link to a webpage with some information on this super cool plane. Bonus points if your image is a GIF (not really bonus points but we'll like it).
 
+<br>
 #### Knit and Push to GitHub
 
 When you are finished with this assignment and ready to push to GitHub, make sure you push the `.Rmd` file, the `.md` file, and the **folder** containing relevant files that shares the same name as your `.Rmd file`. The `.md` file and the folder will be created after the first time you `knit` your document (so you don’t have to create these, R will do it for you).
