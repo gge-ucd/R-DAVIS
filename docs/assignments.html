@@ -787,6 +787,7 @@ gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.
     scale_x_log10() +
     geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
     theme_bw()</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="problem-3" class="section level4">
@@ -817,6 +818,7 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
     scale_x_log10() +
     geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
     theme_bw()</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <pre class="r"><code>#PROBLEM 3: 
 
@@ -936,7 +938,7 @@ df2 %&gt;%
 title: &quot;R-DAVIS Final Assignment&quot;
 author: &quot;Michael Culshaw-Maurer&quot;
 date: &quot;3/3/2020&quot;
-output: github_document
+output: html_document
 ---</code></pre>
 <p>For the RMarkdown document, we want to see all your code and all the outputs, <strong>except</strong> for when you’re loading packages. Try loading all your packages in one chunk and make sure we can’t see the code or the output for it.</p>
 <p><br></p>
@@ -963,7 +965,7 @@ output: github_document
 </div>
 <div id="knit-and-push-to-github" class="section level4">
 <h4>Knit and Push to GitHub</h4>
-<p>When you are finished with this assignment and ready to push to GitHub, make sure you push the <code>.Rmd</code> file, the <code>.md</code> file, and the <strong>folder</strong> containing relevant files that shares the same name as your <code>.Rmd</code> file. The <code>.md</code> file and the folder will be created after the first time you <code>knit</code> your document (so you don’t have to create these, R will do it for you).</p>
+<p>When you are finished with this assignment and ready to push to GitHub, make sure you push the HTML file you made, along with any other files or folders generated when you knit.</p>
 <p><strong>Remember</strong> that any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise GitHub won’t be able to find it and we won’t be able to see it!</p>
 </div>
 </div>
