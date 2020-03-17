@@ -495,7 +495,7 @@ For the RMarkdown document, we want to see all your code and all the outputs, **
 
 For this project you are going to be using some data sets about flights departing New York City in 2013. There are **several** CSV files you will need to use. As with any CSVs you're handed, they might contain some issues...
 
-You should download the [flights](data/nyc_13_flights.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files.
+You should download the [flights](data/nyc_13_flights_new.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files.
 
 Hint! You may have to combine dataframes to answer some questions. Remember our `join` family of functions? You should be able to use the `join` type we covered in class. The `flights` dataset is the biggest one, so you should probably join the other data onto this one, meaning `flights` would be the first argument in the join. You can't join 3 tables together at once, but you can join tables `a` and `b` to make table `ab`, then join `ab` and `c` to get table `abc` which contains the columns from all 3 original tables.
 
