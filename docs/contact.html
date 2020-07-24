@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -14,6 +13,7 @@
 
 <title>Contact</title>
 
+<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -240,6 +240,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -271,6 +272,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -497,7 +504,7 @@ div.tocify {
 <a href="https://mcmaurer.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
 <a href="https://twitter.com/MCulshawMaurer"><i class="fa fa-twitter-square" aria-hidden="true"></i> @MCulshawMaurer</a><br />
 <a href="https://github.com/mcmaurer"><i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer</a></p>
-<p>I’m a 5th-year Ph.D. candidate in the GGE, and I’m co-advised by Jay Rosenheim and Sebastian Schreiber. I study the behavioral responses of insects to natural enemies, ranging from pathogens to predators and parasitoids. I’m working on projects looking at disease-induced cannibalism in <em>Geocoris pallens</em> and non-consumptive effects in pea aphids, using a combination of empirical and theoretical approaches.</p>
+<p>I’m a 6th-year Ph.D. candidate in the GGE, and I’m co-advised by Jay Rosenheim and Sebastian Schreiber. I study the behavioral responses of insects to natural enemies, ranging from pathogens to predators and parasitoids. I’m working on projects looking at disease-induced cannibalism in <em>Geocoris pallens</em> and non-consumptive effects in pea aphids, using a combination of empirical and theoretical approaches.</p>
 <p>I came to grad school in 2015 as a complete R novice, but thanks to things like the <a href="https://d-rug.github.io/">Davis R Users Group (D-RUG)</a>, <a href="dsi.ucdavis.edu">Data Science Initiative</a>, and several ECL courses, I’ve learned a lot in the last few years. In the spring of 2018, I became a certified Software/Data Carpentries instructor and have taught several Carpentries workshops since then. I also help run D-RUG and will be teaching an undergraduate R course this winter.</p>
 <p>My favorite part of teaching R is seeing people go from being uncomfortable or intimidated to feeling empowered and capable of expanding their research opportunities and saving time. I remember how daunting R was at first, but now I use it every day and am constantly learning new skills!</p>
 <p><br></p>
@@ -605,7 +612,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

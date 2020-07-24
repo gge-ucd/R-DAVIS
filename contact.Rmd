@@ -13,7 +13,7 @@ title: "Contact"
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@MCulshawMaurer](https://twitter.com/MCulshawMaurer)  
 [<i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer](https://github.com/mcmaurer)  
 
-I'm a 5th-year Ph.D. candidate in the GGE, and I'm co-advised by Jay Rosenheim and Sebastian Schreiber. I study the behavioral responses of insects to natural enemies, ranging from pathogens to predators and parasitoids. I'm working on projects looking at disease-induced cannibalism in *Geocoris pallens* and non-consumptive effects in pea aphids, using a combination of empirical and theoretical approaches.
+I'm a 6th-year Ph.D. candidate in the GGE, and I'm co-advised by Jay Rosenheim and Sebastian Schreiber. I study the behavioral responses of insects to natural enemies, ranging from pathogens to predators and parasitoids. I'm working on projects looking at disease-induced cannibalism in *Geocoris pallens* and non-consumptive effects in pea aphids, using a combination of empirical and theoretical approaches.
 
 I came to grad school in 2015 as a complete R novice, but thanks to things like the [Davis R Users Group (D-RUG)](https://d-rug.github.io/), [Data Science Initiative](dsi.ucdavis.edu), and several ECL courses, I've learned a lot in the last few years. In the spring of 2018, I became a certified Software/Data Carpentries instructor and have taught several Carpentries workshops since then. I also help run D-RUG and will be teaching an undergraduate R course this winter.
 
