@@ -13,7 +13,6 @@
 
 <title>Contact</title>
 
-<script src="site_libs/header-attrs-2.3/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -523,7 +522,10 @@ div.tocify {
 <p><strong>Christian John</strong></p>
 <p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:cjohn@ucdavis.edu">email</a> <a href="https://github.com/JepsonNomad"><i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad</a><br />
 <a href="https://twitter.com/JepsonNomad"><i class="fa fa-twitter-square" aria-hidden="true"></i> @JepsonNomad</a></p>
-<p>I am a 3rd year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, <code>phenomap</code> is a simple tool for mapping snowmelt and green-up timing over space. If you’re interested in movement or MODIS, come talk to me.</p>
+<p>I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, <code>phenomap</code> is a simple tool for mapping snowmelt and green-up timing over space. If you’re interested in movement or MODIS, come talk to me.</p>
+<p><strong>Liza Wood</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:belwood@ucdavis.edu">email</a></p>
+<p>I am a 3rd year student in the GGE studying environmental governance of agricultural systems – basically, how public and private stakeholders work together (or not) to help improve environmental outcomes for the food system. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS, Introduction to Computational Social Science, and a <strong>a lot</strong> of muddling through self-teaching, I’m now excited about helping promote data literacy. These days, I use R for scraping the web for large amounts of text data (whether it is Tweets scraped from the Twitter API or thousands of policy documents from government agency websites) using packages like <code>rvest</code> and <code>pdftools</code>, and then analyzing the text based on the <code>tidytext</code> package. Teaching R, I really enjoy the opportunity to explain programming in the least jargon-y way possible. It helps me make sure I really know what is going on behind the scenes, and it helps new learners overcome some of the initial hurdles to working in R.</p>
 <p><strong>Christine Parisek</strong> <i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:caparisek@ucdavis.edu">email</a> <a href="https://twitter.com/caparisek"><i class="fa fa-twitter-square" aria-hidden="true"></i> @caparisek</a></p>
 <p>I am a 2nd year PhD student and freshwater ecologist in the Ecology Graduate Group, advised by Andrew Rypel. I currently study the mechanisms that govern lake food web structure and function across heterogeneous mountain landscapes. My interests range from local scale trophic dynamics in Sierra Nevada high elevation lakes, to landscape and global scale patterns in lake distributions.</p>
 <p>I never thought I’d say it, but I love working in R! I used to think that people who helped me with my code must be gifted R wizaRds. Something someone said that stuck with me though, is that they’re not an R wizaRd, they’ve just had more time to make that many more coding mistakes! I was a novice in R when I began my PhD in 2018, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!</p>
@@ -612,7 +614,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
