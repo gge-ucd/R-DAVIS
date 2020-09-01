@@ -19,7 +19,7 @@ There are many resources online and in print. This is by no means a comprehensiv
 - [Using purrr](2019_lesson_purrr_tutorial.html)
 - [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
 - [Text Mining](2019_lesson_text_mining_mlk.html)
-- [Github Collaboration with Branches](/2019_lesson_github_collaboration.html)
+- [Github Collaboration with Branches](2019_lesson_github_collaboration.html)
 - [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html)
 - [Longer Iteration Lesson](2019_lesson_iteration.html)
 
