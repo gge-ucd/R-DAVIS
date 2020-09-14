@@ -25,10 +25,9 @@ I am a 3rd year student in the GGE studying environmental governance of agricult
 **Christine Parisek**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
+[#sierrafishes](https://twitter.com/search?q=%23sierrafishes&src=typed_query&f=live)
 
-I am a 2nd year PhD student and freshwater ecologist in the Ecology Graduate Group, advised by Andrew Rypel. I currently study the mechanisms that govern lake food web structure and function across heterogeneous mountain landscapes. My interests range from local scale trophic dynamics in Sierra Nevada high elevation lakes, to landscape and global scale patterns in lake distributions.
-
-I never thought I’d say it, but I love working in R! I used to think that people who helped me with my code must be gifted R wizaRds. Something someone said that stuck with me though, is that they’re not an R wizaRd, they’ve just had more time to make that many more coding mistakes! I was a novice in R when I began my PhD in 2018, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!
+I am a 3rd year PhD student and freshwater ecologist in GGE. I currently study mountain lake fishes and mechanisms that govern their food web's structure and function. My interests range from local scale trophic dynamics in Sierra Nevada lakes, to landscape and global scale patterns in lake distributions. I find working in R to be a bit like a puzzle. It's gratifying to piece together bits of what I know, what I don’t, and ‘solving’ the puzzle to get what I need done. I used to think that people who helped me with my code must just be gifted R wizaRds. Yet an experienced coder once said to me that their knowledge just came from having made that many more coding mistakes over time! I was a novice in R when I was a 1st year, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too! (
 
 **Conor Higgins**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
