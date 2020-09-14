@@ -11,75 +11,75 @@ Screencasts of our lectures, livecode, and our class notes^[A `@ucdavis.edu` ema
 
 ### Week 1
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w1" target="_blank">livecode</a>)
-* <a href="https://youtu.be/PIiCc4iQomM" target="_blank">Live Stream (can be viewed later as well)</a>
-* <a href="https://docs.google.com/document/d/1a5HIhCkQpJ9UWQj5UPkqSyogUEgSE3t8oHKv6mFnc7M/edit" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-01" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Live Stream (can be viewed later as well)</a>
+* <a href="https://docs.google.com/document/d/1Qn9MHQuCqkMmNFtSi3A3puMEEif3FOUevGnQ7Zb5G8s/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 2
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w2" target="_blank">livecode</a>)
-* <a href="https://www.youtube.com/watch?v=mQiUnRe3gF4" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/11Mnf39JCwNTStjr0IbQ15Z0vmKKXwPLIQfF2Slm-kb0/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-02" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/18x5hZpA7M0FTNDn0hWA5HV4MyxAC5yZyzVwzXu5oV_0/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 3
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w3" target="_blank">livecode</a>)
-* <a href="https://www.youtube.com/watch?v=g7OktcRX8Ow" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1By0MRGp7vKIwHHSCX4t-V0CvoRcHdNzYpceYNVVRLfs/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-03" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/17cXpETCPatph_tmTXrrCo9o23tFq8fDw7E_2wOcFU6o/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w4" target="_blank">livecode</a>)
-* <a href="https://www.youtube.com/watch?v=IIfvTRWZt9Q" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/18Mm8yYAbWayO_g1iKr61JsQQaENebXbgyNfDk7awII4/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-04" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1S7hjwuNfpsPc-FCRjo3tkI-ycab3H3Dr1WV7N-5ONxA/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w5" target="_blank">livecode</a>)
-* <a href="https://www.youtube.com/watch?v=litxD2w2v50" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1heEwQqkNpLfQByB-l86iPTUuDaIKPRsKsZDUnwr1peQ/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-05" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1a32lXEegQtNDpM1WWIAStGjM6i2xQ0KuuPFsMezM5EY/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 6
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w6" target="_blank">livecode</a>)
-* <a href="https://youtu.be/IV5hWyuKtWo" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1EHDny03ICxx2lxC-D0gp7z97PVCJ55DXih3D5hCdeGs/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-06" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1aVk6-88d66ZXOPwCxdRDWwIjztozKMXQqnNIe9vgLRc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 7
 
-* What we covered (<a href="https://tinyurl.com/r-davis-2020-w7" target="_blank">livecode</a>)
-* <a href="https://youtu.be/RNBijcz9CP0" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1Hcq-Cl_4qVsf_yjD06G4dMKLOJ8WKkfXp8LKNQRI5LY/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-07" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/10twqshouUqOb4kr22AvveSHI1atg_Oh_Zo1f8AqpBeo/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 8
 
-* What we covered (<a href="https://tinyurl.com/vef4dzf" target="_blank">livecode</a>)
-* <a href="https://youtu.be/wtKAAqJo-Rg" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1srS39BM6OfKky3qtwRucMQcJbLLMKBWZOLzD4xnjtjc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-08" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1BOYvHmlq0_MrDXYlj_PL-Ibd9kGb1WMhpsqcG7WkLSc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 9
 
-* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/qbgn554za2nofkj/week_9_live_code.R?dl=0" target="_blank">livecode</a>)
-* <a href="https://youtu.be/8-jHc0uJ74Y" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/1SJbozn9Kmm_JG0tvsXYsfuc9BZjj-I9wnETJi-Q4Mac/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-09" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/1BsPJDXYmWwJLt4DrNiQo7QE6Lz_wUUgngYjUw8AThYg/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 10
 
-* What we covered (<a href="https://www.dl.dropboxusercontent.com/s/gvvufjrqr202u4g/week_10_live_code.R?dl=0" target="_blank">livecode</a>)
-* <a href="https://youtu.be/EnFbnE60bsk" target="_blank">Screencast</a>
-* <a href="https://docs.google.com/document/d/16fE5DBGlkomDTf8iT65Uv2c84icPQP-2eexW0PKJdvA/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvuOE6mg1ozerLd2gnUwEvJzUZjMTqCR_3lIQeQ2XxfVHbVA/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* What we covered (<a href="https://tinyurl.com/rdavis-2020fq-10" target="_blank">livecode</a>)
+* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Screencast</a>
+* <a href="https://docs.google.com/document/d/13a1x5WedlcVja-TSnC8n3uUoIBrSQ4AfoLMg5uyR2DI/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
+* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 * <a href="* <a href="https://forms.gle/PAbLdiaGwT4ejtAU6" target="_blank">Post-Class Survey (complete after class)</a>" target="_blank">POST-COURSE SURVEY: PLEASE TAKE YOUR TIME</a>
