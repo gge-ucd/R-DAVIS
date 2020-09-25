@@ -32,8 +32,11 @@ I am a 3rd year PhD student and freshwater ecologist in GGE. I currently study m
 **Conor Higgins**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
 
-I'm a 2nd year student in the GGE in the Post Lab.  I study the interactions between arctic plant and animal communities and how climate change is impacting these interactions.  Specifically, I study the population dynamics of a Greenlandic muskox population and the timing of life history events (phenology) for the plants they consume.  I began using R last year as a student in R-DAVIS and another statistics course, and I am still learning a lot.  It has been a rewarding process figuring it out, and I feel like if I can do it, anybody can.
+I’m a 3rd year student in the GGE studying arctic community interactions.  Specifically, I study the relationship between a Greenlandic muskox population and the timing of life history events (phenology) for the plants they consume. I had never used R before grad school, and if I'm honest with myself, I felt so uncomfortable using it at first that my favorite part of R-Davis was closing everything down at the end of each class.  It took a while, but little by little, I've become more comfortable.  I now use R regularly to analyze my data...shout out R-Davis and Google for the help.
 
+**Nick Framsted**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:ntframsted@ucdavis.edu) 
+I'm a 2nd year student in GGE studying algal responses to climate change in Lake Tahoe. I became familiar with R while doing a minor in statistics and I currently use it to calculate metabolism in aquatic systems. I really enjoy working in R and it's an awesome tool--even if it can be intimidating at first. I look forward to learning with everyone and honing our programming skills this quarter!
 
 <br>
 
