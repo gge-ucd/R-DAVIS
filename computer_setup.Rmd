@@ -4,7 +4,7 @@ title: "Computer Software Setup"
 
 <br>
 
-Welcome! There's a few things we'd like everyone to try and get sorted out *before* our first class. Please plan on bringing your laptop (and a charger if your battery isn't going to hold for 2 hrs) to each class.
+Welcome! There's a few things we'd like everyone to try and get sorted out *before* our first class. 
 
 Our goal is for you to learn how to use these tools so you can get stuff done. You can learn to be an expert later. Mainly, we'd like you know that computer programming or coding doesn't have to make you feel like this:
 
