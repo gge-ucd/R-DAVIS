@@ -271,6 +271,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -490,14 +496,14 @@ div.tocify {
 
 
 <p><br></p>
-<p>Welcome! There’s a few things we’d like everyone to try and get sorted out <em>before</em> our first class. Please plan on bringing your laptop (and a charger if your battery isn’t going to hold for 2 hrs) to each class.</p>
+<p>Welcome! There’s a few things we’d like everyone to try and get sorted out <em>before</em> our first class.</p>
 <p>Our goal is for you to learn how to use these tools so you can get stuff done. You can learn to be an expert later. Mainly, we’d like you know that computer programming or coding doesn’t have to make you feel like this:</p>
 <p><img src="img/woodybewildered.gif" width="350px" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <div id="please-complete-these-4-main-tasks-before-our-first-class" class="section level3">
 <h3>Please complete these 4 main tasks before our first class:</h3>
 <ol style="list-style-type: decimal">
-<li><p><i class="fa fa-github fa-2x" aria-hidden="true"></i>   Install <a href="https://git-scm.com/downloads"><strong><code>git</code></strong></a> &amp; register for a free <a href="https://github.com/"><strong>github</strong> account</a> with your <code>.edu</code> email address</p>
+<li><i class="fa fa-github fa-2x" aria-hidden="true"></i>   Install <a href="https://git-scm.com/downloads"><strong><code>git</code></strong></a> &amp; register for a free <a href="https://github.com/"><strong>github</strong> account</a> with your <code>.edu</code> email address
 <ul>
 <li><strong>IMPORTANT NOTE</strong>: When installing <strong>git</strong> on your computer, please do not change the installation location! The default installation location is what you want, and if during the installation you click something like “Change Install Location”, it will mess everything up</li>
 </ul></li>
