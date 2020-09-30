@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -240,6 +239,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -271,6 +271,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -492,7 +498,7 @@ div.tocify {
 <p>
 </p>
 <p>This course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology (GGE) at the University of California, Davis, USA.</p>
-<p>Funding for this course is provided by the GGE, and the 2019 course faculty sponsor is Andrew Latimer. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.</p>
+<p>Funding for this course is provided by the GGE, and the 2020 course faculty sponsor is Janet Foley. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.</p>
 <p>
 </p>
 <div style="text-align: center; margin-top: 30px; margin-bottom: 30px;">
@@ -505,16 +511,11 @@ div.tocify {
 <p><br></p>
 <div id="instructors" class="section level2">
 <h2>Instructors</h2>
-<p><strong>Michael Culshaw-Maurer</strong></p>
-<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mjculshawmaurer@ucdavis.edu">email</a><br />
-<a href="https://mcmaurer.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
-<a href="https://twitter.com/MCulshawMaurer"><i class="fa fa-twitter-square" aria-hidden="true"></i> @MCulshawMaurer</a><br />
-<a href="https://github.com/mcmaurer"><i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer</a></p>
+<p><strong>Christian John</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:cjohn@ucdavis.edu">email</a></p>
 <p><br></p>
-<p><strong>Martha Wohlfeil</strong></p>
-<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:mwohlfeil@ucdavis.edu">email</a><br />
-<a href="https://marthawohlfeil.github.io/"><i class="fa fa-globe" aria-hidden="true"></i> website</a><br />
-<a href="https://github.com/MarthaWohlfeil"><i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil</a></p>
+<p><strong>Liza Wood</strong></p>
+<p><i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:belwood@ucdavis.edu">email</a></p>
 </div>
 
 

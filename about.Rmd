@@ -5,7 +5,7 @@ title: "About Data Carpentry"
 
 This course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology (GGE) at the University of California, Davis, USA.
 
-Funding for this course is provided by the GGE, and the 2019 course faculty sponsor is Andrew Latimer. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.
+Funding for this course is provided by the GGE, and the 2020 course faculty sponsor is Janet Foley. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.
 
 
 <p></p>
@@ -24,20 +24,17 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 
 ## Instructors 
 
-**Michael Culshaw-Maurer** 
+**Christian John** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mjculshawmaurer@ucdavis.edu)  
-[<i class="fa fa-globe" aria-hidden="true"></i> website](https://mcmaurer.github.io/)  
-[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@MCulshawMaurer](https://twitter.com/MCulshawMaurer)  
-[<i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer](https://github.com/mcmaurer)  
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
 
 <br>
 
-**Martha Wohlfeil** 
+**Liza Wood** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
-[<i class="fa fa-globe" aria-hidden="true"></i> website](https://marthawohlfeil.github.io/)  
-[<i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil](https://github.com/MarthaWohlfeil)   
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu) 
+
+  
 
  
 
