@@ -7,15 +7,15 @@ date: '*Updated:* `r format(Sys.time(), "%Y-%b-%d")`'
 
 ## Course Description
 
-Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question & answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, RMarkdown, and SQLite, but the concepts learned will be applicable to many programming languages and database management systems. **No background in databases or R/computational experience is required.**
+Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data. Class will typically consist of short introductions or question & answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, and RMarkdown, but the concepts learned will easily apply to all programming languages and database management systems. **No background in databases or R/computational experience is required.**
 
 ## Prerequisite Knowledge and Skills
 
-A willingess to practice coding and embrace the R language.
+A willingness to practice coding and embrace the R language.
 
 ## Purpose of Course
 
-In this course you will learn fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations and maps, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, as well as collaborate on Github with version-controlled projects.
+In this course you will learn fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, as well as collaborate on Github with version-controlled projects.  
 
 The focus of this course is to provide graduate students with training that develops and teaches the tools applicable to the entire process of **reproducible data-driven research** and encourage the use of open-source tools. By learning how to get the computer to do your work for you, you will be able to do more science faster, and your future-self will thank you.
 

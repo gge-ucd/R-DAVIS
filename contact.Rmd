@@ -6,8 +6,7 @@ title: "Contact"
 
 ## Instructors
 
-**Christian John**
-
+**Christian John**  
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
 [<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@JepsonNomad](https://twitter.com/JepsonNomad)
@@ -15,14 +14,13 @@ title: "Contact"
 I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
 
 **Liza Wood**
-
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu) 
 
 I am a 3rd year student in the GGE studying environmental governance of agricultural systems. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS and **a lot** of muddling through self-teaching, I'm now excited about helping promote data literacy. These days, I use R for scraping the web for large amounts of text data (whether it is Tweets scraped from Twitter or thousands of policy documents from government agency websites) using packages like `twitteR` or `rvest`. Generally, I think R can be a bit overwhelming and I look forward to being a part of the de-mystifying process for new coders!
 
 ## Teaching Assistants/Classroom Helpers
 
-**Christine Parisek**
+**Christine Parisek**  
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
 [#sierrafishes](https://twitter.com/search?q=%23sierrafishes&src=typed_query&f=live)
