@@ -34,10 +34,10 @@ Students completing this course should be able to:
 
 * Video encouraged but optional
 * Communicate with Instructors/TAs through:  
-    * Asking out loud! (general questions)  
-    * Zoom chat -- monitored by TAs & posted after class (Note: **all** messages are downloaded to Zoom hosts, even private ones)  
-    * Break-out rooms for one-on-one troubleshooting  
-    * Green check and red X buttons on your Participant list      
+    * Asking out loud! (general questions)
+    * Zoom chat -- monitored by TAs & posted after class (Note: **all** messages are downloaded to Zoom hosts, even private ones)
+    * Break-out rooms for one-on-one troubleshooting
+    * Green check and red X buttons on your Participant list 
 
 ## Schedule
 
