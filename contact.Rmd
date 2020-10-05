@@ -8,8 +8,9 @@ title: "Contact"
 
 **Christian John**  
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
-[<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
+[<i class="fa fa-globe" aria-hidden="true"></i> website](https://jepsonnomad.github.io/)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@JepsonNomad](https://twitter.com/JepsonNomad)
+[<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
 
 I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
 
