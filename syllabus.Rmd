@@ -48,7 +48,7 @@ http://emoji.muan.co/ to look up emoji
 
 /-->
 
-```{r echo=F, eval=T}
+```{r echo=F, eval=T, warning = F}
 
 library(emojifont, quietly = T)
 
