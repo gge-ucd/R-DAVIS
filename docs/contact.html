@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -30,6 +29,15 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -240,6 +248,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -515,6 +524,8 @@ div.tocify {
 <p><strong>Nick Framsted</strong> <i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:ntframsted@ucdavis.edu">email</a></p>
 <p>I’m a 2nd year student in GGE studying algal responses to climate change in Lake Tahoe. I became familiar with R while doing a minor in statistics and I currently use it to calculate metabolism in aquatic systems. I really enjoy working in R and it’s an awesome tool–even if it can be intimidating at first. I look forward to learning with everyone and honing our programming skills this quarter!</p>
 <p><br></p>
+<p><strong>Nina Venuti</strong> <i class="fa fa-envelope-square" aria-hidden="true"></i> <a href="mailto:nevenuti@ucdavis.edu">email</a></p>
+<p>I am a second year student in the Graduate Group in Ecology, broadly interested in studying the effects of climate change and interacting disturbances (fire, drought) on plant communities, and the ways in which we, as humans, might better manage and restore ecosystems to increase their resilience to such disturbances. I’m currently studying the effects of fire damage on conifer fecundity in Sierra Nevada mixed conifer forests. I entered grad school with the belief that I would never be able to code (ever), and have started to prove myself wrong with the help of courses like R-Davis, and the support of other graduate students. I consider myself a beginner R-user and look forward to continuing to learn with all of you!</p>
 </div>
 <div id="course-creatorsformer-instructors" class="section level2">
 <h2>Course Creators/Former Instructors</h2>
@@ -615,7 +626,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

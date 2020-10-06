@@ -40,6 +40,13 @@ I'm a 2nd year student in GGE studying algal responses to climate change in Lake
 
 <br>
 
+**Nina Venuti**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:nevenuti@ucdavis.edu)
+
+I am a second year student in the Graduate Group in Ecology, broadly interested in studying the effects of climate change and interacting disturbances (fire, drought) on plant communities, and the ways in which we, as humans, might better manage and restore ecosystems to increase their resilience to such disturbances. I’m currently studying the effects of fire damage on conifer fecundity in Sierra Nevada mixed conifer forests. I entered grad school with the belief that I would never be able to code (ever), and have started to prove myself wrong with the help of courses like R-Davis, and the support of other graduate students. I consider myself a beginner R-user and look forward to continuing to learn with all of you!
+
+
+
 ## Course Creators/Former Instructors
 
 **Michael Culshaw-Maurer** 
