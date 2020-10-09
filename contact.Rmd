@@ -12,10 +12,14 @@ title: "Contact"
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@JepsonNomad](https://twitter.com/JepsonNomad)
 [<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
 
-I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.
+Office Hours: Thursdays, 2-4 pm ([Virtual Office](https://ucdavis.zoom.us/j/2047192834))  
+
+I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.  
 
 **Liza Wood**
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu) 
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
+
+Office Hours: Monday, 3-5 pm ([Virtual Office](https://ucdavis.zoom.us/j/3876491023))  
 
 I am a 3rd year student in the GGE studying environmental governance of agricultural systems. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS and **a lot** of muddling through self-teaching, I'm now excited about helping promote data literacy. These days, I use R for scraping the web for large amounts of text data (whether it is Tweets scraped from Twitter or thousands of policy documents from government agency websites) using packages like `twitteR` or `rvest`. Generally, I think R can be a bit overwhelming and I look forward to being a part of the de-mystifying process for new coders!
 

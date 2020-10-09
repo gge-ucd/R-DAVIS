@@ -26,13 +26,15 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 
 **Christian John** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu)  
+Office Hours: Thursdays, 2-4 pm ([Virtual Office](https://ucdavis.zoom.us/j/2047192834))
 
 <br>
 
 **Liza Wood** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu) 
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
+Office Hours: Monday, 3-5 pm ([Virtual Office](https://ucdavis.zoom.us/j/3876491023))
 
   
 
