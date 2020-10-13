@@ -5,7 +5,7 @@ output:
     toc: false
 ---
 
-Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments are to be completed via private repositories each student set up (via [Github Classrooms](https://classroom.github.com/classrooms)). 
+Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to practice coding, reviewing code, and working with GitHub. Assignments are to be completed by students in their private repositories set up (via [Github Classrooms](https://classroom.github.com/classrooms)). Each week students will be assigned a partner on the **Bowtruckles** team, and review the others' code for the week. Review comments can be made by entering into the repository of your partner, finding the Issue tab, and creating a New Issue. (**Note**: This is a nonstandard use of the "Issue" tab. GitHub usually requires collaboration (pushing and pulling others' code) in order to comment across "commits." We are not going to be doing this, at least not at first, so we will use Issues).
 
 <br>
 
@@ -19,7 +19,7 @@ Today we talked about project management, directory structure, and file paths. U
 
 2) If you drew your diagram on paper, take a picture of it and email it to yourself. If you made it digitally, save it as a .png or .jpg or take a screenshot of it. Get the photo of your diagram into your "in-class-project" folder, and put it into an "images" folder there. You should end up with a file that's something like "in-class-project-yourname/images/your_diagram.jpg". This will be practice for taking external files, moving them into a project, and using them within the project.
 
-3) Get on the good ole Google and look up how to add a local image to a Markdown file. Your README.md is written in Markdown, and we're going to add your diagram photo to it. This should involve just one line of new code- the trickiest part is referring to the correct location of your photo relative to the README file (Hint: your "link" to the file won't be a website link). Once you've made this change, commit and push your changes to GitHub. This photo should now appear in the README when you open your repository on GitHub.
+3) Get on the good ole Google and look up how to add a local image to a Markdown file. Your README.md is written in Markdown, and we're going to add your diagram photo to it. This should involve just one line of new code- the trickiest part is referring to the correct location of your photo relative to the README file (Hint: your "link" to the file won't be a website link). You can also take this time to finish updating your README.md information from Week 1. Once you've made this change, commit and push your changes to GitHub. This photo should now appear in the README when you open your repository on GitHub.
 
 ### <small>Week3</small>
 
