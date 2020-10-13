@@ -5,7 +5,7 @@ output:
     toc: false
 ---
 
-The following material will be posted on Github via the Discussion board for the class *Team* (2020 is the **Dragons**). Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments were completed via private repositories each student set up (via [Github Classrooms](https://classroom.github.com/classrooms)), and each week students will be randomly assigned another student for a code review. Apologies if there are links that don't work, they may be specifically setup for students enrolled in course.
+Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments are to be completed via private repositories each student set up (via [Github Classrooms](https://classroom.github.com/classrooms)). 
 
 <br>
 
@@ -13,7 +13,7 @@ The following material will be posted on Github via the Discussion board for the
 
 ### <small>Week2</small>
 
-Today we talked quite a bit about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it's crucial to any computational task and good project management. We'll have you do a little exercise to help sketch out the relationships between files and folders in your computer.
+Today we talked about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it's crucial to any computational task and good project management. We'll have you do a little exercise to help sketch out the relationships between files and folders in your computer.
 
 1) Grab a pen/pencil and paper and draw out some sort of diagram showing the structure of your "in-class-project" directory. Include the sub-folders and some example files. Somewhere in this diagram, denote what git views as your "repository" and what RStudio views as your "R Project" (Hint: this might involve circling portions of your diagram). Feel free to add notes about the purposes of files/folders you included, or even add new files and folders you think could aid in your project organization. **You're going to be taking a picture of this diagram/uploading it, so if you'd prefer to make it digitally, like in PowerPoint or Lucidchart, go right ahead**
 

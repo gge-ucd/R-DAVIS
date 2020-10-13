@@ -60,9 +60,9 @@ to manage this output, and what's best may depend on the particular kind of proj
 At a minimum, it's useful to have separate directories for each of the following:
 
 - data: Ideally .csv files as these are flat, transparent, and universal. You may have other specialized formats as well. .rda and .rds are R-specific data files but you never *need* to use these.
-- code: .R files, perhaps .do files if Stata is your thing, .py files for Python, etc.
+- code (or script): .R files, perhaps .do files if Stata is your thing, .py files for Python, etc.
 - results: .png or .pdf files for plots; .tex or .txt files for tables
-- papers: .tex if you write in LaTeX, .doc for Word, .Rmd for RMarkdown (which we recommend and will cover tomorrow afternoon), and .pdf or .html rendered documents.
+- papers: .tex if you write in LaTeX, .doc for Word, .Rmd for RMarkdown, and .pdf or .html rendered documents.
 
 ## RStudio Projects
 

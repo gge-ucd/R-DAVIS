@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -27,6 +26,15 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -237,6 +245,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -419,13 +428,13 @@ $(document).ready(function () {
 </div>
 
 
-<p>The following material will be posted on Github via the Discussion board for the class <em>Team</em> (2020 is the <strong>Dragons</strong>). Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments were completed via private repositories each student set up (via <a href="https://classroom.github.com/classrooms">Github Classrooms</a>), and each week students will be randomly assigned another student for a code review. Apologies if there are links that don’t work, they may be specifically setup for students enrolled in course.</p>
+<p>Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to both practice coding and reviewing code. Assignments are to be completed via private repositories each student set up (via <a href="https://classroom.github.com/classrooms">Github Classrooms</a>).</p>
 <p><br></p>
 <div id="assignments" class="section level2 tabset tabset-fade tabset-pills">
 <h2>Assignments</h2>
 <div id="week2" class="section level3">
 <h3><small>Week2</small></h3>
-<p>Today we talked quite a bit about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it’s crucial to any computational task and good project management. We’ll have you do a little exercise to help sketch out the relationships between files and folders in your computer.</p>
+<p>Today we talked about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it’s crucial to any computational task and good project management. We’ll have you do a little exercise to help sketch out the relationships between files and folders in your computer.</p>
 <ol style="list-style-type: decimal">
 <li><p>Grab a pen/pencil and paper and draw out some sort of diagram showing the structure of your “in-class-project” directory. Include the sub-folders and some example files. Somewhere in this diagram, denote what git views as your “repository” and what RStudio views as your “R Project” (Hint: this might involve circling portions of your diagram). Feel free to add notes about the purposes of files/folders you included, or even add new files and folders you think could aid in your project organization. <strong>You’re going to be taking a picture of this diagram/uploading it, so if you’d prefer to make it digitally, like in PowerPoint or Lucidchart, go right ahead</strong></p></li>
 <li><p>If you drew your diagram on paper, take a picture of it and email it to yourself. If you made it digitally, save it as a .png or .jpg or take a screenshot of it. Get the photo of your diagram into your “in-class-project” folder, and put it into an “images” folder there. You should end up with a file that’s something like “in-class-project-yourname/images/your_diagram.jpg”. This will be practice for taking external files, moving them into a project, and using them within the project.</p></li>
@@ -442,14 +451,11 @@ $(document).ready(function () {
 hw3 &lt;- runif(50, 4, 50)
 hw3 &lt;- replace(hw3, c(4,12,22,27), NA)
 hw3</code></pre>
-<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897
-##  [8] 15.682545 35.612619 42.245735  8.814791        NA 27.418158 36.504914
-## [15] 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776 40.971460
-## [22]        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658
-## [29] 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087
-## [36] 34.262403  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810
-## [43] 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312
-## [50]  4.500130</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619 42.245735
+## [11]  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776
+## [21] 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658 46.676823 25.913006
+## [31] 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403  9.591257 27.733004 17.877330 38.975078
+## [41] 46.102046 25.041810 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
 <p><em>PROBLEM 1:</em></p>
 <p>Take you <code>hw3</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
 <p><em>PROBLEM 2:</em></p>
@@ -457,8 +463,8 @@ hw3</code></pre>
 <p><em>PROBLEM 3:</em></p>
 <p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p>
 <pre class="r"><code>final</code></pre>
-<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049
-##  [8]  92.76726  93.19901  85.12543  69.44137  67.57845</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901  85.12543
+## [11]  69.44137  67.57845</code></pre>
 <p>Finally, save your script and push all your changes to your github account!</p>
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
@@ -488,10 +494,8 @@ final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical s
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
 
 colnames(surveys) #a list of the column names </code></pre>
-<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;            
-##  [4] &quot;year&quot;            &quot;plot_id&quot;         &quot;species_id&quot;     
-##  [7] &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;         
-## [10] &quot;genus&quot;           &quot;species&quot;         &quot;taxa&quot;           
+<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;         &quot;species_id&quot;     
+##  [7] &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;           &quot;species&quot;         &quot;taxa&quot;           
 ## [13] &quot;plot_type&quot;</code></pre>
 <pre class="r"><code>surveys_new &lt;- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
 
@@ -513,9 +517,21 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
 <pre class="r"><code>#PROBLEM 2
 
-library(tidyverse) #load tidyverse 
-
-surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
+library(tidyverse) #load tidyverse </code></pre>
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.1     ✓ dplyr   1.0.1
+## ✓ tidyr   1.1.1     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   record_id = col_double(),
@@ -581,27 +597,26 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 surveys %&gt;% 
   filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
 <pre><code>## # A tibble: 14,730 x 13
-##    record_id month   day  year plot_id species_id sex   hindfoot_length
-##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;
-##  1      5966     5    22  1982       2 NL         F                  32
-##  2       226     9    13  1977       2 DM         M                  37
-##  3       233     9    13  1977       2 DM         M                  25
-##  4       245    10    16  1977       2 DM         M                  37
-##  5       251    10    16  1977       2 DM         M                  36
-##  6       257    10    16  1977       2 DM         M                  37
-##  7       259    10    16  1977       2 DM         M                  36
-##  8       268    10    16  1977       2 DM         F                  36
-##  9       346    11    12  1977       2 DM         F                  37
-## 10       350    11    12  1977       2 DM         M                  37
-## # … with 14,720 more rows, and 5 more variables: weight &lt;dbl&gt;,
-## #   genus &lt;chr&gt;, species &lt;chr&gt;, taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus    species  taxa  plot_type
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    
+##  1      5966     5    22  1982       2 NL         F                  32     40 Neotoma  albigula Rode… Control  
+##  2       226     9    13  1977       2 DM         M                  37     51 Dipodom… merriami Rode… Control  
+##  3       233     9    13  1977       2 DM         M                  25     44 Dipodom… merriami Rode… Control  
+##  4       245    10    16  1977       2 DM         M                  37     39 Dipodom… merriami Rode… Control  
+##  5       251    10    16  1977       2 DM         M                  36     49 Dipodom… merriami Rode… Control  
+##  6       257    10    16  1977       2 DM         M                  37     47 Dipodom… merriami Rode… Control  
+##  7       259    10    16  1977       2 DM         M                  36     41 Dipodom… merriami Rode… Control  
+##  8       268    10    16  1977       2 DM         F                  36     55 Dipodom… merriami Rode… Control  
+##  9       346    11    12  1977       2 DM         F                  37     36 Dipodom… merriami Rode… Control  
+## 10       350    11    12  1977       2 DM         M                  37     47 Dipodom… merriami Rode… Control  
+## # … with 14,720 more rows</code></pre>
 <pre class="r"><code>#3
 biggest_critters &lt;- surveys %&gt;% 
   filter(!is.na(weight)) %&gt;% 
   group_by(species_id, sex) %&gt;% 
-  summarise(max_weight = max(weight))
-
-biggest_critters %&gt;% arrange(max_weight)</code></pre>
+  summarise(max_weight = max(weight))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;species_id&#39; (override with `.groups` argument)</code></pre>
+<pre class="r"><code>biggest_critters %&gt;% arrange(max_weight)</code></pre>
 <pre><code>## # A tibble: 64 x 3
 ## # Groups:   species_id [25]
 ##    species_id sex   max_weight
@@ -741,21 +756,21 @@ surveys %&gt;%
   summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
   arrange(Control)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;genus&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 10 x 6
 ## # Groups:   genus [10]
-##    genus Control `Rodent Exclosu… `Long-term Krat… `Short-term Kra…
-##    &lt;chr&gt;   &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 Baio…    13               13.5             12.9             13  
-##  2 Pero…    15.9             16.1             15.8             15.7
-##  3 Reit…    16.6             16.5             16.4             16.5
-##  4 Pero…    20.3             20.3             20.3             20.3
-##  5 Onyc…    20.4             20.3             20.3             20.3
-##  6 Chae…    23.6             22.7             24.1             24.3
-##  7 Sigm…    27.8             28.2             28.0             25.7
-##  8 Ammo…    31               35               NA               NA  
-##  9 Neot…    32.2             32.4             32.5             32.2
-## 10 Dipo…    37.8             36.9             36.7             38.8
-## # … with 1 more variable: `Spectab exclosure` &lt;dbl&gt;</code></pre>
+##    genus          Control `Rodent Exclosure` `Long-term Krat Exclos… `Short-term Krat Exclos… `Spectab exclosur…
+##    &lt;chr&gt;            &lt;dbl&gt;              &lt;dbl&gt;                   &lt;dbl&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
+##  1 Baiomys           13                 13.5                    12.9                     13                 14  
+##  2 Perognathus       15.9               16.1                    15.8                     15.7               15.8
+##  3 Reithrodontom…    16.6               16.5                    16.4                     16.5               16.6
+##  4 Peromyscus        20.3               20.3                    20.3                     20.3               20.5
+##  5 Onychomys         20.4               20.3                    20.3                     20.3               20.4
+##  6 Chaetodipus       23.6               22.7                    24.1                     24.3               23.2
+##  7 Sigmodon          27.8               28.2                    28.0                     25.7               26.5
+##  8 Ammospermophi…    31                 35                      NA                       NA                 NA  
+##  9 Neotoma           32.2               32.4                    32.5                     32.2               32.3
+## 10 Dipodomys         37.8               36.9                    36.7                     38.8               38.3</code></pre>
 </details>
 </div>
 <div id="week6" class="section level3">
@@ -805,6 +820,7 @@ gapminder %&gt;%
   ggplot()+
   geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
   geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;continent&#39; (override with `.groups` argument)</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
 
