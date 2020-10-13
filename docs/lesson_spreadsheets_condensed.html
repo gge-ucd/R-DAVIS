@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -29,15 +30,6 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -248,7 +240,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -525,7 +516,7 @@ div.tocify {
 </ul>
 <p><img src="figures/spreadsheet_fig/spreadsheet-setup-updated.png" alt="spreadsheet setup" /></p>
 <ul>
-<li>Organize your data according to tidy data principles.
+<li>Organize your data according to <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data principles</a>.
 <ul>
 <li>Each column is a variable like “weight” or “site_ID”</li>
 <li>Each row is a single observation</li>
@@ -539,129 +530,129 @@ div.tocify {
 <div id="avoiding-common-mistakes" class="section level1">
 <h1>Avoiding Common Mistakes</h1>
 <ul>
-<li><p>Avoid using multiple tables within one spreadsheet.</p></li>
-<li><p>Avoid spreading data across multiple tabs.</p>
+<li>Avoid using multiple tables within one spreadsheet.</li>
+<li>Avoid spreading data across multiple tabs.
 <ul>
 <li>Programs other than Excel will have a tough time seeing tabs</li>
 <li>Instead of adding a new tab, keep adding rows, and maybe use a new column for the info you’d be splitting across tabs. For example, use a column for Year instead of a new tab for a new year.</li>
 <li>If your table gets big, <a href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">freeze your column headers</a> to make them easier to see while you scroll.</li>
 </ul></li>
-<li><p>Record zeros as zeros.</p>
+<li>Record zeros as zeros.
 <ul>
 <li>Zeros are data! Don’t use blanks, and don’t use zeros as null values</li>
 </ul></li>
-<li><p>Use an appropriate null value to record missing data.</p>
+<li>Use an appropriate null value to record missing data.
 <ul>
 <li>There’s a broader discussion of this in <a href="https://peerj.com/preprints/7/">White et al 2013</a>, but here’s a quick look at their recommendations:</li>
 </ul>
 <p><img src="figures/spreadsheet_fig/3_white_table_1.jpg" alt="White et al." /></p></li>
-<li><p>Don’t use formatting to convey information or to make your spreadsheet look pretty.</p>
+<li>Don’t use formatting to convey information or to make your spreadsheet look pretty.
 <ul>
 <li>R won’t see cell colors or bold fonts</li>
 <li>Keep data as characters or numbers</li>
 </ul></li>
-<li><p>Place comments in a separate column.</p>
+<li>Place comments in a separate column.
 <ul>
 <li>Don’t use Excel’s “comments” functionality, other programs don’t recognize these</li>
 <li>Just use a separate text column</li>
 </ul></li>
-<li><p>Record units in column headers.</p>
+<li>Record units in column headers.
 <ul>
 <li>Don’t put units in your data cells!</li>
 <li>10cm will be read as characters, not numbers</li>
 </ul></li>
-<li><p>Include only one piece of information in a cell.</p></li>
-<li><p>Avoid spaces, numbers and special characters in column headers.</p>
+<li>Include only one piece of information in a cell.</li>
+<li>Avoid spaces, numbers and special characters in column headers.
 <table align="center" style="width =80%; border: 1px solid black;">
 <tr>
 <td>
-<p><b>Good Name</b></p>
+<b>Good Name</b>
 </td>
-<p><br /></p>
+<br />
 <td>
-<p><b>Good Alternative </b></p>
+<b>Good Alternative </b>
 </td>
-<p><br /></p>
+<br />
 <td>
-<p><b>Avoid </b></p>
+<b>Avoid </b>
 </td>
-<p><br /></p>
+<br />
 </tr>
 <tr>
 <td>
-<p>Max_temp_C</p>
+Max_temp_C
 </td>
 <td>
-<p>MaxTemp</p>
+MaxTemp
 </td>
 <td>
-<p>Maximum Temp (°C)</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>Precipitation_mm</p>
-</td>
-<td>
-<p>Precipitation</p>
-</td>
-<td>
-<p>precmm</p>
+Maximum Temp (°C)
 </td>
 </tr>
 <tr>
 <td>
-<p>Mean_year_growth</p>
+Precipitation_mm
 </td>
 <td>
-<p>MeanYearGrowth</p>
+Precipitation
 </td>
 <td>
-<p>Mean growth/year</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>sex</p>
-</td>
-<td>
-<p>sex</p>
-</td>
-<td>
-<p>M/F</p>
+precmm
 </td>
 </tr>
 <tr>
 <td>
-<p>weight</p>
+Mean_year_growth
 </td>
 <td>
-<p>weight</p>
+MeanYearGrowth
 </td>
 <td>
-<p>w.</p>
-</td>
-</tr>
-<tr>
-<td>
-<p>cell_type</p>
-</td>
-<td>
-<p>CellType</p>
-</td>
-<td>
-<p>Cell Type</p>
+Mean growth/year
 </td>
 </tr>
 <tr>
 <td>
-<p>Observation_01</p>
+sex
 </td>
 <td>
-<p>first_observation</p>
+sex
 </td>
 <td>
-<p>1st Obs</p>
+M/F
+</td>
+</tr>
+<tr>
+<td>
+weight
+</td>
+<td>
+weight
+</td>
+<td>
+w.
+</td>
+</tr>
+<tr>
+<td>
+cell_type
+</td>
+<td>
+CellType
+</td>
+<td>
+Cell Type
+</td>
+</tr>
+<tr>
+<td>
+Observation_01
+</td>
+<td>
+first_observation
+</td>
+<td>
+1st Obs
 </td>
 </tr>
 </table></li>
@@ -820,7 +811,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
