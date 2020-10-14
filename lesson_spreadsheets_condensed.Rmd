@@ -26,7 +26,7 @@ This lesson is adapted from [Data Carpentry's Data Organization in Spreadsheets 
   
 ![spreadsheet setup](figures/spreadsheet_fig/spreadsheet-setup-updated.png)
 
-- Organize your data according to tidy data principles.
+- Organize your data according to [tidy data principles](https://www.jstatsoft.org/article/view/v059i10).
   - Each column is a variable like "weight" or "site_ID"
   - Each row is a single observation
   - Don't combine pieces of information in a single cell
