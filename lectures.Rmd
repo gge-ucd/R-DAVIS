@@ -19,7 +19,7 @@ Zoom recordings of our lectures, livecode, and our class notes^[A `@ucdavis.edu`
 ### Week 2
 
 * <a href="https://dl.dropboxusercontent.com/s/1bncm70aaozhx4l/Week02.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Zoom link (can be viewed later as video)</a>
+* <a href="https://www.youtube.com/watch?v=tr4vjTBRY28" target="_blank">Week 2 video recording</a>
 * <a href="https://docs.google.com/document/d/18x5hZpA7M0FTNDn0hWA5HV4MyxAC5yZyzVwzXu5oV_0/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
