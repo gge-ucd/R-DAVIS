@@ -29,7 +29,7 @@ First, open your r-davis-in-class-project-YourName and `pull`! Remember, we alwa
 
 Second, open a new script in your r-davis-in-class-project-YourName and save it to your `scripts` folder. Call this new script `week_3_homework`. 
 
-Copy and paste the chunck of code below into your new `week_3_homework` script and run it. This chunck of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing? 
+Copy and paste the chunk of code below into your new `week_3_homework` script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing? 
 
 ```{r}
 set.seed(15)

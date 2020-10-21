@@ -446,16 +446,17 @@ $(document).ready(function () {
 <p>In Week 3’s homework we are going to practice subsetting and manipulating vectors. Fun!</p>
 <p>First, open your r-davis-in-class-project-YourName and <code>pull</code>! Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).</p>
 <p>Second, open a new script in your r-davis-in-class-project-YourName and save it to your <code>scripts</code> folder. Call this new script <code>week_3_homework</code>.</p>
-<p>Copy and paste the chunck of code below into your new <code>week_3_homework</code> script and run it. This chunck of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
+<p>Copy and paste the chunk of code below into your new <code>week_3_homework</code> script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
 <pre class="r"><code>set.seed(15)
 hw3 &lt;- runif(50, 4, 50)
 hw3 &lt;- replace(hw3, c(4,12,22,27), NA)
 hw3</code></pre>
-<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619 42.245735
-## [11]  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776
-## [21] 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658 46.676823 25.913006
-## [31] 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403  9.591257 27.733004 17.877330 38.975078
-## [41] 46.102046 25.041810 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619
+## [10] 42.245735  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680
+## [19] 10.494605 39.728776 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA
+## [28] 10.825658 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403
+## [37]  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810 46.369401 15.919465 19.813791
+## [46] 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
 <p><em>PROBLEM 1:</em></p>
 <p>Take you <code>hw3</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
 <p><em>PROBLEM 2:</em></p>
@@ -463,8 +464,8 @@ hw3</code></pre>
 <p><em>PROBLEM 3:</em></p>
 <p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p>
 <pre class="r"><code>final</code></pre>
-<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901  85.12543
-## [11]  69.44137  67.57845</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901
+## [10]  85.12543  69.44137  67.57845</code></pre>
 <p>Finally, save your script and push all your changes to your github account!</p>
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
@@ -494,9 +495,9 @@ final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical s
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
 
 colnames(surveys) #a list of the column names </code></pre>
-<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;         &quot;species_id&quot;     
-##  [7] &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;           &quot;species&quot;         &quot;taxa&quot;           
-## [13] &quot;plot_type&quot;</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;        
+##  [6] &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;          
+## [11] &quot;species&quot;         &quot;taxa&quot;            &quot;plot_type&quot;</code></pre>
 <pre class="r"><code>surveys_new &lt;- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
 
 surveys_new$species_id &lt;- as.character(surveys_new$species_id) #converting factor data to character
@@ -517,9 +518,21 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
 <pre class="r"><code>#PROBLEM 2
 
-library(tidyverse) #load tidyverse 
-
-surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
+library(tidyverse) #load tidyverse </code></pre>
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.1     ✓ dplyr   1.0.1
+## ✓ tidyr   1.1.1     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.0.2</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   record_id = col_double(),
@@ -585,19 +598,19 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 surveys %&gt;% 
   filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
 <pre><code>## # A tibble: 14,730 x 13
-##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus    species  taxa  plot_type
-##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    
-##  1      5966     5    22  1982       2 NL         F                  32     40 Neotoma  albigula Rode… Control  
-##  2       226     9    13  1977       2 DM         M                  37     51 Dipodom… merriami Rode… Control  
-##  3       233     9    13  1977       2 DM         M                  25     44 Dipodom… merriami Rode… Control  
-##  4       245    10    16  1977       2 DM         M                  37     39 Dipodom… merriami Rode… Control  
-##  5       251    10    16  1977       2 DM         M                  36     49 Dipodom… merriami Rode… Control  
-##  6       257    10    16  1977       2 DM         M                  37     47 Dipodom… merriami Rode… Control  
-##  7       259    10    16  1977       2 DM         M                  36     41 Dipodom… merriami Rode… Control  
-##  8       268    10    16  1977       2 DM         F                  36     55 Dipodom… merriami Rode… Control  
-##  9       346    11    12  1977       2 DM         F                  37     36 Dipodom… merriami Rode… Control  
-## 10       350    11    12  1977       2 DM         M                  37     47 Dipodom… merriami Rode… Control  
-## # … with 14,720 more rows</code></pre>
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus species taxa 
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;
+##  1      5966     5    22  1982       2 NL         F                  32     40 Neot… albigu… Rode…
+##  2       226     9    13  1977       2 DM         M                  37     51 Dipo… merria… Rode…
+##  3       233     9    13  1977       2 DM         M                  25     44 Dipo… merria… Rode…
+##  4       245    10    16  1977       2 DM         M                  37     39 Dipo… merria… Rode…
+##  5       251    10    16  1977       2 DM         M                  36     49 Dipo… merria… Rode…
+##  6       257    10    16  1977       2 DM         M                  37     47 Dipo… merria… Rode…
+##  7       259    10    16  1977       2 DM         M                  36     41 Dipo… merria… Rode…
+##  8       268    10    16  1977       2 DM         F                  36     55 Dipo… merria… Rode…
+##  9       346    11    12  1977       2 DM         F                  37     36 Dipo… merria… Rode…
+## 10       350    11    12  1977       2 DM         M                  37     47 Dipo… merria… Rode…
+## # … with 14,720 more rows, and 1 more variable: plot_type &lt;chr&gt;</code></pre>
 <pre class="r"><code>#3
 biggest_critters &lt;- surveys %&gt;% 
   filter(!is.na(weight)) %&gt;% 
@@ -747,18 +760,18 @@ surveys %&gt;%
 <pre><code>## `summarise()` regrouping output by &#39;genus&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 10 x 6
 ## # Groups:   genus [10]
-##    genus          Control `Rodent Exclosure` `Long-term Krat Exclos… `Short-term Krat Exclos… `Spectab exclosur…
-##    &lt;chr&gt;            &lt;dbl&gt;              &lt;dbl&gt;                   &lt;dbl&gt;                    &lt;dbl&gt;              &lt;dbl&gt;
-##  1 Baiomys           13                 13.5                    12.9                     13                 14  
-##  2 Perognathus       15.9               16.1                    15.8                     15.7               15.8
-##  3 Reithrodontom…    16.6               16.5                    16.4                     16.5               16.6
-##  4 Peromyscus        20.3               20.3                    20.3                     20.3               20.5
-##  5 Onychomys         20.4               20.3                    20.3                     20.3               20.4
-##  6 Chaetodipus       23.6               22.7                    24.1                     24.3               23.2
-##  7 Sigmodon          27.8               28.2                    28.0                     25.7               26.5
-##  8 Ammospermophi…    31                 35                      NA                       NA                 NA  
-##  9 Neotoma           32.2               32.4                    32.5                     32.2               32.3
-## 10 Dipodomys         37.8               36.9                    36.7                     38.8               38.3</code></pre>
+##    genus       Control `Rodent Exclosur… `Long-term Krat Excl… `Short-term Krat Exc… `Spectab exclosu…
+##    &lt;chr&gt;         &lt;dbl&gt;             &lt;dbl&gt;                 &lt;dbl&gt;                 &lt;dbl&gt;             &lt;dbl&gt;
+##  1 Baiomys        13                13.5                  12.9                  13                14  
+##  2 Perognathus    15.9              16.1                  15.8                  15.7              15.8
+##  3 Reithrodon…    16.6              16.5                  16.4                  16.5              16.6
+##  4 Peromyscus     20.3              20.3                  20.3                  20.3              20.5
+##  5 Onychomys      20.4              20.3                  20.3                  20.3              20.4
+##  6 Chaetodipus    23.6              22.7                  24.1                  24.3              23.2
+##  7 Sigmodon       27.8              28.2                  28.0                  25.7              26.5
+##  8 Ammospermo…    31                35                    NA                    NA                NA  
+##  9 Neotoma        32.2              32.4                  32.5                  32.2              32.3
+## 10 Dipodomys      37.8              36.9                  36.7                  38.8              38.3</code></pre>
 </details>
 </div>
 <div id="week6" class="section level3">
