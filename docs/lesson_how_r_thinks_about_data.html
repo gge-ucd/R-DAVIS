@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -30,6 +29,15 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -240,6 +248,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -271,6 +280,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -642,12 +657,10 @@ x + z</code></pre>
 <pre class="r"><code>z &lt;- 1:3
 
 x + z</code></pre>
-<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object length</code></pre>
 <pre><code>##  [1]  2  4  6  5  7  9  8 10 12 11</code></pre>
 <pre class="r"><code>a &lt;- x + z</code></pre>
-<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object length</code></pre>
 <p>R warns us about this! However, if you try to assign this result to an object, we get the warning, but the assignment works. z will get recycled until it reaches the length of x. So z gets recycled from being <code>1,2,3</code> to being <code>1,2,3,1,2,3,1,2,3,1</code>, then gets added to x. This can give you unexpected results if you’re doing math with vectors and you’re not paying attention to what’s going on.</p>
 <p>Recycling also happens with logical vectors:</p>
 <pre class="r"><code>x[c(TRUE, FALSE)]</code></pre>
@@ -768,17 +781,20 @@ sex</code></pre>
 <div class="blue">
 <h3 id="challenge-3">Challenge</h3>
 <ul>
-<li>Rename the levels of sex to “F” and “M”</li>
-<li>Now order the levels so that “F” is first and “M” is second</li>
+<li>Copy the code below:<br />
+<code>treatment &lt;- factor(c("high", "low", "low", "medium", "high"))</code></li>
+<li>Rename the levels of treatment to “H”, “L” and “M”</li>
+<li>Now order the levels so that “L” is first, “M” is second, and “H” is third</li>
 <li>Hint: you’ll have to do this in 2 steps</li>
 </ul>
 <details>
 <p><summary>ANSWER</summary></p>
-<pre class="r"><code>levels(sex) &lt;- c(&quot;M&quot;, &quot;F&quot;)
-sex &lt;- factor(sex, levels = c(&quot;F&quot;, &quot;M&quot;))
-sex</code></pre>
-<pre><code>## [1] M F F M
-## Levels: F M</code></pre>
+<pre class="r"><code>treatment &lt;- factor(c(&quot;high&quot;, &quot;low&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))
+levels(treatment) &lt;- c(&quot;H&quot;, &quot;L&quot;, &quot;M&quot;)
+treatment &lt;- factor(treatment, levels = c(&quot;L&quot;, &quot;M&quot;, &quot;H&quot;))
+treatment</code></pre>
+<pre><code>## [1] H L L M H
+## Levels: L M H</code></pre>
 </details>
 </div>
 <p><br></p>
@@ -847,7 +863,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

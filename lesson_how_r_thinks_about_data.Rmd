@@ -443,16 +443,19 @@ sex
 <div class = "blue">
 ### Challenge
 
-* Rename the levels of sex to "F" and "M"
-* Now order the levels so that "F" is first and "M" is second
+* Copy the code below:  
+    `treatment <- factor(c("high", "low", "low", "medium", "high"))`
+* Rename the levels of treatment to "H", "L" and "M"
+* Now order the levels so that "L" is first, "M" is second, and "H" is third
 * Hint: you'll have to do this in 2 steps
 
 <details>
 <summary>ANSWER</summary>
 ```{r, answer=TRUE, purl=FALSE}
-levels(sex) <- c("M", "F")
-sex <- factor(sex, levels = c("F", "M"))
-sex
+treatment <- factor(c("high", "low", "low", "medium", "high"))
+levels(treatment) <- c("H", "L", "M")
+treatment <- factor(treatment, levels = c("L", "M", "H"))
+treatment
 ``` 
 </details>
 </div>
