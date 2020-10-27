@@ -99,11 +99,12 @@ objects besides `data.frame`.
 <div class = "blue">
 ### Challenge
 
-Based on the output of `str(surveys)`, can you answer the following questions?
-* What is the class of the object `surveys`?
-* How many rows and how many columns are in this object?
-* How are our character data represented in this data frame?
-* How many species have been recorded during these surveys?
+Based on the output of `str(surveys)`, can you answer the following questions?    
+
+* What is the class of the object `surveys`?   
+* How many rows and how many columns are in this object?   
+* How are our character data represented in this data frame?   
+* How many species have been recorded during these surveys?   
 
 <details>
 <summary>ANSWER</summary>
