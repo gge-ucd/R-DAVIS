@@ -802,7 +802,7 @@ treatment</code></pre>
 <div id="why-factors" class="section level3">
 <h3>Why Factors?</h3>
 <p>Factors can be convenient at times, and they will pop up pretty frequently, but in most circumstances, character strings will give you fewer hassles. It’s usually best to start with character vectors, and convert them explicitly to factors if you need to.</p>
-<p>Some functions in R will automatically convert character strings to factors. For instance, <code>read.csv()</code> is a common function to read CSV files into R, but it will turn any character data into factors. You can use the argument <code>stringsAsFactors=FALSE</code> in <code>read.csv()</code> to turn off this behavior, keeping your character strings as character strings.</p>
+<p>Some functions in R will automatically convert character strings to factors. For instance, <code>read.csv()</code> run in older versions R will turn any character data into factors, while in newer versions this has been changed to keep them as characters. If you aren’t sure, you can use the argument <code>stringsAsFactors=FALSE</code> in <code>read.csv()</code> to make sure your character strings as character strings.</p>
 <p>This lesson is adapted from <a href="https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Data Carpentry’s Ecology Workshop Introduction to R</a></p>
 </div>
 </div>

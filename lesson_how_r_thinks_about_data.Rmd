@@ -465,6 +465,6 @@ treatment
 
 Factors can be convenient at times, and they will pop up pretty frequently, but in most circumstances, character strings will give you fewer hassles. It's usually best to start with character vectors, and convert them explicitly to factors if you need to.
 
-Some functions in R will automatically convert character strings to factors. For instance, `read.csv()` is a common function to read CSV files into R, but it will turn any character data into factors. You can use the argument `stringsAsFactors=FALSE` in `read.csv()` to turn off this behavior, keeping your character strings as character strings.
+Some functions in R will automatically convert character strings to factors. For instance, `read.csv()` run in older versions R will turn any character data into factors, while in newer versions this has been changed to keep them as characters. If you aren't sure, you can use the argument `stringsAsFactors=FALSE` in `read.csv()` to make sure your character strings as character strings.
 
 This lesson is adapted from [Data Carpentry's Ecology Workshop Introduction to R](https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html)
