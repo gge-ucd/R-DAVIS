@@ -443,7 +443,7 @@ sex
 <div class = "blue">
 ### Challenge
 
-* Copy the code below:  
+* Copy, paste and run the code below in your R script:  
     `treatment <- factor(c("high", "low", "low", "medium", "high"))`
 * Rename the levels of treatment to "H", "L" and "M"
 * Now order the levels so that "L" is first, "M" is second, and "H" is third
