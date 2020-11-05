@@ -26,6 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
@@ -37,7 +39,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -678,9 +680,8 @@ surveys[1, 6]   </code></pre>
 <pre><code>## [1] &quot;NL&quot;</code></pre>
 <pre class="r"><code># first column of the data frame (as a vector)
 surveys[, 1]    </code></pre>
-<pre><code>##  [1]    1   72  224  266  349  363  435  506  588  661  748  845  990 1164 1261 1374 1453 1756 1818 1882 2133 2184
-## [23] 2406 2728 3000 3002 4667 4859 5048 5180 5299 5485 5558 5583 5966 6020 6023 6036 6167 6479 6500 8022 8263 8387
-## [45] 8394 8407 8514 8543 8657 8675
+<pre><code>##  [1]    1   72  224  266  349  363  435  506  588  661  748  845  990 1164 1261 1374 1453 1756 1818 1882 2133 2184 2406 2728 3000
+## [26] 3002 4667 4859 5048 5180 5299 5485 5558 5583 5966 6020 6023 6036 6167 6479 6500 8022 8263 8387 8394 8407 8514 8543 8657 8675
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 34736 entries ]</code></pre>
 <pre class="r"><code># first column of the data frame (as a data.frame)
 surveys[1]      </code></pre>
@@ -772,9 +773,9 @@ surveys$species_id          # Result is a vector</code></pre>
 <p>We are going to create a few new data frames using our subsetting skills.</p>
 <ol style="list-style-type: decimal">
 <li>Create a new data frame called <code>surveys_200</code> containing row 200 of the <code>surveys</code> dataset.</li>
-<li>Create a new data frame called <code>surveys_last</code>, which extracts only the last row in the <code>surveys</code> data.
+<li>Create a new data frame called <code>surveys_last</code>, which extracts only the last row in of <code>surveys</code>.
 <ul>
-<li>Hint: Remember that <code>nrow()</code> gives you the number of rows in a data.frame</li>
+<li>Hint: Remember that <code>nrow()</code> gives you the number of rows in a data frame</li>
 <li>Compare your <code>surveys_last</code> data frame with what you see as the last row using <code>tail()</code> with the <code>surveys</code> data frame to make sure it’s meeting expectations.</li>
 </ul></li>
 <li>Use <code>nrow()</code> to identify the row that is in the middle of <code>surveys</code>. Subset this row and store it in a new data frame called <code>surveys_middle</code>.</li>
@@ -818,10 +819,19 @@ surveys_head &lt;- surveys[-(7:n_rows), ]</code></pre>
 <p>It is usually recommended that you do <strong>NOT</strong> write this code into a script, or the package will be reinstalled every time you run the script. Instead, just run it once in your console, and it will be permanently installed so you can use it any time.</p>
 <p>Once a package has been installed on your computer, you can load it in order to use it:</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.4     ✓ dplyr   1.0.2
+## ✓ tidyr   1.1.2     ✓ stringr 1.4.0
+## ✓ readr   1.4.0     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
 <p>Loading the <code>tidyverse</code> package actually loads a whole bunch of commonly used tidyverse packages at once, which is pretty convenient.</p>
 <p>A common feature of <code>tidyverse</code> functions is that they use underscores in the name. For example, the <code>tidyverse</code> function for reading a CSV file is <code>read_csv()</code> instead of <code>read.csv()</code>. Let’s try it:</p>
 <pre class="r"><code>t_surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## cols(
 ##   record_id = col_double(),
 ##   month = col_double(),
@@ -858,9 +868,8 @@ surveys_head &lt;- surveys[-(7:n_rows), ]</code></pre>
 <p>Ooh, doesn’t that print out nicely? It only prints 10 rows by default, NAs are now colored red, and under the name of each column is the type of data! One important thing to notice is that the column types are only <code>double</code> and <code>character</code>, no factors here. By default, <code>read_csv()</code> keeps character data as <code>character</code> columns, which would be like setting <code>stringsAsFactors=FALSE</code> in <code>read.csv()</code>.</p>
 <p>Also, <code>class()</code> returned multiple things! You’ll notice one of them is <code>data.frame</code>, but there are things like <code>tbl_df</code> as well. The <code>tidyverse</code> has a special type of <code>data.frame</code> called a “tibble”. Tibbles are the same as data frames, but they print nicely as we just saw, and they usually return a tibble when you’re using bracket subsetting. As always, just be sure to check whether you’re getting a tibble or a vector back.</p>
 <pre class="r"><code>surveys[,1] # gives a vector back</code></pre>
-<pre><code>##  [1]    1   72  224  266  349  363  435  506  588  661  748  845  990 1164 1261 1374 1453 1756 1818 1882 2133 2184
-## [23] 2406 2728 3000 3002 4667 4859 5048 5180 5299 5485 5558 5583 5966 6020 6023 6036 6167 6479 6500 8022 8263 8387
-## [45] 8394 8407 8514 8543 8657 8675
+<pre><code>##  [1]    1   72  224  266  349  363  435  506  588  661  748  845  990 1164 1261 1374 1453 1756 1818 1882 2133 2184 2406 2728 3000
+## [26] 3002 4667 4859 5048 5180 5299 5485 5558 5583 5966 6020 6023 6036 6167 6479 6500 8022 8263 8387 8394 8407 8514 8543 8657 8675
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 34736 entries ]</code></pre>
 <pre class="r"><code>t_surveys[,1] # gives a tibble back</code></pre>
 <pre><code>## # A tibble: 34,786 x 1
@@ -892,7 +901,7 @@ surveys_head &lt;- surveys[-(7:n_rows), ]</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

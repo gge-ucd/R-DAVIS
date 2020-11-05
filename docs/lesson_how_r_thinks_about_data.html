@@ -26,6 +26,8 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
@@ -37,7 +39,7 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -783,17 +785,16 @@ sex</code></pre>
 <ul>
 <li>Copy, paste and run the code below in your R script:<br />
 <code>treatment &lt;- factor(c("high", "low", "low", "medium", "high"))</code></li>
-<li>Rename the levels of treatment to “H”, “L” and “M”</li>
-<li>Now order the levels so that “L” is first, “M” is second, and “H” is third</li>
-<li>Hint: you’ll have to do this in 2 steps</li>
+<li>First, re-order the levels of <code>treatment</code> so that “low” is first, “medium” is second, and “high” is third. Hint: Use the <code>factor()</code> function again, but with an additional <code>levels</code> argument.</li>
+<li>Next, check the names with the <code>levels()</code> function, then use this same function to rename the levels of treatment to “L”, “M” and “H”</li>
 </ul>
 <details>
 <p><summary>ANSWER</summary></p>
 <pre class="r"><code>treatment &lt;- factor(c(&quot;high&quot;, &quot;low&quot;, &quot;low&quot;, &quot;medium&quot;, &quot;high&quot;))
-levels(treatment) &lt;- c(&quot;H&quot;, &quot;L&quot;, &quot;M&quot;)
-treatment &lt;- factor(treatment, levels = c(&quot;L&quot;, &quot;M&quot;, &quot;H&quot;))
+treatment &lt;- factor(treatment, levels = c(&quot;low&quot;, &quot;mediam&quot;, &quot;high&quot;))
+levels(treatment) &lt;- c(&quot;L&quot;, &quot;M&quot;, &quot;H&quot;)
 treatment</code></pre>
-<pre><code>## [1] H L L M H
+<pre><code>## [1] H    L    L    &lt;NA&gt; H   
 ## Levels: L M H</code></pre>
 </details>
 </div>
@@ -819,7 +820,7 @@ treatment</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

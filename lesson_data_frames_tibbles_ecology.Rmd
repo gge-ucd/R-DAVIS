@@ -175,8 +175,8 @@ You will probably end up using the `$` subsetting quite a bit. What's nice about
 We are going to create a few new data frames using our subsetting skills.
 
 1. Create a new data frame called `surveys_200` containing row 200 of the `surveys` dataset.
-2. Create a new data frame called `surveys_last`, which extracts only the last row in the `surveys` data.
-     * Hint: Remember that `nrow()` gives you the number of rows in a data.frame
+2. Create a new data frame called `surveys_last`, which extracts only the last row in of `surveys`.
+     * Hint: Remember that `nrow()` gives you the number of rows in a data frame
      * Compare your `surveys_last` data frame with what you see as the last row using `tail()` with the `surveys` data frame to make sure it's meeting expectations.
 3. Use `nrow()` to identify the row that is in the middle of `surveys`. Subset this row and store it in a new data frame called `surveys_middle`.
 4. Reproduce the output of the `head()` function by using the `-` notation (e.g. removal) and the `nrow()` function, keeping just the first through 6th rows of the `surveys` dataset.

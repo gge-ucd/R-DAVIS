@@ -445,16 +445,16 @@ sex
 
 * Copy, paste and run the code below in your R script:  
     `treatment <- factor(c("high", "low", "low", "medium", "high"))`
-* Rename the levels of treatment to "H", "L" and "M"
-* Now order the levels so that "L" is first, "M" is second, and "H" is third
-* Hint: you'll have to do this in 2 steps
+* First, re-order the levels of `treatment` so that "low" is first, "medium" is second, and "high" is third. Hint: Use the `factor()` function again, but with an additional `levels` argument.
+* Next, check the names with the `levels()` function, then use this same function to rename the levels of treatment to "L", "M" and "H"
+
 
 <details>
 <summary>ANSWER</summary>
 ```{r, answer=TRUE, purl=FALSE}
 treatment <- factor(c("high", "low", "low", "medium", "high"))
-levels(treatment) <- c("H", "L", "M")
-treatment <- factor(treatment, levels = c("L", "M", "H"))
+treatment <- factor(treatment, levels = c("low", "mediam", "high"))
+levels(treatment) <- c("L", "M", "H")
 treatment
 ``` 
 </details>

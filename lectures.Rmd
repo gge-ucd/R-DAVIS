@@ -33,14 +33,14 @@ Zoom recordings of our lectures, livecode, and our class notes^[A `@ucdavis.edu`
 ### Week 4
 
 * <a href="https://dl.dropboxusercontent.com/s/4i8o1v7zwgdekiv/Week04.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Zoom link (can be viewed later as video)</a>
+* Sorry, we lost this recording!
 * <a href="https://docs.google.com/document/d/1S7hjwuNfpsPc-FCRjo3tkI-ycab3H3Dr1WV7N-5ONxA/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
 * <a href="https://dl.dropboxusercontent.com/s/xnbt9kp2isrdqhr/Week05.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Zoom link (can be viewed later as video)</a>
+* <a href="https://youtu.be/ropTf8D4IF4" target="_blank">Week 5 video recording</a>
 * <a href="https://docs.google.com/document/d/1a32lXEegQtNDpM1WWIAStGjM6i2xQ0KuuPFsMezM5EY/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
