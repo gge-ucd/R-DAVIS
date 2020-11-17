@@ -271,6 +271,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -662,8 +668,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 <pre class="r"><code>ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
     facet_wrap(~ species_id)</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to
-## adjust the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
+## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/first-facet-1.png" width="672" /></p>
 </div>
 <div id="ggplot2-themes" class="section level2">
@@ -676,8 +682,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      facet_wrap(~ species_id) +
      theme_bw() +
      theme(panel.grid = element_blank())</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to
-## adjust the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
+## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div class = "blue">
 <div id="challenge-1" class="section level3">
@@ -695,8 +701,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      geom_line() +
      facet_wrap(~ species_id) +
      theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to
-## adjust the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
+## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <div class="blue">
 <h3 id="challenge-2">Challenge 2</h3>
@@ -713,13 +719,30 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
    geom_line() +
    facet_wrap(~ species_id) +
    theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to
-## adjust the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
+## group aesthetic?</code></pre>
 <img src="lesson_ggplot_ecology_files/figure-html/average-weight-time-series-1.png" width="672" />
 </details>
 </div>
 <p><br></p>
 <p>This lesson was contributed by <a href="https://github.com/MarthaWohlfeil">Martha Zillig</a>.</p>
+<div class="blue">
+<h3 id="challenge-3">Challenge 3</h3>
+<p>You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn’t really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:</p>
+<pre class="r"><code>mystery &lt;- read.csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
+<p>Can you figure out what this dataset represents?</p>
+<p><em>Hint</em> Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your <code>geom_</code>’s to get a better look!</p>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code>#plot code 
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+     facet_wrap(~ Group) +
+     geom_point(size = 0.1, alpha = 0.01) </code></pre>
+<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+</details>
+</div>
+<p><br></p>
+<p>This lesson was contributed by <a href="https://github.com/JepsonNomad">Christian John</a>.</p>
 </div>
 </div>
 

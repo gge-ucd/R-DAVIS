@@ -376,3 +376,33 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
 
 This lesson was contributed by [Martha Zillig](https://github.com/MarthaWohlfeil).
 
+<div class = "blue">
+### Challenge 3
+
+You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn't really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:
+
+```{r}
+mystery <- read.csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv")
+```
+
+Can you figure out what this dataset represents? 
+
+*Hint* Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your `geom_`'s to get a better look!
+
+<details>
+<summary>ANSWER</summary>
+```{r}
+#plot code 
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+     facet_wrap(~ Group) +
+     geom_point(size = 0.1, alpha = 0.01) 
+```
+</details>
+</div>
+
+<br>
+
+
+
+This lesson was contributed by [Christian John](https://github.com/JepsonNomad).
+
