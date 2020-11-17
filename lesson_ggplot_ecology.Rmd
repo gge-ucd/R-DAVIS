@@ -345,6 +345,7 @@ Let's make one final change to our facet wrapped plot of our yearly count data. 
      theme_bw()
 ```
 
+<br>
 
 <div class = "blue">
 ### Challenge 2
