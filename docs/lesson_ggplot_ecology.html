@@ -701,7 +701,7 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      facet_wrap(~ Group) +
      geom_point(size = 0.1, alpha = 0.01) </code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! You may notice that there is some distortion going on, and our fox friend in Group B appears to have a <em>very</em> bushy tail. Try equalizing the coordinate space in the x- and y-axes by adding a <code>coord_equal()</code> to your <code>ggplot()</code> call:</p>
+<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! You may notice that there is some distortion going on, and our foxy friend in Group B appears to have some thick thighs. Try equalizing the coordinate space in the x- and y-axes by adding a <code>coord_equal()</code> to your <code>ggplot()</code> call:</p>
 <pre class="r"><code>## Equalize coordinate mapping
 ggplot(data = mystery, mapping = aes(x = x, y = y)) +
   facet_wrap(~ Group) +
