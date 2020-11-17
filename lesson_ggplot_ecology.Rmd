@@ -404,6 +404,3 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
 <br>
 
 
-
-This lesson was contributed by [Christian John](https://github.com/JepsonNomad).
-
