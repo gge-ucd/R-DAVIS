@@ -671,6 +671,40 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 <pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
 ## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/first-facet-1.png" width="672" /></p>
+<div class="blue">
+<h3 id="challenge-1">Challenge</h3>
+<p>You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn’t really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:</p>
+<pre class="r"><code>mystery &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   x = col_double(),
+##   y = col_double(),
+##   Group = col_character()
+## )</code></pre>
+<p>Can you figure out what this dataset represents?</p>
+<p><em>Hint</em> Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your <code>geom_</code>’s to get a better look!</p>
+<details>
+<p><summary>ANSWER</summary></p>
+<pre class="r"><code># Preview the data
+mystery %&gt;%
+  head(5)</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##       x     y Group
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1 414.   282. A    
+## 2 412.   281. A    
+## 3 414.   281. A    
+## 4  26.2  275. A    
+## 5  33.9  275. A</code></pre>
+<pre class="r"><code># Plot the data
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+     facet_wrap(~ Group) +
+     geom_point(size = 0.1, alpha = 0.01) </code></pre>
+<p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch’s <a href="https://twitter.com/TrevorABranch/status/1227493205337182209">Coelocanth post on Twitter</a> and adapted by <a href="https://jepsonnomad.github.io/">Christian John</a>.</p>
+</details>
+</div>
+<p><br></p>
 </div>
 <div id="ggplot2-themes" class="section level2">
 <h2><strong><code>ggplot2</code></strong> themes</h2>
@@ -686,7 +720,7 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 ## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div class="blue">
-<h3 id="challenge-1">Challenge 1</h3>
+<h3 id="challenge-1-1">Challenge 1</h3>
 <p>Let’s make one final change to our facet wrapped plot of our yearly count data. What if we wanted to split the counts of species up by sex where the lines for each sex are different colors? Make sure you have a nice theme on your graph too!</p>
 <p><em>Hint</em> Make a new dataframe using the <code>count</code> function we learned earlier!</p>
 <details>
@@ -702,7 +736,7 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      theme_bw()</code></pre>
 <pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
 ## group aesthetic?</code></pre>
-<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 </details>
 </div>
 <p><br></p>
@@ -728,23 +762,6 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
 </div>
 <p><br></p>
 <p>This lesson was contributed by <a href="https://github.com/MarthaWohlfeil">Martha Zillig</a>.</p>
-<div class="blue">
-<h3 id="challenge-3">Challenge 3</h3>
-<p>You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn’t really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:</p>
-<pre class="r"><code>mystery &lt;- read.csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
-<p>Can you figure out what this dataset represents?</p>
-<p><em>Hint</em> Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your <code>geom_</code>’s to get a better look!</p>
-<details>
-<p><summary>ANSWER</summary></p>
-<pre class="r"><code>#plot code 
-ggplot(data = mystery, mapping = aes(x = x, y = y)) +
-     facet_wrap(~ Group) +
-     geom_point(size = 0.1, alpha = 0.01) </code></pre>
-<p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch’s <a href="https://twitter.com/TrevorABranch/status/1227493205337182209">Coelocanth post on Twitter</a> and adapted by <a href="https://jepsonnomad.github.io/">Christian John</a>.</p>
-</details>
-</div>
-<p><br></p>
 </div>
 
 

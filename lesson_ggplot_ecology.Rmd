@@ -300,6 +300,38 @@ ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     facet_wrap(~ species_id)
 ```
 
+
+<div class = "blue">
+### Challenge
+
+You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn't really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:
+
+```{r}
+mystery <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv")
+```
+
+Can you figure out what this dataset represents? 
+
+*Hint* Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your `geom_`'s to get a better look!
+
+<details>
+<summary>ANSWER</summary>
+```{r}
+# Preview the data
+mystery %>%
+  head(5)
+# Plot the data
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+     facet_wrap(~ Group) +
+     geom_point(size = 0.1, alpha = 0.01) 
+```
+
+If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low `alpha` setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch's [Coelocanth post on Twitter](https://twitter.com/TrevorABranch/status/1227493205337182209) and adapted by [Christian John](https://jepsonnomad.github.io/).
+
+</details>
+</div>
+<br>
+
 ## **`ggplot2`** themes
 
 ggplot Themes are a great, easy addition that can make all your plots more readable (and a lot more pretty!)
@@ -378,34 +410,5 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
 
 
 This lesson was contributed by [Martha Zillig](https://github.com/MarthaWohlfeil).
-
-<div class = "blue">
-### Challenge 3
-
-You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn't really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:
-
-```{r}
-mystery <- read.csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv")
-```
-
-Can you figure out what this dataset represents? 
-
-*Hint* Use your new knowledge of faceting to break up the data into groups, and consider changing the size and transparency of your `geom_`'s to get a better look!
-
-<details>
-<summary>ANSWER</summary>
-```{r}
-#plot code 
-ggplot(data = mystery, mapping = aes(x = x, y = y)) +
-     facet_wrap(~ Group) +
-     geom_point(size = 0.1, alpha = 0.01) 
-```
-
-If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low `alpha` setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch's [Coelocanth post on Twitter](https://twitter.com/TrevorABranch/status/1227493205337182209) and adapted by [Christian John](https://jepsonnomad.github.io/).
-
-</details>
-</div>
-
-<br>
 
 
