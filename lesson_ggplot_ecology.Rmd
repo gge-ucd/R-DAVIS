@@ -326,7 +326,17 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      geom_point(size = 0.1, alpha = 0.01) 
 ```
 
-If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low `alpha` setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch's [Coelocanth post on Twitter](https://twitter.com/TrevorABranch/status/1227493205337182209) and adapted by [Christian John](https://jepsonnomad.github.io/).
+If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low `alpha` setting), you should discover that each group is the outline of a different animal! You may notice that there is some distortion going on, and our fox friend in Group B appears to have a *very* bushy tail. Try equalizing the coordinate space in the x- and y-axes by adding a `coord_equal()` to your `ggplot()` call:
+
+```{r}
+## Equalize coordinate mapping
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+  facet_wrap(~ Group) +
+  geom_point(size = 0.1, alpha = 0.01) +
+  coord_equal()
+```
+
+This challenge was inspired by Trevor Branch's [Coelocanth post on Twitter](https://twitter.com/TrevorABranch/status/1227493205337182209) and adapted by [Christian John](https://jepsonnomad.github.io/).
 
 </details>
 </div>

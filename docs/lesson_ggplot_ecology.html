@@ -701,7 +701,14 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      facet_wrap(~ Group) +
      geom_point(size = 0.1, alpha = 0.01) </code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch’s <a href="https://twitter.com/TrevorABranch/status/1227493205337182209">Coelocanth post on Twitter</a> and adapted by <a href="https://jepsonnomad.github.io/">Christian John</a>.</p>
+<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! You may notice that there is some distortion going on, and our fox friend in Group B appears to have a <em>very</em> bushy tail. Try equalizing the coordinate space in the x- and y-axes by adding a <code>coord_equal()</code> to your <code>ggplot()</code> call:</p>
+<pre class="r"><code>## Equalize coordinate mapping
+ggplot(data = mystery, mapping = aes(x = x, y = y)) +
+  facet_wrap(~ Group) +
+  geom_point(size = 0.1, alpha = 0.01) +
+  coord_equal()</code></pre>
+<p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>This challenge was inspired by Trevor Branch’s <a href="https://twitter.com/TrevorABranch/status/1227493205337182209">Coelocanth post on Twitter</a> and adapted by <a href="https://jepsonnomad.github.io/">Christian John</a>.</p>
 </details>
 </div>
 <p><br></p>
@@ -736,7 +743,7 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      theme_bw()</code></pre>
 <pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
 ## group aesthetic?</code></pre>
-<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 </details>
 </div>
 <p><br></p>
