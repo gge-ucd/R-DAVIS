@@ -685,9 +685,8 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 <pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
 ## group aesthetic?</code></pre>
 <p><img src="lesson_ggplot_ecology_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
-<div class = "blue">
-<div id="challenge-1" class="section level3">
-<h3>Challenge 1</h3>
+<div class="blue">
+<h3 id="challenge-1">Challenge 1</h3>
 <p>Let’s make one final change to our facet wrapped plot of our yearly count data. What if we wanted to split the counts of species up by sex where the lines for each sex are different colors? Make sure you have a nice theme on your graph too!</p>
 <p><em>Hint</em> Make a new dataframe using the <code>count</code> function we learned earlier!</p>
 <details>
@@ -703,7 +702,9 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
      theme_bw()</code></pre>
 <pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the
 ## group aesthetic?</code></pre>
-<p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+</details>
+</div>
 <p><br></p>
 <div class="blue">
 <h3 id="challenge-2">Challenge 2</h3>
@@ -739,11 +740,11 @@ ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
 ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      facet_wrap(~ Group) +
      geom_point(size = 0.1, alpha = 0.01) </code></pre>
-<img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p><img src="lesson_ggplot_ecology_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low <code>alpha</code> setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch’s <a href="https://twitter.com/TrevorABranch/status/1227493205337182209">Coelocanth post on Twitter</a> and adapted by <a href="https://jepsonnomad.github.io/">Christian John</a>.</p>
 </details>
 </div>
 <p><br></p>
-</div>
 </div>
 
 

@@ -344,6 +344,8 @@ Let's make one final change to our facet wrapped plot of our yearly count data. 
      facet_wrap(~ species_id) +
      theme_bw()
 ```
+</details>
+</div>
 
 <br>
 
@@ -398,6 +400,9 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      facet_wrap(~ Group) +
      geom_point(size = 0.1, alpha = 0.01) 
 ```
+
+If all went well, and you faceted by group, set points to be very small, and transparency to be very high (i.e., a low `alpha` setting), you should discover that each group is the outline of a different animal! This challenge was inspired by Trevor Branch's [Coelocanth post on Twitter](https://twitter.com/TrevorABranch/status/1227493205337182209) and adapted by [Christian John](https://jepsonnomad.github.io/).
+
 </details>
 </div>
 
