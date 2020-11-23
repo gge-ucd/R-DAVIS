@@ -887,27 +887,7 @@ pg %&gt;%
 library(lubridate)
 
 mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)</code></pre>
-<pre><code>## 
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────
-## cols(
-##   filename = col_character(),
-##   siteID = col_character(),
-##   year = col_double(),
-##   month = col_double(),
-##   day = col_double(),
-##   hour24 = col_double(),
-##   min = col_double(),
-##   windDir = col_double(),
-##   windSpeed_m_s = col_double(),
-##   windSteady = col_double(),
-##   baro_hPa = col_double(),
-##   temp_C_2m = col_double(),
-##   temp_C_10m = col_double(),
-##   temp_C_towertop = col_double(),
-##   rel_humid = col_double(),
-##   precip_intens_mm_hr = col_double()
-## )</code></pre>
-<p>With this mloa dataframe, remove the NAs (here designated with -99.9 and -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot of the mean monthly temperature.</p>
+<p>With this mloa dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot scatterplot of the mean monthly temperature.</p>
 Answers:
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
@@ -915,13 +895,13 @@ Answers:
 library(lubridate)
 
 mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)
-
+summary(mloa)
 # make the datetime column
 mloa$datetime &lt;- ymd_hm(paste0(mloa$year,&quot;-&quot;, mloa$month, &quot;-&quot;, mloa$day,&quot; &quot;, mloa$hour24, &quot;:&quot;, mloa$min), tz = &quot;Pacific/Honolulu&quot;)
 
 # clean up the NA data (NA&#39;s are = -99 or -999 depending on data col)
 df &lt;- mloa %&gt;% 
-  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %&gt;% #removing NAs
+  filter(!rel_humid == -99.9, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %&gt;% #removing NAs
   mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
 
 df2 &lt;- df %&gt;% 

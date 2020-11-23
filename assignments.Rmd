@@ -418,7 +418,7 @@ pg %>%
 
 Let’s plot some Mauna Loa data, downloded from the R-DAVIS github. First, you need to read in the data (and remember to load tidyverse and lubridate packages):
 
-```{r}
+```{r, eval=FALSE}
 library(tidyverse)
 library(lubridate)
 
@@ -426,7 +426,7 @@ mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/
 ```
 
 
-With this mloa dataframe, remove the NAs (here designated with -99.9 and -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot of the mean monthly temperature.
+With this mloa dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot scatterplot of the mean monthly temperature.
 
 Answers:
 <details>
@@ -436,13 +436,13 @@ library(tidyverse)
 library(lubridate)
 
 mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
-
+summary(mloa)
 # make the datetime column
 mloa$datetime <- ymd_hm(paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min), tz = "Pacific/Honolulu")
 
 # clean up the NA data (NA's are = -99 or -999 depending on data col)
 df <- mloa %>% 
-  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %>% #removing NAs
+  filter(!rel_humid == -99.9, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %>% #removing NAs
   mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
 
 df2 <- df %>% 
