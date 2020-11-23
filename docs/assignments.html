@@ -772,16 +772,6 @@ surveys %&gt;%
 <pre class="r"><code>library(tidyverse)
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
-<pre><code>## 
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────
-## cols(
-##   country = col_character(),
-##   year = col_double(),
-##   pop = col_double(),
-##   continent = col_character(),
-##   lifeExp = col_double(),
-##   gdpPercap = col_double()
-## )</code></pre>
 <div id="problem-1." class="section level4">
 <h4><em>Problem 1</em>.</h4>
 <p>First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)</p>
@@ -797,7 +787,7 @@ gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.
     geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
     theme_bw()</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="assignments_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="assignments_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="problem-3" class="section level4">
 <h4><em>Problem 3</em></h4>
@@ -815,7 +805,7 @@ gapminder %&gt;%
   geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
   geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
 <pre><code>## `summarise()` regrouping output by &#39;continent&#39; (override with `.groups` argument)</code></pre>
-<p><img src="assignments_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
 
 
@@ -829,7 +819,7 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
     geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
     theme_bw()</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="assignments_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<p><img src="assignments_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <pre class="r"><code>#PROBLEM 3: 
 
 countries &lt;- c(&quot;Brazil&quot;, &quot;China&quot;, &quot;El Salvador&quot;, &quot;Niger&quot;, &quot;United States&quot;) #create a vector with just the countries we are interested in
@@ -843,7 +833,7 @@ gapminder %&gt;%
   ggtitle(&quot;Life Expectancy of Five Countries&quot;) + #title the figure
   theme(plot.title = element_text(hjust = 0.5)) + #centered the plot title
   xlab(&quot;Country&quot;) + ylab(&quot;Life Expectancy&quot;) #how to change axis names</code></pre>
-<img src="assignments_files/figure-html/unnamed-chunk-26-3.png" width="672" />
+<img src="assignments_files/figure-html/unnamed-chunk-10-3.png" width="672" />
 </details>
 </div>
 </div>
@@ -851,7 +841,7 @@ gapminder %&gt;%
 <h3><small>Week7</small></h3>
 <p>For week 7, we’re going to be working on 2 critical <code>ggplot</code> skills: recreating a graph from a dataset and <strong>googling stuff</strong>.</p>
 <p>Our goal will be to make this final graph using the <code>gapminder</code> dataset:</p>
-<p><img src="assignments_files/figure-html/unnamed-chunk-28-1.png" width="768" /></p>
+<p><img src="assignments_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 <p>The x axis labels are all scrunched up because we can’t make the image bigger on the webpage, but if you make it and then zoom it bigger in RStudio it looks much better.</p>
 <p>We’ll touch on some intermediate steps here, since it might take quite a few steps to get from start to finish. Here are some things to note:</p>
 <ol style="list-style-type: decimal">
