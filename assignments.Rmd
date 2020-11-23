@@ -416,13 +416,13 @@ pg %>%
 
 ### <small>Week8</small>
 
-Let’s plot some Mauna Loa data, downloded from the R-DAVIS github. First, load in the data and remember to load the tidyverse package:
+Let’s plot some Mauna Loa data, downloded from the R-DAVIS github. First, you need to read in the data (and remember to load tidyverse and lubridate packages):
 
-```{r, eval=T, echo=F, warning=F, message=F}
+```{r}
 library(tidyverse)
 library(lubridate)
 
-mloa <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/mauna_loa_met_2001_minute.csv")
+mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
 ```
 
 
@@ -435,7 +435,7 @@ Answers:
 library(tidyverse)
 library(lubridate)
 
-mloa <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/mauna_loa_met_2001_minute.csv")
+mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
 
 # make the datetime column
 mloa$datetime <- ymd_hm(paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min), tz = "Pacific/Honolulu")
