@@ -511,17 +511,9 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
 <pre class="r"><code>#PROBLEM 2
 
-library(tidyverse) #load tidyverse </code></pre>
-<pre><code>## ── Attaching packages ──────────────────────────────────────────── tidyverse 1.3.0 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.4
-## ✓ tibble  2.1.3     ✓ dplyr   0.8.3
-## ✓ tidyr   1.0.0     ✓ stringr 1.4.0
-## ✓ readr   1.3.1     ✓ forcats 0.4.0</code></pre>
-<pre><code>## Warning: package &#39;purrr&#39; was built under R version 3.6.2</code></pre>
-<pre><code>## ── Conflicts ─────────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
+library(tidyverse) #load tidyverse 
+
+surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   record_id = col_double(),
@@ -888,7 +880,7 @@ pg %&gt;%
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>
 <p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)</code></p>
-<p>With this <code>mloa</code> dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Use the <a href="%22https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_README.txt%22">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Honolulu/Pacific time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
+<p>With this <code>mloa</code> dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Honolulu/Pacific time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
 Answers:
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
