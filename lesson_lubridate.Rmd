@@ -196,10 +196,10 @@ glimpse(nfy1) # notice the data types in the Date.Time and datetime cols
 glimpse(nfy2)
 ```
 
-Next we might want to get out dates and times into a single datetime column. How do we get them into one column so we can format it as a datetime? The answer is the `paste` function.
+Next we want to create a single datetime column. How do we get our Date and Time columns into one column so we can format it as a datetime? The answer is the `paste` function.
 
- - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify
- - `paste0()` is the same thing, but defaults to using a **`,`** as the separator.
+ - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify with the `sep = ` argument
+ - `paste0()` is the same thing, but defaults to using no separator (i.e. no space).
 
 ```{r, message = F, warning = F}
 # make a datetime col:
@@ -214,7 +214,7 @@ nfy2$datetime_test <- as_datetime(nfy2$datetime,
 nfy2$datetime_test2 <- ymd_hms(nfy2$datetime, tz="America/Los_Angeles")
 
 # OR wrap in as.character()
-nfy1$datetime <- ymd_hms(as.character(paste0(nfy1$Date," ", nfy1$Time)), tz="America/Los_Angeles")
+nfy1$datetime <- ymd_hms(as.character(paste0(nfy1$Date, " ", nfy1$Time)), tz="America/Los_Angeles")
 tz(nfy1$datetime)
 
 ```

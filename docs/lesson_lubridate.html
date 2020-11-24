@@ -656,10 +656,10 @@ glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code><
 ## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
 ## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.2962,…
 ## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
-<p>Next we might want to get out dates and times into a single datetime column. How do we get them into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
+<p>Next we want to create a single datetime column. How do we get our Date and Time columns into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
 <ul>
-<li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify</li>
-<li><code>paste0()</code> is the same thing, but defaults to using a <strong><code>,</code></strong> as the separator.</li>
+<li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify with the <code>sep =</code> argument</li>
+<li><code>paste0()</code> is the same thing, but defaults to using no separator (i.e. no space).</li>
 </ul>
 <pre class="r"><code># make a datetime col:
 nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot;)
@@ -680,7 +680,7 @@ nfy2$datetime_test &lt;- as_datetime(nfy2$datetime,
 nfy2$datetime_test2 &lt;- ymd_hms(nfy2$datetime, tz=&quot;America/Los_Angeles&quot;)
 
 # OR wrap in as.character()
-nfy1$datetime &lt;- ymd_hms(as.character(paste0(nfy1$Date,&quot; &quot;, nfy1$Time)), tz=&quot;America/Los_Angeles&quot;)
+nfy1$datetime &lt;- ymd_hms(as.character(paste0(nfy1$Date, &quot; &quot;, nfy1$Time)), tz=&quot;America/Los_Angeles&quot;)
 tz(nfy1$datetime)</code></pre>
 <pre><code>## [1] &quot;America/Los_Angeles&quot;</code></pre>
 <p>Last, <code>lubridate</code> lets you extract components of date, time and datetime data types with intuitive functions.</p>
