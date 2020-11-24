@@ -442,13 +442,12 @@ $(document).ready(function () {
 hw3 &lt;- runif(50, 4, 50)
 hw3 &lt;- replace(hw3, c(4,12,22,27), NA)
 hw3</code></pre>
-<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545
-##  [9] 35.612619 42.245735  8.814791        NA 27.418158 36.504914 43.666428 42.722117
-## [17] 24.582411 48.374680 10.494605 39.728776 40.971460        NA 20.447903  6.668049
-## [25] 30.024323 34.314318        NA 10.825658 46.676823 25.913006 26.933701 15.810164
-## [33] 26.616794  9.403891 27.589087 34.262403  9.591257 27.733004 17.877330 38.975078
-## [41] 46.102046 25.041810 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297
-## [49] 42.819312  4.500130</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619
+## [10] 42.245735  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680
+## [19] 10.494605 39.728776 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA
+## [28] 10.825658 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403
+## [37]  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810 46.369401 15.919465 19.813791
+## [46] 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
 <p><em>PROBLEM 1:</em></p>
 <p>Take you <code>hw3</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
 <p><em>PROBLEM 2:</em></p>
@@ -456,8 +455,8 @@ hw3</code></pre>
 <p><em>PROBLEM 3:</em></p>
 <p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p>
 <pre class="r"><code>final</code></pre>
-<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726
-##  [9]  93.19901  85.12543  69.44137  67.57845</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901
+## [10]  85.12543  69.44137  67.57845</code></pre>
 <p>Finally, save your script and push all your changes to your github account!</p>
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
@@ -487,10 +486,9 @@ final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical s
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
 
 colnames(surveys) #a list of the column names </code></pre>
-<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;           
-##  [5] &quot;plot_id&quot;         &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot;
-##  [9] &quot;weight&quot;          &quot;genus&quot;           &quot;species&quot;         &quot;taxa&quot;           
-## [13] &quot;plot_type&quot;</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;        
+##  [6] &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;          
+## [11] &quot;species&quot;         &quot;taxa&quot;            &quot;plot_type&quot;</code></pre>
 <pre class="r"><code>surveys_new &lt;- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
 
 surveys_new$species_id &lt;- as.character(surveys_new$species_id) #converting factor data to character
@@ -579,20 +577,19 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 surveys %&gt;% 
   filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
 <pre><code>## # A tibble: 14,730 x 13
-##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus
-##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
-##  1      5966     5    22  1982       2 NL         F                  32     40 Neot…
-##  2       226     9    13  1977       2 DM         M                  37     51 Dipo…
-##  3       233     9    13  1977       2 DM         M                  25     44 Dipo…
-##  4       245    10    16  1977       2 DM         M                  37     39 Dipo…
-##  5       251    10    16  1977       2 DM         M                  36     49 Dipo…
-##  6       257    10    16  1977       2 DM         M                  37     47 Dipo…
-##  7       259    10    16  1977       2 DM         M                  36     41 Dipo…
-##  8       268    10    16  1977       2 DM         F                  36     55 Dipo…
-##  9       346    11    12  1977       2 DM         F                  37     36 Dipo…
-## 10       350    11    12  1977       2 DM         M                  37     47 Dipo…
-## # … with 14,720 more rows, and 3 more variables: species &lt;chr&gt;, taxa &lt;chr&gt;,
-## #   plot_type &lt;chr&gt;</code></pre>
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus species
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+##  1      5966     5    22  1982       2 NL         F                  32     40 Neot… albigu…
+##  2       226     9    13  1977       2 DM         M                  37     51 Dipo… merria…
+##  3       233     9    13  1977       2 DM         M                  25     44 Dipo… merria…
+##  4       245    10    16  1977       2 DM         M                  37     39 Dipo… merria…
+##  5       251    10    16  1977       2 DM         M                  36     49 Dipo… merria…
+##  6       257    10    16  1977       2 DM         M                  37     47 Dipo… merria…
+##  7       259    10    16  1977       2 DM         M                  36     41 Dipo… merria…
+##  8       268    10    16  1977       2 DM         F                  36     55 Dipo… merria…
+##  9       346    11    12  1977       2 DM         F                  37     36 Dipo… merria…
+## 10       350    11    12  1977       2 DM         M                  37     47 Dipo… merria…
+## # … with 14,720 more rows, and 2 more variables: taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
 <pre class="r"><code>#3
 biggest_critters &lt;- surveys %&gt;% 
   filter(!is.na(weight)) %&gt;% 
@@ -741,18 +738,18 @@ surveys %&gt;%
   arrange(Control)</code></pre>
 <pre><code>## # A tibble: 10 x 6
 ## # Groups:   genus [10]
-##    genus  Control `Rodent Exclosu… `Long-term Krat… `Short-term Kra… `Spectab exclos…
-##    &lt;chr&gt;    &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 Baiom…    13               13.5             12.9             13               14  
-##  2 Perog…    15.9             16.1             15.8             15.7             15.8
-##  3 Reith…    16.6             16.5             16.4             16.5             16.6
-##  4 Perom…    20.3             20.3             20.3             20.3             20.5
-##  5 Onych…    20.4             20.3             20.3             20.3             20.4
-##  6 Chaet…    23.6             22.7             24.1             24.3             23.2
-##  7 Sigmo…    27.8             28.2             28.0             25.7             26.5
-##  8 Ammos…    31               35               NA               NA               NA  
-##  9 Neoto…    32.2             32.4             32.5             32.2             32.3
-## 10 Dipod…    37.8             36.9             36.7             38.8             38.3</code></pre>
+##    genus    Control `Rodent Exclosur… `Long-term Krat Ex… `Short-term Krat E… `Spectab exclos…
+##    &lt;chr&gt;      &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Baiomys     13                13.5                12.9                13               14  
+##  2 Perogna…    15.9              16.1                15.8                15.7             15.8
+##  3 Reithro…    16.6              16.5                16.4                16.5             16.6
+##  4 Peromys…    20.3              20.3                20.3                20.3             20.5
+##  5 Onychom…    20.4              20.3                20.3                20.3             20.4
+##  6 Chaetod…    23.6              22.7                24.1                24.3             23.2
+##  7 Sigmodon    27.8              28.2                28.0                25.7             26.5
+##  8 Ammospe…    31                35                  NA                  NA               NA  
+##  9 Neotoma     32.2              32.4                32.5                32.2             32.3
+## 10 Dipodom…    37.8              36.9                36.7                38.8             38.3</code></pre>
 </details>
 </div>
 <div id="week6" class="section level3">
@@ -880,7 +877,7 @@ pg %&gt;%
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>
 <p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)</code></p>
-<p>Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported, and how missing values are reported in each column. With the <code>mloa</code> data.frame, remove observations with missing values in rel_humid, temp_C_2m, and windSpeed_m_s. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Honolulu/Pacific time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
+<p>Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported, and how missing values are reported in each column. With the <code>mloa</code> data.frame, remove observations with missing values in rel_humid, temp_C_2m, and windSpeed_m_s. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Pacific/Honolulu time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
 Answers:
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
