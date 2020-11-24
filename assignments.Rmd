@@ -419,9 +419,7 @@ pg %>%
 Let's look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can read the CSV directly from the R-DAVIS Github:
 `mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")`
 
-With this mloa dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot scatterplot of the mean monthly temperature.
-
-EXTRA CHALLENGE: Make a ggplot of the average hourly temperature during the month of July
+With this `mloa` dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Use the [README]("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_README.txt") file associated with the Mauna Loa dataset to determine in what time zone the data are reported. Generate a column called "datetime" using the year, month, day, hour24, and min columns. Next, create a column called "datetimeLocal" that converts the datetime column to Honolulu/Pacific time (*HINT*: look at the lubridate function called `with_tz()`). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (*HINT*: Look at the lubridate functions called `month()` and `hour()`). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.
 
 Answers:
 <details>
@@ -429,36 +427,44 @@ Answers:
 ```{r, eval=FALSE}
 library(tidyverse)
 library(lubridate)
-
+## Data import
 mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
-summary(mloa)
-# make the datetime column
-mloa$datetime <- ymd_hm(paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min), tz = "Pacific/Honolulu")
 
-# clean up the NA data (NA's are = -99 or -999 depending on data col)
-df <- mloa %>% 
-  filter(!rel_humid == -99.9, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %>% #removing NAs
-  mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
+mloa2 = mloa %>%
+  # Remove NA's
+  filter(!(rel_humid %in% c(-99.9, -999.9))) %>%
+  filter(!(temp_C_2m %in% c(-99.9, -999.9))) %>%
+  filter(!(windSpeed_m_s %in% c(-99.9, -999.9))) %>%
+  # Create datetime column (README indicates time is in UTC)
+  mutate(datetime = ymd_hm(paste0(year,"-", 
+                                  month, "-", 
+                                  day," ", 
+                                  hour24, ":", 
+                                  min), 
+                           tz = "UTC")) %>%
+  # Convert to local time
+  mutate(datetimeLocal = with_tz(datetime, tz = "Pacific/Honolulu"))
 
-df2 <- df %>% 
-  group_by(mon) %>% 
-  summarize(avg_temp_2m = mean(temp_C_2m)) #average monthly temperature
-
-df2 %>% 
-  ggplot() + 
-  geom_point(aes(x=mon, y=avg_temp_2m), color="darkblue", size= 3)+
-  ylab("Avg Monthly Temperature (C)") + xlab("Month")
-
-# avg hourly for july 
-df3 <- df %>% filter(mon=="Jul") %>% # or month==7
-  group_by(hour(datetime)) %>% 
-  summarize(avg_temp_2m = mean(temp_C_2m))
-            
-df3 %>%             
-ggplot() + 
-  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color="Temp-2m"), lty=4)+
-  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill="Temp-2m"), size=3, pch=21, alpha=0.5)+
-  ylab("2001 Avg Daily Temperature (C)") + xlab("July Hour")
+## Aggregate and plot
+mloa2 %>%
+  # Extract month and hour from local time column
+  mutate(localMon = month(datetimeLocal, label = TRUE),
+         localHour = hour(datetimeLocal)) %>%
+  # Group by local month and hour
+  group_by(localMon, localHour) %>%
+  # Calculate mean temperature
+  summarize(meantemp = mean(temp_C_2m)) %>%
+  # Plot
+  ggplot(aes(x = localMon,
+             y = meantemp)) +
+  # Color points by local hour
+  geom_point(aes(col = localHour)) +
+  # Use a nice color ramp
+  scale_color_viridis_c() +
+  # Label axes, add a theme
+  xlab("Month") +
+  ylab("Mean temperature (degrees C)") +
+  theme_classic()
 ```
 </details>
 
