@@ -194,7 +194,14 @@ nfy2 <- read_csv("data/2015_NFY_solinst.csv", col_types = "ccidd", skip=12)
 
 glimpse(nfy1) # notice the data types in the Date.Time and datetime cols
 glimpse(nfy2)
+```
 
+Next we might want to get out dates and times into a single datetime column. How do we get them into one column so we can format it as a datetime? The answer is the `paste` function.
+
+ - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify
+ - `paste0()` is the same thing, but defaults to using a **`,`** as the separator.
+
+```{r, message = F, warning = F}
 # make a datetime col:
 nfy2$datetime <- paste(nfy2$Date, " ", nfy2$Time, sep = "")
 
@@ -212,82 +219,19 @@ tz(nfy1$datetime)
 
 ```
 
-## Example 1: Mauna Loa Meteorological Data
+Last, `lubridate` lets you extract components of date, time and datetime data types with intuitive functions. 
 
-So, now that we have a decent idea how to format these things, let's look at some real data, try to format and plot. Let's use the Mauna Loa meteorological data, collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can find it on the R-DAVIS website in the [Resources->Datasets](https://gge-ucd.github.io/R-DAVIS/resources.html) tab.
+```{r}
+# Functions called day(), month(), year(), hour(), minute(), second(), etc... will extract those elements of a datetime column.
+months <- month(nfy2$datetime)
+# Use the table function to get a quick summary of categorical variables
+table(months)
 
-```{r mloa_data, eval=T, echo=T}
-
-load("data/mauna_loa_met_2001_minute.rda")
-
-# just renaming the object loaded by the RDA file
-mloa <- mloa_2001
-
-library(lubridate, warn.conflicts = F)
-library(dplyr, warn.conflicts = F)
-
-summary(mloa)
-names(mloa)
+# Add label and abbr agruments to convert numeric representations to have names
+months <- month(nfy2$datetime, label = TRUE, abbr=TRUE)
+table(months)
 
 ```
-
-One of the important components to consider is each of the datetime columns has been separated...so how do we get them into one column so we can format it as a datetime? The answer is the `paste` function.
-
- - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify
- - `paste0()` is the same thing, but defaults to using a **`,`** as the separator.
-
-```{r making datetime cols, echo=T, eval=T}
-
-# we need to make a datetime column...let's use paste
-mloa$datetime <- paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min) # this makes a character column
-
-head(mloa$datetime) # character vector but not POSIXct yet
-
-# we can nest this within a lubridate function to convert directly to POSIXct
-mloa$datetime <- ymd_hm(mloa$datetime, tz="Pacific/Honolulu")
-
-# OR all in one step
-mloa$datetime <- ymd_hm(paste0(mloa$year,"-", mloa$month, "-", mloa$day," ", mloa$hour24, ":", mloa$min), tz = "Pacific/Honolulu")
-
-summary(mloa) # notice a new column called "datetime"
-head(mloa$datetime) # in POSIXct
-
-```
-<div class = "blue">
-### Challenge with `dplyr` and `ggplot`
-
-Let's plot some of the Mauna Loa data we just downloaded. First, removed the NAs (here designated with -99.9 and -999.9) in `rel_humid`, `temp_C_2m`, and `windSpeed_m_s`. Next, use `dplyr` to calculate the mean monthly temperature using the `temp_C_2m` column and the `datetime` column. (*HINT: Look at the lubridate function called `month()`). Finally, make a ggplot of the mean monthly temperature.
-
-EXTRA CHALLENGE: Make a ggplot of the average hourly temperature during the month of July
-
-<details>
-<summary>ANSWER</summary>
-```{r challenge2, purl=FALSE, warning = F}
-
-library(dplyr)
-library(ggplot2)
-library(lubridate)
-
-# clean up the NA data (NA's are = -99 or -999 depending on data col)
-df <- mloa %>% 
-  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %>% #removing NAs
-  mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
-
-df2 <- df %>% 
-  group_by(mon) %>% 
-  summarize(avg_temp_2m = mean(temp_C_2m)) #average monthly temperature
-
-df2 %>% 
-  ggplot() + 
-  geom_point(aes(x=mon, y=avg_temp_2m), color="darkblue", size= 3)+
-  ylab("Avg Monthly Temperature (C)") + xlab("Month")
-
-```
-</details>
-</div>
-
-<br>
-
 
 
 This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/) and [Martha Zillig](https://github.com/MarthaWohlfeil).

@@ -247,7 +247,7 @@ surveys %>%
 
 For our week six homework, we are going to be practicing the skills we learned with ggplot during class. You will be happy to know that we are going to be using a brand new data set called `gapminder`. This data set is looking at statistics for a few different counties including population, GDP per capita, and life expentancy. Download the data using the code below. Remember, this code is looking for a folder called `data` to put the .csv in, so make sure you have a folder named `data`, or modify the code to the correct folder name. 
 
-```{r, warnings = F, eval = F}
+```{r, warnings = F}
 library(tidyverse)
 
 gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #ONLY change the "data" part of this path if necessary
@@ -416,17 +416,12 @@ pg %>%
 
 ### <small>Week8</small>
 
-Let’s plot some Mauna Loa data, downloded from the R-DAVIS github. First, you need to read in the data (and remember to load tidyverse and lubridate packages):
-
-```{r, eval=FALSE}
-library(tidyverse)
-library(lubridate)
-
-mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")
-```
-
+Let's look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can read the CSV directly from the R-DAVIS Github:
+`mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")`
 
 With this mloa dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot scatterplot of the mean monthly temperature.
+
+EXTRA CHALLENGE: Make a ggplot of the average hourly temperature during the month of July
 
 Answers:
 <details>
@@ -453,6 +448,17 @@ df2 %>%
   ggplot() + 
   geom_point(aes(x=mon, y=avg_temp_2m), color="darkblue", size= 3)+
   ylab("Avg Monthly Temperature (C)") + xlab("Month")
+
+# avg hourly for july 
+df3 <- df %>% filter(mon=="Jul") %>% # or month==7
+  group_by(hour(datetime)) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m))
+            
+df3 %>%             
+ggplot() + 
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color="Temp-2m"), lty=4)+
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill="Temp-2m"), size=3, pch=21, alpha=0.5)+
+  ylab("2001 Avg Daily Temperature (C)") + xlab("July Hour")
 ```
 </details>
 

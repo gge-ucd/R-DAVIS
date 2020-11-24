@@ -772,6 +772,16 @@ surveys %&gt;%
 <pre class="r"><code>library(tidyverse)
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
+<pre><code>## 
+## ── Column specification ───────────────────────────────────────────────────────────────────────────────
+## cols(
+##   country = col_character(),
+##   year = col_double(),
+##   pop = col_double(),
+##   continent = col_character(),
+##   lifeExp = col_double(),
+##   gdpPercap = col_double()
+## )</code></pre>
 <div id="problem-1." class="section level4">
 <h4><em>Problem 1</em>.</h4>
 <p>First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)</p>
@@ -882,12 +892,9 @@ pg %&gt;%
 </div>
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>
-<p>Let’s plot some Mauna Loa data, downloded from the R-DAVIS github. First, you need to read in the data (and remember to load tidyverse and lubridate packages):</p>
-<pre class="r"><code>library(tidyverse)
-library(lubridate)
-
-mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)</code></pre>
+<p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")</code></p>
 <p>With this mloa dataframe, remove the NAs (here designated with -99.9 or -999.9) in rel_humid, temp_C_2m, and windSpeed_m_s. Next, use dplyr to calculate the mean monthly temperature using the temp_C_2m column and the datetime column. (*HINT: Look at the lubridate function called month()). Finally, make a ggplot scatterplot of the mean monthly temperature.</p>
+<p>EXTRA CHALLENGE: Make a ggplot of the average hourly temperature during the month of July</p>
 Answers:
 <details>
 <p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
@@ -911,7 +918,18 @@ df2 &lt;- df %&gt;%
 df2 %&gt;% 
   ggplot() + 
   geom_point(aes(x=mon, y=avg_temp_2m), color=&quot;darkblue&quot;, size= 3)+
-  ylab(&quot;Avg Monthly Temperature (C)&quot;) + xlab(&quot;Month&quot;)</code></pre>
+  ylab(&quot;Avg Monthly Temperature (C)&quot;) + xlab(&quot;Month&quot;)
+
+# avg hourly for july 
+df3 &lt;- df %&gt;% filter(mon==&quot;Jul&quot;) %&gt;% # or month==7
+  group_by(hour(datetime)) %&gt;% 
+  summarize(avg_temp_2m = mean(temp_C_2m))
+            
+df3 %&gt;%             
+ggplot() + 
+  geom_line(aes(x=`hour(datetime)`, y=avg_temp_2m, color=&quot;Temp-2m&quot;), lty=4)+
+  geom_point(aes(x=`hour(datetime)`, y=avg_temp_2m, fill=&quot;Temp-2m&quot;), size=3, pch=21, alpha=0.5)+
+  ylab(&quot;2001 Avg Daily Temperature (C)&quot;) + xlab(&quot;July Hour&quot;)</code></pre>
 </details>
 </div>
 <div id="final-assignment" class="section level3">

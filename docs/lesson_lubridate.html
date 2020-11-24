@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -27,9 +26,20 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -240,6 +250,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -271,6 +282,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -556,10 +573,10 @@ sample_dates_3&lt;- as.Date(sample_dates_2, format = &quot;%m-%d-%Y&quot; ) # da
 <p>When working with times, the best class to use in base R is <code>POSIXct</code>.</p>
 <pre class="r"><code>tm1 &lt;- as.POSIXct(&quot;2016-07-24 23:55:26&quot;)
 tm1</code></pre>
-<pre><code>## [1] &quot;2016-07-24 23:55:26 PDT&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-24 23:55:26 EDT&quot;</code></pre>
 <pre class="r"><code>tm2 &lt;- as.POSIXct(&quot;25072016 08:32:07&quot;, format = &quot;%d%m%Y %H:%M:%S&quot;)
 tm2</code></pre>
-<pre><code>## [1] &quot;2016-07-25 08:32:07 PDT&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-25 08:32:07 EDT&quot;</code></pre>
 <pre class="r"><code>#Notice how POSIXct automatically uses the timezone your computer is set to. What if we collected this data in a different timezone?
 
 # specify the time zone:
@@ -624,33 +641,38 @@ head(nfy1) #R tried to guess for you that the first column was a date and the se
 nfy2 &lt;- read_csv(&quot;data/2015_NFY_solinst.csv&quot;, col_types = &quot;ccidd&quot;, skip=12)
 
 glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code></pre>
-<pre><code>## Observations: 7,764
-## Variables: 5
-## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 201…
-## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 1…
-## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 5
+## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05…
+## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:00, 15:30:00, 15:45:00,…
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.2962,…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
 <pre class="r"><code>glimpse(nfy2)</code></pre>
-<pre><code>## Observations: 7,764
-## Variables: 5
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/2…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 5
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15:30:0…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.2962,…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
+<p>Next we might want to get out dates and times into a single datetime column. How do we get them into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
+<ul>
+<li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify</li>
+<li><code>paste0()</code> is the same thing, but defaults to using a <strong><code>,</code></strong> as the separator.</li>
+</ul>
 <pre class="r"><code># make a datetime col:
 nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot;)
 
 glimpse(nfy2) #notice the  datetime column is classifed as character</code></pre>
-<pre><code>## Observations: 7,764
-## Variables: 6
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/2…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
-## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/…</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 6
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15:30:0…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.2962,…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 14:30:00&quot;, &quot;2015/05/22…</code></pre>
 <pre class="r"><code># convert Date Time to POSIXct in local timezone using lubridate
 nfy2$datetime_test &lt;- as_datetime(nfy2$datetime, 
                                     tz=&quot;America/Los_Angeles&quot;)
@@ -661,140 +683,22 @@ nfy2$datetime_test2 &lt;- ymd_hms(nfy2$datetime, tz=&quot;America/Los_Angeles&qu
 nfy1$datetime &lt;- ymd_hms(as.character(paste0(nfy1$Date,&quot; &quot;, nfy1$Time)), tz=&quot;America/Los_Angeles&quot;)
 tz(nfy1$datetime)</code></pre>
 <pre><code>## [1] &quot;America/Los_Angeles&quot;</code></pre>
-</div>
-</div>
-<div id="example-1-mauna-loa-meteorological-data" class="section level2">
-<h2>Example 1: Mauna Loa Meteorological Data</h2>
-<p>So, now that we have a decent idea how to format these things, let’s look at some real data, try to format and plot. Let’s use the Mauna Loa meteorological data, collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can find it on the R-DAVIS website in the <a href="https://gge-ucd.github.io/R-DAVIS/resources.html">Resources-&gt;Datasets</a> tab.</p>
-<pre class="r"><code>load(&quot;data/mauna_loa_met_2001_minute.rda&quot;)
-
-# just renaming the object loaded by the RDA file
-mloa &lt;- mloa_2001
-
-library(lubridate, warn.conflicts = F)
-library(dplyr, warn.conflicts = F)
-
-summary(mloa)</code></pre>
-<pre><code>##    filename         siteID            year          month       
-##  Length:459769      MLO:459769   Min.   :2001   Min.   : 1.000  
-##  Class :character                1st Qu.:2001   1st Qu.: 3.000  
-##  Mode  :character                Median :2001   Median : 6.000  
-##                                  Mean   :2001   Mean   : 6.474  
-##                                  3rd Qu.:2001   3rd Qu.:10.000  
-##                                  Max.   :2001   Max.   :12.000  
-##       day            hour24           min           windDir      
-##  Min.   : 1.00   Min.   : 0.00   Min.   : 0.00   Min.   :-999.0  
-##  1st Qu.: 8.00   1st Qu.: 5.00   1st Qu.:15.00   1st Qu.: 115.0  
-##  Median :15.00   Median :11.00   Median :30.00   Median : 156.0  
-##  Mean   :15.44   Mean   :11.43   Mean   :29.51   Mean   : 144.5  
-##  3rd Qu.:22.00   3rd Qu.:18.00   3rd Qu.:45.00   3rd Qu.: 236.0  
-##  Max.   :31.00   Max.   :23.00   Max.   :59.00   Max.   : 360.0  
-##  windSpeed_m_s       windSteady    baro_hPa        temp_C_2m       
-##  Min.   :-99.900   Min.   :-9   Min.   :-999.9   Min.   :-999.900  
-##  1st Qu.:  1.900   1st Qu.:-9   1st Qu.:-999.9   1st Qu.:   4.400  
-##  Median :  3.500   Median :-9   Median :-999.9   Median :   6.900  
-##  Mean   :  1.229   Mean   :-9   Mean   :-999.9   Mean   :   4.747  
-##  3rd Qu.:  5.900   3rd Qu.:-9   3rd Qu.:-999.9   3rd Qu.:   9.400  
-##  Max.   : 20.500   Max.   :-9   Max.   :-999.9   Max.   :  18.900  
-##    temp_C_10m      temp_C_towertop      rel_humid      precip_intens_mm_hr
-##  Min.   :-999.90   Min.   :-999.900   Min.   :-99.00   Min.   :-99.0000   
-##  1st Qu.:   4.90   1st Qu.:   5.600   1st Qu.: 14.00   1st Qu.:  0.0000   
-##  Median :   6.90   Median :   7.200   Median : 28.00   Median :  0.0000   
-##  Mean   : -46.69   Mean   :   1.539   Mean   : 31.82   Mean   : -0.8066   
-##  3rd Qu.:   8.60   3rd Qu.:   8.800   3rd Qu.: 57.00   3rd Qu.:  0.0000   
-##  Max.   :  16.90   Max.   :  16.200   Max.   :138.00   Max.   : 60.0000</code></pre>
-<pre class="r"><code>names(mloa)</code></pre>
-<pre><code>##  [1] &quot;filename&quot;            &quot;siteID&quot;              &quot;year&quot;               
-##  [4] &quot;month&quot;               &quot;day&quot;                 &quot;hour24&quot;             
-##  [7] &quot;min&quot;                 &quot;windDir&quot;             &quot;windSpeed_m_s&quot;      
-## [10] &quot;windSteady&quot;          &quot;baro_hPa&quot;            &quot;temp_C_2m&quot;          
-## [13] &quot;temp_C_10m&quot;          &quot;temp_C_towertop&quot;     &quot;rel_humid&quot;          
-## [16] &quot;precip_intens_mm_hr&quot;</code></pre>
-<p>One of the important components to consider is each of the datetime columns has been separated…so how do we get them into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
-<ul>
-<li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify</li>
-<li><code>paste0()</code> is the same thing, but defaults to using a <strong><code>,</code></strong> as the separator.</li>
-</ul>
-<pre class="r"><code># we need to make a datetime column...let&#39;s use paste
-mloa$datetime &lt;- paste0(mloa$year,&quot;-&quot;, mloa$month, &quot;-&quot;, mloa$day,&quot; &quot;, mloa$hour24, &quot;:&quot;, mloa$min) # this makes a character column
-
-head(mloa$datetime) # character vector but not POSIXct yet</code></pre>
-<pre><code>## [1] &quot;2001-1-1 0:0&quot; &quot;2001-1-1 0:1&quot; &quot;2001-1-1 0:2&quot; &quot;2001-1-1 0:3&quot;
-## [5] &quot;2001-1-1 0:4&quot; &quot;2001-1-1 0:5&quot;</code></pre>
-<pre class="r"><code># we can nest this within a lubridate function to convert directly to POSIXct
-mloa$datetime &lt;- ymd_hm(mloa$datetime, tz=&quot;Pacific/Honolulu&quot;)
-
-# OR all in one step
-mloa$datetime &lt;- ymd_hm(paste0(mloa$year,&quot;-&quot;, mloa$month, &quot;-&quot;, mloa$day,&quot; &quot;, mloa$hour24, &quot;:&quot;, mloa$min), tz = &quot;Pacific/Honolulu&quot;)
-
-summary(mloa) # notice a new column called &quot;datetime&quot;</code></pre>
-<pre><code>##    filename         siteID            year          month       
-##  Length:459769      MLO:459769   Min.   :2001   Min.   : 1.000  
-##  Class :character                1st Qu.:2001   1st Qu.: 3.000  
-##  Mode  :character                Median :2001   Median : 6.000  
-##                                  Mean   :2001   Mean   : 6.474  
-##                                  3rd Qu.:2001   3rd Qu.:10.000  
-##                                  Max.   :2001   Max.   :12.000  
-##       day            hour24           min           windDir      
-##  Min.   : 1.00   Min.   : 0.00   Min.   : 0.00   Min.   :-999.0  
-##  1st Qu.: 8.00   1st Qu.: 5.00   1st Qu.:15.00   1st Qu.: 115.0  
-##  Median :15.00   Median :11.00   Median :30.00   Median : 156.0  
-##  Mean   :15.44   Mean   :11.43   Mean   :29.51   Mean   : 144.5  
-##  3rd Qu.:22.00   3rd Qu.:18.00   3rd Qu.:45.00   3rd Qu.: 236.0  
-##  Max.   :31.00   Max.   :23.00   Max.   :59.00   Max.   : 360.0  
-##  windSpeed_m_s       windSteady    baro_hPa        temp_C_2m       
-##  Min.   :-99.900   Min.   :-9   Min.   :-999.9   Min.   :-999.900  
-##  1st Qu.:  1.900   1st Qu.:-9   1st Qu.:-999.9   1st Qu.:   4.400  
-##  Median :  3.500   Median :-9   Median :-999.9   Median :   6.900  
-##  Mean   :  1.229   Mean   :-9   Mean   :-999.9   Mean   :   4.747  
-##  3rd Qu.:  5.900   3rd Qu.:-9   3rd Qu.:-999.9   3rd Qu.:   9.400  
-##  Max.   : 20.500   Max.   :-9   Max.   :-999.9   Max.   :  18.900  
-##    temp_C_10m      temp_C_towertop      rel_humid      precip_intens_mm_hr
-##  Min.   :-999.90   Min.   :-999.900   Min.   :-99.00   Min.   :-99.0000   
-##  1st Qu.:   4.90   1st Qu.:   5.600   1st Qu.: 14.00   1st Qu.:  0.0000   
-##  Median :   6.90   Median :   7.200   Median : 28.00   Median :  0.0000   
-##  Mean   : -46.69   Mean   :   1.539   Mean   : 31.82   Mean   : -0.8066   
-##  3rd Qu.:   8.60   3rd Qu.:   8.800   3rd Qu.: 57.00   3rd Qu.:  0.0000   
-##  Max.   :  16.90   Max.   :  16.200   Max.   :138.00   Max.   : 60.0000   
-##     datetime                  
-##  Min.   :2001-01-01 00:00:00  
-##  1st Qu.:2001-03-29 06:57:00  
-##  Median :2001-06-24 06:13:00  
-##  Mean   :2001-06-30 15:28:42  
-##  3rd Qu.:2001-10-07 00:34:00  
-##  Max.   :2001-12-31 23:59:00</code></pre>
-<pre class="r"><code>head(mloa$datetime) # in POSIXct</code></pre>
-<pre><code>## [1] &quot;2001-01-01 00:00:00 HST&quot; &quot;2001-01-01 00:01:00 HST&quot;
-## [3] &quot;2001-01-01 00:02:00 HST&quot; &quot;2001-01-01 00:03:00 HST&quot;
-## [5] &quot;2001-01-01 00:04:00 HST&quot; &quot;2001-01-01 00:05:00 HST&quot;</code></pre>
-<div class="blue">
-<h3 id="challenge-with-dplyr-and-ggplot">Challenge with <code>dplyr</code> and <code>ggplot</code></h3>
-<p>Let’s plot some of the Mauna Loa data we just downloaded. First, removed the NAs (here designated with -99.9 and -999.9) in <code>rel_humid</code>, <code>temp_C_2m</code>, and <code>windSpeed_m_s</code>. Next, use <code>dplyr</code> to calculate the mean monthly temperature using the <code>temp_C_2m</code> column and the <code>datetime</code> column. (*HINT: Look at the lubridate function called <code>month()</code>). Finally, make a ggplot of the mean monthly temperature.</p>
-<p>EXTRA CHALLENGE: Make a ggplot of the average hourly temperature during the month of July</p>
-<details>
-<p><summary>ANSWER</summary></p>
-<pre class="r"><code>library(dplyr)
-library(ggplot2)
-library(lubridate)
-
-# clean up the NA data (NA&#39;s are = -99 or -999 depending on data col)
-df &lt;- mloa %&gt;% 
-  filter(!rel_humid == -99, !temp_C_2m == -999.9, !windSpeed_m_s == -99.9) %&gt;% #removing NAs
-  mutate(mon=month(datetime, label = TRUE, abbr=TRUE)) #making new column where each month is named 
-
-df2 &lt;- df %&gt;% 
-  group_by(mon) %&gt;% 
-  summarize(avg_temp_2m = mean(temp_C_2m)) #average monthly temperature
-
-df2 %&gt;% 
-  ggplot() + 
-  geom_point(aes(x=mon, y=avg_temp_2m), color=&quot;darkblue&quot;, size= 3)+
-  ylab(&quot;Avg Monthly Temperature (C)&quot;) + xlab(&quot;Month&quot;)</code></pre>
-<img src="lesson_lubridate_files/figure-html/challenge2-1.png" width="672" />
-</details>
-</div>
-<p><br></p>
+<p>Last, <code>lubridate</code> lets you extract components of date, time and datetime data types with intuitive functions.</p>
+<pre class="r"><code># Functions called day(), month(), year(), hour(), minute(), second(), etc... will extract those elements of a datetime column.
+months &lt;- month(nfy2$datetime)
+# Use the table function to get a quick summary of categorical variables
+table(months)</code></pre>
+<pre><code>## months
+##    5    6    7    8 
+##  904 2880 2976 1004</code></pre>
+<pre class="r"><code># Add label and abbr agruments to convert numeric representations to have names
+months &lt;- month(nfy2$datetime, label = TRUE, abbr=TRUE)
+table(months)</code></pre>
+<pre><code>## months
+##  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec 
+##    0    0    0    0  904 2880 2976 1004    0    0    0    0</code></pre>
 <p>This lesson was contributed by <a href="https://ryanpeek.github.io/">Ryan Peek</a> and <a href="https://github.com/MarthaWohlfeil">Martha Zillig</a>.</p>
+</div>
 </div>
 </div>
 
@@ -809,7 +713,7 @@ df2 %&gt;%
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -853,7 +757,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
