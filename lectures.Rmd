@@ -63,7 +63,7 @@ Zoom recordings of our lectures, livecode, and our class notes^[A `@ucdavis.edu`
 ### Week 8
 
 * <a href="https://dl.dropboxusercontent.com/s/vutfx0xrlfofqop/Week08.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/VgB6WoRXjVM"_blank">Week 8 video recording</a>
+* <a href="https://youtu.be/VgB6WoRXjVM" target="_blank">Week 8 video recording</a>
 * <a href="https://docs.google.com/document/d/1BOYvHmlq0_MrDXYlj_PL-Ibd9kGb1WMhpsqcG7WkLSc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
 * <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
 
