@@ -271,6 +271,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -594,7 +600,11 @@ F_to_K(212)</code></pre>
 <p>A related concept is scoping: any variables you create or modify inside the body of a function only exist for the lifetime of the function’s execution. When we call <code>calcGDP</code>, the variables <code>dat</code>, <code>years</code>, and <code>filteredDF</code> only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.</p>
 <div class="blue">
 <h4 id="challenge-a-new-function" class="challenge">Challenge – A new function</h4>
-<p>Write a new function that takes two arguments, the gapminder data.frame and the name of a country, and plots the change in the country’s population over time. That is, the return value from the function should be a ggplot object. - It is often easier to modify existing code than to start from scratch. Feel free to start with the calcGDP function code.</p>
+<p>This challenge will deal with countries’ population growth. To access the data, load (and install, if needed) the <code>gapminder</code> library and access its life expectancy dataset using:</p>
+<pre><code>library(tidyverse)
+library(gapminder)
+d &lt;- gapminder::gapminder</code></pre>
+<p>Write a new function that takes two arguments, the gapminder data.frame (<code>d</code>) and the name of a country (e.g. <code>&quot;Afghanistan&quot;</code>), and plots a time series of the country’s population. That is, the return value from the function should be a ggplot object. - It is often easier to modify existing code than to start from scratch. To start out with, try writing some code that works interactively, and then wrap it in a function.</p>
 <details>
 <p><summary>ANSWER</summary></p>
 <pre class="r"><code>plotPopGrowth &lt;- function(countrytoplot, dat = gapminder) {
