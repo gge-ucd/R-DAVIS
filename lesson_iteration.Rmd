@@ -172,6 +172,35 @@ mtcars %>%
   )
 ```
 
+<div class = "blue">
+### Challenge
+
+Using the `iris` data frame, create a new variable that categorizes petal length into three groups: small (less than or equal to the 1st quartile), medium (between the 1st and 3rd quartiles), and large (greater than or equal to the 3rd quartile). Explore the iris data using `summary(iris$Petal.Length)`, to look at the spread of that variable.
+
+Then use your function of choice: `ifelse()`, or `case_when()` to make a new variable (`iris$petal.length.cat`) based on the conditions listed above
+
+<details>
+<summary>ANSWER</summary>
+```{r challenge1, purl=FALSE}
+
+iris$petal.length.cat <- ifelse(iris$Petal.Length <= 1.6, "low", 
+                          ifelse(iris$Petal.Length > 1.6 & 
+                                   iris$Petal.Length < 5.1, "medium",
+                           "high"))
+
+iris %>% 
+  mutate(
+    petal.length.cat = case_when(
+      Petal.Length <= 1.6 ~ "small",
+      Petal.Length > 1.6 & Petal.Length < 5.1 ~ "medium",
+      TRUE ~ "large"
+    )
+  )
+```
+</details>
+</div>
+
+<br>
 ### Conditional `map`
 
 Let's throw it back to the `map` family for a sec. Sometimes you might only want to map a function to part of a dataframe. `map_if` allows you to give the data, a condition for the data to meet, and the function you want to apply to the data that meet the condition. Here, we'll map `as.character` to the columns of the iris dataset that meet the condition `is.factor`.
