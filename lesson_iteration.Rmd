@@ -175,9 +175,15 @@ mtcars %>%
 <div class = "blue">
 ### Challenge
 
-Using the `iris` data frame, create a new variable that categorizes petal length into three groups: small (less than or equal to the 1st quartile), medium (between the 1st and 3rd quartiles), and large (greater than or equal to the 3rd quartile). Explore the iris data using `summary(iris$Petal.Length)`, to look at the spread of that variable.
+Using the `iris` data frame (this is built in to R), create a new variable that categorizes petal length into three groups:  
 
-Then use your function of choice: `ifelse()`, or `case_when()` to make a new variable (`iris$petal.length.cat`) based on the conditions listed above
+* small (less than or equal to the 1st quartile)
+* medium (between the 1st and 3rd quartiles) 
+* large (greater than or equal to the 3rd quartile)  
+
+Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution.
+
+Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
 
 <details>
 <summary>ANSWER</summary>
@@ -196,6 +202,8 @@ iris %>%
       TRUE ~ "large"
     )
   )
+
+
 ```
 </details>
 </div>
