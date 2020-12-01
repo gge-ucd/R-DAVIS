@@ -176,9 +176,16 @@ not modified in any way when executing a function.
 <div class = "blue">
 #### Challenge -- A new function {.challenge}
 
-Write a new function that takes two arguments, the gapminder data.frame and the name of a country, and plots the change in the country's population over time. That is, the return value from the function should be a ggplot object.
-   - It is often easier to modify existing code than to start from scratch. Feel free to start with the calcGDP function code.
+This challenge will deal with countries' population growth. To access the data, load (and install, if needed) the `gapminder` library and access its life expectancy dataset using:
 
+```
+library(tidyverse)
+library(gapminder)
+d <- gapminder::gapminder
+```
+
+Write a new function that takes two arguments, the gapminder data.frame (`d`) and the name of a country (e.g. `"Afghanistan"`), and plots a time series of the country's population. That is, the return value from the function should be a ggplot object.
+   - It is often easier to modify existing code than to start from scratch. To start out with, try writing some code that works interactively, and then wrap it in a function.
 
 
 <details>
