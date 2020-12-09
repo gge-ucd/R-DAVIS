@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Liza Wood" />
+
+
+<title>Rmd Intro</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_data_frames_tibbles_ecology.html">Starting With Data in R</a>
+    </li>
+    <li>
+      <a href="lesson_dplyr_ecology.html">Using dplyr and tidyr</a>
+    </li>
+    <li>
+      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+    </li>
+    <li>
+      <a href="lesson_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+    </li>
+    <li>
+      <a href="lesson_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Rmd Intro</h1>
+<h4 class="author">Liza Wood</h4>
+<h4 class="date">12/8/2020</h4>
+
+</div>
+
+
+<div id="the-yaml" class="section level1">
+<h1>The YAML</h1>
+<p>YAMLs are the “set-up” for your Rmd file, indicated by three dashes to begin and end, and it can contain a series of information bits about the markdown document in between. Most important for us is the output, but this is a place to get more advanced (table of contents, LaTeX specification, …).</p>
+<ul>
+<li>What goes in a YAML also depends on the kind of output you have: PDF/LaTex, website, etc.
+<ul>
+<li>See more: <a href="https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html" class="uri">https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html</a></li>
+</ul></li>
+<li>If you want to output as a pdf, you will need to set up LaTeX.
+<ul>
+<li>See more: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html</a></li>
+</ul></li>
+</ul>
+</div>
+<div id="beginning-at-the-end-knitting" class="section level1">
+<h1>Beginning at the end: knitting</h1>
+<p>Use the knit button on the top bar to execute your entire script and create the output you have designated in your YAML. I recommend doing this often because I think that Markdown errors can be hard to read, and it may help you catch errors earlier.</p>
+</div>
+<div id="markdown-language-text" class="section level1">
+<h1>Markdown language (text)</h1>
+<p>This is what allows us to write here, like a text editor, not a coding script. Rmd Cheat Sheet is a good place to start for the basics of the <em>Markdown</em> language.</p>
+<p>The link can be accessed here: <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></p>
+<p>Embed link <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Cheat sheet</a></p>
+<p>Embed images (remember that your working directory will set to your Rmd Directory, and so finding an image might be tough. You can use <code>../</code> before your filepath to move back one step in your folders, if need be) <img src="img/cheatsheet.png" alt="Optional text" /></p>
+<p>Rmd is sensitive to spaces or non-spaces<br />
+<br> I want this to be the next line</p>
+<p>I am also a fan of:</p>
+<ul>
+<li><a href="https://holtzy.github.io/Pimp-my-rmd/">Pimp my Rmd</a></li>
+<li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">Rmd Cookbook</a></li>
+</ul>
+</div>
+<div id="rmd-files-can-also-contain-r-chunks" class="section level1">
+<h1>Rmd files can also contain R “chunks”</h1>
+<p>These chunks are what allow you to embed code and coding outputs (plots) alongside your text. To generate a chunk: Cmd/Ctrl + Alt/Opt + i.</p>
+<p>The stuff inside the curly brackets is critical. These are your <strong>chunk options</strong>. You can name your chunks after <code>r</code> and before a comma.</p>
+<p>See cheatsheet for chunk options. IMO Important ones are:</p>
+<ul>
+<li>echo = T: will include the code chunk</li>
+<li>include = F: will include the code chunk output or the code chunk</li>
+<li>results = c(“asis”): asis is for LaTeX output</li>
+<li>fig.width = 7: default, but can adjust</li>
+<li>fig.height = 7: default, but can adjust</li>
+<li>warnings = F: prevent warnings from appearing</li>
+</ul>
+<pre class="r"><code># Look at built in data
+head(storms)</code></pre>
+<pre><code>## # A tibble: 6 x 13
+##   name   year month   day  hour   lat  long status category  wind pressure
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;ord&gt;    &lt;int&gt;    &lt;int&gt;
+## 1 Amy    1975     6    27     0  27.5 -79   tropi… -1          25     1013
+## 2 Amy    1975     6    27     6  28.5 -79   tropi… -1          25     1013
+## 3 Amy    1975     6    27    12  29.5 -79   tropi… -1          25     1013
+## 4 Amy    1975     6    27    18  30.5 -79   tropi… -1          25     1013
+## 5 Amy    1975     6    28     0  31.5 -78.8 tropi… -1          25     1012
+## 6 Amy    1975     6    28     6  32.4 -78.7 tropi… -1          25     1012
+## # … with 2 more variables: ts_diameter &lt;dbl&gt;, hu_diameter &lt;dbl&gt;</code></pre>
+<p><img src="Rmd_intro_files/figure-html/plot%20storms-1.png" width="672" /></p>
+<p>You can set defaults for your document and your chunk options with the <code>opts_chunk$set</code> code:</p>
+</div>
+<div id="back-to-markdown-for-more-advanced-elements" class="section level1">
+<h1>Back to Markdown for more advanced elements</h1>
+<p><strong>Tables</strong></p>
+<p>You can make a table in Markdown language alone:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Table Title</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td>Column 1</td>
+<td>Column 2</td>
+</tr>
+<tr class="even">
+<td>Row 1</td>
+<td>5</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Row 2</td>
+<td>15</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Or you can make a table in a code chunk. For this, there are a variety of table making packages: kable in knitr, gridextra, stargazer (mostly for model outputs).</p>
+<div id="knitr" class="section level3">
+<h3>knitr</h3>
+<pre class="r"><code>library(knitr)
+kable(head(storms), caption = &quot;Table with kable&quot;)</code></pre>
+<table style="width:100%;">
+<caption>Table with kable</caption>
+<colgroup>
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+<col width="19%" />
+<col width="8%" />
+<col width="4%" />
+<col width="8%" />
+<col width="11%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">name</th>
+<th align="right">year</th>
+<th align="right">month</th>
+<th align="right">day</th>
+<th align="right">hour</th>
+<th align="right">lat</th>
+<th align="right">long</th>
+<th align="left">status</th>
+<th align="left">category</th>
+<th align="right">wind</th>
+<th align="right">pressure</th>
+<th align="right">ts_diameter</th>
+<th align="right">hu_diameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">27</td>
+<td align="right">0</td>
+<td align="right">27.5</td>
+<td align="right">-79.0</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1013</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">27</td>
+<td align="right">6</td>
+<td align="right">28.5</td>
+<td align="right">-79.0</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1013</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">27</td>
+<td align="right">12</td>
+<td align="right">29.5</td>
+<td align="right">-79.0</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1013</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">27</td>
+<td align="right">18</td>
+<td align="right">30.5</td>
+<td align="right">-79.0</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1013</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">28</td>
+<td align="right">0</td>
+<td align="right">31.5</td>
+<td align="right">-78.8</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1012</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Amy</td>
+<td align="right">1975</td>
+<td align="right">6</td>
+<td align="right">28</td>
+<td align="right">6</td>
+<td align="right">32.4</td>
+<td align="right">-78.7</td>
+<td align="left">tropical depression</td>
+<td align="left">-1</td>
+<td align="right">25</td>
+<td align="right">1012</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="htmltable" class="section level3">
+<h3>htmlTable</h3>
+<pre class="r"><code>htmlTable::htmlTable(head(storms))</code></pre>
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+name
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+year
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+month
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+day
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+hour
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+lat
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+long
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+status
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+category
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+wind
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+pressure
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+ts_diameter
+</th>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+hu_diameter
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+1
+</td>
+<td style="text-align: center;">
+Amy
+</td>
+<td style="text-align: center;">
+1975
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+27
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+27.5
+</td>
+<td style="text-align: center;">
+-79
+</td>
+<td style="text-align: center;">
+tropical depression
+</td>
+<td style="text-align: center;">
+-1
+</td>
+<td style="text-align: center;">
+25
+</td>
+<td style="text-align: center;">
+1013
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+2
+</td>
+<td style="text-align: center;">
+Amy
+</td>
+<td style="text-align: center;">
+1975
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+27
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+28.5
+</td>
+<td style="text-align: center;">
+-79
+</td>
+<td style="text-align: center;">
+tropical depression
+</td>
+<td style="text-align: center;">
+-1
+</td>
+<td style="text-align: center;">
+25
+</td>
+<td style="text-align: center;">
+1013
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+3
+</td>
+<td style="text-align: center;">
+Amy
+</td>
+<td style="text-align: center;">
+1975
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+27
+</td>
+<td style="text-align: center;">
+12
+</td>
+<td style="text-align: center;">
+29.5
+</td>
+<td style="text-align: center;">
+-79
+</td>
+<td style="text-align: center;">
+tropical depression
+</td>
+<td style="text-align: center;">
+-1
+</td>
+<td style="text-align: center;">
+25
+</td>
+<td style="text-align: center;">
+1013
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+4
+</td>
+<td style="text-align: center;">
+Amy
+</td>
+<td style="text-align: center;">
+1975
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+27
+</td>
+<td style="text-align: center;">
+18
+</td>
+<td style="text-align: center;">
+30.5
+</td>
+<td style="text-align: center;">
+-79
+</td>
+<td style="text-align: center;">
+tropical depression
+</td>
+<td style="text-align: center;">
+-1
+</td>
+<td style="text-align: center;">
+25
+</td>
+<td style="text-align: center;">
+1013
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+5
+</td>
+<td style="text-align: center;">
+Amy
+</td>
+<td style="text-align: center;">
+1975
+</td>
+<td style="text-align: center;">
+6
+</td>
+<td style="text-align: center;">
+28
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+31.5
+</td>
+<td style="text-align: center;">
+-78.8
+</td>
+<td style="text-align: center;">
+tropical depression
+</td>
+<td style="text-align: center;">
+-1
+</td>
+<td style="text-align: center;">
+25
+</td>
+<td style="text-align: center;">
+1012
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+6
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+Amy
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+1975
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+6
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+28
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+6
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+32.4
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+-78.7
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+tropical depression
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+-1
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+25
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+1012
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+<td style="border-bottom: 2px solid grey; text-align: center;">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="xtable" class="section level3">
+<h3>xtable</h3>
+<p>Better for PDF output, in my opinion, but worth knowing and seeing in html. If type is not specific, default is to LaTeX</p>
+<pre class="r"><code>library(xtable)
+options(xtable.comment = FALSE)
+print(xtable(head(storms), caption = &#39;Table with xtable&#39;), type = &#39;html&#39;)</code></pre>
+<table border="1">
+<caption align="bottom">
+Table with xtable
+</caption>
+<tr>
+<th>
+</th>
+<th>
+name
+</th>
+<th>
+year
+</th>
+<th>
+month
+</th>
+<th>
+day
+</th>
+<th>
+hour
+</th>
+<th>
+lat
+</th>
+<th>
+long
+</th>
+<th>
+status
+</th>
+<th>
+category
+</th>
+<th>
+wind
+</th>
+<th>
+pressure
+</th>
+<th>
+ts_diameter
+</th>
+<th>
+hu_diameter
+</th>
+</tr>
+<tr>
+<td align="right">
+1
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+0.00
+</td>
+<td align="right">
+27.50
+</td>
+<td align="right">
+-79.00
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1013
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td align="right">
+2
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+28.50
+</td>
+<td align="right">
+-79.00
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1013
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td align="right">
+3
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+12.00
+</td>
+<td align="right">
+29.50
+</td>
+<td align="right">
+-79.00
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1013
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td align="right">
+4
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+27
+</td>
+<td align="right">
+18.00
+</td>
+<td align="right">
+30.50
+</td>
+<td align="right">
+-79.00
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1013
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td align="right">
+5
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+0.00
+</td>
+<td align="right">
+31.50
+</td>
+<td align="right">
+-78.80
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1012
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+<tr>
+<td align="right">
+6
+</td>
+<td>
+Amy
+</td>
+<td align="right">
+1975.00
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+28
+</td>
+<td align="right">
+6.00
+</td>
+<td align="right">
+32.40
+</td>
+<td align="right">
+-78.70
+</td>
+<td>
+tropical depression
+</td>
+<td>
+-1
+</td>
+<td align="right">
+25
+</td>
+<td align="right">
+1012
+</td>
+<td align="right">
+</td>
+<td align="right">
+</td>
+</tr>
+</table>
+</div>
+<div id="stargazer" class="section level3">
+<h3>stargazer</h3>
+<pre class="r"><code>library(stargazer)
+model &lt;- lm(wind ~ pressure, data = storms)
+# include a type argument as html for an html output, latex for PDF output, etc...
+stargazer(model, type = &quot;html&quot;)</code></pre>
+<table style="text-align:center">
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+<em>Dependent variable:</em>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+<td colspan="1" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+wind
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+pressure
+</td>
+<td>
+-1.266<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.004)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+1,309.124<sup>***</sup>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(4.462)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+10,010
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.888
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Adjusted R<sup>2</sup>
+</td>
+<td>
+0.888
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+8.780 (df = 10008)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+79,216.640<sup>***</sup> (df = 1; 10008)
+</td>
+</tr>
+<tr>
+<td colspan="2" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<p>Personal note: tables are a total pain. I prefer to use <a href="https://www.tablesgenerator.com/">TablesGenerator</a> for pick the language I want the table to be in, and you can then paste this code <strong>in the text part</strong></p>
+<p><strong>Equations</strong> To make equations, use LaTeX language, bracketed by dollar signs Here is one of many LaTeX symbol sheets: <a href="https://www.caam.rice.edu/~heinken/latex/symbols.pdf" class="uri">https://www.caam.rice.edu/~heinken/latex/symbols.pdf</a></p>
+<p><span class="math inline">\(\beta\)</span><br />
+<span class="math inline">\(f(x)\)</span> <span class="math inline">\(\sum_{i=y}^n X_i\)</span></p>
+</div>
+</div>
+<div id="putting-it-all-together-with-knitting" class="section level1">
+<h1>Putting it all together with knitting</h1>
+<p>Knitting is the moment of truth – it combines everything in this file to create an output, BUT the output will not be created if there is an error in your code, or the code cannot be read linearly.</p>
+<p>Common issues:</p>
+<ul>
+<li>Naming chunks the same thing</li>
+<li>Having code out of order (one mistake breaks the whole thing)</li>
+</ul>
+</div>
+<div id="give-it-a-try" class="section level1">
+<h1>Give it a try</h1>
+<p>Create a Rmd file with an html output, including the document title: “RMarkdown Test”. Using the diamonds dataset, create a plot of your choice. Set the chunk options to display both the code and the plot, but not any warnings or other output from your code. Above your plot, describe the data and what the plot is showing, and try to use your new markdown skills (headers, bullets, bolding, etc). Knit it all together and see your output!</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
