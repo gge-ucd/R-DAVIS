@@ -515,27 +515,27 @@ div.tocify {
 <ul>
 <li>What goes in a YAML also depends on the kind of output you have: PDF/LaTex, website, etc.
 <ul>
-<li>See more: <a href="https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html" class="uri">https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html</a></li>
+<li>See more: <a href="https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html" class="uri">https://cran.r-project.org/web/packages/ymlthis/vignettes/yaml-fieldguide.html</a> <br></li>
 </ul></li>
 <li>If you want to output as a pdf, you will need to set up LaTeX.
 <ul>
-<li>See more: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html</a></li>
+<li>See more: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/install-latex.html</a> <br></li>
 </ul></li>
 </ul>
 </div>
 <div id="beginning-at-the-end-knitting" class="section level1">
 <h1>Beginning at the end: knitting</h1>
-<p>Use the knit button on the top bar to execute your entire script and create the output you have designated in your YAML. I recommend doing this often because I think that Markdown errors can be hard to read, and it may help you catch errors earlier.</p>
+<p>Use the knit button on the top bar to execute your entire script and create the output you have designated in your YAML. I recommend doing this often because I think that Markdown errors can be hard to read, and it may help you catch errors earlier. <br></p>
 </div>
 <div id="markdown-language-text" class="section level1">
 <h1>Markdown language (text)</h1>
 <p>This is what allows us to write here, like a text editor, not a coding script. Rmd Cheat Sheet is a good place to start for the basics of the <em>Markdown</em> language.</p>
 <p>The link can be accessed here: <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf" class="uri">https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf</a></p>
-<p>Embed link <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Cheat sheet</a></p>
+<p>Embed link: <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Cheat sheet</a></p>
 <p>Embed images (remember that your working directory will set to your Rmd Directory, and so finding an image might be tough. You can use <code>../</code> before your filepath to move back one step in your folders, if need be) <img src="img/cheatsheet.png" alt="Optional text" /></p>
 <p>Rmd is sensitive to spaces or non-spaces<br />
-<br> I want this to be the next line</p>
-<p>I am also a fan of:</p>
+<br> I want this to be the next line, so I needed to add 2 spaces at the end of the previous line<br />
+<br> Resources I am also a fan of:</p>
 <ul>
 <li><a href="https://holtzy.github.io/Pimp-my-rmd/">Pimp my Rmd</a></li>
 <li><a href="https://bookdown.org/yihui/rmarkdown-cookbook/">Rmd Cookbook</a></li>
@@ -552,7 +552,7 @@ div.tocify {
 <li>results = c(“asis”): asis is for LaTeX output</li>
 <li>fig.width = 7: default, but can adjust</li>
 <li>fig.height = 7: default, but can adjust</li>
-<li>warnings = F: prevent warnings from appearing</li>
+<li>warnings = F: prevent warnings from appearing <br></li>
 </ul>
 <pre class="r"><code># Look at built in data
 head(storms)</code></pre>
@@ -566,12 +566,14 @@ head(storms)</code></pre>
 ## 5 Amy    1975     6    28     0  31.5 -78.8 tropi… -1          25     1012
 ## 6 Amy    1975     6    28     6  32.4 -78.7 tropi… -1          25     1012
 ## # … with 2 more variables: ts_diameter &lt;dbl&gt;, hu_diameter &lt;dbl&gt;</code></pre>
-<p><img src="Rmd_intro_files/figure-html/plot%20storms-1.png" width="672" /></p>
-<p>You can set defaults for your document and your chunk options with the <code>opts_chunk$set</code> code:</p>
+<p><br> <img src="Rmd_intro_files/figure-html/plot%20storms-1.png" width="672" /> <br></p>
+<p>You can set defaults for your document and your chunk options with the following codes:</p>
+<p><br></p>
 </div>
 <div id="back-to-markdown-for-more-advanced-elements" class="section level1">
 <h1>Back to Markdown for more advanced elements</h1>
-<p><strong>Tables</strong></p>
+<div id="tables" class="section level2">
+<h2>Tables</h2>
 <p>You can make a table in Markdown language alone:</p>
 <table>
 <thead>
@@ -599,7 +601,7 @@ head(storms)</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Or you can make a table in a code chunk. For this, there are a variety of table making packages: kable in knitr, gridextra, stargazer (mostly for model outputs).</p>
+<p><br> Or you can make a table in a code chunk. For this, there are a variety of table making packages: kable in knitr, gridextra, stargazer (mostly for model outputs).</p>
 <div id="knitr" class="section level3">
 <h3>knitr</h3>
 <pre class="r"><code>library(knitr)
@@ -1478,19 +1480,29 @@ F Statistic
 </td>
 </tr>
 </table>
-<p>Personal note: tables are a total pain. I prefer to use <a href="https://www.tablesgenerator.com/">TablesGenerator</a> for pick the language I want the table to be in, and you can then paste this code <strong>in the text part</strong></p>
-<p><strong>Equations</strong> To make equations, use LaTeX language, bracketed by dollar signs Here is one of many LaTeX symbol sheets: <a href="https://www.caam.rice.edu/~heinken/latex/symbols.pdf" class="uri">https://www.caam.rice.edu/~heinken/latex/symbols.pdf</a></p>
-<p><span class="math inline">\(\beta\)</span><br />
-<span class="math inline">\(f(x)\)</span> <span class="math inline">\(\sum_{i=y}^n X_i\)</span></p>
+<p><br> <strong>Personal note:</strong> Tables in Rmd can get very frustrating, I think, especially when generating PDs. I prefer to use <a href="https://www.tablesgenerator.com/">TablesGenerator</a> to create a table, then use the top tabs to pick the language I want the table to be in, generate it, and then paste the code generate at the bottom in the text portion of the Rmd file (i.e. not in a chunk). <br></p>
+</div>
+<div id="equations" class="section level3">
+<h3>Equations</h3>
+<p>To make equations, use LaTeX language, bracketed by dollar signs. Here is one of many LaTeX symbol sheets: <a href="https://www.caam.rice.edu/~heinken/latex/symbols.pdf" class="uri">https://www.caam.rice.edu/~heinken/latex/symbols.pdf</a><br />
+<br> And some examples:</p>
+<ul>
+<li>Beta symbol: <span class="math inline">\(\beta\)</span><br />
+</li>
+<li>function of x: <span class="math inline">\(f(x)\)</span><br />
+</li>
+<li>Summation: <span class="math inline">\(\sum_{i=y}^n X_i\)</span></li>
+</ul>
+</div>
 </div>
 </div>
 <div id="putting-it-all-together-with-knitting" class="section level1">
 <h1>Putting it all together with knitting</h1>
-<p>Knitting is the moment of truth – it combines everything in this file to create an output, BUT the output will not be created if there is an error in your code, or the code cannot be read linearly.</p>
-<p>Common issues:</p>
+<p>Knitting is the moment of truth – it combines everything in this file to create an output, BUT the output will not be created if there is an error in your code, or the code cannot be read linearly.<br />
+<br> Common issues:</p>
 <ul>
 <li>Naming chunks the same thing</li>
-<li>Having code out of order (one mistake breaks the whole thing)</li>
+<li>Having code out of order (one mistake breaks the whole thing) <br></li>
 </ul>
 </div>
 <div id="give-it-a-try" class="section level1">
