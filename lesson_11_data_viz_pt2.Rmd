@@ -145,7 +145,7 @@ barplot(table(iris$Species,iris$Sepal.Length),col  = viridis(3, option = "A"))
 <br>
 
 
-### Customizing color pallettes in ggplot
+## Customizing color pallettes in ggplot
 
 The viridis color pallettes have been built into ggplot so that you can call upon them using the scale_fill_viridis_ or scale_color_viridis_ functions. Note that whether or not you use the fill or color scale function depends on which aesthetic you set in your plot. The functions also have extenstions depending on the kind of variable that you want to color: scale_fill_viridis_*d* is for discrete variables while scale_fill_viridis_*c* is for continous variables. Within the function, you can specify which virids pallette to use: A-D.
 
@@ -157,7 +157,6 @@ ggplot(diamonds, aes(x = clarity, fill = cut)) +
   theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
   scale_fill_viridis_d(option = "C") +
   theme_classic()
-
 ```
 
 

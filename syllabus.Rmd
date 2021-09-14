@@ -67,9 +67,9 @@ To get the most out of in-class time together, R-DAVIS will combine video materi
 - Writing functions
 
 #### Week 9 (Nov. 18)
-- Iteration
+- Iteration  
 
-### Thanksgiving holiday (Nov. 25)  
+#### Thanksgiving holiday (Nov. 25)   
 
 #### Week 10 (Dec. 2)
 - RMarkdown and Literate Programming
