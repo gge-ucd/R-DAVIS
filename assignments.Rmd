@@ -5,42 +5,36 @@ output:
     toc: false
 ---
 
-Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to practice coding, reviewing code, and working with GitHub. Assignments are to be completed by students in their private repositories set up (via [Github Classrooms](https://classroom.github.com/classrooms)). Each week students will be assigned a partner on the **Bowtruckles** team, and review the others' code for the week. Review comments can be made by entering into the repository of your partner, finding the Issue tab, and creating a New Issue. (**Note**: This is a nonstandard use of the "Issue" tab. GitHub usually requires collaboration (pushing and pulling others' code) in order to comment across "commits." We are not going to be doing this, at least not at first, so we will use Issues).
+Assignments are designed to reinforce the code/lessons covered that week and provide you a chance to practice working with GitHub. Assignments are to be completed in your local project (on your computer) and pushed up to your GitHub repository for instructors to review by the following Wednesday. For example, homework for Week 1 (which is on September 23) should be submitted by September 29.
 
 <br>
 
 ## Assignments {.tabset .tabset-fade .tabset-pills}
 
+### <small>Week1</small>
+
+Because this class caters to a range of experiences, we would like you to identify how it is you plan on earning credit for this course. Please complete [this form](https://forms.gle/3yD4oCYfgwB1M369A) to select and describe your plans.
+
 ### <small>Week2</small>
 
-Today we talked about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it's crucial to any computational task and good project management. We'll have you do a little exercise to help sketch out the relationships between files and folders in your computer.
+In Week 2's homework we are going to practice subsetting and manipulating vectors.  
 
-1) Grab a pen/pencil and paper and draw out some sort of diagram showing the structure of your "in-class-project" directory. Include the sub-folders and some example files. Somewhere in this diagram, denote what git views as your "repository" and what RStudio views as your "R Project" (Hint: this might involve circling portions of your diagram). Feel free to add notes about the purposes of files/folders you included, or even add new files and folders you think could aid in your project organization. **You're going to be taking a picture of this diagram/uploading it, so if you'd prefer to make it digitally, like in PowerPoint or Lucidchart, go right ahead**
+First, open your r-davis-in-class-project-YourName and `pull`. Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).
 
-2) If you drew your diagram on paper, take a picture of it and email it to yourself. If you made it digitally, save it as a .png or .jpg or take a screenshot of it. Get the photo of your diagram into your "in-class-project" folder, and put it into an "images" folder there. You should end up with a file that's something like "in-class-project-yourname/images/your_diagram.jpg". This will be practice for taking external files, moving them into a project, and using them within the project.
+Second, open a new script in your r-davis-in-class-project-YourName and save it to your `scripts` folder. Call this new script `week_2_homework`. 
 
-3) Get on the good ole Google and look up how to add a local image to a Markdown file. Your README.md is written in Markdown, and we're going to add your diagram photo to it. This should involve just one line of new code- the trickiest part is referring to the correct location of your photo relative to the README file (Hint: your "link" to the file won't be a website link). You can also take this time to finish updating your README.md information from Week 1. Once you've made this change, commit and push your changes to GitHub. This photo should now appear in the README when you open your repository on GitHub.
-
-### <small>Week3</small>
-
-In Week 3's homework we are going to practice subsetting and manipulating vectors. Fun! 
-
-First, open your r-davis-in-class-project-YourName and `pull`! Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).
-
-Second, open a new script in your r-davis-in-class-project-YourName and save it to your `scripts` folder. Call this new script `week_3_homework`. 
-
-Copy and paste the chunk of code below into your new `week_3_homework` script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing? 
+Copy and paste the chunk of code below into your new `week_2_homework` script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing? 
 
 ```{r}
 set.seed(15)
-hw3 <- runif(50, 4, 50)
-hw3 <- replace(hw3, c(4,12,22,27), NA)
-hw3
+hw2 <- runif(50, 4, 50)
+hw2 <- replace(hw3, c(4,12,22,27), NA)
+hw2
 ```
 
 *PROBLEM 1:*
 
-Take you `hw3` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
+Take you `hw2` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
 
 *PROBLEM 2:* 
 
@@ -51,7 +45,7 @@ Multiply each number in the `prob1` vector by 3 to create a new vector called `t
 Select every other number in your `plus10` vector by selecting the first number, not the second, the third, not the fourth, etc. If you've worked through these three problems in order, you should now have a vector that is 12 numbers long that looks **exactly** like this one:
 
 ```{r, echo = F}
-prob1 <- hw3[!is.na(hw3)] #removing the NAs
+prob1 <- hw2[!is.na(hw2)] #removing the NAs
 
 prob1 <- prob1[prob1 >14 & prob1 < 38] #only selecting numbers between 14 and 38
 
@@ -66,13 +60,13 @@ final <- plus10[c(TRUE, FALSE)] #selecting every other number
 final
 ```
 
-Finally, save your script and push all your changes to your github account! 
+Finally, save your script and push all your changes to your github account. 
 
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=T}
 
-prob1 <- hw3[!is.na(hw3)] #removing the NAs
+prob1 <- hw3[!is.na(hw2)] #removing the NAs
 
 prob1 <- prob1[prob1 >14 & prob1 < 38] #only selecting numbers between 14 and 38
 
@@ -86,19 +80,13 @@ final <- plus10[c(TRUE, FALSE)] #selecting every other number using logical subs
 </details>
 
 
-### <small>Week4</small>
+### <small>Week3</small>
 
-Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and PULL! Then create a new script in your `scripts` folder called `homework_week4.R`. 
-
-We are going to ask you to use the two different types of subsetting techniques we learned about: Base R and `Tidyverse`. It's important to understand both, although in your own work you will probably be using just one. 
-
-**PROBLEM 1:**
-
-**First, Base R** (DON'T use any tidyverse functions for this part!)
+Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and pull Then create a new script in your `scripts` folder called `week_3_homework.R`. 
 
 Load your `survey` data frame with read.csv. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
 
-CHALLENGE!
+CHALLENGE:
 Create a second data frame called `challenge_base` that only consists of individuals from your `surveys_base` data frame with weights greater than 150g.  
 
 <details>
@@ -126,13 +114,13 @@ challenge_base <- surveys_new[(surveys_new[, 2]>150),] #selecting just the weigh
 
 <br> 
 
-**PROBLEM 2:**
+### <small>Week4</small>
 
-**Now, `tidyverse`!** For this second problem, you can use the tidyverse commands we learned in class (although you may need a base function or two). 
+We will repeat last week's homework, but this time usin the tidyverse.  
 
 Load your `survey` data frame with `read_csv` and call it `surveys2`. Create a new data frame called `surveys_tidy` with only the species_id, hindfoot_length, and the year columns.  Remove all rows with hindfoot_length == NA. Next, select only the last 100 rows. *Remember, species_id should already be a character column, so there is no need to convert*
 
-CHALLENGE!
+CHALLENGE:
 Create a second data frame called `challenge_tidy` that only consists of the species "RM" in the year 1997. 
 
 <details>

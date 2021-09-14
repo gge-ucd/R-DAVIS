@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -14,12 +13,22 @@
 
 <title>Coding Practice</title>
 
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
@@ -28,12 +37,16 @@
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -46,32 +59,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -82,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -102,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -163,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -175,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -186,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -201,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -237,6 +206,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -321,37 +291,43 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="lesson_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
     </li>
     <li>
-      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+      <a href="lesson_02_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="lesson_project_management.html">Project Management</a>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
     </li>
     <li>
-      <a href="lesson_how_r_thinks_about_data.html">How R Thinks About Data</a>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="lesson_data_frames_tibbles_ecology.html">Starting With Data in R</a>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr and tidyr</a>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
     </li>
     <li>
-      <a href="lesson_visualization_dos.html">Visualization Best Practices</a>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_lubridate.html">Date-times with lubridate</a>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
     </li>
     <li>
-      <a href="lesson_functions.html">Writing functions</a>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
       <a href="lesson_iteration.html">Iteration</a>
@@ -402,11 +378,11 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -419,29 +395,24 @@ $(document).ready(function () {
 </div>
 
 
-<p>Assignments are designed to reinforce the code/lessons covered that week, and provide students a chance to practice coding, reviewing code, and working with GitHub. Assignments are to be completed by students in their private repositories set up (via <a href="https://classroom.github.com/classrooms">Github Classrooms</a>). Each week students will be assigned a partner on the <strong>Bowtruckles</strong> team, and review the others’ code for the week. Review comments can be made by entering into the repository of your partner, finding the Issue tab, and creating a New Issue. (<strong>Note</strong>: This is a nonstandard use of the “Issue” tab. GitHub usually requires collaboration (pushing and pulling others’ code) in order to comment across “commits.” We are not going to be doing this, at least not at first, so we will use Issues).</p>
+<p>Assignments are designed to reinforce the code/lessons covered that week and provide you a chance to practice working with GitHub. Assignments are to be completed in your local project (on your computer) and pushed up to your GitHub repository for instructors to review by the following Wednesday. For example, homework for Week 1 (which is on September 23) should be submitted by September 29.</p>
 <p><br></p>
 <div id="assignments" class="section level2 tabset tabset-fade tabset-pills">
-<h2>Assignments</h2>
+<h2 class="tabset tabset-fade tabset-pills">Assignments</h2>
+<div id="week1" class="section level3">
+<h3><small>Week1</small></h3>
+<p>Because this class caters to a range of experiences, we would like you to identify how it is you plan on earning credit for this course. Please complete <a href="https://forms.gle/3yD4oCYfgwB1M369A">this form</a> to select and describe your plans.</p>
+</div>
 <div id="week2" class="section level3">
 <h3><small>Week2</small></h3>
-<p>Today we talked about project management, directory structure, and file paths. Understanding how your computer thinks about file organization can be tricky, but it’s crucial to any computational task and good project management. We’ll have you do a little exercise to help sketch out the relationships between files and folders in your computer.</p>
-<ol style="list-style-type: decimal">
-<li><p>Grab a pen/pencil and paper and draw out some sort of diagram showing the structure of your “in-class-project” directory. Include the sub-folders and some example files. Somewhere in this diagram, denote what git views as your “repository” and what RStudio views as your “R Project” (Hint: this might involve circling portions of your diagram). Feel free to add notes about the purposes of files/folders you included, or even add new files and folders you think could aid in your project organization. <strong>You’re going to be taking a picture of this diagram/uploading it, so if you’d prefer to make it digitally, like in PowerPoint or Lucidchart, go right ahead</strong></p></li>
-<li><p>If you drew your diagram on paper, take a picture of it and email it to yourself. If you made it digitally, save it as a .png or .jpg or take a screenshot of it. Get the photo of your diagram into your “in-class-project” folder, and put it into an “images” folder there. You should end up with a file that’s something like “in-class-project-yourname/images/your_diagram.jpg”. This will be practice for taking external files, moving them into a project, and using them within the project.</p></li>
-<li><p>Get on the good ole Google and look up how to add a local image to a Markdown file. Your README.md is written in Markdown, and we’re going to add your diagram photo to it. This should involve just one line of new code- the trickiest part is referring to the correct location of your photo relative to the README file (Hint: your “link” to the file won’t be a website link). You can also take this time to finish updating your README.md information from Week 1. Once you’ve made this change, commit and push your changes to GitHub. This photo should now appear in the README when you open your repository on GitHub.</p></li>
-</ol>
-</div>
-<div id="week3" class="section level3">
-<h3><small>Week3</small></h3>
-<p>In Week 3’s homework we are going to practice subsetting and manipulating vectors. Fun!</p>
-<p>First, open your r-davis-in-class-project-YourName and <code>pull</code>! Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).</p>
-<p>Second, open a new script in your r-davis-in-class-project-YourName and save it to your <code>scripts</code> folder. Call this new script <code>week_3_homework</code>.</p>
-<p>Copy and paste the chunk of code below into your new <code>week_3_homework</code> script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
+<p>In Week 2’s homework we are going to practice subsetting and manipulating vectors.</p>
+<p>First, open your r-davis-in-class-project-YourName and <code>pull</code>. Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).</p>
+<p>Second, open a new script in your r-davis-in-class-project-YourName and save it to your <code>scripts</code> folder. Call this new script <code>week_2_homework</code>.</p>
+<p>Copy and paste the chunk of code below into your new <code>week_2_homework</code> script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
 <pre class="r"><code>set.seed(15)
-hw3 &lt;- runif(50, 4, 50)
-hw3 &lt;- replace(hw3, c(4,12,22,27), NA)
-hw3</code></pre>
+hw2 &lt;- runif(50, 4, 50)
+hw2 &lt;- replace(hw3, c(4,12,22,27), NA)
+hw2</code></pre>
 <pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619
 ## [10] 42.245735  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680
 ## [19] 10.494605 39.728776 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA
@@ -449,7 +420,7 @@ hw3</code></pre>
 ## [37]  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810 46.369401 15.919465 19.813791
 ## [46] 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
 <p><em>PROBLEM 1:</em></p>
-<p>Take you <code>hw3</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
+<p>Take you <code>hw2</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
 <p><em>PROBLEM 2:</em></p>
 <p>Multiply each number in the <code>prob1</code> vector by 3 to create a new vector called <code>times3</code>. Then add 10 to each number in your <code>times3</code> vector to create a new vector called <code>plus10</code>.</p>
 <p><em>PROBLEM 3:</em></p>
@@ -457,10 +428,12 @@ hw3</code></pre>
 <pre class="r"><code>final</code></pre>
 <pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901
 ## [10]  85.12543  69.44137  67.57845</code></pre>
-<p>Finally, save your script and push all your changes to your github account!</p>
+<p>Finally, save your script and push all your changes to your github account.</p>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
-<pre class="r"><code>prob1 &lt;- hw3[!is.na(hw3)] #removing the NAs
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
+<pre class="r"><code>prob1 &lt;- hw3[!is.na(hw2)] #removing the NAs
 
 prob1 &lt;- prob1[prob1 &gt;14 &amp; prob1 &lt; 38] #only selecting numbers between 14 and 38
 
@@ -471,16 +444,15 @@ plus10 &lt;- times3 + 10 #adding 10 to the whole vector
 final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical subsetting</code></pre>
 </details>
 </div>
-<div id="week4" class="section level3">
-<h3><small>Week4</small></h3>
-<p>Homework this week will be playing with the <code>surveys</code> data we worked on in class. First things first, open your r-davis-in-class-project and PULL! Then create a new script in your <code>scripts</code> folder called <code>homework_week4.R</code>.</p>
-<p>We are going to ask you to use the two different types of subsetting techniques we learned about: Base R and <code>Tidyverse</code>. It’s important to understand both, although in your own work you will probably be using just one.</p>
-<p><strong>PROBLEM 1:</strong></p>
-<p><strong>First, Base R</strong> (DON’T use any tidyverse functions for this part!)</p>
+<div id="week3" class="section level3">
+<h3><small>Week3</small></h3>
+<p>Homework this week will be playing with the <code>surveys</code> data we worked on in class. First things first, open your r-davis-in-class-project and pull Then create a new script in your <code>scripts</code> folder called <code>week_3_homework.R</code>.</p>
 <p>Load your <code>survey</code> data frame with read.csv. Create a new data frame called <code>surveys_base</code> with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.</p>
-<p>CHALLENGE! Create a second data frame called <code>challenge_base</code> that only consists of individuals from your <code>surveys_base</code> data frame with weights greater than 150g.</p>
+<p>CHALLENGE: Create a second data frame called <code>challenge_base</code> that only consists of individuals from your <code>surveys_base</code> data frame with weights greater than 150g.</p>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Base R portion of the homework</summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the Base R portion of the homework
+</summary>
 <pre class="r"><code>#PROBLEM 1
 
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
@@ -501,33 +473,36 @@ surveys_new &lt;- surveys_new[complete.cases(surveys_new), ] #selecting only the
 challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the weights (column 2) that are greater than 150</code></pre>
 </details>
 <p><br></p>
-<p><strong>PROBLEM 2:</strong></p>
-<p><strong>Now, <code>tidyverse</code>!</strong> For this second problem, you can use the tidyverse commands we learned in class (although you may need a base function or two).</p>
+</div>
+<div id="week4" class="section level3">
+<h3><small>Week4</small></h3>
+<p>We will repeat last week’s homework, but this time usin the tidyverse.</p>
 <p>Load your <code>survey</code> data frame with <code>read_csv</code> and call it <code>surveys2</code>. Create a new data frame called <code>surveys_tidy</code> with only the species_id, hindfoot_length, and the year columns. Remove all rows with hindfoot_length == NA. Next, select only the last 100 rows. <em>Remember, species_id should already be a character column, so there is no need to convert</em></p>
-<p>CHALLENGE! Create a second data frame called <code>challenge_tidy</code> that only consists of the species “RM” in the year 1997.</p>
+<p>CHALLENGE: Create a second data frame called <code>challenge_tidy</code> that only consists of the species “RM” in the year 1997.</p>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework
+</summary>
 <pre class="r"><code>#PROBLEM 2
 
-library(tidyverse) #load tidyverse 
-
-surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   record_id = col_double(),
-##   month = col_double(),
-##   day = col_double(),
-##   year = col_double(),
-##   plot_id = col_double(),
-##   species_id = col_character(),
-##   sex = col_character(),
-##   hindfoot_length = col_double(),
-##   weight = col_double(),
-##   genus = col_character(),
-##   species = col_character(),
-##   taxa = col_character(),
-##   plot_type = col_character()
-## )</code></pre>
+library(tidyverse) #load tidyverse </code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.3     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   2.0.1     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>surveys2 &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;) #read in data with tidyverse command</code></pre>
+<pre><code>## Rows: 34786 Columns: 13</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): species_id, sex, genus, species, taxa, plot_type
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>surveys_tidy &lt;- surveys2 %&gt;% 
   select(species_id, hindfoot_length, year) %&gt;% 
   filter(!is.na(hindfoot_length)) #removing all the NAs from hindfoot_length
@@ -553,51 +528,45 @@ challenge_tidy &lt;- surveys_tidy %&gt;%
 <li><p>Manipulate <code>surveys</code> to create a dataframe with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you’ve used so far, and it may be useful to sketch out the steps to get to the final result.</p></li>
 </ol>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework</summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework
+</summary>
 <pre class="r"><code>library(tidyverse)
 #1
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   record_id = col_double(),
-##   month = col_double(),
-##   day = col_double(),
-##   year = col_double(),
-##   plot_id = col_double(),
-##   species_id = col_character(),
-##   sex = col_character(),
-##   hindfoot_length = col_double(),
-##   weight = col_double(),
-##   genus = col_character(),
-##   species = col_character(),
-##   taxa = col_character(),
-##   plot_type = col_character()
-## )</code></pre>
+<pre><code>## Rows: 34786 Columns: 13</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): species_id, sex, genus, species, taxa, plot_type
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <pre class="r"><code>#2
 surveys %&gt;% 
   filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
-<pre><code>## # A tibble: 14,730 x 13
-##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus species
-##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
-##  1      5966     5    22  1982       2 NL         F                  32     40 Neot… albigu…
-##  2       226     9    13  1977       2 DM         M                  37     51 Dipo… merria…
-##  3       233     9    13  1977       2 DM         M                  25     44 Dipo… merria…
-##  4       245    10    16  1977       2 DM         M                  37     39 Dipo… merria…
-##  5       251    10    16  1977       2 DM         M                  36     49 Dipo… merria…
-##  6       257    10    16  1977       2 DM         M                  37     47 Dipo… merria…
-##  7       259    10    16  1977       2 DM         M                  36     41 Dipo… merria…
-##  8       268    10    16  1977       2 DM         F                  36     55 Dipo… merria…
-##  9       346    11    12  1977       2 DM         F                  37     36 Dipo… merria…
-## 10       350    11    12  1977       2 DM         M                  37     47 Dipo… merria…
+<pre><code>## # A tibble: 14,730 × 13
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus     species 
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   
+##  1      5966     5    22  1982       2 NL         F                  32     40 Neotoma   albigula
+##  2       226     9    13  1977       2 DM         M                  37     51 Dipodomys merriami
+##  3       233     9    13  1977       2 DM         M                  25     44 Dipodomys merriami
+##  4       245    10    16  1977       2 DM         M                  37     39 Dipodomys merriami
+##  5       251    10    16  1977       2 DM         M                  36     49 Dipodomys merriami
+##  6       257    10    16  1977       2 DM         M                  37     47 Dipodomys merriami
+##  7       259    10    16  1977       2 DM         M                  36     41 Dipodomys merriami
+##  8       268    10    16  1977       2 DM         F                  36     55 Dipodomys merriami
+##  9       346    11    12  1977       2 DM         F                  37     36 Dipodomys merriami
+## 10       350    11    12  1977       2 DM         M                  37     47 Dipodomys merriami
 ## # … with 14,720 more rows, and 2 more variables: taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
 <pre class="r"><code>#3
 biggest_critters &lt;- surveys %&gt;% 
   filter(!is.na(weight)) %&gt;% 
   group_by(species_id, sex) %&gt;% 
-  summarise(max_weight = max(weight))
-
-biggest_critters %&gt;% arrange(max_weight)</code></pre>
-<pre><code>## # A tibble: 64 x 3
+  summarise(max_weight = max(weight))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;species_id&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>biggest_critters %&gt;% arrange(max_weight)</code></pre>
+<pre><code>## # A tibble: 64 × 3
 ## # Groups:   species_id [25]
 ##    species_id sex   max_weight
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
@@ -613,7 +582,7 @@ biggest_critters %&gt;% arrange(max_weight)</code></pre>
 ## 10 PP         &lt;NA&gt;          18
 ## # … with 54 more rows</code></pre>
 <pre class="r"><code>biggest_critters %&gt;% arrange(desc(max_weight))</code></pre>
-<pre><code>## # A tibble: 64 x 3
+<pre><code>## # A tibble: 64 × 3
 ## # Groups:   species_id [25]
 ##    species_id sex   max_weight
 ##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
@@ -634,7 +603,7 @@ surveys %&gt;%
   group_by(species) %&gt;% 
   tally() %&gt;% 
   arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 37 x 2
+<pre><code>## # A tibble: 37 × 2
 ##    species          n
 ##    &lt;chr&gt;        &lt;int&gt;
 ##  1 harrisi        437
@@ -653,7 +622,7 @@ surveys %&gt;%
   group_by(plot_id) %&gt;% 
   tally() %&gt;% 
   arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 24 x 2
+<pre><code>## # A tibble: 24 × 2
 ##    plot_id     n
 ##      &lt;dbl&gt; &lt;int&gt;
 ##  1      13   160
@@ -672,7 +641,7 @@ surveys %&gt;%
   group_by(year) %&gt;% 
   tally() %&gt;% 
   arrange(desc(n))</code></pre>
-<pre><code>## # A tibble: 26 x 2
+<pre><code>## # A tibble: 26 × 2
 ##     year     n
 ##    &lt;dbl&gt; &lt;int&gt;
 ##  1  1977   221
@@ -694,7 +663,7 @@ surveys_avg_weight &lt;- surveys %&gt;%
   select(species_id, sex, weight, avg_weight)
 
 surveys_avg_weight</code></pre>
-<pre><code>## # A tibble: 32,283 x 4
+<pre><code>## # A tibble: 32,283 × 4
 ## # Groups:   species_id, sex [64]
 ##    species_id sex   weight avg_weight
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
@@ -714,7 +683,7 @@ surveys_avg_weight &lt;- surveys_avg_weight %&gt;%
   mutate(above_average = weight &gt; avg_weight)
 
 surveys_avg_weight</code></pre>
-<pre><code>## # A tibble: 32,283 x 5
+<pre><code>## # A tibble: 32,283 × 5
 ## # Groups:   species_id, sex [64]
 ##    species_id sex   weight avg_weight above_average
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
@@ -736,20 +705,21 @@ surveys %&gt;%
   summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
   arrange(Control)</code></pre>
-<pre><code>## # A tibble: 10 x 6
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 10 × 6
 ## # Groups:   genus [10]
-##    genus    Control `Rodent Exclosur… `Long-term Krat Ex… `Short-term Krat E… `Spectab exclos…
-##    &lt;chr&gt;      &lt;dbl&gt;             &lt;dbl&gt;               &lt;dbl&gt;               &lt;dbl&gt;            &lt;dbl&gt;
-##  1 Baiomys     13                13.5                12.9                13               14  
-##  2 Perogna…    15.9              16.1                15.8                15.7             15.8
-##  3 Reithro…    16.6              16.5                16.4                16.5             16.6
-##  4 Peromys…    20.3              20.3                20.3                20.3             20.5
-##  5 Onychom…    20.4              20.3                20.3                20.3             20.4
-##  6 Chaetod…    23.6              22.7                24.1                24.3             23.2
-##  7 Sigmodon    27.8              28.2                28.0                25.7             26.5
-##  8 Ammospe…    31                35                  NA                  NA               NA  
-##  9 Neotoma     32.2              32.4                32.5                32.2             32.3
-## 10 Dipodom…    37.8              36.9                36.7                38.8             38.3</code></pre>
+##    genus            Control `Rodent Exclosure` `Long-term Krat… `Short-term Kra… `Spectab exclos…
+##    &lt;chr&gt;              &lt;dbl&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Baiomys             13                 13.5             12.9             13               14  
+##  2 Perognathus         15.9               16.1             15.8             15.7             15.8
+##  3 Reithrodontomys     16.6               16.5             16.4             16.5             16.6
+##  4 Peromyscus          20.3               20.3             20.3             20.3             20.5
+##  5 Onychomys           20.4               20.3             20.3             20.3             20.4
+##  6 Chaetodipus         23.6               22.7             24.1             24.3             23.2
+##  7 Sigmodon            27.8               28.2             28.0             25.7             26.5
+##  8 Ammospermophilus    31                 35               NA               NA               NA  
+##  9 Neotoma             32.2               32.4             32.5             32.2             32.3
+## 10 Dipodomys           37.8               36.9             36.7             38.8             38.3</code></pre>
 </details>
 </div>
 <div id="week6" class="section level3">
@@ -758,15 +728,14 @@ surveys %&gt;%
 <pre class="r"><code>library(tidyverse)
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   country = col_character(),
-##   year = col_double(),
-##   pop = col_double(),
-##   continent = col_character(),
-##   lifeExp = col_double(),
-##   gdpPercap = col_double()
-## )</code></pre>
+<pre><code>## Rows: 1704 Columns: 6</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): country, continent
+## dbl (4): year, pop, lifeExp, gdpPercap</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 <div id="problem-1." class="section level4">
 <h4><em>Problem 1</em>.</h4>
 <p>First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)</p>
@@ -788,7 +757,9 @@ gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.
 <h4><em>Problem 3</em></h4>
 <p>Create a boxplot that shows the life expectency for Brazil, China, El Salvador, Niger, and the United States, with the data points in the backgroud using geom_jitter. Label the X and Y axis with “Country” and “Life Expectancy” and title the plot “Life Expectancy of Five Countries”.</p>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers! </summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers!
+</summary>
 <pre class="r"><code>library(tidyverse)
 
 #PROBLEM 1:
@@ -799,6 +770,7 @@ gapminder %&gt;%
   ggplot()+
   geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
   geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;continent&#39;. You can override using the `.groups` argument.</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
 
@@ -850,7 +822,9 @@ gapminder %&gt;%
 <p>This lesson should illustrate a key reality of making plots in R, one that applies as much to experts as beginners: 10% of your effort gets the plot 90% right, and 90% of the effort is getting the plot perfect. <code>ggplot</code> is incredibly powerful for exploratory analysis, as you can get a good plot with only a few lines of code. It’s also extremely flexible, allowing you to tweak nearly everything about a plot to get a highly polished final product, but these little tweaks can take a lot of time to figure out!</p>
 <p>So if you spend most of your time on this lesson googling stuff, you’re not alone!</p>
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
 <pre class="r"><code>library(tidyverse)
 
 gapminder &lt;- read_csv(&quot;data/gapminder.csv&quot;)
@@ -876,11 +850,13 @@ pg %&gt;%
 </div>
 <div id="week8" class="section level3">
 <h3><small>Week8</small></h3>
-<p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)</code></p>
+<p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")</code></p>
 <p>Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported, and how missing values are reported in each column. With the <code>mloa</code> data.frame, remove observations with missing values in rel_humid, temp_C_2m, and windSpeed_m_s. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Pacific/Honolulu time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
 Answers:
 <details>
-<p><summary><strong>DO NOT OPEN</strong> until you are ready to see the answers</summary></p>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
 <pre class="r"><code>library(tidyverse)
 library(lubridate)
 ## Data import
@@ -976,7 +952,7 @@ output: html_document
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -994,7 +970,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

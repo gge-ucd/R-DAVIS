@@ -1,0 +1,154 @@
+---
+title: Data visualization for publication
+---
+
+<br>
+<div class = "blue">
+### Learning Objectives
+* Learn how to customize color in plots
+* Gain a basic understanding of package `cowplot`
+* Introduction to interactive `plotly` package
+</div>
+
+<br>
+
+## Customizing color pallettes  
+
+Need to fill in lesson here
+```{r barplots, echo=T, eval=T}
+# upload viridis
+library(viridis)
+
+ggplot(diamonds, aes(clarity, fill = cut)) + 
+  geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+
+#barplot(table(iris$Species,iris$Sepal.Length),col  = viridis(3, option = "A")) 
+```
+
+## Publishing Plots: `cowplot`
+
+A few excellent options exist for creating multi-paneled plots for publications. The first and foremost is a package by Claus Wilke called [`cowplot`](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html). With `cowplot`, it's possible to quickly combine existing `ggplots`, creating publication quality plots. See the vignette for more options, but here's a quick example from the vignette below:
+
+```{r cowplot, echo=T, eval=T}
+library(ggplot2)
+library(cowplot)
+
+# make a few plots:
+plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+#plot.diamonds
+
+plot.cars <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size = 2.5)
+#plot.cars
+
+plot.iris <- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, fill=Species)) +
+  geom_point(size=3, alpha=0.7, shape=21)
+#plot.iris
+
+# use plot_grid
+panel_plot <- plot_grid(plot.cars, plot.iris, plot.diamonds, labels=c("A", "B", "C"), ncol=2, nrow = 2)
+
+panel_plot
+
+# fix the sizes draw_plot
+fixed_gridplot <- ggdraw() + draw_plot(plot.iris, x = 0, y = 0, width = 1, height = 0.5) +
+           draw_plot(plot.cars, x=0, y=.5, width=0.5, height = 0.5) +
+           draw_plot(plot.diamonds, x=0.5, y=0.5, width=0.5, height = 0.5) + 
+  draw_plot_label(label = c("A","B","C"), x = c(0, 0.5, 0), y = c(1, 1, 0.5))
+
+fixed_gridplot
+```
+
+
+## The package `plotly`
+
+The package `plotly` is an excellent, easy to use resource that allows you to quickly create interactive, web-based figures. We have used plotly to illustrate patterns in data to collaborators, to visualize patterns in our data during the pre-analysis stage, and even impress with "fancy" graphics during a conference talk! 
+
+Let's try plotly together using some of the `iris` data: 
+
+```{r, warning = F, message =F}
+library(plotly)
+
+plot.iris <- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, fill=Species)) +
+  geom_point(size=3, alpha=0.7, shape=21)
+
+plotly::ggplotly(plot.iris) #it's as simple as that! 
+
+
+```
+
+## Saving Figures and Plots 
+
+A plot you created with ggplot or another plotting package can be saved as .JPEGS (or .tiff, .img, etc) onto you. For any ggplot objects, we recommend using `ggsave`. 
+
+Let's start by making a plot together with our `survey` data using only data that is for Rodents in years after 2000:  
+
+```{r, warning = F, message = F}
+
+# load data
+surveys <- read_csv('data/combined.csv') # the combined.csv is 3.1 MB in size
+
+# filter to years > 2000 and only rodents
+rodents2001 <- surveys %>% filter(year > 2000 & taxa == "Rodent")
+
+rodents2001 %>% ggplot()+
+        geom_point(aes(x=hindfoot_length, y = weight, color = sex))
+```
+`ggsave` allows us to easily save this plot. First, let's create a new folder in this project called `figures`. Let's save all the figures we create to that folder. `ggsave` will default to saving the last plot you created, however, we think it is always a good idea to specify exactly which plot you want saved. To do that, we have to save our plot as an object. 
+
+```{r, eval = F}
+#saving plot as an object
+rodent_plot <- rodents2001 %>% ggplot()+
+        geom_point(aes(x=hindfoot_length, y = weight, color = sex))
+
+ggsave("figures/rodent1.png", rodent_plot)
+```
+#### With `ggsave` you can save images as
+
+ - .png, .jpeg, .tiff, .pdf, .bmp, or .svg
+
+#### Other arguments of `ggsave`
+
+ - `scale` can scale the image (multiplicative scaling factor)
+ - `width` and `height` let you specify the size of the image in `units` that you specify
+ - `dpi` can change the quality of the image; for publication graphs we suggest over 700 dpi
+
+```{r, eval = F}
+
+ggsave("figures/rodent2.png", rodent_plot, width = 4, height = 3, units = "in", dpi = 500)
+
+```
+
+
+## Excel & GoogleSheets
+
+ - [`readxl`](http://readxl.tidyverse.org/) (Part of `tidyverse`)
+ - Jenny Bryan's `googlesheets` or [`googledrive`](http://googledrive.tidyverse.org/) packages
+
+## Other File Types
+
+ - Using the `foreign` package
+ - reading in `.dbf`, *Stata*, *SAS*, *SPSS*, `.shp`, `.netcdf`, `raster`, `.kml`, `gpx`, `xml`, `geojson`, `json`, etc....
+ 
+## `rio` Package
+
+One other data import/export package to check out is called `rio`. It uses two main functions: `import` and `export`, and it automatically detects the file extension you're using, then picks the fastest function out of a bunch of different specialized packages. It can streamline your data import/export and give you more consistent data frames when you're working with lots of different file types.
+
+```{r}
+#install.packages("rio")
+library(rio)
+export(mtcars, "data/mtcars.csv")
+export(mtcars, "data/mtcars.rds")
+export(mtcars, "data/mtcars.tsv")
+```
+
+You can read more about `rio` on its [Github page](https://github.com/leeper/rio).
+
+<br>
+
+This lesson is adapted from the Software Carpentry: R for Reproducible 
+Scientific Analysis [Vectors and Data Frames materials](http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html)
+and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data 
+[Exporting Data materials](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html).

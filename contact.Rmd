@@ -5,6 +5,18 @@ title: "Contact"
 <br>
 
 ## Instructors
+**Tyler Scott**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:tascott@ucdavis.edu)  
+Office Hours: Choose a time slot that works for you via my appointment booker (please schedule 24 hours in advance)
+
+
+**Liza Wood**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
+Office Hours: Choose a time slot that works for you via my appointment booker (please schedule 24 hours in advance)
+
+I am a PhD candidate in the GGE (4th year) studying environmental governance of agricultural systems. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS and **a lot** of muddling through self-teaching, I'm now excited about helping promote data literacy. These days, I use R for analyzing survey data and making interactive ShinyApps to share my summary statistics, as well as analyzing large amounts of text data scraped from online documents.
+
+## Course Creators/Former Instructors  
 
 **Christian John**  
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu) 
@@ -12,46 +24,7 @@ title: "Contact"
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@JepsonNomad](https://twitter.com/JepsonNomad)
 [<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
 
-Office Hours: Thursdays, 2-4 pm ([Virtual Office](https://ucdavis.zoom.us/j/2047192834))  
-
 I am a 4th year student in the GGE studying bighorn sheep migration in the Sierra Nevada Mountains. I use R for analyzing animal movement and landscape-scale patterns in phenology. My recent R package, `phenomap` is a simple tool for mapping snowmelt and green-up timing over space. If you're interested in movement or MODIS, come talk to me.  
-
-**Liza Wood**
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
-
-Office Hours: Mondays, 3-5 pm ([Virtual Office](https://ucdavis.zoom.us/j/3876491023))  
-
-I am a 3rd year student in the GGE studying environmental governance of agricultural systems. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS and **a lot** of muddling through self-teaching, I'm now excited about helping promote data literacy. These days, I use R for scraping the web for large amounts of text data (whether it is Tweets scraped from Twitter or thousands of policy documents from government agency websites) using packages like `twitteR` or `rvest`. Generally, I think R can be a bit overwhelming and I look forward to being a part of the de-mystifying process for new coders!
-
-## Teaching Assistants/Classroom Helpers
-
-**Christine Parisek**  
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
-[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
-[#sierrafishes](https://twitter.com/search?q=%23sierrafishes&src=typed_query&f=live)
-
-I am a 3rd year PhD student and freshwater ecologist in GGE. I currently study mountain lake fishes and mechanisms that govern their food web's structure and function. My interests range from local scale trophic dynamics in Sierra Nevada lakes, to landscape and global scale patterns in lake distributions. I find working in R to be a bit like a puzzle. It's gratifying to piece together bits of what I know, what I don’t, and ‘solving’ the puzzle to get what I need done. I used to think that people who helped me with my code must just be gifted R wizaRds. Yet an experienced coder once said to me that their knowledge just came from having made that many more coding mistakes over time! I was a novice in R when I was a 1st year, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!
-
-**Conor Higgins**
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
-
-I’m a 3rd year student in the GGE studying arctic community interactions.  Specifically, I study the relationship between a Greenlandic muskox population and the timing of life history events (phenology) for the plants they consume. I had never used R before grad school, and if I'm honest with myself, I felt so uncomfortable using it at first that my favorite part of R-Davis was closing everything down at the end of each class.  It took a while, but little by little, I've become more comfortable.  I now use R regularly to analyze my data...shout out R-Davis and Google for the help.
-
-**Nick Framsted**
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:ntframsted@ucdavis.edu)
-
-I'm a 2nd year student in GGE studying algal responses to climate change in Lake Tahoe. I became familiar with R while doing a minor in statistics and I currently use it to calculate metabolism in aquatic systems. I really enjoy working in R and it's an awesome tool--even if it can be intimidating at first. I look forward to learning with everyone and honing our programming skills this quarter!
-
-<br>
-
-**Nina Venuti**
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:nevenuti@ucdavis.edu)
-
-I am a second year student in the Graduate Group in Ecology, broadly interested in studying the effects of climate change and interacting disturbances (fire, drought) on plant communities, and the ways in which we, as humans, might better manage and restore ecosystems to increase their resilience to such disturbances. I’m currently studying the effects of fire damage on conifer fecundity in Sierra Nevada mixed conifer forests. I entered grad school with the belief that I would never be able to code (ever), and have started to prove myself wrong with the help of courses like R-Davis, and the support of other graduate students. I consider myself a beginner R-user and look forward to continuing to learn with all of you!
-
-
-
-## Course Creators/Former Instructors
 
 **Michael Culshaw-Maurer** 
 
@@ -108,6 +81,35 @@ I've been using R since 2012, and teaching it since 2014 to a wide variety of fo
 My favorite part of teaching R is helping people make the leap between novice (no programming experience and not really sure how to start) and beginner (writing their own code and knowledgeable about *how* to learn more). 
 
 <br>
+
+## Former Teaching Assistants/Classroom Helpers
+
+**Christine Parisek**  
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:caparisek@ucdavis.edu) 
+[<i class="fa fa-twitter-square" aria-hidden="true"></i> \@caparisek](https://twitter.com/caparisek)
+[#sierrafishes](https://twitter.com/search?q=%23sierrafishes&src=typed_query&f=live)
+
+I am a 3rd year PhD student and freshwater ecologist in GGE. I currently study mountain lake fishes and mechanisms that govern their food web's structure and function. My interests range from local scale trophic dynamics in Sierra Nevada lakes, to landscape and global scale patterns in lake distributions. I find working in R to be a bit like a puzzle. It's gratifying to piece together bits of what I know, what I don’t, and ‘solving’ the puzzle to get what I need done. I used to think that people who helped me with my code must just be gifted R wizaRds. Yet an experienced coder once said to me that their knowledge just came from having made that many more coding mistakes over time! I was a novice in R when I was a 1st year, but through the R-Davis course I gained confidence in coding and code problem-solving. Hopefully you enjoy the experience too!
+
+**Conor Higgins**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rchiggins@ucdavis.edu) 
+
+I’m a 3rd year student in the GGE studying arctic community interactions.  Specifically, I study the relationship between a Greenlandic muskox population and the timing of life history events (phenology) for the plants they consume. I had never used R before grad school, and if I'm honest with myself, I felt so uncomfortable using it at first that my favorite part of R-Davis was closing everything down at the end of each class.  It took a while, but little by little, I've become more comfortable.  I now use R regularly to analyze my data...shout out R-Davis and Google for the help.
+
+**Nick Framsted**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:ntframsted@ucdavis.edu)
+
+I'm a 2nd year student in GGE studying algal responses to climate change in Lake Tahoe. I became familiar with R while doing a minor in statistics and I currently use it to calculate metabolism in aquatic systems. I really enjoy working in R and it's an awesome tool--even if it can be intimidating at first. I look forward to learning with everyone and honing our programming skills this quarter!
+
+<br>
+
+**Nina Venuti**
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:nevenuti@ucdavis.edu)
+
+I am a second year student in the Graduate Group in Ecology, broadly interested in studying the effects of climate change and interacting disturbances (fire, drought) on plant communities, and the ways in which we, as humans, might better manage and restore ecosystems to increase their resilience to such disturbances. I’m currently studying the effects of fire damage on conifer fecundity in Sierra Nevada mixed conifer forests. I entered grad school with the belief that I would never be able to code (ever), and have started to prove myself wrong with the help of courses like R-Davis, and the support of other graduate students. I consider myself a beginner R-user and look forward to continuing to learn with all of you!
+
+
+
 
 
 ## Data Carpentry  

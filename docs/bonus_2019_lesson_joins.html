@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Multi-table joins</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Multi-table joins</h1>
+
+</div>
+
+
+<blockquote>
+<h2 id="learning-objectives">Learning objectives</h2>
+<ul>
+<li>Focus on the third tidy data principle
+<ul>
+<li>Each variable forms a column.</li>
+<li>Each observation forms a row.</li>
+<li>Each type of observational unit forms a table.</li>
+</ul></li>
+<li>Be able to use <code>dplyr</code>’s join functions to merge tables</li>
+</ul>
+</blockquote>
+<div id="joins" class="section level3">
+<h3>Joins</h3>
+<p>The third tidy data maxim states that each observation type gets its own table. The idea of multiple tables within a dataset will be familiar to anyone who has worked with a relational database but may seem foreign to those who have not.</p>
+<p>The idea is this: Suppose we conduct a behavioral experiment that puts individuals in groups, and we measure both individual- and group-level variables. We should have a table for the individual-level variables and a separate table for the group-level variables. Then, should we need to merge them, we can do so using the <code>join</code> functions of <code>dplyr</code>.</p>
+<p>The join functions are nicely illustrated in RStudio’s <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data wrangling cheatsheet</a>. Each function takes two data.frames and, optionally, the name(s) of columns on which to match. If no column names are provided, the functions match on all shared column names.</p>
+<p>The different join functions control what happens to rows that exist in one table but not the other.</p>
+<ul>
+<li><code>left_join</code> keeps all the entries that are present in the left (first) table and excludes any that are only in the right table.</li>
+<li><code>right_join</code> keeps all the entries that are present in the right table and excludes any that are only in the left table.</li>
+<li><code>inner_join</code> keeps only the entries that are present in both tables. <code>inner_join</code> is the only function that guarantees you won’t generate any missing entries.</li>
+<li><code>full_join</code> keeps all of the entries in both tables, regardless of whether or not they appear in the other table.</li>
+</ul>
+<div class="figure">
+<img src="img/dplyr-joins.png" alt="" />
+<p class="caption">dplyr joins, via RStudio</p>
+</div>
+</div>
+<div id="practice-with-joins" class="section level1">
+<h1>Practice with joins</h1>
+<div id="fabricate-some-example-data" class="section level2">
+<h2>Fabricate some example data</h2>
+<pre class="r"><code>set.seed(12345)
+x &lt;- data.frame(key= LETTERS[c(1:3, 5)], 
+                value1 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+y &lt;- data.frame(key= LETTERS[c(1:4)], 
+                value2 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+
+x</code></pre>
+<pre><code>##   key value1
+## 1   A      3
+## 2   B      8
+## 3   C      2
+## 4   E      5</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>##   key value2
+## 1   A      8
+## 2   B      2
+## 3   C      6
+## 4   D      3</code></pre>
+</div>
+<div id="joining-joins" class="section level2">
+<h2>“Joining” joins</h2>
+<pre class="r"><code># What&#39;s in both x and y?
+inner_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1 value2
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6</code></pre>
+<pre class="r"><code># What&#39;s in X and bring with it the stuff that matches in Y
+left_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1 value2
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   E      5     NA</code></pre>
+<pre class="r"><code># What&#39;s in Y and bring with it the stuff that matches in Y
+right_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1 value2
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   D     NA      3</code></pre>
+<pre class="r"><code># Give me everything!
+full_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1 value2
+## 1   A      3      8
+## 2   B      8      2
+## 3   C      2      6
+## 4   E      5     NA
+## 5   D     NA      3</code></pre>
+</div>
+<div id="filtering-joins" class="section level2">
+<h2>Filtering “joins”</h2>
+<pre class="r"><code># Give me the stuff in X that is also in Y
+semi_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1
+## 1   A      3
+## 2   B      8
+## 3   C      2</code></pre>
+<pre class="r"><code># Give me the stuff in X that is not in Y
+anti_join(x, y, by = &quot;key&quot;)</code></pre>
+<pre><code>##   key value1
+## 1   E      5</code></pre>
+<pre class="r"><code># Want everything that doesn&#39;t match?
+full_join(anti_join(x,y, by = &quot;key&quot;), anti_join(y,x, by = &quot;key&quot;), by= &quot;key&quot;)</code></pre>
+<pre><code>##   key value1 value2
+## 1   E      5     NA
+## 2   D     NA      3</code></pre>
+<pre class="r"><code># keys with different names?
+x &lt;- data.frame(keyX = LETTERS[c(1:3, 5)], 
+                value1 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+y &lt;- data.frame(keyY = LETTERS[c(1:4)], 
+                value2 = sample(1:10, 4), 
+                stringsAsFactors = FALSE)
+
+x</code></pre>
+<pre><code>##   keyX value1
+## 1    A      6
+## 2    B      7
+## 3    C     10
+## 4    E      2</code></pre>
+<pre class="r"><code>y</code></pre>
+<pre><code>##   keyY value2
+## 1    A      1
+## 2    B      8
+## 3    C      7
+## 4    D      6</code></pre>
+<pre class="r"><code>full_join(x, y) #should error out</code></pre>
+<pre><code>## Error: `by` must be supplied when `x` and `y` have no common variables.
+## ℹ use by = character()` to perform a cross-join.</code></pre>
+<pre class="r"><code>full_join(x, y, by=c(&quot;keyX&quot; = &quot;keyY&quot;))</code></pre>
+<pre><code>##   keyX value1 value2
+## 1    A      6      1
+## 2    B      7      8
+## 3    C     10      7
+## 4    E      2     NA
+## 5    D     NA      6</code></pre>
+</div>
+</div>
+<div id="set-operations" class="section level1">
+<h1>Set Operations</h1>
+<pre class="r"><code>df1 &lt;- data_frame(x = LETTERS[1:2], 
+                  y = c(1L, 1L))</code></pre>
+<pre><code>## Warning: `data_frame()` was deprecated in tibble 1.1.0.
+## Please use `tibble()` instead.</code></pre>
+<pre class="r"><code>df2 &lt;- data_frame(x = LETTERS[1:2], 
+                  y = 1:2)
+
+df1</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 A         1
+## 2 B         1</code></pre>
+<pre class="r"><code>df2</code></pre>
+<pre><code>## # A tibble: 2 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 A         1
+## 2 B         2</code></pre>
+<pre class="r"><code># Which rows are common in both datasets?
+dplyr::intersect(df1, df2)</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 A         1</code></pre>
+<pre class="r"><code>#Want all unique rows between both datasets?
+dplyr::union(df1, df2)</code></pre>
+<pre><code>## # A tibble: 3 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 A         1
+## 2 B         1
+## 3 B         2</code></pre>
+<pre class="r"><code>#What&#39;s unique to df1?
+dplyr::setdiff(df1, df2)</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 B         1</code></pre>
+<pre class="r"><code>#What&#39;s unique to df2?
+dplyr::setdiff(df2, df1)</code></pre>
+<pre><code>## # A tibble: 1 × 2
+##   x         y
+##   &lt;chr&gt; &lt;int&gt;
+## 1 B         2</code></pre>
+</div>
+<div id="practice-with-joins-using-gapminder" class="section level1">
+<h1>Practice with joins using gapminder</h1>
+<p>We will practice on our continents data.frame from module 2 and the gapminder data.frame. Note how these are tidy data: We have observations at the level of continent and at the level of country, so they go in different tables. The continent column in the gapminder data.frame allows us to link them now. If continents data.frame isn’t in your Environment, load it and recall what it consists of:</p>
+<pre class="r"><code>load(&#39;data/continents.RDA&#39;)
+continents</code></pre>
+<pre><code>##    continent area_km2 population percent_total_pop
+## 1     Africa 30370000 1022234000              15.0
+## 2   Americas 42330000  934611000              14.0
+## 3 Antarctica 13720000       4490               0.0
+## 4       Asia 43820000 4164252000              60.0
+## 5     Europe 10180000  738199000              11.0
+## 6    Oceania  9008500   29127000               0.4</code></pre>
+<p>We can join the two data.frames using any of the <code>dplyr</code> functions. We will pass the results to <code>str</code> to avoid printing more than we can read, and to get more high-level information on the resulting data.frames.</p>
+<pre class="r"><code>left_join(gapminder, continents) </code></pre>
+<pre><code>## Joining, by = &quot;continent&quot;</code></pre>
+<pre><code>## # A tibble: 1,704 × 9
+##    country      year      pop continent lifeExp gdpPercap area_km2 population percent_total_pop
+##    &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;             &lt;dbl&gt;
+##  1 Afghanistan  1952  8425333 Asia         28.8      779. 43820000 4164252000                60
+##  2 Afghanistan  1957  9240934 Asia         30.3      821. 43820000 4164252000                60
+##  3 Afghanistan  1962 10267083 Asia         32.0      853. 43820000 4164252000                60
+##  4 Afghanistan  1967 11537966 Asia         34.0      836. 43820000 4164252000                60
+##  5 Afghanistan  1972 13079460 Asia         36.1      740. 43820000 4164252000                60
+##  6 Afghanistan  1977 14880372 Asia         38.4      786. 43820000 4164252000                60
+##  7 Afghanistan  1982 12881816 Asia         39.9      978. 43820000 4164252000                60
+##  8 Afghanistan  1987 13867957 Asia         40.8      852. 43820000 4164252000                60
+##  9 Afghanistan  1992 16317921 Asia         41.7      649. 43820000 4164252000                60
+## 10 Afghanistan  1997 22227415 Asia         41.8      635. 43820000 4164252000                60
+## # … with 1,694 more rows</code></pre>
+<pre class="r"><code>right_join(gapminder, continents)</code></pre>
+<pre><code>## Joining, by = &quot;continent&quot;</code></pre>
+<pre><code>## # A tibble: 1,705 × 9
+##    country      year      pop continent lifeExp gdpPercap area_km2 population percent_total_pop
+##    &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;             &lt;dbl&gt;
+##  1 Afghanistan  1952  8425333 Asia         28.8      779. 43820000 4164252000                60
+##  2 Afghanistan  1957  9240934 Asia         30.3      821. 43820000 4164252000                60
+##  3 Afghanistan  1962 10267083 Asia         32.0      853. 43820000 4164252000                60
+##  4 Afghanistan  1967 11537966 Asia         34.0      836. 43820000 4164252000                60
+##  5 Afghanistan  1972 13079460 Asia         36.1      740. 43820000 4164252000                60
+##  6 Afghanistan  1977 14880372 Asia         38.4      786. 43820000 4164252000                60
+##  7 Afghanistan  1982 12881816 Asia         39.9      978. 43820000 4164252000                60
+##  8 Afghanistan  1987 13867957 Asia         40.8      852. 43820000 4164252000                60
+##  9 Afghanistan  1992 16317921 Asia         41.7      649. 43820000 4164252000                60
+## 10 Afghanistan  1997 22227415 Asia         41.8      635. 43820000 4164252000                60
+## # … with 1,695 more rows</code></pre>
+<p>These operations produce slightly different results, either 1704 or 1705 observations. Can you figure out why? Antarctica contains no countries so doesn’t appear in the gapminder data.frame. When we use <code>left_join</code> it gets filtered from the results, but when we use <code>right_join</code> it appears, with missing values for all of the country-level variables:</p>
+<pre class="r"><code>right_join(gapminder, continents) %&gt;% 
+  filter(continent == &quot;Antarctica&quot;)</code></pre>
+<pre><code>## Joining, by = &quot;continent&quot;</code></pre>
+<pre><code>## # A tibble: 1 × 9
+##   country  year   pop continent  lifeExp gdpPercap area_km2 population percent_total_pop
+##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;             &lt;dbl&gt;
+## 1 &lt;NA&gt;       NA    NA Antarctica      NA        NA 13720000       4490                 0</code></pre>
+<p>There’s another problem in this data.frame – it has two population measures, one by continent and one by country and it’s not clear which is which! Let’s rename a couple of columns.</p>
+<pre class="r"><code>right_join(gapminder, continents) %&gt;% 
+  rename(country_pop = pop, continent_pop = population)</code></pre>
+<pre><code>## Joining, by = &quot;continent&quot;</code></pre>
+<pre><code>## # A tibble: 1,705 × 9
+##    country      year country_pop continent lifeExp gdpPercap area_km2 continent_pop percent_total_p…
+##    &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Afghanistan  1952     8425333 Asia         28.8      779. 43820000    4164252000               60
+##  2 Afghanistan  1957     9240934 Asia         30.3      821. 43820000    4164252000               60
+##  3 Afghanistan  1962    10267083 Asia         32.0      853. 43820000    4164252000               60
+##  4 Afghanistan  1967    11537966 Asia         34.0      836. 43820000    4164252000               60
+##  5 Afghanistan  1972    13079460 Asia         36.1      740. 43820000    4164252000               60
+##  6 Afghanistan  1977    14880372 Asia         38.4      786. 43820000    4164252000               60
+##  7 Afghanistan  1982    12881816 Asia         39.9      978. 43820000    4164252000               60
+##  8 Afghanistan  1987    13867957 Asia         40.8      852. 43820000    4164252000               60
+##  9 Afghanistan  1992    16317921 Asia         41.7      649. 43820000    4164252000               60
+## 10 Afghanistan  1997    22227415 Asia         41.8      635. 43820000    4164252000               60
+## # … with 1,695 more rows</code></pre>
+<blockquote>
+<h4 id="challenge-putting-the-pieces-together">Challenge – Putting the pieces together</h4>
+<p>A colleague suggests that the more land area an individual has, the greater their gdp will be and that this relationship will be observable at any scale of observation. You chuckle and mutter “Not at the continental scale,” but your colleague insists. Test your colleague’s hypothesis by:</p>
+<ul>
+<li>Calculating the total GDP of each continent, - Hint: Use <code>dplyr</code>’s <code>group_by</code> and <code>summarize</code></li>
+<li>Joining the resulting data.frame to the <code>continents</code> data.frame,</li>
+<li>Calculating the per-capita GDP for each continent, and</li>
+<li>Plotting per-capita gdp versus population density.</li>
+</ul>
+</blockquote>
+<div id="challenge-solutions" class="section level2">
+<h2>Challenge solutions</h2>
+<blockquote>
+<h4 id="solution-to-challenge-putting-the-pieces-together">Solution to Challenge – Putting the pieces together</h4>
+<pre class="r"><code>library(ggplot2)
+
+gapminder %&gt;%
+  mutate(GDP = gdpPercap * pop) %&gt;%  # Calculate country-level GDP
+  group_by(continent) %&gt;%  # Group by continent
+  summarize(cont_gdp = sum(GDP)) %&gt;%  # Calculate continent-level GDP
+# Join the continent-GDP data.frame to the continents data.frame
+    left_join(continents) %&gt;%  
+# Calculate continent-level per-capita GDP
+    mutate(per_cap = cont_gdp / population) %&gt;%  
+# Plot gdp versus land area
+    ggplot(aes(x = area_km2, y = per_cap)) +  
+# Draw points
+    geom_point() +  
+# And label them
+    geom_text(aes(label = continent), nudge_y = 5e3)  </code></pre>
+<pre><code>## Joining, by = &quot;continent&quot;</code></pre>
+<p><img src="bonus_2019_lesson_joins_files/figure-html/Putting%20the%20pieces%20together%20-%20solution-1.png" width="672" /></p>
+</blockquote>
+</div>
+</div>
+<div id="practice-with-joins-using-surveys" class="section level1">
+<h1>Practice with joins using surveys</h1>
+<p>To illustrate how to use <strong><code>dplyr</code></strong> with these complex queries, we are going to join the <code>plots</code> and <code>surveys</code> tables. The <code>plots</code> table in the database contains information about the different plots surveyed by the researchers.</p>
+<p>The datasets can be found here: <a href="data/plots.csv">plots.csv</a>, <a href="data/surveys.csv">surveys.csv</a>, and <a href="data/species.csv">species.csv</a>.</p>
+<p>Download them and save them to your downloads folder. Alternatively, copy the link and use the <code>read_csv()</code> function directly on that.</p>
+<pre class="r"><code>plots &lt;- read_csv(&quot;data/plots.csv&quot;)</code></pre>
+<pre><code>## Rows: 24 Columns: 2</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (1): plot_type
+## dbl (1): plot_id</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>plots</code></pre>
+<pre><code>## # A tibble: 24 × 2
+##    plot_id plot_type                
+##      &lt;dbl&gt; &lt;chr&gt;                    
+##  1       1 Spectab exclosure        
+##  2       2 Control                  
+##  3       3 Long-term Krat Exclosure 
+##  4       4 Control                  
+##  5       5 Rodent Exclosure         
+##  6       6 Short-term Krat Exclosure
+##  7       7 Rodent Exclosure         
+##  8       8 Control                  
+##  9       9 Spectab exclosure        
+## 10      10 Rodent Exclosure         
+## # … with 14 more rows</code></pre>
+<p>The <code>plot_id</code> column also features in the <code>surveys</code> table:</p>
+<pre class="r"><code>surveys &lt;- read_csv(&quot;data/surveys.csv&quot;)</code></pre>
+<pre><code>## Rows: 35549 Columns: 9</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): species_id, sex
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>surveys</code></pre>
+<pre><code>## # A tibble: 35,549 × 9
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;
+##  1         1     7    16  1977       2 NL         M                  32     NA
+##  2         2     7    16  1977       3 NL         M                  33     NA
+##  3         3     7    16  1977       2 DM         F                  37     NA
+##  4         4     7    16  1977       7 DM         M                  36     NA
+##  5         5     7    16  1977       3 DM         M                  35     NA
+##  6         6     7    16  1977       1 PF         M                  14     NA
+##  7         7     7    16  1977       2 PE         F                  NA     NA
+##  8         8     7    16  1977       1 DM         M                  37     NA
+##  9         9     7    16  1977       1 DM         F                  34     NA
+## 10        10     7    16  1977       6 PF         F                  20     NA
+## # … with 35,539 more rows</code></pre>
+<p>Because <code>plot_id</code> is listed in both tables, we can use it to look up matching records, and join the two tables.</p>
+<div class="figure">
+<img src="img/joins.svg" alt="" />
+<p class="caption">diagram illustrating inner and left joins</p>
+</div>
+<p>For example, to extract all surveys for the first plot, which has <code>plot_id</code> 1, we can do:</p>
+<pre class="r"><code>plots %&gt;%
+  filter(plot_id == 1) %&gt;%
+  inner_join(surveys)</code></pre>
+<pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
+<pre><code>## # A tibble: 1,995 × 10
+##    plot_id plot_type         record_id month   day  year species_id sex   hindfoot_length weight
+##      &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;
+##  1       1 Spectab exclosure         6     7    16  1977 PF         M                  14     NA
+##  2       1 Spectab exclosure         8     7    16  1977 DM         M                  37     NA
+##  3       1 Spectab exclosure         9     7    16  1977 DM         F                  34     NA
+##  4       1 Spectab exclosure        78     8    19  1977 PF         M                  16      9
+##  5       1 Spectab exclosure        80     8    19  1977 DS         M                  48     NA
+##  6       1 Spectab exclosure       218     9    13  1977 PF         M                  13      4
+##  7       1 Spectab exclosure       222     9    13  1977 DS         M                  52     NA
+##  8       1 Spectab exclosure       239     9    13  1977 DS         M                  48     NA
+##  9       1 Spectab exclosure       263    10    16  1977 DM         M                  37     40
+## 10       1 Spectab exclosure       270    10    16  1977 DM         F                  36     38
+## # … with 1,985 more rows</code></pre>
+<blockquote>
+<h3 id="challenge">Challenge</h3>
+<p>Write some code that returns the number of rodents observed in each plot in each year. Start by reading in the species dataframe.</p>
+<pre class="r"><code>species &lt;- read_csv(&quot;data/species.csv&quot;)</code></pre>
+<pre><code>## Rows: 54 Columns: 4</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (4): species_id, genus, species, taxa</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>Hint: All the information you need isn’t contained in one single dataframe just yet. The “taxa” information is contained in the species dataframe, and the observation data is contained in the surveys dataframe. Write some code that joins the species and survey tables together on a common column. What are the common columns?</p>
+<p>Hint: How would you use a split-apply-combine strategy to count the number of observations <em>per plot, per year</em>? Which part of this hint refers to the “splitting”, and which part refers to the “applying”?</p>
+<p>Hint: How would you subset the resulting dataframe to just include the rodents?</p>
+<pre class="r"><code>glimpse(surveys)</code></pre>
+<pre><code>## Rows: 35,549
+## Columns: 9
+## $ record_id       &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, …
+## $ month           &lt;dbl&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,…
+## $ day             &lt;dbl&gt; 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16,…
+## $ year            &lt;dbl&gt; 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977, 1977,…
+## $ plot_id         &lt;dbl&gt; 2, 3, 2, 7, 3, 1, 2, 1, 1, 6, 5, 7, 3, 8, 6, 4, 3, 2, 4, 11, 14, 15, 13…
+## $ species_id      &lt;chr&gt; &quot;NL&quot;, &quot;NL&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;PF&quot;, &quot;PE&quot;, &quot;DM&quot;, &quot;DM&quot;, &quot;PF&quot;, &quot;DS&quot;, &quot;DM&quot;,…
+## $ sex             &lt;chr&gt; &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, &quot;M&quot;, &quot;F&quot;, &quot;M&quot;, &quot;F&quot;, &quot;F&quot;, &quot;F&quot;, &quot;M&quot;, &quot;M&quot;, NA, &quot;F…
+## $ hindfoot_length &lt;dbl&gt; 32, 33, 37, 36, 35, 14, NA, 37, 34, 20, 53, 38, 35, NA, 36, 36, 48, 22,…
+## $ weight          &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
+<pre class="r"><code>glimpse(species)</code></pre>
+<pre><code>## Rows: 54
+## Columns: 4
+## $ species_id &lt;chr&gt; &quot;AB&quot;, &quot;AH&quot;, &quot;AS&quot;, &quot;BA&quot;, &quot;CB&quot;, &quot;CM&quot;, &quot;CQ&quot;, &quot;CS&quot;, &quot;CT&quot;, &quot;CU&quot;, &quot;CV&quot;, &quot;DM&quot;, &quot;DO&quot;…
+## $ genus      &lt;chr&gt; &quot;Amphispiza&quot;, &quot;Ammospermophilus&quot;, &quot;Ammodramus&quot;, &quot;Baiomys&quot;, &quot;Campylorhynchus&quot;…
+## $ species    &lt;chr&gt; &quot;bilineata&quot;, &quot;harrisi&quot;, &quot;savannarum&quot;, &quot;taylori&quot;, &quot;brunneicapillus&quot;, &quot;melanoc…
+## $ taxa       &lt;chr&gt; &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Rodent&quot;, &quot;Bird&quot;, &quot;Bird&quot;, &quot;Bird&quot;, &quot;Reptile&quot;, &quot;Rept…</code></pre>
+<pre class="r"><code>## with dplyr syntax
+
+surveys %&gt;% 
+  left_join(species) %&gt;%
+  group_by(plot_id, taxa, year) %&gt;%
+  summarize(n = n()) %&gt;% 
+  filter(taxa == &quot;Rodent&quot;)</code></pre>
+<pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;, &#39;taxa&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 619 × 4
+## # Groups:   plot_id, taxa [24]
+##    plot_id taxa    year     n
+##      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;int&gt;
+##  1       1 Rodent  1977    22
+##  2       1 Rodent  1978    57
+##  3       1 Rodent  1979    26
+##  4       1 Rodent  1980    75
+##  5       1 Rodent  1981    79
+##  6       1 Rodent  1982   109
+##  7       1 Rodent  1983   129
+##  8       1 Rodent  1984    49
+##  9       1 Rodent  1985   102
+## 10       1 Rodent  1986    57
+## # … with 609 more rows</code></pre>
+<pre class="r"><code># Alternatively, filter to rodents *before* summarizing by plot and year
+surveys %&gt;% 
+  left_join(species) %&gt;%
+  filter(taxa == &quot;Rodent&quot;) %&gt;% 
+  group_by(plot_id, year) %&gt;%
+  summarize(n = n())</code></pre>
+<pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## # A tibble: 619 × 3
+## # Groups:   plot_id [24]
+##    plot_id  year     n
+##      &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+##  1       1  1977    22
+##  2       1  1978    57
+##  3       1  1979    26
+##  4       1  1980    75
+##  5       1  1981    79
+##  6       1  1982   109
+##  7       1  1983   129
+##  8       1  1984    49
+##  9       1  1985   102
+## 10       1  1986    57
+## # … with 609 more rows</code></pre>
+</blockquote>
+<blockquote>
+<h3 id="challenge-1">Challenge</h3>
+<p>Write some code that returns the total number of rodents in each genus caught in the different plot types.</p>
+<p>Hint: Not all the data you need are contained in 1 dataframe. The plot_type data are in the plots dataframe, the taxa data are in the species dataframe, and the observation data are in the surveys dataframe. Start by joining these three dataframes together.</p>
+<p>Hint: Think “split-apply-combine”. We want to <em>count</em> the number of observations in each group defined by <code>plot_type</code> and <code>genus</code> combinations. That is, what is the count of observations <em>per plot_type, per genus</em> for <em>just the Rodent taxa</em>.</p>
+<pre class="r"><code>genus_counts &lt;- 
+  surveys %&gt;% 
+  left_join(plots) %&gt;%
+  left_join(species) %&gt;% 
+  filter(taxa == &quot;Rodent&quot;) %&gt;% 
+  group_by(plot_type, genus, taxa) %&gt;%
+  summarize(n = n())</code></pre>
+<pre><code>## Joining, by = &quot;plot_id&quot;</code></pre>
+<pre><code>## Joining, by = &quot;species_id&quot;</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_type&#39;, &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>genus_counts</code></pre>
+<pre><code>## # A tibble: 59 × 4
+## # Groups:   plot_type, genus [59]
+##    plot_type genus            taxa       n
+##    &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;  &lt;int&gt;
+##  1 Control   Ammospermophilus Rodent   125
+##  2 Control   Baiomys          Rodent     1
+##  3 Control   Chaetodipus      Rodent  1902
+##  4 Control   Dipodomys        Rodent  9847
+##  5 Control   Neotoma          Rodent   610
+##  6 Control   Onychomys        Rodent  1481
+##  7 Control   Perognathus      Rodent   435
+##  8 Control   Peromyscus       Rodent   464
+##  9 Control   Reithrodontomys  Rodent   415
+## 10 Control   Rodent           Rodent     5
+## # … with 49 more rows</code></pre>
+</blockquote>
+<p><br></p>
+<p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/12-joins.html">Multi-Table Joins materials</a>, Brandon Hurr’s dplyr II: Joins and Set Ops <a href="https://github.com/bhive01/2016-02-D-RUG-dplyr-II-talk">presentation</a> to the Davis R UsersGroup on Februrary 2, 2016, and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html">R and Databases materials</a>.</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

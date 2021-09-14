@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Best Practices for Spreadsheets</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Best Practices for Spreadsheets</h1>
+<h3 class="subtitle">Or, How I Learned to Stop Worrying and Think Like R</h3>
+
+</div>
+
+
+<br>
+<div id="learning-objectives" class="section level1 blue">
+<h1>Learning objectives</h1>
+<ul>
+<li>Understand how to format raw data to be “tidy”</li>
+<li>Know common data formatting/data entry mistakes to avoid</li>
+<li>Introduction to dates as data</li>
+</ul>
+</div>
+<p><br></p>
+<p>This lesson is adapted from <a href="https://datacarpentry.org/spreadsheet-ecology-lesson/">Data Carpentry’s Data Organization in Spreadsheets for Ecologists</a>.</p>
+<div id="formatting" class="section level1">
+<h1>Formatting</h1>
+<ul>
+<li>Never modify your raw data. Always make a copy before making any changes.<br />
+</li>
+<li>Keep track of all of the steps you take to clean your data in a plain text file.</li>
+</ul>
+<p><img src="figures/spreadsheet_fig/spreadsheet-setup-updated.png" alt="spreadsheet setup" /></p>
+<ul>
+<li>Organize your data according to <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data principles</a>.
+<ul>
+<li>Each column is a variable like “weight” or “site_ID”</li>
+<li>Each row is a single observation</li>
+<li>Don’t combine pieces of information in a single cell</li>
+</ul></li>
+</ul>
+<p>This is bad:</p>
+<p><img src="figures/spreadsheet_fig/multiple-info.png" alt="multiple-info example" /></p>
+<p>Why? Species and sex should be split into separate columns.</p>
+</div>
+<div id="avoiding-common-mistakes" class="section level1">
+<h1>Avoiding Common Mistakes</h1>
+<ul>
+<li><p>Avoid using multiple tables within one spreadsheet.</p></li>
+<li><p>Avoid spreading data across multiple tabs.</p>
+<ul>
+<li>Programs other than Excel will have a tough time seeing tabs</li>
+<li>Instead of adding a new tab, keep adding rows, and maybe use a new column for the info you’d be splitting across tabs. For example, use a column for Year instead of a new tab for a new year.</li>
+<li>If your table gets big, <a href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">freeze your column headers</a> to make them easier to see while you scroll.</li>
+</ul></li>
+<li><p>Record zeros as zeros.</p>
+<ul>
+<li>Zeros are data! Don’t use blanks, and don’t use zeros as null values</li>
+</ul></li>
+<li><p>Use an appropriate null value to record missing data.</p>
+<ul>
+<li>There’s a broader discussion of this in <a href="https://peerj.com/preprints/7/">White et al 2013</a>, but here’s a quick look at their recommendations:</li>
+</ul>
+<p><img src="figures/spreadsheet_fig/3_white_table_1.jpg" alt="White et al." /></p></li>
+<li><p>Don’t use formatting to convey information or to make your spreadsheet look pretty.</p>
+<ul>
+<li>R won’t see cell colors or bold fonts</li>
+<li>Keep data as characters or numbers</li>
+</ul></li>
+<li><p>Place comments in a separate column.</p>
+<ul>
+<li>Don’t use Excel’s “comments” functionality, other programs don’t recognize these</li>
+<li>Just use a separate text column</li>
+</ul></li>
+<li><p>Record units in column headers.</p>
+<ul>
+<li>Don’t put units in your data cells!</li>
+<li>10cm will be read as characters, not numbers</li>
+</ul></li>
+<li><p>Include only one piece of information in a cell.</p></li>
+<li><p>Avoid spaces, numbers and special characters in column headers.</p>
+<table align="center" style="width =80%; border: 1px solid black;">
+<tr>
+<td>
+<p><b>Good Name</b></p>
+</td>
+<p><br /></p>
+<td>
+<p><b>Good Alternative </b></p>
+</td>
+<p><br /></p>
+<td>
+<p><b>Avoid </b></p>
+</td>
+<p><br /></p>
+</tr>
+<tr>
+<td>
+<p>Max_temp_C</p>
+</td>
+<td>
+<p>MaxTemp</p>
+</td>
+<td>
+<p>Maximum Temp (°C)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Precipitation_mm</p>
+</td>
+<td>
+<p>Precipitation</p>
+</td>
+<td>
+<p>precmm</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Mean_year_growth</p>
+</td>
+<td>
+<p>MeanYearGrowth</p>
+</td>
+<td>
+<p>Mean growth/year</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>sex</p>
+</td>
+<td>
+<p>sex</p>
+</td>
+<td>
+<p>M/F</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>weight</p>
+</td>
+<td>
+<p>weight</p>
+</td>
+<td>
+<p>w.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>cell_type</p>
+</td>
+<td>
+<p>CellType</p>
+</td>
+<td>
+<p>Cell Type</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Observation_01</p>
+</td>
+<td>
+<p>first_observation</p>
+</td>
+<td>
+<p>1st Obs</p>
+</td>
+</tr>
+</table></li>
+</ul>
+<p><br/><br/></p>
+<ul>
+<li>Avoid special characters in your data.
+<ul>
+<li>Copy-pasting text into cells (ex. from Word) can do weird stuff</li>
+</ul></li>
+<li>Record metadata in a separate plain text file.
+<ul>
+<li>When in doubt, use a README</li>
+<li>Put metadata in same directory as the data file itself, with an appropriate name</li>
+</ul></li>
+</ul>
+</div>
+<div id="dates-as-data" class="section level1">
+<h1>Dates as Data</h1>
+<ul>
+<li>Excel was apparently created by people who hate time</li>
+<li>Excel stores dates in several different ways
+<ul>
+<li>For Windows, it stores dates as <strong>number of days since Jan 1 1900</strong></li>
+<li>For Mac, it stores dates as <strong>number of days since Jan 1 1904</strong>
+<ul>
+<li>Check for dates that are ~4 years off</li>
+</ul></li>
+<li>Excel’s base is to store dates as numbers, but it dresses them up in different ways, like 9/1/2018 or Sept-1-2018</li>
+</ul></li>
+<li>Excel will often take one entry (Jul-10 for the 10th of July) and interpret it as another (1-July-2010)
+<ul>
+<li>It will even coerce data that aren’t dates into dates</li>
+<li>You have to be very careful, because Excel won’t tell you when it does things like this</li>
+</ul></li>
+<li>Treating dates as multiple pieces of data rather than one makes them easier to handle.
+<ul>
+<li>Use separate columns for year, month, and day</li>
+<li>You can also use columns for year and day-of-year (1 to 365)</li>
+</ul></li>
+<li>Ultimately, avoid letting Excel handle dates, it’s hard to know what it will do</li>
+</ul>
+</div>
+<div id="quality-control" class="section level1">
+<h1>Quality Control</h1>
+<ul>
+<li>Always copy your original spreadsheet file and work with a copy so you don’t affect the raw data.
+<ul>
+<li>It can be helpful to have separate “Raw” and “Clean” data folders</li>
+</ul></li>
+<li>Use data validation to prevent accidentally entering invalid data–this can be especially useful if you have others entering data for you.
+<ol style="list-style-type: decimal">
+<li>Select the cells or column you want to validate</li>
+<li>On the <code>Data</code> tab select <code>Data Validation</code></li>
+<li>In the <code>Allow</code> box select the kind of data that should be in the column. Options include whole numbers, decimals, lists of items, dates, and other values.</li>
+<li>You can then give a range of values or enter a comma-separated list of allowable values in the <code>Source</code> box</li>
+<li>You can use the <code>Input Message</code> tab to customize the error message given when an incorrect value is entered</li>
+</ol>
+<ul>
+<li>“Sorry faithful undergraduate field assistant, we only have plots 1-10”</li>
+<li>You can make incorrect values throw warnings instead of errors using the <code>Style</code> option on the <code>Error Alert</code> tab</li>
+</ul></li>
+<li>Use sorting to check for invalid data.</li>
+<li>Use conditional formatting (cautiously) to check for invalid data.
+<ul>
+<li>Conditional formatting can color cells based on their value</li>
+<li>You can then visually scan for strange values</li>
+<li>Can be useful, but definitely not foolproof</li>
+</ul></li>
+</ul>
+</div>
+<div id="exporting-data" class="section level1">
+<h1>Exporting Data</h1>
+<ul>
+<li>Data stored in common spreadsheet formats will often not be read correctly into data analysis software, introducing errors into your data.
+<ul>
+<li>try not to use .xls or .xlxs or .xxlsxlsxlllslxlsllaslxl or whatever</li>
+</ul></li>
+<li>Exporting data from spreadsheets to formats like CSV or TSV puts it in a format that can be used consistently by most programs.
+<ul>
+<li>Not only will this be easier for R to read, but it is widely recognized and will likely be around for a long time</li>
+<li>CSV and TSV are, ultimately, plain-text files, which are simple and classy and timeless</li>
+</ul></li>
+</ul>
+</div>
+<div id="put-it-all-together" class="section level1">
+<h1>Put It All Together</h1>
+<div id="exercise" class="section level2 blue">
+<h2>Exercise</h2>
+<p>We’re going to take a messy version of the survey data and describe how we would clean it up.</p>
+<ol style="list-style-type: decimal">
+<li>Everyone should already have the data file on your computer in your R_DAVIS_2020 project in a folder called <code>data</code></li>
+<li>Navigate to the <code>data</code> folder in your File Explorer (Windows) or Finder (Mac)</li>
+<li>Open up the data in a spreadsheet program.</li>
+<li>You can see that there are two tabs. Two field assistants conducted the surveys, one in 2013 and one in 2014, and they both kept track of the data in their own way. Now you’re the person in charge of this project and you want to be able to start analyzing the data.<br />
+</li>
+<li>With your breakout room, identify what is wrong with this spreadsheet. Also discuss the steps you would need to take to clean up the 2013 and 2014 tabs, and to put them all together in one spreadsheet.</li>
+</ol>
+<p><strong>Important:</strong> Do not forget our first piece of advice: to create a new file (or tab) for the cleaned data, never modify your original (raw) data.</p>
+<p>After you go through this exercise, we’ll discuss as a group what was wrong with this data and how you would fix it.</p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

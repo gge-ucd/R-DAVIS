@@ -1,0 +1,237 @@
+---
+title: "Dates & Times in R"
+subtitle: Working with datetimes and `lubridate`
+minutes: 30
+---
+
+
+<br>
+<div class = "blue">
+### Learning Objectives
+* Learn the basic date/datetime types in R
+* Gain familiarity with converting dates and timezones
+* Learn how to use the `lubridate` package 
+* Tips and tricks about management of datetime data
+
+</div>
+
+<br>
+
+
+# Date-Times in R
+
+We have learned about different data type classes in previous lessons. Some common data classes we have examined before include character, factor, and numeric. But R also recognizes a data class called "Dates". Having your date data in the "Dates" data class is very useful, as you can then do things like calculate time between two events, transform the dates into different formats, and plot temporal data easily. 
+In this lesson, we are going to introduce how base R deals with dates (`POSIXct` or `POSITlt`), but we are going to spend the majority of our lesson on the package `lubridate`. `lubridate` is a great package that makes it much easier to work with dates and times in R. 
+
+## Date-Time Classes in Base R
+
+Importantly, there are **3** basic time classes in R:
+
+ - **`Dates`** (just dates, i.e., 2012-02-10)
+ - **`POSIXct`** ("**ct**" == calendar time, best class for dates with times)
+ - **`POSIXlt`** ("**lt**" == local time, enables easy extraction of specific components of a time, however, remember that POXIXlt objects are lists)
+
+Unfortunately converting dates & times in R into formats that are computer readable can be frustrating, mainly because there is very little consistency. In particular, if you are importing things from Excel, keep in mind dates can get especially weird^1^, depending on the operating system you are working on, the format of your data, etc.
+
+^*1*^ <sub>*For example Excel stores dates as a number representing days since 1900-Jan-0, plus a fractional portion of a 24 hour day (**serial-time**), but in OSX (Mac), it is 1904-Jan-0.*</sub>
+
+## Dates
+
+The `Date` class in R can easily be converted or operated on numerically, depending on the interest. Let's make a string of dates to use for our example:
+
+```{r}
+sample_dates_1 <- c("2018-02-01", "2018-03-21", "2018-10-05", "2019-01-01", "2019-02-18")
+#notice we have dates across two years here
+```
+
+What is the class that R classifies this data as? 
+
+R classifies our `sample_dates_1` data as character data. Let's transform it into Dates. Notice that our `sample_dates_1` is in a nice format: YYYY-MM-DD. This is the format necessary for the function `as.Date`.
+
+```{r}
+
+sample_dates_1 <- as.Date(sample_dates_1)
+
+```
+
+What happens with different orders...say MM-DD-YYYY? 
+
+```{r sampledates, echo=T, eval=T}
+
+# Some sample dates: 
+
+sample_dates_2 <- c("02-01-2018", "03-21-2018", "10-05-2018", "01-01-2019", "02-18-2019")
+
+sample_dates_3 <-as.Date(sample_dates_2) # well that doesn't work
+
+```
+
+The reason this doesn't work is because the computer expects one thing, but is getting something else. Remember, **write code you can read and your computer can understand**. So we need to give some more information here so R will interpret our data correctly.
+
+```{r sampledates2, echo=T, eval=T}
+
+# Some sample dates:
+sample_dates_2 <- c("02-01-2018", "03-21-2018", "10-05-2018", "01-01-2019", "02-18-2019")
+
+sample_dates_3<- as.Date(sample_dates_2, format = "%m-%d-%Y" ) # date code preceded by "%"
+
+```
+
+
+To see a list of the date-time format codes in R, check out this [page and table](https://www.stat.berkeley.edu/~s133/dates.html), or you can use: `?(strptime)`
+
+The nice thing is this method works well with pretty much any format, you just need to provide the associated codes and structure:
+
+ - `as.Date("2016/01/01", format="%Y/%m/%d")`=`r as.Date("2016/01/01", format="%Y/%m/%d")`
+ 
+ - `as.Date("05A21A2011", format="%mA%dA%Y")`=`r as.Date("05A21A2011", format="%mA%dA%Y")`
+ 
+<div class = "blue">
+### Challenge
+
+Format this date with the `as.Date` function: `Jul 04, 2019`
+
+<details>
+<summary>ANSWER</summary>
+```{r challenge1, purl=FALSE}
+
+as.Date("Jul 04, 2019", format = "%b%d,%Y")
+```
+</details>
+</div>
+
+<br>
+
+## Working with Times in Base R
+
+When working with times, the best class to use in base R is `POSIXct`. 
+
+
+```{r}
+
+tm1 <- as.POSIXct("2016-07-24 23:55:26")
+tm1
+tm2 <- as.POSIXct("25072016 08:32:07", format = "%d%m%Y %H:%M:%S")
+tm2
+
+#Notice how POSIXct automatically uses the timezone your computer is set to. What if we collected this data in a different timezone?
+
+# specify the time zone:
+tm3 <- as.POSIXct("2010-12-01 11:42:03", tz = "GMT")
+tm3
+
+```
+
+
+# The `lubridate` Package
+
+The `lubridate` package will handle 90% of the date & datetime issues you need to deal with. It is fast, much easier to work with, and we recommend using it wherever possible. Do keep in mind sometimes you need to fall back on the base R functions (i.e., `as.Date()`), which is why having a basic understanding of theses functions and their use is important. 
+
+To use `lubridate` we will first need to install and load the package.
+
+```{r, message = F}
+#install.packages("lubridate")
+
+library(lubridate)
+```
+
+`lubridate` has lots of handy functions for converting between date and time formats, and even timezones. 
+
+Let's take a look at our `sample_dates_1` data again.
+
+```{r}
+sample_dates_1 <- c("2018-02-01", "2018-03-21", "2018-10-05", "2019-01-01", "2019-02-18")
+```
+Once again, R reads this in a character data. 
+
+Lubridate uses functions that looks like `ymd` or `mdy` to transform data into the class "Date". Our `sample_dates_1` data is formatted like Year, Month, Day, so we would use the `lubridate` function `ymd` (y = year, m = month, d = day). 
+
+```{r}
+sample_dates_lub <- ymd(sample_dates_1)
+```
+
+What about that messier `sample_dates_2` data? Remember R wants dates to be in the format YYYY-MM-DD. 
+
+```{r}
+sample_dates_2 <- c("2-01-2018", "3-21-2018", "10-05-18", "01-01-2019", "02-18-2019")
+#notice that some numbers for years and months are missing
+
+sample_dates_lub2 <- mdy(sample_dates_2) #lubridate can handle it! 
+```
+
+All sorts of date formats can easily be transformed using `lubridate`:
+
+ - `lubridate::ymd("2016/01/01")`=`r lubridate::ymd("2016/01/01")`
+ - `lubridate::ymd("2011-03-19")`=`r lubridate::ymd("2011-03-19")`
+ - `lubridate::mdy("Feb 19, 2011")`=`r lubridate::mdy("Feb 19, 2011")`
+ - `lubridate::dmy("22051997")`=`r lubridate::dmy("22051997")`
+
+
+## Using `lubridate` for Time and Timezones
+
+`lubridate` has very similar functions to handle data with Times and Timezones. To the `ymd` function, add `_hms` or `_hm` (h= hours, m= minute, s= seconds) and a `tz` argument. `lubridate` will default to the POSIXct format.
+
+ - Example 1: `lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")` = `r lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")`
+ - Example 2 (24 hr time): `lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")` = `r lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")`
+ - Example 3 (12 hr time but converts to 24): `lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")` = `r lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")`
+
+
+### Lubridate Tips
+
+For lubridate to work, you need the column datatype to be **character** or **factor**. The `readr` package (from the `tidyverse`) is smart and will try to guess for you. Problem is, it might convert your data for you without the settings (in this case the proper timezone). So here are few ways to work around this. 
+
+```{r, message = F, warning = F}
+library(lubridate)
+library(dplyr)
+library(readr)
+
+# read in some data and skip header lines
+nfy1 <- read_csv("data/2015_NFY_solinst.csv", skip = 12)
+head(nfy1) #R tried to guess for you that the first column was a date and the second a time
+
+# import raw dataset & specify column types
+nfy2 <- read_csv("data/2015_NFY_solinst.csv", col_types = "ccidd", skip=12)
+
+glimpse(nfy1) # notice the data types in the Date.Time and datetime cols
+glimpse(nfy2)
+```
+
+Next we want to create a single datetime column. How do we get our Date and Time columns into one column so we can format it as a datetime? The answer is the `paste` function.
+
+ - `paste()` allows pasting text or vectors (& columns) by a given separator that you specify with the `sep = ` argument
+ - `paste0()` is the same thing, but defaults to using no separator (i.e. no space).
+
+```{r, message = F, warning = F}
+# make a datetime col:
+nfy2$datetime <- paste(nfy2$Date, " ", nfy2$Time, sep = "")
+
+glimpse(nfy2) #notice the  datetime column is classifed as character
+
+# convert Date Time to POSIXct in local timezone using lubridate
+nfy2$datetime_test <- as_datetime(nfy2$datetime, 
+                                    tz="America/Los_Angeles")
+# OR convert using the ymd_functions
+nfy2$datetime_test2 <- ymd_hms(nfy2$datetime, tz="America/Los_Angeles")
+
+# OR wrap in as.character()
+nfy1$datetime <- ymd_hms(as.character(paste0(nfy1$Date, " ", nfy1$Time)), tz="America/Los_Angeles")
+tz(nfy1$datetime)
+
+```
+
+Last, `lubridate` lets you extract components of date, time and datetime data types with intuitive functions. 
+
+```{r}
+# Functions called day(), month(), year(), hour(), minute(), second(), etc... will extract those elements of a datetime column.
+months <- month(nfy2$datetime)
+# Use the table function to get a quick summary of categorical variables
+table(months)
+
+# Add label and abbr agruments to convert numeric representations to have names
+months <- month(nfy2$datetime, label = TRUE, abbr=TRUE)
+table(months)
+
+```
+
+
+This lesson was contributed by [Ryan Peek](https://ryanpeek.github.io/) and [Martha Zillig](https://github.com/MarthaWohlfeil).

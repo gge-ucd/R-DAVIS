@@ -1,0 +1,297 @@
+---
+title: "Iteration, Iteration, Iteration, Iter"
+---
+
+```{r setup, echo=FALSE, purl=FALSE, message=F, results=F}
+library(purrr)
+library(dplyr)
+```
+
+<br>
+<div class = "blue">
+## Learning objectives
+
+* Understand when and why to iterate code
+* Be able to start with a single use and build up to iteration
+* Use for loops, apply functions, and purrr to iterate
+* Be able to write functions to cleanly iterate code
+</div>
+
+<br>
+
+## ~~Once~~ ~~Twice~~ Thrice in a Lifetime
+
+And you may find yourself<br>
+Behind the keys of a large computing machine<br>
+And you may find yourself<br>
+Copy-pasting tons of code<br>
+And you may ask yourself, well<br>
+How did I get here?
+
+![](img/david_byrne_once.gif){width=250}
+
+<br>
+
+It's pretty common that you'll want to run the same basic bit of code a bunch of times with different inputs. Maybe you want to read in a bunch of data files with different names or calculate something complex on every row of a dataframe. A general rule of thumb is that any code you want to run 3+ times should be iterated instead of copy-pasted. Copy-pasting code and replacing the parts you want to change is generally a bad practice for several reasons:
+
+- it's easy to forget to change all the parts that need to be different
+- it's easy to mistype 
+- it is ugly to read
+- it scales very poorly (try copy-pasting 100 times...)
+
+Lots of functions (including many `base` functions) are *vectorized*, meaning they already work on vectors of values. Here's an example:
+
+```{r chunk1}
+x <- 1:10
+log(x)
+```
+
+The `log()` function already knows we want to take the log of each element in x, and it returns a vector that's the same length as x. If a *vectorized* function already exists to do what you want, use it! It's going to be faster and cleaner than trying to iterate everything yourself.
+
+However, we may want to do more complex iterations, which brings us to our first main iterating concept.
+
+## For Loops
+
+A for loop will repeat some bit of code, each time with a new input value. Here's the basic structure:
+
+```{r chunk2}
+for(i in 1:10) {
+  print(i)
+}
+```
+
+You'll often see `i` used in for loops, you can think of it as the iteration value. For each `i` value in the vector 1:10, we'll print that index value. You can use the `i` value more than once in a loop:
+
+```{r chunk3}
+for (i in 1:10) {
+  print(i)
+  print(i^2)
+}
+```
+
+What's happening is the value of `i` gets inserted into the code block, the block gets run, the value of `i` changes, and the process repeats. For loops can be a way to explicitly lay out fairly complicated procedures, since you can see exactly where your `i` value is going in the code.
+
+You can also use the `i` value to index a vector or dataframe, which can be very powerful!
+
+```{r chunk4}
+for (i in 1:10) {
+  print(letters[i])
+  print(mtcars$wt[i])
+}
+```
+
+Here we printed out the first 10 letters of the alphabet from the `letters` vector, as well as the first 10 car weights from the `mtcars` dataframe.
+
+If you want to store your results somewhere, it is important that you create an empty object to hold them **before** you run the loop. If you grow your results vector one value at a time, it will be much slower. Here's how to make that empty vector first. We'll also use the function `seq_along` to create a sequence that's the proper length, instead of explicitly writing out something like `1:10`.
+
+```{r chunk5}
+results <- rep(NA, nrow(mtcars))
+
+for (i in seq_along(mtcars$wt)) {
+  results[i] <- mtcars$wt[i] * 1000
+}
+results
+```
+
+## `purrr`
+
+For loops are very handy and important to understand, but they can involve writing a lot of code and can generally look fairly messy.
+
+The `tidyverse` includes another way to iterate, using the `map` family of functions. These functions all do the same basic thing: take a series of values and apply a function to each of them. That function could be a function from a package, or it could be one you write to do something specific. 
+
+For a wonderful and thorough exploration of the `purrr` package, check out [Jenny Brian's tutorial](https://jennybc.github.io/purrr-tutorial/).
+
+### `map`
+
+When using the `map` family of functions, the first argument (as in all tidyverse functions) is the data. One nice feature is that you can specify the format of the output explicitly by using a different member of the family.
+
+```{r chunk10}
+mtcars %>% map(mean) # gives a list
+mtcars %>% map_dbl(mean) # gives a numeric vector
+mtcars %>% map_chr(mean) # gives a character vector
+```
+
+### Additonal Arguments
+
+You can pass additional arguments to functions that you map across your data. For example, if you have some NAs in your data, you might want to use `mean()` with `na.rm = TRUE`.
+
+```{r}
+mtcars2 <- mtcars # make a copy of the mtcars dataset
+mtcars2[3,c(1,6,8)] <- NA # make one of the cars have NAs for several columns
+mtcars2
+
+mtcars2 %>% map_dbl(mean) # returns NA for mpg, wt, and vs columns
+mtcars2 %>% map_dbl(mean, na.rm = TRUE)
+```
+
+### `map2`
+
+You can use the `map2` series of functions if you need to map across two sets of inputs in parallel. Here, we'll map across both the names of cars and their mpg values, using an anonymous function to paste the two together into a sentence. 
+
+We'll use what's called an "anonymous function", which is a small function we define within the `map` function call. Our function will take 2 arguments, x and y, and paste them together with some other text.
+
+```{r map2_example}
+map2_chr(rownames(mtcars), mtcars$mpg, function(x,y) paste(x, "gets", y, "miles per gallon")) %>% 
+  head()
+```
+
+You can use the `pmap` series of functions if you need to use more than two input lists.
+
+## Conditional Statements
+
+Sometimes, you want to do something with your code, but only if a certain condition is true. There are a couple main ways to do this.
+
+### `if` and `else`
+
+You can use combinations of `if` and `else` to create conditional statements. Here's a quick example:
+
+```{r if_loop}
+for (i in 1:10) {
+  if (i < 5) {
+    print(paste(i, "is less than 5"))
+  } else {
+    print(paste(i, "is greater than or equal to 5"))
+  }
+}
+```
+
+Here we've combined a couple techniques: we've used a for loop to go through a sequence of values, and for each value we've printed a statement based on a condition that our value meets.
+
+### `case_when`
+
+Sometimes you might want to do a bunch conditional statements together, but typing out a ton of nested if-else statements can be unwieldy and prone to typos. A really useful function is the tidyverse's `case_when`. You feed it a dataframe and then use a series of two-sided formulas where the left-hand side determines which values you want, and the right supplies the result. Here's an example where we take the `mtcars` dataframe and add a column called `car_size`. If the car's weight is over 3.5 **or** it has 8 cylinders, we call it "big". If it's not big, but its weight is over 2.5, then it's medium. If neither of these conditions is met (denoted by `TRUE`), then we call it "small".
+
+```{r}
+mtcars %>% 
+  mutate(
+    car_size = case_when(
+    wt > 3.5 | cyl == 8 ~ "big",
+    wt > 2.5 ~ "medium",
+    TRUE ~ "small"
+    )
+  )
+```
+
+<div class = "blue">
+### Challenge
+
+Using the `iris` data frame (this is built in to R), create a new variable that categorizes petal length into three groups:  
+
+* small (less than or equal to the 1st quartile)
+* medium (between the 1st and 3rd quartiles) 
+* large (greater than or equal to the 3rd quartile)  
+
+Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution.
+
+Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
+
+<details>
+<summary>ANSWER</summary>
+```{r challenge1, purl=FALSE}
+
+iris$petal.length.cat <- ifelse(iris$Petal.Length <= 1.6, "low", 
+                          ifelse(iris$Petal.Length > 1.6 & 
+                                   iris$Petal.Length < 5.1, "medium",
+                           "high"))
+
+iris %>% 
+  mutate(
+    petal.length.cat = case_when(
+      Petal.Length <= 1.6 ~ "small",
+      Petal.Length > 1.6 & Petal.Length < 5.1 ~ "medium",
+      TRUE ~ "large"
+    )
+  )
+
+
+```
+</details>
+</div>
+
+<br>
+### Conditional `map`
+
+Let's throw it back to the `map` family for a sec. Sometimes you might only want to map a function to part of a dataframe. `map_if` allows you to give the data, a condition for the data to meet, and the function you want to apply to the data that meet the condition. Here, we'll map `as.character` to the columns of the iris dataset that meet the condition `is.factor`.
+
+```{r}
+str(iris)
+
+iris %>%
+  map_if(is.factor, as.character) %>%
+  str()
+```
+
+`map_at` does something similar, but it allows you to directly specify the locations you'd like to map the function to, using either names or positions.
+
+```{r}
+mtcars %>% 
+  map_at(c("cyl", "am"), as.character) %>% 
+  str()
+```
+
+## Complete Workflow
+
+Let's try working through a complete example of how you might iterate a more complex operation across a dataset. This will follow 3 basic steps:
+
+1. Write code that does the thing you want **once**
+1. Generalize that code into a function that can take different inputs
+1. Apply that function across your data
+
+### Starting With a Single Case
+
+The first thing we'll do is figure out if we can do the right thing once! We want to rescale a vector of values to a 0-1 scale. We'll try it out on the weights in `mtcars`. Our heaviest vehicle will have a scaled weight of 1, and our lightest will have a scaled weight of 0. We'll do this by taking our weight, subtracting the minimum car weight from it, and dividing this by the range of the car weights (max minus min). We'll have to be careful about our order of operations...
+
+```{r}
+(mtcars$wt[1] - min(mtcars$wt, na.rm = T)) /
+  (max(mtcars$wt, na.rm = T) - min(mtcars$wt, na.rm = T))
+```
+
+Great! We got a scaled value out of the deal. Because we're working with base functions like `max`, `min`, and `/`, we can vectorize. This means we can give it the whole weight vector, and we'll get a whole scaled vector back.
+
+```{r}
+mtcars$wt_scaled <- (mtcars$wt - min(mtcars$wt, na.rm = T)) /
+  diff(range(mtcars$wt, na.rm = T))
+
+mtcars$wt_scaled
+```
+
+### Generalizing
+
+Now let's replace our reference to a specific vector of data with something generic: `x`. This code won't run on its own, since `x` doesn't have a value, but it's just showing how we would refer to some generic value.
+
+```{r, eval=F}
+x_scaled <- (x - min(x, na.rm = T)) /
+  diff(range(x, na.rm = T))
+```
+
+### Making it a Function
+
+Now that we've got a generalized bit of code, we can turn it into a function. All we need is a name, `function`, and a list of arguments. In this case, we've just got one argument: `x`.
+
+```{r}
+rescale_0_1 <- function(x) {
+  (x - min(x, na.rm = T)) /
+  diff(range(x, na.rm = T))
+}
+
+rescale_0_1(mtcars$mpg) # it works on one of our columns
+```
+
+### Iterating!
+
+Now that we've got a function that'll rescale a vector of values, we can use one of the `map` functions to iterate across all the columns in a dataframe, rescaling each one. We'll use `map_df` since it returns a dataframe, and we're feeding it a dataframe.
+
+```{r}
+map_df(mtcars, rescale_0_1)
+```
+
+There you have it! We went from some code that calculated one value to being able to iterate it across any number of columns in a dataframe. It can be tempting to jump straight to your final iteration code, but it's often better to start simple and work your way up, verifying that things work at each step, especially if you're trying to do something even moderately complex.
+
+
+## `apply` Functions
+
+While we learned the `tidyverse` series of `map` functions, it's worth mentioning that there is a similar series of packages in base R called the `apply` series of functions. They are very similar to `map` functions, but the syntax is a little different and you have to be a little more careful about the data types you put in and get out.
+
+We're not going to go into the `apply` family, but if you want to learn more, [here is a good tutorial](https://www.guru99.com/r-apply-sapply-tapply.html). You might come across the `apply` functions in someone else's code, so it's good to know they exist.
+
+This lesson was contributed by Michael Culshaw-Maurer, with ideas from Mike Koontz and Brandon Hurr's [D-RUG presentation](http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk).

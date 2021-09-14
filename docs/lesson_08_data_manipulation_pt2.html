@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Manipulating and analyzing data in the tidyverse, Part 2</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Manipulating and analyzing data in the tidyverse, Part 2</h1>
+
+</div>
+
+
+<br>
+<div class = "blue">
+<div id="learning-objectives" class="section level2">
+<h2>Learning objectives</h2>
+<ul>
+<li>Use <code>join</code> functions to join two dataframes together</li>
+<li>Describe the concept of a wide and a long table format and for which purpose those formats are useful.</li>
+<li>Reshape a data frame from long to wide format and back with the <code>pivot_wider</code> and <code>pivot_longer</code> commands from the <strong><code>tidyr</code></strong> package.</li>
+</ul>
+<div id="joining-two-dataframes-together-using-join-functions" class="section level3">
+<h3>Joining two dataframes together using <code>join</code> functions</h3>
+<p>Often when working with real data, data might be seperated in multiple .csvs. The <code>join</code> family of dplyr functions can accomplish the task of uniting disperate data frames together rather easily. There are many kind of <code>join</code> functions that dplyr offers, and today we are going to cover the most commonly used function <code>left_join</code>.</p>
+<p>To learn more about the <code>join</code> family of functions, check out this <a href="https://dplyr.tidyverse.org/reference/join.html">useful link</a>.</p>
+<p>Let’s read in another dataset. This data set is a record of the tail length of every rodent in our <code>surveys</code> dataframe. For some annoying reason, it was recorded on a seperate data sheet. We want to take the tail length data and add it to our surveys dataframe.</p>
+<pre class="r"><code>tail &lt;- read_csv(&quot;data/tail_length.csv&quot;)</code></pre>
+<p>The <code>join</code> functions join dataframes together based on shared columns between the two data frames. Luckily, both our <code>surveys</code> dataframe and our new <code>tail_length</code> data frame both have the column <code>record_id</code>. Let’s double check that our record_id columns in the two data frames are the same by using the <code>summary</code> function.</p>
+<pre class="r"><code>summary(surveys$record_id) #just summarize the record_id column by using the $ operator </code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       1    8964   17762   17804   26655   35548</code></pre>
+<pre class="r"><code>summary(tail$record_id)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       1    8964   17762   17804   26655   35548</code></pre>
+<p>Looks like all those values are identical. Awesome! Let’s join the dataframes together.</p>
+<p>The basic structure of a <code>join</code> looks like this:</p>
+<p><code>join_type(FirstTable, SecondTable, by=columnTojoinBy)</code></p>
+<div id="there-are-many-different-kinds-of-join-types" class="section level4">
+<h4>There are many different kinds of join types:</h4>
+<ul>
+<li><p><code>inner_join</code> will return all the rows from Table A that has <em>matching values</em> in Table B, and all the columns from both Table A and B</p></li>
+<li><p><code>left_join</code> returns all the rows from Table A with all the columns from both A and B. Rows in Table A that have no match in Table B will return NAs</p></li>
+<li><p><code>right_join</code> returns all the rows from Table B and all the columns from table A and B. Rows in Table B that have no match in Table A will return NAs.</p></li>
+<li><p><code>full_join</code> returns all the rows and all the columns from Table A and Table B. Where there are no matching values, returns NA for the one that is missing.</p></li>
+</ul>
+<p>For our data we are going to use a <code>left_join</code>. We want all the rows from the <code>survey</code> data frame, and we want all the columns from both data frames to be in our new data frame.</p>
+<pre class="r"><code>surveys_joined &lt;- left_join(surveys, tail, by = &quot;record_id&quot;)</code></pre>
+<p>If we don’t include the <code>by =</code> argument, the default is to join by all the variables with common names across the two data frames.</p>
+<p>We could also add our tail data to a dataframe that you create within your R project. Let’s say we were just interested in adding the tail length data to the species “NL”.</p>
+<p>First, we have to create a dataframe that just has species = NL, and then we have to join that data frame with our <code>tail</code> dataframe.</p>
+<pre class="r"><code>NL_data &lt;- surveys %&gt;% 
+  filter(species_id == &quot;NL&quot;) #filter to just the species NL
+
+NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column called tail_length was added</code></pre>
+<p>As you can see, even with a lot of <code>record_id</code> missing, the <code>left_join</code> function will still join the dataframes together based on shared values.</p>
+</div>
+</div>
+<div id="reshaping-with-pivot_longer-and-pivot_wider" class="section level3">
+<h3>Reshaping with pivot_longer and pivot_wider</h3>
+<p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
+<ol style="list-style-type: decimal">
+<li>Each variable has its own column</li>
+<li>Each observation has its own row</li>
+<li>Each value must have its own cell</li>
+<li>Each type of observational unit forms a table</li>
+</ol>
+<p>Here we examine the fourth rule: Each type of observational unit forms a table.</p>
+<p>In <code>surveys</code> , the rows of <code>surveys</code> contain the values of variables associated with each record (the unit), values such the weight or sex of each animal associated with each record. What if instead of comparing records, we wanted to compare the different mean weight of each species between plots? (Ignoring <code>plot_type</code> for simplicity).</p>
+<p>We’d need to create a new table where each row (the unit) is comprise of values of variables associated with each plot. In practical terms this means the values of the species in <code>genus</code> would become the names of column variables and the cells would contain the values of the mean weight observed on each plot.</p>
+<p>Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have <strong>reshaped</strong> the data according to the observations of interest: average species weight per plot instead of recordings per date.</p>
+<p>The opposite transformation would be to transform column names into values of a variable.</p>
+<p>We can do both these of transformations with two new <code>tidyr</code> functions, <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
+<div id="pivot_wider" class="section level4">
+<h4><code>pivot_wider</code></h4>
+<p><code>pivot_wider()</code> widens data by <em>increasing</em> the number of columns and <em>decreasing</em> the number of rows. It takes three main arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the data</li>
+<li><code>names_from</code> the name of the column you’d like to spread out</li>
+<li><code>values_from</code> the data you want to fill all your new columns with</li>
+</ol>
+<p>Let’s try an example using our surveys data frame. Let’s pretend we are interested in what the mean weight is for each species in each plot. How would we create a dataframe that would tell us that information?</p>
+<p>First, we need to calculate the mean weight for each species in each plot:</p>
+<pre class="r"><code>surveys_mz &lt;- surveys %&gt;% 
+  filter(!is.na(weight)) %&gt;% 
+  group_by(genus, plot_id) %&gt;% 
+  summarize(mean_weight = mean(weight)) </code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>str(surveys_mz) #let&#39;s take a look at the data</code></pre>
+<pre><code>## grouped_df [196 × 3] (S3: grouped_df/tbl_df/tbl/data.frame)
+##  $ genus      : chr [1:196] &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
+##  $ plot_id    : num [1:196] 1 2 3 5 18 19 20 21 1 2 ...
+##  $ mean_weight: num [1:196] 7 6 8.61 7.75 9.5 ...
+##  - attr(*, &quot;groups&quot;)= tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
+##   ..$ genus: chr [1:10] &quot;Baiomys&quot; &quot;Chaetodipus&quot; &quot;Dipodomys&quot; &quot;Neotoma&quot; ...
+##   ..$ .rows: list&lt;int&gt; [1:10] 
+##   .. ..$ : int [1:8] 1 2 3 4 5 6 7 8
+##   .. ..$ : int [1:24] 9 10 11 12 13 14 15 16 17 18 ...
+##   .. ..$ : int [1:24] 33 34 35 36 37 38 39 40 41 42 ...
+##   .. ..$ : int [1:24] 57 58 59 60 61 62 63 64 65 66 ...
+##   .. ..$ : int [1:24] 81 82 83 84 85 86 87 88 89 90 ...
+##   .. ..$ : int [1:23] 105 106 107 108 109 110 111 112 113 114 ...
+##   .. ..$ : int [1:24] 128 129 130 131 132 133 134 135 136 137 ...
+##   .. ..$ : int [1:24] 152 153 154 155 156 157 158 159 160 161 ...
+##   .. ..$ : int [1:19] 176 177 178 179 180 181 182 183 184 185 ...
+##   .. ..$ : int [1:2] 195 196
+##   .. ..@ ptype: int(0) 
+##   ..- attr(*, &quot;.drop&quot;)= logi TRUE</code></pre>
+<p>In <code>surveys_mz</code> there are 196 rows and 3 columns. Using <code>pivot_wider</code> we are going to <em>increase</em> the number of columns and <em>decrease</em> the number of rows. We want each row to signify a single genus, with their mean weight listed for each plot id. How many rows do we want our final data frame to have?</p>
+<pre class="r"><code>unique(surveys_mz$genus) #lists every unique genus in surveys_mz</code></pre>
+<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;         &quot;Onychomys&quot;      
+##  [6] &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
+<pre class="r"><code>n_distinct(surveys_mz$genus) #another way to look at the number of distinct genera</code></pre>
+<pre><code>## [1] 10</code></pre>
+<p>There are 10 unique genera, so we want to create a data frame with just 10 rows. How many columns would we want? Since we want each column to be a distinct plot id, our number of columns should equal our number of plot ids.</p>
+<pre class="r"><code>n_distinct(surveys_mz$plot_id)</code></pre>
+<pre><code>## [1] 24</code></pre>
+<p>Alright, so we want a data frame with 10 rows and 24 columns. <code>pivot_wider</code> can do the job!</p>
+<pre class="r"><code>wide_survey &lt;- surveys_mz %&gt;% pivot_wider(names_from = &quot;plot_id&quot;, values_from =  &quot;mean_weight&quot;)
+
+head(wide_survey)</code></pre>
+<pre><code>## # A tibble: 6 × 25
+## # Groups:   genus [6]
+##   genus    `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`   `7`    `8`    `9`
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Baio…   7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA     NA    NA     NA   
+## 2 Chae…  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9   19.9  20.5   18.9 
+## 3 Dipo…  60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6   57.4  59.4   57.5 
+## 4 Neot… 156.   169.   158.   190.   149.   120    155.   138.   164.   180.   170.  134.   162.  
+## 5 Onyc…  27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9   23.6  25.9   27.5 
+## 6 Pero…   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81   7     7.06   7.37
+## # … with 11 more variables: 10 &lt;dbl&gt;, 11 &lt;dbl&gt;, 12 &lt;dbl&gt;, 13 &lt;dbl&gt;, 14 &lt;dbl&gt;, 15 &lt;dbl&gt;,
+## #   16 &lt;dbl&gt;, 17 &lt;dbl&gt;, 22 &lt;dbl&gt;, 23 &lt;dbl&gt;, 24 &lt;dbl&gt;</code></pre>
+</div>
+<div id="pivot_longer" class="section level4">
+<h4><code>pivot_longer</code></h4>
+<p><code>pivot_longer</code> lengthens data by <em>increasing</em> the number of rows and <em>decreasing</em> the number of columns. This function takes 4 main arguments:</p>
+<ol style="list-style-type: decimal">
+<li>the data</li>
+<li><code>cols</code>, the column(s) to be pivoted (or to ignore)</li>
+<li><code>names_to</code> the name of the new column you’ll create to put the column names in</li>
+<li><code>values_to</code> the name of the new column to put the column values in</li>
+</ol>
+<div class="figure">
+<img src="img/pivot_longer.JPG" alt="" />
+<p class="caption">pivot_longer figure</p>
+</div>
+<p>Let’s pretend that we got sent the dataset we just created (<code>wide_survey</code>) and we want to reshape it to be in a long format. We can easily do that using <code>pivot_longer</code></p>
+<pre class="r"><code>#cols = columns to be pivoted. Here we want to pivot all the plot_id columns, except the colum &quot;genus&quot;
+#names_to = the name of the new column we created from the `cols` argument 
+#values_to = the name of the new column we will put our values in
+
+surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quot;plot_id&quot;, values_to = &quot;mean_weight&quot;)</code></pre>
+<p>This data set should look just like <code>surveys_mz</code>. But this one is 240 rows, and <code>surveys_mz</code> is 196 rows. What’s going on?</p>
+<pre class="r"><code>View(surveys_long)</code></pre>
+<p>Looks like all the NAs are included in this data set. This is always going to happen when moving between <code>pivot_longer</code> and <code>pivot_wider</code>, but is actually a useful way to balance out a dataset so every replicate has the same composition. Luckily, we now know how to remove the NAs if we want!</p>
+<pre class="r"><code>surveys_long &lt;- surveys_long %&gt;% 
+  filter(!is.na(mean_weight)) #now 196 rows</code></pre>
+<p><code>pivot_wider</code> and <code>pivot_longer</code> are both new additions to the <code>tidyverse</code> which means there are some cool new blog posts detailing all their abilities. If you’d like to read more about this group of functions, check out these links:</p>
+<ul>
+<li><a href="https://www.brodrigues.co/blog/2019-03-20-pivot/">Blog post by Burno Rodrigues</a></li>
+<li><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html">tidyr’s vignette</a></li>
+<li><a href="https://speakerdeck.com/yutannihilation/a-graphical-introduction-to-tidyrs-pivot-star?slide=1">Hiroaki Yutani’s slides</a></li>
+</ul>
+</div>
+</div>
+<div id="challenge" class="section level3 blue">
+<h3>Challenge</h3>
+<ol style="list-style-type: decimal">
+<li>Use <code>pivot_wider</code> on the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</li>
+<li>The <code>surveys</code> data set has two measurement columns: <code>hindfoot_length</code> and <code>weight</code>. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use <code>pivot_longer()</code> to create a dataset where we have a new column called <code>measurement</code> and a <code>value</code> column that takes on the value of either <code>hindfoot_length</code> or <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns are being selected to make longer.</li>
+<li>With this new data set, calculate the average of each <code>measurement</code> in each <code>year</code> for each different <code>plot_type</code>. Then use <code>pivot_wider()</code> to get them into a data set with a column for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>: You only need to specify the <code>names_from =</code> and <code>values_from =</code> columns</li>
+</ol>
+<details>
+<summary>
+ANSWER
+</summary>
+<pre class="r"><code>## Answer 1
+q1 &lt;- surveys %&gt;%
+  group_by(plot_id, year) %&gt;%
+  summarize(n_genera = n_distinct(genus)) %&gt;%
+  pivot_wider(names_from = &quot;year&quot;, values_from = &quot;n_genera&quot;)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>head(q1)</code></pre>
+<pre><code>## # A tibble: 6 × 27
+## # Groups:   plot_id [6]
+##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985` `1986` `1987` `1988`
+##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1       1      2      3      4      7      5      6      7      6      4      3      7      6
+## 2       2      6      6      6      8      5      9      9      9      6      4      9      7
+## 3       3      5      6      4      6      6      8     10     11      7      6      8      9
+## 4       4      4      4      3      4      5      4      6      3      4      3      7      7
+## 5       5      4      3      2      5      4      6      7      7      3      1      7      8
+## 6       6      3      4      3      4      5      9      9      7      5      6      6      8
+## # … with 14 more variables: 1989 &lt;int&gt;, 1990 &lt;int&gt;, 1991 &lt;int&gt;, 1992 &lt;int&gt;, 1993 &lt;int&gt;,
+## #   1994 &lt;int&gt;, 1995 &lt;int&gt;, 1996 &lt;int&gt;, 1997 &lt;int&gt;, 1998 &lt;int&gt;, 1999 &lt;int&gt;, 2000 &lt;int&gt;,
+## #   2001 &lt;int&gt;, 2002 &lt;int&gt;</code></pre>
+<pre class="r"><code>## Answer 2
+q2 &lt;- surveys %&gt;%
+  pivot_longer(cols = c(&quot;hindfoot_length&quot;, &quot;weight&quot;), names_to = &quot;measurement_type&quot;, values_to = &quot;value&quot;)
+
+#cols = columns we want to manipulate 
+#names_to = name of new column
+#values_to = the values we want to fill our new column with (here we already told the function that we were intersted in hindfoot_length and weight, so it will automatically fill our new column, which we named &quot;values&quot;, with those numbers.)
+
+## Answer 3
+q3 &lt;- q2 %&gt;% 
+  group_by(year, measurement_type, plot_type) %&gt;% 
+  summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;% 
+  pivot_wider(names_from = &quot;measurement_type&quot;, values_from = &quot;mean_value&quot;)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;measurement_type&#39;. You can override using the `.groups` argument.</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="exporting-data" class="section level2">
+<h2>Exporting data</h2>
+<p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>
+<p>Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
+<p>Before using <code>write_csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated dataset. We don’t want to write generated datasets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>
+<ul>
+<li>Type in <code>write_</code> and hit TAB. Scroll down and take a look at the many options that exist for writing out data in R. Use the F1 key on any of these options to read more about how to use it.</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

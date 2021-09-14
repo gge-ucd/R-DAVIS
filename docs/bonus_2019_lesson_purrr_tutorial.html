@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Using map Functions with purrr</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Using <code>map</code> Functions with <code>purrr</code></h1>
+
+</div>
+
+
+<p><br></p>
+<div id="r4ds-the-map-functions" class="section level2">
+<h2>R4DS: <a href="http://r4ds.had.co.nz/iteration.html#the-map-functions">the map functions</a></h2>
+<p><br></p>
+<p><strong>Brandon’s PRESENTATION</strong>:</p>
+<iframe width="600" height="400" src="https://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1">
+</iframe>
+<ul>
+<li><a href="https://d-rug.github.io/images/20171026/20171023_DRUG_map_walk.html#1"><em>Fullscreen</em></a></li>
+</ul>
+</div>
+<div id="brandon-hurrs-tutorial" class="section level1">
+<h1>Brandon Hurr’s Tutorial</h1>
+<p>The following code has been adapted from a great presentation Brandon gave at the D-RUG group in Oct 2017. See the original <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">post and content here</a></p>
+<div id="load-tidyverse" class="section level3">
+<h3>Load <code>tidyverse</code></h3>
+<pre class="r"><code>suppressPackageStartupMessages(library(tidyverse))</code></pre>
+</div>
+</div>
+<div id="r-data-types" class="section level1">
+<h1><em>R</em> Data types</h1>
+<p>For a nice demonstration of what vectors of different data types look like, try the code below.</p>
+<pre class="r"><code># initiate blank vectors of a specific type
+# this can be useful when capturing data from for loops
+a &lt;- vector(&quot;logical&quot;, 5)
+a</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>b &lt;- vector(&quot;integer&quot;, 4)
+b</code></pre>
+<pre><code>## [1] 0 0 0 0</code></pre>
+<pre class="r"><code>c &lt;- vector(&quot;double&quot;, 2) # can also use &quot;numeric&quot;
+c</code></pre>
+<pre><code>## [1] 0 0</code></pre>
+<pre class="r"><code>d &lt;- vector(&quot;character&quot;, 10)
+d</code></pre>
+<pre><code>##  [1] &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot; &quot;&quot;</code></pre>
+<pre class="r"><code>e &lt;- vector(&quot;complex&quot;, 7)
+e</code></pre>
+<pre><code>## [1] 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i 0+0i</code></pre>
+<pre class="r"><code>f &lt;- vector(&quot;raw&quot;, 3)
+f</code></pre>
+<pre><code>## [1] 00 00 00</code></pre>
+<pre class="r"><code>g &lt;- list()
+g</code></pre>
+<pre><code>## list()</code></pre>
+<div id="nas-in-r" class="section level2">
+<h2><code>NA</code>’s in R</h2>
+<p><code>NA</code>’s are a common issue in dealing with data from various places (remember spreadsheet lesson?). R deals well with NA’s and even provides different NA’s for different data types.</p>
+<pre class="r"><code>#what do the NAs look like?
+list(NA, NA_integer_, NA_real_, NA_character_, NA_complex_)</code></pre>
+<pre><code>## [[1]]
+## [1] NA
+## 
+## [[2]]
+## [1] NA
+## 
+## [[3]]
+## [1] NA
+## 
+## [[4]]
+## [1] NA
+## 
+## [[5]]
+## [1] NA</code></pre>
+</div>
+<div id="the-null-element" class="section level2">
+<h2>The <code>NULL</code> element</h2>
+<pre class="r"><code># NULL is the absence of a vector
+a &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) # logical vector 
+a</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE FALSE FALSE    NA</code></pre>
+<pre class="r"><code>a &lt;- NULL
+a</code></pre>
+<pre><code>## NULL</code></pre>
+<pre class="r"><code># let&#39;s use mtcars as example of making a column NULL
+head(mtcars)</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb wt_scaled
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 0.2830478
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 0.3482485
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 0.2063411
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 0.4351828
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 0.4927129
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 0.4978266</code></pre>
+<pre class="r"><code>dim(mtcars) # how many rows, cols</code></pre>
+<pre><code>## [1] 32 12</code></pre>
+<pre class="r"><code># assign NULL to a given column to remove it
+mtcars[1] &lt;- NULL #this gets rid of the mpg column completely
+head(mtcars)</code></pre>
+<pre><code>##                   cyl disp  hp drat    wt  qsec vs am gear carb wt_scaled
+## Mazda RX4           6  160 110 3.90 2.620 16.46  0  1    4    4 0.2830478
+## Mazda RX4 Wag       6  160 110 3.90 2.875 17.02  0  1    4    4 0.3482485
+## Datsun 710          4  108  93 3.85 2.320 18.61  1  1    4    1 0.2063411
+## Hornet 4 Drive      6  258 110 3.08 3.215 19.44  1  0    3    1 0.4351828
+## Hornet Sportabout   8  360 175 3.15 3.440 17.02  0  0    3    2 0.4927129
+## Valiant             6  225 105 2.76 3.460 20.22  1  0    3    1 0.4978266</code></pre>
+<pre class="r"><code>dim(mtcars) # how many rows, cols</code></pre>
+<pre><code>## [1] 32 11</code></pre>
+<pre class="r"><code>data(mtcars) # restore full mtcars dataset
+dim(mtcars) # how many rows, cols</code></pre>
+<pre><code>## [1] 32 11</code></pre>
+</div>
+</div>
+<div id="lists-in-r" class="section level1">
+<h1>Lists in R</h1>
+<p>Now that we have an idea what different <em>vectors</em> are, let’s talk about how to make them into lists.</p>
+<p><img src="https://thumbs.gfycat.com/PepperyMediocreAmericanbittern-small.gif" /></p>
+<p>Lists can contain anything of any length, and <code>data.frames</code> are a special type of list.</p>
+<div id="vectors-to-lists-dataframes-tibbles" class="section level2">
+<h2>Vectors to Lists: dataframes &amp; tibbles</h2>
+<pre class="r"><code># let&#39;s put actual values into these
+a &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) # a logical vector 6 items long
+b &lt;- c(1:7, NA_integer_) # Integers
+c &lt;- c(rnorm(8), NA_real_) # pull doubles from normal distribution
+d &lt;- c(LETTERS[1:3], NA_character_) # first 3 capital letters
+
+e &lt;- list(a, b, c, d) #make a list
+
+e # check it</code></pre>
+<pre><code>## [[1]]
+## [1]  TRUE FALSE  TRUE FALSE FALSE    NA
+## 
+## [[2]]
+## [1]  1  2  3  4  5  6  7 NA
+## 
+## [[3]]
+## [1]  0.54604321 -0.27976609  0.11066213 -0.03871764 -2.51287248  0.47283240 -0.35411707
+## [8]  1.30559401          NA
+## 
+## [[4]]
+## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; NA</code></pre>
+<pre class="r"><code># Lists can contain anything of any length
+## data.frame is a special type of list
+## data.frame rows imply association so they need to line up
+
+data.frame(a, b) # uh oh</code></pre>
+<pre><code>## Error in data.frame(a, b): arguments imply differing number of rows: 6, 8</code></pre>
+<pre class="r"><code>a &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA, NA, NA) # make it 8 like b
+df &lt;- data.frame(a = a, b = b) 
+df </code></pre>
+<pre><code>##       a  b
+## 1  TRUE  1
+## 2 FALSE  2
+## 3  TRUE  3
+## 4 FALSE  4
+## 5 FALSE  5
+## 6    NA  6
+## 7    NA  7
+## 8    NA NA</code></pre>
+<p><code>tibbles</code> are data.frames with some stricter rules: - slightly more informative printing (not shown well here) - strict behavior around subsetting <code>[</code> -&gt; tibble <code>[[</code> vector - does not partially match column names (b/c this can get you into trouble)</p>
+<pre class="r"><code>as_tibble(df)</code></pre>
+<pre><code>## # A tibble: 8 × 2
+##   a         b
+##   &lt;lgl&gt; &lt;int&gt;
+## 1 TRUE      1
+## 2 FALSE     2
+## 3 TRUE      3
+## 4 FALSE     4
+## 5 FALSE     5
+## 6 NA        6
+## 7 NA        7
+## 8 NA       NA</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="accessing-elements-inside-vectors-lists-dataframes-and-tibbles" class="section level2">
+<h2>Accessing elements inside vectors, lists, dataframes, and tibbles</h2>
+<pre class="r"><code>
+#atomic vectors
+a &lt;- c(TRUE, FALSE, TRUE, FALSE, FALSE, NA) #logic vector 
+a
+a[1] 
+a[[1]] # does the same thing
+a[[[1]]] # nope just stop adding brackets!
+
+# lists
+list_example &lt;- list(a = a, b = b, c = c, d = d, e = list(1, &quot;A&quot;)) #make a named list
+list_example
+# single brackets returns a list with that element in it
+# can reference by location or by name
+list_example[1]
+list_example[&quot;a&quot;]
+
+# double brackets return a vector 
+list_example[[2]]
+list_example[[&quot;b&quot;]]
+
+#stack [[&#39;s to peel the onion back
+list_example[[&quot;e&quot;]] # remove one layer
+list_example[[&quot;e&quot;]][[2]] # remove the second layer (access e list, and 2 item in that list)
+
+#dolla dolla bills y&#39;all (works like [[, with named vectors)
+list_example$c
+
+#same for dataframes
+mtcars[1]
+mtcars[[1]]
+
+# and for tibbles
+tbbl &lt;- tibble(x = 1:3, y = LETTERS[1:3])
+tbbl[1]
+tbbl[&quot;x&quot;]
+
+tbbl[[2]]
+tbbl[[&quot;y&quot;]]</code></pre>
+<pre><code>## Error: &lt;text&gt;:7:4: unexpected &#39;[&#39;
+## 6: a[[1]] # does the same thing
+## 7: a[[[
+##       ^</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+</div>
+<div id="functions-and-for-loops" class="section level1">
+<h1>Functions and <code>for</code> Loops</h1>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>When should we make a function in R?</p>
+<pre class="r"><code>#Simple dataframe
+df &lt;- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+# What are we doing here?
+df$a &lt;- (df$a - min(df$a, na.rm = TRUE)) /  
+  (max(df$a, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$b &lt;- (df$b - min(df$b, na.rm = TRUE)) /  
+  (max(df$b, na.rm = TRUE) - min(df$b, na.rm = TRUE))
+df$c &lt;- (df$c - min(df$a, na.rm = TRUE)) /  
+  (max(df$c, na.rm = TRUE) - min(df$c, na.rm = TRUE))
+df$d &lt;- (df$d - min(df$d, na.rm = TRUE)) /  
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))</code></pre>
+<p>Anytime we need to do the same thing 3 or more times, it would probably be a good idea to think about creating a function. Stepping through these pieces, here’s what we’d want to do:</p>
+<p>First what is the calculation/task you want to do?</p>
+<pre class="r"><code>df$d &lt;- (df$d - min(df$d, na.rm = TRUE)) /  
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+# exactly as above</code></pre>
+<p>Now pull out the common components:</p>
+<pre class="r"><code># pull out what&#39;s common
+x &lt;- (x - min(x, na.rm = TRUE)) /  
+  (max(x, na.rm = TRUE) - min(x, na.rm = TRUE))</code></pre>
+<p>Problem is the above isn’t a function yet, it’s just the “anonymous” calculation we want our function to follow. We can simplify even more if we want:</p>
+<pre class="r"><code># simplify more and refactor if that makes sense
+x &lt;- (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))</code></pre>
+<p>And now add the actual <code>function()</code> call!</p>
+<pre class="r"><code>rescale_0_1 &lt;- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}</code></pre>
+<p>Let’s test this function and see what happens. We can test a single vector, and then actually apply our function to each column in our dataset. Use a test dataset that’s simple and we now what it should look like.</p>
+<pre class="r"><code>rescale_0_1 &lt;- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+
+testvec &lt;- 10:20 # so this should get rescaled from 0 to 1
+testvec</code></pre>
+<pre><code>##  [1] 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+<pre class="r"><code>rescale_0_1(testvec) # looks like it worked, it rescaled all values from 0 to 1!</code></pre>
+<pre><code>##  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0</code></pre>
+<pre class="r"><code>df &lt;- data.frame(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+rescale_0_1 &lt;- function(x) {
+  (x - min(x, na.rm = TRUE)) /  
+  diff(range(x, na.rm = TRUE))
+}
+
+out &lt;- df # rename df so we can always come back
+out$a &lt;- rescale_0_1(df$a)
+out$b &lt;- rescale_0_1(df$b)
+out$c &lt;- rescale_0_1(df$c)
+out$d &lt;- rescale_0_1(df$d)
+out</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
+</div>
+<div id="for-loops-to-apply-a-function" class="section level2">
+<h2><code>for</code> Loops to <em>apply</em> a function</h2>
+<p>Reduce iteration with a <code>for</code> loop, which takes a vector or list, and interates or steps through each piece of that vector/list, does something and returns values/data.</p>
+<pre class="r"><code>out &lt;- df #make a copy to store scaled data
+for (i in 1:ncol(df)) { # loop through each element
+  out[i] &lt;- rescale_0_1(df[[i]]) #apply function and store it to out
+}
+out</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
+<div id="using-seq_along" class="section level3">
+<h3>Using <code>seq_along</code></h3>
+<p>Handy command that sequences along a list for you, so you don’t have to specify columns or rows, or series of numbers.</p>
+<pre class="r"><code>out &lt;- df #make a copy to store scaled data
+for (i in seq_along(df)) {
+  out[i] &lt;- rescale_0_1(df[[i]])
+}
+out</code></pre>
+<pre><code>##              a          b          c         d
+## 1  0.210583367 0.58944212 0.50976037 0.8524446
+## 2  0.456383992 0.41784664 0.50200281 0.5580446
+## 3  0.671156870 0.33566716 0.77986187 0.4537088
+## 4  0.849874511 1.00000000 0.39146476 0.8358137
+## 5  0.002931114 0.17498379 0.00000000 1.0000000
+## 6  0.806134726 0.02530868 0.28712257 0.3631367
+## 7  0.655715321 0.24926608 0.02283683 0.9162297
+## 8  0.643930985 0.00000000 0.18657748 0.4917923
+## 9  1.000000000 0.55112356 0.68806649 0.0000000
+## 10 0.000000000 0.09840771 1.00000000 0.8234917</code></pre>
+</div>
+</div>
+</div>
+<div id="map-and-apply-functions" class="section level1">
+<h1><code>map</code> and <code>apply</code> Functions</h1>
+<p>There are a family of functions called <code>apply</code> (<code>mapply</code>, <code>sapply</code>, <code>lapply</code>, <code>vapply</code>) which essentially take a list of something and <em>apply</em> a function or operation on each item in that list. These are base functions in R, but a newer set of functions (which do the same thing &amp; more) have been written in R, called the <code>map</code> functions. Let’s see how they migth work.</p>
+<div id="apply" class="section level2">
+<h2><code>apply</code></h2>
+<pre class="r"><code>df_app1 &lt;- apply(df, MARGIN = 2, function(x) rescale_0_1(x)) # iterate over the columns in df
+class(df_app1) # returns a matrix</code></pre>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<pre class="r"><code>df_app2 &lt;- sapply(df, function(x) rescale_0_1(x)) # same as above but defaults to cols</code></pre>
+<p>Okay so <code>apply</code> returns a matrix. What about <code>map</code>?</p>
+</div>
+<div id="map" class="section level2">
+<h2><code>map</code></h2>
+<pre class="r"><code>library(purrr)
+
+df_map1&lt;- map(df, function(x) rescale_0_1(x)) #map over the columns in df
+
+class(df_map1) # returns a list! Keeps same format that was input
+
+df_map2 &lt;- map_df(df, rescale_0_1) # returns a dataframe!</code></pre>
+<p>Let’s look at another more simple example.</p>
+<div id="specifying-outputs-with-map" class="section level3">
+<h3>Specifying Outputs with <code>map</code></h3>
+<p>Another set of examples below will help us understand how <code>map</code> makes it easy to get different data classes (<code>matrix</code>,<code>list</code>, <code>dataframe</code>) back out. The default <code>map</code> function takes a list and returns a list, but there are various options that allow you to specify what you want.</p>
+<p>This example creates a list containing two integer vectors. Let’s say we want the mean of each one:</p>
+<pre class="r"><code>l = list(a=1:10, b = 10:100)
+map(l, function(x) mean(x, na.rm = TRUE)) # and this is returning a list (list in, list out)</code></pre>
+<div id="get-numeric-double-type-back" class="section level4">
+<h4>Get numeric <code>double</code> type back</h4>
+<p>Specify and you get a vector back instead of a list</p>
+<pre class="r"><code>l = list(a=1:10, b = 10:100)
+map_dbl(l, function(x) mean(x, na.rm = TRUE)) # this is a numeric vector</code></pre>
+</div>
+<div id="get-character-back" class="section level4">
+<h4>Get <code>character</code> back</h4>
+<p>Maybe not so useful, but demonstrates the point.</p>
+<pre class="r"><code>map_chr(l, function(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
+</div>
+<div id="use-error-messages-type-strict-functions" class="section level3">
+<h3>Use Error Messages: Type-strict functions</h3>
+<p>So if you have or try to use the wrong type of data, the function won’t run.</p>
+<pre class="r"><code>l = list(a=1:10, b = 10:100)
+map_lgl(l, function(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
+</div>
+</div>
+<div id="more-map-examples" class="section level1">
+<h1>More <code>map</code> Examples</h1>
+<div id="map-use-case-1-read-in-files" class="section level2">
+<h2><code>map</code> Use Case #1: Read in files</h2>
+<p>Based upon this tutorial <a href="http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/" class="uri">http://data.library.virginia.edu/getting-started-with-the-purrr-package-in-r/</a></p>
+<pre class="r"><code># this will work if you clone the github repository
+fileloc &lt;- file.path(getwd(), &quot;stocks&quot;)
+#create a list of files to read in that end in csv
+files &lt;- list.files(fileloc, pattern = &quot;csv$&quot;, full.names = TRUE) 
+
+#this reads in each csv independently into a list
+dat2 &lt;- map(files, read_csv)
+dat2</code></pre>
+<div id="lets-make-it-a-function" class="section level3">
+<h3>Let’s make it a function</h3>
+<pre class="r"><code>fileloc &lt;- file.path(getwd(), &quot;stocks&quot;)
+
+read_folder &lt;- function(folder) {
+  # get files that end with csv or CSV
+  files &lt;- list.files(folder, pattern = &quot;(csv|CSV)$&quot;, full.names = TRUE) 
+  #this reads in each csv independently into a list
+  map(files, read_csv) # last thing is returned
+}
+
+read_folder(fileloc)</code></pre>
+<div id="what-if-you-want-to-change-the-type-of-file-youre-reading" class="section level4">
+<h4>What if you want to change the type of file you’re reading?</h4>
+<pre class="r"><code>fileloc &lt;- file.path(getwd(), &quot;stocks&quot;)
+
+read_folder &lt;- function(folder, pattern, read_fun) {
+  # get files that end with csv or CSV
+  files &lt;- list.files(folder, pattern = pattern, full.names = TRUE) 
+  #this reads in each csv independently into a list
+  map(files, read_fun)
+}
+
+read_folder(folder = fileloc, pattern = &quot;(csv|CSV)$&quot;, read_fun = read_csv)
+# OR more succinctly
+# read_folder(fileloc, &quot;(csv|CSV)$&quot;, read_csv)</code></pre>
+</div>
+<div id="combine-files-and-label-by-filenames" class="section level4">
+<h4>Combine Files and Label By Filenames</h4>
+<p>If there are multiple files but all have same structure (same number of columns/column types), we can read in separately and then combine. But add the filename of each dataset as a new column variable.</p>
+<pre class="r"><code>fileloc &lt;- file.path(getwd(), &quot;stocks&quot;)
+
+# This function reads a file and appends a column called &quot;name&quot; for ID
+read_fun &lt;- function(file, FUN) {
+        dat &lt;- FUN(file) # read in file
+        dat$name &lt;- tools::file_path_sans_ext(basename(file)) #record the filename for later grouping
+        dat #bring data back
+  }
+
+# This function reads a folder for files of given pattern
+# then applies the given read function to read them in read_fun
+read_files_bind &lt;-  function(folder, pattern, FUN) {
+    # get files that end with csv or CSV
+    files &lt;- list.files(folder, pattern = pattern, full.names = TRUE) 
+    map_dfr(files, read_fun, FUN)
+  }
+
+# Read everything in at once and bind it all together
+read_files_bind(folder = fileloc, pattern = &quot;(csv|CSV)$&quot;, FUN = read_csv)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="lists-list-columns" class="section level1">
+<h1>Lists &amp; List columns</h1>
+<p>Ok, so we can get data into our environment in a list, but what then? There are a number of ways to deal with these data, or to deal with lists within dataframes…called <em>list columns</em>.</p>
+<div id="tidyrnest-embeds-tibbles-in-a-column" class="section level2">
+<h2><code>tidyr::nest()</code> embeds tibbles in a column</h2>
+<p>See how to group by something and then create a list-columns that hold each dataframe for that group.</p>
+<pre class="r"><code>cars_nested &lt;-
+  mtcars %&gt;%            # motortrend car dataset
+    group_by(cyl) %&gt;%   # group by cylinder
+    nest(.key = &quot;data&quot;) # nest data by cyl, default key is &quot;data&quot;</code></pre>
+<pre><code>## Warning: `.key` is deprecated</code></pre>
+<pre class="r"><code>cars_nested</code></pre>
+<pre><code>## # A tibble: 3 × 2
+## # Groups:   cyl [3]
+##     cyl data              
+##   &lt;dbl&gt; &lt;list&gt;            
+## 1     6 &lt;tibble [7 × 10]&gt; 
+## 2     4 &lt;tibble [11 × 10]&gt;
+## 3     8 &lt;tibble [14 × 10]&gt;</code></pre>
+</div>
+<div id="interacting-with-list-data-using-map" class="section level2">
+<h2>Interacting with list-data using <code>map</code></h2>
+<p>Use <code>map</code>!. Let’s make a linear model for each subset, pull out the coefficients with <code>broom</code>, and plot them.</p>
+<pre class="r"><code>library(broom)
+library(purrr)
+library(dplyr)
+library(tidyr)
+
+mtc_modeled &lt;- 
+  mtcars %&gt;%            # motortrend car dataset
+    group_by(cyl) %&gt;%   # group by cylinder
+    nest(.key = &quot;data&quot;) %&gt;%         # nest data by cyl, default key is &quot;data&quot;
+    mutate(model = map(data, ~ lm(mpg ~ disp, data = .x))) %&gt;%  # make models
+    mutate(coeff = map(model, tidy)) %&gt;%                        #pull out coefficients
+    mutate(slope = map_dbl(coeff, ~ pull(.x, estimate)[2])) %&gt;% # pull slope from coefficients
+    mutate(intercept = map_dbl(coeff, ~ pull(.x, estimate)[1])) # pull intercept from coefficients
+  
+ 
+ggplot() +
+  # plot the original data 
+  geom_point(data = mtcars, aes(x = disp, y = mpg, color = as.factor(cyl))) +
+  # plot the models
+  geom_abline(data = mtc_modeled, aes(slope = slope, intercept = intercept, color = as.factor(cyl)))</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="iterating-over-more-than-one-list-with-map2-and-pmap" class="section level2">
+<h2>Iterating over more than one list with <code>map2</code> and <code>pmap</code></h2>
+<pre class="r"><code>n =  list(5,10,20)
+mu = list(50,30,10)
+sd = list(10,5,1)
+
+# how does it look as we go from map to map2 to pmap?
+map(n, rnorm)
+map2(n, mu, rnorm)
+pmap(list(n, mu, sd), rnorm)
+
+#technically, pmap can do it all
+pmap(list(n), rnorm)
+pmap(list(n, mu), rnorm)
+
+# formula interface
+map(n, ~rnorm(.))
+map2(n, mu, ~ rnorm(.x, .y))
+pmap(list(n, mu, sd), ~rnorm(..1, ..2, ..3)) # ..4 and so on for as many as you need
+
+# CAUTION: position matters with map2 &amp; pmap
+map2(n, mu, rnorm)
+map2(mu, n, rnorm)
+pmap(list(n, mu, sd), rnorm)
+pmap(list(mu, n, sd), rnorm)
+
+# if you need non-default ordering, specify with full function call
+map2(mu, n, function(x, y) rnorm(y, x))
+# or using the formula interface
+map2(mu, n, ~ rnorm(.y, .x))
+
+# pmap you can name your list to get around positional ordering
+pmap(list(mean=mu, n=n, sd=sd), rnorm)
+# OR you can specify with a full function call
+pmap(list(mu, n, sd), function(mu, n, sd) rnorm(n, mu, sd))
+# OR with the formula interface
+pmap(list(mu, n, sd), ~ rnorm(..2, ..1, ..3))</code></pre>
+<p><em><strong>See presentation, SLIDE: </strong></em></p>
+</div>
+<div id="walkwalk2pwalk-are-used-to-output-side-effects" class="section level2">
+<h2><code>walk/walk2/pwalk</code> are used to output side-effects</h2>
+<pre class="r"><code>asdf &lt;- list(a = LETTERS[1:10], b = 1:15, c = FALSE)
+# we just want to print each element of this list
+walk(asdf, print)</code></pre>
+<div id="outputting-plots-with-map-functions" class="section level3">
+<h3>Outputting Plots with <code>map</code> Functions</h3>
+<pre class="r"><code># make a simple plotting function
+plot_points &lt;- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+mtcars %&gt;%                 # motortrend car dataset
+  group_by(cyl) %&gt;%       # group by cylinder
+  nest(.key = &quot;data&quot;) %&gt;% # nest by cylinder
+  mutate(plot = map(data, plot_points)) %&gt;% # we made a graph for each subset
+  pull(plot) %&gt;% #pull the plots out as a list
+  walk(., print) # print them</code></pre>
+<div id="save-plots-from-walk-with-walk2pwalk" class="section level4">
+<h4>Save Plots from <code>walk</code> with <code>walk2/pwalk</code></h4>
+<pre class="r"><code># make a simple plotting function
+plot_points &lt;- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+mtc_plot_n_save &lt;-
+  mtcars %&gt;%                 # motortrend car dataset
+    group_by(cyl) %&gt;%       # group by cylinder
+    nest(.key = &quot;data&quot;) %&gt;% # nest by cylinder
+    mutate(plot = map(data, plot_points)) %&gt;% # we made a graph for each subset
+    mutate(filepath = map_chr(cyl, ~ file.path(&quot;figures&quot;, paste0(.x, &quot;.png&quot;)))) #make the save paths
+
+
+walk2(mtc_plot_n_save$plot, mtc_plot_n_save$filepath, ~ ggsave(.y, .x)) # save them out</code></pre>
+<p>That is great! Ok, let’s make this a bit fancier. With <code>pwalk</code> we can have a bunch of different lists of things that get mapped…not just 1 or 2.</p>
+<pre class="r"><code># make a simple plotting function
+plot_points &lt;- function(t) ggplot(t, aes(mpg, wt)) + geom_point()
+
+#function that prints cylinder info, ggplot, and table 
+print_func &lt;-
+  function(info, plot, table, filepath) {
+    print(paste0(&quot;This is for &quot;, info, &quot; cylinders./n&quot;))
+    print(plot)
+    ggsave(filepath)
+    print(table)
+    
+  }
+
+mtc_plot_n_save &lt;-
+  mtcars %&gt;%                 # motortrend car dataset
+    group_by(cyl) %&gt;%       # group by cylinder
+    nest(.key = &quot;data&quot;) %&gt;% # nest by cylinder
+    mutate(plot = map(data, plot_points)) %&gt;% # we made a graph for each subset
+    mutate(filepath = map_chr(cyl, ~ file.path(&quot;figures&quot;, paste0(.x, &quot;.png&quot;)))) # make the save paths
+
+# print all the info
+pwalk(list(info = mtc_plot_n_save$cyl, plot = mtc_plot_n_save$plot, table = mtc_plot_n_save$data, filepath = mtc_plot_n_save$filepath), print_func) </code></pre>
+<p>This lesson is adapted from <a href="http://d-rug.github.io/blog/2017/Brandon-Hurr-on-using-map-and-walk">Brandon Hurr’s D-RUG presentation materials</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

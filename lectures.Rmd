@@ -5,82 +5,80 @@ output:
     toc: false
 ---
 
-Zoom recordings of our lectures, livecode, and our class notes^[A `@ucdavis.edu` email/class registration is required to access the google doc] are available below.In addition, there are a number of great presentations that have been recorded at [Davis R-Users Group](http://d-rug.github.io/) meetings, see the Resources tab.
+Pre-class videos, recordings of our lectures, and livecode are available below. 
 
 ## Lectures {.tabset .tabset-fade}
 
 ### Week 1
 
 * <a href="https://dl.dropboxusercontent.com/s/tzri5n40tt4apt2/Week01.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://www.youtube.com/watch?v=fHxYgthoPJs" target="_blank">Week 1 video recording</a>
-* <a href="https://docs.google.com/document/d/1Qn9MHQuCqkMmNFtSi3A3puMEEif3FOUevGnQ7Zb5G8s/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 1 pre-class videos, coming soon</a>
+* <a href="" target="_blank">Week 1 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 2
 
 * <a href="https://dl.dropboxusercontent.com/s/1bncm70aaozhx4l/Week02.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://www.youtube.com/watch?v=tr4vjTBRY28" target="_blank">Week 2 video recording</a>
-* <a href="https://docs.google.com/document/d/18x5hZpA7M0FTNDn0hWA5HV4MyxAC5yZyzVwzXu5oV_0/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 2 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 2 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 3
 
 * <a href="https://dl.dropboxusercontent.com/s/lndh6xewxgijzn6/Week03.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/qvaH_Icc4NQ" target="_blank">Week 3 video recording</a>
-* <a href="https://docs.google.com/document/d/17cXpETCPatph_tmTXrrCo9o23tFq8fDw7E_2wOcFU6o/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 3 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 3 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
 
 * <a href="https://dl.dropboxusercontent.com/s/4i8o1v7zwgdekiv/Week04.R?dl=0" target="_blank">Livecode</a>
-* Sorry, we lost this recording!
-* <a href="https://docs.google.com/document/d/1S7hjwuNfpsPc-FCRjo3tkI-ycab3H3Dr1WV7N-5ONxA/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 4 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 4 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
 * <a href="https://dl.dropboxusercontent.com/s/xnbt9kp2isrdqhr/Week05.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/ropTf8D4IF4" target="_blank">Week 5 video recording</a>
-* <a href="https://docs.google.com/document/d/1a32lXEegQtNDpM1WWIAStGjM6i2xQ0KuuPFsMezM5EY/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 5 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 5 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 6
 
 * <a href="https://dl.dropboxusercontent.com/s/ups7vdhegceehy4/Week06.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://www.youtube.com/watch?v=1FiOSvJEJFY" target="_blank">Week 6 video recording</a>
-* <a href="https://docs.google.com/document/d/1aVk6-88d66ZXOPwCxdRDWwIjztozKMXQqnNIe9vgLRc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 6 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 6 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 7
 
 * <a href="https://dl.dropboxusercontent.com/s/hdq4spww650cy2f/Week07.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/dFRcnsdHLnw" target="_blank">Week 7 video recording</a>
-* <a href="https://docs.google.com/document/d/10twqshouUqOb4kr22AvveSHI1atg_Oh_Zo1f8AqpBeo/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 7 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 7 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 8
 
 * <a href="https://dl.dropboxusercontent.com/s/vutfx0xrlfofqop/Week08.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/VgB6WoRXjVM" target="_blank">Week 8 video recording</a>
-* <a href="https://docs.google.com/document/d/1BOYvHmlq0_MrDXYlj_PL-Ibd9kGb1WMhpsqcG7WkLSc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 8 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 8 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 9
 
 * <a href="https://dl.dropboxusercontent.com/s/43xyeq2xbpgfzed/Week09.R?dl=0" target="_blank">Livecode</a>
-* <a href="https://youtu.be/7btb4crVuzc" target="_blank">Week 9 video recording</a>
-* <a href="https://docs.google.com/document/d/1BsPJDXYmWwJLt4DrNiQo7QE6Lz_wUUgngYjUw8AThYg/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="" target="_blank">Week 9 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 9 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 10
 
 * <a href="https://dl.dropboxusercontent.com/s/cjp0m9cwatrqjl5/Week10.R?dl=0" target="_blank">Livecode</a>
-* [RMarkdown Intro Code](https://github.com/gge-ucd/R-DAVIS/blob/master/Rmd_intro.Rmd) (can copy from code file) and [RMarkdown Intro HTML output](https://gge-ucd.github.io/R-DAVIS/Rmd_intro.html)  
-* <a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Zoom link (can be viewed later as video)</a>
-* <a href="https://docs.google.com/document/d/13a1x5WedlcVja-TSnC8n3uUoIBrSQ4AfoLMg5uyR2DI/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a>
-* <a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a>
-* <a href="https://forms.gle/PAbLdiaGwT4ejtAU6" target="_blank">POST-COURSE SURVEY: PLEASE TAKE YOUR TIME</a>
+* <a href="" target="_blank">Week 10 pre-class videos, posted Monday before class</a>
+* <a href="" target="_blank">Week 10 video recording, to be posted after class</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>

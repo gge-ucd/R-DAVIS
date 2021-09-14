@@ -1,0 +1,108 @@
+---
+title: Conditional statements
+---
+
+<br>
+<div class = "blue">
+## Learning objectives
+
+* Understand how to manipulate and transform data
+* Be able to start with a single use and build up to iteration
+* Use for loops, apply functions, and purrr to iterate
+* Be able to write functions to cleanly iterate code
+</div>
+
+<br>
+
+
+## Conditional Statements
+
+Sometimes, you want to do something with your code, but only if a certain condition is true. There are a couple main ways to do this.
+
+### `if` and `else`
+
+You can use combinations of `if` and `else` to create conditional statements. Here's a quick example:
+
+```{r if_loop}
+for (i in 1:10) {
+  if (i < 5) {
+    print(paste(i, "is less than 5"))
+  } else {
+    print(paste(i, "is greater than or equal to 5"))
+  }
+}
+```
+
+Here we've combined a couple techniques: we've used a for loop to go through a sequence of values, and for each value we've printed a statement based on a condition that our value meets.
+
+### `case_when`
+
+Sometimes you might want to do a bunch conditional statements together, but typing out a ton of nested if-else statements can be unwieldy and prone to typos. A really useful function is the tidyverse's `case_when`. You feed it a dataframe and then use a series of two-sided formulas where the left-hand side determines which values you want, and the right supplies the result. Here's an example where we take the `mtcars` dataframe and add a column called `car_size`. If the car's weight is over 3.5 **or** it has 8 cylinders, we call it "big". If it's not big, but its weight is over 2.5, then it's medium. If neither of these conditions is met (denoted by `TRUE`), then we call it "small".
+
+```{r}
+mtcars %>% 
+  mutate(
+    car_size = case_when(
+    wt > 3.5 | cyl == 8 ~ "big",
+    wt > 2.5 ~ "medium",
+    TRUE ~ "small"
+    )
+  )
+```
+
+<div class = "blue">
+### Challenge
+
+Using the `iris` data frame (this is built in to R), create a new variable that categorizes petal length into three groups:  
+
+* small (less than or equal to the 1st quartile)
+* medium (between the 1st and 3rd quartiles) 
+* large (greater than or equal to the 3rd quartile)  
+
+Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution.
+
+Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
+
+<details>
+<summary>ANSWER</summary>
+```{r challenge1, purl=FALSE}
+
+iris$petal.length.cat <- ifelse(iris$Petal.Length <= 1.6, "low", 
+                          ifelse(iris$Petal.Length > 1.6 & 
+                                   iris$Petal.Length < 5.1, "medium",
+                           "high"))
+
+iris %>% 
+  mutate(
+    petal.length.cat = case_when(
+      Petal.Length <= 1.6 ~ "small",
+      Petal.Length > 1.6 & Petal.Length < 5.1 ~ "medium",
+      TRUE ~ "large"
+    )
+  )
+
+
+```
+</details>
+</div>
+
+<br>
+### Conditional `map` 
+
+Let's throw it back to the `map` family for a sec. Sometimes you might only want to map a function to part of a dataframe. `map_if` allows you to give the data, a condition for the data to meet, and the function you want to apply to the data that meet the condition. Here, we'll map `as.character` to the columns of the iris dataset that meet the condition `is.factor`.
+
+```{r}
+str(iris)
+
+iris %>%
+  map_if(is.factor, as.character) %>%
+  str()
+```
+
+`map_at` does something similar, but it allows you to directly specify the locations you'd like to map the function to, using either names or positions.
+
+```{r}
+mtcars %>% 
+  map_at(c("cyl", "am"), as.character) %>% 
+  str()
+```

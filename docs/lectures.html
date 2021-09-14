@@ -13,18 +13,26 @@
 
 <title>Lectures</title>
 
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
@@ -39,11 +47,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -56,32 +59,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -92,10 +70,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -112,40 +86,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -173,7 +120,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -185,7 +132,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -196,10 +143,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -211,7 +171,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -332,37 +291,43 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="lesson_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
     </li>
     <li>
-      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+      <a href="lesson_02_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="lesson_project_management.html">Project Management</a>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
     </li>
     <li>
-      <a href="lesson_how_r_thinks_about_data.html">How R Thinks About Data</a>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="lesson_data_frames_tibbles_ecology.html">Starting With Data in R</a>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr and tidyr</a>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
     </li>
     <li>
-      <a href="lesson_visualization_dos.html">Visualization Best Practices</a>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_lubridate.html">Date-times with lubridate</a>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
     </li>
     <li>
-      <a href="lesson_functions.html">Writing functions</a>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
       <a href="lesson_iteration.html">Iteration</a>
@@ -413,11 +378,11 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -430,108 +395,99 @@ $(document).ready(function () {
 </div>
 
 
-<p>Zoom recordings of our lectures, livecode, and our class notes<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> are available below.In addition, there are a number of great presentations that have been recorded at <a href="http://d-rug.github.io/">Davis R-Users Group</a> meetings, see the Resources tab.</p>
+<p>Pre-class videos, recordings of our lectures, and livecode are available below.</p>
 <div id="lectures" class="section level2 tabset tabset-fade">
-<h2>Lectures</h2>
+<h2 class="tabset tabset-fade">Lectures</h2>
 <div id="week-1" class="section level3">
 <h3>Week 1</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/tzri5n40tt4apt2/Week01.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://www.youtube.com/watch?v=fHxYgthoPJs" target="_blank">Week 1 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/1Qn9MHQuCqkMmNFtSi3A3puMEEif3FOUevGnQ7Zb5G8s/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 1 pre-class videos, coming soon</a></li>
+<li><a href="" target="_blank">Week 1 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-2" class="section level3">
 <h3>Week 2</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/1bncm70aaozhx4l/Week02.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://www.youtube.com/watch?v=tr4vjTBRY28" target="_blank">Week 2 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/18x5hZpA7M0FTNDn0hWA5HV4MyxAC5yZyzVwzXu5oV_0/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 2 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 2 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-3" class="section level3">
 <h3>Week 3</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/lndh6xewxgijzn6/Week03.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://youtu.be/qvaH_Icc4NQ" target="_blank">Week 3 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/17cXpETCPatph_tmTXrrCo9o23tFq8fDw7E_2wOcFU6o/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 3 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 3 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-4" class="section level3">
 <h3>Week 4</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/4i8o1v7zwgdekiv/Week04.R?dl=0" target="_blank">Livecode</a></li>
-<li>Sorry, we lost this recording!</li>
-<li><a href="https://docs.google.com/document/d/1S7hjwuNfpsPc-FCRjo3tkI-ycab3H3Dr1WV7N-5ONxA/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 4 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 4 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-5" class="section level3">
 <h3>Week 5</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/xnbt9kp2isrdqhr/Week05.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://youtu.be/ropTf8D4IF4" target="_blank">Week 5 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/1a32lXEegQtNDpM1WWIAStGjM6i2xQ0KuuPFsMezM5EY/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 5 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 5 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-6" class="section level3">
 <h3>Week 6</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/ups7vdhegceehy4/Week06.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://www.youtube.com/watch?v=1FiOSvJEJFY" target="_blank">Week 6 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/1aVk6-88d66ZXOPwCxdRDWwIjztozKMXQqnNIe9vgLRc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 6 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 6 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-7" class="section level3">
 <h3>Week 7</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/hdq4spww650cy2f/Week07.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://youtu.be/dFRcnsdHLnw" target="_blank">Week 7 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/10twqshouUqOb4kr22AvveSHI1atg_Oh_Zo1f8AqpBeo/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 7 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 7 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-8" class="section level3">
 <h3>Week 8</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/vutfx0xrlfofqop/Week08.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://youtu.be/VgB6WoRXjVM" target="_blank">Week 8 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/1BOYvHmlq0_MrDXYlj_PL-Ibd9kGb1WMhpsqcG7WkLSc/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 8 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 8 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-9" class="section level3">
 <h3>Week 9</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/43xyeq2xbpgfzed/Week09.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://youtu.be/7btb4crVuzc" target="_blank">Week 9 video recording</a></li>
-<li><a href="https://docs.google.com/document/d/1BsPJDXYmWwJLt4DrNiQo7QE6Lz_wUUgngYjUw8AThYg/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
+<li><a href="" target="_blank">Week 9 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 9 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
 <div id="week-10" class="section level3">
 <h3>Week 10</h3>
 <ul>
 <li><a href="https://dl.dropboxusercontent.com/s/cjp0m9cwatrqjl5/Week10.R?dl=0" target="_blank">Livecode</a></li>
-<li><a href="https://github.com/gge-ucd/R-DAVIS/blob/master/Rmd_intro.Rmd">RMarkdown Intro Code</a> (can copy from code file) and <a href="https://gge-ucd.github.io/R-DAVIS/Rmd_intro.html">RMarkdown Intro HTML output</a><br />
-</li>
-<li><a href="https://ucdavis.zoom.us/j/99874276705?pwd=VjVvckVpU2NjMUx0YnJaZUQxZ3p0dz09" target="_blank">Zoom link (can be viewed later as video)</a></li>
-<li><a href="https://docs.google.com/document/d/13a1x5WedlcVja-TSnC8n3uUoIBrSQ4AfoLMg5uyR2DI/edit?usp=sharing" target="_blank">Google Doc Collaborative Notes</a></li>
-<li><a href="https://docs.google.com/forms/d/e/1FAIpQLSckEg0FR8czE9vFtG2SCE8MZYkPYu6sgzdqx9FoNOdvFWSD1Q/viewform?usp=sf_link" target="_blank">Post-Class Survey (complete after class)</a></li>
-<li><a href="https://forms.gle/PAbLdiaGwT4ejtAU6" target="_blank">POST-COURSE SURVEY: PLEASE TAKE YOUR TIME</a></li>
+<li><a href="" target="_blank">Week 10 pre-class videos, posted Monday before class</a></li>
+<li><a href="" target="_blank">Week 10 video recording, to be posted after class</a></li>
+<li><a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a></li>
 </ul>
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>A <code>@ucdavis.edu</code> email/class registration is required to access the google doc<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
 
 
@@ -561,7 +517,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

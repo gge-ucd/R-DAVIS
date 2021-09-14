@@ -5,7 +5,7 @@ title: "About Data Carpentry"
 
 This course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology (GGE) at the University of California, Davis, USA.
 
-Funding for this course is provided by the GGE, and the 2020 course faculty sponsor is Janet Foley. Additional swag (stickers and handouts) are provided by Github Education/Classroom folks and the Data Science Initiative provided classroom space. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.
+The classroom space is provided by UC Davis Data Lab. Advice from Ethan White (University of Florida), Jenny Bryan (University of British Columbia), and Tracy Teal (The Carpentries) was also helpful in guiding the course implementation.
 
 
 <p></p>
@@ -16,7 +16,7 @@ Funding for this course is provided by the GGE, and the 2020 course faculty spon
 
 <p></p>
 
-Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is a sibling organization of Software Carpentry. Where Software Carpentry teaches best practices in software development, our focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain specific, from life and physical sciences to social science and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.
+Data Carpentry develops and teaches workshops on the fundamental data skills needed to conduct research. Our mission is to provide researchers high-quality, domain-specific training covering the full lifecycle of data-driven research. Data Carpentry is now a lesson program within The Carpentries, having merged with Software Carpentry in January, 2018. Data Carpentry's focus is on the introductory computational skills needed for data management and analysis in all domains of research. Our lessons are domain-specific, and build on the existing knowledge of learners to enable them to quickly apply skills learned to their own research. Our initial target audience is learners who have little to no prior computational experience. We create a friendly environment for learning to empower researchers and enable data driven discovery.
 
 See the Data Carpentry [website](http://www.datacarpentry.org/) for more information.
 
@@ -24,17 +24,13 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 
 ## Instructors 
 
-**Christian John** 
-
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:cjohn@ucdavis.edu)  
-Office Hours: Thursdays, 2-4 pm ([Virtual Office](https://ucdavis.zoom.us/j/2047192834))
-
-<br>
-
 **Liza Wood** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
-Office Hours: Mondays, 3-5 pm ([Virtual Office](https://ucdavis.zoom.us/j/3876491023))
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)
+
+**Tyler Scott** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:tascott@ucdavis.edu)  
 
   
 

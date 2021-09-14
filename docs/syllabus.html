@@ -13,12 +13,22 @@
 
 <title>Syllabus</title>
 
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -37,14 +47,9 @@
   div.column{display: inline-block; vertical-align: top; width: 50%;}
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
-      </style>
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -57,32 +62,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 
@@ -93,10 +73,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -113,40 +89,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -174,7 +123,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -186,7 +135,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -197,10 +146,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -212,7 +174,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -341,7 +302,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -406,37 +367,43 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="lesson_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
     </li>
     <li>
-      <a href="lesson_spreadsheets_condensed.html">Spreadsheets</a>
+      <a href="lesson_02_project_management.html">Project Management</a>
     </li>
     <li>
-      <a href="lesson_project_management.html">Project Management</a>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
     </li>
     <li>
-      <a href="lesson_how_r_thinks_about_data.html">How R Thinks About Data</a>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
     </li>
     <li>
-      <a href="lesson_data_frames_tibbles_ecology.html">Starting With Data in R</a>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
     </li>
     <li>
-      <a href="lesson_dplyr_ecology.html">Using dplyr and tidyr</a>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_ggplot_ecology.html">Using ggplot2</a>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
     </li>
     <li>
-      <a href="lesson_visualization_dos.html">Visualization Best Practices</a>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
     </li>
     <li>
-      <a href="lesson_data_import.html">Data Import &amp; Export</a>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_lubridate.html">Date-times with lubridate</a>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
     </li>
     <li>
-      <a href="lesson_functions.html">Writing functions</a>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
       <a href="lesson_iteration.html">Iteration</a>
@@ -487,11 +454,11 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
 </ul>
@@ -521,6 +488,7 @@ div.tocify {
 <h2>Course Objectives</h2>
 <p>Students completing this course should be able to:</p>
 <ul>
+<li>Organize R projects in GitHub</li>
 <li>Read, import/export data</li>
 <li>Tidy/summarize and analyze data</li>
 <li>Create publication-quality graphs and figures</li>
@@ -529,91 +497,80 @@ div.tocify {
 <li>Apply these tools to address scientific research questions</li>
 </ul>
 </div>
-<div id="online-learning-etiquette" class="section level2">
-<h2>Online learning etiquette</h2>
-<ul>
-<li>Video encouraged but optional</li>
-<li>Communicate with Instructors/TAs through:
-<ul>
-<li>Asking out loud! (general questions)</li>
-<li>Zoom chat – monitored by TAs &amp; posted after class (Note: <strong>all</strong> messages are downloaded to Zoom hosts, even private ones)</li>
-<li>Break-out rooms for one-on-one troubleshooting</li>
-<li>Green check and red X buttons on your Participant list</li>
-</ul></li>
-</ul>
+<div id="course-format" class="section level2">
+<h2>Course format</h2>
+<p>To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. We will post the week’s videos on Mondays at the latest. Please come to class having watched the material relevant to that week’s lesson.</p>
 </div>
 <div id="schedule" class="section level2">
 <h2>Schedule</h2>
-<!-- 
-previously used the emo package now using emojifont as it's CRAN ready
-devtools::install_github("hadley/emo") 
-http://emoji.muan.co/ to look up emoji
-
-/-->
-<div id="week-1" class="section level4">
-<h4>Week 1</h4>
+<div id="week-1-sept.-23" class="section level4">
+<h4>Week 1 (Sept. 23)</h4>
 <ul>
 <li>Course intro</li>
 <li>Intro to git/GitHub and RStudio</li>
 </ul>
 </div>
-<div id="week-2" class="section level4">
-<h4>Week 2</h4>
+<div id="week-2-sept.-30" class="section level4">
+<h4>Week 2 (Sept. 30)</h4>
 <ul>
-<li>Spreadsheets best practices</li>
-<li>Project Management</li>
-</ul>
-</div>
-<div id="week-3" class="section level4">
-<h4>Week 3</h4>
-<ul>
+<li>Project management</li>
 <li>How R thinks about data</li>
 </ul>
 </div>
-<div id="week-4" class="section level4">
-<h4>Week 4</h4>
+<div id="week-3-oct.-7" class="section level4">
+<h4>Week 3 (Oct. 7)</h4>
 <ul>
-<li>Working with data in R</li>
+<li>Spreadsheet best practices</li>
+<li>Starting with spreadsheets in R</li>
 </ul>
 </div>
-<div id="week-5" class="section level4">
-<h4>Week 5</h4>
+<div id="week-4-oct.-14" class="section level4">
+<h4>Week 4 (Oct. 14)</h4>
 <ul>
-<li>Data cleaning with <code>dplyr</code> and <code>tidyr</code></li>
+<li>Data manipulation in the tidyverse, part 1</li>
 </ul>
 </div>
-<div id="week-6" class="section level4">
-<h4>Week 6</h4>
+<div id="week-5-oct.-21" class="section level4">
+<h4>Week 5 (Oct. 21)</h4>
 <ul>
-<li>Finish data cleaning</li>
-<li>Intro to plotting with <code>ggplot</code></li>
+<li>Conditional statements</li>
+<li>Data manipulation in the tidyverse, part 2</li>
 </ul>
 </div>
-<div id="week-7" class="section level4">
-<h4>Week 7</h4>
+<div id="week-6-oct.-28" class="section level4">
+<h4>Week 6 (Oct. 28)</h4>
 <ul>
-<li>Finishing up <code>ggplot</code></li>
+<li>Data visualization, part 1</li>
 </ul>
 </div>
-<div id="week-8" class="section level4">
-<h4>Week 8</h4>
+<div id="week-7-nov.-4" class="section level4">
+<h4>Week 7 (Nov. 4)</h4>
+<ul>
+<li>Data visualization best practices</li>
+<li>Data visualization, part 2</li>
+</ul>
+</div>
+<div id="week-8-nov.-11" class="section level4">
+<h4>Week 8 (Nov. 11)</h4>
 <ul>
 <li>Date-time data with <code>lubridate</code></li>
-<li>Exporting data</li>
+<li>Writing functions</li>
 </ul>
 </div>
-<div id="week-9" class="section level4">
-<h4>Week 9</h4>
+<div id="week-9-nov.-18" class="section level4">
+<h4>Week 9 (Nov. 18)</h4>
 <ul>
-<li>Writing Functions</li>
 <li>Iteration</li>
 </ul>
 </div>
-<div id="week-10" class="section level4">
-<h4>Week 10</h4>
+<div id="thanksgiving-holiday-nov.-25" class="section level3">
+<h3>Thanksgiving holiday (Nov. 25)</h3>
+<div id="week-10-dec.-2" class="section level4">
+<h4>Week 10 (Dec. 2)</h4>
 <ul>
 <li>RMarkdown and Literate Programming</li>
 </ul>
+</div>
 </div>
 </div>
 
@@ -628,7 +585,7 @@ http://emoji.muan.co/ to look up emoji
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -646,7 +603,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -660,6 +617,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

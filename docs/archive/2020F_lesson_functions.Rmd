@@ -1,0 +1,207 @@
+---
+layout: page
+title: R for reproducible scientific analysis
+subtitle: Creating functions
+minutes: 45
+---
+
+```{r, include = FALSE}
+library(gapminder)
+library(tidyverse)
+```
+
+<div class = "blue">
+
+### Learning objectives
+
+* Define a function that takes arguments.
+* Return a value from a function.
+* Test a function.
+* Set default values for function arguments.
+* Explain why we should divide programs into small, single-purpose functions.
+</div>
+<br>
+
+Any operation you will perform more than once can be put into a function. That way, rather than retyping all the commands (and potentially making errors), you can simply call the function, passing it a new dataset or parameters. This may seem cumbersome at first, but writing functions to automate repetitive tasks is incredibly powerful. E.g. each time you call `ggplot` you are calling a function that someone wrote. Imagine if each time you wanted to make a plot you had to copy and paste or write that code from scratch!
+
+
+
+## Defining a function
+
+Recall the components of a function. E.g. the `log` function (see `?log`) takes "arguments" `x` and `base` and "returns" the base-`base` logarithm of `x`. Functions take arguments as input and yield return-values as output. You can define functions to do any number of operations on any number of arguments, but always output a single return value (however there are complex objects into which you can put multiple objects, should you need to).
+
+Let's start by defining a simple function to add two numbers. This is the basic structure, which you can read as "assign to the variable `my_sum` a function that takes arguments `a` and `b` and returns `the_sum`." The body of the function is delimited by the curly-braces. The statements in the body are indented. This makes the code easier to read but does not affect how the code operates. 
+
+```{r}
+my_sum <- function(a, b) {
+  the_sum <- a + b
+  return(the_sum)
+}
+```
+
+Notice that no numbers were summed when we ran that code, but now the Environment has an object called `my_sum` that has type function. You can call `my_sum` just like you would any other function. When you do, the code between the curly-braces of the `my_sum` definition is run with whatever values you pass to `a` and `b` substituted in their place.
+
+```{r}
+my_sum(a = 2, b = 2)
+my_sum(3, 4)
+```
+
+Just like `log` provides a default value of `base` (`exp(1)`) so that you don't have to type it every time, you can provide default values to any arguments of your function. Then if the user doesn't specify them, the defaults will be used.
+
+```{r}
+my_sum2 <- function(a = 1, b = 2) {
+  the_sum <- a + b
+  return(the_sum)
+}
+my_sum2()
+my_sum2(b = 7)
+```
+
+<div class = "blue">
+
+### Tip
+
+One feature unique to R is that the return statement is not required.
+R automatically returns the output of the last line of the body
+of the function unless a `return` statement is specified elsewhere.
+Since other languages require a `return` statement and because it can make
+reading a function easier, we will explicitly define the return statement.
+</div>
+<br>
+
+## Temperature conversion
+
+Let’s define a function F_to_K that converts temperatures from Fahrenheit to Kelvin:
+
+```{r}
+F_to_K <- function(temp) {
+  K <- ((temp - 32) * (5 / 9)) + 273.15
+  return(K)
+}
+```
+
+Calling our own function is no different from calling any other function:
+
+```{r}
+# freezing point of water
+F_to_K(32)
+```
+
+```{r}
+# boiling point of water
+F_to_K(212)
+```
+
+<div class = "blue">
+
+#### Challenge 1
+
+- Write a function called `K_to_C` that takes a temperature in K
+and returns that temperature in C
+   - Hint: To convert from K to C you subtract 273.15
+- Create a new R script, copy `F_to_K` and `K_to_C` in it, and save it as 
+functions.R in the `code` directory of your project.
+</div>
+<br>
+
+## `source()`ing functions
+
+You can load all the functions in your `code/functions.R` script without even opening the file, via the `source` function. This allows you to keep your functions separate from the analyses which use them. 
+
+```{r, eval = FALSE}
+source('code/functions.R')
+```
+
+
+## Combining functions
+
+The real power of functions comes from mixing, matching and combining them
+into ever large chunks to get the effect we want.
+
+<div class = "blue">
+#### Challenge 2
+
+- Write a new function called `F_to_C` in your functions.R file that converts 
+temperature directly from F to C by reusing the two functions above.
+- Load the function not by highlighting the code but by `source`-ing your functions.R file.
+- Use the function to find today's high temperature in your location in C.
+</div>
+<br>
+
+
+<!-- ### A more-useful function -->
+
+<!-- Let's write a function to calculate countries' GDPs in their local currency.  -->
+
+<!-- - Start with Canada, exchange rate is 1.279098 -->
+
+<!-- - Turn that into a function that takes country and exchange rate. -->
+
+<!-- - Here is a [table of exchange rates for many countries](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/simple_exchange_rate.csv). -->
+
+<!-- - Call the function with some row -->
+
+<!-- - lapply over rows -->
+
+
+<!-- ### Do by joins -->
+
+<!-- And by year -->
+
+<!-- - Get all the exchange rates over time. You can [download that here](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/exchange_rate.csv). -->
+
+<!-- - join, filter -->
+
+
+## Pass by value
+
+Functions in R almost always make copies of the data to operate on
+inside of a function body. When we modify `dat` inside the function
+we are modifying the copy of the gapminder dataset stored in `dat`,
+not the original variable we gave as the first argument.
+This is called "pass-by-value" and it makes writing code much safer:
+you can always be sure that whatever changes you make within the
+body of the function, stay inside the body of the function.
+
+## Function scope
+
+A related concept is scoping: any variables you
+create or modify inside the body of a function only exist for the lifetime
+of the function's execution. When we call `calcGDP`, the variables `dat`,
+ `years`, and `filteredDF` only exist inside the body of the function. Even if we
+have variables of the same name in our interactive R session, they are
+not modified in any way when executing a function.
+
+
+<div class = "blue">
+#### Challenge -- A new function {.challenge}
+
+This challenge will deal with countries' population growth. To access the data, load (and install, if needed) the `gapminder` library and access its life expectancy dataset using:
+
+```
+library(tidyverse)
+library(gapminder)
+d <- gapminder::gapminder
+```
+
+Write a new function that takes two arguments, the gapminder data.frame (`d`) and the name of a country (e.g. `"Afghanistan"`), and plots a time series of the country's population. That is, the return value from the function should be a ggplot object.
+   - It is often easier to modify existing code than to start from scratch. To start out with, try writing some code that works interactively, and then wrap it in a function.
+
+
+<details>
+<summary>ANSWER</summary>
+```{r}
+plotPopGrowth <- function(countrytoplot, dat = gapminder) {
+    df <- filter(dat, country == countrytoplot) 
+    plot <- ggplot(df, aes(year, pop)) + 
+        geom_line()
+    return(plot)
+}
+plotPopGrowth('Canada')
+```
+</details>
+</div>
+<br>
+
+
+This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis [Creating Functions materials](http://data-lessons.github.io/gapminder-R/07-functions.html).

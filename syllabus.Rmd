@@ -23,6 +23,7 @@ The focus of this course is to provide graduate students with training that deve
 
 Students completing this course should be able to:
 
+ - Organize R projects in GitHub
  - Read, import/export data
  - Tidy/summarize and analyze data
  - Create publication-quality graphs and figures
@@ -30,63 +31,47 @@ Students completing this course should be able to:
  - Search for and access new learning materials to further develop their computational skills
  - Apply these tools to address scientific research questions
 
-## Online learning etiquette  
+## Course format  
 
-* Video encouraged but optional
-* Communicate with Instructors/TAs through:  
-    * Asking out loud! (general questions)
-    * Zoom chat -- monitored by TAs & posted after class (Note: **all** messages are downloaded to Zoom hosts, even private ones)
-    * Break-out rooms for one-on-one troubleshooting
-    * Green check and red X buttons on your Participant list 
+To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. We will post the week's videos on Mondays at the latest. Please come to class having watched the material relevant to that week's lesson.
+
 
 ## Schedule
 
-<!-- 
-previously used the emo package now using emojifont as it's CRAN ready
-devtools::install_github("hadley/emo") 
-http://emoji.muan.co/ to look up emoji
-
-/-->
-
-```{r echo=F, eval=T, warning = F}
-
-library(emojifont, quietly = T)
-
-# green check emoji are things we've completed or already are in/updated, 
-# gray check boxes are content we have but haven't added to website yet
-```
-
-#### Week 1
+#### Week 1 (Sept. 23)
 - Course intro
 - Intro to git/GitHub and RStudio
 
-#### Week 2
-- Spreadsheets best practices
-- Project Management
- 
-#### Week 3
+#### Week 2 (Sept. 30)
+- Project management
 - How R thinks about data
+ 
+#### Week 3 (Oct. 7)
+- Spreadsheet best practices
+- Starting with spreadsheets in R
 
-#### Week 4
-- Working with data in R
+#### Week 4 (Oct. 14)
+- Data manipulation in the tidyverse, part 1
 
-#### Week 5
-- Data cleaning with `dplyr` and `tidyr`
+#### Week 5 (Oct. 21)
+- Conditional statements
+- Data manipulation in the tidyverse, part 2
 
-#### Week 6
-- Finish data cleaning
-- Intro to plotting with `ggplot`
+#### Week 6 (Oct. 28)
+- Data visualization, part 1
 
-#### Week 7
-- Finishing up `ggplot`
+#### Week 7 (Nov. 4)
+- Data visualization best practices
+- Data visualization, part 2
 
-#### Week 8
+#### Week 8 (Nov. 11)
 - Date-time data with `lubridate`
-- Exporting data
+- Writing functions
 
-#### Week 9
-- Writing Functions
+#### Week 9 (Nov. 18)
 - Iteration
 
-#### Week 10
+### Thanksgiving holiday (Nov. 25)  
+
+#### Week 10 (Dec. 2)
 - RMarkdown and Literate Programming

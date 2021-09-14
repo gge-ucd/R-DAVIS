@@ -1,0 +1,113 @@
+---
+title: "date_time_extras"
+author: "Martha Wohlfeil"
+date: "12/26/2019"
+output: html_document
+---
+
+## Background Reading
+
+These resources are very useful. Please read through them.
+
+ - This is a great overview of times and dates in R from [Bonnie Dixon's talk at the Davis R-Users Group](http://www.noamross.net/blog/2014/2/10/using-times-and-dates-in-r---presentation-code.html)
+
+ - [A very comprehensive and detailed look at using dates in R](https://www.stat.berkeley.edu/~s133/dates.html)
+
+ - [The vignette on using lubridate](https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html)
+ 
+ 
+ 
+### Date Calculations
+
+It's possible to use dates in calculations as well, as long as they are formatted in the same data type (i.e., both are `date` in this case).
+
+**Make some fake dates**
+
+```{r fakedates, eval=T, echo=T}
+
+# format a value as `date`
+dt1 <- as.Date("2017-07-11")
+dt1
+
+# non-standard formats must be specified using format=
+dt2 <- as.Date("04/22/2016", format = "%m/%d/%Y")
+dt2
+
+dt3 <- as.Date("October 6, 2014", format = "%B %d, %Y")
+dt3
+
+```
+
+**Now some calculations**
+
+```{r datecalc1}
+# subtract differences in dates
+print(dt1 - dt2)
+```
+
+```{r datecalc2}
+# or look at differences in alternate scales
+print(difftime(dt1, dt2, units = "weeks"))
+
+```
+
+You can also sequence along by a given interval to create a timeseries. 
+
+```{r}
+six.weeks <- seq(dt1, length = 6, by = "week")
+six.weeks
+```
+
+ > ### Challenge:
+ > Create a sequence of 10 dates with a 2 week interval starting on 2011-02-15
+ 
+```{r challenge2, echo=F, eval=F}
+startingDate <- as.Date("2011-02-15")
+tendates <- seq(startingDate, length=10, by=14)
+tendates
+```
+
+## Working with Timezones & Datetimes
+
+Similar to `as.Date` there are two functions for each datetime class in R. `as.POSIXct` and `as.POSIXlt`. The arguments are the largely the same, but two important components to consider are a `strptime` function to help format the datetime (similar to `as.Date`), and a timezone argument `tz`, for adding the appropriate timezone.
+
+Keep in mind the default datetime format is `YMD HM` or `YMD HMS`, so if you use that format you won't need to use the `strptime` option.
+
+### **as.POSIXct**
+
+ - Example 1 (default doesn't need `strptime`): `as.POSIXct("2016-01-01 12:00", "America/Los_Angeles")` = `r as.POSIXct("2016-01-01 12:00", "America/Los_Angeles")`
+ - Example 2 (24 hr time): `as.POSIXct(strptime("2016/04/05 14:47",format = "%Y/%m/%d %H:%M"), "America/Los_Angeles")` = `r as.POSIXct(strptime("2016/04/05 14:47",format = "%Y/%m/%d %H:%M"), "America/Los_Angeles")`
+ - Example 3 (12 hr time): `as.POSIXct(strptime("2016/04/05 4:47 PM",format = "%Y/%m/%d %H:%M PM"), "America/Los_Angeles")` = `r as.POSIXct(strptime("2016/04/05 4:47 PM",format = "%Y/%m/%d %H:%M PM"), "America/Los_Angeles")`
+ 
+ ## Datetimes without Timezones (and `chron`)
+
+The `chron` package may be helpful for these tasks, however, this may also be a suitable use of the POSIXlt class.
+
+ - `chron::as.chron("2013-07-24 23:55:26")` = `r chron::as.chron("2013-07-24 23:55:26")`
+ - `chron::as.chron("07/25/13 08:32:07", "%m/%d/%y %H:%M:%S")` = `r chron::as.chron("07/25/13 08:32:07", "%m/%d/%y %H:%M:%S")`
+ 
+
+ 
+
+```{r}
+
+
+# or with custom legend
+# use viridis color palette 
+library(viridis)
+#viridis(4) # "#440154FF" "#21908CFF" "#FDE725FF"
+cols1 <- c("Temp-2m"="#440154FF", "Temp-10m" = "#35B779FF", "Temp-Towertop" = "#31688EFF")
+
+df %>% 
+  group_by(mon) %>% 
+  summarize(avg_temp_2m = mean(temp_C_2m),
+            avg_temp_10m = mean(temp_C_10m),
+            avg_temp_tower = mean(temp_C_towertop)) %>% 
+  ggplot() + geom_point(aes(x=mon, y=avg_temp_2m, fill="Temp-2m"), size=5, pch=21)+
+  geom_point(aes(x=mon, y=avg_temp_10m, fill="Temp-10m"), size=5, pch=21) + 
+  geom_point(aes(x=mon, y=avg_temp_tower, fill="Temp-Towertop"), size=5, pch=21) +
+  ylab("2001 Avg Monthly Temperature (C)") + xlab("Month") + 
+  scale_fill_manual(name="Temperature (C)",values=cols1) +
+  theme(legend.position = "bottom")
+ 
+```

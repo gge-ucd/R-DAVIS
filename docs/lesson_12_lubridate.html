@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Dates &amp; Times in R</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up!
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
+    </li>
+    <li>
+      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Dates &amp; Times in R</h1>
+<h3 class="subtitle">Working with datetimes and <code>lubridate</code></h3>
+
+</div>
+
+
+<br>
+<div id="learning-objectives" class="section level3 blue">
+<h3>Learning Objectives</h3>
+<ul>
+<li>Learn the basic date/datetime types in R</li>
+<li>Gain familiarity with converting dates and timezones</li>
+<li>Learn how to use the <code>lubridate</code> package</li>
+<li>Tips and tricks about management of datetime data</li>
+</ul>
+</div>
+<p><br></p>
+<div id="date-times-in-r" class="section level1">
+<h1>Date-Times in R</h1>
+<p>We have learned about different data type classes in previous lessons. Some common data classes we have examined before include character, factor, and numeric. But R also recognizes a data class called “Dates”. Having your date data in the “Dates” data class is very useful, as you can then do things like calculate time between two events, transform the dates into different formats, and plot temporal data easily. In this lesson, we are going to introduce how base R deals with dates (<code>POSIXct</code> or <code>POSITlt</code>), but we are going to spend the majority of our lesson on the package <code>lubridate</code>. <code>lubridate</code> is a great package that makes it much easier to work with dates and times in R.</p>
+<div id="date-time-classes-in-base-r" class="section level2">
+<h2>Date-Time Classes in Base R</h2>
+<p>Importantly, there are <strong>3</strong> basic time classes in R:</p>
+<ul>
+<li><strong><code>Dates</code></strong> (just dates, i.e., 2012-02-10)</li>
+<li><strong><code>POSIXct</code></strong> (“<strong>ct</strong>” == calendar time, best class for dates with times)</li>
+<li><strong><code>POSIXlt</code></strong> (“<strong>lt</strong>” == local time, enables easy extraction of specific components of a time, however, remember that POXIXlt objects are lists)</li>
+</ul>
+<p>Unfortunately converting dates &amp; times in R into formats that are computer readable can be frustrating, mainly because there is very little consistency. In particular, if you are importing things from Excel, keep in mind dates can get especially weird<sup>1</sup>, depending on the operating system you are working on, the format of your data, etc.</p>
+<p><sup><em>1</em></sup> <sub><em>For example Excel stores dates as a number representing days since 1900-Jan-0, plus a fractional portion of a 24 hour day (<strong>serial-time</strong>), but in OSX (Mac), it is 1904-Jan-0.</em></sub></p>
+</div>
+<div id="dates" class="section level2">
+<h2>Dates</h2>
+<p>The <code>Date</code> class in R can easily be converted or operated on numerically, depending on the interest. Let’s make a string of dates to use for our example:</p>
+<pre class="r"><code>sample_dates_1 &lt;- c(&quot;2018-02-01&quot;, &quot;2018-03-21&quot;, &quot;2018-10-05&quot;, &quot;2019-01-01&quot;, &quot;2019-02-18&quot;)
+#notice we have dates across two years here</code></pre>
+<p>What is the class that R classifies this data as?</p>
+<p>R classifies our <code>sample_dates_1</code> data as character data. Let’s transform it into Dates. Notice that our <code>sample_dates_1</code> is in a nice format: YYYY-MM-DD. This is the format necessary for the function <code>as.Date</code>.</p>
+<pre class="r"><code>sample_dates_1 &lt;- as.Date(sample_dates_1)</code></pre>
+<p>What happens with different orders…say MM-DD-YYYY?</p>
+<pre class="r"><code># Some sample dates: 
+
+sample_dates_2 &lt;- c(&quot;02-01-2018&quot;, &quot;03-21-2018&quot;, &quot;10-05-2018&quot;, &quot;01-01-2019&quot;, &quot;02-18-2019&quot;)
+
+sample_dates_3 &lt;-as.Date(sample_dates_2) # well that doesn&#39;t work</code></pre>
+<p>The reason this doesn’t work is because the computer expects one thing, but is getting something else. Remember, <strong>write code you can read and your computer can understand</strong>. So we need to give some more information here so R will interpret our data correctly.</p>
+<pre class="r"><code># Some sample dates:
+sample_dates_2 &lt;- c(&quot;02-01-2018&quot;, &quot;03-21-2018&quot;, &quot;10-05-2018&quot;, &quot;01-01-2019&quot;, &quot;02-18-2019&quot;)
+
+sample_dates_3&lt;- as.Date(sample_dates_2, format = &quot;%m-%d-%Y&quot; ) # date code preceded by &quot;%&quot;</code></pre>
+<p>To see a list of the date-time format codes in R, check out this <a href="https://www.stat.berkeley.edu/~s133/dates.html">page and table</a>, or you can use: <code>?(strptime)</code></p>
+<p>The nice thing is this method works well with pretty much any format, you just need to provide the associated codes and structure:</p>
+<ul>
+<li><p><code>as.Date("2016/01/01", format="%Y/%m/%d")</code>=2016-01-01</p></li>
+<li><p><code>as.Date("05A21A2011", format="%mA%dA%Y")</code>=2011-05-21</p></li>
+</ul>
+<div id="challenge" class="section level3 blue">
+<h3>Challenge</h3>
+<p>Format this date with the <code>as.Date</code> function: <code>Jul 04, 2019</code></p>
+<details>
+<summary>
+ANSWER
+</summary>
+<pre class="r"><code>as.Date(&quot;Jul 04, 2019&quot;, format = &quot;%b%d,%Y&quot;)</code></pre>
+<pre><code>## [1] &quot;2019-07-04&quot;</code></pre>
+</details>
+</div>
+<p><br></p>
+</div>
+<div id="working-with-times-in-base-r" class="section level2">
+<h2>Working with Times in Base R</h2>
+<p>When working with times, the best class to use in base R is <code>POSIXct</code>.</p>
+<pre class="r"><code>tm1 &lt;- as.POSIXct(&quot;2016-07-24 23:55:26&quot;)
+tm1</code></pre>
+<pre><code>## [1] &quot;2016-07-24 23:55:26 BST&quot;</code></pre>
+<pre class="r"><code>tm2 &lt;- as.POSIXct(&quot;25072016 08:32:07&quot;, format = &quot;%d%m%Y %H:%M:%S&quot;)
+tm2</code></pre>
+<pre><code>## [1] &quot;2016-07-25 08:32:07 BST&quot;</code></pre>
+<pre class="r"><code>#Notice how POSIXct automatically uses the timezone your computer is set to. What if we collected this data in a different timezone?
+
+# specify the time zone:
+tm3 &lt;- as.POSIXct(&quot;2010-12-01 11:42:03&quot;, tz = &quot;GMT&quot;)
+tm3</code></pre>
+<pre><code>## [1] &quot;2010-12-01 11:42:03 GMT&quot;</code></pre>
+</div>
+</div>
+<div id="the-lubridate-package" class="section level1">
+<h1>The <code>lubridate</code> Package</h1>
+<p>The <code>lubridate</code> package will handle 90% of the date &amp; datetime issues you need to deal with. It is fast, much easier to work with, and we recommend using it wherever possible. Do keep in mind sometimes you need to fall back on the base R functions (i.e., <code>as.Date()</code>), which is why having a basic understanding of theses functions and their use is important.</p>
+<p>To use <code>lubridate</code> we will first need to install and load the package.</p>
+<pre class="r"><code>#install.packages(&quot;lubridate&quot;)
+
+library(lubridate)</code></pre>
+<p><code>lubridate</code> has lots of handy functions for converting between date and time formats, and even timezones.</p>
+<p>Let’s take a look at our <code>sample_dates_1</code> data again.</p>
+<pre class="r"><code>sample_dates_1 &lt;- c(&quot;2018-02-01&quot;, &quot;2018-03-21&quot;, &quot;2018-10-05&quot;, &quot;2019-01-01&quot;, &quot;2019-02-18&quot;)</code></pre>
+<p>Once again, R reads this in a character data.</p>
+<p>Lubridate uses functions that looks like <code>ymd</code> or <code>mdy</code> to transform data into the class “Date”. Our <code>sample_dates_1</code> data is formatted like Year, Month, Day, so we would use the <code>lubridate</code> function <code>ymd</code> (y = year, m = month, d = day).</p>
+<pre class="r"><code>sample_dates_lub &lt;- ymd(sample_dates_1)</code></pre>
+<p>What about that messier <code>sample_dates_2</code> data? Remember R wants dates to be in the format YYYY-MM-DD.</p>
+<pre class="r"><code>sample_dates_2 &lt;- c(&quot;2-01-2018&quot;, &quot;3-21-2018&quot;, &quot;10-05-18&quot;, &quot;01-01-2019&quot;, &quot;02-18-2019&quot;)
+#notice that some numbers for years and months are missing
+
+sample_dates_lub2 &lt;- mdy(sample_dates_2) #lubridate can handle it! </code></pre>
+<p>All sorts of date formats can easily be transformed using <code>lubridate</code>:</p>
+<ul>
+<li><code>lubridate::ymd("2016/01/01")</code>=2016-01-01</li>
+<li><code>lubridate::ymd("2011-03-19")</code>=2011-03-19</li>
+<li><code>lubridate::mdy("Feb 19, 2011")</code>=2011-02-19</li>
+<li><code>lubridate::dmy("22051997")</code>=1997-05-22</li>
+</ul>
+<div id="using-lubridate-for-time-and-timezones" class="section level2">
+<h2>Using <code>lubridate</code> for Time and Timezones</h2>
+<p><code>lubridate</code> has very similar functions to handle data with Times and Timezones. To the <code>ymd</code> function, add <code>_hms</code> or <code>_hm</code> (h= hours, m= minute, s= seconds) and a <code>tz</code> argument. <code>lubridate</code> will default to the POSIXct format.</p>
+<ul>
+<li>Example 1: <code>lubridate::ymd_hm("2016-01-01 12:00", tz="America/Los_Angeles")</code> = 2016-01-01 12:00:00</li>
+<li>Example 2 (24 hr time): <code>lubridate::ymd_hm("2016/04/05 14:47", tz="America/Los_Angeles")</code> = 2016-04-05 14:47:00</li>
+<li>Example 3 (12 hr time but converts to 24): <code>lubridate::ymd_hms("2016/04/05 4:47:21 PM", tz="America/Los_Angeles")</code> = 2016-04-05 16:47:21</li>
+</ul>
+<div id="lubridate-tips" class="section level3">
+<h3>Lubridate Tips</h3>
+<p>For lubridate to work, you need the column datatype to be <strong>character</strong> or <strong>factor</strong>. The <code>readr</code> package (from the <code>tidyverse</code>) is smart and will try to guess for you. Problem is, it might convert your data for you without the settings (in this case the proper timezone). So here are few ways to work around this.</p>
+<pre class="r"><code>library(lubridate)
+library(dplyr)
+library(readr)
+
+# read in some data and skip header lines
+nfy1 &lt;- read_csv(&quot;data/2015_NFY_solinst.csv&quot;, skip = 12)
+head(nfy1) #R tried to guess for you that the first column was a date and the second a time</code></pre>
+<pre><code>## # A tibble: 6 × 5
+##   Date       Time      ms Level Temperature
+##   &lt;date&gt;     &lt;time&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;
+## 1 2015-05-22 14:00      0 -8.68           0
+## 2 2015-05-22 14:15      0 -8.29           0
+## 3 2015-05-22 14:30      0 -8.29           0
+## 4 2015-05-22 14:45      0 -8.29           0
+## 5 2015-05-22 15:00      0 -8.30           0
+## 6 2015-05-22 15:15      0 -8.29           0</code></pre>
+<pre class="r"><code># import raw dataset &amp; specify column types
+nfy2 &lt;- read_csv(&quot;data/2015_NFY_solinst.csv&quot;, col_types = &quot;ccidd&quot;, skip=12)
+
+glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 5
+## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 20…
+## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:00, 15:30:00, 15:4…
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
+<pre class="r"><code>glimpse(nfy2)</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 5
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
+<p>Next we want to create a single datetime column. How do we get our Date and Time columns into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
+<ul>
+<li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify with the <code>sep =</code> argument</li>
+<li><code>paste0()</code> is the same thing, but defaults to using no separator (i.e. no space).</li>
+</ul>
+<pre class="r"><code># make a datetime col:
+nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot;)
+
+glimpse(nfy2) #notice the  datetime column is classifed as character</code></pre>
+<pre><code>## Rows: 7,764
+## Columns: 6
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
+## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 14:30:00&quot;, &quot;2015/…</code></pre>
+<pre class="r"><code># convert Date Time to POSIXct in local timezone using lubridate
+nfy2$datetime_test &lt;- as_datetime(nfy2$datetime, 
+                                    tz=&quot;America/Los_Angeles&quot;)
+# OR convert using the ymd_functions
+nfy2$datetime_test2 &lt;- ymd_hms(nfy2$datetime, tz=&quot;America/Los_Angeles&quot;)
+
+# OR wrap in as.character()
+nfy1$datetime &lt;- ymd_hms(as.character(paste0(nfy1$Date, &quot; &quot;, nfy1$Time)), tz=&quot;America/Los_Angeles&quot;)
+tz(nfy1$datetime)</code></pre>
+<pre><code>## [1] &quot;America/Los_Angeles&quot;</code></pre>
+<p>Last, <code>lubridate</code> lets you extract components of date, time and datetime data types with intuitive functions.</p>
+<pre class="r"><code># Functions called day(), month(), year(), hour(), minute(), second(), etc... will extract those elements of a datetime column.
+months &lt;- month(nfy2$datetime)
+# Use the table function to get a quick summary of categorical variables
+table(months)</code></pre>
+<pre><code>## months
+##    5    6    7    8 
+##  904 2880 2976 1004</code></pre>
+<pre class="r"><code># Add label and abbr agruments to convert numeric representations to have names
+months &lt;- month(nfy2$datetime, label = TRUE, abbr=TRUE)
+table(months)</code></pre>
+<pre><code>## months
+##  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec 
+##    0    0    0    0  904 2880 2976 1004    0    0    0    0</code></pre>
+<p>This lesson was contributed by <a href="https://ryanpeek.github.io/">Ryan Peek</a> and <a href="https://github.com/MarthaWohlfeil">Martha Zillig</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
