@@ -6,14 +6,102 @@ title: "Manipulating and analyzing data in the tidyverse, Part 2"
 <div class = "blue">
 ## Learning objectives
 
+* Use conditional statements to create new variable
 * Use `join` functions to join two dataframes together
 * Describe the concept of a wide and a long table format and for which purpose those formats are useful.
 * Reshape a data frame from long to wide format and back with the `pivot_wider` and `pivot_longer` commands from the **`tidyr`** package.
 
+</div>
 
-### Joining two dataframes together using `join` functions
+<br>
 
-Often when working with real data, data might be seperated in multiple .csvs. The `join` family of dplyr functions can accomplish the task of uniting disperate data frames together rather easily. There are many kind of `join` functions that dplyr offers, and today we are going to cover the most commonly used function `left_join`. 
+### Conditional Statements  
+
+Sometimes, you want to do something with your code or create a new variable in a data frame, but only if a certain condition is true. Conditional statements are ways to set up a series of logical conditions that can help you manipulate your data.
+
+We'll begin again with our surveys data, and remember to load in the tidyverse
+```{r,results = 'hide', purl = FALSE, warnings = 'hide'}
+library(tidyverse)
+surveys <- read_csv("data/portal_data_joined.csv")
+```
+
+The general logic of conditional statements is this: if a statement is true, then execute x, if it is false, then execute y.
+
+Let's say that we want to create a categorical variable for hindfoot length. Using the summary function below, we see that the mean is 29.29, so let's split the data at the mean using a conditional statement.
+
+```{r}
+summary(surveys$hindfoot_length)
+```
+
+We can create a new variable, based on the logic: if hindfoot length is less than the mean of 29.29, assign "small" to this new variable, otherwise, assign "big" to this new variable.
+```{r}
+surveys$hindfoot_cat <- ifelse(surveys$hindfoot_length < 29.29, "small", "big")
+head(surveys$hindfoot_cat)
+```
+
+#### case_when() function
+
+The tidyverse provides a way to integrate conditional statements by combining `mutate()` with the conditional function: `case_when`. This function uses a series of two-sided formulas where the left-hand side determines which values you want, and the right supplies the result. The final statement is left as TRUE, for when the previous conditions have not been met. Here we can re-write the hindfoot_cat variable using the tidyverse.
+
+A note: Always be cautious about what might be left out when naming the conditions. In the previous ifelse() example we saw that NAs in the data remained NAs in the new variable construction. However, this is not so when using case_when(). It takes the last argument to mean "anything that is left" rather than hindfoot_length > 29.29 == F. So when we run the equivalent conditions in this function, it assigns "small" to the hindfoot_lengths of NA.
+
+```{r}
+surveys %>% 
+  mutate(hindfoot_cat = case_when(
+    hindfoot_length > 29.29 ~ "big",
+    TRUE ~ "small"
+  ))
+```
+
+To adjust for this, we need to add in more than one condition:
+
+```{r}
+surveys %>% 
+  mutate(hindfoot_cat = case_when(
+    hindfoot_length > 29.29 ~ "big",
+    is.na(hindfoot_length) ~ NA_character_,
+    TRUE ~ "small"
+  ))
+```
+
+<div class = "blue">
+### Challenge
+
+Using the `iris` data frame (this is built in to R), create a new variable that categorizes petal length into three groups:  
+
+* small (less than or equal to the 1st quartile)
+* medium (between the 1st and 3rd quartiles) 
+* large (greater than or equal to the 3rd quartile)  
+
+Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution.
+
+Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
+
+<details>
+<summary>ANSWER</summary>
+```{r challenge1, purl=FALSE}
+
+iris$petal.length.cat <- ifelse(iris$Petal.Length <= 1.6, "low", 
+                          ifelse(iris$Petal.Length > 1.6 & 
+                                   iris$Petal.Length < 5.1, "medium",
+                           "high"))
+
+iris %>% 
+  mutate(
+    petal.length.cat = case_when(
+      Petal.Length <= 1.6 ~ "small",
+      Petal.Length > 1.6 & Petal.Length < 5.1 ~ "medium",
+      TRUE ~ "large"
+    )
+  )
+
+
+```
+
+
+### Joining two dataframes 
+
+Often when working with real data, data might be separated in multiple .csvs. The `join` family of dplyr functions can accomplish the task of uniting disparate data frames together rather easily. There are many kind of `join` functions that dplyr offers, and today we are going to cover the most commonly used function `left_join`. 
 
 To learn more about the `join` family of functions, check out this [useful link](https://dplyr.tidyverse.org/reference/join.html). 
 
@@ -70,7 +158,7 @@ NL_data <- left_join(NL_data, tail, by = "record_id") #a new column called tail_
 
 As you can see, even with a lot of `record_id` missing, the `left_join` function will still join the dataframes together based on shared values. 
 
-### Reshaping with pivot_longer and pivot_wider
+### Reshaping with pivot functions
 
 In the 
 <span style="background:yellow">[spreadsheet lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/)</span> we discussed how to 

@@ -385,16 +385,10 @@ div.tocify {
       <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
     </li>
     <li>
-      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
-    </li>
-    <li>
       <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
     </li>
     <li>
       <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
-    </li>
-    <li>
-      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
     </li>
     <li>
       <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
@@ -472,17 +466,268 @@ div.tocify {
 
 
 <br>
-<div class = "blue">
-<div id="learning-objectives" class="section level2">
+<div id="learning-objectives" class="section level2 blue">
 <h2>Learning objectives</h2>
 <ul>
+<li>Use conditional statements to create new variable</li>
 <li>Use <code>join</code> functions to join two dataframes together</li>
 <li>Describe the concept of a wide and a long table format and for which purpose those formats are useful.</li>
 <li>Reshape a data frame from long to wide format and back with the <code>pivot_wider</code> and <code>pivot_longer</code> commands from the <strong><code>tidyr</code></strong> package.</li>
 </ul>
-<div id="joining-two-dataframes-together-using-join-functions" class="section level3">
-<h3>Joining two dataframes together using <code>join</code> functions</h3>
-<p>Often when working with real data, data might be seperated in multiple .csvs. The <code>join</code> family of dplyr functions can accomplish the task of uniting disperate data frames together rather easily. There are many kind of <code>join</code> functions that dplyr offers, and today we are going to cover the most commonly used function <code>left_join</code>.</p>
+</div>
+<p><br></p>
+<div id="conditional-statements" class="section level3">
+<h3>Conditional Statements</h3>
+<p>Sometimes, you want to do something with your code or create a new variable in a data frame, but only if a certain condition is true. Conditional statements are ways to set up a series of logical conditions that can help you manipulate your data.</p>
+<p>We’ll begin again with our surveys data, and remember to load in the tidyverse</p>
+<pre class="r"><code>library(tidyverse)
+surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<pre><code>## Rows: 34786 Columns: 13</code></pre>
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): species_id, sex, genus, species, taxa, plot_type
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<p>The general logic of conditional statements is this: if a statement is true, then execute x, if it is false, then execute y.</p>
+<p>Let’s say that we want to create a categorical variable for hindfoot length. Using the summary function below, we see that the mean is 29.29, so let’s split the data at the mean using a conditional statement.</p>
+<pre class="r"><code>summary(surveys$hindfoot_length)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    2.00   21.00   32.00   29.29   36.00   70.00    3348</code></pre>
+<p>We can create a new variable, based on the logic: if hindfoot length is less than the mean of 29.29, assign “small” to this new variable, otherwise, assign “big” to this new variable.</p>
+<pre class="r"><code>surveys$hindfoot_cat &lt;- ifelse(surveys$hindfoot_length &lt; 29.29, &quot;small&quot;, &quot;big&quot;)
+head(surveys$hindfoot_cat)</code></pre>
+<pre><code>## [1] &quot;big&quot; &quot;big&quot; NA    NA    NA    NA</code></pre>
+<div id="case_when-function" class="section level4">
+<h4>case_when() function</h4>
+<p>The tidyverse provides a way to integrate conditional statements by combining <code>mutate()</code> with the conditional function: <code>case_when</code>. This function uses a series of two-sided formulas where the left-hand side determines which values you want, and the right supplies the result. The final statement is left as TRUE, for when the previous conditions have not been met. Here we can re-write the hindfoot_cat variable using the tidyverse.</p>
+<p>A note: Always be cautious about what might be left out when naming the conditions. In the previous ifelse() example we saw that NAs in the data remained NAs in the new variable construction. However, this is not so when using case_when(). It takes the last argument to mean “anything that is left” rather than hindfoot_length &gt; 29.29 == F. So when we run the equivalent conditions in this function, it assigns “small” to the hindfoot_lengths of NA.</p>
+<pre class="r"><code>surveys %&gt;% 
+  mutate(hindfoot_cat = case_when(
+    hindfoot_length &gt; 29.29 ~ &quot;big&quot;,
+    TRUE ~ &quot;small&quot;
+  ))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species 
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+## # … with 34,776 more rows, and 3 more variables: taxa &lt;chr&gt;, plot_type &lt;chr&gt;, hindfoot_cat &lt;chr&gt;</code></pre>
+<p>To adjust for this, we need to add in more than one condition:</p>
+<pre class="r"><code>surveys %&gt;% 
+  mutate(hindfoot_cat = case_when(
+    hindfoot_length &gt; 29.29 ~ &quot;big&quot;,
+    is.na(hindfoot_length) ~ NA_character_,
+    TRUE ~ &quot;small&quot;
+  ))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species 
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula
+## # … with 34,776 more rows, and 3 more variables: taxa &lt;chr&gt;, plot_type &lt;chr&gt;, hindfoot_cat &lt;chr&gt;</code></pre>
+<div class = "blue">
+</div>
+</div>
+<div id="challenge" class="section level3">
+<h3>Challenge</h3>
+<p>Using the <code>iris</code> data frame (this is built in to R), create a new variable that categorizes petal length into three groups:</p>
+<ul>
+<li>small (less than or equal to the 1st quartile)</li>
+<li>medium (between the 1st and 3rd quartiles)</li>
+<li>large (greater than or equal to the 3rd quartile)</li>
+</ul>
+<p>Explore the iris data using <code>summary(iris$Petal.Length)</code>, to see the petal length distribution.</p>
+<p>Then use your function of choice: <code>ifelse()</code> or <code>case_when()</code> to make a new variable named <code>petal.length.cat</code> based on the conditions listed above.</p>
+<details>
+<summary>
+ANSWER
+</summary>
+<pre class="r"><code>iris$petal.length.cat &lt;- ifelse(iris$Petal.Length &lt;= 1.6, &quot;low&quot;, 
+                          ifelse(iris$Petal.Length &gt; 1.6 &amp; 
+                                   iris$Petal.Length &lt; 5.1, &quot;medium&quot;,
+                           &quot;high&quot;))
+
+iris %&gt;% 
+  mutate(
+    petal.length.cat = case_when(
+      Petal.Length &lt;= 1.6 ~ &quot;small&quot;,
+      Petal.Length &gt; 1.6 &amp; Petal.Length &lt; 5.1 ~ &quot;medium&quot;,
+      TRUE ~ &quot;large&quot;
+    )
+  )</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width    Species petal.length.cat
+## 1            5.1         3.5          1.4         0.2     setosa            small
+## 2            4.9         3.0          1.4         0.2     setosa            small
+## 3            4.7         3.2          1.3         0.2     setosa            small
+## 4            4.6         3.1          1.5         0.2     setosa            small
+## 5            5.0         3.6          1.4         0.2     setosa            small
+## 6            5.4         3.9          1.7         0.4     setosa           medium
+## 7            4.6         3.4          1.4         0.3     setosa            small
+## 8            5.0         3.4          1.5         0.2     setosa            small
+## 9            4.4         2.9          1.4         0.2     setosa            small
+## 10           4.9         3.1          1.5         0.1     setosa            small
+## 11           5.4         3.7          1.5         0.2     setosa            small
+## 12           4.8         3.4          1.6         0.2     setosa            small
+## 13           4.8         3.0          1.4         0.1     setosa            small
+## 14           4.3         3.0          1.1         0.1     setosa            small
+## 15           5.8         4.0          1.2         0.2     setosa            small
+## 16           5.7         4.4          1.5         0.4     setosa            small
+## 17           5.4         3.9          1.3         0.4     setosa            small
+## 18           5.1         3.5          1.4         0.3     setosa            small
+## 19           5.7         3.8          1.7         0.3     setosa           medium
+## 20           5.1         3.8          1.5         0.3     setosa            small
+## 21           5.4         3.4          1.7         0.2     setosa           medium
+## 22           5.1         3.7          1.5         0.4     setosa            small
+## 23           4.6         3.6          1.0         0.2     setosa            small
+## 24           5.1         3.3          1.7         0.5     setosa           medium
+## 25           4.8         3.4          1.9         0.2     setosa           medium
+## 26           5.0         3.0          1.6         0.2     setosa            small
+## 27           5.0         3.4          1.6         0.4     setosa            small
+## 28           5.2         3.5          1.5         0.2     setosa            small
+## 29           5.2         3.4          1.4         0.2     setosa            small
+## 30           4.7         3.2          1.6         0.2     setosa            small
+## 31           4.8         3.1          1.6         0.2     setosa            small
+## 32           5.4         3.4          1.5         0.4     setosa            small
+## 33           5.2         4.1          1.5         0.1     setosa            small
+## 34           5.5         4.2          1.4         0.2     setosa            small
+## 35           4.9         3.1          1.5         0.2     setosa            small
+## 36           5.0         3.2          1.2         0.2     setosa            small
+## 37           5.5         3.5          1.3         0.2     setosa            small
+## 38           4.9         3.6          1.4         0.1     setosa            small
+## 39           4.4         3.0          1.3         0.2     setosa            small
+## 40           5.1         3.4          1.5         0.2     setosa            small
+## 41           5.0         3.5          1.3         0.3     setosa            small
+## 42           4.5         2.3          1.3         0.3     setosa            small
+## 43           4.4         3.2          1.3         0.2     setosa            small
+## 44           5.0         3.5          1.6         0.6     setosa            small
+## 45           5.1         3.8          1.9         0.4     setosa           medium
+## 46           4.8         3.0          1.4         0.3     setosa            small
+## 47           5.1         3.8          1.6         0.2     setosa            small
+## 48           4.6         3.2          1.4         0.2     setosa            small
+## 49           5.3         3.7          1.5         0.2     setosa            small
+## 50           5.0         3.3          1.4         0.2     setosa            small
+## 51           7.0         3.2          4.7         1.4 versicolor           medium
+## 52           6.4         3.2          4.5         1.5 versicolor           medium
+## 53           6.9         3.1          4.9         1.5 versicolor           medium
+## 54           5.5         2.3          4.0         1.3 versicolor           medium
+## 55           6.5         2.8          4.6         1.5 versicolor           medium
+## 56           5.7         2.8          4.5         1.3 versicolor           medium
+## 57           6.3         3.3          4.7         1.6 versicolor           medium
+## 58           4.9         2.4          3.3         1.0 versicolor           medium
+## 59           6.6         2.9          4.6         1.3 versicolor           medium
+## 60           5.2         2.7          3.9         1.4 versicolor           medium
+## 61           5.0         2.0          3.5         1.0 versicolor           medium
+## 62           5.9         3.0          4.2         1.5 versicolor           medium
+## 63           6.0         2.2          4.0         1.0 versicolor           medium
+## 64           6.1         2.9          4.7         1.4 versicolor           medium
+## 65           5.6         2.9          3.6         1.3 versicolor           medium
+## 66           6.7         3.1          4.4         1.4 versicolor           medium
+## 67           5.6         3.0          4.5         1.5 versicolor           medium
+## 68           5.8         2.7          4.1         1.0 versicolor           medium
+## 69           6.2         2.2          4.5         1.5 versicolor           medium
+## 70           5.6         2.5          3.9         1.1 versicolor           medium
+## 71           5.9         3.2          4.8         1.8 versicolor           medium
+## 72           6.1         2.8          4.0         1.3 versicolor           medium
+## 73           6.3         2.5          4.9         1.5 versicolor           medium
+## 74           6.1         2.8          4.7         1.2 versicolor           medium
+## 75           6.4         2.9          4.3         1.3 versicolor           medium
+## 76           6.6         3.0          4.4         1.4 versicolor           medium
+## 77           6.8         2.8          4.8         1.4 versicolor           medium
+## 78           6.7         3.0          5.0         1.7 versicolor           medium
+## 79           6.0         2.9          4.5         1.5 versicolor           medium
+## 80           5.7         2.6          3.5         1.0 versicolor           medium
+## 81           5.5         2.4          3.8         1.1 versicolor           medium
+## 82           5.5         2.4          3.7         1.0 versicolor           medium
+## 83           5.8         2.7          3.9         1.2 versicolor           medium
+## 84           6.0         2.7          5.1         1.6 versicolor            large
+## 85           5.4         3.0          4.5         1.5 versicolor           medium
+## 86           6.0         3.4          4.5         1.6 versicolor           medium
+## 87           6.7         3.1          4.7         1.5 versicolor           medium
+## 88           6.3         2.3          4.4         1.3 versicolor           medium
+## 89           5.6         3.0          4.1         1.3 versicolor           medium
+## 90           5.5         2.5          4.0         1.3 versicolor           medium
+## 91           5.5         2.6          4.4         1.2 versicolor           medium
+## 92           6.1         3.0          4.6         1.4 versicolor           medium
+## 93           5.8         2.6          4.0         1.2 versicolor           medium
+## 94           5.0         2.3          3.3         1.0 versicolor           medium
+## 95           5.6         2.7          4.2         1.3 versicolor           medium
+## 96           5.7         3.0          4.2         1.2 versicolor           medium
+## 97           5.7         2.9          4.2         1.3 versicolor           medium
+## 98           6.2         2.9          4.3         1.3 versicolor           medium
+## 99           5.1         2.5          3.0         1.1 versicolor           medium
+## 100          5.7         2.8          4.1         1.3 versicolor           medium
+## 101          6.3         3.3          6.0         2.5  virginica            large
+## 102          5.8         2.7          5.1         1.9  virginica            large
+## 103          7.1         3.0          5.9         2.1  virginica            large
+## 104          6.3         2.9          5.6         1.8  virginica            large
+## 105          6.5         3.0          5.8         2.2  virginica            large
+## 106          7.6         3.0          6.6         2.1  virginica            large
+## 107          4.9         2.5          4.5         1.7  virginica           medium
+## 108          7.3         2.9          6.3         1.8  virginica            large
+## 109          6.7         2.5          5.8         1.8  virginica            large
+## 110          7.2         3.6          6.1         2.5  virginica            large
+## 111          6.5         3.2          5.1         2.0  virginica            large
+## 112          6.4         2.7          5.3         1.9  virginica            large
+## 113          6.8         3.0          5.5         2.1  virginica            large
+## 114          5.7         2.5          5.0         2.0  virginica           medium
+## 115          5.8         2.8          5.1         2.4  virginica            large
+## 116          6.4         3.2          5.3         2.3  virginica            large
+## 117          6.5         3.0          5.5         1.8  virginica            large
+## 118          7.7         3.8          6.7         2.2  virginica            large
+## 119          7.7         2.6          6.9         2.3  virginica            large
+## 120          6.0         2.2          5.0         1.5  virginica           medium
+## 121          6.9         3.2          5.7         2.3  virginica            large
+## 122          5.6         2.8          4.9         2.0  virginica           medium
+## 123          7.7         2.8          6.7         2.0  virginica            large
+## 124          6.3         2.7          4.9         1.8  virginica           medium
+## 125          6.7         3.3          5.7         2.1  virginica            large
+## 126          7.2         3.2          6.0         1.8  virginica            large
+## 127          6.2         2.8          4.8         1.8  virginica           medium
+## 128          6.1         3.0          4.9         1.8  virginica           medium
+## 129          6.4         2.8          5.6         2.1  virginica            large
+## 130          7.2         3.0          5.8         1.6  virginica            large
+## 131          7.4         2.8          6.1         1.9  virginica            large
+## 132          7.9         3.8          6.4         2.0  virginica            large
+## 133          6.4         2.8          5.6         2.2  virginica            large
+## 134          6.3         2.8          5.1         1.5  virginica            large
+## 135          6.1         2.6          5.6         1.4  virginica            large
+## 136          7.7         3.0          6.1         2.3  virginica            large
+## 137          6.3         3.4          5.6         2.4  virginica            large
+## 138          6.4         3.1          5.5         1.8  virginica            large
+## 139          6.0         3.0          4.8         1.8  virginica           medium
+## 140          6.9         3.1          5.4         2.1  virginica            large
+## 141          6.7         3.1          5.6         2.4  virginica            large
+## 142          6.9         3.1          5.1         2.3  virginica            large
+## 143          5.8         2.7          5.1         1.9  virginica            large
+## 144          6.8         3.2          5.9         2.3  virginica            large
+## 145          6.7         3.3          5.7         2.5  virginica            large
+## 146          6.7         3.0          5.2         2.3  virginica            large
+## 147          6.3         2.5          5.0         1.9  virginica           medium
+## 148          6.5         3.0          5.2         2.0  virginica            large
+## 149          6.2         3.4          5.4         2.3  virginica            large
+## 150          5.9         3.0          5.1         1.8  virginica            large</code></pre>
+</div>
+<div id="joining-two-dataframes" class="section level3">
+<h3>Joining two dataframes</h3>
+<p>Often when working with real data, data might be separated in multiple .csvs. The <code>join</code> family of dplyr functions can accomplish the task of uniting disparate data frames together rather easily. There are many kind of <code>join</code> functions that dplyr offers, and today we are going to cover the most commonly used function <code>left_join</code>.</p>
 <p>To learn more about the <code>join</code> family of functions, check out this <a href="https://dplyr.tidyverse.org/reference/join.html">useful link</a>.</p>
 <p>Let’s read in another dataset. This data set is a record of the tail length of every rodent in our <code>surveys</code> dataframe. For some annoying reason, it was recorded on a seperate data sheet. We want to take the tail length data and add it to our surveys dataframe.</p>
 <pre class="r"><code>tail &lt;- read_csv(&quot;data/tail_length.csv&quot;)</code></pre>
@@ -516,8 +761,8 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 <p>As you can see, even with a lot of <code>record_id</code> missing, the <code>left_join</code> function will still join the dataframes together based on shared values.</p>
 </div>
 </div>
-<div id="reshaping-with-pivot_longer-and-pivot_wider" class="section level3">
-<h3>Reshaping with pivot_longer and pivot_wider</h3>
+<div id="reshaping-with-pivot-functions" class="section level3">
+<h3>Reshaping with pivot functions</h3>
 <p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
 <ol style="list-style-type: decimal">
 <li>Each variable has its own column</li>
@@ -624,7 +869,7 @@ surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quo
 </ul>
 </div>
 </div>
-<div id="challenge" class="section level3 blue">
+<div id="challenge-1" class="section level3 blue">
 <h3>Challenge</h3>
 <ol style="list-style-type: decimal">
 <li>Use <code>pivot_wider</code> on the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</li>
@@ -672,7 +917,6 @@ q3 &lt;- q2 %&gt;%
 </details>
 </div>
 <p><br></p>
-</div>
 <div id="exporting-data" class="section level2">
 <h2>Exporting data</h2>
 <p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>

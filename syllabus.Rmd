@@ -33,7 +33,7 @@ Students completing this course should be able to:
 
 ## Course format  
 
-To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. We will post the week's videos on Mondays at the latest. Please come to class having watched the material relevant to that week's lesson.
+To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. Please come to class having watched the material relevant to that week's lesson. 
 
 
 ## Schedule
@@ -54,14 +54,12 @@ To get the most out of in-class time together, R-DAVIS will combine video materi
 - Data manipulation in the tidyverse, part 1
 
 #### Week 5 (Oct. 21)
-- Conditional statements
 - Data manipulation in the tidyverse, part 2
 
 #### Week 6 (Oct. 28)
 - Data visualization, part 1
 
 #### Week 7 (Nov. 4)
-- Data visualization best practices
 - Data visualization, part 2
 
 #### Week 8 (Nov. 11)

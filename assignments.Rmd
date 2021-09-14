@@ -11,11 +11,11 @@ Assignments are designed to reinforce the code/lessons covered that week and pro
 
 ## Assignments {.tabset .tabset-fade .tabset-pills}
 
-### <small>Week1</small>
+### <small>Week 1</small>
+<br>
+Because this class caters to a range of experiences, we would like you to identify how it is you plan on earning credit for this course. Before next week, please complete [this form](https://forms.gle/3yD4oCYfgwB1M369A) to select and describe your plans.
 
-Because this class caters to a range of experiences, we would like you to identify how it is you plan on earning credit for this course. Please complete [this form](https://forms.gle/3yD4oCYfgwB1M369A) to select and describe your plans.
-
-### <small>Week2</small>
+### <small>Week 2</small>
 
 In Week 2's homework we are going to practice subsetting and manipulating vectors.  
 
@@ -80,11 +80,11 @@ final <- plus10[c(TRUE, FALSE)] #selecting every other number using logical subs
 </details>
 
 
-### <small>Week3</small>
+### <small>Week 3</small>
 
-Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and pull Then create a new script in your `scripts` folder called `week_3_homework.R`. 
+Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and pull. Then create a new script in your `scripts` folder called `week_3_homework.R`. 
 
-Load your `survey` data frame with read.csv. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
+Load your `survey` data frame with the read.csv() function. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.
 
 CHALLENGE:
 Create a second data frame called `challenge_base` that only consists of individuals from your `surveys_base` data frame with weights greater than 150g.  
@@ -114,42 +114,9 @@ challenge_base <- surveys_new[(surveys_new[, 2]>150),] #selecting just the weigh
 
 <br> 
 
-### <small>Week4</small>
+### <small>Week 4</small>
 
-We will repeat last week's homework, but this time usin the tidyverse.  
-
-Load your `survey` data frame with `read_csv` and call it `surveys2`. Create a new data frame called `surveys_tidy` with only the species_id, hindfoot_length, and the year columns.  Remove all rows with hindfoot_length == NA. Next, select only the last 100 rows. *Remember, species_id should already be a character column, so there is no need to convert*
-
-CHALLENGE:
-Create a second data frame called `challenge_tidy` that only consists of the species "RM" in the year 1997. 
-
-<details>
-<summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
-```{r, eval = T}
-#PROBLEM 2
-
-library(tidyverse) #load tidyverse 
-
-surveys2 <- read_csv("data/portal_data_joined.csv") #read in data with tidyverse command
-
-surveys_tidy <- surveys2 %>% 
-  select(species_id, hindfoot_length, year) %>% 
-  filter(!is.na(hindfoot_length)) #removing all the NAs from hindfoot_length
-
-surveys_tidy <- surveys_tidy[-c(1:31338), ] #selecting the LAST 100 rows, data frame was 31438 rows long initially
-
-#CALLENGE 
-challenge_tidy <- surveys_tidy %>% 
-  filter(year == 1997) %>% 
-  filter(species_id == "RM")
-
-```
-</details>
-
-**Finally, save your script and PUSH the changes to github.** 
-
-
-### <small>Week5</small>
+By now you should be in the rhythm of pulling from your git repository and then creating new homework script. This week the homework will review data manipulation in the tidyverse.
 
 1. Create a tibble named `surveys` from the portal_data_joined.csv file.
 
@@ -162,8 +129,6 @@ challenge_tidy <- surveys_tidy %>%
 5. Take `surveys`, remove the rows where weight is NA and add a column that contains the average weight of each species+sex combination to the **full** `surveys` dataframe. Then get rid of all the columns except for species, sex, weight, and your new average weight column. Save this tibble as `surveys_avg_weight`.
 
 6. Take `surveys_avg_weight` and add a new column called `above_average` that contains logical values stating whether or not a row’s weight is above average for its species+sex combination (recall the new column we made for this tibble).
-
-7. Manipulate `surveys` to create a dataframe with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you've used so far, and it may be useful to sketch out the steps to get to the final result.
 
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
@@ -220,20 +185,32 @@ surveys_avg_weight <- surveys_avg_weight %>%
 
 surveys_avg_weight
 
-#7
+```
+</details>
+
+### <small>Week 5</small>
+
+This week's questions will have us practicing pivots and conditional statements.
+
+1. Create a tibble named `surveys` from the portal_data_joined.csv file. Then manipulate `surveys` to create a dataframe with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you've used so far, and it may be useful to sketch out the steps to get to the final result.
+
+2. *NEED A CONDITIONAL STATAMENET ASSIGNMENT*
+
+<details>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
+```{r, eval = T}
 surveys %>% 
   filter(!is.na(hindfoot_length)) %>% 
   group_by(genus, plot_type) %>% 
   summarise(mean_hindfoot = mean(hindfoot_length)) %>% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %>% 
   arrange(Control)
-
 ```
 </details>
 
-### <small>Week6</small>
+### <small>Week 6</small>
 
-For our week six homework, we are going to be practicing the skills we learned with ggplot during class. You will be happy to know that we are going to be using a brand new data set called `gapminder`. This data set is looking at statistics for a few different counties including population, GDP per capita, and life expentancy. Download the data using the code below. Remember, this code is looking for a folder called `data` to put the .csv in, so make sure you have a folder named `data`, or modify the code to the correct folder name. 
+For our week six homework, we are going to be practicing the skills we learned with ggplot during class. You will be happy to know that we are going to be using a brand new data set called `gapminder`. This data set is looking at statistics for a few different counties including population, GDP per capita, and life expectancy. Download the data using the code below. Remember, this code is looking for a folder called `data` to put the .csv in, so make sure you have a folder named `data`, or modify the code to the correct folder name. 
 
 ```{r, warnings = F}
 library(tidyverse)
@@ -320,7 +297,7 @@ gapminder %>%
 </details>
 
 
-### <small>Week7</small>
+### <small>Week 7</small>
 
 For week 7, we're going to be working on 2 critical `ggplot` skills: recreating a graph from a dataset and **googling stuff**.
 
@@ -402,7 +379,7 @@ pg %>%
 ```
 </details>
 
-### <small>Week8</small>
+### <small>Week 8</small>
 
 Let's look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can read the CSV directly from the R-DAVIS Github:
 `mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")`
@@ -456,60 +433,8 @@ mloa2 %>%
 ```
 </details>
 
-### <small>Final Assignment</small>
+### <small>Week 9</small>
+*Need a function writing and/or iteration assignment*
 
-Alright folks, it's time for the final assignment of the quarter. The goal here is to generate an html report using RMarkdown, containing several plots, tables, and images. This assignment will put many of your newfound skills to the test, and will ask you to go through data import, cleaning, manipulation, plotting, and communication. There may be some components you haven't seen before, but tackling new topics is also a big part of any project, and we're confident you'll put your Google skills to good use.
-
-<br>
-
-#### Let's Get Started!
-
-Create a new RMarkdown document in your in-class R Project, and put it in the top level of your project (not into a sub-folder like `scripts/`. To create an RMarkdown document that we can view on GitHub, your YAML header should look like this:
-
-```{yaml, eval = F}
----
-title: "R-DAVIS Final Assignment"
-author: "Hermione Granger"
-date: "11/24/2020"
-output: html_document
----
-```
-
-For the RMarkdown document, we want to see all your code and all the outputs, **except** for when you're loading packages. Try loading all your packages in one chunk and make sure we can't see the code or the output for it.
-
-<br>
-
-#### The Data
-
-For this project you are going to be using some data sets about flights departing New York City in 2013. There are **several** CSV files you will need to use. As with any CSVs you're handed, they might contain some issues...
-
-You should download the [flights](data/nyc_13_flights_new.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files. (Remember to put them into your data foler of your RProject to make reading them in easier!)
-
-Hint! You may have to combine dataframes to answer some questions. Remember our `join` family of functions? You should be able to use the `join` type we covered in class. The `flights` dataset is the biggest one, so you should probably join the other data onto this one, meaning `flights` would be the first (of "left") argument in the left join. You can't join 3 tables together at once, but you can join tables `a` and `b` to make table `ab`, then join `ab` and `c` to get table `abc` which contains the columns from all 3 original tables.
-
-The exact layout of the RMarkdown document is up to you, but it should include the following elements, as well as a short description of each item, in your own words. This could be a simple description of the pattern you observe or a description of issues you had in creating that element. One or two sentences should be just fine. 
-
-**One** of the plots you make should be **interactive**! Also, use a non-default ggplot theme, and keep it the same for all your plots. Hint: You can do this in a single code chunk.
-
-<br>
-
-#### Things to Include
-
-1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel.
-
-2. Create a figure that has date on the x axis and mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Hint: You have the columns sched_dep_time (scheduled departure time) and dep_time (the actual departure time). Calculate the difference for the departure delay. 
-
-3. Create a table with these columns: date (year, month and day), mean_temp_EWR, mean_temp_JFK, mean_temp_LGA. Notice the names share a prefix, wonder if there's an argument somewhere for that... Also, it's a lot of data, so think about whether you want a really long table or an interactive one you can click through (check out the RMarkdown lesson if you need help).
-
-4. Make a combination violin/scatterplot showing departure delay by manufacturer, and add a facet for whether or not it's raining. Hint: you'll have to make a new column to classify "raining" or "not raining", the exact method is up to you.
-
-5. Insert an image of the coolest plane in the `planes` dataset (the choice is yours). Add a link to a webpage with some information on this super cool plane. Bonus points if your image is a GIF (not really bonus points but we'll like it). Hint: This is a throwback alllllll the way back to Week 1. We wrote our README.md files in the *markdown* language, and the text portion of an RMarkdown file is the same.
-
-<br>
-
-#### Knit and Push to GitHub
-
-When you are finished with this assignment and ready to push to GitHub, make sure you push the HTML file you made, along with any other files or folders generated when you knit.
-
-**Remember** that any changes you make, or files you add (e.g. pictures) need to also exist on GitHub. So if you add a file to your RMarkdown, remember you need to push the folder that contains that file as well, otherwise GitHub won’t be able to find it and we won’t be able to see it! 
-
+### <small>Final assignment</small>
+*Forthcoming*

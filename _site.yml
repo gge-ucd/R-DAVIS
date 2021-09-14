@@ -29,14 +29,10 @@ navbar:
       href: lesson_05_data_import.html
     - text: "Data Manipulation Pt. 1"
       href: lesson_06_data_manipulation_pt1.html
-    - text: Conditional Statements
-      href: lesson_07_conditional_statements.html
     - text: "Data Manipulation Pt. 2"
       href: lesson_08_data_manipulation_pt2.html
     - text: "Data Visualization Pt. 1"
       href: lesson_09_data_viz_pt1.html
-    - text: Visualization Best Practices
-      href: lesson_10_visualization_dos.html
     - text: "Data Visualization Pt. 2"
       href: lesson_11_data_viz_pt2.html
     - text: Date-times with lubridate
