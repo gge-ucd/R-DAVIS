@@ -8,7 +8,7 @@ navbar:
   - text: Syllabus
     href: syllabus.html
     icon: fa-map fa-1x
-  - text: Set Up!
+  - text: Set Up
     menu:
     - text: Computer Setup
       href: computer_setup.html
@@ -27,13 +27,13 @@ navbar:
       href: lesson_04_spreadsheets_condensed.html
     - text: Starting With Spreadsheets in R
       href: lesson_05_data_import.html
-    - text: "Data Manipulation Pt. 1"
+    - text: Data Manipulation Pt1
       href: lesson_06_data_manipulation_pt1.html
-    - text: "Data Manipulation Pt. 2"
+    - text: Data Manipulation Pt2
       href: lesson_08_data_manipulation_pt2.html
-    - text: "Data Visualization Pt. 1"
+    - text: Data Visualization Pt1
       href: lesson_09_data_viz_pt1.html
-    - text: "Data Visualization Pt. 2"
+    - text: Data Visualization Pt2
       href: lesson_11_data_viz_pt2.html
     - text: Date-times with lubridate
       href: lesson_12_lubridate.html
