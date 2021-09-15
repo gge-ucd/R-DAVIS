@@ -13,8 +13,8 @@
 
 <title>Dates &amp; Times in R</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -344,7 +344,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Set Up!
+    Set Up
      
     <span class="caret"></span>
   </a>
@@ -382,22 +382,16 @@ div.tocify {
       <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
     </li>
     <li>
-      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt. 1</a>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt1</a>
     </li>
     <li>
-      <a href="lesson_07_conditional_statements.html">Conditional Statements</a>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt2</a>
     </li>
     <li>
-      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt. 2</a>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt1</a>
     </li>
     <li>
-      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt. 1</a>
-    </li>
-    <li>
-      <a href="lesson_10_visualization_dos.html">Visualization Best Practices</a>
-    </li>
-    <li>
-      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt. 2</a>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt2</a>
     </li>
     <li>
       <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
@@ -432,6 +426,13 @@ div.tocify {
     <span class="fa fa-list"></span>
      
     Resources
+  </a>
+</li>
+<li>
+  <a href="appointments.html">
+    <span class="fa fa-list"></span>
+     
+    Appointments
   </a>
 </li>
       </ul>
@@ -540,10 +541,10 @@ ANSWER
 <p>When working with times, the best class to use in base R is <code>POSIXct</code>.</p>
 <pre class="r"><code>tm1 &lt;- as.POSIXct(&quot;2016-07-24 23:55:26&quot;)
 tm1</code></pre>
-<pre><code>## [1] &quot;2016-07-24 23:55:26 BST&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-24 23:55:26 PDT&quot;</code></pre>
 <pre class="r"><code>tm2 &lt;- as.POSIXct(&quot;25072016 08:32:07&quot;, format = &quot;%d%m%Y %H:%M:%S&quot;)
 tm2</code></pre>
-<pre><code>## [1] &quot;2016-07-25 08:32:07 BST&quot;</code></pre>
+<pre><code>## [1] &quot;2016-07-25 08:32:07 PDT&quot;</code></pre>
 <pre class="r"><code>#Notice how POSIXct automatically uses the timezone your computer is set to. What if we collected this data in a different timezone?
 
 # specify the time zone:
@@ -610,19 +611,19 @@ nfy2 &lt;- read_csv(&quot;data/2015_NFY_solinst.csv&quot;, col_types = &quot;cci
 glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 5
-## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 20…
-## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:00, 15:30:00, 15:4…
-## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
+## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-2…
+## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:0…
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <pre class="r"><code>glimpse(nfy2)</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 5
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</code></pre>
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <p>Next we want to create a single datetime column. How do we get our Date and Time columns into one column so we can format it as a datetime? The answer is the <code>paste</code> function.</p>
 <ul>
 <li><code>paste()</code> allows pasting text or vectors (&amp; columns) by a given separator that you specify with the <code>sep =</code> argument</li>
@@ -634,12 +635,12 @@ nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot
 glimpse(nfy2) #notice the  datetime column is classifed as character</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 6
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;15…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8.…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …
-## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 14:30:00&quot;, &quot;2015/…</code></pre>
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 …</code></pre>
 <pre class="r"><code># convert Date Time to POSIXct in local timezone using lubridate
 nfy2$datetime_test &lt;- as_datetime(nfy2$datetime, 
                                     tz=&quot;America/Los_Angeles&quot;)

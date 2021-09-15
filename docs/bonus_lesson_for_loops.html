@@ -11,7 +11,7 @@
 
 
 
-<title>Syllabus</title>
+<title>Automation with for loops</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -467,110 +467,124 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Automation with for loops</h1>
 
 </div>
 
 
-<p><br></p>
-<div id="course-description" class="section level2">
-<h2>Course Description</h2>
-<p>Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data. Class will typically consist of short introductions or question &amp; answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, and RMarkdown, but the concepts learned will easily apply to all programming languages and database management systems. <strong>No background in databases or R/computational experience is required.</strong></p>
-</div>
-<div id="prerequisite-knowledge-and-skills" class="section level2">
-<h2>Prerequisite Knowledge and Skills</h2>
-<p>A willingness to practice coding and embrace the R language.</p>
-</div>
-<div id="purpose-of-course" class="section level2">
-<h2>Purpose of Course</h2>
-<p>In this course you will learn fundamental aspects of computer programming that are necessary for conducting ecological research. By the end of the course you will be able to use these tools to import data into R, wrangle various types of data, summarize and analyze data, create visualizations, write reports/manuscripts/CV’s in RMarkdown, save and export data/figures, as well as collaborate on Github with version-controlled projects.</p>
-<p>The focus of this course is to provide graduate students with training that develops and teaches the tools applicable to the entire process of <strong>reproducible data-driven research</strong> and encourage the use of open-source tools. By learning how to get the computer to do your work for you, you will be able to do more science faster, and your future-self will thank you.</p>
-</div>
-<div id="course-objectives" class="section level2">
-<h2>Course Objectives</h2>
-<p>Students completing this course should be able to:</p>
+<blockquote>
+<h2 id="learning-objectives">Learning objectives</h2>
 <ul>
-<li>Organize R projects in GitHub</li>
-<li>Read, import/export data</li>
-<li>Tidy/summarize and analyze data</li>
-<li>Create publication-quality graphs and figures</li>
-<li>Write simple functions/programs in R</li>
-<li>Search for and access new learning materials to further develop their computational skills</li>
-<li>Apply these tools to address scientific research questions</li>
+<li>Understand the anatomy of a for loop</li>
+<li>Understand the iterative looping variable</li>
+<li>Be able to build a for loop to automate a block of code</li>
 </ul>
+</blockquote>
+<div id="background" class="section level1">
+<h1>Background</h1>
+<p>We can automate chunks of code using a <code>for</code> loop. We’ve seen how many tasks are automatically automated using vectorization. Remember how we can often pass a vector of values as an argument to a function, and the function will happily operate on each element in turn.</p>
+<pre class="r"><code>x &lt;- c(1, 4, 98, 2)
+log(x)</code></pre>
+<pre><code>## [1] 0.0000000 1.3862944 4.5849675 0.6931472</code></pre>
+<p>R understands that we want to call the <code>log()</code> function on the first element in the <code>x</code> vector, then call the <code>log()</code> function on the second element in the <code>x</code> vector, and so on.</p>
+<p>Sometimes vectorization can’t help us automate a set of commands. This can happen when commands are particularly complex, when the commands are using multiple objects at once, or when the next iteration of the block of code relies on the result of the previous iteration of the block of code. In these cases, we can tell R exactly what commands we want repeated inside of a loop.</p>
+<p>Here is what a basic for loop looks like.</p>
+<pre class="r"><code>for(i in 1:10) {
+  print(i)
+}</code></pre>
+<pre><code>## [1] 1
+## [1] 2
+## [1] 3
+## [1] 4
+## [1] 5
+## [1] 6
+## [1] 7
+## [1] 8
+## [1] 9
+## [1] 10</code></pre>
+<p>We use the <code>for()</code> function to indicate we are starting a loop. The <code>{</code> and <code>}</code> mark the start and end of the block of code that we will repeat over and over. <code>i in 1:10</code> means that <code>i</code> will take on the first value in the <code>1:10</code> vector, the block of code will execute, then <code>i</code> will take on the second value in the <code>1:10</code> vector, the block of code will execute a second time, and so on until <code>i</code> takes on the last value in the <code>1:10</code> vector, the block of code executes one final time, and then the loop is finished. R will now proceed to the next line of code after the <code>}</code>. We can call this <strong>iterative looping variable</strong> whatever we’d like. Often, it is called <code>i</code> (or <code>j</code> or <code>k</code> if <code>i</code> is already used), but it could be called <code>monkey</code> and R would be fine with that.</p>
+<p>It’s key to notice that the value of <code>i</code> changes each time the code block in the loop executes. We say that <code>i</code> is <em>iterating</em> through the values of the vector. We can use <code>i</code> (or whatever you’ve called it) inside the for loop code chunk. Above, we printed out the value of <code>i</code> (see how <code>i</code> changed?) Below, we print out the <code>i</code>th letter of the alphabet by using the <code>letters</code> vector</p>
+<pre class="r"><code>letters # all the letters in the alphabet</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
+## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre class="r"><code>for(i in 1:10) {
+  # use square bracket notation to access the ith element in the letters vector
+  print(letters[i]) 
+}</code></pre>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;
+## [1] &quot;d&quot;
+## [1] &quot;e&quot;
+## [1] &quot;f&quot;
+## [1] &quot;g&quot;
+## [1] &quot;h&quot;
+## [1] &quot;i&quot;
+## [1] &quot;j&quot;</code></pre>
 </div>
-<div id="course-format" class="section level2">
-<h2>Course format</h2>
-<p>To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. Please come to class having watched the material relevant to that week’s lesson.</p>
+<div id="example-with-gapminder" class="section level1">
+<h1>Example with gapminder</h1>
+<pre class="r"><code>library(tidyverse)
+library(gapminder)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gapminder&#39;</code></pre>
+<pre><code>## The following object is masked _by_ &#39;.GlobalEnv&#39;:
+## 
+##     gapminder</code></pre>
+<pre class="r"><code>plotPopGrowth &lt;- function(countryToPlot, theData = gapminder) {
+  # this filters data to a specific country
+  oneCountry &lt;- theData %&gt;%
+    filter(country == countryToPlot)
+  
+  # can add some error checking if you want
+  if(!nrow(oneCountry)&gt;0) { # checks if there are values for country
+    stop(&quot;No Data for this Country, please try again&quot;)
+  }
+
+  # this runs the plot
+  ggplot(data=oneCountry) + 
+           geom_line(aes(x=year, y=pop, color=country))
+}</code></pre>
+<pre class="r"><code># plotPopGrowth(&quot;Afghanistans&quot;) # gives error
+plotPopGrowth(&quot;Afghanistan&quot;) </code></pre>
+<p><img src="bonus_lesson_for_loops_files/figure-html/demoTheFunction-1.png" width="672" /></p>
+<pre class="r"><code>plotPopGrowth(&quot;United States&quot;)</code></pre>
+<p><img src="bonus_lesson_for_loops_files/figure-html/demoTheFunction-2.png" width="672" /></p>
+<p>What if we want to make a plot and then save it for every country?</p>
+<pre class="r"><code>### LOOPING
+countries &lt;- unique(gapminder$country)
+for(i in seq_along(countries)){
+  plotPopGrowth(countries[i])
+  ggsave(filename = paste0(&quot;Figures/plot_&quot;,countries[i], &quot;.png&quot;))
+}</code></pre>
 </div>
-<div id="schedule" class="section level2">
-<h2>Schedule</h2>
-<div id="week-1-sept.-23" class="section level4">
-<h4>Week 1 (Sept. 23)</h4>
-<ul>
-<li>Course intro</li>
-<li>Intro to git/GitHub and RStudio</li>
-</ul>
-</div>
-<div id="week-2-sept.-30" class="section level4">
-<h4>Week 2 (Sept. 30)</h4>
-<ul>
-<li>Project management</li>
-<li>How R thinks about data</li>
-</ul>
-</div>
-<div id="week-3-oct.-7" class="section level4">
-<h4>Week 3 (Oct. 7)</h4>
-<ul>
-<li>Spreadsheet best practices</li>
-<li>Starting with spreadsheets in R</li>
-</ul>
-</div>
-<div id="week-4-oct.-14" class="section level4">
-<h4>Week 4 (Oct. 14)</h4>
-<ul>
-<li>Data manipulation in the tidyverse, part 1</li>
-</ul>
-</div>
-<div id="week-5-oct.-21" class="section level4">
-<h4>Week 5 (Oct. 21)</h4>
-<ul>
-<li>Data manipulation in the tidyverse, part 2</li>
-</ul>
-</div>
-<div id="week-6-oct.-28" class="section level4">
-<h4>Week 6 (Oct. 28)</h4>
-<ul>
-<li>Data visualization, part 1</li>
-</ul>
-</div>
-<div id="week-7-nov.-4" class="section level4">
-<h4>Week 7 (Nov. 4)</h4>
-<ul>
-<li>Data visualization, part 2</li>
-</ul>
-</div>
-<div id="week-8-nov.-11" class="section level4">
-<h4>Week 8 (Nov. 11)</h4>
-<ul>
-<li>Date-time data with <code>lubridate</code></li>
-<li>Writing functions</li>
-</ul>
-</div>
-<div id="week-9-nov.-18" class="section level4">
-<h4>Week 9 (Nov. 18)</h4>
-<ul>
-<li>Iteration</li>
-</ul>
-</div>
-<div id="thanksgiving-holiday-nov.-25" class="section level4">
-<h4>Thanksgiving holiday (Nov. 25)</h4>
-</div>
-<div id="week-10-dec.-2" class="section level4">
-<h4>Week 10 (Dec. 2)</h4>
-<ul>
-<li>RMarkdown and Literate Programming</li>
-</ul>
-</div>
+<div id="example-with-file-imports" class="section level1">
+<h1>Example with file imports</h1>
+<p>The tidyverse has its own way to do loops</p>
+<pre class="r"><code>xlist &lt;- list.files(path = &quot;data/2001_mauna_loa_met_data/&quot;, 
+                    pattern = &quot;*.txt&quot;, 
+                    full.names = TRUE)
+xlist</code></pre>
+<pre><code>## character(0)</code></pre>
+<pre class="r"><code>column_headers &lt;- 
+  c(&quot;siteID&quot;, &quot;year&quot;, &quot;month&quot;, 
+    &quot;day&quot;, &quot;hour24&quot;, &quot;min&quot;,
+    &quot;windDir&quot;, &quot;windSpeed_m_s&quot;, &quot;windSteady&quot;, 
+    &quot;baro_hPa&quot;, &quot;temp_C_2m&quot;, &quot;temp_C_10m&quot;, 
+    &quot;temp_C_towertop&quot;, &quot;rel_humid&quot;, &quot;precip_intens_mm_hr&quot;)
+
+ml &lt;-
+  xlist %&gt;%
+  map_df( ~ read.table(., 
+                       sep = &quot;&quot;,
+                       header = FALSE, 
+                       quote = &quot;&quot;, 
+                       col.names = column_headers))
+         
+glimpse(ml)</code></pre>
+<pre><code>## Rows: 0
+## Columns: 0</code></pre>
+<p>This lesson was contributed by <a href="https://orcid.org/0000-0002-8276-210X">Michael Koontz</a>.</p>
 </div>
 
 

@@ -11,7 +11,7 @@
 
 
 
-<title>Manipulating and analyzing data in the tidyverse, Part 2</title>
+<title>Conditional statements</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -467,7 +467,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Manipulating and analyzing data in the tidyverse, Part 2</h1>
+<h1 class="title toc-ignore">Conditional statements</h1>
 
 </div>
 
@@ -476,67 +476,117 @@ div.tocify {
 <div id="learning-objectives" class="section level2 blue">
 <h2>Learning objectives</h2>
 <ul>
-<li>Use conditional statements to create new variables in a dataframe</li>
-<li>Use <code>join</code> functions to join two dataframes together</li>
-<li>Describe the concept of a wide and a long table format and for which purpose those formats are useful.</li>
-<li>Reshape a data frame from long to wide format and back with the <code>pivot_wider</code> and <code>pivot_longer</code> commands from the <strong><code>tidyr</code></strong> package.</li>
+<li>Understand how to manipulate and transform data</li>
+<li>Be able to start with a single use and build up to iteration</li>
+<li>Use for loops, apply functions, and purrr to iterate</li>
+<li>Be able to write functions to cleanly iterate code</li>
 </ul>
 </div>
 <p><br></p>
-<div id="conditional-statements" class="section level3">
-<h3>Conditional Statements</h3>
-<p>When working with your data, you may want to create a new variable in a data frame, but only if a certain conditions are true. Conditional statements are a series of logical conditions that can help you manipulate your data to create new variables.</p>
-<p>We’ll begin again with our surveys data, and remember to load in the tidyverse</p>
-<pre class="r"><code>library(tidyverse)
-surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
-<p>The general logic of conditional statements is this: if a statement is true, then execute x, if it is false, then execute y. For example, let’s say that we want to create a categorical variable for hindfoot length in our data. Using the summary function below, we see that the mean hindfoot length is 29.29, so let’s split the data at the mean using a conditional statement.</p>
-<pre class="r"><code>summary(surveys$hindfoot_length)</code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##    2.00   21.00   32.00   29.29   36.00   70.00    3348</code></pre>
-<p>To do this, we define the logic: if hindfoot length is less than the mean of 29.29, assign “small” to this new variable, otherwise, assign “big” to this new variable. We can call this <code>hindfoot_cat</code> to specify the categorical variable. We will first do this using the <code>ifelse()</code> function, where the first argument is a TRUE/FALSE statement, the second argument is the new variable if the statement is true, and the third argument is the new variable if the statement is false.</p>
-<pre class="r"><code>surveys$hindfoot_cat &lt;- ifelse(surveys$hindfoot_length &lt; 29.29, &quot;small&quot;, &quot;big&quot;)
-head(surveys$hindfoot_cat)</code></pre>
-<pre><code>## [1] &quot;big&quot; &quot;big&quot; NA    NA    NA    NA</code></pre>
-<p>####case_when() function</p>
-<p>The tidyverse provides a way to integrate conditional statements by combining <code>mutate()</code> with the conditional function: <code>case_when()</code>. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. Using this function we can re-write the <code>hindfoot_cat</code> variable using the tidyverse.</p>
-<p>A note: Always be cautious about what might be left out when naming the conditions. In the previous <code>ifelse()</code> example we saw that NAs in the data remained NAs in the new variable construction. However, this is not so when using <code>case_when()</code>. Instead, this function takes the last argument to mean “anything that is left” rather than hindfoot_length &gt; 29.29 == F. So when we run the equivalent conditions in this function, it assigns “small” where hindfoot_lengths are NA.</p>
-<pre class="r"><code>surveys %&gt;% 
-  mutate(hindfoot_cat = case_when(
-    hindfoot_length &gt; 29.29 ~ &quot;big&quot;,
-    TRUE ~ &quot;small&quot;
-  )) %&gt;% 
-  select(hindfoot_length, hindfoot_cat) %&gt;% 
-  head()</code></pre>
-<pre><code>## # A tibble: 6 × 2
-##   hindfoot_length hindfoot_cat
-##             &lt;dbl&gt; &lt;chr&gt;       
-## 1              32 big         
-## 2              31 big         
-## 3              NA small       
-## 4              NA small       
-## 5              NA small       
-## 6              NA small</code></pre>
-<p>To adjust for this, we need to add in more than one condition:</p>
-<pre class="r"><code>surveys %&gt;% 
-  mutate(hindfoot_cat = case_when(
-    hindfoot_length &gt; 29.29 ~ &quot;big&quot;,
-    is.na(hindfoot_length) ~ NA_character_,
-    TRUE ~ &quot;small&quot;
-  )) %&gt;% 
-  select(hindfoot_length, hindfoot_cat) %&gt;% 
-  head()</code></pre>
-<pre><code>## # A tibble: 6 × 2
-##   hindfoot_length hindfoot_cat
-##             &lt;dbl&gt; &lt;chr&gt;       
-## 1              32 big         
-## 2              31 big         
-## 3              NA &lt;NA&gt;        
-## 4              NA &lt;NA&gt;        
-## 5              NA &lt;NA&gt;        
-## 6              NA &lt;NA&gt;</code></pre>
-<div class = "blue">
+<div id="conditional-statements" class="section level2">
+<h2>Conditional Statements</h2>
+<p>Sometimes, you want to do something with your code, but only if a certain condition is true. There are a couple main ways to do this.</p>
+<div id="if-and-else" class="section level3">
+<h3><code>if</code> and <code>else</code></h3>
+<p>You can use combinations of <code>if</code> and <code>else</code> to create conditional statements. Here’s a quick example:</p>
+<pre class="r"><code>for (i in 1:10) {
+  if (i &lt; 5) {
+    print(paste(i, &quot;is less than 5&quot;))
+  } else {
+    print(paste(i, &quot;is greater than or equal to 5&quot;))
+  }
+}</code></pre>
+<pre><code>## [1] &quot;1 is less than 5&quot;
+## [1] &quot;2 is less than 5&quot;
+## [1] &quot;3 is less than 5&quot;
+## [1] &quot;4 is less than 5&quot;
+## [1] &quot;5 is greater than or equal to 5&quot;
+## [1] &quot;6 is greater than or equal to 5&quot;
+## [1] &quot;7 is greater than or equal to 5&quot;
+## [1] &quot;8 is greater than or equal to 5&quot;
+## [1] &quot;9 is greater than or equal to 5&quot;
+## [1] &quot;10 is greater than or equal to 5&quot;</code></pre>
+<p>Here we’ve combined a couple techniques: we’ve used a for loop to go through a sequence of values, and for each value we’ve printed a statement based on a condition that our value meets.</p>
 </div>
-<div id="challenge" class="section level3">
+<div id="case_when" class="section level3">
+<h3><code>case_when</code></h3>
+<p>Sometimes you might want to do a bunch conditional statements together, but typing out a ton of nested if-else statements can be unwieldy and prone to typos. A really useful function is the tidyverse’s <code>case_when</code>. You feed it a dataframe and then use a series of two-sided formulas where the left-hand side determines which values you want, and the right supplies the result. Here’s an example where we take the <code>mtcars</code> dataframe and add a column called <code>car_size</code>. If the car’s weight is over 3.5 <strong>or</strong> it has 8 cylinders, we call it “big”. If it’s not big, but its weight is over 2.5, then it’s medium. If neither of these conditions is met (denoted by <code>TRUE</code>), then we call it “small”.</p>
+<pre class="r"><code>mtcars %&gt;% 
+  mutate(
+    car_size = case_when(
+    wt &gt; 3.5 | cyl == 8 ~ &quot;big&quot;,
+    wt &gt; 2.5 ~ &quot;medium&quot;,
+    TRUE ~ &quot;small&quot;
+    )
+  )</code></pre>
+<pre><code>##                      mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+##                     car_size
+## Mazda RX4             medium
+## Mazda RX4 Wag         medium
+## Datsun 710             small
+## Hornet 4 Drive        medium
+## Hornet Sportabout        big
+## Valiant               medium
+## Duster 360               big
+## Merc 240D             medium
+## Merc 230              medium
+## Merc 280              medium
+## Merc 280C             medium
+## Merc 450SE               big
+## Merc 450SL               big
+## Merc 450SLC              big
+## Cadillac Fleetwood       big
+## Lincoln Continental      big
+## Chrysler Imperial        big
+## Fiat 128               small
+## Honda Civic            small
+## Toyota Corolla         small
+## Toyota Corona          small
+## Dodge Challenger         big
+## AMC Javelin              big
+## Camaro Z28               big
+## Pontiac Firebird         big
+## Fiat X1-9              small
+## Porsche 914-2          small
+## Lotus Europa           small
+## Ford Pantera L           big
+## Ferrari Dino          medium
+## Maserati Bora            big
+## Volvo 142E            medium</code></pre>
+</div>
+<div id="challenge" class="section level3 blue">
 <h3>Challenge</h3>
 <p>Using the <code>iris</code> data frame (this is built in to R), create a new variable that categorizes petal length into three groups:</p>
 <ul>
@@ -865,209 +915,44 @@ iris %&gt;%
 ## 148            large
 ## 149            large
 ## 150            large</code></pre>
-</div>
-<div id="joining-two-dataframes" class="section level3">
-<h3>Joining two dataframes</h3>
-<p>Often when working with real data, data might be separated in multiple .csvs. The <code>join</code> family of dplyr functions can accomplish the task of uniting disparate data frames together rather easily. There are many kind of <code>join</code> functions that dplyr offers, and today we are going to cover the most commonly used function <code>left_join</code>.</p>
-<p>To learn more about the <code>join</code> family of functions, check out this <a href="https://dplyr.tidyverse.org/reference/join.html">useful link</a>.</p>
-<p>Let’s read in another dataset. This data set is a record of the tail length of every rodent in our <code>surveys</code> dataframe. For some annoying reason, it was recorded on a seperate data sheet. We want to take the tail length data and add it to our surveys dataframe.</p>
-<pre class="r"><code>tail &lt;- read_csv(&quot;data/tail_length.csv&quot;)</code></pre>
-<p>The <code>join</code> functions join dataframes together based on shared columns between the two data frames. Luckily, both our <code>surveys</code> dataframe and our new <code>tail_length</code> data frame both have the column <code>record_id</code>. Let’s double check that our record_id columns in the two data frames are the same by using the <code>summary</code> function.</p>
-<pre class="r"><code>summary(surveys$record_id) #just summarize the record_id column by using the $ operator </code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       1    8964   17762   17804   26655   35548</code></pre>
-<pre class="r"><code>summary(tail$record_id)</code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##       1    8964   17762   17804   26655   35548</code></pre>
-<p>Looks like all those values are identical. Awesome! Let’s join the dataframes together.</p>
-<p>The basic structure of a <code>join</code> looks like this:</p>
-<p><code>join_type(FirstTable, SecondTable, by=columnTojoinBy)</code></p>
-<div id="there-are-many-different-kinds-of-join-types" class="section level4">
-<h4>There are many different kinds of join types:</h4>
-<ul>
-<li><p><code>inner_join</code> will return all the rows from Table A that has <em>matching values</em> in Table B, and all the columns from both Table A and B</p></li>
-<li><p><code>left_join</code> returns all the rows from Table A with all the columns from both A and B. Rows in Table A that have no match in Table B will return NAs</p></li>
-<li><p><code>right_join</code> returns all the rows from Table B and all the columns from table A and B. Rows in Table B that have no match in Table A will return NAs.</p></li>
-<li><p><code>full_join</code> returns all the rows and all the columns from Table A and Table B. Where there are no matching values, returns NA for the one that is missing.</p></li>
-</ul>
-<p>For our data we are going to use a <code>left_join</code>. We want all the rows from the <code>survey</code> data frame, and we want all the columns from both data frames to be in our new data frame.</p>
-<pre class="r"><code>surveys_joined &lt;- left_join(surveys, tail, by = &quot;record_id&quot;)</code></pre>
-<p>If we don’t include the <code>by =</code> argument, the default is to join by all the variables with common names across the two data frames.</p>
-<p>We could also add our tail data to a dataframe that you create within your R project. Let’s say we were just interested in adding the tail length data to the species “NL”.</p>
-<p>First, we have to create a dataframe that just has species = NL, and then we have to join that data frame with our <code>tail</code> dataframe.</p>
-<pre class="r"><code>NL_data &lt;- surveys %&gt;% 
-  filter(species_id == &quot;NL&quot;) #filter to just the species NL
-
-NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column called tail_length was added</code></pre>
-<p>As you can see, even with a lot of <code>record_id</code> missing, the <code>left_join</code> function will still join the dataframes together based on shared values.</p>
-</div>
-</div>
-<div id="reshaping-with-pivot-functions" class="section level3">
-<h3>Reshaping with pivot functions</h3>
-<p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
-<ol style="list-style-type: decimal">
-<li>Each variable has its own column</li>
-<li>Each observation has its own row</li>
-<li>Each value must have its own cell</li>
-<li>Each type of observational unit forms a table</li>
-</ol>
-<p>Here we examine the fourth rule: Each type of observational unit forms a table.</p>
-<p>In <code>surveys</code> , the rows of <code>surveys</code> contain the values of variables associated with each record (the unit), values such the weight or sex of each animal associated with each record. What if instead of comparing records, we wanted to compare the different mean weight of each species between plots? (Ignoring <code>plot_type</code> for simplicity).</p>
-<p>We’d need to create a new table where each row (the unit) is comprise of values of variables associated with each plot. In practical terms this means the values of the species in <code>genus</code> would become the names of column variables and the cells would contain the values of the mean weight observed on each plot.</p>
-<p>Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have <strong>reshaped</strong> the data according to the observations of interest: average species weight per plot instead of recordings per date.</p>
-<p>The opposite transformation would be to transform column names into values of a variable.</p>
-<p>We can do both these of transformations with two new <code>tidyr</code> functions, <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
-<div id="pivot_wider" class="section level4">
-<h4><code>pivot_wider</code></h4>
-<p><code>pivot_wider()</code> widens data by <em>increasing</em> the number of columns and <em>decreasing</em> the number of rows. It takes three main arguments:</p>
-<ol style="list-style-type: decimal">
-<li>the data</li>
-<li><code>names_from</code> the name of the column you’d like to spread out</li>
-<li><code>values_from</code> the data you want to fill all your new columns with</li>
-</ol>
-<p>Let’s try an example using our surveys data frame. Let’s pretend we are interested in what the mean weight is for each species in each plot. How would we create a dataframe that would tell us that information?</p>
-<p>First, we need to calculate the mean weight for each species in each plot:</p>
-<pre class="r"><code>surveys_mz &lt;- surveys %&gt;% 
-  filter(!is.na(weight)) %&gt;% 
-  group_by(genus, plot_id) %&gt;% 
-  summarize(mean_weight = mean(weight)) </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
-<pre class="r"><code>str(surveys_mz) #let&#39;s take a look at the data</code></pre>
-<pre><code>## grouped_df [196 × 3] (S3: grouped_df/tbl_df/tbl/data.frame)
-##  $ genus      : chr [1:196] &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
-##  $ plot_id    : num [1:196] 1 2 3 5 18 19 20 21 1 2 ...
-##  $ mean_weight: num [1:196] 7 6 8.61 7.75 9.5 ...
-##  - attr(*, &quot;groups&quot;)= tibble [10 × 2] (S3: tbl_df/tbl/data.frame)
-##   ..$ genus: chr [1:10] &quot;Baiomys&quot; &quot;Chaetodipus&quot; &quot;Dipodomys&quot; &quot;Neotoma&quot; ...
-##   ..$ .rows: list&lt;int&gt; [1:10] 
-##   .. ..$ : int [1:8] 1 2 3 4 5 6 7 8
-##   .. ..$ : int [1:24] 9 10 11 12 13 14 15 16 17 18 ...
-##   .. ..$ : int [1:24] 33 34 35 36 37 38 39 40 41 42 ...
-##   .. ..$ : int [1:24] 57 58 59 60 61 62 63 64 65 66 ...
-##   .. ..$ : int [1:24] 81 82 83 84 85 86 87 88 89 90 ...
-##   .. ..$ : int [1:23] 105 106 107 108 109 110 111 112 113 114 ...
-##   .. ..$ : int [1:24] 128 129 130 131 132 133 134 135 136 137 ...
-##   .. ..$ : int [1:24] 152 153 154 155 156 157 158 159 160 161 ...
-##   .. ..$ : int [1:19] 176 177 178 179 180 181 182 183 184 185 ...
-##   .. ..$ : int [1:2] 195 196
-##   .. ..@ ptype: int(0) 
-##   ..- attr(*, &quot;.drop&quot;)= logi TRUE</code></pre>
-<p>In <code>surveys_mz</code> there are 196 rows and 3 columns. Using <code>pivot_wider</code> we are going to <em>increase</em> the number of columns and <em>decrease</em> the number of rows. We want each row to signify a single genus, with their mean weight listed for each plot id. How many rows do we want our final data frame to have?</p>
-<pre class="r"><code>unique(surveys_mz$genus) #lists every unique genus in surveys_mz</code></pre>
-<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;        
-##  [5] &quot;Onychomys&quot;       &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot;
-##  [9] &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
-<pre class="r"><code>n_distinct(surveys_mz$genus) #another way to look at the number of distinct genera</code></pre>
-<pre><code>## [1] 10</code></pre>
-<p>There are 10 unique genera, so we want to create a data frame with just 10 rows. How many columns would we want? Since we want each column to be a distinct plot id, our number of columns should equal our number of plot ids.</p>
-<pre class="r"><code>n_distinct(surveys_mz$plot_id)</code></pre>
-<pre><code>## [1] 24</code></pre>
-<p>Alright, so we want a data frame with 10 rows and 24 columns. <code>pivot_wider</code> can do the job!</p>
-<pre class="r"><code>wide_survey &lt;- surveys_mz %&gt;% pivot_wider(names_from = &quot;plot_id&quot;, values_from =  &quot;mean_weight&quot;)
-
-head(wide_survey)</code></pre>
-<pre><code>## # A tibble: 6 × 25
-## # Groups:   genus [6]
-##   genus       `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`
-##   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Baiomys    7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA   
-## 2 Chaetod…  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9 
-## 3 Dipodom…  60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6 
-## 4 Neotoma  156.   169.   158.   190.   149.   120    155.   138.   164.   180.  
-## 5 Onychom…  27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9 
-## 6 Perogna…   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81
-## # … with 14 more variables: 7 &lt;dbl&gt;, 8 &lt;dbl&gt;, 9 &lt;dbl&gt;, 10 &lt;dbl&gt;, 11 &lt;dbl&gt;,
-## #   12 &lt;dbl&gt;, 13 &lt;dbl&gt;, 14 &lt;dbl&gt;, 15 &lt;dbl&gt;, 16 &lt;dbl&gt;, 17 &lt;dbl&gt;, 22 &lt;dbl&gt;,
-## #   23 &lt;dbl&gt;, 24 &lt;dbl&gt;</code></pre>
-</div>
-<div id="pivot_longer" class="section level4">
-<h4><code>pivot_longer</code></h4>
-<p><code>pivot_longer</code> lengthens data by <em>increasing</em> the number of rows and <em>decreasing</em> the number of columns. This function takes 4 main arguments:</p>
-<ol style="list-style-type: decimal">
-<li>the data</li>
-<li><code>cols</code>, the column(s) to be pivoted (or to ignore)</li>
-<li><code>names_to</code> the name of the new column you’ll create to put the column names in</li>
-<li><code>values_to</code> the name of the new column to put the column values in</li>
-</ol>
-<div class="figure">
-<img src="img/pivot_longer.JPG" alt="" />
-<p class="caption">pivot_longer figure</p>
-</div>
-<p>Let’s pretend that we got sent the dataset we just created (<code>wide_survey</code>) and we want to reshape it to be in a long format. We can easily do that using <code>pivot_longer</code></p>
-<pre class="r"><code>#cols = columns to be pivoted. Here we want to pivot all the plot_id columns, except the colum &quot;genus&quot;
-#names_to = the name of the new column we created from the `cols` argument 
-#values_to = the name of the new column we will put our values in
-
-surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quot;plot_id&quot;, values_to = &quot;mean_weight&quot;)</code></pre>
-<p>This data set should look just like <code>surveys_mz</code>. But this one is 240 rows, and <code>surveys_mz</code> is 196 rows. What’s going on?</p>
-<pre class="r"><code>View(surveys_long)</code></pre>
-<p>Looks like all the NAs are included in this data set. This is always going to happen when moving between <code>pivot_longer</code> and <code>pivot_wider</code>, but is actually a useful way to balance out a dataset so every replicate has the same composition. Luckily, we now know how to remove the NAs if we want!</p>
-<pre class="r"><code>surveys_long &lt;- surveys_long %&gt;% 
-  filter(!is.na(mean_weight)) #now 196 rows</code></pre>
-<p><code>pivot_wider</code> and <code>pivot_longer</code> are both new additions to the <code>tidyverse</code> which means there are some cool new blog posts detailing all their abilities. If you’d like to read more about this group of functions, check out these links:</p>
-<ul>
-<li><a href="https://www.brodrigues.co/blog/2019-03-20-pivot/">Blog post by Burno Rodrigues</a></li>
-<li><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html">tidyr’s vignette</a></li>
-<li><a href="https://speakerdeck.com/yutannihilation/a-graphical-introduction-to-tidyrs-pivot-star?slide=1">Hiroaki Yutani’s slides</a></li>
-</ul>
-</div>
-</div>
-<div id="challenge-1" class="section level3 blue">
-<h3>Challenge</h3>
-<ol style="list-style-type: decimal">
-<li>Use <code>pivot_wider</code> on the <code>surveys</code> data frame with <code>year</code> as columns, <code>plot_id</code> as rows, and the number of genera per plot as the values. You will need to summarize before reshaping, and use the function <code>n_distinct()</code> to get the number of unique genera within a particular chunk of data. It’s a powerful function! See <code>?n_distinct</code> for more.</li>
-<li>The <code>surveys</code> data set has two measurement columns: <code>hindfoot_length</code> and <code>weight</code>. This makes it difficult to do things like look at the relationship between mean values of each measurement per year in different plot types. Let’s walk through a common solution for this type of problem. First, use <code>pivot_longer()</code> to create a dataset where we have a new column called <code>measurement</code> and a <code>value</code> column that takes on the value of either <code>hindfoot_length</code> or <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns are being selected to make longer.</li>
-<li>With this new data set, calculate the average of each <code>measurement</code> in each <code>year</code> for each different <code>plot_type</code>. Then use <code>pivot_wider()</code> to get them into a data set with a column for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>: You only need to specify the <code>names_from =</code> and <code>values_from =</code> columns</li>
-</ol>
-<details>
-<summary>
-ANSWER
-</summary>
-<pre class="r"><code>## Answer 1
-q1 &lt;- surveys %&gt;%
-  group_by(plot_id, year) %&gt;%
-  summarize(n_genera = n_distinct(genus)) %&gt;%
-  pivot_wider(names_from = &quot;year&quot;, values_from = &quot;n_genera&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the `.groups` argument.</code></pre>
-<pre class="r"><code>head(q1)</code></pre>
-<pre><code>## # A tibble: 6 × 27
-## # Groups:   plot_id [6]
-##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985` `1986`
-##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-## 1       1      2      3      4      7      5      6      7      6      4      3
-## 2       2      6      6      6      8      5      9      9      9      6      4
-## 3       3      5      6      4      6      6      8     10     11      7      6
-## 4       4      4      4      3      4      5      4      6      3      4      3
-## 5       5      4      3      2      5      4      6      7      7      3      1
-## 6       6      3      4      3      4      5      9      9      7      5      6
-## # … with 16 more variables: 1987 &lt;int&gt;, 1988 &lt;int&gt;, 1989 &lt;int&gt;, 1990 &lt;int&gt;,
-## #   1991 &lt;int&gt;, 1992 &lt;int&gt;, 1993 &lt;int&gt;, 1994 &lt;int&gt;, 1995 &lt;int&gt;, 1996 &lt;int&gt;,
-## #   1997 &lt;int&gt;, 1998 &lt;int&gt;, 1999 &lt;int&gt;, 2000 &lt;int&gt;, 2001 &lt;int&gt;, 2002 &lt;int&gt;</code></pre>
-<pre class="r"><code>## Answer 2
-q2 &lt;- surveys %&gt;%
-  pivot_longer(cols = c(&quot;hindfoot_length&quot;, &quot;weight&quot;), names_to = &quot;measurement_type&quot;, values_to = &quot;value&quot;)
-
-#cols = columns we want to manipulate 
-#names_to = name of new column
-#values_to = the values we want to fill our new column with (here we already told the function that we were intersted in hindfoot_length and weight, so it will automatically fill our new column, which we named &quot;values&quot;, with those numbers.)
-
-## Answer 3
-q3 &lt;- q2 %&gt;% 
-  group_by(year, measurement_type, plot_type) %&gt;% 
-  summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;% 
-  pivot_wider(names_from = &quot;measurement_type&quot;, values_from = &quot;mean_value&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;measurement_type&#39;. You can override using the `.groups` argument.</code></pre>
 </details>
 </div>
-<p><br></p>
-<div id="exporting-data" class="section level2">
-<h2>Exporting data</h2>
-<p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>
-<p>Similar to the <code>read_csv()</code> function used for reading CSV files into R, there is a <code>write_csv()</code> function that generates CSV files from data frames.</p>
-<p>Before using <code>write_csv()</code>, we are going to create a new folder, <code>data_output</code>, in our working directory that will store this generated dataset. We don’t want to write generated datasets in the same directory as our raw data. It’s good practice to keep them separate. The <code>data</code> folder should only contain the raw, unaltered data, and should be left alone to make sure we don’t delete or modify it. In contrast, our script will generate the contents of the <code>data_output</code> directory, so even if the files it contains are deleted, we can always re-generate them.</p>
-<ul>
-<li>Type in <code>write_</code> and hit TAB. Scroll down and take a look at the many options that exist for writing out data in R. Use the F1 key on any of these options to read more about how to use it.</li>
-</ul>
+<p><br> ### Conditional <code>map</code></p>
+<p>Let’s throw it back to the <code>map</code> family for a sec. Sometimes you might only want to map a function to part of a dataframe. <code>map_if</code> allows you to give the data, a condition for the data to meet, and the function you want to apply to the data that meet the condition. Here, we’ll map <code>as.character</code> to the columns of the iris dataset that meet the condition <code>is.factor</code>.</p>
+<pre class="r"><code>str(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  6 variables:
+##  $ Sepal.Length    : num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width     : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length    : num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width     : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species         : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ petal.length.cat: chr  &quot;low&quot; &quot;low&quot; &quot;low&quot; &quot;low&quot; ...</code></pre>
+<pre class="r"><code>iris %&gt;%
+  map_if(is.factor, as.character) %&gt;%
+  str()</code></pre>
+<pre><code>## List of 6
+##  $ Sepal.Length    : num [1:150] 5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width     : num [1:150] 3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length    : num [1:150] 1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width     : num [1:150] 0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species         : chr [1:150] &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; &quot;setosa&quot; ...
+##  $ petal.length.cat: chr [1:150] &quot;low&quot; &quot;low&quot; &quot;low&quot; &quot;low&quot; ...</code></pre>
+<p><code>map_at</code> does something similar, but it allows you to directly specify the locations you’d like to map the function to, using either names or positions.</p>
+<pre class="r"><code>mtcars %&gt;% 
+  map_at(c(&quot;cyl&quot;, &quot;am&quot;), as.character) %&gt;% 
+  str()</code></pre>
+<pre><code>## List of 11
+##  $ mpg : num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : chr [1:32] &quot;6&quot; &quot;6&quot; &quot;4&quot; &quot;6&quot; ...
+##  $ disp: num [1:32] 160 160 108 258 360 ...
+##  $ hp  : num [1:32] 110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num [1:32] 3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num [1:32] 16.5 17 18.6 19.4 17 ...
+##  $ vs  : num [1:32] 0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : chr [1:32] &quot;1&quot; &quot;1&quot; &quot;1&quot; &quot;0&quot; ...
+##  $ gear: num [1:32] 4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num [1:32] 4 4 1 1 2 1 4 2 2 4 ...</code></pre>
 </div>
 
 

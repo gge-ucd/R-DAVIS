@@ -1,0 +1,6 @@
+---
+title: "Appointments"
+---
+<p>Please select a time that you'd like to chat, and message us if you encounter any difficulties.</p>
+
+<iframe src="https://tascott.youcanbook.me/?noframe=true&skipHeaderFooter=true" id="ycbmiframetascott" style="width:100%;height:1000px;border:0px;background-color:transparent;" frameborder="0" allowtransparency="true"></iframe><script>window.addEventListener && window.addEventListener("message", function(event){if (event.origin === "https://tascott.youcanbook.me"){document.getElementById("ycbmiframetascott").style.height = event.data + "px";}}, false);</script>
