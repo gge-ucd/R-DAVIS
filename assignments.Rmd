@@ -28,13 +28,13 @@ Copy and paste the chunk of code below into your new `week_2_homework` script an
 ```{r}
 set.seed(15)
 hw2 <- runif(50, 4, 50)
-hw2 <- replace(hw3, c(4,12,22,27), NA)
+hw2 <- replace(hw2, c(4,12,22,27), NA)
 hw2
 ```
 
 *PROBLEM 1:*
 
-Take you `hw2` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
+Take your `hw2` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
 
 *PROBLEM 2:* 
 
@@ -66,7 +66,7 @@ Finally, save your script and push all your changes to your github account.
 <summary>**DO NOT OPEN** until you are ready to see the answers</summary>
 ```{r, eval=T}
 
-prob1 <- hw3[!is.na(hw2)] #removing the NAs
+prob1 <- hw2[!is.na(hw2)] #removing the NAs
 
 prob1 <- prob1[prob1 >14 & prob1 < 38] #only selecting numbers between 14 and 38
 

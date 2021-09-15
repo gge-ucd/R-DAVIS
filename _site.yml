@@ -52,6 +52,9 @@ navbar:
   - text: Resources
     icon: fa-list
     href: resources.html
+  - text: Appointments
+    icon: fa-list
+    href: appointments.html
   right:
   - text: Contact
     icon: fa-hand-spock-o
@@ -73,4 +76,3 @@ output:
     lib_dir: site_libs
     self_contained: no
 name: R-DAVIS
-

@@ -10,49 +10,47 @@ output:
 There are many resources online and in print. This is by no means a comprehensive list, but hopefully a launching pad for some very useful website and books. All of these examples provide code in same shape or form.
 
 ### Bonus Lessons
-- [Importing and exporting data, extended](bonus_2020F_lesson_data_import.html)
-- [Longer Spreadsheets Lesson](bonus_2019_lesson_spreadsheets.html)
-- [Joining Data](bonus_2019_lesson_joins.html)
-- [Pipelines: data import %>% dplyr %>% ggplot2](bonus_2019_lesson_import_dplyr_ggplot2.html)
-- [Pipelines: Download CO2 & Ice Core Data & Visualize](bonus_2019_lesson_ice_core_CO2_web_data.html)
-- [For Loops](bonus_2019_lesson_for_loops.html)
-- [Using purrr](bonus_2019_lesson_purrr_tutorial.html)
-- [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/)
-- [Text Mining](bonus_2019_lesson_text_mining_mlk.html)
-- [Github Collaboration with Branches](bonus_2019_lesson_github_collaboration.html)
-- [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html)
-- [Longer Iteration Lesson](bonus_2019_lesson_iteration.html)
-
-
+<!-- - [Importing and exporting data, extended](bonus_2020F_lesson_data_import.html) -->
+<!-- - [Longer Spreadsheets Lesson](bonus_2019_lesson_spreadsheets.html) -->
+<!-- - [Joining Data](bonus_2019_lesson_joins.html) -->
+<!-- - [Pipelines: data import %>% dplyr %>% ggplot2](bonus_2019_lesson_import_dplyr_ggplot2.html) -->
+<!-- - [Pipelines: Download CO2 & Ice Core Data & Visualize](bonus_2019_lesson_ice_core_CO2_web_data.html) -->
+<!-- - [For Loops](bonus_2019_lesson_for_loops.html) -->
+<!-- - [Using purrr](bonus_2019_lesson_purrr_tutorial.html) -->
+<!-- - [Mapping in R](https://ryanpeek.github.io/mapping-in-R-workshop/) -->
+<!-- - [Text Mining](bonus_2019_lesson_text_mining_mlk.html) -->
+<!-- - [Github Collaboration with Branches](bonus_2019_lesson_github_collaboration.html) -->
+<!-- - [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html) -->
+<!-- - [Longer Iteration Lesson](bonus_2019_lesson_iteration.html) -->
 
 
 ### Resources
 
 #### *R Lessons & Tutorials*
 
-* [Software Carpentry: **R for Reproducible Scientific Analysis**](http://data-lessons.github.io/gapminder-R/)
-* [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/)
-* [Data Carpentry: **Data Organization in Spreadsheets**](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)
-* [Data Carpentry: **Genomics Lesson**](https://jasonjwilliamsny.github.io/tidiness-genomics/)
-* [ANGUS: **Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown**](http://angus.readthedocs.io/en/2017/index.html)
-* [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/)
-* [**Coding Club**, great resource with many tutorials](https://ourcodingclub.github.io/)
+<!-- * [Software Carpentry: **R for Reproducible Scientific Analysis**](http://data-lessons.github.io/gapminder-R/) -->
+<!-- * [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/) -->
+<!-- * [Data Carpentry: **Data Organization in Spreadsheets**](http://www.datacarpentry.org/spreadsheet-ecology-lesson/) -->
+<!-- * [Data Carpentry: **Genomics Lesson**](https://jasonjwilliamsny.github.io/tidiness-genomics/) -->
+<!-- * [ANGUS: **Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown**](http://angus.readthedocs.io/en/2017/index.html) -->
+<!-- * [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/) -->
+<!-- * [**Coding Club**, great resource with many tutorials](https://ourcodingclub.github.io/) -->
 
 #### *R eBooks/Courses*
 
-* [Jenny Bryan's **Stat545.com**](http://stat545.com/)
-* [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/)
-* [Kieran Healy's **Data Visualization for Social Science**](http://socviz.co/)
-* [Ethan White and Zack Brym's **Data Carpentry for Biologists**](http://www.datacarpentry.org/semester-biology/)
-* [Chester Ismay and Albert Y. Kim's **Modern DiveR**](https://ismayc.github.io/moderndiver-book/)
-* [Colin Gillespie and Robin Lovelace **Efficient R Programming**](https://csgillespie.github.io/efficientR/)
-* [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/)
-* [Hadley Wickham's **Advanced R**](http://adv-r.had.co.nz/)
+<!-- * [Jenny Bryan's **Stat545.com**](http://stat545.com/) -->
+<!-- * [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/) -->
+<!-- * [Kieran Healy's **Data Visualization for Social Science**](http://socviz.co/) -->
+<!-- * [Ethan White and Zack Brym's **Data Carpentry for Biologists**](http://www.datacarpentry.org/semester-biology/) -->
+<!-- * [Chester Ismay and Albert Y. Kim's **Modern DiveR**](https://ismayc.github.io/moderndiver-book/) -->
+<!-- * [Colin Gillespie and Robin Lovelace **Efficient R Programming**](https://csgillespie.github.io/efficientR/) -->
+<!-- * [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/) -->
+<!-- * [Hadley Wickham's **Advanced R**](http://adv-r.had.co.nz/) -->
 
 #### *Git/Github* 
 
-* [Jenny Bryan's **Happy Git and Github for the useR**](http://happygitwithr.com/)
-* [Coding Club **Intro to Github**](https://ourcodingclub.github.io/2017/02/27/git.html)
+<!-- * [Jenny Bryan's **Happy Git and Github for the useR**](http://happygitwithr.com/) -->
+<!-- * [Coding Club **Intro to Github**](https://ourcodingclub.github.io/2017/02/27/git.html) -->
 
 ### Datasets
 
