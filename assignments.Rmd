@@ -5,7 +5,7 @@ output:
     toc: false
 ---
 
-Assignments are designed to reinforce the code/lessons covered that week and provide you a chance to practice working with GitHub. Assignments are to be completed in your local project (on your computer) and pushed up to your GitHub repository for instructors to review by the following Wednesday. For example, homework for Week 1 (which is on September 23) should be submitted by September 29. That said, these due dates are largely suggestive as a way to help you prioritize and stay caught up as a group -- if you need, or want, more time, take it. At the end of the quarter, we will simply look over the tasks you have completed in concert with the reflection you submit
+Assignments are designed to reinforce the code/lessons covered that week and provide you a chance to practice working with GitHub. Assignments are to be completed in your local project (on your computer) and pushed up to your GitHub repository for instructors to review by the following Wednesday. For example, homework for Week 1 (which is on September 23) should be submitted by September 29. That said, these due dates are largely suggestive as a way to help you prioritize and stay caught up as a group -- if you need, or want, more time, take it. At the end of the quarter, we will simply look over the tasks you have completed in concert with the reflection you submit.
 
 
 <br>
