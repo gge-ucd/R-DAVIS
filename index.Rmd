@@ -38,24 +38,24 @@ Students completing this course should be able to:
 
 We believe that instructors have a duty to examine their pedagogy--and students have a right to know the pedagogical assumptions that shape our course. This section describes the four key principles that motivate our course. It is also an invitation to dialogue on how these can be improved.^[Acknowledgement and thanks to Dr. David Carter at the University of Utah, from whom many of these principles have been learned and adopted.]
 
-####Equity is a vital social project
+#### Equity is a vital social project
 
 Many educational institutions and practices perpetuate the discrimination of our wider society, further marginalizing Black, Brown, and Indigenous people, people of differing abilities, and people of genders or gender identities other than those reflecting “conventional” notions of male masculinity. In perhaps no field of academia is this reality more apparent than in Science, Technology, Engineering, and Mathematics (STEM) fields. We are committed to diversity (social/demographic differences such as race, ethnicity, gender, sex, sexual orientation, ability, and language) and the pursuit of equity (the fair distribution of resources and opportunities, accounting for past and present events, conditions, and contexts) as a vital project in and outside of the classroom. We are also acutely aware that we will fall short of these ideals — as will our teaching. We invite you to hold us and this course to them, and to help us learn.
 
-####Inaccessibility is a choice
+#### Inaccessibility is a choice
 
 Inaccessibility is a choice (and choosing accessibility benefits all). Accessibility is both more necessary and easier than acknowledged. As the case of 
 [curb cuts](https://uxdesign.cc/the-curb-cut-effect-universal-design-b4e3d7da73f5) famously demonstrates, anything that delivers greater accessibility tends to benefit everyone. While digital tools and contexts offer the promise of flexible inclusion in the form of customizable, one-size-fits-one experience, we realize, that many of the tools and practices we use in data science and statistical programming fall short of even modest accessibility goals. With apologies for the extra time and energy it demands, we ask you to let us know as soon as you encounter any part of this course that impedes your participation, so that we can prioritize its immediate correction.
 
 
-####People come first
+#### People come first
 Physical, emotional, psychological, and spiritual trauma are real and have real impacts on one’s ability to engage in learning. Courses that ignore the inevitable conditions of life undermine learning. Our commitment to your academic journey means that your wellbeing comes first. Whatever difficulties you encounter--jobs, illness, family, the world simply falling apart around us--know that we implicitly trust you to be where you need to be, and do what you need to be doing, for yourself and others. 
 
-####Failure is productive
+#### Failure is productive
 
 Data science and programming are all about learning from failure--stuff like fixing bugs, troubleshooting messy data, and figuring out why your model blew up. You will learn the most by trying something, having it break, trying to decipher the error message, and iterating until you get it to work. We want to encourage you to take risks, fail repeatedly, and learn volumes in the process. In practice, this means that we would *much* rather have you only get half of a lab assignment done, but really understand that half, instead of borrowing your friends' code that you don't really understand and completing the lab. To put our money where our mouth is: *we will not assign grades for activities or assignments*. Assessment will instead take the form of qualitative feedback and self-reflection. Moreover, *we will not decide whether you get credit or not*. Instead, at the end of class we will ask you to suggest the grade (in this case, credit or no credit) you believe you earned in the class, accounting for your efforts, circumstances, and relevant events.
 
-####Busywork is bad
+#### Busywork is bad
 
 We want this course to be a “no busy work” space. On a micro-level, if you find an assignment unproductive, feel free to propose an alternate activity that achieves the same/similar aims. On a macro-level, if you find this training unproductive, feel free to propose an alternative curriculum that achieves the same/similar aims (e.g., doing lab assignments in the Python programming language instead of R and duplicating the workflow and version control elements of the course). During the first week of the quarter, you will have an opportunity to develop a customize plan for the quarter (this can just be following the primary course plan, but it doesn't have to be).
 
