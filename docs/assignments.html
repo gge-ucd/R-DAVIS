@@ -13,8 +13,8 @@
 
 <title>Coding Practice</title>
 
-<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -414,12 +414,14 @@ $(document).ready(function () {
 hw2 &lt;- runif(50, 4, 50)
 hw2 &lt;- replace(hw2, c(4,12,22,27), NA)
 hw2</code></pre>
-<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619
-## [10] 42.245735  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680
-## [19] 10.494605 39.728776 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA
-## [28] 10.825658 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403
-## [37]  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810 46.369401 15.919465 19.813791
-## [46] 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897
+##  [8] 15.682545 35.612619 42.245735  8.814791        NA 27.418158 36.504914
+## [15] 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776 40.971460
+## [22]        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658
+## [29] 46.676823 25.913006 26.933701 15.810164 26.616794  9.403891 27.589087
+## [36] 34.262403  9.591257 27.733004 17.877330 38.975078 46.102046 25.041810
+## [43] 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312
+## [50]  4.500130</code></pre>
 <p><em>PROBLEM 1:</em></p>
 <p>Take your <code>hw2</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p>
 <p><em>PROBLEM 2:</em></p>
@@ -427,8 +429,8 @@ hw2</code></pre>
 <p><em>PROBLEM 3:</em></p>
 <p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p>
 <pre class="r"><code>final</code></pre>
-<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901
-## [10]  85.12543  69.44137  67.57845</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049
+##  [8]  92.76726  93.19901  85.12543  69.44137  67.57845</code></pre>
 <p>Finally, save your script and push all your changes to your github account.</p>
 <details>
 <summary>
@@ -459,9 +461,10 @@ final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical s
 surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
 
 colnames(surveys) #a list of the column names </code></pre>
-<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;        
-##  [6] &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;          
-## [11] &quot;species&quot;         &quot;taxa&quot;            &quot;plot_type&quot;</code></pre>
+<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;           
+##  [5] &quot;plot_id&quot;         &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot;
+##  [9] &quot;weight&quot;          &quot;genus&quot;           &quot;species&quot;         &quot;taxa&quot;           
+## [13] &quot;plot_type&quot;</code></pre>
 <pre class="r"><code>surveys_new &lt;- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
 
 surveys_new$species_id &lt;- as.character(surveys_new$species_id) #converting factor data to character
@@ -490,11 +493,19 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <summary>
 <strong>DO NOT OPEN</strong> until you are ready to see the answers for the Tidyverse portion of the homework
 </summary>
-<pre class="r"><code>library(tidyverse)
-#1
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.4     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+## ✓ readr   2.0.1     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>#1
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13</code></pre>
-<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
@@ -505,19 +516,20 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 surveys %&gt;% 
   filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
 <pre><code>## # A tibble: 14,730 × 13
-##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus     species 
-##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   
-##  1      5966     5    22  1982       2 NL         F                  32     40 Neotoma   albigula
-##  2       226     9    13  1977       2 DM         M                  37     51 Dipodomys merriami
-##  3       233     9    13  1977       2 DM         M                  25     44 Dipodomys merriami
-##  4       245    10    16  1977       2 DM         M                  37     39 Dipodomys merriami
-##  5       251    10    16  1977       2 DM         M                  36     49 Dipodomys merriami
-##  6       257    10    16  1977       2 DM         M                  37     47 Dipodomys merriami
-##  7       259    10    16  1977       2 DM         M                  36     41 Dipodomys merriami
-##  8       268    10    16  1977       2 DM         F                  36     55 Dipodomys merriami
-##  9       346    11    12  1977       2 DM         F                  37     36 Dipodomys merriami
-## 10       350    11    12  1977       2 DM         M                  37     47 Dipodomys merriami
-## # … with 14,720 more rows, and 2 more variables: taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt;
+##  1      5966     5    22  1982       2 NL         F                  32     40
+##  2       226     9    13  1977       2 DM         M                  37     51
+##  3       233     9    13  1977       2 DM         M                  25     44
+##  4       245    10    16  1977       2 DM         M                  37     39
+##  5       251    10    16  1977       2 DM         M                  36     49
+##  6       257    10    16  1977       2 DM         M                  37     47
+##  7       259    10    16  1977       2 DM         M                  36     41
+##  8       268    10    16  1977       2 DM         F                  36     55
+##  9       346    11    12  1977       2 DM         F                  37     36
+## 10       350    11    12  1977       2 DM         M                  37     47
+## # … with 14,720 more rows, and 4 more variables: genus &lt;chr&gt;, species &lt;chr&gt;,
+## #   taxa &lt;chr&gt;, plot_type &lt;chr&gt;</code></pre>
 <pre class="r"><code>#3
 biggest_critters &lt;- surveys %&gt;% 
   filter(!is.na(weight)) %&gt;% 
@@ -679,18 +691,19 @@ surveys_avg_weight</code></pre>
 <pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
 <pre><code>## # A tibble: 10 × 6
 ## # Groups:   genus [10]
-##    genus            Control `Rodent Exclosure` `Long-term Krat… `Short-term Kra… `Spectab exclos…
-##    &lt;chr&gt;              &lt;dbl&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
-##  1 Baiomys             13                 13.5             12.9             13               14  
-##  2 Perognathus         15.9               16.1             15.8             15.7             15.8
-##  3 Reithrodontomys     16.6               16.5             16.4             16.5             16.6
-##  4 Peromyscus          20.3               20.3             20.3             20.3             20.5
-##  5 Onychomys           20.4               20.3             20.3             20.3             20.4
-##  6 Chaetodipus         23.6               22.7             24.1             24.3             23.2
-##  7 Sigmodon            27.8               28.2             28.0             25.7             26.5
-##  8 Ammospermophilus    31                 35               NA               NA               NA  
-##  9 Neotoma             32.2               32.4             32.5             32.2             32.3
-## 10 Dipodomys           37.8               36.9             36.7             38.8             38.3</code></pre>
+##    genus            Control `Rodent Exclosure` `Long-term Krat… `Short-term Kra…
+##    &lt;chr&gt;              &lt;dbl&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+##  1 Baiomys             13                 13.5             12.9             13  
+##  2 Perognathus         15.9               16.1             15.8             15.7
+##  3 Reithrodontomys     16.6               16.5             16.4             16.5
+##  4 Peromyscus          20.3               20.3             20.3             20.3
+##  5 Onychomys           20.4               20.3             20.3             20.3
+##  6 Chaetodipus         23.6               22.7             24.1             24.3
+##  7 Sigmodon            27.8               28.2             28.0             25.7
+##  8 Ammospermophilus    31                 35               NA               NA  
+##  9 Neotoma             32.2               32.4             32.5             32.2
+## 10 Dipodomys           37.8               36.9             36.7             38.8
+## # … with 1 more variable: Spectab exclosure &lt;dbl&gt;</code></pre>
 </details>
 </div>
 <div id="week-6" class="section level3">
@@ -700,7 +713,7 @@ surveys_avg_weight</code></pre>
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
 <pre><code>## Rows: 1704 Columns: 6</code></pre>
-<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (2): country, continent
 ## dbl (4): year, pop, lifeExp, gdpPercap</code></pre>
