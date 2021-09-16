@@ -11,7 +11,9 @@ Computer literacy is now essential in all aspects of science. Data management sk
 
 ## Prerequisite Knowledge and Skills
 
-A willingness to practice coding and embrace the R language.
+- Willingness to practice coding
+- Willingness to fail
+- Willingness to try things
 
 ## Purpose of Course
 
@@ -33,7 +35,7 @@ Students completing this course should be able to:
 
 ## Course format  
 
-To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. Please come to class having watched the material relevant to that week's lesson. 
+To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. Unless unforeseen circumstances arise, videos will be posted by Monday to the relevant week on the Lectures page. Please come to class having watched the material relevant to that week's lesson, and perhaps having taken a cursory attempt at trying out what is covered in the videos. We are organizing the course this way so as to spend less of our time together lecturing, and more time working and learning together. The general plan for each course period will be: (1) brief overview of topic and tasks for class; (2) in-class challenge activities; (3) debrief of challenge activities; (4) get started on weekly "at-home" lab assignment as time allows.
 
 
 ## Schedule
