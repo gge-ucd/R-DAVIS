@@ -51,27 +51,19 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 <br>
 
-### 1. Create a New Repository on Github
+### 1. Create a new repository on Github
 
  - Typically, the preferred method is to create a new repository on Github...**HOWEVER**:
- - For this class we've already created a repository for you, and you should have already gotten a Github Classrom link via email! When you click the link, Github creates a new repository for you, which our class will be able to view and work with.
- - When you use the Github Classroom link, a repository will created that looks like "gge-ucd/r-davis-in-class-project-YourGithubUsername"
+ - For this class we've already created a repository for you, and you will get a Github Classroom link via email. When you click the link, Github creates a new repository for you, which our class will be able to view and work with.
+ - When you use the Github Classroom link, a repository will be created that looks like "gge-ucd/r-davis-in-class-project-YourGithubUsername"
 
-#### Students not enrolled in the class
-**Note**: If you are not *enrolled* in the course but have contacted the instructors about following along, the instructions will differ slightly. You will not be a part of the Github classroom, but we can still get you the repositories you will need to follow along. This will involve creating a **fork** of the repositories, which is an independent copy of the repository that lives under **your** Github account.
 
-For the start of the class, we will be working with this repository: [https://github.com/gge-ucd/R_DAVIS_in_class_project](https://github.com/gge-ucd/R_DAVIS_in_class_project). Open that page, then go to the upper right corner of the screen and click the button that says "Fork".
-
-This will create a repository called "YourGithubUsername/R_DAVIS_in_class_project". It will have all the same stuff as the students enrolled in the class, it just won't be underneath the gge-ucd Organization. All the other steps from here on out should be the same!
-
-<br>
-
-### 2. Clone Your Repository to your Computer
+### 2. Clone your repository to your computer
 
 You should now have a repository on Github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
 
   - [`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername`](https://github.com/gge-ucd/r-davis-in-class-project-MCMaurer). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
-  - **To _`clone`_ your repository** (*copy to your computer*):
+  - **To _`clone`_ your repository** (i.e. copy to your computer):
       - We're going to stick with using **`HTTPS`:** for now. Look for the big green "*Clone or download*" button. Make sure you select the "**Use HTTPS**" so the top of the box says: **Clone with HTTPS**. 
       - Copy that link (should be something like *`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername.git`*).
  

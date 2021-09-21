@@ -13,8 +13,8 @@
 
 <title>RStudio and Git</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -516,26 +516,19 @@ div.tocify {
 <p>For our purposes the “<em>best practice</em>” (i.e., <strong>easier</strong>) for setting up a new github repository in RStudio is through an RStudio <em>Project</em>. First, ideally what we want to do is create a new repository on <a href="https://github.com/">Github</a>, then create a new RStudio Project to <strong>clone</strong> (copy) our repository onto our computer (a local version). See the steps below.</p>
 <p><br></p>
 <div id="create-a-new-repository-on-github" class="section level3">
-<h3>1. Create a New Repository on Github</h3>
+<h3>1. Create a new repository on Github</h3>
 <ul>
 <li>Typically, the preferred method is to create a new repository on Github…<strong>HOWEVER</strong>:</li>
-<li>For this class we’ve already created a repository for you, and you should have already gotten a Github Classrom link via email! When you click the link, Github creates a new repository for you, which our class will be able to view and work with.</li>
-<li>When you use the Github Classroom link, a repository will created that looks like “gge-ucd/r-davis-in-class-project-YourGithubUsername”</li>
+<li>For this class we’ve already created a repository for you, and you will get a Github Classroom link via email. When you click the link, Github creates a new repository for you, which our class will be able to view and work with.</li>
+<li>When you use the Github Classroom link, a repository will be created that looks like “gge-ucd/r-davis-in-class-project-YourGithubUsername”</li>
 </ul>
-<div id="students-not-enrolled-in-the-class" class="section level4">
-<h4>Students not enrolled in the class</h4>
-<p><strong>Note</strong>: If you are not <em>enrolled</em> in the course but have contacted the instructors about following along, the instructions will differ slightly. You will not be a part of the Github classroom, but we can still get you the repositories you will need to follow along. This will involve creating a <strong>fork</strong> of the repositories, which is an independent copy of the repository that lives under <strong>your</strong> Github account.</p>
-<p>For the start of the class, we will be working with this repository: <a href="https://github.com/gge-ucd/R_DAVIS_in_class_project">https://github.com/gge-ucd/R_DAVIS_in_class_project</a>. Open that page, then go to the upper right corner of the screen and click the button that says “Fork”.</p>
-<p>This will create a repository called “YourGithubUsername/R_DAVIS_in_class_project”. It will have all the same stuff as the students enrolled in the class, it just won’t be underneath the gge-ucd Organization. All the other steps from here on out should be the same!</p>
-<p><br></p>
-</div>
 </div>
 <div id="clone-your-repository-to-your-computer" class="section level3">
-<h3>2. Clone Your Repository to your Computer</h3>
+<h3>2. Clone your repository to your computer</h3>
 <p>You should now have a repository on Github. Our class is all housed in the <a href="https://github.com/gge-ucd">gge-ucd</a> Organization, so your repository should appear there, and it should look something like this:</p>
 <ul>
 <li><a href="https://github.com/gge-ucd/r-davis-in-class-project-MCMaurer"><code>https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername</code></a>. Take a minute to navigate to your repo online and take a look at your <code>README.md</code> file by clicking on it.</li>
-<li><strong>To <em><code>clone</code></em> your repository</strong> (<em>copy to your computer</em>):
+<li><strong>To <em><code>clone</code></em> your repository</strong> (i.e. copy to your computer):
 <ul>
 <li>We’re going to stick with using <strong><code>HTTPS</code>:</strong> for now. Look for the big green “<em>Clone or download</em>” button. Make sure you select the “<strong>Use HTTPS</strong>” so the top of the box says: <strong>Clone with HTTPS</strong>.</li>
 <li>Copy that link (should be something like <em><code>https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername.git</code></em>).</li>
