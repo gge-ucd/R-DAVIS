@@ -119,9 +119,10 @@ We'll go over this part in class. If you successfully created your RStudio proje
 
 In RStudio, open your new project (`r-davis-in-class-project-YourGithubUsername`). Navigate to the *Files* tab and open the `README.md` file. You can click on it in the window and it will automatically open up.
 
-  - **Edit your README:**
-    - Add your name
-    - Answer the other questions
+  - **Edit your README by adding in the following:**
+    - Name
+    - Preferred pronouns
+    - General research area/interest
     - Delete all the original text in the README, leaving just the information about you
 
 <br>
