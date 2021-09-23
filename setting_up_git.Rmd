@@ -80,13 +80,13 @@ Now we'll create an RStudio Project and link our Github repository (following [*
   - In RStudio, start a new Project: `File > New Project > Version Control > Git`. 
   
 
-  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automatically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. You should put this project into a subdirectory, which will be **Desktop/R_DAVIS_2020** for this class. You should make a folder on your desktop called **R_DAVIS_2020** spelled **EXACTLY** like that, and put your new GitHub repository into that folder. It should look like this:
+  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automatically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. You should put this project into a subdirectory, which will be **Desktop/R_DAVIS_2021** for this class. You should make a folder on your desktop called **R_DAVIS_2021** spelled **EXACTLY** like that, and put your new GitHub repository into that folder. It should look like this:
   
 ![](img/rstudio_git_repo_setup.png)
 
 <br>
 
-For the rest of this class, **everything** we do will be in the R_DAVIS_2020 folder on your Desktop. For the rest of your life, however, you can put GitHub repositories anywhere on your computer, but it's really useful to keep them well organized. A common way to do this would be a folder under your username called "GitHub_Projects" or something like that.
+For the rest of this class, **everything** we do will be in the R_DAVIS_2021 folder on your Desktop. For the rest of your life, however, you can put GitHub repositories anywhere on your computer, but it's really useful to keep them well organized. A common way to do this would be a folder under your username called "GitHub_Projects" or something like that.
 
 Another critical thing with git and GitHub is that you should **never** nest projects inside of projects. Treat each RProject/git repository as a completely separate entity, containing only the stuff pertaining to that project. If you try to put a folder that's an RProject inside another folder that's an RProject, stuff is gonna go wrong. Just keep them all separate, but ideally contained in some other folder, like "GitHub_Projects", which is NOT a GitHub repository or RProject, just a boring regular folder.
 
