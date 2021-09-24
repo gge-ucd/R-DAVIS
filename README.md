@@ -4,6 +4,7 @@
 
 This is the repository for website used to teach the quarter-long graduate seminar course, R-DAVIS. Course content integrates and builds on Data Carpentry Ecology lessons, and is taught as part of the curriculum for students in the Graduate Group in Ecology at the University of California, Davis, USA.
 
+
 ## Package Dependencies
 
 Because much of the varied content found in the lessons, there are a number of package dependencies to be aware of. This list may not be complete, but before building the site locally, these packages should be installed:
