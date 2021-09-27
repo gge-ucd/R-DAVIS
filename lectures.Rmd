@@ -9,16 +9,17 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ## Lectures {.tabset .tabset-fade}
 
-### Week 1
-
-* <a href="https://dl.dropboxusercontent.com/s/tzri5n40tt4apt2/Week01.R?dl=0" target="_blank">Livecode</a>
-* No pre-class videos for Week 1
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
-
 ### Week 2
 
-* <a href="https://dl.dropboxusercontent.com/s/1bncm70aaozhx4l/Week02.R?dl=0" target="_blank">Livecode</a>
-* Week 2 pre-class videos will be posted by the Monday before class
+* <a href="">Livecode coming soon</a>  
+Catch up on a few videos from Week 1:  
+* [Pushing to GitHub](https://www.youtube.com/watch?v=R4XrKXqfZBA&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1&t=50s) (as well as a few extra videos on [git from the terminal](https://www.youtube.com/watch?v=EcD-Uy9ZopE&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3) and [personal access tokens](https://www.youtube.com/watch?v=PKDa85i-k54&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2&t=12s))  
+* [Global settings for RStudio](https://www.youtube.com/watch?v=5D4x6BlELCI&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=4) and wrapping up [RStudio Introduction](https://www.youtube.com/watch?v=uDGquqN4WkM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)  
+Videos for Week 2:  
+* [Project management](https://www.youtube.com/watch?v=brw1dl5BUbc)  
+* [How R thinks about data](https://www.youtube.com/watch?v=I-bSX6YwQFM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
+(All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
+
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 3
