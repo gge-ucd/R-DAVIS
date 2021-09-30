@@ -90,7 +90,7 @@ Let's create a new project in RStudio. We won't use this project today (we will 
 2. Click "New Directory".
 3. Click "Empty Project".
 4. Call your project "test_project_lastname"
-5. Store the new directory in the R_DAVIS_2020 folder you should have already created on your desktop.
+5. Store the new directory in the R_DAVIS_2021 folder you should have already created on your desktop.
 6. Click "Create Project".
 </div>
 <br>
@@ -109,19 +109,17 @@ in your OS by navigating to the directory you just created.
 - In your project directory, either using the Project tab of RStudio or your OS' file system, 
 create the following directories:
     - data
-    - code
-    - results
-    - papers
-
-The finished product should look something like this on your computer:  
-![](img/good_project_organization.png)
+    - scripts
+    - figures
 </div>
 
 <br>
 
 Finally, let's switch back to our R_DAVIS project that we will be working in for the rest of class. Go up to the right hand corner of your screen and click the pull down tab that currently says something like "test_project_lastname." Once you click it, you can toggle between multiple projects at once by clicking the white square/arrow icon next to the project name. This will allow you to have multiple projects open at once. If you want to switch projects completely, just click the project name (not the white square/arrow icon). 
 
-Let's do that now. Click on the project you've named R_DAVIS_2020. Once RStudio switches to the new project, the tab in the top right corner should read R_DAVIS_2020.
+Now in this project go ahead and create a file structure like we've practiced. You should already have a data folder. In addition to this, create a "scripts" folder to store your weekly code in. It is good to come up with some kind of naming convention that you can keep consistently (e.g. week_2.R).
+
+
 
 ***
 

@@ -13,8 +13,8 @@
 
 <title>Project Management with RStudio</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -527,7 +527,7 @@ div.tocify {
 <p>RStudio has a feature to help keep everything organized in a self-contained, reproducible package, called a “project”.</p>
 <p>A project is a small file with a <code>.Rproj</code> extension, but you can think of all the files and sub-directories as belonging to that project. We recommend creating a directory and a project file for each project you work on. It should look something like this:</p>
 <p><img src="img/working-directory-structure.png" /></p>
-<p>When you want to work on this project using R, double click on the .Rproj file, and RStudio will open it and keep everything organized for you. You can also open an existing project from RStudio by clicking “File -&gt; Open project…</p>
+<p>When you want to work on this project using R, double click on the .Rproj file, and RStudio will open it and keep everything organized for you. You can also open an existing project from RStudio by clicking "File -&gt; Open project…</p>
 <br>
 <div id="challenge-create-a-project" class="section level3 blue">
 <h3>Challenge – Create a Project</h3>
@@ -550,17 +550,14 @@ div.tocify {
 <li>In your project directory, either using the Project tab of RStudio or your OS’ file system, create the following directories:
 <ul>
 <li>data</li>
-<li>code</li>
-<li>results</li>
-<li>papers</li>
+<li>scripts</li>
+<li>figures</li>
 </ul></li>
 </ul>
-<p>The finished product should look something like this on your computer:<br />
-<img src="img/good_project_organization.png" /></p>
 </div>
 <p><br></p>
 <p>Finally, let’s switch back to our R_DAVIS project that we will be working in for the rest of class. Go up to the right hand corner of your screen and click the pull down tab that currently says something like “test_project_lastname.” Once you click it, you can toggle between multiple projects at once by clicking the white square/arrow icon next to the project name. This will allow you to have multiple projects open at once. If you want to switch projects completely, just click the project name (not the white square/arrow icon).</p>
-<p>Let’s do that now. Click on the project you’ve named R_DAVIS_2020. Once RStudio switches to the new project, the tab in the top right corner should read R_DAVIS_2020.</p>
+<p>Now in this project go ahead and create a file structure like we’ve practiced. You should already have a data folder. In addition to this, create a “scripts” folder to store your weekly code in. It is good to come up with some kind of naming convention that you can keep consistently (e.g. week_2.R).</p>
 <hr />
 <p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/02-project-intro.html">Project management with RStudio materials</a> and the Data Carpentry: R for data analysis and visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/00-before-we-start.html">Before We Start materials</a>. .</p>
 </div>
