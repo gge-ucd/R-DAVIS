@@ -11,7 +11,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 2
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Catch up on a few videos from Week 1:
@@ -27,7 +27,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 3
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 3 pre-class videos will be posted by the Monday before class
@@ -35,7 +35,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 4
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 4 pre-class videos will be posted by the Monday before class
@@ -43,7 +43,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 5
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 5 pre-class videos will be posted by the Monday before class
@@ -52,7 +52,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 6
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 6 pre-class videos will be posted by the Monday before class
@@ -60,7 +60,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 7
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 7 pre-class videos will be posted by the Monday before class
@@ -69,7 +69,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 8
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 8 pre-class videos will be posted by the Monday before class
@@ -78,7 +78,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 9
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 9 pre-class videos will be posted by the Monday before class
@@ -87,7 +87,7 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 10
 
-* [Livecode link](http://rdaviscode.com)
+* [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
 * Week 10 pre-class videos will be posted by the Monday before class
