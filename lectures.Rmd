@@ -11,10 +11,9 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 2
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Catch up on a few videos from Week 1:
   * [Pushing to GitHub](https://www.youtube.com/watch?v=R4XrKXqfZBA&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1&t=50s) (as well as a few extra videos on [git from the terminal](https://www.youtube.com/watch?v=EcD-Uy9ZopE&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3) and [personal access tokens](https://www.youtube.com/watch?v=PKDa85i-k54&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2&t=12s))
   * [Global settings for RStudio](https://www.youtube.com/watch?v=5D4x6BlELCI&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=4) and wrapping up [RStudio Introduction](https://www.youtube.com/watch?v=uDGquqN4WkM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)
@@ -28,76 +27,68 @@ Pre-class videos, recordings of our lectures, and livecode are available below.
 
 ### Week 3
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 3 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 4 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 5 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 6
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 6 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 7
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 7 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 8
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 8 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 9
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 9 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
 
 
 ### Week 10
 
-* Livecode link: <a href="http://rdaviscode.com">
-  **username "rdavis"
-  **password "vulcans"
-  **NOTE: only works with http (not https)
+* [Livecode link](http://rdaviscode.com)
+  * username "rdavis", password "vulcans"
+  * NOTE: only works with http (not https)
 * Week 10 pre-class videos will be posted by the Monday before class
 * <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
