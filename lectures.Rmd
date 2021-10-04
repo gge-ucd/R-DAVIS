@@ -5,7 +5,7 @@ output:
     toc: false
 ---
 
-Pre-class videos, recordings of our lectures, and livecode are available below. 
+Check out each week to see what you need to be doing before, during, and after class.
 
 ## Lectures {.tabset .tabset-fade}
 
