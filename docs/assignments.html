@@ -450,7 +450,7 @@ final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical s
 <div id="week-3" class="section level3">
 <h3><small>Week 3</small></h3>
 <p>Homework this week will be playing with the <code>surveys</code> data we worked on in class. First things first, open your r-davis-in-class-project and pull. Then create a new script in your <code>scripts</code> folder called <code>week_3_homework.R</code>.</p>
-<p>Load your <code>survey</code> data frame with the read.csv() function. Create a new data frame called <code>surveys_base</code> with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to characters. Remove all rows with weight == NA.</p>
+<p>Load your <code>survey</code> data frame with the read.csv() function. Create a new data frame called <code>surveys_base</code> with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to factors. Explore these variables and try to explain why a factor is different from a character. Remove all rows where there is an NA in the weight column.</p>
 <p>CHALLENGE: Create a second data frame called <code>challenge_base</code> that only consists of individuals from your <code>surveys_base</code> data frame with weights greater than 150g.</p>
 <details>
 <summary>
@@ -496,9 +496,9 @@ challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
 <pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.4     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-## ✓ readr   2.0.1     ✓ forcats 0.5.1</code></pre>
+## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+## ✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
 <pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## x dplyr::filter() masks stats::filter()
 ## x dplyr::lag()    masks stats::lag()</code></pre>
