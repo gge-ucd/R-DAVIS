@@ -483,8 +483,8 @@ div.tocify {
 </ul>
 </div>
 <p><br></p>
-<div id="conditional-statements" class="section level3">
-<h3>Conditional Statements</h3>
+<div id="conditional-statements" class="section level2">
+<h2>Conditional Statements</h2>
 <p>When working with your data, you may want to create a new variable in a data frame, but only if a certain conditions are true. Conditional statements are a series of logical conditions that can help you manipulate your data to create new variables.</p>
 <p>We’ll begin again with our surveys data, and remember to load in the tidyverse</p>
 <pre class="r"><code>library(tidyverse)
@@ -493,11 +493,15 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre class="r"><code>summary(surveys$hindfoot_length)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##    2.00   21.00   32.00   29.29   36.00   70.00    3348</code></pre>
+<div id="ifelse-function" class="section level3">
+<h3>ifelse() function</h3>
 <p>To do this, we define the logic: if hindfoot length is less than the mean of 29.29, assign “small” to this new variable, otherwise, assign “big” to this new variable. We can call this <code>hindfoot_cat</code> to specify the categorical variable. We will first do this using the <code>ifelse()</code> function, where the first argument is a TRUE/FALSE statement, the second argument is the new variable if the statement is true, and the third argument is the new variable if the statement is false.</p>
 <pre class="r"><code>surveys$hindfoot_cat &lt;- ifelse(surveys$hindfoot_length &lt; 29.29, &quot;small&quot;, &quot;big&quot;)
 head(surveys$hindfoot_cat)</code></pre>
 <pre><code>## [1] &quot;big&quot; &quot;big&quot; NA    NA    NA    NA</code></pre>
-<p>####case_when() function</p>
+</div>
+<div id="case_when-function" class="section level3">
+<h3>case_when() function</h3>
 <p>The tidyverse provides a way to integrate conditional statements by combining <code>mutate()</code> with the conditional function: <code>case_when()</code>. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. Using this function we can re-write the <code>hindfoot_cat</code> variable using the tidyverse.</p>
 <p>A note: Always be cautious about what might be left out when naming the conditions. In the previous <code>ifelse()</code> example we saw that NAs in the data remained NAs in the new variable construction. However, this is not so when using <code>case_when()</code>. Instead, this function takes the last argument to mean “anything that is left” rather than hindfoot_length &gt; 29.29 == F. So when we run the equivalent conditions in this function, it assigns “small” where hindfoot_lengths are NA.</p>
 <pre class="r"><code>surveys %&gt;% 
@@ -534,9 +538,8 @@ head(surveys$hindfoot_cat)</code></pre>
 ## 4              NA &lt;NA&gt;        
 ## 5              NA &lt;NA&gt;        
 ## 6              NA &lt;NA&gt;</code></pre>
-<div class = "blue">
 </div>
-<div id="challenge" class="section level3">
+<div id="challenge" class="section level3 blue">
 <h3>Challenge</h3>
 <p>Using the <code>iris</code> data frame (this is built in to R), create a new variable that categorizes petal length into three groups:</p>
 <ul>
@@ -544,8 +547,7 @@ head(surveys$hindfoot_cat)</code></pre>
 <li>medium (between the 1st and 3rd quartiles)</li>
 <li>large (greater than or equal to the 3rd quartile)</li>
 </ul>
-<p>Explore the iris data using <code>summary(iris$Petal.Length)</code>, to see the petal length distribution.</p>
-<p>Then use your function of choice: <code>ifelse()</code> or <code>case_when()</code> to make a new variable named <code>petal.length.cat</code> based on the conditions listed above.</p>
+<p>Hint: Explore the iris data using <code>summary(iris$Petal.Length)</code>, to see the petal length distribution. Then use your function of choice: <code>ifelse()</code> or <code>case_when()</code> to make a new variable named <code>petal.length.cat</code> based on the conditions listed above.</p>
 <details>
 <summary>
 ANSWER
@@ -865,9 +867,12 @@ iris %&gt;%
 ## 148            large
 ## 149            large
 ## 150            large</code></pre>
+</details>
 </div>
-<div id="joining-two-dataframes" class="section level3">
-<h3>Joining two dataframes</h3>
+<p><br></p>
+</div>
+<div id="joining-two-dataframes" class="section level2">
+<h2>Joining two dataframes</h2>
 <p>Often when working with real data, data might be separated in multiple .csvs. The <code>join</code> family of dplyr functions can accomplish the task of uniting disparate data frames together rather easily. There are many kind of <code>join</code> functions that dplyr offers, and today we are going to cover the most commonly used function <code>left_join</code>.</p>
 <p>To learn more about the <code>join</code> family of functions, check out this <a href="https://dplyr.tidyverse.org/reference/join.html">useful link</a>.</p>
 <p>Let’s read in another dataset. This data set is a record of the tail length of every rodent in our <code>surveys</code> dataframe. For some annoying reason, it was recorded on a seperate data sheet. We want to take the tail length data and add it to our surveys dataframe.</p>
@@ -902,9 +907,9 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 <p>As you can see, even with a lot of <code>record_id</code> missing, the <code>left_join</code> function will still join the dataframes together based on shared values.</p>
 </div>
 </div>
-<div id="reshaping-with-pivot-functions" class="section level3">
-<h3>Reshaping with pivot functions</h3>
-<p>In the <span style="background:yellow"><a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/">spreadsheet lesson</a></span> we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
+<div id="reshaping-with-pivot-functions" class="section level2">
+<h2>Reshaping with pivot functions</h2>
+<p>In the spreadsheet lesson we discussed how to structure our data leading to the four rules defining a tidy dataset:</p>
 <ol style="list-style-type: decimal">
 <li>Each variable has its own column</li>
 <li>Each observation has its own row</li>
@@ -917,8 +922,8 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 <p>Having created a new table, it is therefore straightforward to explore the relationship between the weight of different species within, and between, the plots. The key point here is that we are still following a tidy data structure, but we have <strong>reshaped</strong> the data according to the observations of interest: average species weight per plot instead of recordings per date.</p>
 <p>The opposite transformation would be to transform column names into values of a variable.</p>
 <p>We can do both these of transformations with two new <code>tidyr</code> functions, <code>pivot_longer()</code> and <code>pivot_wider()</code>.</p>
-<div id="pivot_wider" class="section level4">
-<h4><code>pivot_wider</code></h4>
+<div id="pivot_wider" class="section level3">
+<h3><code>pivot_wider</code></h3>
 <p><code>pivot_wider()</code> widens data by <em>increasing</em> the number of columns and <em>decreasing</em> the number of rows. It takes three main arguments:</p>
 <ol style="list-style-type: decimal">
 <li>the data</li>
@@ -963,7 +968,8 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 <pre class="r"><code>n_distinct(surveys_mz$plot_id)</code></pre>
 <pre><code>## [1] 24</code></pre>
 <p>Alright, so we want a data frame with 10 rows and 24 columns. <code>pivot_wider</code> can do the job!</p>
-<pre class="r"><code>wide_survey &lt;- surveys_mz %&gt;% pivot_wider(names_from = &quot;plot_id&quot;, values_from =  &quot;mean_weight&quot;)
+<pre class="r"><code>wide_survey &lt;- surveys_mz %&gt;% 
+  pivot_wider(names_from = &quot;plot_id&quot;, values_from =  &quot;mean_weight&quot;)
 
 head(wide_survey)</code></pre>
 <pre><code>## # A tibble: 6 × 25
@@ -980,8 +986,8 @@ head(wide_survey)</code></pre>
 ## #   12 &lt;dbl&gt;, 13 &lt;dbl&gt;, 14 &lt;dbl&gt;, 15 &lt;dbl&gt;, 16 &lt;dbl&gt;, 17 &lt;dbl&gt;, 22 &lt;dbl&gt;,
 ## #   23 &lt;dbl&gt;, 24 &lt;dbl&gt;</code></pre>
 </div>
-<div id="pivot_longer" class="section level4">
-<h4><code>pivot_longer</code></h4>
+<div id="pivot_longer" class="section level3">
+<h3><code>pivot_longer</code></h3>
 <p><code>pivot_longer</code> lengthens data by <em>increasing</em> the number of rows and <em>decreasing</em> the number of columns. This function takes 4 main arguments:</p>
 <ol style="list-style-type: decimal">
 <li>the data</li>
@@ -998,7 +1004,8 @@ head(wide_survey)</code></pre>
 #names_to = the name of the new column we created from the `cols` argument 
 #values_to = the name of the new column we will put our values in
 
-surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quot;plot_id&quot;, values_to = &quot;mean_weight&quot;)</code></pre>
+surveys_long &lt;- wide_survey %&gt;% 
+  pivot_longer(col = -genus, names_to = &quot;plot_id&quot;, values_to = &quot;mean_weight&quot;)</code></pre>
 <p>This data set should look just like <code>surveys_mz</code>. But this one is 240 rows, and <code>surveys_mz</code> is 196 rows. What’s going on?</p>
 <pre class="r"><code>View(surveys_long)</code></pre>
 <p>Looks like all the NAs are included in this data set. This is always going to happen when moving between <code>pivot_longer</code> and <code>pivot_wider</code>, but is actually a useful way to balance out a dataset so every replicate has the same composition. Luckily, we now know how to remove the NAs if we want!</p>
@@ -1010,7 +1017,6 @@ surveys_long &lt;- wide_survey %&gt;% pivot_longer(col = -genus, names_to = &quo
 <li><a href="https://tidyr.tidyverse.org/dev/articles/pivot.html">tidyr’s vignette</a></li>
 <li><a href="https://speakerdeck.com/yutannihilation/a-graphical-introduction-to-tidyrs-pivot-star?slide=1">Hiroaki Yutani’s slides</a></li>
 </ul>
-</div>
 </div>
 <div id="challenge-1" class="section level3 blue">
 <h3>Challenge</h3>
@@ -1060,6 +1066,7 @@ q3 &lt;- q2 %&gt;%
 </details>
 </div>
 <p><br></p>
+</div>
 <div id="exporting-data" class="section level2">
 <h2>Exporting data</h2>
 <p>Now that you have learned how to use <strong><code>dplyr</code></strong> to extract information from or summarize your raw data, you may want to export these new datasets to share them with your collaborators or for archival.</p>

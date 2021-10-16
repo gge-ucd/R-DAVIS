@@ -15,11 +15,12 @@ title: "Manipulating and analyzing data in the tidyverse, Part 2"
 
 <br>
 
-### Conditional Statements  
+## Conditional Statements  
 
 When working with your data, you may want to create a new variable in a data frame, but only if a certain conditions are true. Conditional statements are a series of logical conditions that can help you manipulate your data to create new variables.
 
 We'll begin again with our surveys data, and remember to load in the tidyverse
+
 ```{r,results = 'hide', purl = FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 surveys <- read_csv("data/portal_data_joined.csv")
@@ -31,13 +32,15 @@ The general logic of conditional statements is this: if a statement is true, the
 summary(surveys$hindfoot_length)
 ```
 
+### ifelse() function
+
 To do this, we define the logic: if hindfoot length is less than the mean of 29.29, assign "small" to this new variable, otherwise, assign "big" to this new variable. We can call this `hindfoot_cat` to specify the categorical variable. We will first do this using the `ifelse()` function, where the first argument is a TRUE/FALSE statement, the second argument is the new variable if the statement is true, and the third argument is the new variable if the statement is false.
 ```{r}
 surveys$hindfoot_cat <- ifelse(surveys$hindfoot_length < 29.29, "small", "big")
 head(surveys$hindfoot_cat)
 ```
 
-####case_when() function
+### case_when() function
 
 The tidyverse provides a way to integrate conditional statements by combining `mutate()` with the conditional function: `case_when()`. This function uses a series of two-sided formulas where the left-hand side determines describes the condition, and the right supplies the result. The final condition should always be TRUE, meaning that when the previous conditions have not been met, assign the last value. Using this function we can re-write the `hindfoot_cat` variable using the tidyverse.
 
@@ -75,9 +78,7 @@ Using the `iris` data frame (this is built in to R), create a new variable that 
 * medium (between the 1st and 3rd quartiles) 
 * large (greater than or equal to the 3rd quartile)  
 
-Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution.
-
-Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
+Hint: Explore the iris data using `summary(iris$Petal.Length)`, to see the petal length distribution. Then use your function of choice: `ifelse()` or `case_when()` to make a new variable named `petal.length.cat` based on the conditions listed above.
 
 <details>
 <summary>ANSWER</summary>
@@ -99,9 +100,11 @@ iris %>%
 
 
 ```
+ </details>
+</div>
+<br>
 
-
-### Joining two dataframes 
+## Joining two dataframes 
 
 Often when working with real data, data might be separated in multiple .csvs. The `join` family of dplyr functions can accomplish the task of uniting disparate data frames together rather easily. There are many kind of `join` functions that dplyr offers, and today we are going to cover the most commonly used function `left_join`. 
 
@@ -160,11 +163,9 @@ NL_data <- left_join(NL_data, tail, by = "record_id") #a new column called tail_
 
 As you can see, even with a lot of `record_id` missing, the `left_join` function will still join the dataframes together based on shared values. 
 
-### Reshaping with pivot functions
+## Reshaping with pivot functions
 
-In the 
-<span style="background:yellow">[spreadsheet lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/01-format-data/)</span> we discussed how to 
-structure our data leading to the four rules defining a tidy dataset:
+In the spreadsheet lesson we discussed how to structure our data leading to the four rules defining a tidy dataset:
 
 1. Each variable has its own column
 2. Each observation has its own row
@@ -192,7 +193,7 @@ a variable.
 
 We can do both these of transformations with two new `tidyr` functions, `pivot_longer()` and `pivot_wider()`.
 
-#### `pivot_wider`
+### `pivot_wider`
 
 `pivot_wider()` widens data by *increasing* the number of columns and *decreasing* the number of rows. It takes three main arguments:
 
@@ -227,12 +228,13 @@ n_distinct(surveys_mz$plot_id)
 ```
 Alright, so we want a data frame with 10 rows and 24 columns. `pivot_wider` can do the job! 
 ```{r}
-wide_survey <- surveys_mz %>% pivot_wider(names_from = "plot_id", values_from =  "mean_weight")
+wide_survey <- surveys_mz %>% 
+  pivot_wider(names_from = "plot_id", values_from =  "mean_weight")
 
 head(wide_survey)
 ```
 
-#### `pivot_longer`
+### `pivot_longer`
 
 `pivot_longer` lengthens data by *increasing* the number of rows and *decreasing* the number of columns. This function takes 4 main arguments: 
 
@@ -250,7 +252,8 @@ Let's pretend that we got sent the dataset we just created (`wide_survey`) and w
 #names_to = the name of the new column we created from the `cols` argument 
 #values_to = the name of the new column we will put our values in
 
-surveys_long <- wide_survey %>% pivot_longer(col = -genus, names_to = "plot_id", values_to = "mean_weight")
+surveys_long <- wide_survey %>% 
+  pivot_longer(col = -genus, names_to = "plot_id", values_to = "mean_weight")
 
 ```
 This data set should look just like `surveys_mz`. But this one is 240 rows, and `surveys_mz` is 196 rows. What's going on? 
