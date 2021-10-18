@@ -62,16 +62,16 @@ To get the most out of in-class time together, R-DAVIS will combine video materi
 - Data visualization, part 1
 
 #### Week 7 (Nov. 4)
-- Data visualization, part 2
+- Data visualization, part 2  
 
-#### Week 8 (Nov. 11)
-- Date-time data with `lubridate`
-- Writing functions
+
+#### Week 8 (Nov. 11) -- Veterans Day Holiday  
 
 #### Week 9 (Nov. 18)
-- Iteration  
+- Date-time data with `lubridate`
+- Writing functions
 
 #### Thanksgiving holiday (Nov. 25)   
 
 #### Week 10 (Dec. 2)
-- RMarkdown and Literate Programming
+- Iteration 
