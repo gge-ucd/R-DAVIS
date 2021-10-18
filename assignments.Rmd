@@ -33,17 +33,12 @@ hw2 <- replace(hw2, c(4,12,22,27), NA)
 hw2
 ```
 
-*PROBLEM 1:*
 
-Take your `hw2` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
+1. Take your `hw2` vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector `prob1`. 
 
-*PROBLEM 2:* 
+2. Multiply each number in the `prob1` vector by 3 to create a new vector called `times3`. Then add 10 to each number in your `times3` vector to create a new vector called `plus10`. 
 
-Multiply each number in the `prob1` vector by 3 to create a new vector called `times3`. Then add 10 to each number in your `times3` vector to create a new vector called `plus10`. 
-
-*PROBLEM 3:*
-
-Select every other number in your `plus10` vector by selecting the first number, not the second, the third, not the fourth, etc. If you've worked through these three problems in order, you should now have a vector that is 12 numbers long that looks **exactly** like this one:
+3. Select every other number in your `plus10` vector by selecting the first number, not the second, the third, not the fourth, etc. If you've worked through these three problems in order, you should now have a vector that is 12 numbers long that looks **exactly** like this one:
 
 ```{r, echo = F}
 prob1 <- hw2[!is.na(hw2)] #removing the NAs
@@ -91,7 +86,7 @@ CHALLENGE:
 Create a second data frame called `challenge_base` that only consists of individuals from your `surveys_base` data frame with weights greater than 150g.  
 
 <details>
-<summary>**DO NOT OPEN** until you are ready to see the answers for the Base R portion of the homework</summary>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the the homework</summary>
 ```{r, eval=T}
 #PROBLEM 1
 
@@ -132,7 +127,7 @@ By now you should be in the rhythm of pulling from your git repository and then 
 6. Take `surveys_avg_weight` and add a new column called `above_average` that contains logical values stating whether or not a row’s weight is above average for its species+sex combination (recall the new column we made for this tibble).
 
 <details>
-<summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the homework</summary>
 ```{r, eval = T}
 library(tidyverse)
 #1
@@ -193,19 +188,63 @@ surveys_avg_weight
 
 This week's questions will have us practicing pivots and conditional statements.
 
-1. Create a tibble named `surveys` from the portal_data_joined.csv file. Then manipulate `surveys` to create a dataframe with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you've used so far, and it may be useful to sketch out the steps to get to the final result.
+1. Create a tibble named `surveys` from the portal_data_joined.csv file. Then manipulate `surveys` to create a new dataframe called `surveys_wide` with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you've used so far, and it may be useful to sketch out the steps to get to the final result.
 
-2. *Conditional statement problem forthcoming*
+2. Using the original `surveys` dataframe, use the two different functions we laid out for conditional statements, ifelse() and case_when(), to calculate a new weight category variable called `weight_cat`. For this variable, define the rodent weight into three categories, where "small" is less than or equal to the 1st quartile of weight distribution, "medium" is between (but not inclusive) the 1st and 3rd quartile, and "large" is any weight greater than or equal to the 3rd quartile. (Hint: the summary() function on a column summarizes the distribution). For ifelse() and case_when(), compare what happens to the weight values of NA, depending on how you specify your arguments.
+
+BONUS: How might you soft code the values (i.e. not type them in manually) of the 1st and 3rd quartile into your conditional statements in question 2?
 
 <details>
-<summary>**DO NOT OPEN** until you are ready to see the answers for the Tidyverse portion of the homework</summary>
+<summary>**DO NOT OPEN** until you are ready to see the answers for the homework</summary>
 ```{r, eval = T}
-surveys %>% 
+# 1
+library(tidyverse)
+surveys <- read_csv("data/portal_data_joined.csv")
+
+surveys_wide <- surveys %>% 
   filter(!is.na(hindfoot_length)) %>% 
   group_by(genus, plot_type) %>% 
   summarise(mean_hindfoot = mean(hindfoot_length)) %>% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %>% 
   arrange(Control)
+
+# 2
+summary(surveys$weight)
+# The final "else" argument here, where I used the T ~ "large" applies even to NAs, which is not something we want
+surveys %>% 
+  mutate(weight_cat = case_when(
+    weight >= 20.00 ~ "small",
+    weight > 20.00 & weight < 48.00 ~ "medium",
+    T ~ "large"
+  ))
+
+# To overcome this, case_when() allows us to not even use an "else" argument, and just specify the final argument to reduce confusion. This leaves NAs as is
+surveys %>% 
+  mutate(weight_cat = case_when(
+    weight >= 20.00 ~ "small",
+    weight > 20.00 & weight < 48.00 ~ "medium",
+    weight >= 48.00 ~ "large"
+  ))
+
+# The "else" argument in ifelse() does not include NAs when specified, which is useful. The shortcoming, however, is that ifelse() does not allow you to leave out a final else argument, which means it is really important to always check the work on what that last argument assigns to.
+surveys %>% 
+  mutate(weight_cat = ifelse(weight >= 20.00, "small",
+                             ifelse(weight > 20.00 & weight < 48.00, "medium","large")))
+
+# BONUS:
+summ <- summary(surveys$weight)
+# Remember our indexing skills from the first weeks? Play around with single and double bracketing to see how it can extract values
+summ[[2]]
+summ[[5]]
+
+# Then you can next these into your code
+surveys %>% 
+  mutate(weight_cat = case_when(
+    weight >= summ[[2]] ~ "small",
+    weight > summ[[2]] & weight < summ[[5]] ~ "medium",
+    weight >= summ[[5]] ~ "large"
+  ))
+
 ```
 </details>
 
@@ -221,13 +260,9 @@ gapminder <- read_csv("https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv") #O
 ```
 
 
-#### *Problem 1*.
+1. First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)
 
-First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)
-
-#### *Problem 2*.
-
-Look at the following code and answer the following questions. What do you think the `scale_x_log10()` line of code is achieving? What about the `geom_smooth()` line of code? 
+2. Look at the following code and answer the following questions. What do you think the `scale_x_log10()` line of code is achieving? What about the `geom_smooth()` line of code? 
 
 *Challenge!* Modify the above code to size the points in proportion to the population of the country. 
 **Hint:** Are you translating data to a visual feature of the plot?
@@ -235,7 +270,6 @@ Look at the following code and answer the following questions. What do you think
 **Hint:** There's no cost to tinkering! Try some code out and see what happens with or without particular elements.
 
 ```{r}
-
 
 ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
     geom_point(aes(color = continent), size = .25) + 
@@ -246,9 +280,7 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
 ```
 
 
-#### *Problem 3*
-
-Create a boxplot that shows the life expectency for Brazil, China, El Salvador, Niger, and the United States, with the data points in the backgroud using geom_jitter. Label the X and Y axis with "Country" and "Life Expectancy" and title the plot "Life Expectancy of Five Countries".
+3. Create a boxplot that shows the life expectency for Brazil, China, El Salvador, Niger, and the United States, with the data points in the backgroud using geom_jitter. Label the X and Y axis with "Country" and "Life Expectancy" and title the plot "Life Expectancy of Five Countries".
 
 <details>
 <summary>**DO NOT OPEN** until you are ready to see the answers! </summary>
@@ -337,17 +369,17 @@ We'll touch on some intermediate steps here, since it might take quite a few ste
 
 1. To get the population difference between 2002 and 2007 for each country, it would probably be easiest to have a country in each row and a column for 2002 population and a column for 2007 population.
 
-1. Notice the order of countries within each facet. You'll have to look up how to order them in this way.
+2. Notice the order of countries within each facet. You'll have to look up how to order them in this way.
 
-1. Also look at how the axes are different for each facet. Try looking through `?facet_wrap` to see if you can figure this one out.
+3. Also look at how the axes are different for each facet. Try looking through `?facet_wrap` to see if you can figure this one out.
 
-1. The color scale is different from the default- feel free to try out other color scales, just don't use the defaults!
+4. The color scale is different from the default- feel free to try out other color scales, just don't use the defaults!
 
-1. The theme here is different from the default in a few ways, again, feel free to play around with other non-default themes.
+5. The theme here is different from the default in a few ways, again, feel free to play around with other non-default themes.
 
-1. The axis labels are rotated! Here's a hint: `angle = 45, hjust = 1`. It's up to you (and Google) to figure out where this code goes!
+6. The axis labels are rotated! Here's a hint: `angle = 45, hjust = 1`. It's up to you (and Google) to figure out where this code goes!
 
-1. Is there a legend on this plot?
+7. Is there a legend on this plot?
 
 This lesson should illustrate a key reality of making plots in R, one that applies as much to experts as beginners: 10% of your effort gets the plot 90% right, and 90% of the effort is getting the plot perfect. `ggplot` is incredibly powerful for exploratory analysis, as you can get a good plot with only a few lines of code. It's also extremely flexible, allowing you to tweak nearly everything about a plot to get a highly polished final product, but these little tweaks can take a lot of time to figure out!
 
