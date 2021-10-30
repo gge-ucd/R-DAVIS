@@ -4,7 +4,7 @@ title: Data visualization best practices for publication and accessibility
 
 <br>
 <div class = "blue">
-### Learning Objectives
+## Learning Objectives
 * Learn some basic visualization dos and don'ts
 * Learn how to customize color in plots
 * Gain a basic understanding of package `cowplot`
@@ -67,6 +67,20 @@ Take a look at the [vignette online](https://cran.r-project.org/web/packages/vir
 An example:
 
 ![viridis](img/viridis_demo.png)
+
+### Customizing color pallettes in ggplot
+
+The viridis color pallettes have been built into ggplot so that you can call upon them using the scale_fill_viridis_ or scale_color_viridis_ functions. Note that whether or not you use the fill or color scale function depends on which aesthetic you set in your plot. The functions also have extenstions depending on the kind of variable that you want to color: scale_fill_viridis_*d* is for discrete variables while scale_fill_viridis_*c* is for continous variables. Within the function, you can specify which virids pallette to use: A-D.
+
+In this example we fill in our bars with the cut vairable in the diamond dataset, a categorical variable with 5 groups. 
+```{r, echo=T, eval=T}
+library(ggplot2)
+ggplot(diamonds, aes(x = clarity, fill = cut)) + 
+  geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
+  scale_fill_viridis_d(option = "C") +
+  theme_classic()
+```
 
 ## Visualization Tips {.tabset .tabset-fade}
 
@@ -144,21 +158,68 @@ barplot(table(iris$Species,iris$Sepal.Length),col  = viridis(3, option = "A"))
 <br>
 <br>
 
+## Non-visual data interaction  
 
-## Customizing color pallettes in ggplot
 
-The viridis color pallettes have been built into ggplot so that you can call upon them using the scale_fill_viridis_ or scale_color_viridis_ functions. Note that whether or not you use the fill or color scale function depends on which aesthetic you set in your plot. The functions also have extenstions depending on the kind of variable that you want to color: scale_fill_viridis_*d* is for discrete variables while scale_fill_viridis_*c* is for continous variables. Within the function, you can specify which virids pallette to use: A-D.
+Discussions of visualization so far have taken for granted that visualization is accessible to everyone, but researchers and audiences alike are not all sighted. RStudio is behind on blind accessibility, but some packages can provide text descriptions and sonification/audification of plots to improve accessibility for non-visual data interaction.  
 
-In this example we fill in our bars with the cut vairable in the diamond dataset, a categorical variable with 5 groups. 
-```{r, echo=T, eval=T}
-library(ggplot2)
-ggplot(diamonds, aes(x = clarity, fill = cut)) + 
+The `BrailleR` package ([read more here](https://r-resources.massey.ac.nz/BrailleRInAction/)), has a `VI()` function that wraps around plots and provides a text-description output. We can use the VI wrapper to interact with our plots from a textual perspective and identify what information is missing. Such text can also be used as alt-text when publishing this material. What could we do to our plot improve the text description of this plot?
+
+```{r, echo=T, eval=T, warning= F, message = F}
+#install.packages("BrailleR")
+library(BrailleR)
+
+barplot <- ggplot(diamonds, aes(x = clarity, fill = cut)) + 
   geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
   scale_fill_viridis_d(option = "C") +
   theme_classic()
+
+VI(barplot)
 ```
 
+The `sonification` package's `sonify` function can be used to represent data in audio form, where the x-axis can span sound across time, so that the length of time a sound plays follows the data long the x-axis from left to right; the y-axis can be expressed as pitch, so that the pitch of the sound matches to the values of the data (lower value = lower pitch).
+
+```{r, echo = F, eval = T, warning= F, message = F}
+library(sonify)
+sonif <- sonify(iris$Petal.Width)
+save(sonif, file = "width.sound.wav")
+```
+
+One variable can be used as an input to hear the distribution. For instance this univariate plot of iris petal width visually looks like this:
+```{r, echo=T, eval=T, warning= F, message = F}
+plot(iris$Petal.Width)
+```
+
+Using `sonify` instead of plot, the distribution of iris petal width sounds like this:
+```{r, echo = F, eval = T, warning= F, message = F}
+#install.packages("sonify")
+library(sonify)
+sonify(iris$Petal.Width)
+```
+If you try this on your computer it should play autmatically, buy on the website you can listen below: 
+
+<audio controls>
+  <source src="width.sound.wav" type="audio/wav">
+</audio>
+
+```{r, echo = F, eval = T, warning= F, message = F}
+sonif <- sonify(x = iris$Petal.Width, y = iris$Petal.Length)
+save(sonif, file = "width.length.sound.wav")
+```
+Two variables can be used as input to hear the relationship between continuous variables. For instance this bivariate plot of iris petal length and petal width visually looks like this:
+```{r, echo=T, eval=T, warning= F, message = F}
+plot(x = iris$Petal.Width, y = iris$Petal.Length)
+```
+
+And using `sonify`, sounds like this:
+```{r, echo=T, eval=T, warning= F, message = F}
+sonify(x=iris$Petal.Width, y = iris$Petal.Length) 
+```
+
+<audio controls>
+  <source src="width.length.sound.wav" type="audio/wav">
+</audio>
 
 ## Publishing Plots: `cowplot`
 
