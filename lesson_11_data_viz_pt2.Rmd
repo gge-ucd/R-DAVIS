@@ -182,8 +182,9 @@ The `sonification` package's `sonify` function can be used to represent data in 
 
 ```{r, echo = F, eval = T, warning= F, message = F}
 library(sonify)
+library(seewave)
 sonif <- sonify(iris$Petal.Width)
-save(sonif, file = "width.sound.wav")
+savewav(sonif, file = "sw.width.sound.wav")
 ```
 
 One variable can be used as an input to hear the distribution. For instance this univariate plot of iris petal width visually looks like this:
@@ -200,12 +201,12 @@ sonify(iris$Petal.Width)
 If you try this on your computer it should play autmatically, buy on the website you can listen below: 
 
 <audio controls>
-  <source src="width.sound.wav" type="audio/wav">
+  <source src="sw.width.sound.wav" type="audio/wav">
 </audio>
 
 ```{r, echo = F, eval = T, warning= F, message = F}
 sonif <- sonify(x = iris$Petal.Width, y = iris$Petal.Length)
-save(sonif, file = "width.length.sound.wav")
+savewav(sonif, file = "sw.width.length.sound.wav")
 ```
 Two variables can be used as input to hear the relationship between continuous variables. For instance this bivariate plot of iris petal length and petal width visually looks like this:
 ```{r, echo=T, eval=T, warning= F, message = F}
@@ -218,7 +219,7 @@ sonify(x=iris$Petal.Width, y = iris$Petal.Length)
 ```
 
 <audio controls>
-  <source src="width.length.sound.wav" type="audio/wav">
+  <source src="sw.width.length.sound.wav" type="audio/wav">
 </audio>
 
 ## Publishing Plots: `cowplot`
