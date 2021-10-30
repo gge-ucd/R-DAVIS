@@ -192,7 +192,7 @@ plot(iris$Petal.Width)
 ```
 
 Using `sonify` instead of plot, the distribution of iris petal width sounds like this:
-```{r, echo = F, eval = T, warning= F, message = F}
+```{r, echo = T, eval = T, warning= F, message = F}
 #install.packages("sonify")
 library(sonify)
 sonify(iris$Petal.Width)
