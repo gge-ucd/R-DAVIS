@@ -226,6 +226,11 @@ sonify(x=iris$Petal.Width, y = iris$Petal.Length)
 
 A few excellent options exist for creating multi-paneled plots for publications. The first and foremost is a package by Claus Wilke called [`cowplot`](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html). With `cowplot`, it's possible to quickly combine existing `ggplots`, creating publication quality plots. See the vignette for more options, but here's a quick example from the vignette below:
 
+```{r, echo F, warning = F, message = F}
+detach("package:BrailleR", unload=TRUE)
+```
+
+
 ```{r cowplot, echo=T, eval=T}
 library(cowplot)
 
