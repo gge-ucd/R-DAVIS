@@ -412,7 +412,7 @@ pg %>%
 ```
 </details>
 
-### <small>Week 8</small>
+### <small>Week 9</small>
 
 Let's look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. *This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.* Download this dataset [here](data/mauna_loa_met_2001_minute.rda). Save it to your `data/` folder. Alternatively, you can read the CSV directly from the R-DAVIS Github:
 `mloa <- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")`
@@ -466,7 +466,7 @@ mloa2 %>%
 ```
 </details>
 
-### <small>Week 9</small>
+### <small>Week 10</small>
 *Forthcoming*
 
 ### <small>Final assignment</small>

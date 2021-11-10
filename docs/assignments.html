@@ -919,8 +919,8 @@ pg %&gt;%
   ylab(&quot;Change in Population Between 2002 and 2007&quot;)</code></pre>
 </details>
 </div>
-<div id="week-8" class="section level3">
-<h3><small>Week 8</small></h3>
+<div id="week-9" class="section level3">
+<h3><small>Week 9</small></h3>
 <p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")</code></p>
 <p>Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported, and how missing values are reported in each column. With the <code>mloa</code> data.frame, remove observations with missing values in rel_humid, temp_C_2m, and windSpeed_m_s. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Pacific/Honolulu time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
 Answers:
@@ -970,8 +970,8 @@ mloa2 %&gt;%
   theme_classic()</code></pre>
 </details>
 </div>
-<div id="week-9" class="section level3">
-<h3><small>Week 9</small></h3>
+<div id="week-10" class="section level3">
+<h3><small>Week 10</small></h3>
 <p><em>Forthcoming</em></p>
 </div>
 <div id="final-assignment" class="section level3">

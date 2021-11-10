@@ -139,20 +139,7 @@ Check out each week to see what you need to be doing before, during, and after c
 
 ### Week 8
 
-<b>Before class:</b>  
-
-* Complete the Week 7 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Week 8 videos will be posted the Monday before class
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
-
-<b>After class:</b>  
-
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+No class this week 
 
 
 ### Week 9
