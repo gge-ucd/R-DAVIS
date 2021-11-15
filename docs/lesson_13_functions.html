@@ -11,7 +11,7 @@
 
 
 
-<title>R for reproducible scientific analysis</title>
+<title>Creating functions</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -467,8 +467,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">R for reproducible scientific analysis</h1>
-<h3 class="subtitle">Creating functions</h3>
+<h1 class="title toc-ignore">Creating functions</h1>
 
 </div>
 
@@ -477,8 +476,6 @@ div.tocify {
 <h3>Learning objectives</h3>
 <ul>
 <li>Define a function that takes arguments.</li>
-<li>Return a value from a function.</li>
-<li>Test a function.</li>
 <li>Set default values for function arguments.</li>
 <li>Explain why we should divide programs into small, single-purpose functions.</li>
 </ul>
@@ -527,8 +524,8 @@ F_to_K(32)</code></pre>
 <pre class="r"><code># boiling point of water
 F_to_K(212)</code></pre>
 <pre><code>## [1] 373.15</code></pre>
-<div id="challenge-1" class="section level4 blue">
-<h4>Challenge 1</h4>
+<div id="challenge" class="section level3 blue">
+<h3>Challenge</h3>
 <ul>
 <li>Write a function called <code>K_to_C</code> that takes a temperature in K and returns that temperature in C
 <ul>
@@ -536,6 +533,15 @@ F_to_K(212)</code></pre>
 </ul></li>
 <li>Create a new R script, copy <code>F_to_K</code> and <code>K_to_C</code> in it, and save it as functions.R in the <code>code</code> directory of your project.</li>
 </ul>
+<details>
+<summary>
+ANSWER
+</summary>
+<pre class="r"><code>K_to_C &lt;- function(tempK) {
+    tempC &lt;- tempK - 273.15 
+    return(tempC)
+}</code></pre>
+</details>
 </div>
 <p><br></p>
 </div>
@@ -543,43 +549,47 @@ F_to_K(212)</code></pre>
 <h2><code>source()</code>ing functions</h2>
 <p>You can load all the functions in your <code>code/functions.R</code> script without even opening the file, via the <code>source</code> function. This allows you to keep your functions separate from the analyses which use them.</p>
 <pre class="r"><code>source(&#39;code/functions.R&#39;)</code></pre>
+<div id="using-dataframes-in-functions" class="section level3">
+<h3>Using dataframes in functions</h3>
+<p>Let’s write a function to calculate the average GDP in a given country, in a given span of years, based on the <code>gapminder</code> data. If you were to do this for just one specification, without writing a function, it might look something like this:</p>
+<pre class="r"><code>library(gapminder)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+## ✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>gapminder %&gt;% 
+  filter(country == &quot;Canada&quot;, year %in% c(1950:1970)) %&gt;% 
+  summarize(mean(gdpPercap, na.rm = T))</code></pre>
+<pre><code>## # A tibble: 1 × 1
+##   `mean(gdpPercap, na.rm = T)`
+##                          &lt;dbl&gt;
+## 1                       13349.</code></pre>
+<p>But, what if you wanted to do this for many different specifications? You might find yourself wanting to copy and paste these couple lines of code over and over. Instead, you can write it into a function, <strong>soft coding</strong> the parts that you want as your function’s arguments. In this example, we want to be able to change the country and the year range that we are interested in.</p>
+<pre class="r"><code># Note: try to name arguments something that do not exist as a column name, to avoid confusing yourself and R
+avgGDP &lt;- function(cntry, yr.range){
+  df &lt;- gapminder %&gt;% 
+  filter(country == cntry, year %in% yr.range)
+  mean(df$gdpPercap, na.rm = T)
+}
+
+avgGDP(&quot;Iran&quot;, 1980:1985)</code></pre>
+<pre><code>## [1] 7608.335</code></pre>
+<pre class="r"><code>avgGDP(&quot;Zimbabwe&quot;, 1950:2000)</code></pre>
+<pre><code>## [1] 648.8549</code></pre>
 </div>
-<div id="combining-functions" class="section level2">
-<h2>Combining functions</h2>
-<p>The real power of functions comes from mixing, matching and combining them into ever large chunks to get the effect we want.</p>
-<div id="challenge-2" class="section level4 blue">
-<h4>Challenge 2</h4>
-<ul>
-<li>Write a new function called <code>F_to_C</code> in your functions.R file that converts temperature directly from F to C by reusing the two functions above.</li>
-<li>Load the function not by highlighting the code but by <code>source</code>-ing your functions.R file.</li>
-<li>Use the function to find today’s high temperature in your location in C.</li>
-</ul>
-</div>
-<p><br></p>
-<!-- ### A more-useful function -->
-<!-- Let's write a function to calculate countries' GDPs in their local currency.  -->
-<!-- - Start with Canada, exchange rate is 1.279098 -->
-<!-- - Turn that into a function that takes country and exchange rate. -->
-<!-- - Here is a [table of exchange rates for many countries](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/simple_exchange_rate.csv). -->
-<!-- - Call the function with some row -->
-<!-- - lapply over rows -->
-<!-- ### Do by joins -->
-<!-- And by year -->
-<!-- - Get all the exchange rates over time. You can [download that here](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/exchange_rate.csv). -->
-<!-- - join, filter -->
 </div>
 <div id="pass-by-value" class="section level2">
 <h2>Pass by value</h2>
-<p>Functions in R almost always make copies of the data to operate on inside of a function body. When we modify <code>dat</code> inside the function we are modifying the copy of the gapminder dataset stored in <code>dat</code>, not the original variable we gave as the first argument. This is called “pass-by-value” and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.</p>
-</div>
-<div id="function-scope" class="section level2">
-<h2>Function scope</h2>
-<p>A related concept is scoping: any variables you create or modify inside the body of a function only exist for the lifetime of the function’s execution. When we call <code>calcGDP</code>, the variables <code>dat</code>, <code>years</code>, and <code>filteredDF</code> only exist inside the body of the function. Even if we have variables of the same name in our interactive R session, they are not modified in any way when executing a function.</p>
-<div id="challenge-a-new-function" class="section level4 challenge blue">
-<h4 class="challenge">Challenge – A new function</h4>
+<p>Functions in R almost always make copies of the data to operate on inside of a function body. When we modify a data frame inside the function we are modifying the copy of the gapminder dataset, not the original variable we gave as the first argument. This is called “pass-by-value” and it makes writing code much safer: you can always be sure that whatever changes you make within the body of the function, stay inside the body of the function.</p>
+<div id="challenge-1" class="section level3 challenge blue">
+<h3 class="challenge">Challenge</h3>
 <p>This challenge will deal with countries’ population growth. To access the data, load (and install, if needed) the <code>gapminder</code> library and access its life expectancy dataset using:</p>
-<pre><code>library(tidyverse)
-library(gapminder)
+<pre><code>library(gapminder)
 d &lt;- gapminder::gapminder</code></pre>
 <p>Write a new function that takes two arguments, the gapminder data.frame (<code>d</code>) and the name of a country (e.g. <code>"Afghanistan"</code>), and plots a time series of the country’s population. That is, the return value from the function should be a ggplot object. - It is often easier to modify existing code than to start from scratch. To start out with, try writing some code that works interactively, and then wrap it in a function.</p>
 <details>
@@ -593,7 +603,7 @@ ANSWER
     return(plot)
 }
 plotPopGrowth(&#39;Canada&#39;)</code></pre>
-<img src="lesson_13_functions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="lesson_13_functions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 </details>
 </div>
 <p><br></p>

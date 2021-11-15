@@ -1,29 +1,18 @@
 ---
-layout: page
-title: R for reproducible scientific analysis
-subtitle: Creating functions
-minutes: 45
+title: Creating functions
 ---
-
-```{r, include = FALSE}
-library(gapminder)
-library(tidyverse)
-```
 
 <div class = "blue">
 
 ### Learning objectives
 
 * Define a function that takes arguments.
-* Return a value from a function.
-* Test a function.
 * Set default values for function arguments.
 * Explain why we should divide programs into small, single-purpose functions.
 </div>
 <br>
 
 Any operation you will perform more than once can be put into a function. That way, rather than retyping all the commands (and potentially making errors), you can simply call the function, passing it a new dataset or parameters. This may seem cumbersome at first, but writing functions to automate repetitive tasks is incredibly powerful. E.g. each time you call `ggplot` you are calling a function that someone wrote. Imagine if each time you wanted to make a plot you had to copy and paste or write that code from scratch!
-
 
 
 ## Defining a function
@@ -94,15 +83,26 @@ F_to_K(212)
 
 <div class = "blue">
 
-#### Challenge 1
+### Challenge
 
 - Write a function called `K_to_C` that takes a temperature in K
 and returns that temperature in C
    - Hint: To convert from K to C you subtract 273.15
 - Create a new R script, copy `F_to_K` and `K_to_C` in it, and save it as 
 functions.R in the `code` directory of your project.
+
+<details>
+<summary>ANSWER</summary>
+```{r}
+K_to_C <- function(tempK) {
+    tempC <- tempK - 273.15 
+    return(tempC)
+}
+```
+</details>
 </div>
 <br>
+
 
 ## `source()`ing functions
 
@@ -113,73 +113,52 @@ source('code/functions.R')
 ```
 
 
-## Combining functions
+### Using dataframes in functions
 
-The real power of functions comes from mixing, matching and combining them
-into ever large chunks to get the effect we want.
+Let's write a function to calculate the average GDP in a given country, in a given span of years, based on the `gapminder` data. If you were to do this for just one specification, without writing a function, it might look something like this:
 
-<div class = "blue">
-#### Challenge 2
+```{r}
+library(gapminder)
+library(tidyverse)
 
-- Write a new function called `F_to_C` in your functions.R file that converts 
-temperature directly from F to C by reusing the two functions above.
-- Load the function not by highlighting the code but by `source`-ing your functions.R file.
-- Use the function to find today's high temperature in your location in C.
-</div>
-<br>
+gapminder %>% 
+  filter(country == "Canada", year %in% c(1950:1970)) %>% 
+  summarize(mean(gdpPercap, na.rm = T))
+```
 
+But, what if you wanted to do this for many different specifications? You might find yourself wanting to copy and paste these couple lines of code over and over. Instead, you can write it into a function, **soft coding** the parts that you want as your function's arguments. In this example, we want to be able to change the country and the year range that we are interested in. 
 
-<!-- ### A more-useful function -->
+```{r}
+# Note: try to name arguments something that do not exist as a column name, to avoid confusing yourself and R
+avgGDP <- function(cntry, yr.range){
+  df <- gapminder %>% 
+  filter(country == cntry, year %in% yr.range)
+  mean(df$gdpPercap, na.rm = T)
+}
 
-<!-- Let's write a function to calculate countries' GDPs in their local currency.  -->
+avgGDP("Iran", 1980:1985)
+avgGDP("Zimbabwe", 1950:2000)
 
-<!-- - Start with Canada, exchange rate is 1.279098 -->
-
-<!-- - Turn that into a function that takes country and exchange rate. -->
-
-<!-- - Here is a [table of exchange rates for many countries](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/simple_exchange_rate.csv). -->
-
-<!-- - Call the function with some row -->
-
-<!-- - lapply over rows -->
-
-
-<!-- ### Do by joins -->
-
-<!-- And by year -->
-
-<!-- - Get all the exchange rates over time. You can [download that here](https://raw.githubusercontent.com/michaellevy/gapminder-R/gh-pages/data/exchange_rate.csv). -->
-
-<!-- - join, filter -->
+```
 
 
 ## Pass by value
 
 Functions in R almost always make copies of the data to operate on
-inside of a function body. When we modify `dat` inside the function
-we are modifying the copy of the gapminder dataset stored in `dat`,
+inside of a function body. When we modify a data frame inside the function
+we are modifying the copy of the gapminder dataset,
 not the original variable we gave as the first argument.
 This is called "pass-by-value" and it makes writing code much safer:
 you can always be sure that whatever changes you make within the
 body of the function, stay inside the body of the function.
 
-## Function scope
-
-A related concept is scoping: any variables you
-create or modify inside the body of a function only exist for the lifetime
-of the function's execution. When we call `calcGDP`, the variables `dat`,
- `years`, and `filteredDF` only exist inside the body of the function. Even if we
-have variables of the same name in our interactive R session, they are
-not modified in any way when executing a function.
-
 
 <div class = "blue">
-#### Challenge -- A new function {.challenge}
+### Challenge{.challenge}
 
 This challenge will deal with countries' population growth. To access the data, load (and install, if needed) the `gapminder` library and access its life expectancy dataset using:
 
 ```
-library(tidyverse)
 library(gapminder)
 d <- gapminder::gapminder
 ```
