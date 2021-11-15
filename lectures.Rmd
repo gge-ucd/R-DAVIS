@@ -147,7 +147,11 @@ No class this week
 <b>Before class:</b>  
 
 * Complete the Week 8 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Week 9 videos will be posted the Monday before class
+* Videos for Week 9
+  * [Lubridate](https://www.youtube.com/watch?v=CVgeZf8Av0I&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
+  * [Function writing](https://www.youtube.com/watch?v=DzYaUFy6Ims&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
+* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
+
 
 <b>During class:</b>  
 
