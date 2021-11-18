@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -497,7 +497,7 @@ div.tocify {
 
 surveys_underscore &lt;- read_csv(&quot;data/combined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+<pre><code>## ── Column specification ───────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
@@ -638,8 +638,10 @@ ggsave(&quot;figures/rodent1.png&quot;, rodent_plot)</code></pre>
 <h2><code>rio</code> Package</h2>
 <p>One other data import/export package to check out is called <code>rio</code>. It uses two main functions: <code>import</code> and <code>export</code>, and it automatically detects the file extension you’re using, then picks the fastest function out of a bunch of different specialized packages. It can streamline your data import/export and give you more consistent data frames when you’re working with lots of different file types.</p>
 <pre class="r"><code>#install.packages(&quot;rio&quot;)
-library(rio)
-export(mtcars, &quot;data/mtcars.csv&quot;)
+library(rio)</code></pre>
+<pre><code>## The following rio suggested packages are not installed: &#39;arrow&#39;, &#39;feather&#39;, &#39;fst&#39;, &#39;hexView&#39;, &#39;pzfx&#39;, &#39;rmatio&#39;
+## Use &#39;install_formats()&#39; to install them</code></pre>
+<pre class="r"><code>export(mtcars, &quot;data/mtcars.csv&quot;)
 export(mtcars, &quot;data/mtcars.rds&quot;)
 export(mtcars, &quot;data/mtcars.tsv&quot;)</code></pre>
 <p>You can read more about <code>rio</code> on its <a href="https://github.com/leeper/rio">Github page</a>.</p>

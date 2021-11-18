@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -505,8 +505,8 @@ log(x)</code></pre>
 <p>We use the <code>for()</code> function to indicate we are starting a loop. The <code>{</code> and <code>}</code> mark the start and end of the block of code that we will repeat over and over. <code>i in 1:10</code> means that <code>i</code> will take on the first value in the <code>1:10</code> vector, the block of code will execute, then <code>i</code> will take on the second value in the <code>1:10</code> vector, the block of code will execute a second time, and so on until <code>i</code> takes on the last value in the <code>1:10</code> vector, the block of code executes one final time, and then the loop is finished. R will now proceed to the next line of code after the <code>}</code>. We can call this <strong>iterative looping variable</strong> whatever we’d like. Often, it is called <code>i</code> (or <code>j</code> or <code>k</code> if <code>i</code> is already used), but it could be called <code>monkey</code> and R would be fine with that.</p>
 <p>It’s key to notice that the value of <code>i</code> changes each time the code block in the loop executes. We say that <code>i</code> is <em>iterating</em> through the values of the vector. We can use <code>i</code> (or whatever you’ve called it) inside the for loop code chunk. Above, we printed out the value of <code>i</code> (see how <code>i</code> changed?) Below, we print out the <code>i</code>th letter of the alphabet by using the <code>letters</code> vector</p>
 <pre class="r"><code>letters # all the letters in the alphabet</code></pre>
-<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot;
-## [20] &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot; &quot;z&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot; &quot;f&quot; &quot;g&quot; &quot;h&quot; &quot;i&quot; &quot;j&quot; &quot;k&quot; &quot;l&quot; &quot;m&quot; &quot;n&quot; &quot;o&quot; &quot;p&quot; &quot;q&quot; &quot;r&quot; &quot;s&quot; &quot;t&quot; &quot;u&quot; &quot;v&quot; &quot;w&quot; &quot;x&quot; &quot;y&quot;
+## [26] &quot;z&quot;</code></pre>
 <pre class="r"><code>for(i in 1:10) {
   # use square bracket notation to access the ith element in the letters vector
   print(letters[i]) 
