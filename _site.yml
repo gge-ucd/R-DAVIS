@@ -40,7 +40,7 @@ navbar:
     - text: Writing functions
       href: lesson_13_functions.html
     - text: Iteration
-      href: lesson_iteration.html
+      href: lesson_14_functions.html
     - text: Literate Programming with RMarkdown
       href: lesson_rmarkdown.html
   - text: Lectures
