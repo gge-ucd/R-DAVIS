@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Coding Practice</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">
+    <span class="fa fa-info-circle  fa-1x"></span>
+     
+    About
+  </a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map fa-1x"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Set Up
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="computer_setup.html">Computer Setup</a>
+    </li>
+    <li>
+      <a href="setting_up_git.html">Setting up Git Repository</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-book  fa-1x"></span>
+     
+    Course Materials
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="lesson_01_intro_r_rstudio.html">Intro to Programming, R, &amp; RStudio</a>
+    </li>
+    <li>
+      <a href="lesson_02_project_management.html">Project Management</a>
+    </li>
+    <li>
+      <a href="lesson_03_how_r_thinks_about_data.html">How R Thinks About Data</a>
+    </li>
+    <li>
+      <a href="lesson_04_spreadsheets_condensed.html">Spreadsheets</a>
+    </li>
+    <li>
+      <a href="lesson_05_data_import.html">Starting With Spreadsheets in R</a>
+    </li>
+    <li>
+      <a href="lesson_06_data_manipulation_pt1.html">Data Manipulation Pt1</a>
+    </li>
+    <li>
+      <a href="lesson_08_data_manipulation_pt2.html">Data Manipulation Pt2</a>
+    </li>
+    <li>
+      <a href="lesson_09_data_viz_pt1.html">Data Visualization Pt1</a>
+    </li>
+    <li>
+      <a href="lesson_11_data_viz_pt2.html">Data Visualization Pt2</a>
+    </li>
+    <li>
+      <a href="lesson_12_lubridate.html">Date-times with lubridate</a>
+    </li>
+    <li>
+      <a href="lesson_13_functions.html">Writing functions</a>
+    </li>
+    <li>
+      <a href="lesson_14_iteration.html">Iteration</a>
+    </li>
+    <li>
+      <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="lectures.html">
+    <span class="fa fa-slideshare fa-1x"></span>
+     
+    Lectures
+  </a>
+</li>
+<li>
+  <a href="assignments.html">
+    <span class="fa fa-paperclip fa-1x"></span>
+     
+    Assignments
+  </a>
+</li>
+<li>
+  <a href="resources.html">
+    <span class="fa fa-list"></span>
+     
+    Resources
+  </a>
+</li>
+<li>
+  <a href="appointments.html">
+    <span class="fa fa-list"></span>
+     
+    Appointments
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-hand-spock-o"></span>
+     
+    Contact
+  </a>
+</li>
+<li>
+  <a href="https://github.com/gge-ucd/R-DAVIS">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Coding Practice</h1>
+
+</div>
+
+
+<p>Assignments are designed to reinforce the code/lessons covered that week and provide you a chance to practice working with GitHub. Assignments are to be completed in your local project (on your computer) and pushed up to your GitHub repository for instructors to review by the following Wednesday. For example, homework for Week 1 (which is on September 23) should be submitted by September 29. That said, these due dates are largely suggestive as a way to help you prioritize and stay caught up as a group – if you need, or want, more time, take it. At the end of the quarter, we will simply look over the tasks you have completed in concert with the reflection you submit.</p>
+<p><br></p>
+<div id="assignments" class="section level2 tabset tabset-fade tabset-pills">
+<h2 class="tabset tabset-fade tabset-pills">Assignments</h2>
+<div id="week-1" class="section level3">
+<h3><small>Week 1</small></h3>
+<p><br> Because this class caters to a range of experiences, we would like you to identify how it is you plan on earning credit for this course. Before next week, please complete <a href="https://forms.gle/3yD4oCYfgwB1M369A">this form</a> to select and describe your plans.</p>
+</div>
+<div id="week-2" class="section level3">
+<h3><small>Week 2</small></h3>
+<p>In Week 2’s homework we are going to practice subsetting and manipulating vectors.</p>
+<p>First, open your r-davis-in-class-project-YourName and <code>pull</code>. Remember, we always want to start working on a github project by pulling, even if we are sure nothing has changed (believe me, this small step will save you lots of headaches).</p>
+<p>Second, open a new script in your r-davis-in-class-project-YourName and save it to your <code>scripts</code> folder. Call this new script <code>week_2_homework</code>.</p>
+<p>Copy and paste the chunk of code below into your new <code>week_2_homework</code> script and run it. This chunk of code will create the vector you will use in your homework today. Check in your environment to see what it looks like. What do you think each line of code is doing?</p>
+<pre class="r"><code>set.seed(15)
+hw2 &lt;- runif(50, 4, 50)
+hw2 &lt;- replace(hw2, c(4,12,22,27), NA)
+hw2</code></pre>
+<pre><code>##  [1] 31.697246 12.972021 48.457102        NA 20.885307 49.487524 41.498897 15.682545 35.612619 42.245735
+## [11]  8.814791        NA 27.418158 36.504914 43.666428 42.722117 24.582411 48.374680 10.494605 39.728776
+## [21] 40.971460        NA 20.447903  6.668049 30.024323 34.314318        NA 10.825658 46.676823 25.913006
+## [31] 26.933701 15.810164 26.616794  9.403891 27.589087 34.262403  9.591257 27.733004 17.877330 38.975078
+## [41] 46.102046 25.041810 46.369401 15.919465 19.813791 23.741937 19.192818 38.630297 42.819312  4.500130</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>Take your <code>hw2</code> vector and removed all the NAs then select all the numbers between 14 and 38 inclusive, call this vector <code>prob1</code>.</p></li>
+<li><p>Multiply each number in the <code>prob1</code> vector by 3 to create a new vector called <code>times3</code>. Then add 10 to each number in your <code>times3</code> vector to create a new vector called <code>plus10</code>.</p></li>
+<li><p>Select every other number in your <code>plus10</code> vector by selecting the first number, not the second, the third, not the fourth, etc. If you’ve worked through these three problems in order, you should now have a vector that is 12 numbers long that looks <strong>exactly</strong> like this one:</p></li>
+</ol>
+<pre class="r"><code>final</code></pre>
+<pre><code>##  [1] 105.09174  57.04763  92.25447  83.74723 100.07297  87.73902  57.43049  92.76726  93.19901  85.12543
+## [11]  69.44137  67.57845</code></pre>
+<p>Finally, save your script and push all your changes to your github account.</p>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
+<pre class="r"><code>prob1 &lt;- hw2[!is.na(hw2)] #removing the NAs
+
+prob1 &lt;- prob1[prob1 &gt;14 &amp; prob1 &lt; 38] #only selecting numbers between 14 and 38
+
+times3 &lt;- prob1 * 3 #multiplying by 3
+
+plus10 &lt;- times3 + 10 #adding 10 to the whole vector 
+
+final &lt;- plus10[c(TRUE, FALSE)] #selecting every other number using logical subsetting</code></pre>
+</details>
+</div>
+<div id="week-3" class="section level3">
+<h3><small>Week 3</small></h3>
+<p>Homework this week will be playing with the <code>surveys</code> data we worked on in class. First things first, open your r-davis-in-class-project and pull. Then create a new script in your <code>scripts</code> folder called <code>week_3_homework.R</code>.</p>
+<p>Load your <code>survey</code> data frame with the read.csv() function. Create a new data frame called <code>surveys_base</code> with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to factors. Explore these variables and try to explain why a factor is different from a character. Remove all rows where there is an NA in the weight column.</p>
+<p>CHALLENGE: Create a second data frame called <code>challenge_base</code> that only consists of individuals from your <code>surveys_base</code> data frame with weights greater than 150g.</p>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the the homework
+</summary>
+<pre class="r"><code>#PROBLEM 1
+
+surveys &lt;- read.csv(&quot;data/portal_data_joined.csv&quot;) #reading the data in
+
+colnames(surveys) #a list of the column names </code></pre>
+<pre><code>##  [1] &quot;record_id&quot;       &quot;month&quot;           &quot;day&quot;             &quot;year&quot;            &quot;plot_id&quot;        
+##  [6] &quot;species_id&quot;      &quot;sex&quot;             &quot;hindfoot_length&quot; &quot;weight&quot;          &quot;genus&quot;          
+## [11] &quot;species&quot;         &quot;taxa&quot;            &quot;plot_type&quot;</code></pre>
+<pre class="r"><code>surveys_new &lt;- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
+
+surveys_new$species_id &lt;- as.character(surveys_new$species_id) #converting factor data to character
+
+surveys_new$plot_type &lt;- as.character(surveys_new$plot_type) #converting factor data to character 
+
+surveys_new &lt;- surveys_new[complete.cases(surveys_new), ] #selecting only the ROWS that have complete cases (no NAs) **Notice the comma was needed for this to work**
+
+#CHALLENGE
+challenge_base &lt;- surveys_new[(surveys_new[, 2]&gt;150),] #selecting just the weights (column 2) that are greater than 150</code></pre>
+</details>
+<p><br></p>
+</div>
+<div id="week-4" class="section level3">
+<h3><small>Week 4</small></h3>
+<p>By now you should be in the rhythm of pulling from your git repository and then creating new homework script. This week the homework will review data manipulation in the tidyverse.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a tibble named <code>surveys</code> from the portal_data_joined.csv file.</p></li>
+<li><p>Subset <code>surveys</code> to keep rows with weight between 30 and 60, and print out the first 6 rows.</p></li>
+<li><p>Create a new tibble showing the maximum weight for each species + sex combination and name it <code>biggest_critters</code>. Sort the tibble to take a look at the biggest and smallest species + sex combinations. HINT: it’s easier to calculate max if there are no NAs in the dataframe…</p></li>
+<li><p>Try to figure out where the NA weights are concentrated in the data- is there a particular species, taxa, plot, or whatever, where there are lots of NA values? There isn’t necessarily a right or wrong answer here, but manipulate surveys a few different ways to explore this. Maybe use <code>tally</code> and <code>arrange</code> here.</p></li>
+<li><p>Take <code>surveys</code>, remove the rows where weight is NA and add a column that contains the average weight of each species+sex combination to the <strong>full</strong> <code>surveys</code> dataframe. Then get rid of all the columns except for species, sex, weight, and your new average weight column. Save this tibble as <code>surveys_avg_weight</code>.</p></li>
+<li><p>Take <code>surveys_avg_weight</code> and add a new column called <code>above_average</code> that contains logical values stating whether or not a row’s weight is above average for its species+sex combination (recall the new column we made for this tibble).</p></li>
+</ol>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the homework
+</summary>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
+## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
+## ✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>#1
+surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<pre><code>## Rows: 34786 Columns: 13</code></pre>
+<pre><code>## ── Column specification ───────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): species_id, sex, genus, species, taxa, plot_type
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>#2
+surveys %&gt;% 
+  filter(weight &gt; 30 &amp; weight &lt; 60)</code></pre>
+<pre><code>## # A tibble: 14,730 × 13
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus     species  taxa  
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt; 
+##  1      5966     5    22  1982       2 NL         F                  32     40 Neotoma   albigula Rodent
+##  2       226     9    13  1977       2 DM         M                  37     51 Dipodomys merriami Rodent
+##  3       233     9    13  1977       2 DM         M                  25     44 Dipodomys merriami Rodent
+##  4       245    10    16  1977       2 DM         M                  37     39 Dipodomys merriami Rodent
+##  5       251    10    16  1977       2 DM         M                  36     49 Dipodomys merriami Rodent
+##  6       257    10    16  1977       2 DM         M                  37     47 Dipodomys merriami Rodent
+##  7       259    10    16  1977       2 DM         M                  36     41 Dipodomys merriami Rodent
+##  8       268    10    16  1977       2 DM         F                  36     55 Dipodomys merriami Rodent
+##  9       346    11    12  1977       2 DM         F                  37     36 Dipodomys merriami Rodent
+## 10       350    11    12  1977       2 DM         M                  37     47 Dipodomys merriami Rodent
+## # … with 14,720 more rows, and 1 more variable: plot_type &lt;chr&gt;</code></pre>
+<pre class="r"><code>#3
+biggest_critters &lt;- surveys %&gt;% 
+  filter(!is.na(weight)) %&gt;% 
+  group_by(species_id, sex) %&gt;% 
+  summarise(max_weight = max(weight))</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;species_id&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code>biggest_critters %&gt;% arrange(max_weight)</code></pre>
+<pre><code>## # A tibble: 64 × 3
+## # Groups:   species_id [25]
+##    species_id sex   max_weight
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
+##  1 PF         &lt;NA&gt;           8
+##  2 BA         M              9
+##  3 RO         M             11
+##  4 RO         F             13
+##  5 RF         M             15
+##  6 RM         &lt;NA&gt;          16
+##  7 BA         F             18
+##  8 PE         &lt;NA&gt;          18
+##  9 PI         &lt;NA&gt;          18
+## 10 PP         &lt;NA&gt;          18
+## # … with 54 more rows</code></pre>
+<pre class="r"><code>biggest_critters %&gt;% arrange(desc(max_weight))</code></pre>
+<pre><code>## # A tibble: 64 × 3
+## # Groups:   species_id [25]
+##    species_id sex   max_weight
+##    &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;
+##  1 NL         M            280
+##  2 NL         F            274
+##  3 NL         &lt;NA&gt;         243
+##  4 SF         F            199
+##  5 DS         F            190
+##  6 DS         M            170
+##  7 DS         &lt;NA&gt;         152
+##  8 SH         F            140
+##  9 SH         &lt;NA&gt;         130
+## 10 SS         M            130
+## # … with 54 more rows</code></pre>
+<pre class="r"><code>#4
+surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(species) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 37 × 2
+##    species          n
+##    &lt;chr&gt;        &lt;int&gt;
+##  1 harrisi        437
+##  2 merriami       334
+##  3 bilineata      303
+##  4 spilosoma      246
+##  5 spectabilis    160
+##  6 ordii          123
+##  7 albigula       100
+##  8 penicillatus    99
+##  9 torridus        89
+## 10 baileyi         81
+## # … with 27 more rows</code></pre>
+<pre class="r"><code>surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(plot_id) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 24 × 2
+##    plot_id     n
+##      &lt;dbl&gt; &lt;int&gt;
+##  1      13   160
+##  2      15   155
+##  3      14   152
+##  4      20   152
+##  5      12   144
+##  6      17   144
+##  7      11   119
+##  8       9   118
+##  9       2   117
+## 10      21   106
+## # … with 14 more rows</code></pre>
+<pre class="r"><code>surveys %&gt;% 
+  filter(is.na(weight)) %&gt;% 
+  group_by(year) %&gt;% 
+  tally() %&gt;% 
+  arrange(desc(n))</code></pre>
+<pre><code>## # A tibble: 26 × 2
+##     year     n
+##    &lt;dbl&gt; &lt;int&gt;
+##  1  1977   221
+##  2  1998   195
+##  3  1987   151
+##  4  1988   130
+##  5  1978   124
+##  6  1982   123
+##  7  1989   123
+##  8  1991   108
+##  9  2002   108
+## 10  1992   106
+## # … with 16 more rows</code></pre>
+<pre class="r"><code>#5
+surveys_avg_weight &lt;- surveys %&gt;% 
+  filter(!is.na(weight)) %&gt;% 
+  group_by(species_id, sex) %&gt;% 
+  mutate(avg_weight = mean(weight)) %&gt;% 
+  select(species_id, sex, weight, avg_weight)
+
+surveys_avg_weight</code></pre>
+<pre><code>## # A tibble: 32,283 × 4
+## # Groups:   species_id, sex [64]
+##    species_id sex   weight avg_weight
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+##  1 NL         M        218       166.
+##  2 NL         M        204       166.
+##  3 NL         M        200       166.
+##  4 NL         M        199       166.
+##  5 NL         M        197       166.
+##  6 NL         M        218       166.
+##  7 NL         M        166       166.
+##  8 NL         M        184       166.
+##  9 NL         M        206       166.
+## 10 NL         F        274       154.
+## # … with 32,273 more rows</code></pre>
+<pre class="r"><code>#6
+surveys_avg_weight &lt;- surveys_avg_weight %&gt;% 
+  mutate(above_average = weight &gt; avg_weight)
+
+surveys_avg_weight</code></pre>
+<pre><code>## # A tibble: 32,283 × 5
+## # Groups:   species_id, sex [64]
+##    species_id sex   weight avg_weight above_average
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
+##  1 NL         M        218       166. TRUE         
+##  2 NL         M        204       166. TRUE         
+##  3 NL         M        200       166. TRUE         
+##  4 NL         M        199       166. TRUE         
+##  5 NL         M        197       166. TRUE         
+##  6 NL         M        218       166. TRUE         
+##  7 NL         M        166       166. TRUE         
+##  8 NL         M        184       166. TRUE         
+##  9 NL         M        206       166. TRUE         
+## 10 NL         F        274       154. TRUE         
+## # … with 32,273 more rows</code></pre>
+</details>
+</div>
+<div id="week-5" class="section level3">
+<h3><small>Week 5</small></h3>
+<p>This week’s questions will have us practicing pivots and conditional statements.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a tibble named <code>surveys</code> from the portal_data_joined.csv file. Then manipulate <code>surveys</code> to create a new dataframe called <code>surveys_wide</code> with a column for genus and a column named after every plot type, with each of these columns containing the mean hindfoot length of animals in that plot type and genus. So every row has a genus and then a mean hindfoot length value for every plot type. The dataframe should be sorted by values in the Control plot type column. This question will involve quite a few of the functions you’ve used so far, and it may be useful to sketch out the steps to get to the final result.</p></li>
+<li><p>Using the original <code>surveys</code> dataframe, use the two different functions we laid out for conditional statements, ifelse() and case_when(), to calculate a new weight category variable called <code>weight_cat</code>. For this variable, define the rodent weight into three categories, where “small” is less than or equal to the 1st quartile of weight distribution, “medium” is between (but not inclusive) the 1st and 3rd quartile, and “large” is any weight greater than or equal to the 3rd quartile. (Hint: the summary() function on a column summarizes the distribution). For ifelse() and case_when(), compare what happens to the weight values of NA, depending on how you specify your arguments.</p></li>
+</ol>
+<p>BONUS: How might you soft code the values (i.e. not type them in manually) of the 1st and 3rd quartile into your conditional statements in question 2?</p>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers for the homework
+</summary>
+<pre class="r"><code># 1
+library(tidyverse)
+surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
+<pre><code>## Rows: 34786 Columns: 13</code></pre>
+<pre><code>## ── Column specification ───────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): species_id, sex, genus, species, taxa, plot_type
+## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>surveys_wide &lt;- surveys %&gt;% 
+  filter(!is.na(hindfoot_length)) %&gt;% 
+  group_by(genus, plot_type) %&gt;% 
+  summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
+  pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
+  arrange(Control)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
+<pre class="r"><code># 2
+summary(surveys$weight)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    4.00   20.00   37.00   42.67   48.00  280.00    2503</code></pre>
+<pre class="r"><code># The final &quot;else&quot; argument here, where I used the T ~ &quot;large&quot; applies even to NAs, which is not something we want
+surveys %&gt;% 
+  mutate(weight_cat = case_when(
+    weight &gt;= 20.00 ~ &quot;small&quot;,
+    weight &gt; 20.00 &amp; weight &lt; 48.00 ~ &quot;medium&quot;,
+    T ~ &quot;large&quot;
+  ))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species  taxa  
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; 
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula Rodent
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula Rodent
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula Rodent
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+## # … with 34,776 more rows, and 2 more variables: plot_type &lt;chr&gt;, weight_cat &lt;chr&gt;</code></pre>
+<pre class="r"><code># To overcome this, case_when() allows us to not even use an &quot;else&quot; argument, and just specify the final argument to reduce confusion. This leaves NAs as is
+surveys %&gt;% 
+  mutate(weight_cat = case_when(
+    weight &gt;= 20.00 ~ &quot;small&quot;,
+    weight &gt; 20.00 &amp; weight &lt; 48.00 ~ &quot;medium&quot;,
+    weight &gt;= 48.00 ~ &quot;large&quot;
+  ))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species  taxa  
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; 
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula Rodent
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula Rodent
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula Rodent
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+## # … with 34,776 more rows, and 2 more variables: plot_type &lt;chr&gt;, weight_cat &lt;chr&gt;</code></pre>
+<pre class="r"><code># The &quot;else&quot; argument in ifelse() does not include NAs when specified, which is useful. The shortcoming, however, is that ifelse() does not allow you to leave out a final else argument, which means it is really important to always check the work on what that last argument assigns to.
+surveys %&gt;% 
+  mutate(weight_cat = ifelse(weight &gt;= 20.00, &quot;small&quot;,
+                             ifelse(weight &gt; 20.00 &amp; weight &lt; 48.00, &quot;medium&quot;,&quot;large&quot;)))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species  taxa  
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; 
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula Rodent
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula Rodent
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula Rodent
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+## # … with 34,776 more rows, and 2 more variables: plot_type &lt;chr&gt;, weight_cat &lt;chr&gt;</code></pre>
+<pre class="r"><code># BONUS:
+summ &lt;- summary(surveys$weight)
+# Remember our indexing skills from the first weeks? Play around with single and double bracketing to see how it can extract values
+summ[[2]]</code></pre>
+<pre><code>## [1] 20</code></pre>
+<pre class="r"><code>summ[[5]]</code></pre>
+<pre><code>## [1] 48</code></pre>
+<pre class="r"><code># Then you can next these into your code
+surveys %&gt;% 
+  mutate(weight_cat = case_when(
+    weight &gt;= summ[[2]] ~ &quot;small&quot;,
+    weight &gt; summ[[2]] &amp; weight &lt; summ[[5]] ~ &quot;medium&quot;,
+    weight &gt;= summ[[5]] ~ &quot;large&quot;
+  ))</code></pre>
+<pre><code>## # A tibble: 34,786 × 14
+##    record_id month   day  year plot_id species_id sex   hindfoot_length weight genus   species  taxa  
+##        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; 
+##  1         1     7    16  1977       2 NL         M                  32     NA Neotoma albigula Rodent
+##  2        72     8    19  1977       2 NL         M                  31     NA Neotoma albigula Rodent
+##  3       224     9    13  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  4       266    10    16  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  5       349    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  6       363    11    12  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  7       435    12    10  1977       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  8       506     1     8  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+##  9       588     2    18  1978       2 NL         M                  NA    218 Neotoma albigula Rodent
+## 10       661     3    11  1978       2 NL         &lt;NA&gt;               NA     NA Neotoma albigula Rodent
+## # … with 34,776 more rows, and 2 more variables: plot_type &lt;chr&gt;, weight_cat &lt;chr&gt;</code></pre>
+</details>
+</div>
+<div id="week-6" class="section level3">
+<h3><small>Week 6</small></h3>
+<p>For our week six homework, we are going to be practicing the skills we learned with ggplot during class. You will be happy to know that we are going to be using a brand new data set called <code>gapminder</code>. This data set is looking at statistics for a few different counties including population, GDP per capita, and life expectancy. Download the data using the code below. Remember, this code is looking for a folder called <code>data</code> to put the .csv in, so make sure you have a folder named <code>data</code>, or modify the code to the correct folder name.</p>
+<pre class="r"><code>library(tidyverse)
+
+gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
+<pre><code>## Rows: 1704 Columns: 6</code></pre>
+<pre><code>## ── Column specification ───────────────────────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (2): country, continent
+## dbl (4): year, pop, lifeExp, gdpPercap</code></pre>
+<pre><code>## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<ol style="list-style-type: decimal">
+<li><p>First calculates mean life expectancy on each continent. Then create a plot that shows how life expectancy has changed over time in each continent. Try to do this all in one step using pipes! (aka, try not to create intermediate dataframes)</p></li>
+<li><p>Look at the following code and answer the following questions. What do you think the <code>scale_x_log10()</code> line of code is achieving? What about the <code>geom_smooth()</code> line of code?</p></li>
+</ol>
+<p><em>Challenge!</em> Modify the above code to size the points in proportion to the population of the country. <strong>Hint:</strong> Are you translating data to a visual feature of the plot?</p>
+<p><strong>Hint:</strong> There’s no cost to tinkering! Try some code out and see what happens with or without particular elements.</p>
+<pre class="r"><code>ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent), size = .25) + 
+    scale_x_log10() +
+    geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
+    theme_bw()</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Create a boxplot that shows the life expectency for Brazil, China, El Salvador, Niger, and the United States, with the data points in the backgroud using geom_jitter. Label the X and Y axis with “Country” and “Life Expectancy” and title the plot “Life Expectancy of Five Countries”.</li>
+</ol>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers!
+</summary>
+<pre class="r"><code>library(tidyverse)
+
+#PROBLEM 1:
+
+gapminder %&gt;%
+  group_by(continent, year) %&gt;% 
+  summarize(mean_lifeExp = mean(lifeExp)) %&gt;% #calculating the mean life expectancy for each continent and year
+  ggplot()+
+  geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
+  geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;continent&#39;. You can override using the `.groups` argument.</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
+
+
+
+#PROBLEM 2:
+
+#challenge answer
+ggplot(gapminder, aes(x = gdpPercap, y = lifeExp)) +
+    geom_point(aes(color = continent, size = pop)) + 
+    scale_x_log10() +
+    geom_smooth(method = &#39;lm&#39;, color = &#39;black&#39;, linetype = &#39;dashed&#39;) +
+    theme_bw()</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<pre class="r"><code>#PROBLEM 3: 
+
+countries &lt;- c(&quot;Brazil&quot;, &quot;China&quot;, &quot;El Salvador&quot;, &quot;Niger&quot;, &quot;United States&quot;) #create a vector with just the countries we are interested in
+
+gapminder %&gt;% 
+  filter(country %in% countries) %&gt;% 
+  ggplot(aes(x = country, y = lifeExp))+
+  geom_boxplot() +
+  geom_jitter(alpha = 0.3, color = &quot;blue&quot;)+
+  theme_minimal() +
+  ggtitle(&quot;Life Expectancy of Five Countries&quot;) + #title the figure
+  theme(plot.title = element_text(hjust = 0.5)) + #centered the plot title
+  xlab(&quot;Country&quot;) + ylab(&quot;Life Expectancy&quot;) #how to change axis names</code></pre>
+<img src="assignments_files/figure-html/unnamed-chunk-10-3.png" width="672" />
+</details>
+</div>
+<div id="week-7" class="section level3">
+<h3><small>Week 7</small></h3>
+<p>For week 7, we’re going to be working on 2 critical <code>ggplot</code> skills: recreating a graph from a dataset and <strong>googling stuff</strong>.</p>
+<p>Our goal will be to make this final graph using the <code>gapminder</code> dataset:</p>
+<p><img src="assignments_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
+<p>The x axis labels are all scrunched up because we can’t make the image bigger on the webpage, but if you make it and then zoom it bigger in RStudio it looks much better.</p>
+<p>We’ll touch on some intermediate steps here, since it might take quite a few steps to get from start to finish. Here are some things to note:</p>
+<ol style="list-style-type: decimal">
+<li><p>To get the population difference between 2002 and 2007 for each country, it would probably be easiest to have a country in each row and a column for 2002 population and a column for 2007 population.</p></li>
+<li><p>Notice the order of countries within each facet. You’ll have to look up how to order them in this way.</p></li>
+<li><p>Also look at how the axes are different for each facet. Try looking through <code>?facet_wrap</code> to see if you can figure this one out.</p></li>
+<li><p>The color scale is different from the default- feel free to try out other color scales, just don’t use the defaults!</p></li>
+<li><p>The theme here is different from the default in a few ways, again, feel free to play around with other non-default themes.</p></li>
+<li><p>The axis labels are rotated! Here’s a hint: <code>angle = 45, hjust = 1</code>. It’s up to you (and Google) to figure out where this code goes!</p></li>
+<li><p>Is there a legend on this plot?</p></li>
+</ol>
+<p>This lesson should illustrate a key reality of making plots in R, one that applies as much to experts as beginners: 10% of your effort gets the plot 90% right, and 90% of the effort is getting the plot perfect. <code>ggplot</code> is incredibly powerful for exploratory analysis, as you can get a good plot with only a few lines of code. It’s also extremely flexible, allowing you to tweak nearly everything about a plot to get a highly polished final product, but these little tweaks can take a lot of time to figure out!</p>
+<p>So if you spend most of your time on this lesson googling stuff, you’re not alone!</p>
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
+<pre class="r"><code>library(tidyverse)
+
+gapminder &lt;- read_csv(&quot;data/gapminder.csv&quot;)
+
+pg &lt;- gapminder %&gt;% 
+  select(country, year, pop, continent) %&gt;% 
+  filter(year &gt; 2000) %&gt;% 
+  pivot_wider(names_from = year, values_from = pop) %&gt;% 
+  mutate(pop_change_0207 = `2007` - `2002`)
+
+pg %&gt;% 
+  filter(continent != &quot;Oceania&quot;) %&gt;% 
+  ggplot(aes(x = reorder(country, pop_change_0207), y = pop_change_0207)) +
+  geom_col(aes(fill = continent)) +
+  facet_wrap(~continent, scales = &quot;free&quot;) +
+  theme_bw() +
+  scale_fill_viridis_d() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+        legend.position = &quot;none&quot;) +
+  xlab(&quot;Country&quot;) +
+  ylab(&quot;Change in Population Between 2002 and 2007&quot;)</code></pre>
+</details>
+</div>
+<div id="week-9" class="section level3">
+<h3><small>Week 9</small></h3>
+<p>Let’s look at some real data from Mauna Loa to try to format and plot. These meteorological data from Mauna Loa were collected every minute for the year 2001. <em>This dataset has 459,769 observations for 9 different metrics of wind, humidity, barometric pressure, air temperature, and precipitation.</em> Download this dataset <a href="data/mauna_loa_met_2001_minute.rda">here</a>. Save it to your <code>data/</code> folder. Alternatively, you can read the CSV directly from the R-DAVIS Github: <code>mloa &lt;- read_csv("https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv")</code></p>
+<p>Use the <a href="data/mauna_loa_README.txt">README</a> file associated with the Mauna Loa dataset to determine in what time zone the data are reported, and how missing values are reported in each column. With the <code>mloa</code> data.frame, remove observations with missing values in rel_humid, temp_C_2m, and windSpeed_m_s. Generate a column called “datetime” using the year, month, day, hour24, and min columns. Next, create a column called “datetimeLocal” that converts the datetime column to Pacific/Honolulu time (<em>HINT</em>: look at the lubridate function called <code>with_tz()</code>). Then, use dplyr to calculate the mean hourly temperature each month using the temp_C_2m column and the datetimeLocal columns. (<em>HINT</em>: Look at the lubridate functions called <code>month()</code> and <code>hour()</code>). Finally, make a ggplot scatterplot of the mean monthly temperature, with points colored by local hour.</p>
+Answers:
+<details>
+<summary>
+<strong>DO NOT OPEN</strong> until you are ready to see the answers
+</summary>
+<pre class="r"><code>library(tidyverse)
+library(lubridate)
+## Data import
+mloa &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mauna_loa_met_2001_minute.csv&quot;)
+
+mloa2 = mloa %&gt;%
+  # Remove NA&#39;s
+  filter(rel_humid != -99) %&gt;%
+  filter(temp_C_2m != -999.9) %&gt;%
+  filter(windSpeed_m_s != -999.9) %&gt;%
+  # Create datetime column (README indicates time is in UTC)
+  mutate(datetime = ymd_hm(paste0(year,&quot;-&quot;, 
+                                  month, &quot;-&quot;, 
+                                  day,&quot; &quot;, 
+                                  hour24, &quot;:&quot;, 
+                                  min), 
+                           tz = &quot;UTC&quot;)) %&gt;%
+  # Convert to local time
+  mutate(datetimeLocal = with_tz(datetime, tz = &quot;Pacific/Honolulu&quot;))
+
+## Aggregate and plot
+mloa2 %&gt;%
+  # Extract month and hour from local time column
+  mutate(localMon = month(datetimeLocal, label = TRUE),
+         localHour = hour(datetimeLocal)) %&gt;%
+  # Group by local month and hour
+  group_by(localMon, localHour) %&gt;%
+  # Calculate mean temperature
+  summarize(meantemp = mean(temp_C_2m)) %&gt;%
+  # Plot
+  ggplot(aes(x = localMon,
+             y = meantemp)) +
+  # Color points by local hour
+  geom_point(aes(col = localHour)) +
+  # Use a nice color ramp
+  scale_color_viridis_c() +
+  # Label axes, add a theme
+  xlab(&quot;Month&quot;) +
+  ylab(&quot;Mean temperature (degrees C)&quot;) +
+  theme_classic()</code></pre>
+</details>
+</div>
+<div id="week-10" class="section level3">
+<h3><small>Week 10</small></h3>
+<p><em>Forthcoming</em></p>
+</div>
+<div id="final-assignment" class="section level3">
+<h3><small>Final assignment</small></h3>
+<p><em>Forthcoming</em></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
