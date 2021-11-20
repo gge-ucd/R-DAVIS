@@ -7,15 +7,18 @@ For this project you are going to be using some data sets about flights departin
 You should download the [flights](data/nyc_13_flights_small.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files. (Remember to put them into your data folder of your RProject to make reading them in easier!)
 
 Hint! You may have to combine dataframes to answer some questions. Remember our `join` family of functions? You should be able to use the `join` type we covered in class. The `flights` dataset is the biggest one, so you should probably join the other data onto this one, meaning `flights` would be the first (of "left") argument in the left join. You can't join 3 tables together at once, but you can join tables `a` and `b` to make table `ab`, then join `ab` and `c` to get table `abc` which contains the columns from all 3 original tables.
-
+For each plot, use `ggsave` to put your ggplot objects into a **new folder** you create called "plots".
 
 #### Things to Include
 1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel.
 2. Create a figure that has date on the x axis and each day's mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). 
 3. Create a dataframe with these columns: date (year, month and day), mean_temp, where each row represents the airport, based on airport code. Save this is a new csv into you `data` folder called `mean_temp_by_origin.csv`.
-4. Make a combination boxplot/scatterplot showing departure delay by manufacturer, and add a facet for whether or not it's raining. Hint: you'll have to make a new column to classify "raining" or "not raining", the exact method is up to you.
+4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going); use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times by carrier.
+5. Write a second function that converts the 24 hour time codes used in the dataframe to 12 hour time codes (i.e., AM and PM). (hint: you'll again want to use some sort of conditional, logical evaluation to identify AM and PM times, and you'll want to use the paste() function to add 'pm' or 'am' as appropriate.). 
+6. Save both functions in a new script called customFunctions.R.
 
-For each plot, use `ggsave` to put your ggplot objects into a **new folder** you create called "plots".
+
+
 
 
 ```{r}
