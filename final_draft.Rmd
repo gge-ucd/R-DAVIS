@@ -11,7 +11,7 @@ Hint! You may have to combine dataframes to answer some questions. Remember our 
 
 #### Things to Include
 1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel.
-2. Create a figure that has date on the x axis and mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). 
+2. Create a figure that has date on the x axis and each day's mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). 
 3. Create a dataframe with these columns: date (year, month and day), mean_temp, where each row represents the airport, based on airport code. Save this is a new csv into you `data` folder called `mean_temp_by_origin.csv`.
 4. Make a combination boxplot/scatterplot showing departure delay by manufacturer, and add a facet for whether or not it's raining. Hint: you'll have to make a new column to classify "raining" or "not raining", the exact method is up to you.
 
@@ -51,7 +51,9 @@ df %>%
   filter(dep_delay > 0) %>% 
   filter(month %in% c(9:12)) %>% 
   mutate(date = ymd(paste(year, month, day, sep = "-"))) %>% 
-  ggplot(aes(x = date, y = dep_delay)) + 
+  mutate(mean_dep_delay = mean(dep_delay, na.rm = T)) %>% 
+  unique() %>% 
+  ggplot(aes(x = date, y = mean_dep_delay)) + 
   geom_point() +
   facet_wrap(~carrier)
   
