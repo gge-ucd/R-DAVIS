@@ -970,13 +970,27 @@ mloa2 %&gt;%
   theme_classic()</code></pre>
 </details>
 </div>
-<div id="week-10" class="section level3">
-<h3><small>Week 10</small></h3>
-<p><em>Forthcoming</em></p>
-</div>
 <div id="final-assignment" class="section level3">
 <h3><small>Final assignment</small></h3>
-<p><em>Forthcoming</em></p>
+<p>Alright folks, it’s time for the final assignment of the quarter. The goal here is to generate an script that combines the skills we’ve learned throughout the quarter to produce several outputs. <br></p>
+<div id="the-data" class="section level4">
+<h4>The Data</h4>
+<p>For this project you are going to be using some data sets about flights departing New York City in 2013. There are <strong>several</strong> CSV files you will need to use (as with any CSVs you’re handed, they are likely imperfect and incomplete). You should download the <a href="data/nyc_13_flights_small.csv">flights</a>, <a href="data/nyc_13_planes.csv">planes</a>, and <a href="data/nyc_13_weather.csv">weather</a> CSV files. (Remember to put them into your data folder of your RProject to make reading them in easier!)</p>
+<p>Hint: You may have to combine dataframes to answer some questions. Remember our <code>join</code> family of functions? You should be able to use the <code>join</code> type we covered in class. The <code>flights</code> dataset is the biggest one, so you should probably join the other data onto this one, meaning <code>flights</code> would be the first (of “left”) argument in the left join. You can’t join 3 tables together at once, but you can join tables <code>a</code> and <code>b</code> to make table <code>ab</code>, then join <code>ab</code> and <code>c</code> to get table <code>abc</code> which contains the columns from all 3 original tables.</p>
+</div>
+<div id="things-to-include" class="section level4">
+<h4>Things to Include</h4>
+<ol style="list-style-type: decimal">
+<li>Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a <code>geom_</code> that will plot a simple <code>y ~ x</code> regression line for you, but you might have to use an argument to make sure it’s a regular <strong>l</strong>inear <strong>m</strong>odel. Use <code>ggsave</code> to save your ggplot objects into a <strong>new folder</strong> you create called “plots”.</li>
+<li>Create a figure that has date on the x axis and each day’s mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Again, save your final product into the “plot” folder.</li>
+<li>Create a dataframe with these columns: date (year, month and day), mean_temp, where each row represents the airport, based on airport code. Save this is a new csv into you <code>data</code> folder called <code>mean_temp_by_origin.csv</code>.</li>
+<li>Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it’s going to require some sort of conditional setting in the function that determines which direction the conversion is going). Use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. Save this function into a script called “customFunctions.R” in your scripts/code folder.</li>
+<li>Below is the plot we generated from the new data in Q4. (Base code: <code>ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +   geom_boxplot()</code>). The goal is to visualize delays by carrier. Do (at least) 5 things to improve this plot by changing, adding, or subtracting to this plot. The sky’s the limit here, remember we often reduce data to more succinctly communicate things.</li>
+</ol>
+<pre><code>## Warning: Computation failed in `stat_boxplot()`:
+## missing values and NaN&#39;s not allowed if &#39;na.rm&#39; is FALSE</code></pre>
+<p><img src="assignments_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
 </div>
 </div>
 

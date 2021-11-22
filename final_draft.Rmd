@@ -13,10 +13,13 @@ Hint: You may have to combine dataframes to answer some questions. Remember our 
 2. Create a figure that has date on the x axis and each day's mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Again, save your final product into the "plot" folder.
 3. Create a dataframe with these columns: date (year, month and day), mean_temp, where each row represents the airport, based on airport code. Save this is a new csv into you `data` folder called `mean_temp_by_origin.csv`.
 4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going). Use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. Save this function into a script called "customFunctions.R" in your scripts/code folder.
+5. Below is the plot we generated from the new data in Q4. (Base code: 
+`ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +
+  geom_boxplot()`). The goal is to visualize delays by carrier. Do (at least) 5 things to improve this plot by changing, adding, or subtracting to this plot.
 
 
 
-```{r}
+```{r, echo = F, results = F}
 library(tidyverse)
 #flight <- read.csv("data/nyc_13_flights.csv") 
 #flight <- flight[sample(1:nrow(flight), size = 50000),]
@@ -61,7 +64,7 @@ df %>%
   summarize(mean_temp = mean(temp, na.rm = T)) %>% 
   pivot_wider(names_from = origin, values_from = mean_temp)
 
-#4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going); use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times , colored by carrier. Adjust the axis so that you don't see the outlier delays of more than 10 hours.
+#4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going); use this function to convert departure delay (currently in minutes) to hours.
 
 min2hr <- function(hr = NULL, min = NULL, unit){
 if (unit == "minute"){
@@ -95,10 +98,12 @@ OR
 
 df$dep_delay_hrs <- map(df$dep_delay, ~ min2hr(.x, unit = "minute"))
 
-ggplot(df, aes(x = dep_delay_hrs, fill = carrier)) +
-  geom_boxplot()
-
-  
 
 ```
+
+```{r, echo = F}
+ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +
+  geom_boxplot()
+```
+
 
