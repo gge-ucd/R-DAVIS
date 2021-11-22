@@ -987,8 +987,7 @@ mloa2 %&gt;%
 <li>Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it’s going to require some sort of conditional setting in the function that determines which direction the conversion is going). Use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. Save this function into a script called “customFunctions.R” in your scripts/code folder.</li>
 <li>Below is the plot we generated from the new data in Q4. (Base code: <code>ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +   geom_boxplot()</code>). The goal is to visualize delays by carrier. Do (at least) 5 things to improve this plot by changing, adding, or subtracting to this plot. The sky’s the limit here, remember we often reduce data to more succinctly communicate things.</li>
 </ol>
-<pre><code>## Warning: Computation failed in `stat_boxplot()`:
-## missing values and NaN&#39;s not allowed if &#39;na.rm&#39; is FALSE</code></pre>
+<pre><code>## Warning: Removed 1228 rows containing non-finite values (stat_boxplot).</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>

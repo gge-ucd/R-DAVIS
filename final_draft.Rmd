@@ -94,7 +94,7 @@ df$dep_delay_hrs <- NA
 for(i in 1:nrow(df)){
   df$dep_delay_hrs[i] <- min2hr(df$dep_delay[i], unit = "minute")
 }
-OR
+#OR
 
 df$dep_delay_hrs <- map(df$dep_delay, ~ min2hr(.x, unit = "minute"))
 
