@@ -66,10 +66,45 @@ df %>%
   summarize(mean_temp = mean(temp, na.rm = T)) %>% 
   pivot_wider(names_from = origin, values_from = mean_temp)
 
-## Not really convinced we need them to make another plot. Any thoughts on a good function to write?
-# Something for each carrier?
+#4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going); use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times , colored by carrier. Adjust the axis so that you don't see the outlier delays of more than 10 hours.
 
-unique(df$carrier)
+min2hr <- function(hr = NULL, min = NULL, unit){
+if (unit == "minute"){
+  hour = min/60
+  print(hour)
+} else if (unit == "hour"){
+  minute = hr*60
+  print(minute)
+  }
+}
+
+min2hr(min = 760, unit = "minute")
+min2hr(hr = 7, unit = "hour")
+
+min2hr <- function(hr = NULL, min = NULL, unit){
+  ifelse(unit == "minute", min/60, hr*60)
+}
+
+min2hr <- function(x = NULL, unit){
+  ifelse(unit == "minute", x/60, x*60)
+}
+
+min2hr(760, unit = "minute")
+min2hr(7, unit = "hour")
+
+df$dep_delay_hrs <- NA
+for(i in 1:nrow(df)){
+  df$dep_delay_hrs[i] <- min2hr(df$dep_delay[i], unit = "minute")
+}
+OR
+
+df$dep_delay_hrs <- map(df$dep_delay, ~ min2hr(.x, unit = "minute"))
+
+ggplot(df, aes(x = dep_delay_hrs, fill = carrier)) +
+  geom_boxplot()
+
+
+#5. Write a second function that converts the 24 hour time codes used in the dataframe to 12 hour time codes (i.e., AM and PM). (hint: you'll again want to use some sort of conditional, logical evaluation to identify AM and PM times, and you'll want to use the paste() function to add 'pm' or 'am' as appropriate.). 
   
 
 ```
