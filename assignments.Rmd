@@ -535,36 +535,40 @@ df %>%
 
 #4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going); use this function to convert departure delay (currently in minutes) to hours.
 
-min2hr <- function(hr = NULL, min = NULL, unit){
-if (unit == "minute"){
+min2hr <- function(hr = NULL, min = NULL, from_unit = NULL){
+if (from_unit == "minute"){
   hour = min/60
   print(hour)
-} else if (unit == "hour"){
+} else if (from_unit == "hour"){
   minute = hr*60
   print(minute)
   }
 }
 
-min2hr(min = 760, unit = "minute")
-min2hr(hr = 7, unit = "hour")
+min2hr(min = 760, from_unit = "minute")
+min2hr(hr = 7, from_unit = "hour")
 # or
-min2hr <- function(hr = NULL, min = NULL, unit){
-  ifelse(unit == "minute", min/60, hr*60)
+min2hr <- function(hr = NULL, min = NULL, from_unit = NULL){
+  ifelse(from_unit == "minute", min/60, hr*60)
 }
 # or
-min2hr <- function(x = NULL, unit){
-  ifelse(unit == "minute", x/60, x*60)
+min2hr <- function(x = NULL, from_unit = NULL){
+  ifelse(from_unit == "minute", x/60, x*60)
 }
 
-min2hr(760, unit = "minute")
-min2hr(7, unit = "hour")
+min2hr(760, from_unit = "minute")
+min2hr(7, from_unit = "hour")
 
 df$dep_delay_hrs <- NA
 for(i in 1:nrow(df)){
-  df$dep_delay_hrs[i] <- min2hr(df$dep_delay[i], unit = "minute")
+  df$dep_delay_hrs[i] <- min2hr(df$dep_delay[i], from_unit = "minute")
 }
 # or
-df$dep_delay_hrs <- map(df$dep_delay, ~ min2hr(.x, unit = "minute"))
+df$dep_delay_hrs <- map(df$dep_delay, ~ min2hr(.x, from_unit = "minute"))
+
+## OR JUST TO SHOW A COOL FUNCTION
+vec_min2hr <- Vectorize(min2hr,'x')
+df <- df %>% mutate(dep_delay_hrs = vec_min2hr(dep_delay,from_unit = 'minute'))
 
 
 ```
