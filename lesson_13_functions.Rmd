@@ -8,7 +8,7 @@ title: Creating functions
 
 * Define a function that takes arguments.
 * Set default values for function arguments.
-* Explain why we should divide programs into small, single-purpose functions.
+* Explain why we should divide programs into small, single-purpose functions. 
 </div>
 <br>
 
