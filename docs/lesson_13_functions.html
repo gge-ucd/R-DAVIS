@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -553,16 +553,9 @@ ANSWER
 <h3>Using dataframes in functions</h3>
 <p>Let’s write a function to calculate the average GDP in a given country, in a given span of years, based on the <code>gapminder</code> data. If you were to do this for just one specification, without writing a function, it might look something like this:</p>
 <pre class="r"><code>library(gapminder)
-library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</code></pre>
-<pre><code>## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
-## ✓ tibble  3.1.5     ✓ dplyr   1.0.7
-## ✓ tidyr   1.1.4     ✓ stringr 1.4.0
-## ✓ readr   2.0.2     ✓ forcats 0.5.1</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-## x dplyr::filter() masks stats::filter()
-## x dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>gapminder %&gt;% 
+library(tidyverse)
+
+gapminder %&gt;% 
   filter(country == &quot;Canada&quot;, year %in% c(1950:1970)) %&gt;% 
   summarize(mean(gdpPercap, na.rm = T))</code></pre>
 <pre><code>## # A tibble: 1 × 1

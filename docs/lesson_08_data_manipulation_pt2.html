@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -663,8 +663,8 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 ##   ..- attr(*, &quot;.drop&quot;)= logi TRUE</code></pre>
 <p>In <code>surveys_mz</code> there are 196 rows and 3 columns. Using <code>pivot_wider</code> we are going to <em>increase</em> the number of columns and <em>decrease</em> the number of rows. We want each row to signify a single genus, with their mean weight listed for each plot id. How many rows do we want our final data frame to have?</p>
 <pre class="r"><code>unique(surveys_mz$genus) #lists every unique genus in surveys_mz</code></pre>
-<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;         &quot;Onychomys&quot;       &quot;Perognathus&quot;    
-##  [7] &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
+<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;         &quot;Onychomys&quot;      
+##  [6] &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
 <pre class="r"><code>n_distinct(surveys_mz$genus) #another way to look at the number of distinct genera</code></pre>
 <pre><code>## [1] 10</code></pre>
 <p>There are 10 unique genera, so we want to create a data frame with just 10 rows. How many columns would we want? Since we want each column to be a distinct plot id, our number of columns should equal our number of plot ids.</p>
@@ -677,16 +677,16 @@ NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column
 head(wide_survey)</code></pre>
 <pre><code>## # A tibble: 6 × 25
 ## # Groups:   genus [6]
-##   genus       `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`   `7`    `8`    `9`  `10`   `11`
-##   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Baiomys    7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA     NA    NA     NA     NA    NA   
-## 2 Chaetod…  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9   19.9  20.5   18.9   22.3  19.8 
-## 3 Dipodom…  60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6   57.4  59.4   57.5   51.8  50.6 
-## 4 Neotoma  156.   169.   158.   190.   149.   120    155.   138.   164.   180.   170.  134.   162.   190   153.  
-## 5 Onychom…  27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9   23.6  25.9   27.5   28.7  25.9 
-## 6 Perogna…   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81   7     7.06   7.37  NA     8.12
-## # … with 9 more variables: 12 &lt;dbl&gt;, 13 &lt;dbl&gt;, 14 &lt;dbl&gt;, 15 &lt;dbl&gt;, 16 &lt;dbl&gt;, 17 &lt;dbl&gt;, 22 &lt;dbl&gt;, 23 &lt;dbl&gt;,
-## #   24 &lt;dbl&gt;</code></pre>
+##   genus          `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`   `7`    `8`    `9`  `10`
+##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Baiomys       7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA     NA    NA     NA     NA  
+## 2 Chaetodipus  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9   19.9  20.5   18.9   22.3
+## 3 Dipodomys    60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6   57.4  59.4   57.5   51.8
+## 4 Neotoma     156.   169.   158.   190.   149.   120    155.   138.   164.   180.   170.  134.   162.   190  
+## 5 Onychomys    27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9   23.6  25.9   27.5   28.7
+## 6 Perognathus   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81   7     7.06   7.37  NA  
+## # … with 10 more variables: 11 &lt;dbl&gt;, 12 &lt;dbl&gt;, 13 &lt;dbl&gt;, 14 &lt;dbl&gt;, 15 &lt;dbl&gt;, 16 &lt;dbl&gt;, 17 &lt;dbl&gt;, 22 &lt;dbl&gt;,
+## #   23 &lt;dbl&gt;, 24 &lt;dbl&gt;</code></pre>
 </div>
 <div id="pivot_longer" class="section level3">
 <h3><code>pivot_longer</code></h3>
@@ -748,8 +748,8 @@ q1 &lt;- surveys %&gt;%
 ## 4       4      4      4      3      4      5      4      6      3      4      3      7      7      6      2
 ## 5       5      4      3      2      5      4      6      7      7      3      1      7      8      9      7
 ## 6       6      3      4      3      4      5      9      9      7      5      6      6      8      7     10
-## # … with 12 more variables: 1991 &lt;int&gt;, 1992 &lt;int&gt;, 1993 &lt;int&gt;, 1994 &lt;int&gt;, 1995 &lt;int&gt;, 1996 &lt;int&gt;, 1997 &lt;int&gt;,
-## #   1998 &lt;int&gt;, 1999 &lt;int&gt;, 2000 &lt;int&gt;, 2001 &lt;int&gt;, 2002 &lt;int&gt;</code></pre>
+## # … with 12 more variables: 1991 &lt;int&gt;, 1992 &lt;int&gt;, 1993 &lt;int&gt;, 1994 &lt;int&gt;, 1995 &lt;int&gt;, 1996 &lt;int&gt;,
+## #   1997 &lt;int&gt;, 1998 &lt;int&gt;, 1999 &lt;int&gt;, 2000 &lt;int&gt;, 2001 &lt;int&gt;, 2002 &lt;int&gt;</code></pre>
 <pre class="r"><code>## Answer 2
 q2 &lt;- surveys %&gt;%
   pivot_longer(cols = c(&quot;hindfoot_length&quot;, &quot;weight&quot;), names_to = &quot;measurement_type&quot;, values_to = &quot;value&quot;)

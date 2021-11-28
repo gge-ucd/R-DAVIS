@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -648,15 +648,14 @@ ggplot(mapping = aes(x= species_id, y = hindfoot_length)) +
 <pre class="r"><code>ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
     facet_wrap(~ species_id)</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/first-facet-1.png" width="672" /></p>
 <div id="challenge-1" class="section level3 blue">
 <h3>Challenge</h3>
 <p>You are looking at a new dataset shared with you by a collaborator. You received the dataset shortly after the vernal equinox. Your collaborator didn’t really give you any context on what the data represent, and you need to do some preliminary visualizations before you can really even formulate a question for them. Import the mystery dataset using:</p>
 <pre class="r"><code>mystery &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
 <pre><code>## Rows: 91325 Columns: 3</code></pre>
-<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+<pre><code>## ── Column specification ─────────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): Group
 ## dbl (2): x, y</code></pre>
@@ -707,8 +706,7 @@ ggplot(data = mystery, mapping = aes(x = x, y = y)) +
      facet_wrap(~ species_id) +
      theme_bw() +
      theme(panel.grid = element_blank())</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div id="challenge-1-1" class="section level3 blue">
 <h3>Challenge 1</h3>
@@ -727,8 +725,7 @@ ANSWER
      geom_line() +
      facet_wrap(~ species_id) +
      theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 </details>
 </div>
@@ -749,8 +746,7 @@ yearly_weight &lt;- surveys_complete %&gt;%
    geom_line() +
    facet_wrap(~ species_id) +
    theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/average-weight-time-series-1.png" width="672" />
 </details>
 </div>

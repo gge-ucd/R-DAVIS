@@ -400,7 +400,7 @@ div.tocify {
       <a href="lesson_13_functions.html">Writing functions</a>
     </li>
     <li>
-      <a href="lesson_iteration.html">Iteration</a>
+      <a href="lesson_14_iteration.html">Iteration</a>
     </li>
     <li>
       <a href="lesson_rmarkdown.html">Literate Programming with RMarkdown</a>
@@ -624,12 +624,10 @@ x + z</code></pre>
 <pre class="r"><code>z &lt;- 1:3
 
 x + z</code></pre>
-<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object length</code></pre>
 <pre><code>##  [1]  2  4  6  5  7  9  8 10 12 11</code></pre>
 <pre class="r"><code>a &lt;- x + z</code></pre>
-<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object
-## length</code></pre>
+<pre><code>## Warning in x + z: longer object length is not a multiple of shorter object length</code></pre>
 <p>R warns us about this! However, if you try to assign this result to an object, we get the warning, but the assignment works. z will get recycled until it reaches the length of x. So z gets recycled from being <code>1,2,3</code> to being <code>1,2,3,1,2,3,1,2,3,1</code>, then gets added to x. This can give you unexpected results if you’re doing math with vectors and you’re not paying attention to what’s going on.</p>
 <p>Recycling also happens with logical vectors:</p>
 <pre class="r"><code>x[c(TRUE, FALSE)]</code></pre>
