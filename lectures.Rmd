@@ -169,7 +169,10 @@ No class this week
 <b>Before class:</b>  
 
 * Complete the Week 9 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Week 10 videos will be posted the Monday before class
+* Videos for Week 10
+  * [For loops](https://www.youtube.com/watch?v=DNF4ZwfobiQ&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
+  * [Map functions](https://www.youtube.com/watch?v=DVaACfvnFJs&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
+* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
 
 <b>During class:</b>  
 
