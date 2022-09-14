@@ -139,15 +139,10 @@ Check out each week to see what you need to be doing before, during, and after c
 
 ### Week 8
 
-No class this week 
-
-
-### Week 9
-
 <b>Before class:</b>  
 
-* Complete the Week 8 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 9
+* Complete the Week 7 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
+* Videos for Week 8  
   * [Lubridate](https://www.youtube.com/watch?v=CVgeZf8Av0I&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Function writing](https://www.youtube.com/watch?v=DzYaUFy6Ims&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
@@ -161,15 +156,14 @@ No class this week
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>  
 
-
-### Week 10
+### Week 9
 
 <b>Before class:</b>  
 
-* Complete the Week 9 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 10
+* Complete the Week 8 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
+* Videos for Week 9
   * [For loops](https://www.youtube.com/watch?v=DNF4ZwfobiQ&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Map functions](https://www.youtube.com/watch?v=DVaACfvnFJs&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))

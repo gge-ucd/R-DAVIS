@@ -40,38 +40,39 @@ To get the most out of in-class time together, R-DAVIS will combine video materi
 
 ## Schedule
 
-#### Week 1 (Sept. 23)
+#### Week 1 (Sept. 22)
 - Course intro
 - Intro to git/GitHub and RStudio
 
-#### Week 2 (Sept. 30)
+#### Week 2 (Sept. 29)
 - Project management
 - How R thinks about data
  
-#### Week 3 (Oct. 7)
+#### Week 3 (Oct. 6)
 - Spreadsheet best practices
 - Starting with spreadsheets in R
 
-#### Week 4 (Oct. 14)
+#### Week 4 (Oct. 13)
 - Data manipulation in the tidyverse, part 1
 
-#### Week 5 (Oct. 21)
+#### Week 5 (Oct. 20)
 - Data manipulation in the tidyverse, part 2
 
-#### Week 6 (Oct. 28)
+#### Week 6 (Oct. 27)
 - Data visualization, part 1
 
-#### Week 7 (Nov. 4)
+#### Week 7 (Nov. 3)
 - Data visualization, part 2  
 
-
-#### Week 8 (Nov. 11) -- Veterans Day Holiday  
-
-#### Week 9 (Nov. 18)
+#### Week 8 (Nov. 10) 
 - Date-time data with `lubridate`
 - Writing functions
 
-#### Thanksgiving holiday (Nov. 25)   
-
-#### Week 10 (Dec. 2)
+#### Week 9 (Nov. 17)
 - Iteration 
+
+#### Week 10 Thanksgiving holiday (Nov. 24)   
+
+#### Week 11 (Dec. 1)
+- TBD  
+

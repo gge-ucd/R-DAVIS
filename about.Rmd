@@ -24,13 +24,17 @@ See the Data Carpentry [website](http://www.datacarpentry.org/) for more informa
 
 ## Instructors 
 
+**Tyler Scott** 
+
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:tascott@ucdavis.edu)  
+
 **Liza Wood** 
 
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)
 
-**Tyler Scott** 
+**Tara Pozzi** 
 
-<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:tascott@ucdavis.edu)  
+<i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:)
 
   
 
