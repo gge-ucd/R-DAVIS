@@ -37,12 +37,12 @@
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
-<script src="site_libs/plotly-binding-4.9.4.1/plotly.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
 <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
-<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
-<link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
+<link href="site_libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="stylesheet" href="site_libs_extra/academicons-1.8.0/css/academicons.css"/>
@@ -474,7 +474,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Data visualization best practices for publication and accessibility</h1>
+<h1 class="title toc-ignore">Data visualization best practices for
+publication and accessibility</h1>
 
 </div>
 
@@ -492,51 +493,111 @@ div.tocify {
 <p><br></p>
 <div id="data-visualization-in-r" class="section level2">
 <h2>Data Visualization in R</h2>
-<p>There are many tips and tricks that are available for the multitude of visualization packages in R. However, there aren’t as many simple rules or suggestions on what actually makes a good visualization. This starts with the “grammar of graphics”, which is the fundamental rules or principals which describe an art or science (from Wickham 2010).</p>
+<p>There are many tips and tricks that are available for the multitude
+of visualization packages in R. However, there aren’t as many simple
+rules or suggestions on what actually makes a good visualization. This
+starts with the “grammar of graphics”, which is the fundamental rules or
+principals which describe an art or science (from Wickham 2010).</p>
 <blockquote>
-<p>“A good grammar will allow us to gain insight into the composition of complicated graphics, and reveal unexpected connections between seemingly different graphics (Cox 1978)”</p>
+<p>“A good grammar will allow us to gain insight into the composition of
+complicated graphics, and reveal unexpected connections between
+seemingly different graphics (Cox 1978)”</p>
 </blockquote>
-<p>Because there are so many options and methods to plot our data in R, we need to think about how we are going to represent the data, how can that data be interpreted visually, and what story it may tell.</p>
-<p>A very nice example of this is provided by this animation (created by Darkhorse Analytics, and used in Jenny Bryan’s excellent <a href="http://stat545.com/block015_graph-dos-donts.html">stat545</a> course). It shows how <em>simplification</em> can make a big difference in communication.</p>
+<p>Because there are so many options and methods to plot our data in R,
+we need to think about how we are going to represent the data, how can
+that data be interpreted visually, and what story it may tell.</p>
+<p>A very nice example of this is provided by this animation (created by
+Darkhorse Analytics, and used in Jenny Bryan’s excellent <a
+href="http://stat545.com/block015_graph-dos-donts.html">stat545</a>
+course). It shows how <em>simplification</em> can make a big difference
+in communication.</p>
 <div class="figure">
 <img src="img/less-is-more-darkhorse-analytics.gif" alt="" />
 <p class="caption">Less is more graphic</p>
 </div>
 <div id="exploration-vs.-communication" class="section level3">
 <h3>Exploration vs. Communication</h3>
-<p>One thing to consider is what the objective is when creating a visualization or plot. When we build plots for exploratory purposes, we already know what the variables are we are using, and the objective is more about what sort of patterns the data might show. When communicating, the objective is more about providing a stand-alone snapshot which helps others <em>understand</em> what you are trying to convey. We’ll cover more on this when we talk about <code>Rmarkdown</code>.</p>
+<p>One thing to consider is what the objective is when creating a
+visualization or plot. When we build plots for exploratory purposes, we
+already know what the variables are we are using, and the objective is
+more about what sort of patterns the data might show. When
+communicating, the objective is more about providing a stand-alone
+snapshot which helps others <em>understand</em> what you are trying to
+convey. We’ll cover more on this when we talk about
+<code>Rmarkdown</code>.</p>
 </div>
 <div id="ggplot2" class="section level3">
 <h3><code>ggplot2</code></h3>
-<p>While there are many visualization options in R, we believe the most comprehensive and powerful is the <code>ggplot2</code> package. Much of the class has used/follows <code>ggplot</code>, so here’s a little background that might be useful.</p>
+<p>While there are many visualization options in R, we believe the most
+comprehensive and powerful is the <code>ggplot2</code> package. Much of
+the class has used/follows <code>ggplot</code>, so here’s a little
+background that might be useful.</p>
 <ul>
-<li>Based on Grammar of Graphics book by Leland Wilkinson hence ‘gg’</li>
-<li>Each part of the plot is layered or built upon the other parts (like building legos).</li>
+<li>Based on Grammar of Graphics book by Leland Wilkinson hence
+‘gg’</li>
+<li>Each part of the plot is layered or built upon the other parts (like
+building legos).</li>
 <li>Consider parts of a <code>ggplot2</code> as parts of a house.
 <ul>
-<li>Data = The materials the house is built from (<code>ggplot(data=yourdata)</code>)</li>
-<li>Plot Type = The structure/design of your house (how will it look?) (<code>geom_</code>)</li>
-<li>Aesthetics = What the exterior looks like, i.e., the paint/decor (<code>aes()</code>)</li>
-<li>Stats = Ways to wire or plumb your house…how to tie your data together, or transform it (<code>stat_</code>)</li>
+<li>Data = The materials the house is built from
+(<code>ggplot(data=yourdata)</code>)</li>
+<li>Plot Type = The structure/design of your house (how will it look?)
+(<code>geom_</code>)</li>
+<li>Aesthetics = What the exterior looks like, i.e., the paint/decor
+(<code>aes()</code>)</li>
+<li>Stats = Ways to wire or plumb your house…how to tie your data
+together, or transform it (<code>stat_</code>)</li>
 </ul></li>
 </ul>
-<p>A questions we often get asked when helping students with ggplot figures is, <em>how can I put two y-axis on my graph?</em> Short answer, with ggplot, you can’t. There is a good reason for this though, which is basically that the creators of ggplot2 believe that duel y-axis are confusing, eaisly misunderstood and not invertible (given a point on the plot space, you can not uniquely map it back to a point in the data space). We agree with this logic, and would urge you to never put two differnt y-axis on the same plot. Instead, make two seperate graphs.</p>
+<p>A questions we often get asked when helping students with ggplot
+figures is, <em>how can I put two y-axis on my graph?</em> Short answer,
+with ggplot, you can’t. There is a good reason for this though, which is
+basically that the creators of ggplot2 believe that duel y-axis are
+confusing, eaisly misunderstood and not invertible (given a point on the
+plot space, you can not uniquely map it back to a point in the data
+space). We agree with this logic, and would urge you to never put two
+differnt y-axis on the same plot. Instead, make two seperate graphs.</p>
 </div>
 </div>
 <div id="color" class="section level2">
 <h2>Color</h2>
-<p>There are so many options in R. It is fun to play around with color, but keep in mind not everyone sees color in the same way, and some folks cannot see certain spectrums of color (i.e., <a href="https://www.colormatters.com/color-and-vision/what-is-color-blindness">absence of blue or green receptors is common</a>). See below for a example of what colorblindness may do…if you see numbers inside these circles, great, you have some blue/green retinal receptors.</p>
-<p><img src="https://www.colormatters.com/images/cbtests/plate1.jpg" /> <img src="https://www.colormatters.com/images/cbtests/plate3.jpg" /></p>
-<p>Having said that, <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">here’s a great cheat sheet of colors in R</a>, it can be handy when trying to find the correct color or name of a color. Check out this recent Nature perspective piece on <a href="https://www.nature.com/articles/s41467-020-19160-7?utm_source=twitter&amp;utm_medium=social&amp;utm_content=organic&amp;utm_campaign=NGMT_USG_JC01_GL_NRJournals">The misuse of colour in science communication</a>.</p>
+<p>There are so many options in R. It is fun to play around with color,
+but keep in mind not everyone sees color in the same way, and some folks
+cannot see certain spectrums of color (i.e., <a
+href="https://www.colormatters.com/color-and-vision/what-is-color-blindness">absence
+of blue or green receptors is common</a>). See below for a example of
+what colorblindness may do…if you see numbers inside these circles,
+great, you have some blue/green retinal receptors.</p>
+<p><img src="https://www.colormatters.com/images/cbtests/plate1.jpg" />
+<img src="https://www.colormatters.com/images/cbtests/plate3.jpg" /></p>
+<p>Having said that, <a
+href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf">here’s
+a great cheat sheet of colors in R</a>, it can be handy when trying to
+find the correct color or name of a color. Check out this recent Nature
+perspective piece on <a
+href="https://www.nature.com/articles/s41467-020-19160-7?utm_source=twitter&amp;utm_medium=social&amp;utm_content=organic&amp;utm_campaign=NGMT_USG_JC01_GL_NRJournals">The
+misuse of colour in science communication</a>.</p>
 <div id="discretecategorical" class="section level3">
 <h3>Discrete/Categorical:</h3>
-<p>For a very nice discussion about color palettes, I recommend <a href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">this page</a> from the R cookbook folks.</p>
-<p>Additionally, check out the great <a href="https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html">ggthemes</a> package, which has many options. One I find very helpful is using <code>scale_color_colorblind()</code>, which if you have 8-9 categories, may be a nice way to display your data.</p>
+<p>For a very nice discussion about color palettes, I recommend <a
+href="http://www.cookbook-r.com/Graphs/Colors_(ggplot2)/">this page</a>
+from the R cookbook folks.</p>
+<p>Additionally, check out the great <a
+href="https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html">ggthemes</a>
+package, which has many options. One I find very helpful is using
+<code>scale_color_colorblind()</code>, which if you have 8-9 categories,
+may be a nice way to display your data.</p>
 </div>
 <div id="continuous-viridis" class="section level3">
-<h3>Continuous: <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a></h3>
-<p>The <code>viridis</code> package is an excellent set of colors that better represent your data, are easier to read for those with colorblindness, and they also tend to print fairly well in grayscale.</p>
-<p>Take a look at the <a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">vignette online</a>!</p>
+<h3>Continuous: <a
+href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html"><code>viridis</code></a></h3>
+<p>The <code>viridis</code> package is an excellent set of colors that
+better represent your data, are easier to read for those with
+colorblindness, and they also tend to print fairly well in
+grayscale.</p>
+<p>Take a look at the <a
+href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">vignette
+online</a>!</p>
 <p>An example:</p>
 <div class="figure">
 <img src="img/viridis_demo.png" alt="" />
@@ -545,8 +606,16 @@ div.tocify {
 </div>
 <div id="customizing-color-pallettes-in-ggplot" class="section level3">
 <h3>Customizing color pallettes in ggplot</h3>
-<p>The viridis color pallettes have been built into ggplot so that you can call upon them using the scale_fill_viridis_ or scale_color_viridis_ functions. Note that whether or not you use the fill or color scale function depends on which aesthetic you set in your plot. The functions also have extenstions depending on the kind of variable that you want to color: scale_fill_viridis_<em>d</em> is for discrete variables while scale_fill_viridis_<em>c</em> is for continous variables. Within the function, you can specify which virids pallette to use: A-D.</p>
-<p>In this example we fill in our bars with the cut vairable in the diamond dataset, a categorical variable with 5 groups.</p>
+<p>The viridis color pallettes have been built into ggplot so that you
+can call upon them using the scale_fill_viridis_ or scale_color_viridis_
+functions. Note that whether or not you use the fill or color scale
+function depends on which aesthetic you set in your plot. The functions
+also have extenstions depending on the kind of variable that you want to
+color: scale_fill_viridis_<em>d</em> is for discrete variables while
+scale_fill_viridis_<em>c</em> is for continous variables. Within the
+function, you can specify which virids pallette to use: A-D.</p>
+<p>In this example we fill in our bars with the cut vairable in the
+diamond dataset, a categorical variable with 5 groups.</p>
 <pre class="r"><code>library(ggplot2)
 ggplot(diamonds, aes(x = clarity, fill = cut)) + 
   geom_bar() +
@@ -558,38 +627,54 @@ ggplot(diamonds, aes(x = clarity, fill = cut)) +
 </div>
 <div id="visualization-tips" class="section level2 tabset tabset-fade">
 <h2 class="tabset tabset-fade">Visualization Tips</h2>
-<p>This information isn’t meant to be comprehensive, but at minimum, it may provide some guidance when you are creating plots and figures.</p>
+<p>This information isn’t meant to be comprehensive, but at minimum, it
+may provide some guidance when you are creating plots and figures.</p>
 <div id="visualization-dos" class="section level3">
 <h3>Visualization Do’s</h3>
-<p>The most basic tip is keep it simple! Stick with a clean and clear message, what is your plot/figure trying to get across? Data visualization is effective when it is simple, and repackages data into a visual story that is easy to understand.</p>
+<p>The most basic tip is keep it simple! Stick with a clean and clear
+message, what is your plot/figure trying to get across? Data
+visualization is effective when it is simple, and repackages data into a
+visual story that is easy to understand.</p>
 <ul>
-<li>Label appropriately and legibly, including axes, and use text to highlight important bits</li>
-<li>Use one color to represent each category, consider colorblind/BW friendly palettes</li>
-<li>Order datasets using logical heirarchy (Make it easy for reader to compare values)</li>
+<li>Label appropriately and legibly, including axes, and use text to
+highlight important bits</li>
+<li>Use one color to represent each category, consider colorblind/BW
+friendly palettes</li>
+<li>Order datasets using logical heirarchy (Make it easy for reader to
+compare values)</li>
 <li>Use icons when possible to reduce unnecessary labeling</li>
-<li>Pay attention to scale (e.g., start axis at zero not 2.4 to 3.5)</li>
+<li>Pay attention to scale (e.g., start axis at zero not 2.4 to
+3.5)</li>
 <li>Include your data/outliers where possible</li>
 </ul>
 </div>
 <div id="visualization-donts" class="section level3">
 <h3>Visualization Don’ts</h3>
-<p>A few things to avoid (which basically relates to keeping it simple):</p>
+<p>A few things to avoid (which basically relates to keeping it
+simple):</p>
 <ul>
-<li>Don’t try to add too much into one plot…<strong>keep it simple</strong></li>
-<li>Don’t add color uncessarily unless it provides a specific function</li>
+<li>Don’t try to add too much into one plot…<strong>keep it
+simple</strong></li>
+<li>Don’t add color uncessarily unless it provides a specific
+function</li>
 <li>Avoid high contrast colors (red/green or blue/yellow)</li>
-<li>Don’t use 3D charts. They can make it hard to discern or perceive the actual information.</li>
+<li>Don’t use 3D charts. They can make it hard to discern or perceive
+the actual information.</li>
 <li>Avoid ornamentation (shadowing, extra illustration, etc)</li>
-<li>Avoid more than 6 categorical colors in a layout unless you looking at continuous data.</li>
-<li>Keep fonts simple (avoid uncessary <strong>bold</strong> or <em>italicization</em>)</li>
-<li>Don’t try to compare too many categories or data types in one chart</li>
+<li>Avoid more than 6 categorical colors in a layout unless you looking
+at continuous data.</li>
+<li>Keep fonts simple (avoid uncessary <strong>bold</strong> or
+<em>italicization</em>)</li>
+<li>Don’t try to compare too many categories or data types in one
+chart</li>
 </ul>
 </div>
 <div id="examples" class="section level3">
 <h3>Examples</h3>
 <div id="scatterplots" class="section level4">
 <h4>Scatterplots</h4>
-<p>One of the best simple plots for examining patterns in data, but very effective. Also used when adding model trend lines.</p>
+<p>One of the best simple plots for examining patterns in data, but very
+effective. Also used when adding model trend lines.</p>
 <pre class="r"><code>suppressPackageStartupMessages(library(ggplot2))
 plot(x=iris$Petal.Width) # single variable</code></pre>
 <p><img src="lesson_11_data_viz_pt2_files/figure-html/scatterplots-1.png" width="672" /></p>
@@ -602,7 +687,8 @@ plot(x=iris$Petal.Width) # single variable</code></pre>
 </div>
 <div id="lineplots" class="section level4">
 <h4>Lineplots</h4>
-<p>Comparing relative change in quantities across a variable like time. Note the change when we avoid facetting each line independently.</p>
+<p>Comparing relative change in quantities across a variable like time.
+Note the change when we avoid facetting each line independently.</p>
 <pre class="r"><code>plot(EuStockMarkets)</code></pre>
 <p><img src="lesson_11_data_viz_pt2_files/figure-html/lineplots-1.png" width="672" /></p>
 <pre class="r"><code>suppressPackageStartupMessages(library(tidyverse))
@@ -613,7 +699,8 @@ ggplot() + geom_line(data=EuStockMarkets_long, aes(x=date, y=value, color=Market
 </div>
 <div id="barplots" class="section level4">
 <h4>Barplots</h4>
-<p>Comparing totals across multiple groups. Notice legibility when you stack the bars.</p>
+<p>Comparing totals across multiple groups. Notice legibility when you
+stack the bars.</p>
 <pre class="r"><code># code adpated from https://www.analyticsvidhya.com/blog/2015/07/guide-data-visualization-r/
 suppressPackageStartupMessages(library(viridis))
 barplot(iris$Petal.Length)</code></pre>
@@ -628,17 +715,24 @@ barplot(iris$Petal.Length)</code></pre>
 </div>
 <div id="non-visual-data-interaction" class="section level2">
 <h2>Non-visual data interaction</h2>
-<p>Discussions of visualization so far have taken for granted that visualization is accessible to everyone, but researchers and audiences alike are not all sighted. RStudio is behind on blind accessibility, but some packages can provide text descriptions and sonification/audification of plots to improve accessibility for non-visual data interaction.</p>
-<p>The <code>BrailleR</code> package (<a href="https://r-resources.massey.ac.nz/BrailleRInAction/">read more here</a>), has a <code>VI()</code> function that wraps around plots and provides a text-description output. We can use the VI wrapper to interact with our plots from a textual perspective and identify what information is missing. Such text can also be used as alt-text when publishing this material. What could we do to our plot to improve the text description?</p>
+<p>Discussions of visualization so far have taken for granted that
+visualization is accessible to everyone, but researchers and audiences
+alike are not all sighted. RStudio is behind on blind accessibility, but
+some packages can provide text descriptions and
+sonification/audification of plots to improve accessibility for
+non-visual data interaction.</p>
+<p>The <code>BrailleR</code> package (<a
+href="https://r-resources.massey.ac.nz/BrailleRInAction/">read more
+here</a>), has a <code>VI()</code> function that wraps around plots and
+provides a text-description output. We can use the VI wrapper to
+interact with our plots from a textual perspective and identify what
+information is missing. Such text can also be used as alt-text when
+publishing this material. What could we do to our plot to improve the
+text description?</p>
 <pre class="r"><code>#install.packages(&quot;BrailleR&quot;)
-library(BrailleR)</code></pre>
-<pre><code>## Do you want to create the (almost) permanent folder? 
-## 
-## 1: Yes: create /Users/lizawood/MyBrailleR/ now
-## 2: No,not this time
-## 
-## Enter an item from the menu, or 0 to exit</code></pre>
-<pre class="r"><code>barplot &lt;- ggplot(diamonds, aes(x = clarity, fill = cut)) + 
+library(BrailleR)
+
+barplot &lt;- ggplot(diamonds, aes(x = clarity, fill = cut)) + 
   geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5)) +
   scale_fill_viridis_d(option = &quot;C&quot;) +
@@ -656,19 +750,30 @@ VI(barplot)</code></pre>
 ## Ideal shown as brilliant greenish yellow fill.
 ## The chart is a bar chart with 40 vertical bars.
 ## These are stacked, as sorted by cut.</code></pre>
-<p>The <code>sonification</code> package’s <code>sonify</code> function can be used to represent data in audio form, where the x-axis can span sound across time, so that the length of time a sound plays follows the data long the x-axis from left to right; the y-axis can be expressed as pitch, so that the pitch of the sound matches to the values of the data (lower value = lower pitch).</p>
-<p>One variable can be used as an input to hear the distribution. For instance this univariate plot of iris petal width visually looks like this:</p>
+<p>The <code>sonification</code> package’s <code>sonify</code> function
+can be used to represent data in audio form, where the x-axis can span
+sound across time, so that the length of time a sound plays follows the
+data long the x-axis from left to right; the y-axis can be expressed as
+pitch, so that the pitch of the sound matches to the values of the data
+(lower value = lower pitch).</p>
+<p>One variable can be used as an input to hear the distribution. For
+instance this univariate plot of iris petal width visually looks like
+this:</p>
 <pre class="r"><code>plot(iris$Petal.Width)</code></pre>
 <p><img src="lesson_11_data_viz_pt2_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>Using <code>sonify</code> instead of plot, the distribution of iris petal width sounds like this:</p>
+<p>Using <code>sonify</code> instead of plot, the distribution of iris
+petal width sounds like this:</p>
 <pre class="r"><code>#install.packages(&quot;sonify&quot;)
 library(sonify)
 sonify(iris$Petal.Width)</code></pre>
-<p>If you try this on your computer it should play autmatically, buy on the website you can listen below:</p>
+<p>If you try this on your computer it should play autmatically, buy on
+the website you can listen below:</p>
 <audio controls>
 <source src="sw.width.sound.wav" type="audio/wav">
 </audio>
-<p>Two variables can be used as input to hear the relationship between continuous variables. For instance this bivariate plot of iris petal length and petal width visually looks like this:</p>
+<p>Two variables can be used as input to hear the relationship between
+continuous variables. For instance this bivariate plot of iris petal
+length and petal width visually looks like this:</p>
 <pre class="r"><code>plot(x = iris$Petal.Width, y = iris$Petal.Length)</code></pre>
 <p><img src="lesson_11_data_viz_pt2_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>And using <code>sonify</code>, sounds like this:</p>
@@ -679,7 +784,14 @@ sonify(iris$Petal.Width)</code></pre>
 </div>
 <div id="publishing-plots-cowplot" class="section level2">
 <h2>Publishing Plots: <code>cowplot</code></h2>
-<p>A few excellent options exist for creating multi-paneled plots for publications. The first and foremost is a package by Claus Wilke called <a href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html"><code>cowplot</code></a>. With <code>cowplot</code>, it’s possible to quickly combine existing <code>ggplots</code>, creating publication quality plots. See the vignette for more options, but here’s a quick example from the vignette below:</p>
+<p>A few excellent options exist for creating multi-paneled plots for
+publications. The first and foremost is a package by Claus Wilke called
+<a
+href="https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html"><code>cowplot</code></a>.
+With <code>cowplot</code>, it’s possible to quickly combine existing
+<code>ggplots</code>, creating publication quality plots. See the
+vignette for more options, but here’s a quick example from the vignette
+below:</p>
 <pre class="r"><code>detach(&quot;package:BrailleR&quot;, unload=TRUE)</code></pre>
 <pre class="r"><code>library(cowplot)</code></pre>
 <pre><code>## 
@@ -717,8 +829,15 @@ fixed_gridplot</code></pre>
 </div>
 <div id="saving-figures-and-plots" class="section level2">
 <h2>Saving Figures and Plots</h2>
-<p>A plot you created with ggplot or another plotting package can be saved as .JPEGS (or .tiff, .img, etc) onto you. For any ggplot objects, we recommend using <code>ggsave</code>.</p>
-<p>First, let’s create a new folder in this project called <code>figures</code>. Let’s save all the figures we create to that folder. <code>ggsave</code> will default to saving the last plot you created, however, we think it is always a good idea to specify exactly which plot you want saved. To do that, we have to save our plot as an object.</p>
+<p>A plot you created with ggplot or another plotting package can be
+saved as .JPEGS (or .tiff, .img, etc) onto you. For any ggplot objects,
+we recommend using <code>ggsave</code>.</p>
+<p>First, let’s create a new folder in this project called
+<code>figures</code>. Let’s save all the figures we create to that
+folder. <code>ggsave</code> will default to saving the last plot you
+created, however, we think it is always a good idea to specify exactly
+which plot you want saved. To do that, we have to save our plot as an
+object.</p>
 <pre class="r"><code>ggsave(&quot;figures/gridplot.png&quot;, fixed_gridplot)</code></pre>
 <div id="with-ggsave-you-can-save-images-as" class="section level4">
 <h4>With <code>ggsave</code> you can save images as</h4>
@@ -729,17 +848,25 @@ fixed_gridplot</code></pre>
 <div id="other-arguments-of-ggsave" class="section level4">
 <h4>Other arguments of <code>ggsave</code></h4>
 <ul>
-<li><code>scale</code> can scale the image (multiplicative scaling factor)</li>
-<li><code>width</code> and <code>height</code> let you specify the size of the image in <code>units</code> that you specify</li>
-<li><code>dpi</code> can change the quality of the image; for publication graphs we suggest over 700 dpi</li>
+<li><code>scale</code> can scale the image (multiplicative scaling
+factor)</li>
+<li><code>width</code> and <code>height</code> let you specify the size
+of the image in <code>units</code> that you specify</li>
+<li><code>dpi</code> can change the quality of the image; for
+publication graphs we suggest over 700 dpi</li>
 </ul>
 <pre class="r"><code>ggsave(&quot;figures/gridplot.png&quot;, fixed_gridplot, width = 6, height = 4, units = &quot;in&quot;, dpi = 700)</code></pre>
 </div>
 </div>
 <div id="the-package-plotly" class="section level2">
 <h2>The package <code>plotly</code></h2>
-<p>The package <code>plotly</code> is an excellent, easy to use resource that allows you to quickly create interactive, web-based figures. We have used plotly to illustrate patterns in data to collaborators, to visualize patterns in our data during the pre-analysis stage, and even impress with “fancy” graphics during a conference talk!</p>
-<p>Let’s try plotly together using some of the <code>iris</code> data:</p>
+<p>The package <code>plotly</code> is an excellent, easy to use resource
+that allows you to quickly create interactive, web-based figures. We
+have used plotly to illustrate patterns in data to collaborators, to
+visualize patterns in our data during the pre-analysis stage, and even
+impress with “fancy” graphics during a conference talk!</p>
+<p>Let’s try plotly together using some of the <code>iris</code>
+data:</p>
 <pre class="r"><code>library(plotly)
 
 plot.iris &lt;- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, fill=Species)) +
@@ -747,8 +874,14 @@ plot.iris &lt;- ggplot(data=iris, aes(x=Sepal.Length, y=Petal.Length, fill=Speci
 
 plotly::ggplotly(plot.iris) #it&#39;s as simple as that! </code></pre>
 <div id="htmlwidget-5b0561167aa2304a30b7" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5b0561167aa2304a30b7">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Sepal.Length: 5.1<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.7<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.3<br />Petal.Length: 1.1<br />Species: setosa","Sepal.Length: 5.8<br />Petal.Length: 1.2<br />Species: setosa","Sepal.Length: 5.7<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.7<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.0<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.9<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.7<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.5<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.2<br />Species: setosa","Sepal.Length: 5.5<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.5<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.9<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.3<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Sepal.Length: 7.0<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.4<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.9<br />Petal.Length: 4.9<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.5<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 4.9<br />Petal.Length: 3.3<br />Species: versicolor","Sepal.Length: 6.6<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.2<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 5.0<br />Petal.Length: 3.5<br />Species: versicolor","Sepal.Length: 5.9<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 3.6<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 4.1<br />Species: versicolor","Sepal.Length: 6.2<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 5.9<br />Petal.Length: 4.8<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.9<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.4<br />Petal.Length: 4.3<br />Species: versicolor","Sepal.Length: 6.6<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 6.8<br />Petal.Length: 4.8<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 5.0<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 3.5<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 3.8<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 3.7<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 5.1<br />Species: versicolor","Sepal.Length: 5.4<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.1<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 5.0<br />Petal.Length: 3.3<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 6.2<br />Petal.Length: 4.3<br />Species: versicolor","Sepal.Length: 5.1<br />Petal.Length: 3.0<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Sepal.Length: 6.3<br />Petal.Length: 6.0<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 7.1<br />Petal.Length: 5.9<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.6<br />Petal.Length: 6.6<br />Species: virginica","Sepal.Length: 4.9<br />Petal.Length: 4.5<br />Species: virginica","Sepal.Length: 7.3<br />Petal.Length: 6.3<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.3<br />Species: virginica","Sepal.Length: 6.8<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 5.7<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.3<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.7<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.9<br />Species: virginica","Sepal.Length: 6.0<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 5.6<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.7<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 6.0<br />Species: virginica","Sepal.Length: 6.2<br />Petal.Length: 4.8<br />Species: virginica","Sepal.Length: 6.1<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.4<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 7.9<br />Petal.Length: 6.4<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.1<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 6.0<br />Petal.Length: 4.8<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.4<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.8<br />Petal.Length: 5.9<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.2<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.2<br />Species: virginica","Sepal.Length: 6.2<br />Petal.Length: 5.4<br />Species: virginica","Sepal.Length: 5.9<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.913385826771654},"annotations":[{"text":"Species","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8b0d727b9bfb":{"x":{},"y":{},"fill":{},"type":"scatter"}},"cur_data":"8b0d727b9bfb","visdat":{"8b0d727b9bfb":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<p>This lesson is adapted from the Software Carpentry: R for Reproducible Scientific Analysis <a href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors and Data Frames materials</a> and the Data Carpentry: R for Data Analysis and Visualization of Ecological Data <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting Data materials</a>.</p>
+<script type="application/json" data-for="htmlwidget-5b0561167aa2304a30b7">{"x":{"data":[{"x":[5.1,4.9,4.7,4.6,5,5.4,4.6,5,4.4,4.9,5.4,4.8,4.8,4.3,5.8,5.7,5.4,5.1,5.7,5.1,5.4,5.1,4.6,5.1,4.8,5,5,5.2,5.2,4.7,4.8,5.4,5.2,5.5,4.9,5,5.5,4.9,4.4,5.1,5,4.5,4.4,5,5.1,4.8,5.1,4.6,5.3,5],"y":[1.4,1.4,1.3,1.5,1.4,1.7,1.4,1.5,1.4,1.5,1.5,1.6,1.4,1.1,1.2,1.5,1.3,1.4,1.7,1.5,1.7,1.5,1,1.7,1.9,1.6,1.6,1.5,1.4,1.6,1.6,1.5,1.5,1.4,1.5,1.2,1.3,1.4,1.3,1.5,1.3,1.3,1.3,1.6,1.9,1.4,1.6,1.4,1.5,1.4],"text":["Sepal.Length: 5.1<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.7<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.3<br />Petal.Length: 1.1<br />Species: setosa","Sepal.Length: 5.8<br />Petal.Length: 1.2<br />Species: setosa","Sepal.Length: 5.7<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.7<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.0<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.7<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.9<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.7<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.4<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.2<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.5<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.2<br />Species: setosa","Sepal.Length: 5.5<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.9<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.5<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 4.4<br />Petal.Length: 1.3<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.9<br />Species: setosa","Sepal.Length: 4.8<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.1<br />Petal.Length: 1.6<br />Species: setosa","Sepal.Length: 4.6<br />Petal.Length: 1.4<br />Species: setosa","Sepal.Length: 5.3<br />Petal.Length: 1.5<br />Species: setosa","Sepal.Length: 5.0<br />Petal.Length: 1.4<br />Species: setosa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"setosa","legendgroup":"setosa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[7,6.4,6.9,5.5,6.5,5.7,6.3,4.9,6.6,5.2,5,5.9,6,6.1,5.6,6.7,5.6,5.8,6.2,5.6,5.9,6.1,6.3,6.1,6.4,6.6,6.8,6.7,6,5.7,5.5,5.5,5.8,6,5.4,6,6.7,6.3,5.6,5.5,5.5,6.1,5.8,5,5.6,5.7,5.7,6.2,5.1,5.7],"y":[4.7,4.5,4.9,4,4.6,4.5,4.7,3.3,4.6,3.9,3.5,4.2,4,4.7,3.6,4.4,4.5,4.1,4.5,3.9,4.8,4,4.9,4.7,4.3,4.4,4.8,5,4.5,3.5,3.8,3.7,3.9,5.1,4.5,4.5,4.7,4.4,4.1,4,4.4,4.6,4,3.3,4.2,4.2,4.2,4.3,3,4.1],"text":["Sepal.Length: 7.0<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.4<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.9<br />Petal.Length: 4.9<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.5<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 4.9<br />Petal.Length: 3.3<br />Species: versicolor","Sepal.Length: 6.6<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.2<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 5.0<br />Petal.Length: 3.5<br />Species: versicolor","Sepal.Length: 5.9<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 3.6<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 4.1<br />Species: versicolor","Sepal.Length: 6.2<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 5.9<br />Petal.Length: 4.8<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.9<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.4<br />Petal.Length: 4.3<br />Species: versicolor","Sepal.Length: 6.6<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 6.8<br />Petal.Length: 4.8<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 5.0<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 3.5<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 3.8<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 3.7<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 3.9<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 5.1<br />Species: versicolor","Sepal.Length: 5.4<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.0<br />Petal.Length: 4.5<br />Species: versicolor","Sepal.Length: 6.7<br />Petal.Length: 4.7<br />Species: versicolor","Sepal.Length: 6.3<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.1<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 5.5<br />Petal.Length: 4.4<br />Species: versicolor","Sepal.Length: 6.1<br />Petal.Length: 4.6<br />Species: versicolor","Sepal.Length: 5.8<br />Petal.Length: 4.0<br />Species: versicolor","Sepal.Length: 5.0<br />Petal.Length: 3.3<br />Species: versicolor","Sepal.Length: 5.6<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.2<br />Species: versicolor","Sepal.Length: 6.2<br />Petal.Length: 4.3<br />Species: versicolor","Sepal.Length: 5.1<br />Petal.Length: 3.0<br />Species: versicolor","Sepal.Length: 5.7<br />Petal.Length: 4.1<br />Species: versicolor"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"versicolor","legendgroup":"versicolor","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[6.3,5.8,7.1,6.3,6.5,7.6,4.9,7.3,6.7,7.2,6.5,6.4,6.8,5.7,5.8,6.4,6.5,7.7,7.7,6,6.9,5.6,7.7,6.3,6.7,7.2,6.2,6.1,6.4,7.2,7.4,7.9,6.4,6.3,6.1,7.7,6.3,6.4,6,6.9,6.7,6.9,5.8,6.8,6.7,6.7,6.3,6.5,6.2,5.9],"y":[6,5.1,5.9,5.6,5.8,6.6,4.5,6.3,5.8,6.1,5.1,5.3,5.5,5,5.1,5.3,5.5,6.7,6.9,5,5.7,4.9,6.7,4.9,5.7,6,4.8,4.9,5.6,5.8,6.1,6.4,5.6,5.1,5.6,6.1,5.6,5.5,4.8,5.4,5.6,5.1,5.1,5.9,5.7,5.2,5,5.2,5.4,5.1],"text":["Sepal.Length: 6.3<br />Petal.Length: 6.0<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 7.1<br />Petal.Length: 5.9<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.6<br />Petal.Length: 6.6<br />Species: virginica","Sepal.Length: 4.9<br />Petal.Length: 4.5<br />Species: virginica","Sepal.Length: 7.3<br />Petal.Length: 6.3<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.3<br />Species: virginica","Sepal.Length: 6.8<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 5.7<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.3<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.7<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.9<br />Species: virginica","Sepal.Length: 6.0<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 5.6<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.7<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 6.0<br />Species: virginica","Sepal.Length: 6.2<br />Petal.Length: 4.8<br />Species: virginica","Sepal.Length: 6.1<br />Petal.Length: 4.9<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 7.2<br />Petal.Length: 5.8<br />Species: virginica","Sepal.Length: 7.4<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 7.9<br />Petal.Length: 6.4<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.1<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 7.7<br />Petal.Length: 6.1<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.4<br />Petal.Length: 5.5<br />Species: virginica","Sepal.Length: 6.0<br />Petal.Length: 4.8<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.4<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.6<br />Species: virginica","Sepal.Length: 6.9<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 5.8<br />Petal.Length: 5.1<br />Species: virginica","Sepal.Length: 6.8<br />Petal.Length: 5.9<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.7<br />Species: virginica","Sepal.Length: 6.7<br />Petal.Length: 5.2<br />Species: virginica","Sepal.Length: 6.3<br />Petal.Length: 5.0<br />Species: virginica","Sepal.Length: 6.5<br />Petal.Length: 5.2<br />Species: virginica","Sepal.Length: 6.2<br />Petal.Length: 5.4<br />Species: virginica","Sepal.Length: 5.9<br />Petal.Length: 5.1<br />Species: virginica"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":0.7,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","name":"virginica","legendgroup":"virginica","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":31.4155251141553},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[4.12,8.08],"tickmode":"array","ticktext":["5","6","7","8"],"tickvals":[5,6,7,8],"categoryorder":"array","categoryarray":["5","6","7","8"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Sepal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.705,7.195],"tickmode":"array","ticktext":["2","4","6"],"tickvals":[2,4,6],"categoryorder":"array","categoryarray":["2","4","6"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Petal.Length","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"title":{"text":"Species","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1530115a4ecdc":{"x":{},"y":{},"fill":{},"type":"scatter"}},"cur_data":"1530115a4ecdc","visdat":{"1530115a4ecdc":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>This lesson is adapted from the Software Carpentry: R for
+Reproducible Scientific Analysis <a
+href="http://data-lessons.github.io/gapminder-R/03-data-types-subsetting.html">Vectors
+and Data Frames materials</a> and the Data Carpentry: R for Data
+Analysis and Visualization of Ecological Data <a
+href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Exporting
+Data materials</a>.</p>
 </div>
 
 

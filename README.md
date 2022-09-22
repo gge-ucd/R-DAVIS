@@ -9,7 +9,7 @@ This is the repository for website used to teach the quarter-long graduate semin
 
 Because much of the varied content found in the lessons, there are a number of package dependencies to be aware of. This list may not be complete, but before building the site locally, these packages should be installed:
 
-`c("tidyverse", "ggplot2", "tidyr", "readr", "dplyr", "purrr", "emojifont",
+`c("tidyverse", "ggplot2", "tidyr", "readr", "dplyr", "purrr", "emojifont","BrailleR","sonify","seewave",
 "viridis", "mapdata", "maps", "mapview", "measurements", "gapminder", "broom",
 "gutenbergr", "tidytext", "patchwork", "cowplot", "hexbin", "geosphere", "ggmap",
 "ggthemes", "magrittr", "leaflet", "plotly", "knitr", "rio")`
