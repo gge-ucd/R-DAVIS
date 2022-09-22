@@ -468,7 +468,8 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Best Practices for Spreadsheets</h1>
-<h3 class="subtitle">Or, How I Learned to Stop Worrying and Think Like R</h3>
+<h3 class="subtitle">Or, How I Learned to Stop Worrying and Think Like
+R</h3>
 
 </div>
 
@@ -483,17 +484,24 @@ div.tocify {
 </ul>
 </div>
 <p><br></p>
-<p>This lesson is adapted from <a href="https://datacarpentry.org/spreadsheet-ecology-lesson/">Data Carpentry’s Data Organization in Spreadsheets for Ecologists</a>.</p>
+<p>This lesson is adapted from <a
+href="https://datacarpentry.org/spreadsheet-ecology-lesson/">Data
+Carpentry’s Data Organization in Spreadsheets for Ecologists</a>.</p>
 <div id="formatting" class="section level1">
 <h1>Formatting</h1>
 <ul>
-<li>Never modify your raw data. Always make a copy before making any changes.<br />
+<li>Never modify your raw data. Always make a copy before making any
+changes.<br />
 </li>
-<li>Keep track of all of the steps you take to clean your data in a plain text file.</li>
+<li>Keep track of all of the steps you take to clean your data in a
+plain text file.</li>
 </ul>
-<p><img src="figures/spreadsheet_fig/spreadsheet-setup-updated.png" alt="spreadsheet setup" /></p>
+<p><img src="figures/spreadsheet_fig/spreadsheet-setup-updated.png"
+alt="spreadsheet setup" /></p>
 <ul>
-<li>Organize your data according to <a href="https://www.jstatsoft.org/article/view/v059i10">tidy data principles</a>.
+<li>Organize your data according to <a
+href="https://www.jstatsoft.org/article/view/v059i10">tidy data
+principles</a>.
 <ul>
 <li>Each column is a variable like “weight” or “site_ID”</li>
 <li>Each row is a single observation</li>
@@ -501,7 +509,8 @@ div.tocify {
 </ul></li>
 </ul>
 <p>This is bad:</p>
-<p><img src="figures/spreadsheet_fig/multiple-info.png" alt="multiple-info example" /></p>
+<p><img src="figures/spreadsheet_fig/multiple-info.png"
+alt="multiple-info example" /></p>
 <p>Why? Species and sex should be split into separate columns.</p>
 </div>
 <div id="avoiding-common-mistakes" class="section level1">
@@ -511,26 +520,37 @@ div.tocify {
 <li><p>Avoid spreading data across multiple tabs.</p>
 <ul>
 <li>Programs other than Excel will have a tough time seeing tabs</li>
-<li>Instead of adding a new tab, keep adding rows, and maybe use a new column for the info you’d be splitting across tabs. For example, use a column for Year instead of a new tab for a new year.</li>
-<li>If your table gets big, <a href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">freeze your column headers</a> to make them easier to see while you scroll.</li>
+<li>Instead of adding a new tab, keep adding rows, and maybe use a new
+column for the info you’d be splitting across tabs. For example, use a
+column for Year instead of a new tab for a new year.</li>
+<li>If your table gets big, <a
+href="https://support.office.com/en-ca/article/Freeze-column-headings-for-easy-scrolling-57ccce0c-cf85-4725-9579-c5d13106ca6a">freeze
+your column headers</a> to make them easier to see while you
+scroll.</li>
 </ul></li>
 <li><p>Record zeros as zeros.</p>
 <ul>
-<li>Zeros are data! Don’t use blanks, and don’t use zeros as null values</li>
+<li>Zeros are data! Don’t use blanks, and don’t use zeros as null
+values</li>
 </ul></li>
 <li><p>Use an appropriate null value to record missing data.</p>
 <ul>
-<li>There’s a broader discussion of this in <a href="https://peerj.com/preprints/7/">White et al 2013</a>, but here’s a quick look at their recommendations:</li>
+<li>There’s a broader discussion of this in <a
+href="https://peerj.com/preprints/7/">White et al 2013</a>, but here’s a
+quick look at their recommendations:</li>
 </ul>
-<p><img src="figures/spreadsheet_fig/3_white_table_1.jpg" alt="White et al." /></p></li>
-<li><p>Don’t use formatting to convey information or to make your spreadsheet look pretty.</p>
+<p><img src="figures/spreadsheet_fig/3_white_table_1.jpg"
+alt="White et al." /></p></li>
+<li><p>Don’t use formatting to convey information or to make your
+spreadsheet look pretty.</p>
 <ul>
 <li>R won’t see cell colors or bold fonts</li>
 <li>Keep data as characters or numbers</li>
 </ul></li>
 <li><p>Place comments in a separate column.</p>
 <ul>
-<li>Don’t use Excel’s “comments” functionality, other programs don’t recognize these</li>
+<li>Don’t use Excel’s “comments” functionality, other programs don’t
+recognize these</li>
 <li>Just use a separate text column</li>
 </ul></li>
 <li><p>Record units in column headers.</p>
@@ -539,7 +559,8 @@ div.tocify {
 <li>10cm will be read as characters, not numbers</li>
 </ul></li>
 <li><p>Include only one piece of information in a cell.</p></li>
-<li><p>Avoid spaces, numbers and special characters in column headers.</p>
+<li><p>Avoid spaces, numbers and special characters in column
+headers.</p>
 <table align="center" style="width =80%; border: 1px solid black;">
 <tr>
 <td>
@@ -643,7 +664,8 @@ div.tocify {
 <li>Record metadata in a separate plain text file.
 <ul>
 <li>When in doubt, use a README</li>
-<li>Put metadata in same directory as the data file itself, with an appropriate name</li>
+<li>Put metadata in same directory as the data file itself, with an
+appropriate name</li>
 </ul></li>
 </ul>
 </div>
@@ -653,44 +675,62 @@ div.tocify {
 <li>Excel was apparently created by people who hate time</li>
 <li>Excel stores dates in several different ways
 <ul>
-<li>For Windows, it stores dates as <strong>number of days since Jan 1 1900</strong></li>
-<li>For Mac, it stores dates as <strong>number of days since Jan 1 1904</strong>
+<li>For Windows, it stores dates as <strong>number of days since Jan 1
+1900</strong></li>
+<li>For Mac, it stores dates as <strong>number of days since Jan 1
+1904</strong>
 <ul>
 <li>Check for dates that are ~4 years off</li>
 </ul></li>
-<li>Excel’s base is to store dates as numbers, but it dresses them up in different ways, like 9/1/2018 or Sept-1-2018</li>
+<li>Excel’s base is to store dates as numbers, but it dresses them up in
+different ways, like 9/1/2018 or Sept-1-2018</li>
 </ul></li>
-<li>Excel will often take one entry (Jul-10 for the 10th of July) and interpret it as another (1-July-2010)
+<li>Excel will often take one entry (Jul-10 for the 10th of July) and
+interpret it as another (1-July-2010)
 <ul>
 <li>It will even coerce data that aren’t dates into dates</li>
-<li>You have to be very careful, because Excel won’t tell you when it does things like this</li>
+<li>You have to be very careful, because Excel won’t tell you when it
+does things like this</li>
 </ul></li>
-<li>Treating dates as multiple pieces of data rather than one makes them easier to handle.
+<li>Treating dates as multiple pieces of data rather than one makes them
+easier to handle.
 <ul>
 <li>Use separate columns for year, month, and day</li>
 <li>You can also use columns for year and day-of-year (1 to 365)</li>
 </ul></li>
-<li>Ultimately, avoid letting Excel handle dates, it’s hard to know what it will do</li>
+<li>Ultimately, avoid letting Excel handle dates, it’s hard to know what
+it will do</li>
 </ul>
 </div>
 <div id="quality-control" class="section level1">
 <h1>Quality Control</h1>
 <ul>
-<li>Always copy your original spreadsheet file and work with a copy so you don’t affect the raw data.
+<li>Always copy your original spreadsheet file and work with a copy so
+you don’t affect the raw data.
 <ul>
-<li>It can be helpful to have separate “Raw” and “Clean” data folders</li>
+<li>It can be helpful to have separate “Raw” and “Clean” data
+folders</li>
 </ul></li>
-<li>Use data validation to prevent accidentally entering invalid data–this can be especially useful if you have others entering data for you.
+<li>Use data validation to prevent accidentally entering invalid
+data–this can be especially useful if you have others entering data for
+you.
 <ol style="list-style-type: decimal">
 <li>Select the cells or column you want to validate</li>
-<li>On the <code>Data</code> tab select <code>Data Validation</code></li>
-<li>In the <code>Allow</code> box select the kind of data that should be in the column. Options include whole numbers, decimals, lists of items, dates, and other values.</li>
-<li>You can then give a range of values or enter a comma-separated list of allowable values in the <code>Source</code> box</li>
-<li>You can use the <code>Input Message</code> tab to customize the error message given when an incorrect value is entered</li>
+<li>On the <code>Data</code> tab select
+<code>Data Validation</code></li>
+<li>In the <code>Allow</code> box select the kind of data that should be
+in the column. Options include whole numbers, decimals, lists of items,
+dates, and other values.</li>
+<li>You can then give a range of values or enter a comma-separated list
+of allowable values in the <code>Source</code> box</li>
+<li>You can use the <code>Input Message</code> tab to customize the
+error message given when an incorrect value is entered</li>
 </ol>
 <ul>
-<li>“Sorry faithful undergraduate field assistant, we only have plots 1-10”</li>
-<li>You can make incorrect values throw warnings instead of errors using the <code>Style</code> option on the <code>Error Alert</code> tab</li>
+<li>“Sorry faithful undergraduate field assistant, we only have plots
+1-10”</li>
+<li>You can make incorrect values throw warnings instead of errors using
+the <code>Style</code> option on the <code>Error Alert</code> tab</li>
 </ul></li>
 <li>Use sorting to check for invalid data.</li>
 <li>Use conditional formatting (cautiously) to check for invalid data.
@@ -704,14 +744,20 @@ div.tocify {
 <div id="exporting-data" class="section level1">
 <h1>Exporting Data</h1>
 <ul>
-<li>Data stored in common spreadsheet formats will often not be read correctly into data analysis software, introducing errors into your data.
+<li>Data stored in common spreadsheet formats will often not be read
+correctly into data analysis software, introducing errors into your
+data.
 <ul>
-<li>try not to use .xls or .xlxs or .xxlsxlsxlllslxlsllaslxl or whatever</li>
+<li>try not to use .xls or .xlxs or .xxlsxlsxlllslxlsllaslxl or
+whatever</li>
 </ul></li>
-<li>Exporting data from spreadsheets to formats like CSV or TSV puts it in a format that can be used consistently by most programs.
+<li>Exporting data from spreadsheets to formats like CSV or TSV puts it
+in a format that can be used consistently by most programs.
 <ul>
-<li>Not only will this be easier for R to read, but it is widely recognized and will likely be around for a long time</li>
-<li>CSV and TSV are, ultimately, plain-text files, which are simple and classy and timeless</li>
+<li>Not only will this be easier for R to read, but it is widely
+recognized and will likely be around for a long time</li>
+<li>CSV and TSV are, ultimately, plain-text files, which are simple and
+classy and timeless</li>
 </ul></li>
 </ul>
 </div>
@@ -719,17 +765,29 @@ div.tocify {
 <h1>Put It All Together</h1>
 <div id="exercise" class="section level2 blue">
 <h2>Exercise</h2>
-<p>We’re going to take a messy version of the survey data and describe how we would clean it up.</p>
+<p>We’re going to take a messy version of the survey data and describe
+how we would clean it up.</p>
 <ol style="list-style-type: decimal">
-<li>Everyone should already have the data file on your computer in your R_DAVIS_2020 project in a folder called <code>data</code></li>
-<li>Navigate to the <code>data</code> folder in your File Explorer (Windows) or Finder (Mac)</li>
+<li>Everyone should already have the data file on your computer in your
+R_DAVIS_2020 project in a folder called <code>data</code></li>
+<li>Navigate to the <code>data</code> folder in your File Explorer
+(Windows) or Finder (Mac)</li>
 <li>Open up the data in a spreadsheet program.</li>
-<li>You can see that there are two tabs. Two field assistants conducted the surveys, one in 2013 and one in 2014, and they both kept track of the data in their own way. Now you’re the person in charge of this project and you want to be able to start analyzing the data.<br />
+<li>You can see that there are two tabs. Two field assistants conducted
+the surveys, one in 2013 and one in 2014, and they both kept track of
+the data in their own way. Now you’re the person in charge of this
+project and you want to be able to start analyzing the data.<br />
 </li>
-<li>With your breakout room, identify what is wrong with this spreadsheet. Also discuss the steps you would need to take to clean up the 2013 and 2014 tabs, and to put them all together in one spreadsheet.</li>
+<li>With your breakout room, identify what is wrong with this
+spreadsheet. Also discuss the steps you would need to take to clean up
+the 2013 and 2014 tabs, and to put them all together in one
+spreadsheet.</li>
 </ol>
-<p><strong>Important:</strong> Do not forget our first piece of advice: to create a new file (or tab) for the cleaned data, never modify your original (raw) data.</p>
-<p>After you go through this exercise, we’ll discuss as a group what was wrong with this data and how you would fix it.</p>
+<p><strong>Important:</strong> Do not forget our first piece of advice:
+to create a new file (or tab) for the cleaned data, never modify your
+original (raw) data.</p>
+<p>After you go through this exercise, we’ll discuss as a group what was
+wrong with this data and how you would fix it.</p>
 </div>
 </div>
 
