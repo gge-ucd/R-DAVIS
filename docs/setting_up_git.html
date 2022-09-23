@@ -13,7 +13,7 @@
 
 <title>RStudio and Git</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -64,6 +64,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -88,6 +89,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,7 +320,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -343,7 +347,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Set Up
      
     <span class="caret"></span>
@@ -358,7 +362,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
@@ -458,7 +462,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -565,23 +569,20 @@ your repository should appear there, and it should look something like
 this:</p>
 <ul>
 <li><a
-href="https://github.com/gge-ucd/r-davis-in-class-project-MCMaurer"><code>https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername</code></a>.
-Take a minute to navigate to your repo online and take a look at your
-<code>README.md</code> file by clicking on it.</li>
+href="https://github.com/gge-ucd/r-davis-in-class-project-liza-wood"><code>https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername</code></a>.</li>
 <li><strong>To <em><code>clone</code></em> your repository</strong>
 (i.e. copy to your computer):
 <ul>
-<li>We’re going to stick with using <strong><code>HTTPS</code>:</strong>
-for now. Look for the big green “<em>Clone or download</em>” button.
-Make sure you select the “<strong>Use HTTPS</strong>” so the top of the
-box says: <strong>Clone with HTTPS</strong>.</li>
+<li>We’re going to stick with using <strong><code>SSH</code>:</strong>
+link for now. If you successfully used HTTPS, congrats – you can leave
+it that way. But if you’re on the SSH train, look for the big green
+“<em>Code</em>” button. Make sure you select the “<strong>Use
+SSH</strong>” link</li>
 <li>Copy that link (should be something like
-<em><code>https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername.git</code></em>).</li>
+<em><code>git@github.com:gge-ucd/r-davis-in-class-project-YourGithubUsername.git</code></em>).</li>
 </ul></li>
 </ul>
-<p><img src="img/https_clone.png" /></p>
-<p><strong>If you see this box, but it says “Clone with SSH”, just click
-“Use HTTPS” in the top right of the box.</strong></p>
+<p><img src="img/clone_button.png" /></p>
 <p><br></p>
 </div>
 <div id="create-a-new-version-controlled-git-rstudio-project"
@@ -600,16 +601,16 @@ new GitHub repository. If you hit <strong><code>Tab</code></strong>, the
 <em>Project directory name</em> will automatically populate with the
 exact name of the repository. This is generally preferred so you can
 keep track of things more easily. You should put this project into a
-subdirectory, which will be <strong>Desktop/R_DAVIS_2021</strong> for
+subdirectory, which will be <strong>Desktop/R-DAVIS-2022</strong> for
 this class. You should make a folder on your desktop called
-<strong>R_DAVIS_2021</strong> spelled <strong>EXACTLY</strong> like
+<strong>R-DAVIS-2022</strong> spelled <strong>EXACTLY</strong> like
 that, and put your new GitHub repository into that folder. It should
 look like this:</p></li>
 </ul>
 <p><img src="img/rstudio_git_repo_setup.png" /></p>
 <p><br></p>
 <p>For the rest of this class, <strong>everything</strong> we do will be
-in the R_DAVIS_2021 folder on your Desktop. For the rest of your life,
+in the R-DAVIS-2022 folder on your Desktop. For the rest of your life,
 however, you can put GitHub repositories anywhere on your computer, but
 it’s really useful to keep them well organized. A common way to do this
 would be a folder under your username called “GitHub_Projects” or

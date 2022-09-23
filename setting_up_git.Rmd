@@ -62,14 +62,12 @@ For our purposes the "*best practice*" (i.e., **easier**) for setting up a new g
 
 You should now have a repository on Github. Our class is all housed in the [gge-ucd](https://github.com/gge-ucd) Organization, so your repository should appear there, and it should look something like this:
 
-  - [`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername`](https://github.com/gge-ucd/r-davis-in-class-project-MCMaurer). Take a minute to navigate to your repo online and take a look at your `README.md` file by clicking on it. 
+  - [`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername`](https://github.com/gge-ucd/r-davis-in-class-project-liza-wood). 
   - **To _`clone`_ your repository** (i.e. copy to your computer):
-      - We're going to stick with using **`HTTPS`:** for now. Look for the big green "*Clone or download*" button. Make sure you select the "**Use HTTPS**" so the top of the box says: **Clone with HTTPS**. 
-      - Copy that link (should be something like *`https://github.com/gge-ucd/r-davis-in-class-project-YourGithubUsername.git`*).
+      - We're going to stick with using **`SSH`:** link for now. If you successfully used HTTPS, congrats -- you can leave it that way. But if you're on the SSH train, look for the big green "*Code*" button. Make sure you select the "**Use SSH**" link
+      - Copy that link (should be something like *`git@github.com:gge-ucd/r-davis-in-class-project-YourGithubUsername.git`*).
  
-![](img/https_clone.png)
-
-**If you see this box, but it says "Clone with SSH", just click "Use HTTPS" in the top right of the box.**
+![](img/clone_button.png)
 
 <br>
 
@@ -80,13 +78,13 @@ Now we'll create an RStudio Project and link our Github repository (following [*
   - In RStudio, start a new Project: `File > New Project > Version Control > Git`. 
   
 
-  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automatically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. You should put this project into a subdirectory, which will be **Desktop/R_DAVIS_2021** for this class. You should make a folder on your desktop called **R_DAVIS_2021** spelled **EXACTLY** like that, and put your new GitHub repository into that folder. It should look like this:
+  - In the “**Repository URL**” paste the URL of your new GitHub repository. If you hit **`Tab`**, the *Project directory name* will automatically populate with the exact name of the repository. This is generally preferred so you can keep track of things more easily. You should put this project into a subdirectory, which will be **Desktop/R-DAVIS-2022** for this class. You should make a folder on your desktop called **R-DAVIS-2022** spelled **EXACTLY** like that, and put your new GitHub repository into that folder. It should look like this:
   
 ![](img/rstudio_git_repo_setup.png)
 
 <br>
 
-For the rest of this class, **everything** we do will be in the R_DAVIS_2021 folder on your Desktop. For the rest of your life, however, you can put GitHub repositories anywhere on your computer, but it's really useful to keep them well organized. A common way to do this would be a folder under your username called "GitHub_Projects" or something like that.
+For the rest of this class, **everything** we do will be in the R-DAVIS-2022 folder on your Desktop. For the rest of your life, however, you can put GitHub repositories anywhere on your computer, but it's really useful to keep them well organized. A common way to do this would be a folder under your username called "GitHub_Projects" or something like that.
 
 Another critical thing with git and GitHub is that you should **never** nest projects inside of projects. Treat each RProject/git repository as a completely separate entity, containing only the stuff pertaining to that project. If you try to put a folder that's an RProject inside another folder that's an RProject, stuff is gonna go wrong. Just keep them all separate, but ideally contained in some other folder, like "GitHub_Projects", which is NOT a GitHub repository or RProject, just a boring regular folder.
 
