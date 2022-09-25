@@ -14,8 +14,7 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Catch up on a few videos from Week 1:
-  * [Pushing to GitHub](https://www.youtube.com/watch?v=R4XrKXqfZBA&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1&t=50s) (as well as a few extra videos on [git from the terminal](https://www.youtube.com/watch?v=EcD-Uy9ZopE&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3) and [personal access tokens](https://www.youtube.com/watch?v=PKDa85i-k54&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2&t=12s))
-  * [Global settings for RStudio](https://www.youtube.com/watch?v=5D4x6BlELCI&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=4) and wrapping up [RStudio Introduction](https://www.youtube.com/watch?v=uDGquqN4WkM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)
+  * [SSH keys](https://youtu.be/itv-H-kOhJw)
 * Videos for Week 2:
   * [Project management](https://www.youtube.com/watch?v=brw1dl5BUbc)
   * [How R thinks about data](https://www.youtube.com/watch?v=I-bSX6YwQFM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
