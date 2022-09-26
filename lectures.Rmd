@@ -15,164 +15,141 @@ Check out each week to see what you need to be doing before, during, and after c
 
 * Catch up on a few videos from Week 1:
   * [SSH keys](https://youtu.be/itv-H-kOhJw)
-* Videos for Week 2:
+* Videos for Week 2: Forthcoming
+
+<!------
+# Last year's videos
   * [Project management](https://www.youtube.com/watch?v=brw1dl5BUbc)
   * [How R thinks about data](https://www.youtube.com/watch?v=I-bSX6YwQFM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
-
-* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
+  
+  <b>During class:</b>  
 
 * [Livecode link](http://www.rdaviscode.com)
   * username "rdavis", password "vulcans"
   * NOTE: only works with http (not https)
+  
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 3
 
 <b>Before class:</b>  
 
 * Complete the Week 2 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 3
+* Videos for Week 3: Forthcoming
+
+<!------
+# Last year's videos
   * [Spreadsheets](https://www.youtube.com/watch?v=Dyl8BSVd_fY&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)
   * [Starting with data in R (base R)](https://www.youtube.com/watch?v=_B9c5jKoRTU&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)  
   * [Starting with data in R (tidyverse)](https://www.youtube.com/watch?v=6MlVc4uYzvM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
-* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
-
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 4
 
 <b>Before class:</b>  
 
 * Complete the Week 3 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 4
+* Videos for Week 4: Forthcoming
+
+<!------
   * [Data manipulation Part 1a](https://www.youtube.com/watch?v=f0OCEG-0ExI&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Data manipulation Part 1b](https://www.youtube.com/watch?v=h6wgu_3Jp1c&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
   * In case you missed it last week: [Extra about package installation](https://www.youtube.com/watch?v=LYlto9UAGAA&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)  
-* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
-
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 5
 
 <b>Before class:</b>  
 
 * Complete the Week 4 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 5
+* Videos for Week 5: Forthcoming
+
+<!------
   * [Data manipulation Part 2](https://www.youtube.com/watch?v=Y7nhagJCCk4&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1&t=824s)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 6
 
 <b>Before class:</b>  
 
 * Complete the Week 5 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 6
+* Videos for Week 6: Forthcoming
+
+<!------
   * [Data visualization Part 1A](https://www.youtube.com/watch?v=rLGJO6aOD6c&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
   * [Data visualization Part 1B](https://www.youtube.com/watch?v=W6cfxJkKy3Q&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 7
 
 <b>Before class:</b>  
 
 * Complete the Week 6 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 7
+* Videos for Week 7: Forthcoming
+
+<!------
   * [Data visualization Part 2A](https://www.youtube.com/watch?v=Xq2lCoNlqH8&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Data visualization Part 2B](https://www.youtube.com/watch?v=GDqT7MP2QLA&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
-
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
 
 ### Week 8
 
 <b>Before class:</b>  
 
 * Complete the Week 7 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 8  
+* Videos for Week 8: Forthcoming
+
+<!------  
   * [Lubridate](https://www.youtube.com/watch?v=CVgeZf8Av0I&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Function writing](https://www.youtube.com/watch?v=DzYaUFy6Ims&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>  
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
+
 
 ### Week 9
 
 <b>Before class:</b>  
 
 * Complete the Week 8 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 9
+* Videos for Week 9: Forthcoming
+
+<!------
   * [For loops](https://www.youtube.com/watch?v=DNF4ZwfobiQ&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
   * [Map functions](https://www.youtube.com/watch?v=DVaACfvnFJs&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
 * (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-
-<b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
+  ------> 
 
 <b>After class:</b>  
 
-* <a href="https://forms.gle/RGr928xNcisC6eLd8" target="_blank">Post-Class Survey (complete after class)</a>
+* <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
