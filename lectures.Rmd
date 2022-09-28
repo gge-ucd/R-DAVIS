@@ -19,6 +19,8 @@ Check out each week to see what you need to be doing before, during, and after c
   * [Intro to R (Part 1)](https://youtu.be/YWTskQW-EkE)
   * [Intro to R (Part 2)](https://youtu.be/VEQ79huOPwo)
   * [Filepaths and folder setup](https://youtu.be/eMd_9Lb6wfc)
+  * [How R thinks about data (Part 1)](https://youtu.be/mmkwJH1h6UM)
+  * [How R thinks about data (Part 2)](https://youtu.be/4zOCBgVPueM)
   * Optional: [Changing RStudio visual defaults](https://youtu.be/KC7YyJsOnQI)]
 
 <!------
