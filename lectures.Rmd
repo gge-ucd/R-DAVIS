@@ -15,7 +15,11 @@ Check out each week to see what you need to be doing before, during, and after c
 
 * Catch up on a few videos from Week 1:
   * [SSH keys](https://youtu.be/itv-H-kOhJw)
-* Videos for Week 2: Forthcoming
+* Videos for Week 2: 
+  * [Intro to R (Part 1)](https://youtu.be/YWTskQW-EkE)
+  * [Intro to R (Part 2)](https://youtu.be/VEQ79huOPwo)
+  * [Filepaths and folder setup](https://youtu.be/eMd_9Lb6wfc)
+  * Optional: [Changing RStudio visual defaults](https://youtu.be/KC7YyJsOnQI)]
 
 <!------
 # Last year's videos
