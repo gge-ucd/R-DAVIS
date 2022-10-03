@@ -45,7 +45,11 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Complete the Week 2 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 3: Forthcoming
+* Videos for Week 3: 
+  * [How R thinks about data (Part 3, vector math)](https://youtu.be/8d0kxYEbuPA)
+  * [How R thinks about data (Part 4, missing values)](https://youtu.be/Fd5ygOAPADI)
+  * [How R thinks about data (Part 5, not-vectors)](https://youtu.be/EWGRfBnmIH0)
+  * [Spreadsheet best-practices](https://youtu.be/D7B1cF-nNHc)
 
 <!------
 # Last year's videos

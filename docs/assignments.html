@@ -415,7 +415,7 @@ class="section level2 tabset tabset-fade tabset-pills">
 <p><br> Because this class caters to a range of experiences, we would
 like you to identify how it is you plan on earning credit for this
 course. Before next week, please complete <a
-href="https://forms.gle/3yD4oCYfgwB1M369A">this form</a> to select and
+href="https://forms.gle/HHTZJVVtScUrEMLm7">this form</a> to select and
 describe your plans.</p>
 </div>
 <div id="week-2" class="section level3">
@@ -561,18 +561,18 @@ or not a row’s weight is above average for its species+sex combination
 the homework
 </summary>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────── tidyverse 1.3.2 ──
+<pre><code>## ── Attaching packages ────────
 ## ✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
 ## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
 ## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
 ## ✔ readr   2.1.2      ✔ forcats 0.5.1 
-## ── Conflicts ────────────────────── tidyverse_conflicts() ──
+## ── Conflicts ─────────────────
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>#1
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13
-## ── Column specification ────────────────────────────────────
+## ── Column specification ──────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
@@ -602,8 +602,10 @@ biggest_critters &lt;- surveys %&gt;%
   filter(!is.na(weight)) %&gt;% 
   group_by(species_id, sex) %&gt;% 
   summarise(max_weight = max(weight))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;species_id&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;species_id&#39;. You
+## can override using the
+## `.groups` argument.</code></pre>
 <pre class="r"><code>biggest_critters %&gt;% arrange(max_weight)</code></pre>
 <pre><code>## # A tibble: 64 × 3
 ## # Groups:   species_id [25]
@@ -703,7 +705,8 @@ surveys_avg_weight &lt;- surveys %&gt;%
 
 surveys_avg_weight</code></pre>
 <pre><code>## # A tibble: 32,283 × 4
-## # Groups:   species_id, sex [64]
+## # Groups:   species_id, sex
+## #   [64]
 ##    species_id sex   weight avg_weight
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
 ##  1 NL         M        218       166.
@@ -723,7 +726,8 @@ surveys_avg_weight &lt;- surveys_avg_weight %&gt;%
 
 surveys_avg_weight</code></pre>
 <pre><code>## # A tibble: 32,283 × 5
-## # Groups:   species_id, sex [64]
+## # Groups:   species_id, sex
+## #   [64]
 ##    species_id sex   weight avg_weight above_average
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
 ##  1 NL         M        218       166. TRUE         
@@ -778,7 +782,7 @@ the homework
 library(tidyverse)
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13
-## ── Column specification ────────────────────────────────────
+## ── Column specification ──────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
@@ -791,8 +795,10 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
   summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
   arrange(Control)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;genus&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre class="r"><code># 2
 summary(surveys$weight)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
@@ -910,7 +916,7 @@ to the correct folder name.</p>
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
 <pre><code>## Rows: 1704 Columns: 6
-## ── Column specification ────────────────────────────────────
+## ── Column specification ──────
 ## Delimiter: &quot;,&quot;
 ## chr (2): country, continent
 ## dbl (4): year, pop, lifeExp, gdpPercap
@@ -960,8 +966,10 @@ gapminder %&gt;%
   ggplot()+
   geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
   geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;continent&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;continent&#39;. You
+## can override using the
+## `.groups` argument.</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
 

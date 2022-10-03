@@ -759,7 +759,7 @@ can really even formulate a question for them. Import the mystery
 dataset using:</p>
 <pre class="r"><code>mystery &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
 <pre><code>## Rows: 91325 Columns: 3
-## ── Column specification ────────────────────────────────────
+## ── Column specification ──────
 ## Delimiter: &quot;,&quot;
 ## chr (1): Group
 ## dbl (2): x, y
@@ -874,8 +874,10 @@ ANSWER
 yearly_weight &lt;- surveys_complete %&gt;%
                  group_by(year, species_id) %&gt;%
                  summarize(avg_weight = mean(weight))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can
-## override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;year&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre class="r"><code>ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
    geom_line() +
    facet_wrap(~ species_id) +

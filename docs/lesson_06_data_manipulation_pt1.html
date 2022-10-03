@@ -568,7 +568,7 @@ data we are going to be using today should already be in your
 R_DAVIS_2020 project in the folder <code>data</code>.</p>
 <pre class="r"><code>surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13
-## ── Column specification ────────────────────────────────────
+## ── Column specification ──────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
@@ -876,8 +876,10 @@ run off the screen anymore. It’s one of the advantages of
 <pre class="r"><code>surveys %&gt;%
   group_by(sex, species_id) %&gt;%
   summarize(mean_weight = mean(weight, na.rm = TRUE))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You can override
-## using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;sex&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre><code>## # A tibble: 92 × 3
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
@@ -905,8 +907,10 @@ the missing values are removed first, we can omit
   filter(!is.na(weight)) %&gt;%
   group_by(sex, species_id) %&gt;%
   summarize(mean_weight = mean(weight))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You can override
-## using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;sex&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre><code>## # A tibble: 64 × 3
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
@@ -931,8 +935,10 @@ anymore. If you want to display more data, you can use the
   group_by(sex, species_id) %&gt;%
   summarize(mean_weight = mean(weight)) %&gt;%
   print(n = 15)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You can override
-## using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;sex&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre><code>## # A tibble: 64 × 3
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight
@@ -962,8 +968,10 @@ species for each sex:</p>
   group_by(sex, species_id) %&gt;%
   summarize(mean_weight = mean(weight),
             min_weight = min(weight))</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;sex&#39;. You can override
-## using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;sex&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre><code>## # A tibble: 64 × 4
 ## # Groups:   sex [3]
 ##    sex   species_id mean_weight min_weight
