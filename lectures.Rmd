@@ -23,19 +23,6 @@ Check out each week to see what you need to be doing before, during, and after c
   * [How R thinks about data (Part 2)](https://youtu.be/4zOCBgVPueM)
   * Optional: [Changing RStudio visual defaults](https://youtu.be/KC7YyJsOnQI)]
 
-<!------
-# Last year's videos
-  * [Project management](https://www.youtube.com/watch?v=brw1dl5BUbc)
-  * [How R thinks about data](https://www.youtube.com/watch?v=I-bSX6YwQFM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
-  
-  <b>During class:</b>  
-
-* [Livecode link](http://www.rdaviscode.com)
-  * username "rdavis", password "vulcans"
-  * NOTE: only works with http (not https)
-  
-  ------> 
-
 <b>After class:</b>  
 
 * <a href="https://forms.gle/VoNi6uiAPrUtySQK9" target="_blank">Post-Class Survey (complete after class)</a>
@@ -50,13 +37,8 @@ Check out each week to see what you need to be doing before, during, and after c
   * [How R thinks about data (Part 4, missing values)](https://youtu.be/Fd5ygOAPADI)
   * [How R thinks about data (Part 5, not-vectors)](https://youtu.be/EWGRfBnmIH0)
   * [Spreadsheet best-practices](https://youtu.be/D7B1cF-nNHc)
-
-<!------
-# Last year's videos
-  * [Spreadsheets](https://www.youtube.com/watch?v=Dyl8BSVd_fY&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=3)
-  * [Starting with data in R (base R)](https://www.youtube.com/watch?v=_B9c5jKoRTU&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)  
-  * [Starting with data in R (tidyverse)](https://www.youtube.com/watch?v=6MlVc4uYzvM&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)  
-  ------> 
+  * [Reading in and exploring data](https://youtu.be/kAU2UFUR1i8)
+  * [Tidyverse](https://youtu.be/cq7U24UOHTk)  
 
 <b>After class:</b>  
 
