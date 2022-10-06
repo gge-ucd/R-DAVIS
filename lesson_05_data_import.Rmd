@@ -104,7 +104,7 @@ Based on the output of `str(surveys)`, can you answer the following questions?
 * What is the class of the object `surveys`?   
 * How many rows and how many columns are in this object?   
 * How are our character data represented in this data frame?   
-* How many species have been recorded during these surveys?   
+* How many species have been recorded during these surveys? (This may take more than just the `str()` function. Try Googling around how to count the unique observations in a character string in R)   
 
 <details>
 <summary>ANSWER</summary>
@@ -113,6 +113,8 @@ str(surveys)
 ## * class: data frame
 ## * how many rows: 34786,  how many columns: 13
 ## * the character data are characters if you have R Version 4.0.0 of later, factors for older versions
+length(unique(surveys$species))
+table(surveys$species)
 ## * how many species: 48
 ```
 </details>
