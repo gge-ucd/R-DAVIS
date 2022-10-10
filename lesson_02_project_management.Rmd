@@ -90,7 +90,7 @@ Let's create a new project in RStudio. We won't use this project today (we will 
 2. Click "New Directory".
 3. Click "Empty Project".
 4. Call your project "test_project_lastname"
-5. Store the new directory in the R_DAVIS_2021 folder you should have already created on your desktop.
+5. Store the new directory in the R_DAVIS_2022 folder you should have already created on your desktop.
 6. Click "Create Project".
 </div>
 <br>

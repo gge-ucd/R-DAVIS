@@ -13,7 +13,7 @@
 
 <title>Data visualization with ggplot2</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -64,6 +64,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -88,6 +89,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,7 +320,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -343,7 +347,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Set Up
      
     <span class="caret"></span>
@@ -358,7 +362,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
@@ -428,13 +432,6 @@ div.tocify {
     Resources
   </a>
 </li>
-<li>
-  <a href="appointments.html">
-    <span class="fa fa-list"></span>
-     
-    Appointments
-  </a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -458,7 +455,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -746,8 +743,8 @@ a time series plot for each species:</p>
 <pre class="r"><code>ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
     facet_wrap(~ species_id)</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/first-facet-1.png" width="672" /></p>
 <div id="challenge-1" class="section level3 blue">
 <h3>Challenge</h3>
@@ -759,7 +756,7 @@ can really even formulate a question for them. Import the mystery
 dataset using:</p>
 <pre class="r"><code>mystery &lt;- read_csv(&quot;https://raw.githubusercontent.com/gge-ucd/R-DAVIS/master/data/mysteryData.csv&quot;)</code></pre>
 <pre><code>## Rows: 91325 Columns: 3
-## ── Column specification ──────
+## ── Column specification ────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): Group
 ## dbl (2): x, y
@@ -832,8 +829,8 @@ We can set the background to white using the function
      facet_wrap(~ species_id) +
      theme_bw() +
      theme(panel.grid = element_blank())</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div id="challenge-1-1" class="section level3 blue">
 <h3>Challenge 1</h3>
@@ -856,8 +853,8 @@ ANSWER
      geom_line() +
      facet_wrap(~ species_id) +
      theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 </details>
 </div>
@@ -874,16 +871,13 @@ ANSWER
 yearly_weight &lt;- surveys_complete %&gt;%
                  group_by(year, species_id) %&gt;%
                  summarize(avg_weight = mean(weight))</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;year&#39;. You can
-## override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;. You can override using the `.groups` argument.</code></pre>
 <pre class="r"><code>ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
    geom_line() +
    facet_wrap(~ species_id) +
    theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust the group
+## aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/average-weight-time-series-1.png" width="672" />
 </details>
 </div>

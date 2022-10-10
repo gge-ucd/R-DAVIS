@@ -52,9 +52,6 @@ navbar:
   - text: Resources
     icon: fa-list
     href: resources.html
-  - text: Appointments
-    icon: fa-list
-    href: appointments.html
   right:
   - text: Contact
     icon: fa-hand-spock-o

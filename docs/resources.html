@@ -13,7 +13,7 @@
 
 <title>Resources</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -61,6 +61,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -85,6 +86,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -240,7 +244,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -267,7 +271,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Set Up
      
     <span class="caret"></span>
@@ -282,7 +286,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
@@ -352,13 +356,6 @@ $(document).ready(function () {
     Resources
   </a>
 </li>
-<li>
-  <a href="appointments.html">
-    <span class="fa fa-list"></span>
-     
-    Appointments
-  </a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -382,7 +379,7 @@ $(document).ready(function () {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -402,8 +399,7 @@ $(document).ready(function () {
 comprehensive list, but hopefully a launching pad for some very useful
 website and books. All of these examples provide code in same shape or
 form.</p>
-<div id="bonus-lessons" class="section level3">
-<h3>Bonus Lessons</h3>
+<!--### Bonus Lessons -->
 <!-- - [Importing and exporting data, extended](bonus_2020F_lesson_data_import.html) -->
 <!-- - [Longer Spreadsheets Lesson](bonus_2019_lesson_spreadsheets.html) -->
 <!-- - [Joining Data](bonus_2019_lesson_joins.html) -->
@@ -416,11 +412,8 @@ form.</p>
 <!-- - [Github Collaboration with Branches](bonus_2019_lesson_github_collaboration.html) -->
 <!-- - [Data Carpentry: R and SQL](http://www.datacarpentry.org/R-ecology-lesson/05-r-and-databases.html) -->
 <!-- - [Longer Iteration Lesson](bonus_2019_lesson_iteration.html) -->
-</div>
-<div id="resources" class="section level3">
-<h3>Resources</h3>
-<div id="r-lessons-tutorials" class="section level4">
-<h4><em>R Lessons &amp; Tutorials</em></h4>
+<!--### Resources -->
+<!--#### *R Lessons & Tutorials* -->
 <!-- * [Software Carpentry: **R for Reproducible Scientific Analysis**](http://data-lessons.github.io/gapminder-R/) -->
 <!-- * [Data Carpentry: **R for Data Analysis and Visualization of Ecological Data**](http://www.datacarpentry.org/R-ecology-lesson/) -->
 <!-- * [Data Carpentry: **Data Organization in Spreadsheets**](http://www.datacarpentry.org/spreadsheet-ecology-lesson/) -->
@@ -428,9 +421,7 @@ form.</p>
 <!-- * [ANGUS: **Analyzing High Throughput Sequencing Data; Exploratory RNAseq data analysis using RMarkdown**](http://angus.readthedocs.io/en/2017/index.html) -->
 <!-- * [**RStudio Webinars**, many topics](https://www.rstudio.com/resources/webinars/) -->
 <!-- * [**Coding Club**, great resource with many tutorials](https://ourcodingclub.github.io/) -->
-</div>
-<div id="r-ebookscourses" class="section level4">
-<h4><em>R eBooks/Courses</em></h4>
+<!--#### *R eBooks/Courses* -->
 <!-- * [Jenny Bryan's **Stat545.com**](http://stat545.com/) -->
 <!-- * [Garrett Grolemund and Hadley Wickham's **R For Data Science**](http://r4ds.had.co.nz/) -->
 <!-- * [Kieran Healy's **Data Visualization for Social Science**](http://socviz.co/) -->
@@ -439,13 +430,9 @@ form.</p>
 <!-- * [Colin Gillespie and Robin Lovelace **Efficient R Programming**](https://csgillespie.github.io/efficientR/) -->
 <!-- * [Julia Silge and David Robinson **Text Mining with R**](http://tidytextmining.com/) -->
 <!-- * [Hadley Wickham's **Advanced R**](http://adv-r.had.co.nz/) -->
-</div>
-<div id="gitgithub" class="section level4">
-<h4><em>Git/Github</em></h4>
+<!--#### *Git/Github* -->
 <!-- * [Jenny Bryan's **Happy Git and Github for the useR**](http://happygitwithr.com/) -->
 <!-- * [Coding Club **Intro to Github**](https://ourcodingclub.github.io/2017/02/27/git.html) -->
-</div>
-</div>
 <div id="datasets" class="section level3">
 <h3>Datasets</h3>
 <p>This is a list of most of the data sources used in this course.</p>

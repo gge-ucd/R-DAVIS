@@ -13,7 +13,7 @@
 
 <title>Manipulating and analyzing data in the tidyverse, Part 2</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -64,6 +64,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -88,6 +89,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,7 +320,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -343,7 +347,7 @@ div.tocify {
   </a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Set Up
      
     <span class="caret"></span>
@@ -358,7 +362,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     <span class="fa fa-book  fa-1x"></span>
      
     Course Materials
@@ -428,13 +432,6 @@ div.tocify {
     Resources
   </a>
 </li>
-<li>
-  <a href="appointments.html">
-    <span class="fa fa-list"></span>
-     
-    Appointments
-  </a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -458,7 +455,7 @@ div.tocify {
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -745,10 +742,7 @@ plot:</p>
   filter(!is.na(weight)) %&gt;% 
   group_by(genus, plot_id) %&gt;% 
   summarize(mean_weight = mean(weight)) </code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;genus&#39;. You can
-## override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
 <pre class="r"><code>str(surveys_mz) #let&#39;s take a look at the data</code></pre>
 <pre><code>## grouped_df [196 × 3] (S3: grouped_df/tbl_df/tbl/data.frame)
 ##  $ genus      : chr [1:196] &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
@@ -775,9 +769,8 @@ columns and <em>decrease</em> the number of rows. We want each row to
 signify a single genus, with their mean weight listed for each plot id.
 How many rows do we want our final data frame to have?</p>
 <pre class="r"><code>unique(surveys_mz$genus) #lists every unique genus in surveys_mz</code></pre>
-<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;        
-##  [5] &quot;Onychomys&quot;       &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot;
-##  [9] &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
+<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;         &quot;Onychomys&quot;      
+##  [6] &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
 <pre class="r"><code>n_distinct(surveys_mz$genus) #another way to look at the number of distinct genera</code></pre>
 <pre><code>## [1] 10</code></pre>
 <p>There are 10 unique genera, so we want to create a data frame with
@@ -794,17 +787,16 @@ of plot ids.</p>
 head(wide_survey)</code></pre>
 <pre><code>## # A tibble: 6 × 25
 ## # Groups:   genus [6]
-##   genus       `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`
-##   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Baiomys    7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA   
-## 2 Chaetod…  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9 
-## 3 Dipodom…  60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6 
-## 4 Neotoma  156.   169.   158.   190.   149.   120    155.   138.   164.   180.  
-## 5 Onychom…  27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9 
-## 6 Perogna…   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81
-## # … with 14 more variables: `7` &lt;dbl&gt;, `8` &lt;dbl&gt;, `9` &lt;dbl&gt;, `10` &lt;dbl&gt;,
-## #   `11` &lt;dbl&gt;, `12` &lt;dbl&gt;, `13` &lt;dbl&gt;, `14` &lt;dbl&gt;, `15` &lt;dbl&gt;, `16` &lt;dbl&gt;,
-## #   `17` &lt;dbl&gt;, `22` &lt;dbl&gt;, `23` &lt;dbl&gt;, `24` &lt;dbl&gt;</code></pre>
+##   genus          `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`   `7`    `8`
+##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Baiomys       7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA     NA    NA   
+## 2 Chaetodipus  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9   19.9  20.5 
+## 3 Dipodomys    60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6   57.4  59.4 
+## 4 Neotoma     156.   169.   158.   190.   149.   120    155.   138.   164.   180.   170.  134.  
+## 5 Onychomys    27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9   23.6  25.9 
+## 6 Perognathus   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81   7     7.06
+## # … with 12 more variables: `9` &lt;dbl&gt;, `10` &lt;dbl&gt;, `11` &lt;dbl&gt;, `12` &lt;dbl&gt;, `13` &lt;dbl&gt;,
+## #   `14` &lt;dbl&gt;, `15` &lt;dbl&gt;, `16` &lt;dbl&gt;, `17` &lt;dbl&gt;, `22` &lt;dbl&gt;, `23` &lt;dbl&gt;, `24` &lt;dbl&gt;</code></pre>
 </div>
 <div id="pivot_longer" class="section level3">
 <h3><code>pivot_longer</code></h3>
@@ -893,25 +885,21 @@ q1 &lt;- surveys %&gt;%
   group_by(plot_id, year) %&gt;%
   summarize(n_genera = n_distinct(genus)) %&gt;%
   pivot_wider(names_from = &quot;year&quot;, values_from = &quot;n_genera&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;plot_id&#39;. You can
-## override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the `.groups` argument.</code></pre>
 <pre class="r"><code>head(q1)</code></pre>
 <pre><code>## # A tibble: 6 × 27
 ## # Groups:   plot_id [6]
-##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985` `1986`
-##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-## 1       1      2      3      4      7      5      6      7      6      4      3
-## 2       2      6      6      6      8      5      9      9      9      6      4
-## 3       3      5      6      4      6      6      8     10     11      7      6
-## 4       4      4      4      3      4      5      4      6      3      4      3
-## 5       5      4      3      2      5      4      6      7      7      3      1
-## 6       6      3      4      3      4      5      9      9      7      5      6
-## # … with 16 more variables: `1987` &lt;int&gt;, `1988` &lt;int&gt;, `1989` &lt;int&gt;,
-## #   `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;, `1993` &lt;int&gt;, `1994` &lt;int&gt;,
-## #   `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;, `1999` &lt;int&gt;,
-## #   `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
+##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985` `1986` `1987` `1988`
+##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1       1      2      3      4      7      5      6      7      6      4      3      7      6
+## 2       2      6      6      6      8      5      9      9      9      6      4      9      7
+## 3       3      5      6      4      6      6      8     10     11      7      6      8      9
+## 4       4      4      4      3      4      5      4      6      3      4      3      7      7
+## 5       5      4      3      2      5      4      6      7      7      3      1      7      8
+## 6       6      3      4      3      4      5      9      9      7      5      6      6      8
+## # … with 14 more variables: `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;,
+## #   `1993` &lt;int&gt;, `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
+## #   `1999` &lt;int&gt;, `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
 <pre class="r"><code>## Answer 2
 q2 &lt;- surveys %&gt;%
   pivot_longer(cols = c(&quot;hindfoot_length&quot;, &quot;weight&quot;), names_to = &quot;measurement_type&quot;, values_to = &quot;value&quot;)
@@ -925,11 +913,8 @@ q3 &lt;- q2 %&gt;%
   group_by(year, measurement_type, plot_type) %&gt;% 
   summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;% 
   pivot_wider(names_from = &quot;measurement_type&quot;, values_from = &quot;mean_value&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;year&#39;,
-## &#39;measurement_type&#39;. You can
-## override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;measurement_type&#39;. You can override using the
+## `.groups` argument.</code></pre>
 </details>
 </div>
 <p><br></p>
