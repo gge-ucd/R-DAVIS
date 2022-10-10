@@ -80,7 +80,7 @@ final <- plus10[c(TRUE, FALSE)] #selecting every other number using logical subs
 
 Homework this week will be playing with the `surveys` data we worked on in class. First things first, open your r-davis-in-class-project and pull. Then create a new script in your `scripts` folder called `week_3_homework.R`. 
 
-Load your `survey` data frame with the read.csv() function. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 60 rows. Convert both species_id and plot_type to factors. Explore these variables and try to explain why a factor is different from a character. Remove all rows where there is an NA in the weight column.
+Load your `survey` data frame with the read.csv() function. Create a new data frame called `surveys_base` with only the species_id, the weight, and the plot_type columns. Have this data frame only be the first 5,000 rows. Convert both species_id and plot_type to factors. Remove all rows where there is an NA in the weight column. Explore these variables and try to explain why a factor is different from a character. Why might we want to use factors? Can you think of any examples? 
 
 CHALLENGE:
 Create a second data frame called `challenge_base` that only consists of individuals from your `surveys_base` data frame with weights greater than 150g.  
@@ -94,16 +94,21 @@ surveys <- read.csv("data/portal_data_joined.csv") #reading the data in
 
 colnames(surveys) #a list of the column names 
 
-surveys_new <- surveys[1:60, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
+surveys_base <- surveys[1:5000, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
 
-surveys_new$species_id <- as.character(surveys_new$species_id) #converting factor data to character
+surveys_base <- surveys_base[complete.cases(surveys_base), ] #selecting only the ROWS that have complete cases (no NAs) **Notice the comma was needed for this to work**
 
-surveys_new$plot_type <- as.character(surveys_new$plot_type) #converting factor data to character 
+surveys_base$species_id <- factor(surveys_base$species_id) #converting factor data to character
 
-surveys_new <- surveys_new[complete.cases(surveys_new), ] #selecting only the ROWS that have complete cases (no NAs) **Notice the comma was needed for this to work**
+surveys_base$plot_type <- factor(surveys_base$plot_type) #converting factor data to character
+
+#Experimentation of factors
+levels(surveys_base$species_id)
+typeof(surveys_base$species_id)
+class(surveys_base$species_id)
 
 #CHALLENGE
-challenge_base <- surveys_new[(surveys_new[, 2]>150),] #selecting just the weights (column 2) that are greater than 150
+challenge_base <- surveys_base[surveys_base[, 2]>150,] #selecting just the weights (column 2) that are greater than 150
 
 ```
 </details>
@@ -116,7 +121,7 @@ By now you should be in the rhythm of pulling from your git repository and then 
 
 1. Create a tibble named `surveys` from the portal_data_joined.csv file.
 
-2. Subset `surveys` to keep rows with weight between 30 and 60, and print out the first 6 rows.
+2. Subset `surveys` using Tidyverse methods to keep rows with weight between 30 and 60, and print out the first 6 rows.
 
 3. Create a new tibble showing the maximum weight for each species + sex combination and name it `biggest_critters`. Sort the tibble to take a look at the biggest and smallest species + sex combinations. HINT: it's easier to calculate max if there are no NAs in the dataframe...
 
