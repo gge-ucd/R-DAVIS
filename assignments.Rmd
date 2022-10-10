@@ -94,7 +94,7 @@ surveys <- read.csv("data/portal_data_joined.csv") #reading the data in
 
 colnames(surveys) #a list of the column names 
 
-surveys_base <- surveys[1:5000, c(6, 9, 13)] #selecting rows 1:60 and just columns 6, 9 and 13
+surveys_base <- surveys[1:5000, c(6, 9, 13)] #selecting rows 1:5000 and just columns 6, 9 and 13
 
 surveys_base <- surveys_base[complete.cases(surveys_base), ] #selecting only the ROWS that have complete cases (no NAs) **Notice the comma was needed for this to work**
 
