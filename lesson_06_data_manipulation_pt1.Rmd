@@ -250,7 +250,6 @@ than 30. Name this data frame `surveys_hindfoot_half`.
 <details>
 <summary>ANSWER</summary>
 ```{r, eval=FALSE, purl=FALSE}
-
 surveys_hindfoot_half <- surveys %>%
     filter(!is.na(hindfoot_length)) %>%
     mutate(hindfoot_half = hindfoot_length / 2) %>%
@@ -332,12 +331,8 @@ surveys %>%
 <div class = "blue">
 ### Challenge
 
-1. Use `group_by()` and `summarize()` to find the mean, min, and max hindfoot
-length for each species (using `species_id`).
-2. What was the heaviest animal measured in each year? Return the columns `year`,
-`genus`, `species_id`, and `weight`.
-3. You saw above how to count the number of individuals of each `sex` using a
-combination of `group_by()` and `tally()`. How could you get the same result
+1. What was the weight of the heaviest animal measured in each year? Return a table with three columns: year, weight of the heaviest animal in grams, and weight in kilograms, arranged (`arrange()`) in descending order, from heaviest to lightest.  (This table should have 26 rows, one for each year)  
+2. Try out a new function, `count()`. Group the data by `sex` and pipe the grouped data into the `count()` function. How could you get the same result
 using `group_by()` and `summarize()`? Hint: see `?n`.
 
 <details>
@@ -345,23 +340,17 @@ using `group_by()` and `summarize()`? Hint: see `?n`.
 ```{r, purl=FALSE}
 ## Answer 1
 surveys %>%
-    filter(!is.na(hindfoot_length)) %>%
-    group_by(species_id) %>%
-    summarize(
-        mean_hindfoot_length = mean(hindfoot_length),
-        min_hindfoot_length = min(hindfoot_length),
-        max_hindfoot_length = max(hindfoot_length)
-    )
+    filter(!is.na(weight)) %>%
+    group_by(year) %>%
+    summarize(max_weight_g = max(weight)) %>% 
+    mutate(max_weight_kg = max_weight_g/1000) %>% 
+    arrange()
 
 ## Answer 2
 surveys %>%
-    filter(!is.na(weight)) %>%
-    group_by(year) %>%
-    filter(weight == max(weight)) %>%
-    select(year, genus, species, weight) %>%
-    arrange(year)
+  group_by(sex) %>%
+  count()
 
-## Answer 3
 surveys %>%
   group_by(sex) %>%
   summarize(n = n())
