@@ -68,7 +68,9 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Complete the Week 4 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 5: Forthcoming
+* Videos for Week 5:
+  * [Data manipulation Part 2a](https://youtu.be/thFdHm-uILk)
+  * [Data manipulation Part 2b](https://youtu.be/HYyIBZUm3yU)
 
 <!------
   * [Data manipulation Part 2](https://www.youtube.com/watch?v=Y7nhagJCCk4&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1&t=824s)
