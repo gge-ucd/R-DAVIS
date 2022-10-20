@@ -173,6 +173,10 @@ nrow(surveysNL_tail_right)
 
 ```
 
+ </details>
+</div>
+<br>
+
 ## Reshaping with pivot functions
 
 In the spreadsheet lesson we discussed how to structure our data leading to the four rules defining a tidy dataset:
