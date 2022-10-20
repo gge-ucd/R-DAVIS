@@ -604,13 +604,20 @@ iris %&gt;%
       Petal.Length &gt; 1.6 &amp; Petal.Length &lt; 5.1 ~ &quot;medium&quot;,
       TRUE ~ &quot;large&quot;)) %&gt;% 
   head()</code></pre>
-<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species petal.length.cat
-## 1          5.1         3.5          1.4         0.2  setosa            small
-## 2          4.9         3.0          1.4         0.2  setosa            small
-## 3          4.7         3.2          1.3         0.2  setosa            small
-## 4          4.6         3.1          1.5         0.2  setosa            small
-## 5          5.0         3.6          1.4         0.2  setosa            small
-## 6          5.4         3.9          1.7         0.4  setosa           medium</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+##   petal.length.cat
+## 1            small
+## 2            small
+## 3            small
+## 4            small
+## 5            small
+## 6           medium</code></pre>
 </details>
 </div>
 <p><br></p>
@@ -672,19 +679,38 @@ the columns from both data frames to be in our new data frame.</p>
 <p>If we don’t include the <code>by =</code> argument, the default is to
 join by all the variables with common names across the two data
 frames.</p>
-<p>We could also add our tail data to a dataframe that you create within
-your R project. Let’s say we were just interested in adding the tail
-length data to the species “NL”.</p>
-<p>First, we have to create a dataframe that just has species = NL, and
-then we have to join that data frame with our <code>tail</code>
-dataframe.</p>
-<pre class="r"><code>NL_data &lt;- surveys %&gt;% 
+<div class = "blue">
+</div>
+<div id="challenge-1" class="section level3">
+<h3>Challenge</h3>
+<ol style="list-style-type: decimal">
+<li>Filter the data so that only species_id = NL,and call this
+<code>surveysNL</code><br />
+</li>
+<li>Join the <code>tail</code> data to the <code>surveysNL</code> data
+(i.e. left join with <code>surveysNL</code> on the left). Name it
+<code>surveysNL_tail_left</code>. How many rows are there?<br />
+</li>
+<li>Join the <code>surveysNL</code> data to the <code>tail data</code>
+(i.e. right join with <code>surveysNL</code> on the left). Name it
+<code>surveysNL_tail_right</code>. How many rows are there?</li>
+</ol>
+<details>
+<summary>
+ANSWER
+</summary>
+<pre class="r"><code># 1.  
+surveysNL &lt;- surveys %&gt;% 
   filter(species_id == &quot;NL&quot;) #filter to just the species NL
 
-NL_data &lt;- left_join(NL_data, tail, by = &quot;record_id&quot;) #a new column called tail_length was added</code></pre>
-<p>As you can see, even with a lot of <code>record_id</code> missing,
-the <code>left_join</code> function will still join the dataframes
-together based on shared values.</p>
+# 2.
+surveysNL_tail_left &lt;- left_join(surveysNL, tail, by = &quot;record_id&quot;) #a new column called tail_length was added
+nrow(surveysNL_tail_left)</code></pre>
+<pre><code>## [1] 1252</code></pre>
+<pre class="r"><code># 3.
+surveysNL_tail_right &lt;- right_join(surveysNL, tail, by = &quot;record_id&quot;) #a new column called tail_length was added
+nrow(surveysNL_tail_right)</code></pre>
+<pre><code>## [1] 34786</code></pre>
 </div>
 </div>
 <div id="reshaping-with-pivot-functions" class="section level2">
@@ -742,7 +768,8 @@ plot:</p>
   filter(!is.na(weight)) %&gt;% 
   group_by(genus, plot_id) %&gt;% 
   summarize(mean_weight = mean(weight)) </code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the
+## `.groups` argument.</code></pre>
 <pre class="r"><code>str(surveys_mz) #let&#39;s take a look at the data</code></pre>
 <pre><code>## grouped_df [196 × 3] (S3: grouped_df/tbl_df/tbl/data.frame)
 ##  $ genus      : chr [1:196] &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; &quot;Baiomys&quot; ...
@@ -769,8 +796,10 @@ columns and <em>decrease</em> the number of rows. We want each row to
 signify a single genus, with their mean weight listed for each plot id.
 How many rows do we want our final data frame to have?</p>
 <pre class="r"><code>unique(surveys_mz$genus) #lists every unique genus in surveys_mz</code></pre>
-<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;       &quot;Neotoma&quot;         &quot;Onychomys&quot;      
-##  [6] &quot;Perognathus&quot;     &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;        &quot;Spermophilus&quot;</code></pre>
+<pre><code>##  [1] &quot;Baiomys&quot;         &quot;Chaetodipus&quot;     &quot;Dipodomys&quot;      
+##  [4] &quot;Neotoma&quot;         &quot;Onychomys&quot;       &quot;Perognathus&quot;    
+##  [7] &quot;Peromyscus&quot;      &quot;Reithrodontomys&quot; &quot;Sigmodon&quot;       
+## [10] &quot;Spermophilus&quot;</code></pre>
 <pre class="r"><code>n_distinct(surveys_mz$genus) #another way to look at the number of distinct genera</code></pre>
 <pre><code>## [1] 10</code></pre>
 <p>There are 10 unique genera, so we want to create a data frame with
@@ -787,16 +816,17 @@ of plot ids.</p>
 head(wide_survey)</code></pre>
 <pre><code>## # A tibble: 6 × 25
 ## # Groups:   genus [6]
-##   genus          `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`    `6`   `7`    `8`
-##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-## 1 Baiomys       7      6      8.61   7.75   9.5    9.53   6      6.67  NA     NA     NA    NA   
-## 2 Chaetodipus  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0   24.9   19.9  20.5 
-## 3 Dipodomys    60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5   58.6   57.4  59.4 
-## 4 Neotoma     156.   169.   158.   190.   149.   120    155.   138.   164.   180.   170.  134.  
-## 5 Onychomys    27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1   25.9   23.6  25.9 
-## 6 Perognathus   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82   7.81   7     7.06
-## # … with 12 more variables: `9` &lt;dbl&gt;, `10` &lt;dbl&gt;, `11` &lt;dbl&gt;, `12` &lt;dbl&gt;, `13` &lt;dbl&gt;,
-## #   `14` &lt;dbl&gt;, `15` &lt;dbl&gt;, `16` &lt;dbl&gt;, `17` &lt;dbl&gt;, `22` &lt;dbl&gt;, `23` &lt;dbl&gt;, `24` &lt;dbl&gt;</code></pre>
+##   genus         `1`    `2`    `3`    `5`   `18`   `19`   `20`   `21`    `4`
+##   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Baiomys      7      6      8.61   7.75   9.5    9.53   6      6.67  NA   
+## 2 Chaetodip…  22.2   25.1   24.6   18.0   26.8   26.4   25.1   28.2   23.0 
+## 3 Dipodomys   60.2   55.7   52.0   51.1   61.4   43.3   65.9   42.7   57.5 
+## 4 Neotoma    156.   169.   158.   190.   149.   120    155.   138.   164.  
+## 5 Onychomys   27.7   26.9   26.0   27.0   26.6   23.8   25.2   24.6   28.1 
+## 6 Perognath…   9.62   6.95   7.51   8.66   8.62   8.09   8.14   9.19   7.82
+## # … with 15 more variables: `6` &lt;dbl&gt;, `7` &lt;dbl&gt;, `8` &lt;dbl&gt;, `9` &lt;dbl&gt;,
+## #   `10` &lt;dbl&gt;, `11` &lt;dbl&gt;, `12` &lt;dbl&gt;, `13` &lt;dbl&gt;, `14` &lt;dbl&gt;,
+## #   `15` &lt;dbl&gt;, `16` &lt;dbl&gt;, `17` &lt;dbl&gt;, `22` &lt;dbl&gt;, `23` &lt;dbl&gt;, `24` &lt;dbl&gt;</code></pre>
 </div>
 <div id="pivot_longer" class="section level3">
 <h3><code>pivot_longer</code></h3>
@@ -850,15 +880,15 @@ href="https://speakerdeck.com/yutannihilation/a-graphical-introduction-to-tidyrs
 Yutani’s slides</a></li>
 </ul>
 </div>
-<div id="challenge-1" class="section level3 blue">
+<div id="challenge-2" class="section level3 blue">
 <h3>Challenge</h3>
 <ol style="list-style-type: decimal">
 <li>Use <code>pivot_wider</code> on the <code>surveys</code> data frame
 with <code>year</code> as columns, <code>plot_id</code> as rows, and the
 number of genera per plot as the values. You will need to summarize
 before reshaping, and use the function <code>n_distinct()</code> to get
-the number of unique genera within a particular chunk of data. It’s a
-powerful function! See <code>?n_distinct</code> for more.</li>
+the number of unique genera within a particular chunk of data.<br />
+</li>
 <li>The <code>surveys</code> data set has two measurement columns:
 <code>hindfoot_length</code> and <code>weight</code>. This makes it
 difficult to do things like look at the relationship between mean values
@@ -868,13 +898,13 @@ a common solution for this type of problem. First, use
 column called <code>measurement</code> and a <code>value</code> column
 that takes on the value of either <code>hindfoot_length</code> or
 <code>weight</code>. <em>Hint</em>: You’ll need to specify which columns
-are being selected to make longer.</li>
-<li>With this new data set, calculate the average of each
-<code>measurement</code> in each <code>year</code> for each different
-<code>plot_type</code>. Then use <code>pivot_wider()</code> to get them
-into a data set with a column for <code>hindfoot_length</code> and
-<code>weight</code>. <em>Hint</em>: You only need to specify the
-<code>names_from =</code> and <code>values_from =</code> columns</li>
+are being selected to make longer.<br />
+Then with this new data set, calculate the average of each
+<code>measurement</code> for each different <code>plot_type</code>. Then
+use <code>pivot_wider()</code> to get them into a data set with a column
+for <code>hindfoot_length</code> and <code>weight</code>. <em>Hint</em>:
+You only need to specify the <code>names_from =</code> and
+<code>values_from =</code> columns</li>
 </ol>
 <details>
 <summary>
@@ -885,36 +915,46 @@ q1 &lt;- surveys %&gt;%
   group_by(plot_id, year) %&gt;%
   summarize(n_genera = n_distinct(genus)) %&gt;%
   pivot_wider(names_from = &quot;year&quot;, values_from = &quot;n_genera&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;plot_id&#39;. You can override using the
+## `.groups` argument.</code></pre>
 <pre class="r"><code>head(q1)</code></pre>
 <pre><code>## # A tibble: 6 × 27
 ## # Groups:   plot_id [6]
-##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985` `1986` `1987` `1988`
-##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
-## 1       1      2      3      4      7      5      6      7      6      4      3      7      6
-## 2       2      6      6      6      8      5      9      9      9      6      4      9      7
-## 3       3      5      6      4      6      6      8     10     11      7      6      8      9
-## 4       4      4      4      3      4      5      4      6      3      4      3      7      7
-## 5       5      4      3      2      5      4      6      7      7      3      1      7      8
-## 6       6      3      4      3      4      5      9      9      7      5      6      6      8
-## # … with 14 more variables: `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;,
-## #   `1993` &lt;int&gt;, `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
+##   plot_id `1977` `1978` `1979` `1980` `1981` `1982` `1983` `1984` `1985`
+##     &lt;dbl&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;  &lt;int&gt;
+## 1       1      2      3      4      7      5      6      7      6      4
+## 2       2      6      6      6      8      5      9      9      9      6
+## 3       3      5      6      4      6      6      8     10     11      7
+## 4       4      4      4      3      4      5      4      6      3      4
+## 5       5      4      3      2      5      4      6      7      7      3
+## 6       6      3      4      3      4      5      9      9      7      5
+## # … with 17 more variables: `1986` &lt;int&gt;, `1987` &lt;int&gt;, `1988` &lt;int&gt;,
+## #   `1989` &lt;int&gt;, `1990` &lt;int&gt;, `1991` &lt;int&gt;, `1992` &lt;int&gt;, `1993` &lt;int&gt;,
+## #   `1994` &lt;int&gt;, `1995` &lt;int&gt;, `1996` &lt;int&gt;, `1997` &lt;int&gt;, `1998` &lt;int&gt;,
 ## #   `1999` &lt;int&gt;, `2000` &lt;int&gt;, `2001` &lt;int&gt;, `2002` &lt;int&gt;</code></pre>
 <pre class="r"><code>## Answer 2
-q2 &lt;- surveys %&gt;%
+q2a &lt;- surveys %&gt;%
   pivot_longer(cols = c(&quot;hindfoot_length&quot;, &quot;weight&quot;), names_to = &quot;measurement_type&quot;, values_to = &quot;value&quot;)
 
 #cols = columns we want to manipulate 
 #names_to = name of new column
 #values_to = the values we want to fill our new column with (here we already told the function that we were intersted in hindfoot_length and weight, so it will automatically fill our new column, which we named &quot;values&quot;, with those numbers.)
 
-## Answer 3
-q3 &lt;- q2 %&gt;% 
-  group_by(year, measurement_type, plot_type) %&gt;% 
+q2b &lt;- q2a %&gt;% 
+  group_by(measurement_type, plot_type) %&gt;% 
   summarize(mean_value = mean(value, na.rm=TRUE)) %&gt;% 
   pivot_wider(names_from = &quot;measurement_type&quot;, values_from = &quot;mean_value&quot;)</code></pre>
-<pre><code>## `summarise()` has grouped output by &#39;year&#39;, &#39;measurement_type&#39;. You can override using the
-## `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;measurement_type&#39;. You can override
+## using the `.groups` argument.</code></pre>
+<pre class="r"><code>head(q2b)</code></pre>
+<pre><code>## # A tibble: 5 × 3
+##   plot_type                 hindfoot_length weight
+##   &lt;chr&gt;                               &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Control                              32.2   48.6
+## 2 Long-term Krat Exclosure             22.5   27.2
+## 3 Rodent Exclosure                     24.6   32.5
+## 4 Short-term Krat Exclosure            27.3   41.2
+## 5 Spectab exclosure                    33.9   51.6</code></pre>
 </details>
 </div>
 <p><br></p>

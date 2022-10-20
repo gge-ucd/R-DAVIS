@@ -148,18 +148,30 @@ surveys_joined <- left_join(surveys, tail, by = "record_id")
 
 If we don't include the `by = ` argument, the default is to join by all the variables with common names across the two data frames. 
 
-We could also add our tail data to a dataframe that you create within your R project. Let's say we were just interested in adding the tail length data to the species "NL". 
 
-First, we have to create a dataframe that just has species = NL, and then we have to join that data frame with our `tail` dataframe.
+<div class = "blue">
+### Challenge
 
-```{r}
-NL_data <- surveys %>% 
+1. Filter the data so that only species_id = NL,and call this `surveysNL`  
+2. Join the `tail` data to the `surveysNL` data (i.e. left join with `surveysNL` on the left). Name it `surveysNL_tail_left`. How many rows are there?  
+3. Join the `surveysNL` data to the `tail data` (i.e. right join with `surveysNL` on the left). Name it `surveysNL_tail_right`. How many rows are there?   
+
+<details>
+<summary>ANSWER</summary>   
+```{r, purl=FALSE}
+# 1.  
+surveysNL <- surveys %>% 
   filter(species_id == "NL") #filter to just the species NL
 
-NL_data <- left_join(NL_data, tail, by = "record_id") #a new column called tail_length was added
-```
+# 2.
+surveysNL_tail_left <- left_join(surveysNL, tail, by = "record_id") #a new column called tail_length was added
+nrow(surveysNL_tail_left)
 
-As you can see, even with a lot of `record_id` missing, the `left_join` function will still join the dataframes together based on shared values. 
+# 3.
+surveysNL_tail_right <- right_join(surveysNL, tail, by = "record_id") #a new column called tail_length was added
+nrow(surveysNL_tail_right)
+
+```
 
 ## Reshaping with pivot functions
 
@@ -277,16 +289,16 @@ surveys_long <- surveys_long %>%
 
 1. Use `pivot_wider` on the `surveys` data frame with `year` as columns, `plot_id` as rows, and the number of genera per plot as the values. You will need to summarize before
   reshaping, and use the function `n_distinct()` to get the number of unique
-  genera within a particular chunk of data. It's a powerful function! See `?n_distinct` for more.
+  genera within a particular chunk of data.  
 2. The `surveys` data set has two measurement columns: `hindfoot_length` and `weight`.  This makes it
    difficult to do things like look at the relationship between mean values of
    each measurement per year in different plot types. Let's walk through a
    common solution for this type of problem. First, use `pivot_longer()` to create a
     dataset where we have a new column called `measurement` and a
    `value` column that takes on the value of either `hindfoot_length` or
-   `weight`. *Hint*: You'll need to specify which columns are being selected to make longer.
-3. With this new data set, calculate the average of each
-   `measurement` in each `year` for each different `plot_type`. Then
+   `weight`. *Hint*: You'll need to specify which columns are being selected to make longer.  
+Then with this new data set, calculate the average of each
+   `measurement` for each different `plot_type`. Then
    use `pivot_wider()` to get them into a data set with a column for `hindfoot_length` and
    `weight`. *Hint*: You only need to specify the `names_from =` and `values_from =`
     columns
@@ -303,18 +315,18 @@ q1 <- surveys %>%
 head(q1)
 
 ## Answer 2
-q2 <- surveys %>%
+q2a <- surveys %>%
   pivot_longer(cols = c("hindfoot_length", "weight"), names_to = "measurement_type", values_to = "value")
 
 #cols = columns we want to manipulate 
 #names_to = name of new column
 #values_to = the values we want to fill our new column with (here we already told the function that we were intersted in hindfoot_length and weight, so it will automatically fill our new column, which we named "values", with those numbers.)
 
-## Answer 3
-q3 <- q2 %>% 
-  group_by(year, measurement_type, plot_type) %>% 
+q2b <- q2a %>% 
+  group_by(measurement_type, plot_type) %>% 
   summarize(mean_value = mean(value, na.rm=TRUE)) %>% 
   pivot_wider(names_from = "measurement_type", values_from = "mean_value")
+head(q2b)
 ```
  </details>
 </div>
