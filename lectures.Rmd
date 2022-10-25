@@ -86,13 +86,10 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Complete the Week 5 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 6: Forthcoming
 
-<!------
-  * [Data visualization Part 1A](https://www.youtube.com/watch?v=rLGJO6aOD6c&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
-  * [Data visualization Part 1B](https://www.youtube.com/watch?v=W6cfxJkKy3Q&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=1)
-* (All videos can be found on the [2021 R-DAVIS video page](https://www.youtube.com/playlist?list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk))
-  ------> 
+* Videos for Week 6:
+  * [Data visualization Part 1a](https://youtu.be/2q2Hfg6zi8Y)
+  * [Data visualization Part 1b](https://youtu.be/FOAe4PnnAoA)
 
 <b>After class:</b>  
 
