@@ -167,8 +167,8 @@ Notice that we can change the geom layer and colors will be still determined by 
 <div class = "blue">
 ### Challenge
 
-Use what you just learned to create a scatter plot of `weight` and
-`species_id` with weight on the Y-axis, and species_id on the X-axis. Have the colors be coded by plot_type. Is this a good way to show this type of data? What might be a better graph? 
+Use `ggplot()` to create a scatter plot of `weight` and
+`species_id` with weight on the Y-axis, and species_id on the X-axis. Have the colors be coded by `plot_type`. Is this a good way to show this type of data? What might be a better graph? 
 
 <details>
 <summary>ANSWER</summary>
@@ -213,7 +213,7 @@ example, if the distribution is bimodal, we would not see it in a
 boxplot. An alternative to the boxplot is the violin plot, where the shape 
 (of the density of points) is drawn.
 
-- Replace the box plot with a violin plot; see `geom_violin()`.
+- Replace the box plot code from above with a violin plot; see `geom_violin()`.
 
 2. In many types of data, it is important to consider the *scale* of the
 observations.  For example, it may be worth changing the scale of the axis to
@@ -221,9 +221,9 @@ better distribute the observations in the space of the plot.  Changing the scale
 of the axes is done similarly to adding/modifying other components (i.e., by
 incrementally adding commands). Try making these modifications:
 
-- Represent weight on the log~10~ scale; see `scale_y_log10()`.
+- Use the violin plot you made in Q1 and adjust the weight to be on the log~10~ scale; see `scale_y_log10()`.
 
-3. Make a new plot to explore the distrubtion of `hindfoot_length` just for species NL and PF. Overlay a jitter plot of the hindfoot lengths of each species by a boxplot. Then, color the datapoints according to the plot from which the sample was taken.  
+3. Make a new plot to explore the distribution of `hindfoot_length` just for species NL and PF using `geom_boxplot()`. Overlay a jitter/scatter plot of the hindfoot lengths of the two species behind the boxplots. Then, add an `aes()` argument to color the datapoints (but not the boxplots) according to the plot from which the sample was taken.  
 
 *Hint:* Check the class for `plot_id`. Consider changing the class of `plot_id` from integer to factor. Why does this change how R makes the graph?
 
