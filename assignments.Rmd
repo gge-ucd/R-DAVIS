@@ -218,7 +218,7 @@ summary(surveys$weight)
 # The final "else" argument here, where I used the T ~ "large" applies even to NAs, which is not something we want
 surveys %>% 
   mutate(weight_cat = case_when(
-    weight >= 20.00 ~ "small",
+    weight <= 20.00 ~ "small",
     weight > 20.00 & weight < 48.00 ~ "medium",
     T ~ "large"
   ))
@@ -226,14 +226,14 @@ surveys %>%
 # To overcome this, case_when() allows us to not even use an "else" argument, and just specify the final argument to reduce confusion. This leaves NAs as is
 surveys %>% 
   mutate(weight_cat = case_when(
-    weight >= 20.00 ~ "small",
+    weight <= 20.00 ~ "small",
     weight > 20.00 & weight < 48.00 ~ "medium",
     weight >= 48.00 ~ "large"
   ))
 
 # The "else" argument in ifelse() does not include NAs when specified, which is useful. The shortcoming, however, is that ifelse() does not allow you to leave out a final else argument, which means it is really important to always check the work on what that last argument assigns to.
 surveys %>% 
-  mutate(weight_cat = ifelse(weight >= 20.00, "small",
+  mutate(weight_cat = ifelse(weight <= 20.00, "small",
                              ifelse(weight > 20.00 & weight < 48.00, "medium","large")))
 
 # BONUS:
