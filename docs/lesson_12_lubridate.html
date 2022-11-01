@@ -13,7 +13,7 @@
 
 <title>Dates &amp; Times in R</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -149,11 +149,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -182,8 +186,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -191,16 +195,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -673,19 +670,19 @@ nfy2 &lt;- read_csv(&quot;data/2015_NFY_solinst.csv&quot;, col_types = &quot;cci
 glimpse(nfy1) # notice the data types in the Date.Time and datetime cols</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 5
-## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2…
-## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:00, 15:30:00, 15:…
-## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
+## $ Date        &lt;date&gt; 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-22, 2015-05-2…
+## $ Time        &lt;time&gt; 14:00:00, 14:15:00, 14:30:00, 14:45:00, 15:00:00, 15:15:0…
+## $ ms          &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <pre class="r"><code>glimpse(nfy2)</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 5
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;201…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;1…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</code></pre>
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
 <p>Next we want to create a single datetime column. How do we get our
 Date and Time columns into one column so we can format it as a datetime?
 The answer is the <code>paste</code> function.</p>
@@ -702,12 +699,12 @@ nfy2$datetime &lt;- paste(nfy2$Date, &quot; &quot;, nfy2$Time, sep = &quot;&quot
 glimpse(nfy2) #notice the  datetime column is classifed as character</code></pre>
 <pre><code>## Rows: 7,764
 ## Columns: 6
-## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;201…
-## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;, &quot;15:15:00&quot;, &quot;1…
-## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2935, -8.2948, -8…
-## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
-## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 14:30:00&quot;, &quot;2015…</code></pre>
+## $ Date        &lt;chr&gt; &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2015/05/22&quot;, &quot;2…
+## $ Time        &lt;chr&gt; &quot;14:00:00&quot;, &quot;14:15:00&quot;, &quot;14:30:00&quot;, &quot;14:45:00&quot;, &quot;15:00:00&quot;…
+## $ ms          &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ Level       &lt;dbl&gt; -8.6834, -8.2928, -8.2914, -8.2901, -8.2955, -8.2935, -8.2…
+## $ Temperature &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ datetime    &lt;chr&gt; &quot;2015/05/22 14:00:00&quot;, &quot;2015/05/22 14:15:00&quot;, &quot;2015/05/22 …</code></pre>
 <pre class="r"><code># convert Date Time to POSIXct in local timezone using lubridate
 nfy2$datetime_test &lt;- as_datetime(nfy2$datetime, 
                                     tz=&quot;America/Los_Angeles&quot;)

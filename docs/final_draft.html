@@ -13,7 +13,7 @@
 
 <title>final_draft.knit</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -149,11 +149,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -182,8 +186,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -191,16 +195,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -523,13 +520,20 @@ delay times by carrier. Save this function into a script called
 The goal is to visualize delays by carrier. Do (at least) 5 things to
 improve this plot by changing, adding, or subtracting to this plot.</li>
 </ol>
-<pre><code>## Joining, by = c(&quot;year&quot;, &quot;tailnum&quot;)
-## Joining, by = c(&quot;year&quot;, &quot;month&quot;, &quot;day&quot;, &quot;origin&quot;, &quot;hour&quot;, &quot;time_hour&quot;)
-## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Joining, by = c(&quot;year&quot;,
+## &quot;tailnum&quot;)
+## Joining, by = c(&quot;year&quot;,
+## &quot;month&quot;, &quot;day&quot;, &quot;origin&quot;,
+## &quot;hour&quot;, &quot;time_hour&quot;)
+## `geom_smooth()` using formula
+## &#39;y ~ x&#39;</code></pre>
 <pre><code>## Warning: Removed 112 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 112 rows containing missing values (geom_point).</code></pre>
 <p><img src="final_draft_files/figure-html/unnamed-chunk-1-1.png" width="672" /><img src="final_draft_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
-<pre><code>## `summarise()` has grouped output by &#39;month&#39;. You can override using the `.groups` argument.</code></pre>
+<pre><code>## `summarise()` has grouped
+## output by &#39;month&#39;. You can
+## override using the `.groups`
+## argument.</code></pre>
 <pre><code>## Warning: Computation failed in `stat_boxplot()`:
 ## missing values and NaN&#39;s not allowed if &#39;na.rm&#39; is FALSE</code></pre>
 <p><img src="final_draft_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>

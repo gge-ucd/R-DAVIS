@@ -100,7 +100,10 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Complete the Week 6 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 7: Forthcoming
+* Videos for Week 7:
+  * [Data visualization Part 2a](https://youtu.be/GKiJNuvfT5k)
+  * [Data visualization Part 2b](https://youtu.be/50wbb1-XjI0)
+
 
 <!------
   * [Data visualization Part 2A](https://www.youtube.com/watch?v=Xq2lCoNlqH8&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
