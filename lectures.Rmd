@@ -120,7 +120,10 @@ Check out each week to see what you need to be doing before, during, and after c
 <b>Before class:</b>  
 
 * Complete the Week 7 homework in the [Assignments tab](https://gge-ucd.github.io/R-DAVIS/assignments.html)
-* Videos for Week 8: Forthcoming
+* Videos for Week 7:
+  * [Dates with Lubridate](https://youtu.be/pnST9AkbF9o)
+  * [Function-writing](https://youtu.be/4gHuVmuyBI8)
+  * Iteration (bonus video to be posted soon, no need to watch before)
 
 <!------  
   * [Lubridate](https://www.youtube.com/watch?v=CVgeZf8Av0I&list=PL9RGU7mcuUv6hlpNiICK6Q1NYnBsf-RYk&index=2)
