@@ -1,5 +1,5 @@
 ---
-title: Creating functions
+title: "Creating functions"
 ---
 
 <div class = "blue">
@@ -153,7 +153,8 @@ you can always be sure that whatever changes you make within the
 body of the function, stay inside the body of the function.
 
 
-<div class = "blue">
+<div class = "blue"> 
+
 ### Challenge{.challenge}
 
 This challenge will deal with countries' population growth. To access the data, load (and install, if needed) the `gapminder` library and access its life expectancy dataset using:
@@ -163,8 +164,8 @@ library(gapminder)
 d <- gapminder::gapminder
 ```
 
-Write a new function that takes two arguments, the gapminder data.frame (`d`) and the name of a country (e.g. `"Afghanistan"`), and plots a time series of the country's population. That is, the return value from the function should be a ggplot object.
-   - It is often easier to modify existing code than to start from scratch. To start out with, try writing some code that works interactively, and then wrap it in a function.
+Write a new function that takes two arguments, the gapminder data.frame (`d`) and the name of a country (e.g. `"Afghanistan"`), and plots a time series of the country's population. The return value from the function should be a ggplot object. Note: It is often easier to modify existing code than to start from scratch. To start out with one plot for a particular country, figured out what you need to change for each iteration (these will be your arguments), and then wrap it in a function.  
+
 
 
 <details>
