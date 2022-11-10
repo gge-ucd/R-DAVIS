@@ -13,7 +13,7 @@
 
 <title>Coding Practice</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -146,15 +146,11 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark the anchor link active (and if it's in a dropdown, also mark that active)
-  var dropdown = menuAnchor.closest('li.dropdown');
-  if (window.bootstrap) { // Bootstrap 4+
-    menuAnchor.addClass('active');
-    dropdown.find('> .dropdown-toggle').addClass('active');
-  } else { // Bootstrap 3
-    menuAnchor.parent().addClass('active');
-    dropdown.addClass('active');
-  }
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -183,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "\e259";
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -192,9 +188,16 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "\e258";
-  font-family: 'Glyphicons Halflings';
+  content: "&#xe258;";
   border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -564,18 +567,24 @@ or not a row’s weight is above average for its species+sex combination
 the homework
 </summary>
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ────────
-## ✔ ggplot2 3.3.6      ✔ purrr   0.3.5 
+<pre><code>## Warning: package &#39;tidyverse&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.3.5      ✔ purrr   0.3.5 
 ## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
 ## ✔ tidyr   1.2.1      ✔ stringr 1.4.1 
-## ✔ readr   2.1.3      ✔ forcats 0.5.2 
-## ── Conflicts ─────────────────
+## ✔ readr   2.1.2      ✔ forcats 0.5.1</code></pre>
+<pre><code>## Warning: package &#39;tibble&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## Warning: package &#39;purrr&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## Warning: package &#39;stringr&#39; was built under R version 4.1.2</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>#1
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13
-## ── Column specification ──────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
@@ -605,9 +614,7 @@ biggest_critters &lt;- surveys %&gt;%
   filter(!is.na(weight)) %&gt;% 
   group_by(species_id, sex) %&gt;% 
   summarise(max_weight = max(weight))</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;species_id&#39;. You
-## can override using the
+<pre><code>## `summarise()` has grouped output by &#39;species_id&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <pre class="r"><code>biggest_critters %&gt;% arrange(max_weight)</code></pre>
 <pre><code>## # A tibble: 64 × 3
@@ -708,8 +715,7 @@ surveys_avg_weight &lt;- surveys %&gt;%
 
 surveys_avg_weight</code></pre>
 <pre><code>## # A tibble: 32,283 × 4
-## # Groups:   species_id, sex
-## #   [64]
+## # Groups:   species_id, sex [64]
 ##    species_id sex   weight avg_weight
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;
 ##  1 NL         M        218       166.
@@ -729,8 +735,7 @@ surveys_avg_weight &lt;- surveys_avg_weight %&gt;%
 
 surveys_avg_weight</code></pre>
 <pre><code>## # A tibble: 32,283 × 5
-## # Groups:   species_id, sex
-## #   [64]
+## # Groups:   species_id, sex [64]
 ##    species_id sex   weight avg_weight above_average
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;lgl&gt;        
 ##  1 NL         M        218       166. TRUE         
@@ -785,7 +790,7 @@ the homework
 library(tidyverse)
 surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
 <pre><code>## Rows: 34786 Columns: 13
-## ── Column specification ──────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (6): species_id, sex, genus, species, taxa, plot_type
 ## dbl (7): record_id, month, day, year, plot_id, hindfoot_length, weight
@@ -798,10 +803,8 @@ surveys &lt;- read_csv(&quot;data/portal_data_joined.csv&quot;)</code></pre>
   summarise(mean_hindfoot = mean(hindfoot_length)) %&gt;% 
   pivot_wider(names_from = plot_type, values_from = mean_hindfoot) %&gt;% 
   arrange(Control)</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;genus&#39;. You can
-## override using the `.groups`
-## argument.</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;genus&#39;. You can override using the
+## `.groups` argument.</code></pre>
 <pre class="r"><code># 2
 summary(surveys$weight)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
@@ -919,7 +922,7 @@ to the correct folder name.</p>
 
 gapminder &lt;- read_csv(&quot;https://gge-ucd.github.io/R-DAVIS/data/gapminder.csv&quot;) #ONLY change the &quot;data&quot; part of this path if necessary</code></pre>
 <pre><code>## Rows: 1704 Columns: 6
-## ── Column specification ──────
+## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (2): country, continent
 ## dbl (4): year, pop, lifeExp, gdpPercap
@@ -969,9 +972,7 @@ gapminder %&gt;%
   ggplot()+
   geom_point(aes(x = year, y = mean_lifeExp, color = continent))+ #scatter plot
   geom_line(aes(x = year, y = mean_lifeExp, color = continent)) #line plot</code></pre>
-<pre><code>## `summarise()` has grouped
-## output by &#39;continent&#39;. You
-## can override using the
+<pre><code>## `summarise()` has grouped output by &#39;continent&#39;. You can override using the
 ## `.groups` argument.</code></pre>
 <p><img src="assignments_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>#there are other ways to represent this data and answer this question. Try a facet wrap! Play around with themes and ggplotly!  
@@ -1073,8 +1074,8 @@ pg %&gt;%
   ylab(&quot;Change in Population Between 2002 and 2007&quot;)</code></pre>
 </details>
 </div>
-<div id="week-9" class="section level3">
-<h3><small>Week 9</small></h3>
+<div id="week-8" class="section level3">
+<h3><small>Week 8</small></h3>
 <p>Let’s look at some real data from Mauna Loa to try to format and
 plot. These meteorological data from Mauna Loa were collected every
 minute for the year 2001. <em>This dataset has 459,769 observations for
@@ -1147,66 +1148,38 @@ mloa2 %&gt;%
 </div>
 <div id="final-assignment" class="section level3">
 <h3><small>Final assignment</small></h3>
-<p>Alright folks, it’s time for the final assignment of the quarter. The
-goal here is to generate an script that combines the skills we’ve
-learned throughout the quarter to produce several outputs. <br></p>
-<div id="the-data" class="section level4">
-<h4>The Data</h4>
-<p>For this project you are going to be using some data sets about
-flights departing New York City in 2013. There are
-<strong>several</strong> CSV files you will need to use (as with any
-CSVs you’re handed, they are likely imperfect and incomplete). You
-should download the <a href="data/nyc_13_flights_small.csv">flights</a>,
-<a href="data/nyc_13_planes.csv">planes</a>, and <a
-href="data/nyc_13_weather.csv">weather</a> CSV files. (Remember to put
-them into your data folder of your RProject to make reading them in
-easier!)</p>
-<p>Hint: You may have to combine dataframes to answer some questions.
-Remember our <code>join</code> family of functions? You should be able
-to use the <code>join</code> type we covered in class. The
-<code>flights</code> dataset is the biggest one, so you should probably
-join the other data onto this one, meaning <code>flights</code> would be
-the first (of “left”) argument in the left join. You can’t join 3 tables
-together at once, but you can join tables <code>a</code> and
-<code>b</code> to make table <code>ab</code>, then join <code>ab</code>
-and <code>c</code> to get table <code>abc</code> which contains the
-columns from all 3 original tables.</p>
-</div>
-<div id="things-to-include" class="section level4">
-<h4>Things to Include</h4>
-<ol style="list-style-type: decimal">
-<li>Plot the departure delay of flights against the precipitation, and
-include a simple regression line as part of the plot. Hint: there is a
-<code>geom_</code> that will plot a simple <code>y ~ x</code> regression
-line for you, but you might have to use an argument to make sure it’s a
-regular <strong>l</strong>inear <strong>m</strong>odel. Use
-<code>ggsave</code> to save your ggplot objects into a <strong>new
-folder</strong> you create called “plots”.</li>
-<li>Create a figure that has date on the x axis and each day’s mean
-departure delay on the y axis. Plot only months September through
-December. Somehow distinguish between airline carriers (the method is up
-to you). Again, save your final product into the “plot” folder.</li>
-<li>Create a dataframe with these columns: date (year, month and day),
-mean_temp, where each row represents the airport, based on airport code.
-Save this is a new csv into you <code>data</code> folder called
-<code>mean_temp_by_origin.csv</code>.</li>
-<li>Make a function that can: (1) convert hours to minutes; and (2)
-convert minutes to hours (i.e., it’s going to require some sort of
-conditional setting in the function that determines which direction the
-conversion is going). Use this function to convert departure delay
-(currently in minutes) to hours and then generate a boxplot of departure
-delay times by carrier. Save this function into a script called
-“customFunctions.R” in your scripts/code folder.</li>
-<li>Below is the plot we generated from the new data in Q4. (Base code:
-<code>ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +   geom_boxplot()</code>).
-The goal is to visualize delays by carrier. Do (at least) 5 things to
-improve this plot by changing, adding, or subtracting to this plot. The
-sky’s the limit here, remember we often reduce data to more succinctly
-communicate things.</li>
-</ol>
-<pre><code>## Warning: Removed 1228 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="assignments_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
-</div>
+<p>Forthcoming</p>
+<!-----
+Alright folks, it's time for the final assignment of the quarter. The goal here is to generate an script that combines the skills we've learned throughout the quarter to produce several outputs. 
+<br>
+
+
+#### The Data
+For this project you are going to be using some data sets about flights departing New York City in 2013. There are **several** CSV files you will need to use (as with any CSVs you're handed, they are likely imperfect and incomplete).
+You should download the [flights](data/nyc_13_flights_small.csv), [planes](data/nyc_13_planes.csv), and [weather](data/nyc_13_weather.csv) CSV files. (Remember to put them into your data folder of your RProject to make reading them in easier!)
+
+Hint: You may have to combine dataframes to answer some questions. Remember our `join` family of functions? You should be able to use the `join` type we covered in class. The `flights` dataset is the biggest one, so you should probably join the other data onto this one, meaning `flights` would be the first (of "left") argument in the left join. You can't join 3 tables together at once, but you can join tables `a` and `b` to make table `ab`, then join `ab` and `c` to get table `abc` which contains the columns from all 3 original tables.
+
+#### Things to Include
+1. Plot the departure delay of flights against the precipitation, and include a simple regression line as part of the plot. Hint: there is a `geom_` that will plot a simple `y ~ x` regression line for you, but you might have to use an argument to make sure it's a regular **l**inear **m**odel. Use `ggsave` to save your ggplot objects into a **new folder** you create called "plots".
+2. Create a figure that has date on the x axis and each day's mean departure delay on the y axis. Plot only months September through December. Somehow distinguish between airline carriers (the method is up to you). Again, save your final product into the "plot" folder.
+3. Create a dataframe with these columns: date (year, month and day), mean_temp, where each row represents the airport, based on airport code. Save this is a new csv into you `data` folder called `mean_temp_by_origin.csv`.
+4. Make a function that can: (1) convert hours to minutes; and (2) convert minutes to hours (i.e., it's going to require some sort of conditional setting in the function that determines which direction the conversion is going). Use this function to convert departure delay (currently in minutes) to hours and then generate a boxplot of departure delay times by carrier. Save this function into a script called "customFunctions.R" in your scripts/code folder.
+5. Below is the plot we generated from the new data in Q4. (Base code: 
+`ggplot(df, aes(x = dep_delay_hrs, y = carrier, fill = carrier)) +
+  geom_boxplot()`). The goal is to visualize delays by carrier. Do (at least) 5 things to improve this plot by changing, adding, or subtracting to this plot. The sky's the limit here, remember we often reduce data to more succinctly communicate things.
+
+
+
+
+
+```
+## Warning: Removed 1228 rows containing non-finite values (stat_boxplot).
+```
+
+<img src="assignments_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+--->
 </div>
 </div>
 
