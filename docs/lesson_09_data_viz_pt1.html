@@ -13,7 +13,7 @@
 
 <title>Data visualization with ggplot2</title>
 
-<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -741,8 +741,11 @@ a time series plot for each species:</p>
 <pre class="r"><code>ggplot(data = yearly_counts, mapping = aes(x = year, y = n)) +
     geom_line() +
     facet_wrap(~ species_id)</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## `geom_line()`: Each group
+## consists of only one
+## observation.
+## ℹ Do you need to adjust the
+##   group aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/first-facet-1.png" width="672" /></p>
 <div id="challenge-1" class="section level3 blue">
 <h3>Challenge</h3>
@@ -827,8 +830,11 @@ We can set the background to white using the function
      facet_wrap(~ species_id) +
      theme_bw() +
      theme(panel.grid = element_blank())</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## `geom_line()`: Each group
+## consists of only one
+## observation.
+## ℹ Do you need to adjust the
+##   group aesthetic?</code></pre>
 <p><img src="lesson_09_data_viz_pt1_files/figure-html/facet-by-species-and-sex-white-bg-1.png" width="672" /></p>
 <div id="challenge-1-1" class="section level3 blue">
 <h3>Challenge 1</h3>
@@ -851,8 +857,11 @@ ANSWER
      geom_line() +
      facet_wrap(~ species_id) +
      theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## `geom_line()`: Each group
+## consists of only one
+## observation.
+## ℹ Do you need to adjust the
+##   group aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 </details>
 </div>
@@ -877,8 +886,11 @@ yearly_weight &lt;- surveys_complete %&gt;%
    geom_line() +
    facet_wrap(~ species_id) +
    theme_bw()</code></pre>
-<pre><code>## geom_path: Each group consists of only one observation. Do you need to adjust
-## the group aesthetic?</code></pre>
+<pre><code>## `geom_line()`: Each group
+## consists of only one
+## observation.
+## ℹ Do you need to adjust the
+##   group aesthetic?</code></pre>
 <img src="lesson_09_data_viz_pt1_files/figure-html/average-weight-time-series-1.png" width="672" />
 </details>
 </div>
