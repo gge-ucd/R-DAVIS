@@ -38,7 +38,10 @@ Students completing this course should be able to:
 To get the most out of in-class time together, R-DAVIS will combine video material with in-person discussion and activities that build on the video material for that week. Unless unforeseen circumstances arise, videos will be posted by Monday to the relevant week on the Lectures page. Please come to class having watched the material relevant to that week's lesson, and perhaps having taken a cursory attempt at trying out what is covered in the videos. We are organizing the course this way so as to spend less of our time together lecturing, and more time working and learning together. The general plan for each course period will be: (1) brief overview of topic and tasks for class; (2) in-class challenge activities; (3) debrief of challenge activities; (4) get started on weekly "at-home" lab assignment as time allows.
 
 
-## Schedule
+## Schedule  
+
+**NOTICE:** The R-DAVIS course is no longer being hosted on this page -- it has been moved to https://ucd-cepb.github.io/R-DAVIS/. The contents of this page will remain active, including information for the last time it was offered on this site: Fall 2022.  
+
 
 #### Week 1 (Sept. 22)
 - Course intro

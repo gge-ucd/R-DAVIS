@@ -8,6 +8,13 @@ date: "Updated: `r format(Sys.Date())`"
 
 <br>  
 
+### NOTICE  
+
+The R-DAVIS course is no longer being hosted on this page -- it has been moved to https://ucd-cepb.github.io/R-DAVIS/. The contents of this page will remain active, including information for the last time it was offered on this site: Fall 2022. 
+
+<br>
+<br>
+
 ### Course Description
 
 Computer literacy is now essential in all aspects of science. Data management skills are needed for entering data without errors, storing it in a usable way, and extracting key aspects of the data for analysis. Basic programming is required for everything from accessing and managing data, data visualization, to statistical analysis, and modeling. This course will provide an introduction to data/project management, manipulation, visualization and analysis, across a broad set of ecological data (spatial, genomic, field, etc). Class will typically consist of short introductions or question & answer sessions, followed by hands on computing exercises. The course will be taught using git/Github, R/RStudio, and RMarkdown, but the concepts learned will easily apply to all programming languages and database management systems. **No background in databases or R/computational experience is required.**

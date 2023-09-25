@@ -7,14 +7,12 @@ title: "Contact"
 ## Instructors
 **Tyler Scott**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:tascott@ucdavis.edu)  
-Drop-in hours:
 
 
 **Liza Wood**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:belwood@ucdavis.edu)  
 Drop-in working session (in person): Tuesday 
 
-I am a PhD candidate in the GGE (5th year) studying environmental governance of agricultural systems. I was new to R (and very intimidated) when entering my PhD in 2018, but through a couple courses like R-DAVIS and **a lot** of muddling through self-teaching, I'm now excited about helping promote data literacy. These days, I use R for analyzing survey data and making interactive ShinyApps to share my summary statistics, as well as analyzing large amounts of text data scraped from online documents.
 
 **Tara Pozzi**
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:)  
@@ -29,31 +27,25 @@ I am a PhD candidate in the GGE (5th year) studying environmental governance of 
 [<i class="fa fa-github-square" aria-hidden="true"></i> JepsonNomad](https://github.com/JepsonNomad)  
 
 **Michael Culshaw-Maurer** 
-
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mjculshawmaurer@ucdavis.edu)  
 [<i class="fa fa-globe" aria-hidden="true"></i> website](https://mcmaurer.github.io/)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@MCulshawMaurer](https://twitter.com/MCulshawMaurer)  
 [<i class="fa fa-github-square" aria-hidden="true"></i> MCMaurer](https://github.com/mcmaurer)  
 
 **Martha Zillig** 
-
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mwohlfeil@ucdavis.edu)  
 [<i class="fa fa-globe" aria-hidden="true"></i> website](https://marthawohlfeil.github.io/)  
 [<i class="fa fa-github-square" aria-hidden="true"></i> MarthaWohlfeil](https://github.com/MarthaWohlfeil)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@mw_avianecology](https://twitter.com/mw_avianecology)
 
-
 **Ryan Peek** 
-
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:rapeek@ucdavis.edu)  
 [<i class="fa fa-globe" aria-hidden="true"></i> website](https://ryanpeek.github.io/)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@riverpeek](https://twitter.com/riverpeek)  
 [<i class="fa fa-github-square" aria-hidden="true"></i> ryanpeek](https://github.com/ryanpeek)  
 [<i class="ai ai-orcid-square"></i> orcid.org/0000-0002-9577-6885](https://orcid.org/0000-0002-9577-6885)   
 
-
 **Michael Koontz** 
-
 <i class="fa fa-envelope-square" aria-hidden="true"></i> [email](mailto:mikoontz@gmail.com)  
 [<i class="fa fa-globe" aria-hidden="true"></i> website](https://michaeljkoontz.weebly.com/)  
 [<i class="fa fa-twitter-square" aria-hidden="true"></i> \@_mikoontz](https://twitter.com/_mikoontz)  
